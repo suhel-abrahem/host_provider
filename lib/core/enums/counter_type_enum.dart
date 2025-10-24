@@ -1,0 +1,1 @@
+enum CounterTypeEnum { horizontal, vertical }

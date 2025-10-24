@@ -1,0 +1,4 @@
+enum Position {
+  upper,
+  beside,
+}

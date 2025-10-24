@@ -1,0 +1,4 @@
+enum ConnectionStateEnum{
+  online,
+  offline
+}

@@ -1,0 +1,1 @@
+enum ThemeDataBrightness { darkTheme, lightTheme }

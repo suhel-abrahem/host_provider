@@ -1,0 +1,71 @@
+import 'dart:convert';
+
+import 'package:hosta_provider/features/login_page/domain/entities/login_state_entity.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../core/constants/language_constant.dart';
+import '../../core/constants/shared_preferences_keys.dart';
+
+class AppPreferences {
+  late final SharedPreferences _sharedPreferences;
+  AppPreferences(SharedPreferences sharedPreferences)
+    : _sharedPreferences = sharedPreferences;
+  setLanguage({String? languageCode}) {
+    _sharedPreferences.setString(
+      SharedPreferencesKeys.appLanguageKey,
+      languageCode ?? LanguageConstant.en,
+    );
+  }
+
+  String? getLanguage() {
+    return _sharedPreferences.getString(SharedPreferencesKeys.appLanguageKey);
+  }
+
+  setAppTheme({bool? isDarkTheme}) {
+    _sharedPreferences.setBool(
+      SharedPreferencesKeys.appThemeKey,
+      isDarkTheme ?? false,
+    );
+  }
+
+  bool? getAppTheme() {
+    return _sharedPreferences.getBool(SharedPreferencesKeys.appThemeKey);
+  }
+
+  setDataLocale({required List<String?>? data, required String? key}) {
+    _sharedPreferences.setStringList(
+      key ?? "",
+      (data ?? [""]).whereType<String>().toList(),
+    );
+  }
+
+  List<String?>? getDataLocale({String? key}) {
+    return _sharedPreferences.getStringList(key ?? "");
+  }
+
+  bool? isFirstUse() {
+    return _sharedPreferences.getBool(SharedPreferencesKeys.isFirstUseKey) ??
+        false;
+  }
+
+  setFirstUse({required bool isFirstUse}) {
+    _sharedPreferences.setBool(SharedPreferencesKeys.isFirstUseKey, isFirstUse);
+  }
+
+  setUserInfo({required LoginStateEntity loginStateEntity}) {
+    _sharedPreferences.setString(
+      SharedPreferencesKeys.loginStateKey,
+      loginStateEntity.toJson().toString(),
+    );
+  }
+
+  LoginStateEntity? getUserInfo() {
+    String? jsonString = _sharedPreferences.getString(
+      SharedPreferencesKeys.loginStateKey,
+    );
+
+    return LoginStateEntity.fromJson(
+      jsonDecode(jsonString ?? "{}") as Map<String, dynamic>,
+    );
+  }
+}

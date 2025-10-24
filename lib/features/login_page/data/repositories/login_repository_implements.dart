@@ -1,0 +1,53 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:dio/dio.dart';
+import 'package:hosta_provider/core/constants/api_constant.dart';
+import 'package:hosta_provider/core/data_state/data_state.dart';
+import 'package:hosta_provider/core/resource/common_service/common_service.dart';
+import 'package:hosta_provider/core/resource/connectivity/check_connectivity.dart';
+import 'package:hosta_provider/features/login_page/data/models/login_model.dart';
+import 'package:hosta_provider/features/login_page/data/models/login_state_model.dart';
+import 'package:hosta_provider/features/login_page/domain/entities/login_state_entity.dart';
+import 'package:hosta_provider/features/login_page/domain/repositories/login_repository.dart';
+
+class LoginRepositoryImplements implements LoginRepository {
+  final CommonService _commonService;
+  final CheckConnectivity _checkConnectivity;
+  LoginRepositoryImplements(this._commonService, this._checkConnectivity);
+  ConnectivityResult connectivityResult = ConnectivityResult.none;
+  @override
+  Future<DataState<LoginStateEntity>> loginUser({
+    required LoginStateModel? loginStateModel,
+  }) async {
+    await _checkConnectivity.checkConnectivity().then(
+      (action) => connectivityResult = action.last,
+    );
+    if (connectivityResult == ConnectivityResult.none) {
+      return Future.value(NOInternetDataState());
+    }
+    LoginStateEntity? loginStateEntity;
+    DataState<LoginStateEntity>? dataState;
+    await _commonService
+        .post(
+          ApiConstant.loginEndpoint,
+          data: LoginModel(
+            login: (loginStateModel?.phone?.trim().isEmpty ?? false)
+                ? loginStateModel?.email?.trim()
+                : loginStateModel?.phone?.trim(),
+            password: loginStateModel?.password,
+          ).toJson(),
+        )
+        .then((response) {
+          if (response is DataSuccess<Response?>) {
+            if (response.data?.statusCode == 200) {
+              loginStateEntity = LoginStateEntity.fromJson(response.data?.data);
+              dataState = DataSuccess(data: loginStateEntity);
+            } else {
+              dataState = OtpRequestedDataState();
+            }
+          } else if (response is DataError) {
+            dataState = DataError(error: response.error);
+          }
+        });
+    return Future.value(dataState);
+  }
+}

@@ -1,0 +1,4 @@
+enum SetTypeEnum{
+  set,
+  delete
+}

@@ -1,0 +1,4 @@
+enum DiscountTypeEnum{
+  percentage,
+  ezMode
+}
