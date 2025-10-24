@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hosta_provider/core/constants/font_constants.dart';
 import 'package:hosta_provider/core/resource/charts/chart_model/line_chart_model.dart';
-import 'package:hosta_provider/core/resource/charts/line_charts/costume_line_chart.dart';
+
 import 'package:hosta_provider/core/resource/main_page/main_page.dart';
 import 'package:hosta_provider/features/home_page/presentation/widgets/squer_container_with_presse_widget.dart';
 import 'package:hosta_provider/generated/locale_keys.g.dart';
+
+import '../../../../core/resource/charts/line_charts/custom_line_chart.dart';
 
 class HomePagePage extends StatefulWidget {
   const HomePagePage({super.key});
