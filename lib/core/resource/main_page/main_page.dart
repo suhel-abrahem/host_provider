@@ -53,30 +53,36 @@ class MainPage extends StatelessWidget {
                       width: 36.w,
                       height: 36.h,
                       child: Center(
-                        child: ElevatedButton(
-                          style: Theme.of(context).elevatedButtonTheme.style
-                              ?.copyWith(
-                                backgroundColor: WidgetStatePropertyAll(
-                                  Theme.of(context).scaffoldBackgroundColor,
-                                ),
-                                shape: WidgetStatePropertyAll(
-                                  CircleBorder(eccentricity: 0),
-                                ),
-                                padding: WidgetStatePropertyAll(
-                                  EdgeInsets.all(0),
-                                ),
-                                shadowColor: WidgetStatePropertyAll(
-                                  Colors.transparent,
-                                ),
+                        child: Builder(
+                          builder: (builderContext) {
+                            return ElevatedButton(
+                              style: Theme.of(context).elevatedButtonTheme.style
+                                  ?.copyWith(
+                                    backgroundColor: WidgetStatePropertyAll(
+                                      Theme.of(context).scaffoldBackgroundColor,
+                                    ),
+                                    shape: WidgetStatePropertyAll(
+                                      CircleBorder(eccentricity: 0),
+                                    ),
+                                    padding: WidgetStatePropertyAll(
+                                      EdgeInsets.all(0),
+                                    ),
+                                    shadowColor: WidgetStatePropertyAll(
+                                      Colors.transparent,
+                                    ),
+                                  ),
+                              onPressed: () {
+                                Scaffold.of(builderContext).openDrawer();
+                              },
+                              child: Icon(
+                                Icons.menu,
+                                size: 28.sp,
+                                color: Theme.of(
+                                  context,
+                                ).textTheme.labelLarge?.color,
                               ),
-                          onPressed: () {},
-                          child: Icon(
-                            Icons.notifications_none,
-                            size: 28.sp,
-                            color: Theme.of(
-                              context,
-                            ).textTheme.labelLarge?.color,
-                          ),
+                            );
+                          },
                         ),
                       ),
                     ),

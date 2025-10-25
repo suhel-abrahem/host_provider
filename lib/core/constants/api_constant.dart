@@ -5,4 +5,5 @@ class ApiConstant {
   static const String registerEndpoint = "/register";
   static const String verifyOtpEndpoint = "/users/{user}/verify-otp";
   static const String resendOtpEndpoint = "/resend-otp";
+  static const String getServices = "/services";
 }

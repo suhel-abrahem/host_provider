@@ -91,6 +91,7 @@ class CodegenLoader extends AssetLoader{
   },
   "homePage": {
     "title": "الصفحة الرئيسية",
+    "label": "الرئيسية",
     "welcomeMessage": "مرحباً بك في هوستا للمزودين",
     "subtitle": "إدارة خدماتك بسهولة",
     "myRating": "تقييمي",
@@ -105,6 +106,22 @@ class CodegenLoader extends AssetLoader{
     "completedBookings": "الحجوزات المكتملة",
     "annualTotal": "الإجمالي السنوي",
     "annualStatistics": "الإحصائيات السنوية"
+  },
+  "bookingPage": {
+    "title": "Booking Page",
+    "label": "Booking"
+  },
+  "profilePage": {
+    "title": "Profile Page",
+    "label": "Profile"
+  },
+  "myServicesPage": {
+    "title": "My Services Page",
+    "label": "My Services"
+  },
+  "categoriesPage": {
+    "title": "Categories Page",
+    "servicesCategories": " Services Categories"
   }
 };
 static const Map<String,dynamic> _en = {
@@ -198,6 +215,22 @@ static const Map<String,dynamic> _en = {
     "completedBookings": "Completed Bookings",
     "annualTotal": "Annual Total",
     "annualStatistics": "Annual Statistics"
+  },
+  "bookingPage": {
+    "title": "Booking Page",
+    "label": "Booking"
+  },
+  "profilePage": {
+    "title": "Profile Page",
+    "label": "Profile"
+  },
+  "myServicesPage": {
+    "title": "My Services Page",
+    "label": "My Services"
+  },
+  "categoriesPage": {
+    "title": "Categories Page",
+    "servicesCategories": " Services Categories"
   }
 };
 static const Map<String,dynamic> _fa = {
@@ -291,6 +324,22 @@ static const Map<String,dynamic> _fa = {
     "completedBookings": "بۆکینگەکانی تەواوکراو",
     "annualTotal": "کۆی ساڵانە",
     "annualStatistics": "ئامارەکانی ساڵانە"
+  },
+  "bookingPage": {
+    "title": "Booking Page",
+    "label": "Booking"
+  },
+  "profilePage": {
+    "title": "Profile Page",
+    "label": "Profile"
+  },
+  "myServicesPage": {
+    "title": "My Services Page",
+    "label": "My Services"
+  },
+  "categoriesPage": {
+    "title": "Categories Page",
+    "servicesCategories": " Services Categories"
   }
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": _ar, "en": _en, "fa": _fa};

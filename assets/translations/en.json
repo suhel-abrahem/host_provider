@@ -89,5 +89,21 @@
     "completedBookings": "Completed Bookings",
     "annualTotal": "Annual Total",
     "annualStatistics": "Annual Statistics"
+  },
+  "bookingPage": {
+    "title": "Booking Page",
+    "label": "Booking"
+  },
+  "profilePage": {
+    "title": "Profile Page",
+    "label": "Profile"
+  },
+  "myServicesPage": {
+    "title": "My Services Page",
+    "label": "My Services"
+  },
+  "categoriesPage": {
+    "title": "Categories Page",
+    "servicesCategories": " Services Categories"
   }
 }

@@ -1,89 +1,97 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:glass/glass.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hosta_provider/generated/locale_keys.g.dart';
 
 import '../../../config/route/routes_manager.dart';
 
 class MainBottomBar extends StatefulWidget {
-  final String? currentRoute;
-  const MainBottomBar({super.key, this.currentRoute});
+  final int? currentIndex;
+  const MainBottomBar({super.key, this.currentIndex});
 
   @override
   State<MainBottomBar> createState() => _MainBottomBarState();
 }
 
 class _MainBottomBarState extends State<MainBottomBar> {
-  Widget buildNavButton({
-    required IconData icon,
-    required String label,
-    required String routePath,
-    required String routeName,
-  }) {
-    final selected = widget.currentRoute == routePath;
+  int? _currentIndex = 0;
+  String path = RoutesPath.homePage;
+  String _getPathByIndex(int index) {
+    String output = path;
+    switch (index) {
+      case 0:
+        output = RoutesPath.homePage;
+        break;
+      case 1:
+        output = RoutesPath.bookingPage;
+        break;
+      case 2:
+        output = RoutesPath.myServicesPage;
+        break;
+      case 3:
+        output = RoutesPath.profilePage;
+        break;
+    }
+    return output;
+  }
 
-    return AnimatedSwitcher(
-      duration: const Duration(milliseconds: 300),
-      child: ElevatedButton(
-        style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
-          shadowColor: WidgetStatePropertyAll(Theme.of(context).shadowColor),
-          padding: WidgetStatePropertyAll(
-            EdgeInsets.symmetric(vertical: 8.h, horizontal: 16.w),
-          ),
-          shape: WidgetStatePropertyAll(CircleBorder()),
-          backgroundColor: WidgetStatePropertyAll(
-            selected
-                ? Theme.of(context).primaryColor
-                : Theme.of(context).colorScheme.primaryContainer,
-          ),
-        ),
-        onPressed: () {
-          context.push(routePath);
-        },
-        child: Icon(
-          icon,
-          size: 24.sp,
-          color: Theme.of(context).textTheme.labelLarge?.color,
-        ),
-      ),
-    );
+  @override
+  void initState() {
+    _currentIndex = widget.currentIndex;
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 4.h),
-      height: 60,
       decoration: BoxDecoration(
-        border: Border(
-          top: BorderSide(color: Theme.of(context).primaryColor, width: 1.sp),
-        ),
-        color: Theme.of(context).colorScheme.surface,
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(20.r),
-          topRight: Radius.circular(20.r),
-        ),
+        color: Colors.transparent,
+        boxShadow: [
+          BoxShadow(
+            color: Theme.of(context).colorScheme.shadow,
+            spreadRadius: 0.r,
+            blurRadius: 2.r,
+          ),
+        ],
       ),
-      child: Row(
-        key: ValueKey(widget.currentRoute),
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: [
-          buildNavButton(
-            icon: Icons.category_rounded,
-            label: 'Categories',
-            routePath: RoutesPath.categoriesPage,
-            routeName: RoutesName.categoriesPage,
+      child: BottomNavigationBar(
+        elevation: 10.r,
+
+        currentIndex: _currentIndex ?? 0,
+        onTap: (newIndex) {
+          setState(() {
+            _currentIndex = newIndex;
+            context.push(_getPathByIndex(_currentIndex ?? 0));
+          });
+        },
+        backgroundColor: Theme.of(context).colorScheme.surface,
+        selectedItemColor: Theme.of(context).primaryColor,
+        unselectedItemColor: Theme.of(context).textTheme.labelLarge?.color,
+        items: [
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.home_outlined),
+            activeIcon: const Icon(Icons.home),
+            label: LocaleKeys.homePage_label.tr(),
+            tooltip: LocaleKeys.homePage_title.tr(),
           ),
-          buildNavButton(
-            icon: Icons.home_rounded,
-            label: 'Home',
-            routePath: RoutesPath.homePage,
-            routeName: RoutesName.homePage,
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.calendar_today_outlined),
+            activeIcon: const Icon(Icons.calendar_today),
+            label: LocaleKeys.bookingPage_label.tr(),
+            tooltip: LocaleKeys.bookingPage_title.tr(),
           ),
-          buildNavButton(
-            icon: Icons.settings_rounded,
-            label: 'Setting',
-            routePath: RoutesPath.settingPage,
-            routeName: RoutesName.settingPage,
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.miscellaneous_services_outlined),
+            activeIcon: const Icon(Icons.miscellaneous_services),
+            label: LocaleKeys.myServicesPage_label.tr(),
+            tooltip: LocaleKeys.myServicesPage_title.tr(),
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.person_outline),
+            activeIcon: const Icon(Icons.person),
+            label: LocaleKeys.profilePage_label.tr(),
           ),
         ],
       ),

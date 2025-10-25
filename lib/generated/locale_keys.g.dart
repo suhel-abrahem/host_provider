@@ -73,6 +73,7 @@ abstract class  LocaleKeys {
   static const cities_halabja = 'cities.halabja';
   static const cities = 'cities';
   static const homePage_title = 'homePage.title';
+  static const homePage_label = 'homePage.label';
   static const homePage_welcomeMessage = 'homePage.welcomeMessage';
   static const homePage_subtitle = 'homePage.subtitle';
   static const homePage_myRating = 'homePage.myRating';
@@ -88,5 +89,17 @@ abstract class  LocaleKeys {
   static const homePage_annualTotal = 'homePage.annualTotal';
   static const homePage_annualStatistics = 'homePage.annualStatistics';
   static const homePage = 'homePage';
+  static const bookingPage_title = 'bookingPage.title';
+  static const bookingPage_label = 'bookingPage.label';
+  static const bookingPage = 'bookingPage';
+  static const profilePage_title = 'profilePage.title';
+  static const profilePage_label = 'profilePage.label';
+  static const profilePage = 'profilePage';
+  static const myServicesPage_title = 'myServicesPage.title';
+  static const myServicesPage_label = 'myServicesPage.label';
+  static const myServicesPage = 'myServicesPage';
+  static const categoriesPage_title = 'categoriesPage.title';
+  static const categoriesPage_servicesCategories = 'categoriesPage.servicesCategories';
+  static const categoriesPage = 'categoriesPage';
 
 }

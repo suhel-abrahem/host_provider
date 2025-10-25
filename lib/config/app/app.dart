@@ -26,7 +26,7 @@ class HostaProvider extends StatelessWidget {
           DeviceOrientation.portraitUp,
           DeviceOrientation.portraitDown,
         ]);
-        SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+        SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive);
         SystemChrome.setSystemUIOverlayStyle(
           SystemUiOverlayStyle(
             statusBarColor: Colors.transparent,
