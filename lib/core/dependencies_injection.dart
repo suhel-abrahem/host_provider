@@ -7,6 +7,24 @@ import 'package:hosta_provider/features/login_page/domain/entities/login_state_e
 import 'package:hosta_provider/features/login_page/domain/repositories/login_repository.dart';
 import 'package:hosta_provider/features/login_page/domain/usecases/login_usecase.dart';
 import 'package:hosta_provider/features/login_page/presentation/bloc/login_bloc_bloc.dart';
+import 'package:hosta_provider/features/signup_page/data/models/city_model.dart';
+import 'package:hosta_provider/features/signup_page/data/models/country_model.dart';
+import 'package:hosta_provider/features/signup_page/data/models/signup_model.dart';
+import 'package:hosta_provider/features/signup_page/data/repositories/get_cities_repository_implements.dart';
+import 'package:hosta_provider/features/signup_page/data/repositories/get_country_repository_implement.dart';
+import 'package:hosta_provider/features/signup_page/data/repositories/signup_repository_implements.dart';
+import 'package:hosta_provider/features/signup_page/domain/entities/city_entity.dart';
+import 'package:hosta_provider/features/signup_page/domain/entities/country_entity.dart';
+import 'package:hosta_provider/features/signup_page/domain/entities/signup_entity.dart';
+import 'package:hosta_provider/features/signup_page/domain/repositories/get_cities_repository.dart';
+import 'package:hosta_provider/features/signup_page/domain/repositories/get_country_repository.dart';
+import 'package:hosta_provider/features/signup_page/domain/repositories/signup_repository.dart';
+import 'package:hosta_provider/features/signup_page/domain/usecases/get_cities_usecase.dart';
+import 'package:hosta_provider/features/signup_page/domain/usecases/get_country_usecase.dart';
+import 'package:hosta_provider/features/signup_page/domain/usecases/signup_usecase.dart';
+import 'package:hosta_provider/features/signup_page/presentation/bloc/get_cities_bloc.dart';
+import 'package:hosta_provider/features/signup_page/presentation/bloc/get_countries_bloc.dart';
+import 'package:hosta_provider/features/signup_page/presentation/bloc/signup_bloc_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../config/app/app_preferences.dart';
@@ -38,4 +56,46 @@ Future<void> initDependencies() async {
   getItInstance.registerFactory<LoginBlocBloc>(
     () => LoginBlocBloc(getItInstance<LoginUsecase>()),
   );
+  // end of login
+  // signup
+  //models and entities
+  getItInstance.registerSingleton<SignupEntity>(SignupEntity());
+  getItInstance.registerSingleton<SignupModel>(SignupModel());
+  getItInstance.registerSingleton<CityEntity>(CityEntity());
+  getItInstance.registerSingleton<CityModel>(CityModel());
+  getItInstance.registerSingleton<CountryEntity>(CountryEntity());
+  getItInstance.registerSingleton<CountryModel>(CountryModel());
+  //repository
+  getItInstance.registerSingleton<SignupRepository>(
+    SignupRepositoryImplements(
+      commonService: getItInstance(),
+      checkConnectivity: getItInstance(),
+    ),
+  );
+  getItInstance.registerSingleton<GetCitiesRepository>(
+    GetCitiesRepositoryImplements(checkConnectivity: getItInstance()),
+  );
+  getItInstance.registerSingleton<GetCountryRepository>(
+    GetCountryRepositoryImplement(checkConnectivity: getItInstance()),
+  );
+  //use case
+  getItInstance.registerSingleton<SignupUsecase>(
+    SignupUsecase(signupRepository: getItInstance()),
+  );
+  getItInstance.registerSingleton<GetCountryUsecase>(
+    GetCountryUsecase(getCountryRepository: getItInstance()),
+  );
+  getItInstance.registerSingleton<GetCitiesUsecase>(
+    GetCitiesUsecase(getCitiesRepository: getItInstance()),
+  );
+  //bloc
+  getItInstance.registerFactory<SignupBlocBloc>(
+    () => SignupBlocBloc(getItInstance()),
+  );
+  getItInstance.registerFactory<GetCitiesBloc>(() => GetCitiesBloc());
+  getItInstance.registerFactory<GetCountriesBloc>(
+    () => GetCountriesBloc(getItInstance()),
+  );
+
+  // end of signup
 }

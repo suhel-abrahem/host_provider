@@ -407,12 +407,12 @@ return loginStateNoInternet(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  loginStateInitial,TResult Function()?  loginStateLoading,TResult Function( LoginStateModel? loginStateModel)?  loginStateLoaded,TResult Function( String? message)?  loginStateError,TResult Function()?  loginStateNoInternet,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  loginStateInitial,TResult Function()?  loginStateLoading,TResult Function( LoginStateEntity? loginStateEntity)?  loginStateLoaded,TResult Function( String? message)?  loginStateError,TResult Function()?  loginStateNoInternet,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case LoginStateInitial() when loginStateInitial != null:
 return loginStateInitial();case LoginStateLoading() when loginStateLoading != null:
 return loginStateLoading();case LoginStateLoaded() when loginStateLoaded != null:
-return loginStateLoaded(_that.loginStateModel);case LoginStateError() when loginStateError != null:
+return loginStateLoaded(_that.loginStateEntity);case LoginStateError() when loginStateError != null:
 return loginStateError(_that.message);case LoginStateNoInternet() when loginStateNoInternet != null:
 return loginStateNoInternet();case _:
   return orElse();
@@ -432,12 +432,12 @@ return loginStateNoInternet();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  loginStateInitial,required TResult Function()  loginStateLoading,required TResult Function( LoginStateModel? loginStateModel)  loginStateLoaded,required TResult Function( String? message)  loginStateError,required TResult Function()  loginStateNoInternet,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  loginStateInitial,required TResult Function()  loginStateLoading,required TResult Function( LoginStateEntity? loginStateEntity)  loginStateLoaded,required TResult Function( String? message)  loginStateError,required TResult Function()  loginStateNoInternet,}) {final _that = this;
 switch (_that) {
 case LoginStateInitial():
 return loginStateInitial();case LoginStateLoading():
 return loginStateLoading();case LoginStateLoaded():
-return loginStateLoaded(_that.loginStateModel);case LoginStateError():
+return loginStateLoaded(_that.loginStateEntity);case LoginStateError():
 return loginStateError(_that.message);case LoginStateNoInternet():
 return loginStateNoInternet();case _:
   throw StateError('Unexpected subclass');
@@ -456,12 +456,12 @@ return loginStateNoInternet();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  loginStateInitial,TResult? Function()?  loginStateLoading,TResult? Function( LoginStateModel? loginStateModel)?  loginStateLoaded,TResult? Function( String? message)?  loginStateError,TResult? Function()?  loginStateNoInternet,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  loginStateInitial,TResult? Function()?  loginStateLoading,TResult? Function( LoginStateEntity? loginStateEntity)?  loginStateLoaded,TResult? Function( String? message)?  loginStateError,TResult? Function()?  loginStateNoInternet,}) {final _that = this;
 switch (_that) {
 case LoginStateInitial() when loginStateInitial != null:
 return loginStateInitial();case LoginStateLoading() when loginStateLoading != null:
 return loginStateLoading();case LoginStateLoaded() when loginStateLoaded != null:
-return loginStateLoaded(_that.loginStateModel);case LoginStateError() when loginStateError != null:
+return loginStateLoaded(_that.loginStateEntity);case LoginStateError() when loginStateError != null:
 return loginStateError(_that.message);case LoginStateNoInternet() when loginStateNoInternet != null:
 return loginStateNoInternet();case _:
   return null;
@@ -539,10 +539,10 @@ String toString() {
 
 
 class LoginStateLoaded implements LoginBlocState {
-  const LoginStateLoaded({required this.loginStateModel});
+  const LoginStateLoaded({required this.loginStateEntity});
   
 
- final  LoginStateModel? loginStateModel;
+ final  LoginStateEntity? loginStateEntity;
 
 /// Create a copy of LoginBlocState
 /// with the given fields replaced by the non-null parameter values.
@@ -554,16 +554,16 @@ $LoginStateLoadedCopyWith<LoginStateLoaded> get copyWith => _$LoginStateLoadedCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is LoginStateLoaded&&(identical(other.loginStateModel, loginStateModel) || other.loginStateModel == loginStateModel));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LoginStateLoaded&&(identical(other.loginStateEntity, loginStateEntity) || other.loginStateEntity == loginStateEntity));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,loginStateModel);
+int get hashCode => Object.hash(runtimeType,loginStateEntity);
 
 @override
 String toString() {
-  return 'LoginBlocState.loginStateLoaded(loginStateModel: $loginStateModel)';
+  return 'LoginBlocState.loginStateLoaded(loginStateEntity: $loginStateEntity)';
 }
 
 
@@ -574,11 +574,11 @@ abstract mixin class $LoginStateLoadedCopyWith<$Res> implements $LoginBlocStateC
   factory $LoginStateLoadedCopyWith(LoginStateLoaded value, $Res Function(LoginStateLoaded) _then) = _$LoginStateLoadedCopyWithImpl;
 @useResult
 $Res call({
- LoginStateModel? loginStateModel
+ LoginStateEntity? loginStateEntity
 });
 
 
-$LoginStateModelCopyWith<$Res>? get loginStateModel;
+$LoginStateEntityCopyWith<$Res>? get loginStateEntity;
 
 }
 /// @nodoc
@@ -591,10 +591,10 @@ class _$LoginStateLoadedCopyWithImpl<$Res>
 
 /// Create a copy of LoginBlocState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? loginStateModel = freezed,}) {
+@pragma('vm:prefer-inline') $Res call({Object? loginStateEntity = freezed,}) {
   return _then(LoginStateLoaded(
-loginStateModel: freezed == loginStateModel ? _self.loginStateModel : loginStateModel // ignore: cast_nullable_to_non_nullable
-as LoginStateModel?,
+loginStateEntity: freezed == loginStateEntity ? _self.loginStateEntity : loginStateEntity // ignore: cast_nullable_to_non_nullable
+as LoginStateEntity?,
   ));
 }
 
@@ -602,13 +602,13 @@ as LoginStateModel?,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$LoginStateModelCopyWith<$Res>? get loginStateModel {
-    if (_self.loginStateModel == null) {
+$LoginStateEntityCopyWith<$Res>? get loginStateEntity {
+    if (_self.loginStateEntity == null) {
     return null;
   }
 
-  return $LoginStateModelCopyWith<$Res>(_self.loginStateModel!, (value) {
-    return _then(_self.copyWith(loginStateModel: value));
+  return $LoginStateEntityCopyWith<$Res>(_self.loginStateEntity!, (value) {
+    return _then(_self.copyWith(loginStateEntity: value));
   });
 }
 }

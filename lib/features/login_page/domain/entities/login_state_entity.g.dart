@@ -8,17 +8,11 @@ part of 'login_state_entity.dart';
 
 _LoginStateEntity _$LoginStateEntityFromJson(Map<String, dynamic> json) =>
     _LoginStateEntity(
-      token: json['token'] as String? ?? "",
-      refreshToken: json['refreshToken'] as String? ?? "",
-      userId: json['userId'] as String? ?? "",
-      userName: json['userName'] as String? ?? "",
-      email: json['email'] as String? ?? "",
-      phone: json['phone'] as String? ?? "",
-      profileImage: json['profileImage'] as String? ?? "",
-      tokenExpireDate: json['tokenExpireDate'] as String? ?? "",
-      refreshTokenExpireDate: json['refreshTokenExpireDate'] as String? ?? "",
-      isEmailVerified: json['isEmailVerified'] as bool? ?? false,
-      isPhoneVerified: json['isPhoneVerified'] as bool? ?? false,
+      access_token: json['access_token'] as String? ?? "",
+      refresh_token: json['refresh_token'] as String? ?? "",
+      token_type: json['token_type'] as String? ?? "",
+      expires_in: (json['expires_in'] as num?)?.toInt() ?? 0,
+      user: json['user'] as Map<String, dynamic>? ?? const {},
       loginStateEnum:
           $enumDecodeNullable(
             _$LoginStateEnumEnumMap,
@@ -29,17 +23,11 @@ _LoginStateEntity _$LoginStateEntityFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$LoginStateEntityToJson(_LoginStateEntity instance) =>
     <String, dynamic>{
-      'token': instance.token,
-      'refreshToken': instance.refreshToken,
-      'userId': instance.userId,
-      'userName': instance.userName,
-      'email': instance.email,
-      'phone': instance.phone,
-      'profileImage': instance.profileImage,
-      'tokenExpireDate': instance.tokenExpireDate,
-      'refreshTokenExpireDate': instance.refreshTokenExpireDate,
-      'isEmailVerified': instance.isEmailVerified,
-      'isPhoneVerified': instance.isPhoneVerified,
+      'access_token': instance.access_token,
+      'refresh_token': instance.refresh_token,
+      'token_type': instance.token_type,
+      'expires_in': instance.expires_in,
+      'user': instance.user,
       'loginStateEnum': _$LoginStateEnumEnumMap[instance.loginStateEnum],
     };
 

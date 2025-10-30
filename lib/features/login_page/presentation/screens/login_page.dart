@@ -4,9 +4,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hosta_provider/config/app/app_preferences.dart';
 import 'package:hosta_provider/core/constants/font_constants.dart';
 import 'package:hosta_provider/core/dependencies_injection.dart';
 import 'package:hosta_provider/core/enums/assets_type_enum.dart';
+import 'package:hosta_provider/core/enums/login_state_enum.dart';
 import 'package:hosta_provider/core/resource/assets_manager.dart';
 import 'package:hosta_provider/core/resource/custom_widget/custom_input_field/custom_input_field.dart';
 import 'package:hosta_provider/core/resource/custom_widget/snake_bar_widget/snake_bar_widget.dart';
@@ -51,6 +53,12 @@ class _LoginPageState extends State<LoginPage> {
               context: context,
             );
           } else if (state is LoginStateLoaded) {
+            print("from login page:${state.loginStateEntity}");
+            getItInstance<AppPreferences>().setUserInfo(
+              loginStateEntity: state.loginStateEntity?.copyWith(
+                loginStateEnum: LoginStateEnum.logined,
+              ),
+            );
             context.pushNamed(RoutesName.homePage);
           }
         },

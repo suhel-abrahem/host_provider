@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$LoginStateEntity {
 
- String? get token; String? get refreshToken; String? get userId; String? get userName; String? get email; String? get phone; String? get profileImage; String? get tokenExpireDate; String? get refreshTokenExpireDate; bool? get isEmailVerified; bool? get isPhoneVerified; LoginStateEnum? get loginStateEnum;
+ String? get access_token; String? get refresh_token; String? get token_type; int? get expires_in; Map<String, dynamic> get user; LoginStateEnum? get loginStateEnum;
 /// Create a copy of LoginStateEntity
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $LoginStateEntityCopyWith<LoginStateEntity> get copyWith => _$LoginStateEntityCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is LoginStateEntity&&(identical(other.token, token) || other.token == token)&&(identical(other.refreshToken, refreshToken) || other.refreshToken == refreshToken)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.userName, userName) || other.userName == userName)&&(identical(other.email, email) || other.email == email)&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.profileImage, profileImage) || other.profileImage == profileImage)&&(identical(other.tokenExpireDate, tokenExpireDate) || other.tokenExpireDate == tokenExpireDate)&&(identical(other.refreshTokenExpireDate, refreshTokenExpireDate) || other.refreshTokenExpireDate == refreshTokenExpireDate)&&(identical(other.isEmailVerified, isEmailVerified) || other.isEmailVerified == isEmailVerified)&&(identical(other.isPhoneVerified, isPhoneVerified) || other.isPhoneVerified == isPhoneVerified)&&(identical(other.loginStateEnum, loginStateEnum) || other.loginStateEnum == loginStateEnum));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LoginStateEntity&&(identical(other.access_token, access_token) || other.access_token == access_token)&&(identical(other.refresh_token, refresh_token) || other.refresh_token == refresh_token)&&(identical(other.token_type, token_type) || other.token_type == token_type)&&(identical(other.expires_in, expires_in) || other.expires_in == expires_in)&&const DeepCollectionEquality().equals(other.user, user)&&(identical(other.loginStateEnum, loginStateEnum) || other.loginStateEnum == loginStateEnum));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,token,refreshToken,userId,userName,email,phone,profileImage,tokenExpireDate,refreshTokenExpireDate,isEmailVerified,isPhoneVerified,loginStateEnum);
+int get hashCode => Object.hash(runtimeType,access_token,refresh_token,token_type,expires_in,const DeepCollectionEquality().hash(user),loginStateEnum);
 
 @override
 String toString() {
-  return 'LoginStateEntity(token: $token, refreshToken: $refreshToken, userId: $userId, userName: $userName, email: $email, phone: $phone, profileImage: $profileImage, tokenExpireDate: $tokenExpireDate, refreshTokenExpireDate: $refreshTokenExpireDate, isEmailVerified: $isEmailVerified, isPhoneVerified: $isPhoneVerified, loginStateEnum: $loginStateEnum)';
+  return 'LoginStateEntity(access_token: $access_token, refresh_token: $refresh_token, token_type: $token_type, expires_in: $expires_in, user: $user, loginStateEnum: $loginStateEnum)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $LoginStateEntityCopyWith<$Res>  {
   factory $LoginStateEntityCopyWith(LoginStateEntity value, $Res Function(LoginStateEntity) _then) = _$LoginStateEntityCopyWithImpl;
 @useResult
 $Res call({
- String? token, String? refreshToken, String? userId, String? userName, String? email, String? phone, String? profileImage, String? tokenExpireDate, String? refreshTokenExpireDate, bool? isEmailVerified, bool? isPhoneVerified, LoginStateEnum? loginStateEnum
+ String? access_token, String? refresh_token, String? token_type, int? expires_in, Map<String, dynamic> user, LoginStateEnum? loginStateEnum
 });
 
 
@@ -65,20 +65,14 @@ class _$LoginStateEntityCopyWithImpl<$Res>
 
 /// Create a copy of LoginStateEntity
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? token = freezed,Object? refreshToken = freezed,Object? userId = freezed,Object? userName = freezed,Object? email = freezed,Object? phone = freezed,Object? profileImage = freezed,Object? tokenExpireDate = freezed,Object? refreshTokenExpireDate = freezed,Object? isEmailVerified = freezed,Object? isPhoneVerified = freezed,Object? loginStateEnum = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? access_token = freezed,Object? refresh_token = freezed,Object? token_type = freezed,Object? expires_in = freezed,Object? user = null,Object? loginStateEnum = freezed,}) {
   return _then(_self.copyWith(
-token: freezed == token ? _self.token : token // ignore: cast_nullable_to_non_nullable
-as String?,refreshToken: freezed == refreshToken ? _self.refreshToken : refreshToken // ignore: cast_nullable_to_non_nullable
-as String?,userId: freezed == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
-as String?,userName: freezed == userName ? _self.userName : userName // ignore: cast_nullable_to_non_nullable
-as String?,email: freezed == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
-as String?,phone: freezed == phone ? _self.phone : phone // ignore: cast_nullable_to_non_nullable
-as String?,profileImage: freezed == profileImage ? _self.profileImage : profileImage // ignore: cast_nullable_to_non_nullable
-as String?,tokenExpireDate: freezed == tokenExpireDate ? _self.tokenExpireDate : tokenExpireDate // ignore: cast_nullable_to_non_nullable
-as String?,refreshTokenExpireDate: freezed == refreshTokenExpireDate ? _self.refreshTokenExpireDate : refreshTokenExpireDate // ignore: cast_nullable_to_non_nullable
-as String?,isEmailVerified: freezed == isEmailVerified ? _self.isEmailVerified : isEmailVerified // ignore: cast_nullable_to_non_nullable
-as bool?,isPhoneVerified: freezed == isPhoneVerified ? _self.isPhoneVerified : isPhoneVerified // ignore: cast_nullable_to_non_nullable
-as bool?,loginStateEnum: freezed == loginStateEnum ? _self.loginStateEnum : loginStateEnum // ignore: cast_nullable_to_non_nullable
+access_token: freezed == access_token ? _self.access_token : access_token // ignore: cast_nullable_to_non_nullable
+as String?,refresh_token: freezed == refresh_token ? _self.refresh_token : refresh_token // ignore: cast_nullable_to_non_nullable
+as String?,token_type: freezed == token_type ? _self.token_type : token_type // ignore: cast_nullable_to_non_nullable
+as String?,expires_in: freezed == expires_in ? _self.expires_in : expires_in // ignore: cast_nullable_to_non_nullable
+as int?,user: null == user ? _self.user : user // ignore: cast_nullable_to_non_nullable
+as Map<String, dynamic>,loginStateEnum: freezed == loginStateEnum ? _self.loginStateEnum : loginStateEnum // ignore: cast_nullable_to_non_nullable
 as LoginStateEnum?,
   ));
 }
@@ -164,10 +158,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? token,  String? refreshToken,  String? userId,  String? userName,  String? email,  String? phone,  String? profileImage,  String? tokenExpireDate,  String? refreshTokenExpireDate,  bool? isEmailVerified,  bool? isPhoneVerified,  LoginStateEnum? loginStateEnum)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? access_token,  String? refresh_token,  String? token_type,  int? expires_in,  Map<String, dynamic> user,  LoginStateEnum? loginStateEnum)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _LoginStateEntity() when $default != null:
-return $default(_that.token,_that.refreshToken,_that.userId,_that.userName,_that.email,_that.phone,_that.profileImage,_that.tokenExpireDate,_that.refreshTokenExpireDate,_that.isEmailVerified,_that.isPhoneVerified,_that.loginStateEnum);case _:
+return $default(_that.access_token,_that.refresh_token,_that.token_type,_that.expires_in,_that.user,_that.loginStateEnum);case _:
   return orElse();
 
 }
@@ -185,10 +179,10 @@ return $default(_that.token,_that.refreshToken,_that.userId,_that.userName,_that
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? token,  String? refreshToken,  String? userId,  String? userName,  String? email,  String? phone,  String? profileImage,  String? tokenExpireDate,  String? refreshTokenExpireDate,  bool? isEmailVerified,  bool? isPhoneVerified,  LoginStateEnum? loginStateEnum)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? access_token,  String? refresh_token,  String? token_type,  int? expires_in,  Map<String, dynamic> user,  LoginStateEnum? loginStateEnum)  $default,) {final _that = this;
 switch (_that) {
 case _LoginStateEntity():
-return $default(_that.token,_that.refreshToken,_that.userId,_that.userName,_that.email,_that.phone,_that.profileImage,_that.tokenExpireDate,_that.refreshTokenExpireDate,_that.isEmailVerified,_that.isPhoneVerified,_that.loginStateEnum);case _:
+return $default(_that.access_token,_that.refresh_token,_that.token_type,_that.expires_in,_that.user,_that.loginStateEnum);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -205,10 +199,10 @@ return $default(_that.token,_that.refreshToken,_that.userId,_that.userName,_that
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? token,  String? refreshToken,  String? userId,  String? userName,  String? email,  String? phone,  String? profileImage,  String? tokenExpireDate,  String? refreshTokenExpireDate,  bool? isEmailVerified,  bool? isPhoneVerified,  LoginStateEnum? loginStateEnum)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? access_token,  String? refresh_token,  String? token_type,  int? expires_in,  Map<String, dynamic> user,  LoginStateEnum? loginStateEnum)?  $default,) {final _that = this;
 switch (_that) {
 case _LoginStateEntity() when $default != null:
-return $default(_that.token,_that.refreshToken,_that.userId,_that.userName,_that.email,_that.phone,_that.profileImage,_that.tokenExpireDate,_that.refreshTokenExpireDate,_that.isEmailVerified,_that.isPhoneVerified,_that.loginStateEnum);case _:
+return $default(_that.access_token,_that.refresh_token,_that.token_type,_that.expires_in,_that.user,_that.loginStateEnum);case _:
   return null;
 
 }
@@ -220,20 +214,20 @@ return $default(_that.token,_that.refreshToken,_that.userId,_that.userName,_that
 @JsonSerializable()
 
 class _LoginStateEntity implements LoginStateEntity {
-  const _LoginStateEntity({this.token = "", this.refreshToken = "", this.userId = "", this.userName = "", this.email = "", this.phone = "", this.profileImage = "", this.tokenExpireDate = "", this.refreshTokenExpireDate = "", this.isEmailVerified = false, this.isPhoneVerified = false, this.loginStateEnum = LoginStateEnum.unlogined});
+  const _LoginStateEntity({this.access_token = "", this.refresh_token = "", this.token_type = "", this.expires_in = 0, final  Map<String, dynamic> user = const {}, this.loginStateEnum = LoginStateEnum.unlogined}): _user = user;
   factory _LoginStateEntity.fromJson(Map<String, dynamic> json) => _$LoginStateEntityFromJson(json);
 
-@override@JsonKey() final  String? token;
-@override@JsonKey() final  String? refreshToken;
-@override@JsonKey() final  String? userId;
-@override@JsonKey() final  String? userName;
-@override@JsonKey() final  String? email;
-@override@JsonKey() final  String? phone;
-@override@JsonKey() final  String? profileImage;
-@override@JsonKey() final  String? tokenExpireDate;
-@override@JsonKey() final  String? refreshTokenExpireDate;
-@override@JsonKey() final  bool? isEmailVerified;
-@override@JsonKey() final  bool? isPhoneVerified;
+@override@JsonKey() final  String? access_token;
+@override@JsonKey() final  String? refresh_token;
+@override@JsonKey() final  String? token_type;
+@override@JsonKey() final  int? expires_in;
+ final  Map<String, dynamic> _user;
+@override@JsonKey() Map<String, dynamic> get user {
+  if (_user is EqualUnmodifiableMapView) return _user;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableMapView(_user);
+}
+
 @override@JsonKey() final  LoginStateEnum? loginStateEnum;
 
 /// Create a copy of LoginStateEntity
@@ -249,16 +243,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LoginStateEntity&&(identical(other.token, token) || other.token == token)&&(identical(other.refreshToken, refreshToken) || other.refreshToken == refreshToken)&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.userName, userName) || other.userName == userName)&&(identical(other.email, email) || other.email == email)&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.profileImage, profileImage) || other.profileImage == profileImage)&&(identical(other.tokenExpireDate, tokenExpireDate) || other.tokenExpireDate == tokenExpireDate)&&(identical(other.refreshTokenExpireDate, refreshTokenExpireDate) || other.refreshTokenExpireDate == refreshTokenExpireDate)&&(identical(other.isEmailVerified, isEmailVerified) || other.isEmailVerified == isEmailVerified)&&(identical(other.isPhoneVerified, isPhoneVerified) || other.isPhoneVerified == isPhoneVerified)&&(identical(other.loginStateEnum, loginStateEnum) || other.loginStateEnum == loginStateEnum));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LoginStateEntity&&(identical(other.access_token, access_token) || other.access_token == access_token)&&(identical(other.refresh_token, refresh_token) || other.refresh_token == refresh_token)&&(identical(other.token_type, token_type) || other.token_type == token_type)&&(identical(other.expires_in, expires_in) || other.expires_in == expires_in)&&const DeepCollectionEquality().equals(other._user, _user)&&(identical(other.loginStateEnum, loginStateEnum) || other.loginStateEnum == loginStateEnum));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,token,refreshToken,userId,userName,email,phone,profileImage,tokenExpireDate,refreshTokenExpireDate,isEmailVerified,isPhoneVerified,loginStateEnum);
+int get hashCode => Object.hash(runtimeType,access_token,refresh_token,token_type,expires_in,const DeepCollectionEquality().hash(_user),loginStateEnum);
 
 @override
 String toString() {
-  return 'LoginStateEntity(token: $token, refreshToken: $refreshToken, userId: $userId, userName: $userName, email: $email, phone: $phone, profileImage: $profileImage, tokenExpireDate: $tokenExpireDate, refreshTokenExpireDate: $refreshTokenExpireDate, isEmailVerified: $isEmailVerified, isPhoneVerified: $isPhoneVerified, loginStateEnum: $loginStateEnum)';
+  return 'LoginStateEntity(access_token: $access_token, refresh_token: $refresh_token, token_type: $token_type, expires_in: $expires_in, user: $user, loginStateEnum: $loginStateEnum)';
 }
 
 
@@ -269,7 +263,7 @@ abstract mixin class _$LoginStateEntityCopyWith<$Res> implements $LoginStateEnti
   factory _$LoginStateEntityCopyWith(_LoginStateEntity value, $Res Function(_LoginStateEntity) _then) = __$LoginStateEntityCopyWithImpl;
 @override @useResult
 $Res call({
- String? token, String? refreshToken, String? userId, String? userName, String? email, String? phone, String? profileImage, String? tokenExpireDate, String? refreshTokenExpireDate, bool? isEmailVerified, bool? isPhoneVerified, LoginStateEnum? loginStateEnum
+ String? access_token, String? refresh_token, String? token_type, int? expires_in, Map<String, dynamic> user, LoginStateEnum? loginStateEnum
 });
 
 
@@ -286,20 +280,14 @@ class __$LoginStateEntityCopyWithImpl<$Res>
 
 /// Create a copy of LoginStateEntity
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? token = freezed,Object? refreshToken = freezed,Object? userId = freezed,Object? userName = freezed,Object? email = freezed,Object? phone = freezed,Object? profileImage = freezed,Object? tokenExpireDate = freezed,Object? refreshTokenExpireDate = freezed,Object? isEmailVerified = freezed,Object? isPhoneVerified = freezed,Object? loginStateEnum = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? access_token = freezed,Object? refresh_token = freezed,Object? token_type = freezed,Object? expires_in = freezed,Object? user = null,Object? loginStateEnum = freezed,}) {
   return _then(_LoginStateEntity(
-token: freezed == token ? _self.token : token // ignore: cast_nullable_to_non_nullable
-as String?,refreshToken: freezed == refreshToken ? _self.refreshToken : refreshToken // ignore: cast_nullable_to_non_nullable
-as String?,userId: freezed == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
-as String?,userName: freezed == userName ? _self.userName : userName // ignore: cast_nullable_to_non_nullable
-as String?,email: freezed == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
-as String?,phone: freezed == phone ? _self.phone : phone // ignore: cast_nullable_to_non_nullable
-as String?,profileImage: freezed == profileImage ? _self.profileImage : profileImage // ignore: cast_nullable_to_non_nullable
-as String?,tokenExpireDate: freezed == tokenExpireDate ? _self.tokenExpireDate : tokenExpireDate // ignore: cast_nullable_to_non_nullable
-as String?,refreshTokenExpireDate: freezed == refreshTokenExpireDate ? _self.refreshTokenExpireDate : refreshTokenExpireDate // ignore: cast_nullable_to_non_nullable
-as String?,isEmailVerified: freezed == isEmailVerified ? _self.isEmailVerified : isEmailVerified // ignore: cast_nullable_to_non_nullable
-as bool?,isPhoneVerified: freezed == isPhoneVerified ? _self.isPhoneVerified : isPhoneVerified // ignore: cast_nullable_to_non_nullable
-as bool?,loginStateEnum: freezed == loginStateEnum ? _self.loginStateEnum : loginStateEnum // ignore: cast_nullable_to_non_nullable
+access_token: freezed == access_token ? _self.access_token : access_token // ignore: cast_nullable_to_non_nullable
+as String?,refresh_token: freezed == refresh_token ? _self.refresh_token : refresh_token // ignore: cast_nullable_to_non_nullable
+as String?,token_type: freezed == token_type ? _self.token_type : token_type // ignore: cast_nullable_to_non_nullable
+as String?,expires_in: freezed == expires_in ? _self.expires_in : expires_in // ignore: cast_nullable_to_non_nullable
+as int?,user: null == user ? _self._user : user // ignore: cast_nullable_to_non_nullable
+as Map<String, dynamic>,loginStateEnum: freezed == loginStateEnum ? _self.loginStateEnum : loginStateEnum // ignore: cast_nullable_to_non_nullable
 as LoginStateEnum?,
   ));
 }

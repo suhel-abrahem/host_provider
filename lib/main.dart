@@ -24,4 +24,5 @@ void main() async {
       child: HostaProvider(),
     ),
   );
+  print("from main:${getItInstance<AppPreferences>().getUserInfo()}");
 }

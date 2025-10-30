@@ -5,7 +5,7 @@ abstract class LoginBlocState with _$LoginBlocState {
   const factory LoginBlocState.loginStateInitial() = LoginStateInitial;
   const factory LoginBlocState.loginStateLoading() = LoginStateLoading;
   const factory LoginBlocState.loginStateLoaded({
-    required LoginStateModel? loginStateModel,
+    required LoginStateEntity? loginStateEntity,
   }) = LoginStateLoaded;
   const factory LoginBlocState.loginStateError({required String? message}) =
       LoginStateError;

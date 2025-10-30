@@ -7,17 +7,11 @@ part 'login_state_entity.g.dart';
 @freezed
 abstract class LoginStateEntity with _$LoginStateEntity {
   const factory LoginStateEntity({
-    @Default("") String? token,
-    @Default("") String? refreshToken,
-    @Default("") String? userId,
-    @Default("") String? userName,
-    @Default("") String? email,
-    @Default("") String? phone,
-    @Default("") String? profileImage,
-    @Default("") String? tokenExpireDate,
-    @Default("") String? refreshTokenExpireDate,
-    @Default(false) bool? isEmailVerified,
-    @Default(false) bool? isPhoneVerified,
+    @Default("") String? access_token,
+    @Default("") String? refresh_token,
+    @Default("") String? token_type,
+    @Default(0) int? expires_in,
+    @Default({}) Map<String, dynamic> user,
     @Default(LoginStateEnum.unlogined) LoginStateEnum? loginStateEnum,
   }) = _LoginStateEntity;
 

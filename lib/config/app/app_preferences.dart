@@ -52,10 +52,10 @@ class AppPreferences {
     _sharedPreferences.setBool(SharedPreferencesKeys.isFirstUseKey, isFirstUse);
   }
 
-  setUserInfo({required LoginStateEntity loginStateEntity}) {
+  setUserInfo({required LoginStateEntity? loginStateEntity}) {
     _sharedPreferences.setString(
       SharedPreferencesKeys.loginStateKey,
-      loginStateEntity.toJson().toString(),
+      jsonEncode(loginStateEntity),
     );
   }
 
@@ -63,9 +63,7 @@ class AppPreferences {
     String? jsonString = _sharedPreferences.getString(
       SharedPreferencesKeys.loginStateKey,
     );
-
-    return LoginStateEntity.fromJson(
-      jsonDecode(jsonString ?? "{}") as Map<String, dynamic>,
-    );
+    print("json As string:$jsonString");
+    return LoginStateEntity.fromJson(jsonDecode(jsonString ?? "{}"));
   }
 }

@@ -5,7 +5,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part "line_chart_model.freezed.dart";
 
 @freezed
-class LineChartModel with _$LineChartModel {
+abstract class LineChartModel with _$LineChartModel {
   const factory LineChartModel(
       {@Default('') String? name,
      @Default(Colors.blueAccent) Color? color,

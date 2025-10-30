@@ -50,12 +50,12 @@ GoRouter goRouter = GoRouter(
     print("Current route: ${state.uri.toString()}");
     if (getItInstance<AppPreferences>().isFirstUse() == false) {
       return RoutesPath.firstUsePage;
-    } //  else if (getItInstance<AppPreferences>().getUserInfo()?.loginStateEnum ==
-    //         LoginStateEnum.unlogined &&
-    //     !(state.uri.toString().endsWith(RoutesPath.signupPage))) {
-    //   print(state.fullPath);
-    //   return RoutesPath.loginPage;
-    //}
+    } else if (getItInstance<AppPreferences>().getUserInfo()?.loginStateEnum ==
+            LoginStateEnum.unlogined &&
+        !(state.uri.toString().endsWith(RoutesPath.signupPage))) {
+      print(state.fullPath);
+      return RoutesPath.loginPage;
+    }
 
     return null;
   },
@@ -68,7 +68,8 @@ GoRouter goRouter = GoRouter(
           body: navigationShell,
           bottomNavigationBar:
               !(state.uri.toString().endsWith(RoutesPath.loginPage) ||
-                  state.uri.toString().endsWith(RoutesPath.firstUsePage))
+                  state.uri.toString().endsWith(RoutesPath.firstUsePage) ||
+                  state.uri.toString().endsWith(RoutesPath.signupPage))
               ? MainBottomBar(
                   currentIndex: _routerToIndex(state.uri.toString()),
                 )

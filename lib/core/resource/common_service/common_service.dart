@@ -1,20 +1,24 @@
 import 'package:dio/dio.dart';
 import 'package:hosta_provider/core/constants/api_constant.dart';
 
-import 'dart:convert';
-
 import '../../data_state/data_state.dart';
 
 class CommonService {
   final Dio _dio;
 
-  CommonService({Duration? connectTimeout, Duration? receiveTimeout})
-    : _dio = Dio(
-        BaseOptions(
-          connectTimeout: connectTimeout ?? const Duration(seconds: 200),
-          receiveTimeout: receiveTimeout ?? const Duration(seconds: 200),
-        ),
-      );
+  CommonService({
+    Duration? connectTimeout,
+    Duration? receiveTimeout,
+    Map<String, dynamic>? queryParameters,
+    Map<String, dynamic>? headers,
+  }) : _dio = Dio(
+         BaseOptions(
+           connectTimeout: connectTimeout ?? const Duration(seconds: 200),
+           receiveTimeout: receiveTimeout ?? const Duration(seconds: 200),
+           queryParameters: queryParameters,
+           headers: headers,
+         ),
+       );
 
   /// GET request
   Future<DataState<Response?>> get(
