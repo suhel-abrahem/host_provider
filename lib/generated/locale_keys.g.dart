@@ -28,9 +28,13 @@ abstract class  LocaleKeys {
   static const loginPage_dateOfBirthIsRequired = 'loginPage.dateOfBirthIsRequired';
   static const loginPage_already_have_account = 'loginPage.already_have_account';
   static const loginPage_loginFailed = 'loginPage.loginFailed';
+  static const loginPage_country = 'loginPage.country';
+  static const loginPage_countryIsRequired = 'loginPage.countryIsRequired';
   static const loginPage = 'loginPage';
   static const common_loading = 'common.loading';
   static const common_error = 'common.error';
+  static const common_anErrorHasOccurs = 'common.anErrorHasOccurs';
+  static const common_noInternetPullDown = 'common.noInternetPullDown';
   static const common_success = 'common.success';
   static const common_retry = 'common.retry';
   static const common_cancel = 'common.cancel';

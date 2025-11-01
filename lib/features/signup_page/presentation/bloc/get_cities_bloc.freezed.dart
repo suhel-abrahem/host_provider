@@ -355,16 +355,15 @@ extension GetCitiesStatePatterns on GetCitiesState {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( GetCitiesStateInitial value)?  initial,TResult Function( GetCitiesStateGot value)?  got,TResult Function( GetCitiesStateLoading value)?  loading,TResult Function( GetCitiesStateCantAccessAddress value)?  cantAccessAddress,TResult Function( GetCitiesStateCanAccessAddress value)?  canAccessAddress,TResult Function( GetCitiesStateError value)?  error,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( GetCitiesStateInitial value)?  initial,TResult Function( GetCitiesStateGot value)?  got,TResult Function( GetCitiesStateLoading value)?  loading,TResult Function( GetCitiesStateError value)?  error,TResult Function( GetCitiesStateNoInternet value)?  noInternet,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case GetCitiesStateInitial() when initial != null:
 return initial(_that);case GetCitiesStateGot() when got != null:
 return got(_that);case GetCitiesStateLoading() when loading != null:
-return loading(_that);case GetCitiesStateCantAccessAddress() when cantAccessAddress != null:
-return cantAccessAddress(_that);case GetCitiesStateCanAccessAddress() when canAccessAddress != null:
-return canAccessAddress(_that);case GetCitiesStateError() when error != null:
-return error(_that);case _:
+return loading(_that);case GetCitiesStateError() when error != null:
+return error(_that);case GetCitiesStateNoInternet() when noInternet != null:
+return noInternet(_that);case _:
   return orElse();
 
 }
@@ -382,16 +381,15 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( GetCitiesStateInitial value)  initial,required TResult Function( GetCitiesStateGot value)  got,required TResult Function( GetCitiesStateLoading value)  loading,required TResult Function( GetCitiesStateCantAccessAddress value)  cantAccessAddress,required TResult Function( GetCitiesStateCanAccessAddress value)  canAccessAddress,required TResult Function( GetCitiesStateError value)  error,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( GetCitiesStateInitial value)  initial,required TResult Function( GetCitiesStateGot value)  got,required TResult Function( GetCitiesStateLoading value)  loading,required TResult Function( GetCitiesStateError value)  error,required TResult Function( GetCitiesStateNoInternet value)  noInternet,}){
 final _that = this;
 switch (_that) {
 case GetCitiesStateInitial():
 return initial(_that);case GetCitiesStateGot():
 return got(_that);case GetCitiesStateLoading():
-return loading(_that);case GetCitiesStateCantAccessAddress():
-return cantAccessAddress(_that);case GetCitiesStateCanAccessAddress():
-return canAccessAddress(_that);case GetCitiesStateError():
-return error(_that);case _:
+return loading(_that);case GetCitiesStateError():
+return error(_that);case GetCitiesStateNoInternet():
+return noInternet(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -408,16 +406,15 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( GetCitiesStateInitial value)?  initial,TResult? Function( GetCitiesStateGot value)?  got,TResult? Function( GetCitiesStateLoading value)?  loading,TResult? Function( GetCitiesStateCantAccessAddress value)?  cantAccessAddress,TResult? Function( GetCitiesStateCanAccessAddress value)?  canAccessAddress,TResult? Function( GetCitiesStateError value)?  error,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( GetCitiesStateInitial value)?  initial,TResult? Function( GetCitiesStateGot value)?  got,TResult? Function( GetCitiesStateLoading value)?  loading,TResult? Function( GetCitiesStateError value)?  error,TResult? Function( GetCitiesStateNoInternet value)?  noInternet,}){
 final _that = this;
 switch (_that) {
 case GetCitiesStateInitial() when initial != null:
 return initial(_that);case GetCitiesStateGot() when got != null:
 return got(_that);case GetCitiesStateLoading() when loading != null:
-return loading(_that);case GetCitiesStateCantAccessAddress() when cantAccessAddress != null:
-return cantAccessAddress(_that);case GetCitiesStateCanAccessAddress() when canAccessAddress != null:
-return canAccessAddress(_that);case GetCitiesStateError() when error != null:
-return error(_that);case _:
+return loading(_that);case GetCitiesStateError() when error != null:
+return error(_that);case GetCitiesStateNoInternet() when noInternet != null:
+return noInternet(_that);case _:
   return null;
 
 }
@@ -434,15 +431,14 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function( List<CityEntity?>? cityEntity)?  got,TResult Function()?  loading,TResult Function()?  cantAccessAddress,TResult Function()?  canAccessAddress,TResult Function( String? message)?  error,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function( List<CityEntity?>? cityEntity)?  got,TResult Function()?  loading,TResult Function( String? message)?  error,TResult Function()?  noInternet,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case GetCitiesStateInitial() when initial != null:
 return initial();case GetCitiesStateGot() when got != null:
 return got(_that.cityEntity);case GetCitiesStateLoading() when loading != null:
-return loading();case GetCitiesStateCantAccessAddress() when cantAccessAddress != null:
-return cantAccessAddress();case GetCitiesStateCanAccessAddress() when canAccessAddress != null:
-return canAccessAddress();case GetCitiesStateError() when error != null:
-return error(_that.message);case _:
+return loading();case GetCitiesStateError() when error != null:
+return error(_that.message);case GetCitiesStateNoInternet() when noInternet != null:
+return noInternet();case _:
   return orElse();
 
 }
@@ -460,15 +456,14 @@ return error(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function( List<CityEntity?>? cityEntity)  got,required TResult Function()  loading,required TResult Function()  cantAccessAddress,required TResult Function()  canAccessAddress,required TResult Function( String? message)  error,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function( List<CityEntity?>? cityEntity)  got,required TResult Function()  loading,required TResult Function( String? message)  error,required TResult Function()  noInternet,}) {final _that = this;
 switch (_that) {
 case GetCitiesStateInitial():
 return initial();case GetCitiesStateGot():
 return got(_that.cityEntity);case GetCitiesStateLoading():
-return loading();case GetCitiesStateCantAccessAddress():
-return cantAccessAddress();case GetCitiesStateCanAccessAddress():
-return canAccessAddress();case GetCitiesStateError():
-return error(_that.message);case _:
+return loading();case GetCitiesStateError():
+return error(_that.message);case GetCitiesStateNoInternet():
+return noInternet();case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -485,15 +480,14 @@ return error(_that.message);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function( List<CityEntity?>? cityEntity)?  got,TResult? Function()?  loading,TResult? Function()?  cantAccessAddress,TResult? Function()?  canAccessAddress,TResult? Function( String? message)?  error,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function( List<CityEntity?>? cityEntity)?  got,TResult? Function()?  loading,TResult? Function( String? message)?  error,TResult? Function()?  noInternet,}) {final _that = this;
 switch (_that) {
 case GetCitiesStateInitial() when initial != null:
 return initial();case GetCitiesStateGot() when got != null:
 return got(_that.cityEntity);case GetCitiesStateLoading() when loading != null:
-return loading();case GetCitiesStateCantAccessAddress() when cantAccessAddress != null:
-return cantAccessAddress();case GetCitiesStateCanAccessAddress() when canAccessAddress != null:
-return canAccessAddress();case GetCitiesStateError() when error != null:
-return error(_that.message);case _:
+return loading();case GetCitiesStateError() when error != null:
+return error(_that.message);case GetCitiesStateNoInternet() when noInternet != null:
+return noInternet();case _:
   return null;
 
 }
@@ -660,82 +654,6 @@ String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
 /// @nodoc
 
 
-class GetCitiesStateCantAccessAddress with DiagnosticableTreeMixin implements GetCitiesState {
-  const GetCitiesStateCantAccessAddress();
-  
-
-
-
-
-
-@override
-void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-  properties
-    ..add(DiagnosticsProperty('type', 'GetCitiesState.cantAccessAddress'))
-    ;
-}
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is GetCitiesStateCantAccessAddress);
-}
-
-
-@override
-int get hashCode => runtimeType.hashCode;
-
-@override
-String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'GetCitiesState.cantAccessAddress()';
-}
-
-
-}
-
-
-
-
-/// @nodoc
-
-
-class GetCitiesStateCanAccessAddress with DiagnosticableTreeMixin implements GetCitiesState {
-  const GetCitiesStateCanAccessAddress();
-  
-
-
-
-
-
-@override
-void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-  properties
-    ..add(DiagnosticsProperty('type', 'GetCitiesState.canAccessAddress'))
-    ;
-}
-
-@override
-bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is GetCitiesStateCanAccessAddress);
-}
-
-
-@override
-int get hashCode => runtimeType.hashCode;
-
-@override
-String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'GetCitiesState.canAccessAddress()';
-}
-
-
-}
-
-
-
-
-/// @nodoc
-
-
 class GetCitiesStateError with DiagnosticableTreeMixin implements GetCitiesState {
   const GetCitiesStateError(this.message);
   
@@ -804,5 +722,43 @@ as String?,
 
 
 }
+
+/// @nodoc
+
+
+class GetCitiesStateNoInternet with DiagnosticableTreeMixin implements GetCitiesState {
+  const GetCitiesStateNoInternet();
+  
+
+
+
+
+
+@override
+void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+  properties
+    ..add(DiagnosticsProperty('type', 'GetCitiesState.noInternet'))
+    ;
+}
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is GetCitiesStateNoInternet);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
+  return 'GetCitiesState.noInternet()';
+}
+
+
+}
+
+
+
 
 // dart format on

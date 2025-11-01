@@ -12,6 +12,9 @@ class GetCountryUsecase
     : _getCountryRepository = getCountryRepository;
   @override
   Future<DataState<List<CountryEntity?>?>?> call({CountryModel? params}) {
+    print(
+      "usecase:${_getCountryRepository.getCountry(countryModel: params) is DataSuccess}",
+    );
     return _getCountryRepository.getCountry(countryModel: params);
   }
 }

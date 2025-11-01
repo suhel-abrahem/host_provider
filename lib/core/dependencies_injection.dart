@@ -83,7 +83,9 @@ Future<void> initDependencies() async {
     SignupUsecase(signupRepository: getItInstance()),
   );
   getItInstance.registerSingleton<GetCountryUsecase>(
-    GetCountryUsecase(getCountryRepository: getItInstance()),
+    GetCountryUsecase(
+      getCountryRepository: getItInstance<GetCountryRepository>(),
+    ),
   );
   getItInstance.registerSingleton<GetCitiesUsecase>(
     GetCitiesUsecase(getCitiesRepository: getItInstance()),
@@ -92,9 +94,11 @@ Future<void> initDependencies() async {
   getItInstance.registerFactory<SignupBlocBloc>(
     () => SignupBlocBloc(getItInstance()),
   );
-  getItInstance.registerFactory<GetCitiesBloc>(() => GetCitiesBloc());
+  getItInstance.registerFactory<GetCitiesBloc>(
+    () => GetCitiesBloc(getItInstance()),
+  );
   getItInstance.registerFactory<GetCountriesBloc>(
-    () => GetCountriesBloc(getItInstance()),
+    () => GetCountriesBloc(getItInstance<GetCountryUsecase>()),
   );
 
   // end of signup

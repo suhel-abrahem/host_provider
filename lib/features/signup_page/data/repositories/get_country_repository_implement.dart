@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:hosta_provider/core/constants/api_constant.dart';
 import 'package:hosta_provider/core/data_state/data_state.dart';
@@ -28,24 +30,27 @@ class GetCountryRepositoryImplement implements GetCountryRepository {
       headers: {"Accept-Language": countryModel?.acceptLanguage},
     );
     try {
+      Completer<DataState<List<CountryEntity?>?>?> getCountriesCompleter =
+          Completer();
       await commonService.get(ApiConstant.countryList).then((onValue) {
         if (onValue is DataSuccess) {
           List<CountryEntity?>? countries = [];
-          final List<Map<String, dynamic>?>? rawCountries =
-              onValue.data?.data["data"];
+          final List? rawCountries = onValue.data?.data["data"];
           rawCountries?.forEach(
             (action) => action != null
                 ? countries.add(CountryEntity.fromJson(action))
                 : null,
           );
+          getCountriesCompleter.complete(DataSuccess(data: countries));
           return DataSuccess(data: countries);
         } else {
+          getCountriesCompleter.completeError(DataError(error: onValue.error));
           return DataError(error: onValue.error);
         }
       });
+      return getCountriesCompleter.future;
     } catch (e) {
       return DataError(error: e.toString());
     }
-    return null;
   }
 }

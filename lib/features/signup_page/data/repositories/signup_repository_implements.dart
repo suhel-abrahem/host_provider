@@ -38,9 +38,7 @@ class SignupRepositoryImplements implements SignupRepository {
           .post(ApiConstant.registerEndpoint, data: signupModel?.toJson())
           .then((onValue) {
             if (onValue is DataSuccess<Response>) {
-              return DataSuccess(
-                data: SignupEntity.fromJson(onValue.data?.data),
-              );
+              return onValue;
             } else {
               return DataError(error: onValue.error);
             }

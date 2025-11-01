@@ -6,9 +6,7 @@ abstract class GetCitiesState with _$GetCitiesState {
   const factory GetCitiesState.got(List<CityEntity?>? cityEntity) =
       GetCitiesStateGot;
   const factory GetCitiesState.loading() = GetCitiesStateLoading;
-  const factory GetCitiesState.cantAccessAddress() =
-      GetCitiesStateCantAccessAddress;
-  const factory GetCitiesState.canAccessAddress() =
-      GetCitiesStateCanAccessAddress;
+
   const factory GetCitiesState.error(String? message) = GetCitiesStateError;
+  const factory GetCitiesState.noInternet() = GetCitiesStateNoInternet;
 }

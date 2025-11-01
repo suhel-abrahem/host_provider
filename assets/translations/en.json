@@ -24,11 +24,15 @@
     "dateOfBirth": "Date of Birth",
     "dateOfBirthIsRequired": "Date of Birth is required",
     "already_have_account": "Already have an account?",
-    "loginFailed": "Login failed. Please check your credentials and try again."
+    "loginFailed": "Login failed. Please check your credentials and try again.",
+    "country": "Country",
+    "countryIsRequired": "Country is required"
   },
   "common": {
     "loading": "Loading...",
     "error": "Error",
+    "anErrorHasOccurs": "An Error has occurs",
+    "noInternetPullDown": "Seams like You don't have internet connection. Check Your connection and try again by pulling the page down!",
     "success": "Success",
     "retry": "Retry",
     "cancel": "Cancel",

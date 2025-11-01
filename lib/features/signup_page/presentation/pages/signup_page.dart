@@ -7,7 +7,15 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hosta_provider/config/theme/app_theme.dart';
+import 'package:hosta_provider/core/constants/language_constant.dart';
 import 'package:hosta_provider/core/dependencies_injection.dart';
+import 'package:hosta_provider/core/util/helper/helper.dart';
+import 'package:hosta_provider/features/signup_page/data/models/city_model.dart';
+import 'package:hosta_provider/features/signup_page/data/models/country_model.dart';
+import 'package:hosta_provider/features/signup_page/domain/entities/city_entity.dart';
+import 'package:hosta_provider/features/signup_page/domain/entities/country_entity.dart';
+import 'package:hosta_provider/features/signup_page/presentation/bloc/get_cities_bloc.dart';
 import 'package:hosta_provider/features/signup_page/presentation/bloc/get_countries_bloc.dart';
 
 import '../../../../config/route/routes_manager.dart';
@@ -29,47 +37,12 @@ class SignupPage extends StatefulWidget {
 class _SignupPageState extends State<SignupPage> {
   String? birthDate;
   DateTime? selectedDateOfBirth;
-  final List<String> governatesList = [
-    LocaleKeys.cities_baghdad,
-    LocaleKeys.cities_basra,
-    LocaleKeys.cities_mosul,
-    LocaleKeys.cities_erbil,
-    LocaleKeys.cities_sulaymaniyah,
-    LocaleKeys.cities_dohuk,
-    LocaleKeys.cities_najaf,
-    LocaleKeys.cities_kirkuk,
-    LocaleKeys.cities_kut,
-    LocaleKeys.cities_diwaniyah,
-    LocaleKeys.cities_karbala,
-    LocaleKeys.cities_anbar,
-    LocaleKeys.cities_saladin,
-    LocaleKeys.cities_babylon,
-    LocaleKeys.cities_samawah,
-    LocaleKeys.cities_amarah,
-    LocaleKeys.cities_halabja,
-    LocaleKeys.cities_nasiriyah,
-  ];
-  final Map<String, String> governates = {
-    LocaleKeys.cities_baghdad: "baghdad",
-    LocaleKeys.cities_basra: "basra",
-    LocaleKeys.cities_mosul: "mosul",
-    LocaleKeys.cities_erbil: "erbil",
-    LocaleKeys.cities_sulaymaniyah: "sulaymaniyah",
-    LocaleKeys.cities_dohuk: "dohuk",
-    LocaleKeys.cities_najaf: "najaf",
-    LocaleKeys.cities_kirkuk: "kirkuk",
-    LocaleKeys.cities_kut: "kut",
-    LocaleKeys.cities_diwaniyah: "diwaniyah",
-    LocaleKeys.cities_karbala: "karbala",
-    LocaleKeys.cities_anbar: "anbar",
-    LocaleKeys.cities_saladin: "saladin",
-    LocaleKeys.cities_babylon: "babylon",
-    LocaleKeys.cities_samawah: "samawah",
-    LocaleKeys.cities_amarah: "amarah",
-    LocaleKeys.cities_halabja: "halabja",
-    LocaleKeys.cities_nasiriyah: "nasiriyah",
-  };
-  String? selectedGovernate;
+  List<CountryEntity?>? countryEntity;
+  int? selectedCountryId;
+  String? selectedCountry;
+  String? selectedGovernment;
+  List<CityEntity?>? governmentList;
+  List<CountryEntity?>? countriesList;
   bool? canAccessAddress = false;
   Future<void> getLocationPermissionState() async {
     if ((await Permission.locationWhenInUse.serviceStatus.isEnabled)) {
@@ -82,365 +55,621 @@ class _SignupPageState extends State<SignupPage> {
   @override
   void didChangeDependencies() {
     getLocationPermissionState();
+
     super.didChangeDependencies();
   }
 
   @override
   void didUpdateWidget(covariant SignupPage oldWidget) {
     getLocationPermissionState();
+
     super.didUpdateWidget(oldWidget);
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) =>
-          getItInstance<GetCountriesBloc>()
-            ..add(GetCountriesEvent.started(canAccessAddress)),
-      child: BlocListener<GetCountriesBloc, GetCountriesState>(
-        listener: (context, state) async {
-          print("su state: $state");
-          if (state is GetCountriesStateCantAccessAddress) {
-            Permission.locationWhenInUse.request().isRestricted;
-          }
-        },
-        child: Scaffold(
-          body: ListView(
-            children: [
-              Padding(
-                padding: EdgeInsetsGeometry.symmetric(vertical: 50.h),
-                child: SvgPicture.asset(
-                  getAssetsPath(
-                    assetsName: ImagesName.loginImage,
-                    assetsType: AssetsType.image,
+    return Scaffold(
+      body: ListView(
+        children: [
+          Padding(
+            padding: EdgeInsetsGeometry.symmetric(vertical: 50.h),
+            child: SvgPicture.asset(
+              getAssetsPath(
+                assetsName: ImagesName.loginImage,
+                assetsType: AssetsType.image,
+              ),
+            ),
+          ),
+          Form(
+            autovalidateMode: AutovalidateMode.onUserInteraction,
+            child: Column(
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 20.w,
+                    vertical: 20.h,
+                  ),
+                  child: Align(
+                    alignment: AlignmentDirectional.centerStart,
+                    child: Text(
+                      LocaleKeys.loginPage_signUp.tr(),
+                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                        fontFamily: FontConstants.fontFamily(context.locale),
+                      ),
+                    ),
                   ),
                 ),
-              ),
-              Form(
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 20.w,
-                        vertical: 20.h,
-                      ),
-                      child: Align(
-                        alignment: AlignmentDirectional.centerStart,
-                        child: Text(
-                          LocaleKeys.loginPage_signUp.tr(),
-                          style: Theme.of(context).textTheme.labelLarge
-                              ?.copyWith(
-                                fontFamily: FontConstants.fontFamily(
-                                  context.locale,
-                                ),
-                              ),
+                //name input field
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 5.h),
+                  child: CustomInputField(
+                    width: 300.w,
+                    isRequired: true,
+
+                    label: LocaleKeys.loginPage_name.tr(),
+                    validator: (value) {
+                      if (value == null || value.toString().trim().isEmpty) {
+                        return LocaleKeys.loginPage_nameIsRequired.tr();
+                      }
+
+                      return null;
+                    },
+                  ),
+                ),
+
+                //email input field
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 5.h),
+                  child: CustomInputField(
+                    width: 300.w,
+                    isRequired: false,
+
+                    label: LocaleKeys.loginPage_email.tr(),
+                    validator: (value) {
+                      if (value != null && value.toString().trim().isNotEmpty) {
+                        if (!RegExp(Validator.emailRegex).hasMatch(value)) {
+                          return Validator.emailExample;
+                        } else {
+                          return null;
+                        }
+                      }
+                      return null;
+                    },
+                  ),
+                ), //mobil input field
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 5.h),
+                  child: CustomInputField(
+                    width: 300.w,
+                    isRequired: true,
+
+                    label: LocaleKeys.loginPage_mobile.tr(),
+                    validator: (value) {
+                      if (value == null ||
+                          value.toString().trim().isEmpty ||
+                          value.toString().trim().length < 10) {
+                        return LocaleKeys.loginPage_mobileIsRequired.tr();
+                      }
+                      if (!RegExp(Validator.numberRegex).hasMatch(value)) {
+                        return LocaleKeys.loginPage_mobileIsRequired.tr();
+                      }
+                      return null;
+                    },
+                  ),
+                ),
+                //country input field
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 5.h),
+                  child: BlocProvider(
+                    create: (context) => getItInstance<GetCountriesBloc>()
+                      ..add(
+                        GetCountriesEvent.getCountries(
+                          CountryModel(acceptLanguage: "ar"),
                         ),
                       ),
-                    ),
-                    //name input field
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 5.h),
-                      child: CustomInputField(
-                        width: 300.w,
-                        isRequired: true,
-
-                        label: LocaleKeys.loginPage_name.tr(),
-                        validator: (value) {
-                          if (value == null ||
-                              value.toString().trim().isEmpty) {
-                            return LocaleKeys.loginPage_nameIsRequired.tr();
-                          }
-
-                          return null;
-                        },
-                      ),
-                    ),
-
-                    //email input field
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 5.h),
-                      child: CustomInputField(
-                        width: 300.w,
-                        isRequired: false,
-
-                        label: LocaleKeys.loginPage_email.tr(),
-                        validator: (value) {
-                          if (value != null &&
-                              value.toString().trim().isNotEmpty) {
-                            if (!RegExp(Validator.emailRegex).hasMatch(value)) {
-                              return Validator.emailExample;
-                            } else {
-                              return null;
-                            }
-                          }
-                          return null;
-                        },
-                      ),
-                    ), //mobil input field
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 5.h),
-                      child: CustomInputField(
-                        width: 300.w,
-                        isRequired: true,
-
-                        label: LocaleKeys.loginPage_mobile.tr(),
-                        validator: (value) {
-                          if (value == null ||
-                              value.toString().trim().isEmpty ||
-                              value.toString().trim().length < 10) {
-                            return LocaleKeys.loginPage_mobileIsRequired.tr();
-                          }
-                          if (!RegExp(Validator.numberRegex).hasMatch(value)) {
-                            return LocaleKeys.loginPage_mobileIsRequired.tr();
-                          }
-                          return null;
-                        },
-                      ),
-                    ),
-                    //city input field
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 5.h),
-                      child: GestureDetector(
-                        onTap: () async {
-                          await showDialog(
-                            context: context,
-                            barrierDismissible: true,
-                            builder: (context) {
-                              return BackdropFilter(
-                                filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
-                                child: AlertDialog(
-                                  backgroundColor: Theme.of(context)
-                                      .scaffoldBackgroundColor
-                                      .withValues(alpha: 0.4),
-                                  title: Center(
-                                    child: Text(
-                                      LocaleKeys.loginPage_city.tr(),
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .labelLarge
-                                          ?.copyWith(
-                                            fontFamily:
-                                                FontConstants.fontFamily(
-                                                  context.locale,
-                                                ),
-                                          ),
-                                      textAlign: TextAlign.center,
-                                    ),
+                    child: BlocBuilder<GetCountriesBloc, GetCountriesState>(
+                      builder: (context, state) {
+                        return AnimatedSwitcher(
+                          duration: Duration(milliseconds: 300),
+                          child: SizedBox(
+                            key: ValueKey(state),
+                            child: state.when(
+                              initial: () => SizedBox(),
+                              loading: () => Container(
+                                width: 300.w,
+                                height: 50.h,
+                                decoration: BoxDecoration(
+                                  border: Border.fromBorderSide(
+                                    Theme.of(context).defaultBorderSide,
                                   ),
-                                  content: SizedBox(
-                                    width: 300.w,
-                                    height: 300.h,
-                                    child: ListView.separated(
-                                      itemBuilder: (context, index) {
-                                        return ListTile(
-                                          title: Text(
-                                            governatesList[index].tr(),
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .labelLarge
-                                                ?.copyWith(
-                                                  fontFamily:
-                                                      FontConstants.fontFamily(
-                                                        context.locale,
-                                                      ),
-                                                ),
+                                  borderRadius: BorderRadius.circular(12.r),
+                                ),
+                                child: Row(
+                                  children: [
+                                    Padding(
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal: 13.w,
+                                      ),
+                                      child: Text(
+                                        LocaleKeys.loginPage_country.tr(),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .labelLarge
+                                            ?.copyWith(
+                                              fontFamily:
+                                                  FontConstants.fontFamily(
+                                                    context.locale,
+                                                  ),
+                                            ),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: Padding(
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: 12.w,
+                                        ),
+                                        child: LinearProgressIndicator(),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                              got: (List<CountryEntity?>? data) {
+                                countriesList = data;
+                                return GestureDetector(
+                                  onTap: () async {
+                                    await showDialog(
+                                      context: context,
+                                      barrierDismissible: true,
+                                      builder: (context) {
+                                        return BackdropFilter(
+                                          filter: ImageFilter.blur(
+                                            sigmaX: 2,
+                                            sigmaY: 2,
                                           ),
-                                          onTap: () {
-                                            setState(() {
-                                              selectedGovernate =
-                                                  governatesList[index].tr();
-                                            });
-                                            Navigator.pop(context);
-                                          },
+                                          child: AlertDialog(
+                                            backgroundColor: Theme.of(context)
+                                                .scaffoldBackgroundColor
+                                                .withValues(alpha: 0.4),
+                                            title: Center(
+                                              child: Text(
+                                                LocaleKeys.loginPage_country
+                                                    .tr(),
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .labelLarge
+                                                    ?.copyWith(
+                                                      fontFamily:
+                                                          FontConstants.fontFamily(
+                                                            context.locale,
+                                                          ),
+                                                    ),
+                                                textAlign: TextAlign.center,
+                                              ),
+                                            ),
+                                            content: SizedBox(
+                                              width: 300.w,
+                                              height: 300.h,
+                                              child: ListView.separated(
+                                                key: ValueKey(countriesList),
+                                                itemBuilder: (context, index) {
+                                                  return ListTile(
+                                                    title: Text(
+                                                      countriesList?[index]
+                                                              ?.name ??
+                                                          "",
+                                                      style: Theme.of(context)
+                                                          .textTheme
+                                                          .labelLarge
+                                                          ?.copyWith(
+                                                            fontFamily:
+                                                                FontConstants.fontFamily(
+                                                                  context
+                                                                      .locale,
+                                                                ),
+                                                          ),
+                                                    ),
+                                                    onTap: () {
+                                                      setState(() {
+                                                        selectedCountry =
+                                                            countriesList?[index]
+                                                                ?.name;
+                                                        selectedCountryId =
+                                                            countriesList?[index]
+                                                                ?.id;
+                                                      });
+                                                      Navigator.pop(context);
+                                                    },
+                                                  );
+                                                },
+                                                separatorBuilder:
+                                                    (context, index) =>
+                                                        const Divider(
+                                                          height: 1,
+                                                        ),
+                                                itemCount:
+                                                    countriesList?.length ?? 1,
+                                              ),
+                                            ),
+                                          ),
                                         );
                                       },
-                                      separatorBuilder: (context, index) =>
-                                          const Divider(height: 1),
-                                      itemCount: governatesList.length,
+                                    );
+                                  },
+                                  child: AbsorbPointer(
+                                    child: CustomInputField(
+                                      key: ValueKey(selectedGovernment),
+                                      width: 300.w,
+                                      isRequired: true,
+                                      initialValue: selectedGovernment,
+                                      label: LocaleKeys.loginPage_country.tr(),
+                                      validator: (value) {
+                                        if (value == null ||
+                                            value.toString().trim().isEmpty) {
+                                          return LocaleKeys
+                                              .loginPage_countryIsRequired
+                                              .tr();
+                                        }
+
+                                        return null;
+                                      },
                                     ),
                                   ),
-                                ),
-                              );
-                            },
-                          );
-                        },
-                        child: AbsorbPointer(
-                          child: CustomInputField(
-                            key: ValueKey(selectedGovernate),
-                            width: 300.w,
-                            isRequired: true,
-                            initialValue: selectedGovernate,
-                            label: LocaleKeys.loginPage_city.tr(),
-                            validator: (value) {
-                              if (value == null ||
-                                  value.toString().trim().isEmpty) {
-                                return LocaleKeys.loginPage_cityIsRequired.tr();
-                              }
-
-                              return null;
-                            },
+                                );
+                              },
+                              error: (String? message) => CustomInputField(
+                                width: 300.w,
+                                label: LocaleKeys.loginPage_country.tr(),
+                                maxLines: 1,
+                                initialValue: LocaleKeys.common_anErrorHasOccurs
+                                    .tr(),
+                              ),
+                              noInternet: () => CustomInputField(
+                                width: 300.w,
+                                label: LocaleKeys.loginPage_country.tr(),
+                                maxLines: 5,
+                                initialValue: LocaleKeys
+                                    .common_noInternetPullDown
+                                    .tr(),
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ),
+                //city input field
+                Visibility(
+                  visible: selectedCountryId != null,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(vertical: 5.h),
+                    child: BlocProvider(
+                      create: (context) => getItInstance<GetCitiesBloc>()
+                        ..add(
+                          GetCitiesEvent.getCities(
+                            CityModel(country_id: selectedCountryId),
                           ),
                         ),
+                      child: BlocBuilder<GetCitiesBloc, GetCitiesState>(
+                        builder: (context, state) {
+                          return AnimatedSwitcher(
+                            duration: Duration(milliseconds: 300),
+                            child: SizedBox(
+                              child: state.when(
+                                initial: () => SizedBox(),
+                                got: (data) {
+                                  governmentList = data;
+                                  return GestureDetector(
+                                    onTap: () async {
+                                      await showDialog(
+                                        context: context,
+                                        barrierDismissible: true,
+                                        builder: (context) {
+                                          return BackdropFilter(
+                                            filter: ImageFilter.blur(
+                                              sigmaX: 2,
+                                              sigmaY: 2,
+                                            ),
+                                            child: AlertDialog(
+                                              backgroundColor: Theme.of(context)
+                                                  .scaffoldBackgroundColor
+                                                  .withValues(alpha: 0.4),
+                                              title: Center(
+                                                child: Text(
+                                                  LocaleKeys.loginPage_city
+                                                      .tr(),
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .labelLarge
+                                                      ?.copyWith(
+                                                        fontFamily:
+                                                            FontConstants.fontFamily(
+                                                              context.locale,
+                                                            ),
+                                                      ),
+                                                  textAlign: TextAlign.center,
+                                                ),
+                                              ),
+                                              content: SizedBox(
+                                                width: 300.w,
+                                                height: 300.h,
+                                                child: ListView.separated(
+                                                  key: ValueKey(governmentList),
+                                                  itemBuilder: (context, index) {
+                                                    return ListTile(
+                                                      title: Text(
+                                                        governmentList?[index]
+                                                                ?.name ??
+                                                            "",
+                                                        style: Theme.of(context)
+                                                            .textTheme
+                                                            .labelLarge
+                                                            ?.copyWith(
+                                                              fontFamily:
+                                                                  FontConstants.fontFamily(
+                                                                    context
+                                                                        .locale,
+                                                                  ),
+                                                            ),
+                                                      ),
+                                                      onTap: () {
+                                                        setState(() {
+                                                          selectedGovernment =
+                                                              governmentList?[index]
+                                                                  ?.name;
+                                                        });
+                                                        Navigator.pop(context);
+                                                      },
+                                                    );
+                                                  },
+                                                  separatorBuilder:
+                                                      (context, index) =>
+                                                          const Divider(
+                                                            height: 1,
+                                                          ),
+                                                  itemCount:
+                                                      governmentList?.length ??
+                                                      0,
+                                                ),
+                                              ),
+                                            ),
+                                          );
+                                        },
+                                      );
+                                    },
+                                    child: AbsorbPointer(
+                                      child: CustomInputField(
+                                        key: ValueKey(selectedGovernment),
+                                        width: 300.w,
+                                        isRequired: true,
+                                        initialValue: selectedGovernment,
+                                        label: LocaleKeys.loginPage_city.tr(),
+                                        validator: (value) {
+                                          if (value == null ||
+                                              value.toString().trim().isEmpty) {
+                                            return LocaleKeys
+                                                .loginPage_cityIsRequired
+                                                .tr();
+                                          }
+
+                                          return null;
+                                        },
+                                      ),
+                                    ),
+                                  );
+                                },
+                                loading: () => Container(
+                                  width: 300.w,
+                                  height: 50.h,
+                                  decoration: BoxDecoration(
+                                    border: Border.fromBorderSide(
+                                      Theme.of(context).defaultBorderSide,
+                                    ),
+                                    borderRadius: BorderRadius.circular(12.r),
+                                  ),
+                                  child: Row(
+                                    children: [
+                                      Padding(
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: 13.w,
+                                        ),
+                                        child: Text(
+                                          LocaleKeys.loginPage_city.tr(),
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .labelLarge
+                                              ?.copyWith(
+                                                fontFamily:
+                                                    FontConstants.fontFamily(
+                                                      context.locale,
+                                                    ),
+                                              ),
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Padding(
+                                          padding: EdgeInsets.symmetric(
+                                            horizontal: 12.w,
+                                          ),
+                                          child: LinearProgressIndicator(),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+
+                                error: (String? message) => CustomInputField(
+                                  width: 300.w,
+                                  label: LocaleKeys.loginPage_city.tr(),
+                                  maxLines: 1,
+                                  initialValue: LocaleKeys
+                                      .common_anErrorHasOccurs
+                                      .tr(),
+                                ),
+                                noInternet: () => CustomInputField(
+                                  width: 300.w,
+                                  label: LocaleKeys.loginPage_city.tr(),
+                                  maxLines: 5,
+                                  initialValue: LocaleKeys
+                                      .common_noInternetPullDown
+                                      .tr(),
+                                ),
+                              ),
+                            ),
+                          );
+                        },
                       ),
                     ),
-                    //address input field
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 5.h),
+                  ),
+                ),
+                //address input field
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 5.h),
+                  child: CustomInputField(
+                    width: 300.w,
+                    isRequired: true,
+
+                    label: LocaleKeys.loginPage_address.tr(),
+                    validator: (value) {
+                      if (value == null || value.toString().trim().isEmpty) {
+                        return LocaleKeys.loginPage_addressIsRequired.tr();
+                      }
+
+                      return null;
+                    },
+                  ),
+                ),
+
+                //password input field
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 5.h),
+                  child: CustomInputField(
+                    width: 300.w,
+                    isRequired: true,
+                    obscureText: true,
+                    label: LocaleKeys.loginPage_password.tr(),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return LocaleKeys.loginPage_passwordIsRequired.tr();
+                      }
+
+                      return null;
+                    },
+                  ),
+                ),
+                //confirm password input field
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 5.h),
+                  child: CustomInputField(
+                    width: 300.w,
+                    isRequired: true,
+                    obscureText: true,
+                    label: LocaleKeys.loginPage_confirmPassword.tr(),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return LocaleKeys.loginPage_passwordIsRequired.tr();
+                      }
+
+                      return null;
+                    },
+                  ),
+                ),
+                // date of birth input field
+                Padding(
+                  padding: EdgeInsetsGeometry.symmetric(vertical: 5.h),
+                  child: GestureDetector(
+                    onTap: () {
+                      showDatePicker(
+                        context: context,
+                        initialDate: DateTime.now(),
+                        firstDate: DateTime(1900),
+                        lastDate: DateTime.now(),
+                      ).then((selectedDate) {
+                        if (selectedDate != null) {
+                          setState(() {
+                            selectedDateOfBirth = selectedDate;
+                            birthDate = DateFormat(
+                              'yyyy-MM-dd',
+                            ).format(selectedDate);
+                          });
+                        }
+                      });
+                    },
+                    child: AbsorbPointer(
                       child: CustomInputField(
+                        key: ValueKey(birthDate),
                         width: 300.w,
                         isRequired: true,
-
-                        label: LocaleKeys.loginPage_address.tr(),
+                        initialValue: birthDate,
+                        label: LocaleKeys.loginPage_dateOfBirth.tr(),
                         validator: (value) {
                           if (value == null ||
                               value.toString().trim().isEmpty) {
-                            return LocaleKeys.loginPage_addressIsRequired.tr();
+                            return LocaleKeys.loginPage_dateOfBirthIsRequired
+                                .tr();
                           }
 
                           return null;
                         },
                       ),
                     ),
+                  ),
+                ),
 
-                    //password input field
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 5.h),
-                      child: CustomInputField(
-                        width: 300.w,
-                        isRequired: true,
-                        obscureText: true,
-                        label: LocaleKeys.loginPage_password.tr(),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return LocaleKeys.loginPage_passwordIsRequired.tr();
-                          }
-
-                          return null;
-                        },
-                      ),
-                    ),
-                    //confirm password input field
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 5.h),
-                      child: CustomInputField(
-                        width: 300.w,
-                        isRequired: true,
-                        obscureText: true,
-                        label: LocaleKeys.loginPage_confirmPassword.tr(),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return LocaleKeys.loginPage_passwordIsRequired.tr();
-                          }
-
-                          return null;
-                        },
-                      ),
-                    ),
-                    // date of birth input field
-                    Padding(
-                      padding: EdgeInsetsGeometry.symmetric(vertical: 5.h),
-                      child: GestureDetector(
-                        onTap: () {
-                          showDatePicker(
-                            context: context,
-                            initialDate: DateTime.now(),
-                            firstDate: DateTime(1900),
-                            lastDate: DateTime.now(),
-                          ).then((selectedDate) {
-                            if (selectedDate != null) {
-                              setState(() {
-                                selectedDateOfBirth = selectedDate;
-                                birthDate = DateFormat(
-                                  'yyyy-MM-dd',
-                                ).format(selectedDate);
-                              });
-                            }
-                          });
-                        },
-                        child: AbsorbPointer(
-                          child: CustomInputField(
-                            key: ValueKey(birthDate),
-                            width: 300.w,
-                            isRequired: true,
-                            initialValue: birthDate,
-                            label: LocaleKeys.loginPage_dateOfBirth.tr(),
-                            validator: (value) {
-                              if (value == null ||
-                                  value.toString().trim().isEmpty) {
-                                return LocaleKeys
-                                    .loginPage_dateOfBirthIsRequired
-                                    .tr();
-                              }
-
-                              return null;
-                            },
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 20.h),
+                  child: SizedBox(
+                    width: 300.w,
+                    height: 50.h,
+                    child: ElevatedButton(
+                      style: Theme.of(context).elevatedButtonTheme.style
+                          ?.copyWith(
+                            backgroundColor: WidgetStatePropertyAll(
+                              Theme.of(context).colorScheme.primary,
+                            ),
                           ),
+                      onPressed: () {},
+                      child: Text(
+                        LocaleKeys.loginPage_signUp.tr(),
+                        style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                          fontFamily: FontConstants.fontFamily(context.locale),
                         ),
                       ),
                     ),
-
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 20.h),
-                      child: SizedBox(
-                        width: 300.w,
-                        height: 50.h,
-                        child: ElevatedButton(
-                          style: Theme.of(context).elevatedButtonTheme.style
-                              ?.copyWith(
-                                backgroundColor: WidgetStatePropertyAll(
-                                  Theme.of(context).colorScheme.primary,
-                                ),
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text(
+                      LocaleKeys.loginPage_already_have_account.tr(),
+                      style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                        fontFamily: FontConstants.fontFamily(context.locale),
+                      ),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        context.goNamed(RoutesName.loginPage);
+                      },
+                      child: Text(
+                        LocaleKeys.loginPage_login.tr(),
+                        style: Theme.of(context).textTheme.labelMedium
+                            ?.copyWith(
+                              fontWeight: FontWeight.w600,
+                              fontFamily: FontConstants.fontFamily(
+                                context.locale,
                               ),
-                          onPressed: () {},
-                          child: Text(
-                            LocaleKeys.loginPage_signUp.tr(),
-                            style: Theme.of(context).textTheme.labelLarge
-                                ?.copyWith(
-                                  fontFamily: FontConstants.fontFamily(
-                                    context.locale,
-                                  ),
-                                ),
-                          ),
-                        ),
+                              decoration: TextDecoration.underline,
+                            ),
                       ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          LocaleKeys.loginPage_already_have_account.tr(),
-                          style: Theme.of(context).textTheme.labelSmall
-                              ?.copyWith(
-                                fontFamily: FontConstants.fontFamily(
-                                  context.locale,
-                                ),
-                              ),
-                        ),
-                        TextButton(
-                          onPressed: () {
-                            context.goNamed(RoutesName.loginPage);
-                          },
-                          child: Text(
-                            LocaleKeys.loginPage_login.tr(),
-                            style: Theme.of(context).textTheme.labelMedium
-                                ?.copyWith(
-                                  fontWeight: FontWeight.w600,
-                                  fontFamily: FontConstants.fontFamily(
-                                    context.locale,
-                                  ),
-                                  decoration: TextDecoration.underline,
-                                ),
-                          ),
-                        ),
-                      ],
                     ),
                   ],
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }

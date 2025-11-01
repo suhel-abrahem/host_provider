@@ -15,25 +15,24 @@ class GetCountriesBloc extends Bloc<GetCountriesEvent, GetCountriesState> {
   GetCountriesBloc(this._getCountryUsecase)
     : super(GetCountriesState.initial()) {
     on<GetCountriesEventStarted>((event, emit) {
-      if ((event.canAccessAddress ?? false)) {
-        emit(GetCountriesState.canAccessAddress());
-      } else {
-        emit(GetCountriesState.cantAccessAddress());
-      }
+      // if ((event.canAccessAddress ?? false)) {
+      //   emit(GetCountriesState.canAccessAddress());
+      // } else {
+      //   emit(GetCountriesState.cantAccessAddress());
+      // }
     });
     on<GetCountriesEventGetCountries>((event, emit) async {
       emit(GetCountriesState.loading());
-      if ((event.countryModel?.canAccessLocation) ?? false) {
-        await _getCountryUsecase.call(params: event.countryModel).then((
-          onValue,
-        ) {
-          if (onValue is DataSuccess) {
-            emit(GetCountriesState.got(onValue?.data));
-          } else {
-            emit(GetCountriesState.error(onValue?.error));
-          }
-        });
-      }
+      await _getCountryUsecase.call(params: event.countryModel).then((onValue) {
+        print("bloc $onValue");
+        if (onValue is NOInternetDataState) {
+          emit(GetCountriesState.noInternet());
+        } else if (onValue is DataSuccess) {
+          emit(GetCountriesState.got(onValue?.data));
+        } else {
+          emit(GetCountriesState.error(onValue?.error));
+        }
+      });
     });
   }
 }

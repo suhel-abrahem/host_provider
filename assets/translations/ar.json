@@ -24,11 +24,15 @@
     "dateOfBirth": "تاريخ الميلاد",
     "dateOfBirthIsRequired": "تاريخ الميلاد مطلوب",
     "already_have_account": "هل لديك حساب؟",
-    "loginFailed": "فشل تسجيل الدخول. يرجى التحقق من بيانات الاعتماد الخاصة بك والمحاولة مرة أخرى."
+    "loginFailed": "فشل تسجيل الدخول. يرجى التحقق من بيانات الاعتماد الخاصة بك والمحاولة مرة أخرى.",
+    "country": "الدولة",
+    "countryIsRequired": "الدولة مطلوبة"
   },
   "common": {
     "loading": "جاري التحميل...",
     "error": "خطأ",
+    "anErrorHasOccurs": "An Error has occurs",
+    "noInternetPullDown": "Seams like You don't have internet connection. Check Your connection and try again by pulling the page down!",
     "success": "نجاح",
     "retry": "إعادة المحاولة",
     "cancel": "إلغاء",

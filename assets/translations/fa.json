@@ -24,11 +24,15 @@
     "dateOfBirth": "ڕۆژی لەدایکبوون",
     "dateOfBirthIsRequired": "ڕۆژی لەدایکبوون پێویستە",
     "already_have_account": "ئەژماری هەیە؟",
-    "loginFailed": "چوونەژوورەوە سەرکەوتوو نەبو. تکایە دڵنیابە لە زانیاریەکانت و دووبارە هەوڵبدەرەوە."
+    "loginFailed": "چوونەژوورەوە سەرکەوتوو نەبو. تکایە دڵنیابە لە زانیاریەکانت و دووبارە هەوڵبدەرەوە.",
+    "country": "Country",
+    "countryIsRequired": "Country is required"
   },
   "common": {
     "loading": "چاوەڕێ بکە...",
     "error": "هەڵە",
+    "anErrorHasOccurs": "An Error has occurs",
+    "noInternetPullDown": "Seams like You don't have internet connection. Check Your connection and try again by pulling the page down!",
     "success": "سەرکەوتوو",
     "retry": "دووبارە هەوڵدان",
     "cancel": "هەڵوەشاندنەوە",

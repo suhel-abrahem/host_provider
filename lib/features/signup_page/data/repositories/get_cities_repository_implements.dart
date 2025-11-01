@@ -28,14 +28,16 @@ class GetCitiesRepositoryImplements implements GetCitiesRepository {
       headers: {"Accept-Language": cityModel?.acceptLanguage},
     );
     await commonService.get(ApiConstant.citiesList).then((onValue) {
+      print("onvalue:${onValue.data?.data}");
       if (onValue is DataSuccess) {
         List<CityEntity?>? cities = [];
-        final List<Map<String, dynamic>?>? rawCities =
-            onValue.data?.data["data"];
+        final List? rawCities = onValue.data?.data["data"];
+
         rawCities?.forEach(
           (action) =>
               action != null ? cities.add(CityEntity.fromJson(action)) : null,
         );
+        print("onvalue:${onValue}");
         return DataSuccess(data: cities);
       } else {
         return DataError(error: onValue.error);

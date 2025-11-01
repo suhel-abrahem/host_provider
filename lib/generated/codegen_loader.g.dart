@@ -40,11 +40,15 @@ class CodegenLoader extends AssetLoader{
     "dateOfBirth": "تاريخ الميلاد",
     "dateOfBirthIsRequired": "تاريخ الميلاد مطلوب",
     "already_have_account": "هل لديك حساب؟",
-    "loginFailed": "فشل تسجيل الدخول. يرجى التحقق من بيانات الاعتماد الخاصة بك والمحاولة مرة أخرى."
+    "loginFailed": "فشل تسجيل الدخول. يرجى التحقق من بيانات الاعتماد الخاصة بك والمحاولة مرة أخرى.",
+    "country": "الدولة",
+    "countryIsRequired": "الدولة مطلوبة"
   },
   "common": {
     "loading": "جاري التحميل...",
     "error": "خطأ",
+    "anErrorHasOccurs": "An Error has occurs",
+    "noInternetPullDown": "Seams like You don't have internet connection. Check Your connection and try again by pulling the page down!",
     "success": "نجاح",
     "retry": "إعادة المحاولة",
     "cancel": "إلغاء",
@@ -150,11 +154,15 @@ static const Map<String,dynamic> _en = {
     "dateOfBirth": "Date of Birth",
     "dateOfBirthIsRequired": "Date of Birth is required",
     "already_have_account": "Already have an account?",
-    "loginFailed": "Login failed. Please check your credentials and try again."
+    "loginFailed": "Login failed. Please check your credentials and try again.",
+    "country": "Country",
+    "countryIsRequired": "Country is required"
   },
   "common": {
     "loading": "Loading...",
     "error": "Error",
+    "anErrorHasOccurs": "An Error has occurs",
+    "noInternetPullDown": "Seams like You don't have internet connection. Check Your connection and try again by pulling the page down!",
     "success": "Success",
     "retry": "Retry",
     "cancel": "Cancel",
@@ -259,11 +267,15 @@ static const Map<String,dynamic> _fa = {
     "dateOfBirth": "ڕۆژی لەدایکبوون",
     "dateOfBirthIsRequired": "ڕۆژی لەدایکبوون پێویستە",
     "already_have_account": "ئەژماری هەیە؟",
-    "loginFailed": "چوونەژوورەوە سەرکەوتوو نەبو. تکایە دڵنیابە لە زانیاریەکانت و دووبارە هەوڵبدەرەوە."
+    "loginFailed": "چوونەژوورەوە سەرکەوتوو نەبو. تکایە دڵنیابە لە زانیاریەکانت و دووبارە هەوڵبدەرەوە.",
+    "country": "Country",
+    "countryIsRequired": "Country is required"
   },
   "common": {
     "loading": "چاوەڕێ بکە...",
     "error": "هەڵە",
+    "anErrorHasOccurs": "An Error has occurs",
+    "noInternetPullDown": "Seams like You don't have internet connection. Check Your connection and try again by pulling the page down!",
     "success": "سەرکەوتوو",
     "retry": "دووبارە هەوڵدان",
     "cancel": "هەڵوەشاندنەوە",
