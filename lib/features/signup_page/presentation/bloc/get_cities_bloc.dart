@@ -17,6 +17,7 @@ class GetCitiesBloc extends Bloc<GetCitiesEvent, GetCitiesState> {
     on<GetCitiesEventGetCities>((event, emit) async {
       emit(GetCitiesState.loading());
       await _getCitiesUsecase.call(params: event.cityModel).then((onValue) {
+        print("cities bloc:$onValue");
         if (onValue is NOInternetDataState) {
           emit(GetCitiesState.noInternet());
         } else if (onValue is DataSuccess) {

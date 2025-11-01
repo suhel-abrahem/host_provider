@@ -47,7 +47,7 @@ class CodegenLoader extends AssetLoader{
   "common": {
     "loading": "جاري التحميل...",
     "error": "خطأ",
-    "anErrorHasOccurs": "An Error has occurs",
+    "anErrorHasOccurs": "An Error has occurs. try again by pulling the page down!",
     "noInternetPullDown": "Seams like You don't have internet connection. Check Your connection and try again by pulling the page down!",
     "success": "نجاح",
     "retry": "إعادة المحاولة",
@@ -161,7 +161,7 @@ static const Map<String,dynamic> _en = {
   "common": {
     "loading": "Loading...",
     "error": "Error",
-    "anErrorHasOccurs": "An Error has occurs",
+    "anErrorHasOccurs": "An Error has occurs. try again by pulling the page down!",
     "noInternetPullDown": "Seams like You don't have internet connection. Check Your connection and try again by pulling the page down!",
     "success": "Success",
     "retry": "Retry",
@@ -274,7 +274,7 @@ static const Map<String,dynamic> _fa = {
   "common": {
     "loading": "چاوەڕێ بکە...",
     "error": "هەڵە",
-    "anErrorHasOccurs": "An Error has occurs",
+    "anErrorHasOccurs": "An Error has occurs. try again by pulling the page down!",
     "noInternetPullDown": "Seams like You don't have internet connection. Check Your connection and try again by pulling the page down!",
     "success": "سەرکەوتوو",
     "retry": "دووبارە هەوڵدان",

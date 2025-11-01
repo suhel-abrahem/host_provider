@@ -44,6 +44,7 @@ class _SignupPageState extends State<SignupPage> {
   List<CityEntity?>? governmentList;
   List<CountryEntity?>? countriesList;
   bool? canAccessAddress = false;
+  String? acceptLanguage;
   Future<void> getLocationPermissionState() async {
     if ((await Permission.locationWhenInUse.serviceStatus.isEnabled)) {
       canAccessAddress = true;
@@ -53,16 +54,21 @@ class _SignupPageState extends State<SignupPage> {
   }
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   void didChangeDependencies() {
     getLocationPermissionState();
-
+    acceptLanguage = Helper.getCountryCode(context);
     super.didChangeDependencies();
   }
 
   @override
   void didUpdateWidget(covariant SignupPage oldWidget) {
     getLocationPermissionState();
-
+    acceptLanguage = Helper.getCountryCode(context);
     super.didUpdateWidget(oldWidget);
   }
 
@@ -164,7 +170,7 @@ class _SignupPageState extends State<SignupPage> {
                     create: (context) => getItInstance<GetCountriesBloc>()
                       ..add(
                         GetCountriesEvent.getCountries(
-                          CountryModel(acceptLanguage: "ar"),
+                          CountryModel(acceptLanguage: acceptLanguage),
                         ),
                       ),
                     child: BlocBuilder<GetCountriesBloc, GetCountriesState>(
@@ -278,6 +284,9 @@ class _SignupPageState extends State<SignupPage> {
                                                             countriesList?[index]
                                                                 ?.id;
                                                       });
+                                                      print(
+                                                        "selectedCountryId:$selectedCountryId",
+                                                      );
                                                       Navigator.pop(context);
                                                     },
                                                   );
@@ -298,10 +307,10 @@ class _SignupPageState extends State<SignupPage> {
                                   },
                                   child: AbsorbPointer(
                                     child: CustomInputField(
-                                      key: ValueKey(selectedGovernment),
+                                      key: ValueKey(selectedCountry),
                                       width: 300.w,
                                       isRequired: true,
-                                      initialValue: selectedGovernment,
+                                      initialValue: selectedCountry,
                                       label: LocaleKeys.loginPage_country.tr(),
                                       validator: (value) {
                                         if (value == null ||
@@ -318,6 +327,7 @@ class _SignupPageState extends State<SignupPage> {
                                 );
                               },
                               error: (String? message) => CustomInputField(
+                                enabled: false,
                                 width: 300.w,
                                 label: LocaleKeys.loginPage_country.tr(),
                                 maxLines: 1,
@@ -325,6 +335,7 @@ class _SignupPageState extends State<SignupPage> {
                                     .tr(),
                               ),
                               noInternet: () => CustomInputField(
+                                enabled: false,
                                 width: 300.w,
                                 label: LocaleKeys.loginPage_country.tr(),
                                 maxLines: 5,
@@ -348,7 +359,10 @@ class _SignupPageState extends State<SignupPage> {
                       create: (context) => getItInstance<GetCitiesBloc>()
                         ..add(
                           GetCitiesEvent.getCities(
-                            CityModel(country_id: selectedCountryId),
+                            CityModel(
+                              country_id: selectedCountryId,
+                              acceptLanguage: acceptLanguage,
+                            ),
                           ),
                         ),
                       child: BlocBuilder<GetCitiesBloc, GetCitiesState>(
@@ -444,6 +458,7 @@ class _SignupPageState extends State<SignupPage> {
                                         width: 300.w,
                                         isRequired: true,
                                         initialValue: selectedGovernment,
+                                        maxLines: 1,
                                         label: LocaleKeys.loginPage_city.tr(),
                                         validator: (value) {
                                           if (value == null ||
@@ -502,12 +517,14 @@ class _SignupPageState extends State<SignupPage> {
                                 error: (String? message) => CustomInputField(
                                   width: 300.w,
                                   label: LocaleKeys.loginPage_city.tr(),
-                                  maxLines: 1,
+                                  enabled: false,
+                                  maxLines: 2,
                                   initialValue: LocaleKeys
                                       .common_anErrorHasOccurs
                                       .tr(),
                                 ),
                                 noInternet: () => CustomInputField(
+                                  enabled: false,
                                   width: 300.w,
                                   label: LocaleKeys.loginPage_city.tr(),
                                   maxLines: 5,

@@ -29,9 +29,9 @@ class GetCountryRepositoryImplement implements GetCountryRepository {
     final CommonService commonService = CommonService(
       headers: {"Accept-Language": countryModel?.acceptLanguage},
     );
+    Completer<DataState<List<CountryEntity?>?>?> getCountriesCompleter =
+        Completer();
     try {
-      Completer<DataState<List<CountryEntity?>?>?> getCountriesCompleter =
-          Completer();
       await commonService.get(ApiConstant.countryList).then((onValue) {
         if (onValue is DataSuccess) {
           List<CountryEntity?>? countries = [];
@@ -50,7 +50,8 @@ class GetCountryRepositoryImplement implements GetCountryRepository {
       });
       return getCountriesCompleter.future;
     } catch (e) {
-      return DataError(error: e.toString());
+      getCountriesCompleter.completeError(DataError(error: e.toString()));
+      return getCountriesCompleter.future;
     }
   }
 }

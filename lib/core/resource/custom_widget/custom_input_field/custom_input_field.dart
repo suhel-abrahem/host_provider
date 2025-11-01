@@ -39,6 +39,7 @@ class CustomInputField extends StatelessWidget {
   final TextStyle? style;
   final BorderRadius? borderRadius;
   final bool? readOnly;
+  final bool? enabled;
   final Function(String?)? onSaved;
   const CustomInputField({
     super.key,
@@ -74,6 +75,7 @@ class CustomInputField extends StatelessWidget {
     this.borderRadius,
     this.readOnly,
     this.onSaved,
+    this.enabled,
   });
 
   @override
@@ -89,6 +91,7 @@ class CustomInputField extends StatelessWidget {
             Theme.of(context).textTheme.labelLarge?.copyWith(
               fontFamily: FontConstants.fontFamily(context.locale),
             ),
+        enabled: enabled,
         maxLines: maxLines ?? 1,
         maxLength: maxLength,
         controller: controller,

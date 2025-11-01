@@ -31,7 +31,7 @@
   "common": {
     "loading": "Loading...",
     "error": "Error",
-    "anErrorHasOccurs": "An Error has occurs",
+    "anErrorHasOccurs": "An Error has occurs. try again by pulling the page down!",
     "noInternetPullDown": "Seams like You don't have internet connection. Check Your connection and try again by pulling the page down!",
     "success": "Success",
     "retry": "Retry",
