@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$SignupModel {
 
- String? get country_id; String? get lng; String? get verify_via; String? get name; String? get phone; String? get city_id; String? get address; String? get role; String? get dop;@Uint8listJsonConverter() List<int>? get avatar; String? get password; String? get password_confirmation; String? get email; String? get lat;
+ int? get country_id; num? get lng; String? get verify_via; String? get name; String? get phone; int? get city_id; String? get address; String? get role; String? get dob;@FileJsonConverter() String? get avatar; String? get password; String? get password_confirmation; String? get email; num? get lat;
 /// Create a copy of SignupModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $SignupModelCopyWith<SignupModel> get copyWith => _$SignupModelCopyWithImpl<Sign
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SignupModel&&(identical(other.country_id, country_id) || other.country_id == country_id)&&(identical(other.lng, lng) || other.lng == lng)&&(identical(other.verify_via, verify_via) || other.verify_via == verify_via)&&(identical(other.name, name) || other.name == name)&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.city_id, city_id) || other.city_id == city_id)&&(identical(other.address, address) || other.address == address)&&(identical(other.role, role) || other.role == role)&&(identical(other.dop, dop) || other.dop == dop)&&const DeepCollectionEquality().equals(other.avatar, avatar)&&(identical(other.password, password) || other.password == password)&&(identical(other.password_confirmation, password_confirmation) || other.password_confirmation == password_confirmation)&&(identical(other.email, email) || other.email == email)&&(identical(other.lat, lat) || other.lat == lat));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SignupModel&&(identical(other.country_id, country_id) || other.country_id == country_id)&&(identical(other.lng, lng) || other.lng == lng)&&(identical(other.verify_via, verify_via) || other.verify_via == verify_via)&&(identical(other.name, name) || other.name == name)&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.city_id, city_id) || other.city_id == city_id)&&(identical(other.address, address) || other.address == address)&&(identical(other.role, role) || other.role == role)&&(identical(other.dob, dob) || other.dob == dob)&&(identical(other.avatar, avatar) || other.avatar == avatar)&&(identical(other.password, password) || other.password == password)&&(identical(other.password_confirmation, password_confirmation) || other.password_confirmation == password_confirmation)&&(identical(other.email, email) || other.email == email)&&(identical(other.lat, lat) || other.lat == lat));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,country_id,lng,verify_via,name,phone,city_id,address,role,dop,const DeepCollectionEquality().hash(avatar),password,password_confirmation,email,lat);
+int get hashCode => Object.hash(runtimeType,country_id,lng,verify_via,name,phone,city_id,address,role,dob,avatar,password,password_confirmation,email,lat);
 
 @override
 String toString() {
-  return 'SignupModel(country_id: $country_id, lng: $lng, verify_via: $verify_via, name: $name, phone: $phone, city_id: $city_id, address: $address, role: $role, dop: $dop, avatar: $avatar, password: $password, password_confirmation: $password_confirmation, email: $email, lat: $lat)';
+  return 'SignupModel(country_id: $country_id, lng: $lng, verify_via: $verify_via, name: $name, phone: $phone, city_id: $city_id, address: $address, role: $role, dob: $dob, avatar: $avatar, password: $password, password_confirmation: $password_confirmation, email: $email, lat: $lat)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $SignupModelCopyWith<$Res>  {
   factory $SignupModelCopyWith(SignupModel value, $Res Function(SignupModel) _then) = _$SignupModelCopyWithImpl;
 @useResult
 $Res call({
- String? country_id, String? lng, String? verify_via, String? name, String? phone, String? city_id, String? address, String? role, String? dop,@Uint8listJsonConverter() List<int>? avatar, String? password, String? password_confirmation, String? email, String? lat
+ int? country_id, num? lng, String? verify_via, String? name, String? phone, int? city_id, String? address, String? role, String? dob,@FileJsonConverter() String? avatar, String? password, String? password_confirmation, String? email, num? lat
 });
 
 
@@ -65,23 +65,23 @@ class _$SignupModelCopyWithImpl<$Res>
 
 /// Create a copy of SignupModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? country_id = freezed,Object? lng = freezed,Object? verify_via = freezed,Object? name = freezed,Object? phone = freezed,Object? city_id = freezed,Object? address = freezed,Object? role = freezed,Object? dop = freezed,Object? avatar = freezed,Object? password = freezed,Object? password_confirmation = freezed,Object? email = freezed,Object? lat = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? country_id = freezed,Object? lng = freezed,Object? verify_via = freezed,Object? name = freezed,Object? phone = freezed,Object? city_id = freezed,Object? address = freezed,Object? role = freezed,Object? dob = freezed,Object? avatar = freezed,Object? password = freezed,Object? password_confirmation = freezed,Object? email = freezed,Object? lat = freezed,}) {
   return _then(_self.copyWith(
 country_id: freezed == country_id ? _self.country_id : country_id // ignore: cast_nullable_to_non_nullable
-as String?,lng: freezed == lng ? _self.lng : lng // ignore: cast_nullable_to_non_nullable
-as String?,verify_via: freezed == verify_via ? _self.verify_via : verify_via // ignore: cast_nullable_to_non_nullable
+as int?,lng: freezed == lng ? _self.lng : lng // ignore: cast_nullable_to_non_nullable
+as num?,verify_via: freezed == verify_via ? _self.verify_via : verify_via // ignore: cast_nullable_to_non_nullable
 as String?,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String?,phone: freezed == phone ? _self.phone : phone // ignore: cast_nullable_to_non_nullable
 as String?,city_id: freezed == city_id ? _self.city_id : city_id // ignore: cast_nullable_to_non_nullable
-as String?,address: freezed == address ? _self.address : address // ignore: cast_nullable_to_non_nullable
+as int?,address: freezed == address ? _self.address : address // ignore: cast_nullable_to_non_nullable
 as String?,role: freezed == role ? _self.role : role // ignore: cast_nullable_to_non_nullable
-as String?,dop: freezed == dop ? _self.dop : dop // ignore: cast_nullable_to_non_nullable
+as String?,dob: freezed == dob ? _self.dob : dob // ignore: cast_nullable_to_non_nullable
 as String?,avatar: freezed == avatar ? _self.avatar : avatar // ignore: cast_nullable_to_non_nullable
-as List<int>?,password: freezed == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
+as String?,password: freezed == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
 as String?,password_confirmation: freezed == password_confirmation ? _self.password_confirmation : password_confirmation // ignore: cast_nullable_to_non_nullable
 as String?,email: freezed == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as String?,lat: freezed == lat ? _self.lat : lat // ignore: cast_nullable_to_non_nullable
-as String?,
+as num?,
   ));
 }
 
@@ -166,10 +166,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? country_id,  String? lng,  String? verify_via,  String? name,  String? phone,  String? city_id,  String? address,  String? role,  String? dop, @Uint8listJsonConverter()  List<int>? avatar,  String? password,  String? password_confirmation,  String? email,  String? lat)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int? country_id,  num? lng,  String? verify_via,  String? name,  String? phone,  int? city_id,  String? address,  String? role,  String? dob, @FileJsonConverter()  String? avatar,  String? password,  String? password_confirmation,  String? email,  num? lat)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _SignupModel() when $default != null:
-return $default(_that.country_id,_that.lng,_that.verify_via,_that.name,_that.phone,_that.city_id,_that.address,_that.role,_that.dop,_that.avatar,_that.password,_that.password_confirmation,_that.email,_that.lat);case _:
+return $default(_that.country_id,_that.lng,_that.verify_via,_that.name,_that.phone,_that.city_id,_that.address,_that.role,_that.dob,_that.avatar,_that.password,_that.password_confirmation,_that.email,_that.lat);case _:
   return orElse();
 
 }
@@ -187,10 +187,10 @@ return $default(_that.country_id,_that.lng,_that.verify_via,_that.name,_that.pho
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? country_id,  String? lng,  String? verify_via,  String? name,  String? phone,  String? city_id,  String? address,  String? role,  String? dop, @Uint8listJsonConverter()  List<int>? avatar,  String? password,  String? password_confirmation,  String? email,  String? lat)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int? country_id,  num? lng,  String? verify_via,  String? name,  String? phone,  int? city_id,  String? address,  String? role,  String? dob, @FileJsonConverter()  String? avatar,  String? password,  String? password_confirmation,  String? email,  num? lat)  $default,) {final _that = this;
 switch (_that) {
 case _SignupModel():
-return $default(_that.country_id,_that.lng,_that.verify_via,_that.name,_that.phone,_that.city_id,_that.address,_that.role,_that.dop,_that.avatar,_that.password,_that.password_confirmation,_that.email,_that.lat);case _:
+return $default(_that.country_id,_that.lng,_that.verify_via,_that.name,_that.phone,_that.city_id,_that.address,_that.role,_that.dob,_that.avatar,_that.password,_that.password_confirmation,_that.email,_that.lat);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -207,10 +207,10 @@ return $default(_that.country_id,_that.lng,_that.verify_via,_that.name,_that.pho
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? country_id,  String? lng,  String? verify_via,  String? name,  String? phone,  String? city_id,  String? address,  String? role,  String? dop, @Uint8listJsonConverter()  List<int>? avatar,  String? password,  String? password_confirmation,  String? email,  String? lat)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int? country_id,  num? lng,  String? verify_via,  String? name,  String? phone,  int? city_id,  String? address,  String? role,  String? dob, @FileJsonConverter()  String? avatar,  String? password,  String? password_confirmation,  String? email,  num? lat)?  $default,) {final _that = this;
 switch (_that) {
 case _SignupModel() when $default != null:
-return $default(_that.country_id,_that.lng,_that.verify_via,_that.name,_that.phone,_that.city_id,_that.address,_that.role,_that.dop,_that.avatar,_that.password,_that.password_confirmation,_that.email,_that.lat);case _:
+return $default(_that.country_id,_that.lng,_that.verify_via,_that.name,_that.phone,_that.city_id,_that.address,_that.role,_that.dob,_that.avatar,_that.password,_that.password_confirmation,_that.email,_that.lat);case _:
   return null;
 
 }
@@ -222,31 +222,23 @@ return $default(_that.country_id,_that.lng,_that.verify_via,_that.name,_that.pho
 @JsonSerializable()
 
 class _SignupModel implements SignupModel {
-   _SignupModel({this.country_id = "", this.lng = "", this.verify_via = "", this.name = "", this.phone = "", this.city_id = "", this.address = "", this.role = "", this.dop = "", @Uint8listJsonConverter() final  List<int>? avatar = const [], this.password = "", this.password_confirmation = "", this.email = "", this.lat = ""}): _avatar = avatar;
+   _SignupModel({this.country_id = 0, this.lng = 0.000, this.verify_via = "", this.name = "", this.phone = "", this.city_id = 0, this.address = "", this.role = "", this.dob = "", @FileJsonConverter() this.avatar = "", this.password = "", this.password_confirmation = "", this.email = "", this.lat = 0.000});
   factory _SignupModel.fromJson(Map<String, dynamic> json) => _$SignupModelFromJson(json);
 
-@override@JsonKey() final  String? country_id;
-@override@JsonKey() final  String? lng;
+@override@JsonKey() final  int? country_id;
+@override@JsonKey() final  num? lng;
 @override@JsonKey() final  String? verify_via;
 @override@JsonKey() final  String? name;
 @override@JsonKey() final  String? phone;
-@override@JsonKey() final  String? city_id;
+@override@JsonKey() final  int? city_id;
 @override@JsonKey() final  String? address;
 @override@JsonKey() final  String? role;
-@override@JsonKey() final  String? dop;
- final  List<int>? _avatar;
-@override@JsonKey()@Uint8listJsonConverter() List<int>? get avatar {
-  final value = _avatar;
-  if (value == null) return null;
-  if (_avatar is EqualUnmodifiableListView) return _avatar;
-  // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(value);
-}
-
+@override@JsonKey() final  String? dob;
+@override@JsonKey()@FileJsonConverter() final  String? avatar;
 @override@JsonKey() final  String? password;
 @override@JsonKey() final  String? password_confirmation;
 @override@JsonKey() final  String? email;
-@override@JsonKey() final  String? lat;
+@override@JsonKey() final  num? lat;
 
 /// Create a copy of SignupModel
 /// with the given fields replaced by the non-null parameter values.
@@ -261,16 +253,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SignupModel&&(identical(other.country_id, country_id) || other.country_id == country_id)&&(identical(other.lng, lng) || other.lng == lng)&&(identical(other.verify_via, verify_via) || other.verify_via == verify_via)&&(identical(other.name, name) || other.name == name)&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.city_id, city_id) || other.city_id == city_id)&&(identical(other.address, address) || other.address == address)&&(identical(other.role, role) || other.role == role)&&(identical(other.dop, dop) || other.dop == dop)&&const DeepCollectionEquality().equals(other._avatar, _avatar)&&(identical(other.password, password) || other.password == password)&&(identical(other.password_confirmation, password_confirmation) || other.password_confirmation == password_confirmation)&&(identical(other.email, email) || other.email == email)&&(identical(other.lat, lat) || other.lat == lat));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SignupModel&&(identical(other.country_id, country_id) || other.country_id == country_id)&&(identical(other.lng, lng) || other.lng == lng)&&(identical(other.verify_via, verify_via) || other.verify_via == verify_via)&&(identical(other.name, name) || other.name == name)&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.city_id, city_id) || other.city_id == city_id)&&(identical(other.address, address) || other.address == address)&&(identical(other.role, role) || other.role == role)&&(identical(other.dob, dob) || other.dob == dob)&&(identical(other.avatar, avatar) || other.avatar == avatar)&&(identical(other.password, password) || other.password == password)&&(identical(other.password_confirmation, password_confirmation) || other.password_confirmation == password_confirmation)&&(identical(other.email, email) || other.email == email)&&(identical(other.lat, lat) || other.lat == lat));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,country_id,lng,verify_via,name,phone,city_id,address,role,dop,const DeepCollectionEquality().hash(_avatar),password,password_confirmation,email,lat);
+int get hashCode => Object.hash(runtimeType,country_id,lng,verify_via,name,phone,city_id,address,role,dob,avatar,password,password_confirmation,email,lat);
 
 @override
 String toString() {
-  return 'SignupModel(country_id: $country_id, lng: $lng, verify_via: $verify_via, name: $name, phone: $phone, city_id: $city_id, address: $address, role: $role, dop: $dop, avatar: $avatar, password: $password, password_confirmation: $password_confirmation, email: $email, lat: $lat)';
+  return 'SignupModel(country_id: $country_id, lng: $lng, verify_via: $verify_via, name: $name, phone: $phone, city_id: $city_id, address: $address, role: $role, dob: $dob, avatar: $avatar, password: $password, password_confirmation: $password_confirmation, email: $email, lat: $lat)';
 }
 
 
@@ -281,7 +273,7 @@ abstract mixin class _$SignupModelCopyWith<$Res> implements $SignupModelCopyWith
   factory _$SignupModelCopyWith(_SignupModel value, $Res Function(_SignupModel) _then) = __$SignupModelCopyWithImpl;
 @override @useResult
 $Res call({
- String? country_id, String? lng, String? verify_via, String? name, String? phone, String? city_id, String? address, String? role, String? dop,@Uint8listJsonConverter() List<int>? avatar, String? password, String? password_confirmation, String? email, String? lat
+ int? country_id, num? lng, String? verify_via, String? name, String? phone, int? city_id, String? address, String? role, String? dob,@FileJsonConverter() String? avatar, String? password, String? password_confirmation, String? email, num? lat
 });
 
 
@@ -298,23 +290,23 @@ class __$SignupModelCopyWithImpl<$Res>
 
 /// Create a copy of SignupModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? country_id = freezed,Object? lng = freezed,Object? verify_via = freezed,Object? name = freezed,Object? phone = freezed,Object? city_id = freezed,Object? address = freezed,Object? role = freezed,Object? dop = freezed,Object? avatar = freezed,Object? password = freezed,Object? password_confirmation = freezed,Object? email = freezed,Object? lat = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? country_id = freezed,Object? lng = freezed,Object? verify_via = freezed,Object? name = freezed,Object? phone = freezed,Object? city_id = freezed,Object? address = freezed,Object? role = freezed,Object? dob = freezed,Object? avatar = freezed,Object? password = freezed,Object? password_confirmation = freezed,Object? email = freezed,Object? lat = freezed,}) {
   return _then(_SignupModel(
 country_id: freezed == country_id ? _self.country_id : country_id // ignore: cast_nullable_to_non_nullable
-as String?,lng: freezed == lng ? _self.lng : lng // ignore: cast_nullable_to_non_nullable
-as String?,verify_via: freezed == verify_via ? _self.verify_via : verify_via // ignore: cast_nullable_to_non_nullable
+as int?,lng: freezed == lng ? _self.lng : lng // ignore: cast_nullable_to_non_nullable
+as num?,verify_via: freezed == verify_via ? _self.verify_via : verify_via // ignore: cast_nullable_to_non_nullable
 as String?,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String?,phone: freezed == phone ? _self.phone : phone // ignore: cast_nullable_to_non_nullable
 as String?,city_id: freezed == city_id ? _self.city_id : city_id // ignore: cast_nullable_to_non_nullable
-as String?,address: freezed == address ? _self.address : address // ignore: cast_nullable_to_non_nullable
+as int?,address: freezed == address ? _self.address : address // ignore: cast_nullable_to_non_nullable
 as String?,role: freezed == role ? _self.role : role // ignore: cast_nullable_to_non_nullable
-as String?,dop: freezed == dop ? _self.dop : dop // ignore: cast_nullable_to_non_nullable
-as String?,avatar: freezed == avatar ? _self._avatar : avatar // ignore: cast_nullable_to_non_nullable
-as List<int>?,password: freezed == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
+as String?,dob: freezed == dob ? _self.dob : dob // ignore: cast_nullable_to_non_nullable
+as String?,avatar: freezed == avatar ? _self.avatar : avatar // ignore: cast_nullable_to_non_nullable
+as String?,password: freezed == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
 as String?,password_confirmation: freezed == password_confirmation ? _self.password_confirmation : password_confirmation // ignore: cast_nullable_to_non_nullable
 as String?,email: freezed == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as String?,lat: freezed == lat ? _self.lat : lat // ignore: cast_nullable_to_non_nullable
-as String?,
+as num?,
   ));
 }
 

@@ -42,6 +42,9 @@ abstract class  LocaleKeys {
   static const common_delete = 'common.delete';
   static const common_edit = 'common.edit';
   static const common_close = 'common.close';
+  static const common_youMustEnableLocationServices = 'common.youMustEnableLocationServices';
+  static const common_youMustAcceptLocationPermission = 'common.youMustAcceptLocationPermission';
+  static const common_youDeniedLocationPermissionForever = 'common.youDeniedLocationPermissionForever';
   static const common = 'common';
   static const theme_choose = 'theme.choose';
   static const theme_system = 'theme.system';

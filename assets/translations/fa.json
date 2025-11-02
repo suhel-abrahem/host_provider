@@ -39,7 +39,10 @@
     "save": "پاشەکەوت",
     "delete": "سڕینەوە",
     "edit": "دەستکاری",
-    "close": "داخستن"
+    "close": "داخستن",
+    "youMustEnableLocationServices": "You must enable Location Services!",
+    "youMustAcceptLocationPermission": "You must accept Location Permission!",
+    "youDeniedLocationPermissionForever": "Seams like You denied Location Permission forever!. so You must go to device setting and accept it!"
   },
   "theme": {
     "choose": "مۆدێلێک هەڵبژێرە",

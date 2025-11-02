@@ -55,7 +55,10 @@ class CodegenLoader extends AssetLoader{
     "save": "حفظ",
     "delete": "حذف",
     "edit": "تعديل",
-    "close": "إغلاق"
+    "close": "إغلاق",
+    "youMustEnableLocationServices": "You must enable Location Services!",
+    "youMustAcceptLocationPermission": "You must accept Location Permission!",
+    "youDeniedLocationPermissionForever": "Seams like You denied Location Permission forever!. so You must go to device setting and accept it!"
   },
   "theme": {
     "choose": "اختر سمة",
@@ -169,7 +172,10 @@ static const Map<String,dynamic> _en = {
     "save": "Save",
     "delete": "Delete",
     "edit": "Edit",
-    "close": "Close"
+    "close": "Close",
+    "youMustEnableLocationServices": "You must enable Location Services!",
+    "youMustAcceptLocationPermission": "You must accept Location Permission!",
+    "youDeniedLocationPermissionForever": "Seams like You denied Location Permission forever!. so You must go to device setting and accept it!"
   },
   "theme": {
     "choose": "Choose a theme",
@@ -282,7 +288,10 @@ static const Map<String,dynamic> _fa = {
     "save": "پاشەکەوت",
     "delete": "سڕینەوە",
     "edit": "دەستکاری",
-    "close": "داخستن"
+    "close": "داخستن",
+    "youMustEnableLocationServices": "You must enable Location Services!",
+    "youMustAcceptLocationPermission": "You must accept Location Permission!",
+    "youDeniedLocationPermissionForever": "Seams like You denied Location Permission forever!. so You must go to device setting and accept it!"
   },
   "theme": {
     "choose": "مۆدێلێک هەڵبژێرە",

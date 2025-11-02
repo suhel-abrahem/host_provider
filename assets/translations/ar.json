@@ -39,7 +39,10 @@
     "save": "حفظ",
     "delete": "حذف",
     "edit": "تعديل",
-    "close": "إغلاق"
+    "close": "إغلاق",
+    "youMustEnableLocationServices": "You must enable Location Services!",
+    "youMustAcceptLocationPermission": "You must accept Location Permission!",
+    "youDeniedLocationPermissionForever": "Seams like You denied Location Permission forever!. so You must go to device setting and accept it!"
   },
   "theme": {
     "choose": "اختر سمة",

@@ -23,3 +23,15 @@ class NOInternetDataState<T> extends DataState<T> {
 class OtpRequestedDataState<T> extends DataState<T> {
   const OtpRequestedDataState();
 }
+
+class LocationDisabledDataState<T> extends DataState<T> {
+  const LocationDisabledDataState();
+}
+
+class LocationPermissionDeniedDataState<T> extends DataState<T> {
+  const LocationPermissionDeniedDataState();
+}
+
+class LocationPermissionDeniedForeverDataState<T> extends DataState<T> {
+  const LocationPermissionDeniedForeverDataState();
+}

@@ -33,19 +33,26 @@ class SignupRepositoryImplements implements SignupRepository {
     if (connectivityResult == ConnectivityResult.none) {
       return Future.value(NOInternetDataState());
     }
+    DataState<SignupEntity>? res;
     try {
+      print("from repo model:${signupModel?.toJson()}");
+
       await _commonService
           .post(ApiConstant.registerEndpoint, data: signupModel?.toJson())
           .then((onValue) {
+            print("from repo onValue:${onValue.data?.data}");
             if (onValue is DataSuccess<Response>) {
-              return onValue;
+              res = onValue.data?.data;
+              return res;
             } else {
-              return DataError(error: onValue.error);
+              res = DataError(error: onValue.error);
+              return res;
             }
           });
     } catch (e) {
-      return DataError(error: e.toString());
+      res = DataError(error: e.toString());
+      return res;
     }
-    return null;
+    return res;
   }
 }

@@ -54,7 +54,12 @@ class CommonService {
     final url = ApiConstant.baseUrl + endpoint;
     try {
       final response = await _dio.post(url, data: data, options: options);
-      return DataSuccess(data: response);
+      if ((response.statusCode ?? 0) >= 200 ||
+          (response.statusCode ?? 0) <= 204) {
+        return DataSuccess(data: response);
+      } else {
+        return DataError(error: response.statusMessage);
+      }
     } catch (e) {
       return DataError(error: e.toString());
     }

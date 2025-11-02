@@ -1,16 +1,17 @@
+import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:json_annotation/json_annotation.dart';
 
-class Uint8listJsonConverter implements JsonConverter<Uint8List?, List<int>?> {
-  const Uint8listJsonConverter();
+class FileJsonConverter implements JsonConverter<File?, String?> {
+  const FileJsonConverter();
   @override
-  Uint8List? fromJson(List<int>? json) {
-    return json != null ? Uint8List.fromList(json) : null;
+  File? fromJson(String? json) {
+    return json != null ? File.fromUri(Uri.parse(json)) : null;
   }
 
   @override
-  List<int>? toJson(Uint8List? object) {
-    return object?.toList();
+  String? toJson(File? object) {
+    return object?.uri.toString();
   }
 }

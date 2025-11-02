@@ -11,20 +11,20 @@ part 'signup_model.g.dart';
 @freezed
 abstract class SignupModel with _$SignupModel {
   factory SignupModel({
-    @Default("") String? country_id,
-    @Default("") String? lng,
+    @Default(0) int? country_id,
+    @Default(0.000) num? lng,
     @Default("") String? verify_via,
     @Default("") String? name,
     @Default("") String? phone,
-    @Default("") String? city_id,
+    @Default(0) int? city_id,
     @Default("") String? address,
     @Default("") String? role,
-    @Default("") String? dop,
-    @Uint8listJsonConverter() @Default([]) List<int>? avatar,
+    @Default("") String? dob,
+    @FileJsonConverter() @Default("") String? avatar,
     @Default("") String? password,
     @Default("") String? password_confirmation,
     @Default("") String? email,
-    @Default("") String? lat,
+    @Default(0.000) num? lat,
   }) = _SignupModel;
   factory SignupModel.fromJson(Map<String, dynamic> json) =>
       _$SignupModelFromJson(json);
