@@ -5,4 +5,5 @@ class SharedPreferencesKeys {
   static const String categoryIndexKey = "categoryIndexKey";
   static const String isFirstUseKey = "isFirstUseKey";
   static const String loginStateKey = "loginStateKey";
+  static const String signupInfoKey = "signupInfoKey";
 }

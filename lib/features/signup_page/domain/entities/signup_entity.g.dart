@@ -11,6 +11,9 @@ _SignupEntity _$SignupEntityFromJson(Map<String, dynamic> json) =>
       message: json['message'] as String? ?? "",
       user_id: json['user_id'] as String? ?? "",
       email: json['email'] as String? ?? "",
+      otp: json['otp'] == null
+          ? const OtpEntity()
+          : OtpEntity.fromJson(json['otp'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$SignupEntityToJson(_SignupEntity instance) =>
@@ -18,4 +21,5 @@ Map<String, dynamic> _$SignupEntityToJson(_SignupEntity instance) =>
       'message': instance.message,
       'user_id': instance.user_id,
       'email': instance.email,
+      'otp': instance.otp,
     };

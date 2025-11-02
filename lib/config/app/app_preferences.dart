@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:hosta_provider/features/login_page/domain/entities/login_state_entity.dart';
+import 'package:hosta_provider/features/signup_page/domain/entities/signup_entity.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../core/constants/language_constant.dart';
@@ -52,8 +53,8 @@ class AppPreferences {
     _sharedPreferences.setBool(SharedPreferencesKeys.isFirstUseKey, isFirstUse);
   }
 
-  setUserInfo({required LoginStateEntity? loginStateEntity}) {
-    _sharedPreferences.setString(
+  setUserInfo({required LoginStateEntity? loginStateEntity}) async {
+    await _sharedPreferences.setString(
       SharedPreferencesKeys.loginStateKey,
       jsonEncode(loginStateEntity),
     );
@@ -65,5 +66,19 @@ class AppPreferences {
     );
     print("json As string:$jsonString");
     return LoginStateEntity.fromJson(jsonDecode(jsonString ?? "{}"));
+  }
+
+  setUserSignUpInfo({required SignupEntity? signupEntity}) async {
+    await _sharedPreferences.setString(
+      SharedPreferencesKeys.signupInfoKey,
+      jsonEncode(signupEntity),
+    );
+  }
+
+  SignupEntity? getSignupInfo() {
+    String? stringJson = _sharedPreferences.getString(
+      SharedPreferencesKeys.signupInfoKey,
+    );
+    return SignupEntity.fromJson(jsonDecode(stringJson ?? ""));
   }
 }

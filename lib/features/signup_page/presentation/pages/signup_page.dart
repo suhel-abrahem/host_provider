@@ -229,7 +229,7 @@ class _SignupPageState extends State<SignupPage> {
                             padding: EdgeInsets.symmetric(vertical: 5.h),
                             child: CustomInputField(
                               width: 300.w,
-                              isRequired: false,
+                              isRequired: true,
                               onChanged: (value) {
                                 signupModel = signupModel?.copyWith(
                                   email: value,
@@ -883,6 +883,9 @@ class _SignupPageState extends State<SignupPage> {
                                         positionEntity?.long ?? "",
                                       ),
                                       role: "Provider",
+                                    );
+                                    signupModel = signupModel?.copyWith(
+                                      verify_via: "email",
                                     );
                                     context.read<SignupBlocBloc>().add(
                                       SignupBlocEvent.signupSignedInEvent(

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:hosta_provider/features/signup_page/domain/entities/otp_entity.dart';
 part 'signup_entity.freezed.dart';
 part 'signup_entity.g.dart';
 
@@ -10,6 +11,7 @@ abstract class SignupEntity with _$SignupEntity {
     @Default("") String? message,
     @Default("") String? user_id,
     @Default("") String? email,
+    @Default(OtpEntity()) OtpEntity? otp,
   }) = _SignupEntity;
   factory SignupEntity.fromJson(Map<String, dynamic> json) =>
       _$SignupEntityFromJson(json);

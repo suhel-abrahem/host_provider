@@ -18,11 +18,7 @@ class SignupBlocBloc extends Bloc<SignupBlocEvent, SignupBlocState> {
       emit(SignupBlocState.loading());
       await _signupUsecase.call(params: event.signupModel).then((onValue) {
         if (onValue is DataSuccess) {
-          if (onValue?.data != null) {
-            emit(SignupBlocState.signupSignedUp(signupEntity: onValue?.data));
-          } else {
-            emit(SignupBlocState.error(onValue?.data));
-          }
+          emit(SignupBlocState.signupSignedUp(signupEntity: onValue?.data));
         } else {
           emit(SignupBlocState.error(onValue?.data));
         }
