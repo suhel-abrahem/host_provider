@@ -9,7 +9,11 @@ class DataSuccess<T> extends DataState<T> {
 }
 
 class DataError<T> extends DataState<T> {
-  const DataError({required super.error});
+  const DataError({super.data, super.error});
+}
+
+class DataFailed<T> extends DataState<T> {
+  const DataFailed({required super.error});
 }
 
 class NoDataDataState<T> extends DataState<T> {

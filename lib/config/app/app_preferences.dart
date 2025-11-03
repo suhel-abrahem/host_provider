@@ -6,6 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../core/constants/language_constant.dart';
 import '../../core/constants/shared_preferences_keys.dart';
+import '../../features/signup_page/domain/entities/signup_info_entity.dart';
 
 class AppPreferences {
   late final SharedPreferences _sharedPreferences;
@@ -68,17 +69,17 @@ class AppPreferences {
     return LoginStateEntity.fromJson(jsonDecode(jsonString ?? "{}"));
   }
 
-  setUserSignUpInfo({required SignupEntity? signupEntity}) async {
+  setUserSignUpInfo({required SignupInfoEntity? signupEntity}) async {
     await _sharedPreferences.setString(
       SharedPreferencesKeys.signupInfoKey,
       jsonEncode(signupEntity),
     );
   }
 
-  SignupEntity? getSignupInfo() {
+  SignupInfoEntity? getSignupInfo() {
     String? stringJson = _sharedPreferences.getString(
       SharedPreferencesKeys.signupInfoKey,
     );
-    return SignupEntity.fromJson(jsonDecode(stringJson ?? ""));
+    return SignupInfoEntity.fromJson(jsonDecode(stringJson ?? ""));
   }
 }

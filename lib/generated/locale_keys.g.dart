@@ -30,6 +30,10 @@ abstract class  LocaleKeys {
   static const loginPage_loginFailed = 'loginPage.loginFailed';
   static const loginPage_country = 'loginPage.country';
   static const loginPage_countryIsRequired = 'loginPage.countryIsRequired';
+  static const loginPage_thisPhoneIsTaken = 'loginPage.thisPhoneIsTaken';
+  static const loginPage_thisEmailIsTaken = 'loginPage.thisEmailIsTaken';
+  static const loginPage_ThePasswordFieldMustBeAtLeast8Characters = 'loginPage.ThePasswordFieldMustBeAtLeast8Characters';
+  static const loginPage_errors = 'loginPage.errors';
   static const loginPage = 'loginPage';
   static const common_loading = 'common.loading';
   static const common_error = 'common.error';
@@ -108,5 +112,14 @@ abstract class  LocaleKeys {
   static const categoriesPage_title = 'categoriesPage.title';
   static const categoriesPage_servicesCategories = 'categoriesPage.servicesCategories';
   static const categoriesPage = 'categoriesPage';
+  static const otpPage_title = 'otpPage.title';
+  static const otpPage_verification = 'otpPage.verification';
+  static const otpPage_enterTheCodeSentToTheNumber = 'otpPage.enterTheCodeSentToTheNumber';
+  static const otpPage_didntReceiveCode = 'otpPage.didntReceiveCode';
+  static const otpPage_resend = 'otpPage.resend';
+  static const otpPage_wrongOtp = 'otpPage.wrongOtp';
+  static const otpPage_verified = 'otpPage.verified';
+  static const otpPage_verify = 'otpPage.verify';
+  static const otpPage = 'otpPage';
 
 }

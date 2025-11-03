@@ -26,7 +26,11 @@
     "already_have_account": "ئەژماری هەیە؟",
     "loginFailed": "چوونەژوورەوە سەرکەوتوو نەبو. تکایە دڵنیابە لە زانیاریەکانت و دووبارە هەوڵبدەرەوە.",
     "country": "Country",
-    "countryIsRequired": "Country is required"
+    "countryIsRequired": "Country is required",
+    "thisPhoneIsTaken": "This phone Is taken",
+    "thisEmailIsTaken": "This email Is taken",
+    "ThePasswordFieldMustBeAtLeast8Characters": "The password field must be at least 8 characters",
+    "errors": "Errors"
   },
   "common": {
     "loading": "چاوەڕێ بکە...",
@@ -112,5 +116,15 @@
   "categoriesPage": {
     "title": "Categories Page",
     "servicesCategories": " Services Categories"
+  },
+  "otpPage": {
+    "title": "Otp Page",
+    "verification": "Verification",
+    "enterTheCodeSentToTheNumber": "enter The code sent To The number",
+    "didntReceiveCode": "Didnt receive code",
+    "resend": "Resend",
+    "wrongOtp": "Wrong Otp",
+    "verified": "Verified",
+    "verify": "Verify"
   }
 }

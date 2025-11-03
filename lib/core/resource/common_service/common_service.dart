@@ -36,12 +36,12 @@ class CommonService {
       if (response.statusCode == 204) {
         return DataSuccess(data: null);
       } else if (response.statusCode == 401) {
-        return DataError(error: "Unauthorized");
+        return DataFailed(error: "Unauthorized");
       }
 
       return DataSuccess(data: response);
     } catch (e) {
-      return DataError(error: e.toString());
+      return DataFailed(error: e.toString());
     }
   }
 
@@ -58,10 +58,13 @@ class CommonService {
           (response.statusCode ?? 0) <= 204) {
         return DataSuccess(data: response);
       } else {
-        return DataError(error: response.statusMessage);
+        return DataFailed(error: response.statusMessage);
       }
-    } catch (e) {
-      return DataError(error: e.toString());
+    } on DioException catch (e) {
+      if ((e.response?.statusCode ?? 0) == 422) {
+        return DataError(data: e.response, error: e.response?.statusMessage);
+      }
+      return DataFailed(error: e.toString());
     }
   }
 
@@ -76,7 +79,7 @@ class CommonService {
       final response = await _dio.put(url, data: data, options: options);
       return DataSuccess(data: response);
     } catch (e) {
-      return DataError(error: e.toString());
+      return DataFailed(error: e.toString());
     }
   }
 
@@ -95,7 +98,7 @@ class CommonService {
       );
       return DataSuccess(data: response);
     } catch (e) {
-      return DataError(error: e.toString());
+      return DataFailed(error: e.toString());
     }
   }
 }

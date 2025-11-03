@@ -7,6 +7,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hosta_provider/config/app/app_preferences.dart';
 import 'package:hosta_provider/config/theme/app_theme.dart';
 
 import 'package:hosta_provider/core/dependencies_injection.dart';
@@ -18,6 +19,8 @@ import 'package:hosta_provider/features/signup_page/data/models/signup_model.dar
 import 'package:hosta_provider/features/signup_page/domain/entities/city_entity.dart';
 import 'package:hosta_provider/features/signup_page/domain/entities/country_entity.dart';
 import 'package:hosta_provider/features/signup_page/domain/entities/position_entity.dart';
+import 'package:hosta_provider/features/signup_page/domain/entities/signup_error_entity.dart';
+import 'package:hosta_provider/features/signup_page/domain/entities/signup_info_entity.dart';
 import 'package:hosta_provider/features/signup_page/presentation/bloc/get_cities_bloc.dart';
 import 'package:hosta_provider/features/signup_page/presentation/bloc/get_countries_bloc.dart';
 import 'package:hosta_provider/features/signup_page/presentation/bloc/get_position_bloc.dart';
@@ -54,6 +57,9 @@ class _SignupPageState extends State<SignupPage> {
   int requestLocationPermissionCounter = 0;
   SignupModel? signupModel = SignupModel();
   bool? isSignupButtonLoading = false;
+  bool? isResponseHaveError = false;
+  List errors = [];
+  GlobalKey<FormState> formKey = GlobalKey();
   // Future<void> getLocationPermissionState() async {
   //   if ((await Permission.locationWhenInUse.serviceStatus.isEnabled)) {
   //     canAccessAddress = true;
@@ -152,15 +158,39 @@ class _SignupPageState extends State<SignupPage> {
               listener: (context, state) {
                 state.when(
                   initial: () => isSignupButtonLoading = false,
-                  signupSignedUp: (data) {
+                  signupSignedUp: (data) async {
                     print("signUpRe:$data");
+                    SignupInfoEntity? signupInfoEntity = data;
+                    signupInfoEntity = signupInfoEntity?.copyWith(
+                      email: signupModel?.email,
+                      phoneNumber: signupModel?.phone,
+                    );
+                    await getItInstance<AppPreferences>().setUserSignUpInfo(
+                      signupEntity: signupInfoEntity,
+                    );
+                    context.push(RoutesPath.otpPage);
                   },
                   loading: () => isSignupButtonLoading = true,
                   error: (message) {
                     isSignupButtonLoading = false;
-                    print("signup mess:$message");
+                    if (message is SignupErrorEntity) {
+                      isResponseHaveError = true;
+                      errors = [];
+                      if ((message.email?.isNotEmpty) ?? false) {
+                        errors.add(LocaleKeys.loginPage_thisEmailIsTaken);
+                      }
+                      if ((message.phone?.isNotEmpty) ?? false) {
+                        errors.add(LocaleKeys.loginPage_thisPhoneIsTaken);
+                      }
+                      if ((message.password?.isNotEmpty) ?? false) {
+                        errors.add(
+                          LocaleKeys
+                              .loginPage_ThePasswordFieldMustBeAtLeast8Characters,
+                        );
+                      }
+                    }
                     showMessage(
-                      message: message?.message ?? "",
+                      message: LocaleKeys.common_error.toString(),
                       context: context,
                     );
                   },
@@ -179,6 +209,7 @@ class _SignupPageState extends State<SignupPage> {
                       ),
                     ),
                     Form(
+                      key: formKey,
                       autovalidateMode: AutovalidateMode.onUserInteraction,
                       child: Column(
                         children: [
@@ -852,6 +883,55 @@ class _SignupPageState extends State<SignupPage> {
                               ),
                             ),
                           ),
+                          AnimatedSwitcher(
+                            duration: Duration(milliseconds: 300),
+                            child: Visibility(
+                              key: ValueKey(isResponseHaveError),
+                              visible: isResponseHaveError ?? false,
+                              child: Padding(
+                                padding: EdgeInsets.symmetric(vertical: 20.h),
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      "${LocaleKeys.loginPage_errors.tr()}:",
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .labelLarge
+                                          ?.copyWith(
+                                            fontFamily:
+                                                FontConstants.fontFamily(
+                                                  context.locale,
+                                                ),
+                                          ),
+                                    ),
+                                    for (String error in errors)
+                                      Padding(
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: 12.w,
+                                        ),
+                                        child: Align(
+                                          alignment:
+                                              AlignmentDirectional.centerStart,
+                                          child: Text(
+                                            " * ${error.tr()}",
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .labelLarge
+                                                ?.copyWith(
+                                                  fontFamily:
+                                                      FontConstants.fontFamily(
+                                                        context.locale,
+                                                      ),
+                                                ),
+                                            textAlign: TextAlign.start,
+                                          ),
+                                        ),
+                                      ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
 
                           Padding(
                             padding: EdgeInsets.symmetric(vertical: 20.h),
@@ -871,27 +951,31 @@ class _SignupPageState extends State<SignupPage> {
                                 onPressed: () {
                                   if (positionEntity == null) {
                                     print("pressed");
+
                                     context.read<GetPositionBloc>().add(
                                       GetPositionEvent.get(),
                                     );
                                   } else {
-                                    signupModel = signupModel?.copyWith(
-                                      lat: num.tryParse(
-                                        positionEntity?.lat ?? "",
-                                      ),
-                                      lng: num.tryParse(
-                                        positionEntity?.long ?? "",
-                                      ),
-                                      role: "Provider",
-                                    );
-                                    signupModel = signupModel?.copyWith(
-                                      verify_via: "email",
-                                    );
-                                    context.read<SignupBlocBloc>().add(
-                                      SignupBlocEvent.signupSignedInEvent(
-                                        signupModel: signupModel,
-                                      ),
-                                    );
+                                    if (formKey.currentState?.validate() ??
+                                        false) {
+                                      signupModel = signupModel?.copyWith(
+                                        lat: num.tryParse(
+                                          positionEntity?.lat ?? "",
+                                        ),
+                                        lng: num.tryParse(
+                                          positionEntity?.long ?? "",
+                                        ),
+                                        role: "Provider",
+                                      );
+                                      signupModel = signupModel?.copyWith(
+                                        verify_via: "email",
+                                      );
+                                      context.read<SignupBlocBloc>().add(
+                                        SignupBlocEvent.signupSignedInEvent(
+                                          signupModel: signupModel,
+                                        ),
+                                      );
+                                    }
                                   }
                                 },
                                 child: (isSignupButtonLoading ?? false)

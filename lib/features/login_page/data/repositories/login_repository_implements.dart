@@ -44,8 +44,8 @@ class LoginRepositoryImplements implements LoginRepository {
             } else {
               dataState = OtpRequestedDataState();
             }
-          } else if (response is DataError) {
-            dataState = DataError(error: response.error);
+          } else if (response is DataFailed) {
+            dataState = DataFailed(error: response.error);
           }
         });
     return Future.value(dataState);

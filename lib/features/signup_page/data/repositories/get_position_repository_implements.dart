@@ -40,7 +40,7 @@ class GetPositionRepositoryImplements implements GetPositionRepository {
               ),
             );
           } catch (e) {
-            return DataError(error: e.toString());
+            return DataFailed(error: e.toString());
           }
         }
       } else {

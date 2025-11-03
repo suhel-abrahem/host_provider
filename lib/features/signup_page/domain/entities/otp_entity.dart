@@ -7,7 +7,7 @@ abstract class OtpEntity with _$OtpEntity {
   const factory OtpEntity({
     @Default(0) int? user_id,
     @Default(0) int? id,
-    @Default("") String? otp,
+    @Default(0) int? otp,
     @Default("") String? expires_at,
     @Default(false) bool? used,
     @Default("") String? updated_at,

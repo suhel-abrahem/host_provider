@@ -26,7 +26,11 @@
     "already_have_account": "هل لديك حساب؟",
     "loginFailed": "فشل تسجيل الدخول. يرجى التحقق من بيانات الاعتماد الخاصة بك والمحاولة مرة أخرى.",
     "country": "الدولة",
-    "countryIsRequired": "الدولة مطلوبة"
+    "countryIsRequired": "الدولة مطلوبة",
+    "thisPhoneIsTaken": "This phone Is taken",
+    "thisEmailIsTaken": "This email Is taken",
+    "ThePasswordFieldMustBeAtLeast8Characters": "The password field must be at least 8 characters",
+    "errors": "Errors"
   },
   "common": {
     "loading": "جاري التحميل...",
@@ -113,5 +117,15 @@
   "categoriesPage": {
     "title": "Categories Page",
     "servicesCategories": " Services Categories"
+  },
+  "otpPage": {
+    "title": "Otp Page",
+    "verification": "Verification",
+    "enterTheCodeSentToTheNumber": "enter The code sent To The number",
+    "didntReceiveCode": "Didnt receive code",
+    "resend": "Resend",
+    "wrongOtp": "Wrong Otp",
+    "verified": "Verified",
+    "verify": "Verify"
   }
 }

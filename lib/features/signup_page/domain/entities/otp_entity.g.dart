@@ -9,7 +9,7 @@ part of 'otp_entity.dart';
 _OtpEntity _$OtpEntityFromJson(Map<String, dynamic> json) => _OtpEntity(
   user_id: (json['user_id'] as num?)?.toInt() ?? 0,
   id: (json['id'] as num?)?.toInt() ?? 0,
-  otp: json['otp'] as String? ?? "",
+  otp: (json['otp'] as num?)?.toInt() ?? 0,
   expires_at: json['expires_at'] as String? ?? "",
   used: json['used'] as bool? ?? false,
   updated_at: json['updated_at'] as String? ?? "",

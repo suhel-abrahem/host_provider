@@ -27,7 +27,7 @@ class CategoriesPageImplementsRepository implements CategoriesPageRepository {
     try {
       final response = _commonService.get(ApiConstant.getServices, params: {});
     } catch (e) {
-      return Future.value(DataError(error: e.toString()));
+      return Future.value(DataFailed(error: e.toString()));
     }
   }
 

@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$OtpEntity {
 
- int? get user_id; int? get id; String? get otp; String? get expires_at; bool? get used; String? get updated_at; String? get created_at;
+ int? get user_id; int? get id; int? get otp; String? get expires_at; bool? get used; String? get updated_at; String? get created_at;
 /// Create a copy of OtpEntity
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $OtpEntityCopyWith<$Res>  {
   factory $OtpEntityCopyWith(OtpEntity value, $Res Function(OtpEntity) _then) = _$OtpEntityCopyWithImpl;
 @useResult
 $Res call({
- int? user_id, int? id, String? otp, String? expires_at, bool? used, String? updated_at, String? created_at
+ int? user_id, int? id, int? otp, String? expires_at, bool? used, String? updated_at, String? created_at
 });
 
 
@@ -70,7 +70,7 @@ class _$OtpEntityCopyWithImpl<$Res>
 user_id: freezed == user_id ? _self.user_id : user_id // ignore: cast_nullable_to_non_nullable
 as int?,id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int?,otp: freezed == otp ? _self.otp : otp // ignore: cast_nullable_to_non_nullable
-as String?,expires_at: freezed == expires_at ? _self.expires_at : expires_at // ignore: cast_nullable_to_non_nullable
+as int?,expires_at: freezed == expires_at ? _self.expires_at : expires_at // ignore: cast_nullable_to_non_nullable
 as String?,used: freezed == used ? _self.used : used // ignore: cast_nullable_to_non_nullable
 as bool?,updated_at: freezed == updated_at ? _self.updated_at : updated_at // ignore: cast_nullable_to_non_nullable
 as String?,created_at: freezed == created_at ? _self.created_at : created_at // ignore: cast_nullable_to_non_nullable
@@ -159,7 +159,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int? user_id,  int? id,  String? otp,  String? expires_at,  bool? used,  String? updated_at,  String? created_at)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int? user_id,  int? id,  int? otp,  String? expires_at,  bool? used,  String? updated_at,  String? created_at)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _OtpEntity() when $default != null:
 return $default(_that.user_id,_that.id,_that.otp,_that.expires_at,_that.used,_that.updated_at,_that.created_at);case _:
@@ -180,7 +180,7 @@ return $default(_that.user_id,_that.id,_that.otp,_that.expires_at,_that.used,_th
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int? user_id,  int? id,  String? otp,  String? expires_at,  bool? used,  String? updated_at,  String? created_at)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int? user_id,  int? id,  int? otp,  String? expires_at,  bool? used,  String? updated_at,  String? created_at)  $default,) {final _that = this;
 switch (_that) {
 case _OtpEntity():
 return $default(_that.user_id,_that.id,_that.otp,_that.expires_at,_that.used,_that.updated_at,_that.created_at);case _:
@@ -200,7 +200,7 @@ return $default(_that.user_id,_that.id,_that.otp,_that.expires_at,_that.used,_th
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int? user_id,  int? id,  String? otp,  String? expires_at,  bool? used,  String? updated_at,  String? created_at)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int? user_id,  int? id,  int? otp,  String? expires_at,  bool? used,  String? updated_at,  String? created_at)?  $default,) {final _that = this;
 switch (_that) {
 case _OtpEntity() when $default != null:
 return $default(_that.user_id,_that.id,_that.otp,_that.expires_at,_that.used,_that.updated_at,_that.created_at);case _:
@@ -215,12 +215,12 @@ return $default(_that.user_id,_that.id,_that.otp,_that.expires_at,_that.used,_th
 @JsonSerializable()
 
 class _OtpEntity implements OtpEntity {
-  const _OtpEntity({this.user_id = 0, this.id = 0, this.otp = "", this.expires_at = "", this.used = false, this.updated_at = "", this.created_at = ""});
+  const _OtpEntity({this.user_id = 0, this.id = 0, this.otp = 0, this.expires_at = "", this.used = false, this.updated_at = "", this.created_at = ""});
   factory _OtpEntity.fromJson(Map<String, dynamic> json) => _$OtpEntityFromJson(json);
 
 @override@JsonKey() final  int? user_id;
 @override@JsonKey() final  int? id;
-@override@JsonKey() final  String? otp;
+@override@JsonKey() final  int? otp;
 @override@JsonKey() final  String? expires_at;
 @override@JsonKey() final  bool? used;
 @override@JsonKey() final  String? updated_at;
@@ -259,7 +259,7 @@ abstract mixin class _$OtpEntityCopyWith<$Res> implements $OtpEntityCopyWith<$Re
   factory _$OtpEntityCopyWith(_OtpEntity value, $Res Function(_OtpEntity) _then) = __$OtpEntityCopyWithImpl;
 @override @useResult
 $Res call({
- int? user_id, int? id, String? otp, String? expires_at, bool? used, String? updated_at, String? created_at
+ int? user_id, int? id, int? otp, String? expires_at, bool? used, String? updated_at, String? created_at
 });
 
 
@@ -281,7 +281,7 @@ class __$OtpEntityCopyWithImpl<$Res>
 user_id: freezed == user_id ? _self.user_id : user_id // ignore: cast_nullable_to_non_nullable
 as int?,id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int?,otp: freezed == otp ? _self.otp : otp // ignore: cast_nullable_to_non_nullable
-as String?,expires_at: freezed == expires_at ? _self.expires_at : expires_at // ignore: cast_nullable_to_non_nullable
+as int?,expires_at: freezed == expires_at ? _self.expires_at : expires_at // ignore: cast_nullable_to_non_nullable
 as String?,used: freezed == used ? _self.used : used // ignore: cast_nullable_to_non_nullable
 as bool?,updated_at: freezed == updated_at ? _self.updated_at : updated_at // ignore: cast_nullable_to_non_nullable
 as String?,created_at: freezed == created_at ? _self.created_at : created_at // ignore: cast_nullable_to_non_nullable

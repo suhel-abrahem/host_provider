@@ -44,13 +44,13 @@ class GetCountryRepositoryImplement implements GetCountryRepository {
           getCountriesCompleter.complete(DataSuccess(data: countries));
           return DataSuccess(data: countries);
         } else {
-          getCountriesCompleter.completeError(DataError(error: onValue.error));
-          return DataError(error: onValue.error);
+          getCountriesCompleter.completeError(DataFailed(error: onValue.error));
+          return DataFailed(error: onValue.error);
         }
       });
       return getCountriesCompleter.future;
     } catch (e) {
-      getCountriesCompleter.completeError(DataError(error: e.toString()));
+      getCountriesCompleter.completeError(DataFailed(error: e.toString()));
       return getCountriesCompleter.future;
     }
   }

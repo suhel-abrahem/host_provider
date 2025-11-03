@@ -50,12 +50,14 @@ class GetCitiesRepositoryImplements implements GetCitiesRepository {
               getCitiesCompleter.complete(DataSuccess(data: cities));
               return getCitiesCompleter.future;
             } else {
-              getCitiesCompleter.completeError(DataError(error: onValue.error));
+              getCitiesCompleter.completeError(
+                DataFailed(error: onValue.error),
+              );
               return getCitiesCompleter.future;
             }
           });
     } catch (e) {
-      getCitiesCompleter.completeError(DataError(error: e.toString()));
+      getCitiesCompleter.completeError(DataFailed(error: e.toString()));
       return getCitiesCompleter.future;
     }
     return getCitiesCompleter.future;

@@ -42,7 +42,11 @@ class CodegenLoader extends AssetLoader{
     "already_have_account": "هل لديك حساب؟",
     "loginFailed": "فشل تسجيل الدخول. يرجى التحقق من بيانات الاعتماد الخاصة بك والمحاولة مرة أخرى.",
     "country": "الدولة",
-    "countryIsRequired": "الدولة مطلوبة"
+    "countryIsRequired": "الدولة مطلوبة",
+    "thisPhoneIsTaken": "This phone Is taken",
+    "thisEmailIsTaken": "This email Is taken",
+    "ThePasswordFieldMustBeAtLeast8Characters": "The password field must be at least 8 characters",
+    "errors": "Errors"
   },
   "common": {
     "loading": "جاري التحميل...",
@@ -129,6 +133,16 @@ class CodegenLoader extends AssetLoader{
   "categoriesPage": {
     "title": "Categories Page",
     "servicesCategories": " Services Categories"
+  },
+  "otpPage": {
+    "title": "Otp Page",
+    "verification": "Verification",
+    "enterTheCodeSentToTheNumber": "enter The code sent To The number",
+    "didntReceiveCode": "Didnt receive code",
+    "resend": "Resend",
+    "wrongOtp": "Wrong Otp",
+    "verified": "Verified",
+    "verify": "Verify"
   }
 };
 static const Map<String,dynamic> _en = {
@@ -159,7 +173,11 @@ static const Map<String,dynamic> _en = {
     "already_have_account": "Already have an account?",
     "loginFailed": "Login failed. Please check your credentials and try again.",
     "country": "Country",
-    "countryIsRequired": "Country is required"
+    "countryIsRequired": "Country is required",
+    "thisPhoneIsTaken": "This phone Is taken",
+    "thisEmailIsTaken": "This email Is taken",
+    "ThePasswordFieldMustBeAtLeast8Characters": "The password field must be at least 8 characters",
+    "errors": "Errors"
   },
   "common": {
     "loading": "Loading...",
@@ -245,6 +263,16 @@ static const Map<String,dynamic> _en = {
   "categoriesPage": {
     "title": "Categories Page",
     "servicesCategories": " Services Categories"
+  },
+  "otpPage": {
+    "title": "Otp Page",
+    "verification": "Verification",
+    "enterTheCodeSentToTheNumber": "enter The code sent To The number",
+    "didntReceiveCode": "Didnt receive code",
+    "resend": "Resend",
+    "wrongOtp": "Wrong Otp",
+    "verified": "Verified",
+    "verify": "Verify"
   }
 };
 static const Map<String,dynamic> _fa = {
@@ -275,7 +303,11 @@ static const Map<String,dynamic> _fa = {
     "already_have_account": "ئەژماری هەیە؟",
     "loginFailed": "چوونەژوورەوە سەرکەوتوو نەبو. تکایە دڵنیابە لە زانیاریەکانت و دووبارە هەوڵبدەرەوە.",
     "country": "Country",
-    "countryIsRequired": "Country is required"
+    "countryIsRequired": "Country is required",
+    "thisPhoneIsTaken": "This phone Is taken",
+    "thisEmailIsTaken": "This email Is taken",
+    "ThePasswordFieldMustBeAtLeast8Characters": "The password field must be at least 8 characters",
+    "errors": "Errors"
   },
   "common": {
     "loading": "چاوەڕێ بکە...",
@@ -361,6 +393,16 @@ static const Map<String,dynamic> _fa = {
   "categoriesPage": {
     "title": "Categories Page",
     "servicesCategories": " Services Categories"
+  },
+  "otpPage": {
+    "title": "Otp Page",
+    "verification": "Verification",
+    "enterTheCodeSentToTheNumber": "enter The code sent To The number",
+    "didntReceiveCode": "Didnt receive code",
+    "resend": "Resend",
+    "wrongOtp": "Wrong Otp",
+    "verified": "Verified",
+    "verify": "Verify"
   }
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": _ar, "en": _en, "fa": _fa};

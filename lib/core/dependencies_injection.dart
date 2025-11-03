@@ -7,6 +7,10 @@ import 'package:hosta_provider/features/login_page/domain/entities/login_state_e
 import 'package:hosta_provider/features/login_page/domain/repositories/login_repository.dart';
 import 'package:hosta_provider/features/login_page/domain/usecases/login_usecase.dart';
 import 'package:hosta_provider/features/login_page/presentation/bloc/login_bloc_bloc.dart';
+import 'package:hosta_provider/features/otp_page/data/models/otp_model.dart';
+import 'package:hosta_provider/features/otp_page/domain/repositories/otp_verifiy_repository.dart';
+import 'package:hosta_provider/features/otp_page/domain/usecases/otp_verify_usecase.dart';
+import 'package:hosta_provider/features/otp_page/presentation/bloc/otp_page_bloc.dart';
 import 'package:hosta_provider/features/signup_page/data/models/city_model.dart';
 import 'package:hosta_provider/features/signup_page/data/models/country_model.dart';
 import 'package:hosta_provider/features/signup_page/data/models/signup_model.dart';
@@ -16,6 +20,7 @@ import 'package:hosta_provider/features/signup_page/data/repositories/get_positi
 import 'package:hosta_provider/features/signup_page/data/repositories/signup_repository_implements.dart';
 import 'package:hosta_provider/features/signup_page/domain/entities/city_entity.dart';
 import 'package:hosta_provider/features/signup_page/domain/entities/country_entity.dart';
+import 'package:hosta_provider/features/signup_page/domain/entities/otp_entity.dart';
 import 'package:hosta_provider/features/signup_page/domain/entities/position_entity.dart';
 import 'package:hosta_provider/features/signup_page/domain/entities/signup_entity.dart';
 import 'package:hosta_provider/features/signup_page/domain/repositories/get_cities_repository.dart';
@@ -34,6 +39,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../config/app/app_preferences.dart';
 import '../features/login_page/data/repositories/login_repository_implements.dart';
+import '../features/otp_page/data/repositories/otp_verify_repository_implements.dart';
 
 GetIt getItInstance = GetIt.instance;
 Future<void> initDependencies() async {
@@ -71,6 +77,8 @@ Future<void> initDependencies() async {
   getItInstance.registerSingleton<CountryEntity>(CountryEntity());
   getItInstance.registerSingleton<CountryModel>(CountryModel());
   getItInstance.registerSingleton<PositionEntity>(PositionEntity());
+  getItInstance.registerSingleton<OtpModel>(OtpModel());
+  getItInstance.registerSingleton<OtpEntity>(OtpEntity());
   //repository
   getItInstance.registerSingleton<SignupRepository>(
     SignupRepositoryImplements(
@@ -87,6 +95,12 @@ Future<void> initDependencies() async {
   getItInstance.registerSingleton<GetPositionRepository>(
     GetPositionRepositoryImplements(checkConnectivity: getItInstance()),
   );
+  getItInstance.registerSingleton<OtpVerifyRepository>(
+    OtpVerifyRepositoryImplements(
+      commonService: getItInstance(),
+      checkConnectivity: getItInstance(),
+    ),
+  );
   //use case
   getItInstance.registerSingleton<SignupUsecase>(
     SignupUsecase(signupRepository: getItInstance()),
@@ -102,6 +116,9 @@ Future<void> initDependencies() async {
   getItInstance.registerSingleton<GetPositionUsecase>(
     GetPositionUsecase(getPositionRepository: getItInstance()),
   );
+  getItInstance.registerSingleton<OtpVerifyUsecase>(
+    OtpVerifyUsecase(otpVerifyRepository: getItInstance()),
+  );
   //bloc
   getItInstance.registerFactory<SignupBlocBloc>(
     () => SignupBlocBloc(getItInstance()),
@@ -114,6 +131,9 @@ Future<void> initDependencies() async {
   );
   getItInstance.registerFactory<GetPositionBloc>(
     () => GetPositionBloc(getItInstance()),
+  );
+  getItInstance.registerFactory<OtpPageBloc>(
+    () => OtpPageBloc(getItInstance()),
   );
   // end of signup
 }

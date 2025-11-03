@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$SignupEntity {
 
- String? get message; String? get user_id; String? get email; OtpEntity? get otp;
+ String? get message; int? get user_id; String? get verify_via;
 /// Create a copy of SignupEntity
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $SignupEntityCopyWith<SignupEntity> get copyWith => _$SignupEntityCopyWithImpl<S
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SignupEntity&&(identical(other.message, message) || other.message == message)&&(identical(other.user_id, user_id) || other.user_id == user_id)&&(identical(other.email, email) || other.email == email)&&(identical(other.otp, otp) || other.otp == otp));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SignupEntity&&(identical(other.message, message) || other.message == message)&&(identical(other.user_id, user_id) || other.user_id == user_id)&&(identical(other.verify_via, verify_via) || other.verify_via == verify_via));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,message,user_id,email,otp);
+int get hashCode => Object.hash(runtimeType,message,user_id,verify_via);
 
 @override
 String toString() {
-  return 'SignupEntity(message: $message, user_id: $user_id, email: $email, otp: $otp)';
+  return 'SignupEntity(message: $message, user_id: $user_id, verify_via: $verify_via)';
 }
 
 
@@ -48,11 +48,11 @@ abstract mixin class $SignupEntityCopyWith<$Res>  {
   factory $SignupEntityCopyWith(SignupEntity value, $Res Function(SignupEntity) _then) = _$SignupEntityCopyWithImpl;
 @useResult
 $Res call({
- String? message, String? user_id, String? email, OtpEntity? otp
+ String? message, int? user_id, String? verify_via
 });
 
 
-$OtpEntityCopyWith<$Res>? get otp;
+
 
 }
 /// @nodoc
@@ -65,28 +65,15 @@ class _$SignupEntityCopyWithImpl<$Res>
 
 /// Create a copy of SignupEntity
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? message = freezed,Object? user_id = freezed,Object? email = freezed,Object? otp = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? message = freezed,Object? user_id = freezed,Object? verify_via = freezed,}) {
   return _then(_self.copyWith(
 message: freezed == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
 as String?,user_id: freezed == user_id ? _self.user_id : user_id // ignore: cast_nullable_to_non_nullable
-as String?,email: freezed == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
-as String?,otp: freezed == otp ? _self.otp : otp // ignore: cast_nullable_to_non_nullable
-as OtpEntity?,
+as int?,verify_via: freezed == verify_via ? _self.verify_via : verify_via // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
-/// Create a copy of SignupEntity
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$OtpEntityCopyWith<$Res>? get otp {
-    if (_self.otp == null) {
-    return null;
-  }
 
-  return $OtpEntityCopyWith<$Res>(_self.otp!, (value) {
-    return _then(_self.copyWith(otp: value));
-  });
-}
 }
 
 
@@ -168,10 +155,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? message,  String? user_id,  String? email,  OtpEntity? otp)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? message,  int? user_id,  String? verify_via)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _SignupEntity() when $default != null:
-return $default(_that.message,_that.user_id,_that.email,_that.otp);case _:
+return $default(_that.message,_that.user_id,_that.verify_via);case _:
   return orElse();
 
 }
@@ -189,10 +176,10 @@ return $default(_that.message,_that.user_id,_that.email,_that.otp);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? message,  String? user_id,  String? email,  OtpEntity? otp)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? message,  int? user_id,  String? verify_via)  $default,) {final _that = this;
 switch (_that) {
 case _SignupEntity():
-return $default(_that.message,_that.user_id,_that.email,_that.otp);case _:
+return $default(_that.message,_that.user_id,_that.verify_via);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -209,10 +196,10 @@ return $default(_that.message,_that.user_id,_that.email,_that.otp);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? message,  String? user_id,  String? email,  OtpEntity? otp)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? message,  int? user_id,  String? verify_via)?  $default,) {final _that = this;
 switch (_that) {
 case _SignupEntity() when $default != null:
-return $default(_that.message,_that.user_id,_that.email,_that.otp);case _:
+return $default(_that.message,_that.user_id,_that.verify_via);case _:
   return null;
 
 }
@@ -224,13 +211,12 @@ return $default(_that.message,_that.user_id,_that.email,_that.otp);case _:
 @JsonSerializable()
 
 class _SignupEntity implements SignupEntity {
-  const _SignupEntity({this.message = "", this.user_id = "", this.email = "", this.otp = const OtpEntity()});
+  const _SignupEntity({this.message = "", this.user_id = 0, this.verify_via = ""});
   factory _SignupEntity.fromJson(Map<String, dynamic> json) => _$SignupEntityFromJson(json);
 
 @override@JsonKey() final  String? message;
-@override@JsonKey() final  String? user_id;
-@override@JsonKey() final  String? email;
-@override@JsonKey() final  OtpEntity? otp;
+@override@JsonKey() final  int? user_id;
+@override@JsonKey() final  String? verify_via;
 
 /// Create a copy of SignupEntity
 /// with the given fields replaced by the non-null parameter values.
@@ -245,16 +231,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SignupEntity&&(identical(other.message, message) || other.message == message)&&(identical(other.user_id, user_id) || other.user_id == user_id)&&(identical(other.email, email) || other.email == email)&&(identical(other.otp, otp) || other.otp == otp));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SignupEntity&&(identical(other.message, message) || other.message == message)&&(identical(other.user_id, user_id) || other.user_id == user_id)&&(identical(other.verify_via, verify_via) || other.verify_via == verify_via));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,message,user_id,email,otp);
+int get hashCode => Object.hash(runtimeType,message,user_id,verify_via);
 
 @override
 String toString() {
-  return 'SignupEntity(message: $message, user_id: $user_id, email: $email, otp: $otp)';
+  return 'SignupEntity(message: $message, user_id: $user_id, verify_via: $verify_via)';
 }
 
 
@@ -265,11 +251,11 @@ abstract mixin class _$SignupEntityCopyWith<$Res> implements $SignupEntityCopyWi
   factory _$SignupEntityCopyWith(_SignupEntity value, $Res Function(_SignupEntity) _then) = __$SignupEntityCopyWithImpl;
 @override @useResult
 $Res call({
- String? message, String? user_id, String? email, OtpEntity? otp
+ String? message, int? user_id, String? verify_via
 });
 
 
-@override $OtpEntityCopyWith<$Res>? get otp;
+
 
 }
 /// @nodoc
@@ -282,29 +268,16 @@ class __$SignupEntityCopyWithImpl<$Res>
 
 /// Create a copy of SignupEntity
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? message = freezed,Object? user_id = freezed,Object? email = freezed,Object? otp = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? message = freezed,Object? user_id = freezed,Object? verify_via = freezed,}) {
   return _then(_SignupEntity(
 message: freezed == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
 as String?,user_id: freezed == user_id ? _self.user_id : user_id // ignore: cast_nullable_to_non_nullable
-as String?,email: freezed == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
-as String?,otp: freezed == otp ? _self.otp : otp // ignore: cast_nullable_to_non_nullable
-as OtpEntity?,
+as int?,verify_via: freezed == verify_via ? _self.verify_via : verify_via // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 
-/// Create a copy of SignupEntity
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$OtpEntityCopyWith<$Res>? get otp {
-    if (_self.otp == null) {
-    return null;
-  }
 
-  return $OtpEntityCopyWith<$Res>(_self.otp!, (value) {
-    return _then(_self.copyWith(otp: value));
-  });
-}
 }
 
 // dart format on

@@ -4,9 +4,9 @@ part of 'signup_bloc_bloc.dart';
 abstract class SignupBlocState with _$SignupBlocState {
   const factory SignupBlocState.initial() = SignupInitialState;
   const factory SignupBlocState.signupSignedUp({
-    required SignupEntity? signupEntity,
+    required SignupInfoEntity? signupInfoEntity,
   }) = SignUpSignedUpState;
   const factory SignupBlocState.loading() = SignupLoadingState;
-  const factory SignupBlocState.error(SignupEntity? signupEntity) =
+  const factory SignupBlocState.error(SignupErrorEntity? signupErrorEntity) =
       SignupErrorState;
 }

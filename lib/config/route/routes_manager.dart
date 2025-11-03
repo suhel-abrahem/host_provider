@@ -10,6 +10,7 @@ import 'package:hosta_provider/features/first_use_page/presentation/screens/firs
 import 'package:hosta_provider/features/home_page/presentation/pages/home_page_page.dart';
 import 'package:hosta_provider/features/login_page/presentation/screens/login_page.dart';
 import 'package:hosta_provider/features/my_services_page/presentation/pages/my_services_page_page.dart';
+import 'package:hosta_provider/features/otp_page/presentation/pages/otp_page_page.dart';
 import 'package:hosta_provider/features/profile_page/presentation/pages/profile_page_page.dart';
 import 'package:hosta_provider/features/signup_page/presentation/pages/signup_page.dart';
 
@@ -28,6 +29,7 @@ class RoutesName {
   static String bookingPage = "bookingPage";
   static String myServicesPage = "myServicesPage";
   static String profilePage = "profilePage";
+  static String otpPage = "otpPage";
 }
 
 class RoutesPath {
@@ -41,6 +43,7 @@ class RoutesPath {
   static String bookingPage = '/booking';
   static String myServicesPage = '/myServices';
   static String profilePage = '/profile';
+  static String otpPage = "/otpPage";
 }
 
 GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -52,7 +55,8 @@ GoRouter goRouter = GoRouter(
       return RoutesPath.firstUsePage;
     } else if (getItInstance<AppPreferences>().getUserInfo()?.loginStateEnum ==
             LoginStateEnum.unlogined &&
-        !(state.uri.toString().endsWith(RoutesPath.signupPage))) {
+        !(state.uri.toString().endsWith(RoutesPath.signupPage) ||
+            state.uri.toString().endsWith(RoutesPath.otpPage))) {
       print(state.fullPath);
       return RoutesPath.loginPage;
     }
@@ -69,7 +73,8 @@ GoRouter goRouter = GoRouter(
           bottomNavigationBar:
               !(state.uri.toString().endsWith(RoutesPath.loginPage) ||
                   state.uri.toString().endsWith(RoutesPath.firstUsePage) ||
-                  state.uri.toString().endsWith(RoutesPath.signupPage))
+                  state.uri.toString().endsWith(RoutesPath.signupPage) ||
+                  state.uri.toString().endsWith(RoutesPath.otpPage))
               ? MainBottomBar(
                   currentIndex: _routerToIndex(state.uri.toString()),
                 )
@@ -102,6 +107,14 @@ GoRouter goRouter = GoRouter(
               name: RoutesName.signupPage,
               pageBuilder: (context, state) => _customTransitionPage(
                 child: const SignupPage(),
+                state: state,
+              ),
+            ),
+            GoRoute(
+              path: RoutesPath.otpPage,
+              name: RoutesName.otpPage,
+              pageBuilder: (context, state) => _customTransitionPage(
+                child: const OtpPagePage(),
                 state: state,
               ),
             ),

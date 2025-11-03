@@ -428,13 +428,13 @@ return error(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function( SignupEntity? signupEntity)?  signupSignedUp,TResult Function()?  loading,TResult Function( SignupEntity? signupEntity)?  error,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function( SignupInfoEntity? signupInfoEntity)?  signupSignedUp,TResult Function()?  loading,TResult Function( SignupErrorEntity? signupErrorEntity)?  error,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case SignupInitialState() when initial != null:
 return initial();case SignUpSignedUpState() when signupSignedUp != null:
-return signupSignedUp(_that.signupEntity);case SignupLoadingState() when loading != null:
+return signupSignedUp(_that.signupInfoEntity);case SignupLoadingState() when loading != null:
 return loading();case SignupErrorState() when error != null:
-return error(_that.signupEntity);case _:
+return error(_that.signupErrorEntity);case _:
   return orElse();
 
 }
@@ -452,13 +452,13 @@ return error(_that.signupEntity);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function( SignupEntity? signupEntity)  signupSignedUp,required TResult Function()  loading,required TResult Function( SignupEntity? signupEntity)  error,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function( SignupInfoEntity? signupInfoEntity)  signupSignedUp,required TResult Function()  loading,required TResult Function( SignupErrorEntity? signupErrorEntity)  error,}) {final _that = this;
 switch (_that) {
 case SignupInitialState():
 return initial();case SignUpSignedUpState():
-return signupSignedUp(_that.signupEntity);case SignupLoadingState():
+return signupSignedUp(_that.signupInfoEntity);case SignupLoadingState():
 return loading();case SignupErrorState():
-return error(_that.signupEntity);case _:
+return error(_that.signupErrorEntity);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -475,13 +475,13 @@ return error(_that.signupEntity);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function( SignupEntity? signupEntity)?  signupSignedUp,TResult? Function()?  loading,TResult? Function( SignupEntity? signupEntity)?  error,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function( SignupInfoEntity? signupInfoEntity)?  signupSignedUp,TResult? Function()?  loading,TResult? Function( SignupErrorEntity? signupErrorEntity)?  error,}) {final _that = this;
 switch (_that) {
 case SignupInitialState() when initial != null:
 return initial();case SignUpSignedUpState() when signupSignedUp != null:
-return signupSignedUp(_that.signupEntity);case SignupLoadingState() when loading != null:
+return signupSignedUp(_that.signupInfoEntity);case SignupLoadingState() when loading != null:
 return loading();case SignupErrorState() when error != null:
-return error(_that.signupEntity);case _:
+return error(_that.signupErrorEntity);case _:
   return null;
 
 }
@@ -531,10 +531,10 @@ String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
 
 
 class SignUpSignedUpState with DiagnosticableTreeMixin implements SignupBlocState {
-  const SignUpSignedUpState({required this.signupEntity});
+  const SignUpSignedUpState({required this.signupInfoEntity});
   
 
- final  SignupEntity? signupEntity;
+ final  SignupInfoEntity? signupInfoEntity;
 
 /// Create a copy of SignupBlocState
 /// with the given fields replaced by the non-null parameter values.
@@ -547,21 +547,21 @@ $SignUpSignedUpStateCopyWith<SignUpSignedUpState> get copyWith => _$SignUpSigned
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
   properties
     ..add(DiagnosticsProperty('type', 'SignupBlocState.signupSignedUp'))
-    ..add(DiagnosticsProperty('signupEntity', signupEntity));
+    ..add(DiagnosticsProperty('signupInfoEntity', signupInfoEntity));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SignUpSignedUpState&&(identical(other.signupEntity, signupEntity) || other.signupEntity == signupEntity));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SignUpSignedUpState&&(identical(other.signupInfoEntity, signupInfoEntity) || other.signupInfoEntity == signupInfoEntity));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,signupEntity);
+int get hashCode => Object.hash(runtimeType,signupInfoEntity);
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'SignupBlocState.signupSignedUp(signupEntity: $signupEntity)';
+  return 'SignupBlocState.signupSignedUp(signupInfoEntity: $signupInfoEntity)';
 }
 
 
@@ -572,11 +572,11 @@ abstract mixin class $SignUpSignedUpStateCopyWith<$Res> implements $SignupBlocSt
   factory $SignUpSignedUpStateCopyWith(SignUpSignedUpState value, $Res Function(SignUpSignedUpState) _then) = _$SignUpSignedUpStateCopyWithImpl;
 @useResult
 $Res call({
- SignupEntity? signupEntity
+ SignupInfoEntity? signupInfoEntity
 });
 
 
-$SignupEntityCopyWith<$Res>? get signupEntity;
+$SignupInfoEntityCopyWith<$Res>? get signupInfoEntity;
 
 }
 /// @nodoc
@@ -589,10 +589,10 @@ class _$SignUpSignedUpStateCopyWithImpl<$Res>
 
 /// Create a copy of SignupBlocState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? signupEntity = freezed,}) {
+@pragma('vm:prefer-inline') $Res call({Object? signupInfoEntity = freezed,}) {
   return _then(SignUpSignedUpState(
-signupEntity: freezed == signupEntity ? _self.signupEntity : signupEntity // ignore: cast_nullable_to_non_nullable
-as SignupEntity?,
+signupInfoEntity: freezed == signupInfoEntity ? _self.signupInfoEntity : signupInfoEntity // ignore: cast_nullable_to_non_nullable
+as SignupInfoEntity?,
   ));
 }
 
@@ -600,13 +600,13 @@ as SignupEntity?,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$SignupEntityCopyWith<$Res>? get signupEntity {
-    if (_self.signupEntity == null) {
+$SignupInfoEntityCopyWith<$Res>? get signupInfoEntity {
+    if (_self.signupInfoEntity == null) {
     return null;
   }
 
-  return $SignupEntityCopyWith<$Res>(_self.signupEntity!, (value) {
-    return _then(_self.copyWith(signupEntity: value));
+  return $SignupInfoEntityCopyWith<$Res>(_self.signupInfoEntity!, (value) {
+    return _then(_self.copyWith(signupInfoEntity: value));
   });
 }
 }
@@ -653,10 +653,10 @@ String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
 
 
 class SignupErrorState with DiagnosticableTreeMixin implements SignupBlocState {
-  const SignupErrorState(this.signupEntity);
+  const SignupErrorState(this.signupErrorEntity);
   
 
- final  SignupEntity? signupEntity;
+ final  SignupErrorEntity? signupErrorEntity;
 
 /// Create a copy of SignupBlocState
 /// with the given fields replaced by the non-null parameter values.
@@ -669,21 +669,21 @@ $SignupErrorStateCopyWith<SignupErrorState> get copyWith => _$SignupErrorStateCo
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
   properties
     ..add(DiagnosticsProperty('type', 'SignupBlocState.error'))
-    ..add(DiagnosticsProperty('signupEntity', signupEntity));
+    ..add(DiagnosticsProperty('signupErrorEntity', signupErrorEntity));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SignupErrorState&&(identical(other.signupEntity, signupEntity) || other.signupEntity == signupEntity));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SignupErrorState&&(identical(other.signupErrorEntity, signupErrorEntity) || other.signupErrorEntity == signupErrorEntity));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,signupEntity);
+int get hashCode => Object.hash(runtimeType,signupErrorEntity);
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'SignupBlocState.error(signupEntity: $signupEntity)';
+  return 'SignupBlocState.error(signupErrorEntity: $signupErrorEntity)';
 }
 
 
@@ -694,11 +694,11 @@ abstract mixin class $SignupErrorStateCopyWith<$Res> implements $SignupBlocState
   factory $SignupErrorStateCopyWith(SignupErrorState value, $Res Function(SignupErrorState) _then) = _$SignupErrorStateCopyWithImpl;
 @useResult
 $Res call({
- SignupEntity? signupEntity
+ SignupErrorEntity? signupErrorEntity
 });
 
 
-$SignupEntityCopyWith<$Res>? get signupEntity;
+$SignupErrorEntityCopyWith<$Res>? get signupErrorEntity;
 
 }
 /// @nodoc
@@ -711,10 +711,10 @@ class _$SignupErrorStateCopyWithImpl<$Res>
 
 /// Create a copy of SignupBlocState
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? signupEntity = freezed,}) {
+@pragma('vm:prefer-inline') $Res call({Object? signupErrorEntity = freezed,}) {
   return _then(SignupErrorState(
-freezed == signupEntity ? _self.signupEntity : signupEntity // ignore: cast_nullable_to_non_nullable
-as SignupEntity?,
+freezed == signupErrorEntity ? _self.signupErrorEntity : signupErrorEntity // ignore: cast_nullable_to_non_nullable
+as SignupErrorEntity?,
   ));
 }
 
@@ -722,13 +722,13 @@ as SignupEntity?,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$SignupEntityCopyWith<$Res>? get signupEntity {
-    if (_self.signupEntity == null) {
+$SignupErrorEntityCopyWith<$Res>? get signupErrorEntity {
+    if (_self.signupErrorEntity == null) {
     return null;
   }
 
-  return $SignupEntityCopyWith<$Res>(_self.signupEntity!, (value) {
-    return _then(_self.copyWith(signupEntity: value));
+  return $SignupErrorEntityCopyWith<$Res>(_self.signupErrorEntity!, (value) {
+    return _then(_self.copyWith(signupErrorEntity: value));
   });
 }
 }
