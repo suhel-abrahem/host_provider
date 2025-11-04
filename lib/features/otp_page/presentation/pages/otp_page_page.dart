@@ -52,15 +52,16 @@ class _OtpPagePageState extends State<OtpPagePage> {
               );
             },
             loading: () {},
-            verified: (data) async {
+            verified: (data) {
               LoginStateEntity? loginStateEntity = data;
               loginStateEntity = loginStateEntity?.copyWith(
                 loginStateEnum: LoginStateEnum.logined,
+                created_at: DateTime.now().toString(),
               );
-              await getItInstance<AppPreferences>().setUserInfo(
+              getItInstance<AppPreferences>().setUserInfo(
                 loginStateEntity: loginStateEntity,
               );
-              context.goNamed(RoutesName.otpPage);
+              context.pushNamed(RoutesName.homePage);
             },
           );
         },

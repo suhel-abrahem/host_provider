@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ServiceEntity implements DiagnosticableTreeMixin {
 
- int? get id; String? get ar_name; String? get en_name; String? get kr_name; bool? get is_active; String? get image; int? get category_id; String? get created_at; String? get updated_at;
+ int? get id; int? get user_id; int? get service_id; String? get name; String? get price; String? get notes; bool? get is_active; String? get image; int? get category_id; String? get created_at; String? get updated_at; Map<String, dynamic>? get category; Map<String, dynamic>? get service;
 /// Create a copy of ServiceEntity
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -29,21 +29,21 @@ $ServiceEntityCopyWith<ServiceEntity> get copyWith => _$ServiceEntityCopyWithImp
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
   properties
     ..add(DiagnosticsProperty('type', 'ServiceEntity'))
-    ..add(DiagnosticsProperty('id', id))..add(DiagnosticsProperty('ar_name', ar_name))..add(DiagnosticsProperty('en_name', en_name))..add(DiagnosticsProperty('kr_name', kr_name))..add(DiagnosticsProperty('is_active', is_active))..add(DiagnosticsProperty('image', image))..add(DiagnosticsProperty('category_id', category_id))..add(DiagnosticsProperty('created_at', created_at))..add(DiagnosticsProperty('updated_at', updated_at));
+    ..add(DiagnosticsProperty('id', id))..add(DiagnosticsProperty('user_id', user_id))..add(DiagnosticsProperty('service_id', service_id))..add(DiagnosticsProperty('name', name))..add(DiagnosticsProperty('price', price))..add(DiagnosticsProperty('notes', notes))..add(DiagnosticsProperty('is_active', is_active))..add(DiagnosticsProperty('image', image))..add(DiagnosticsProperty('category_id', category_id))..add(DiagnosticsProperty('created_at', created_at))..add(DiagnosticsProperty('updated_at', updated_at))..add(DiagnosticsProperty('category', category))..add(DiagnosticsProperty('service', service));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ServiceEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.ar_name, ar_name) || other.ar_name == ar_name)&&(identical(other.en_name, en_name) || other.en_name == en_name)&&(identical(other.kr_name, kr_name) || other.kr_name == kr_name)&&(identical(other.is_active, is_active) || other.is_active == is_active)&&(identical(other.image, image) || other.image == image)&&(identical(other.category_id, category_id) || other.category_id == category_id)&&(identical(other.created_at, created_at) || other.created_at == created_at)&&(identical(other.updated_at, updated_at) || other.updated_at == updated_at));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ServiceEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.user_id, user_id) || other.user_id == user_id)&&(identical(other.service_id, service_id) || other.service_id == service_id)&&(identical(other.name, name) || other.name == name)&&(identical(other.price, price) || other.price == price)&&(identical(other.notes, notes) || other.notes == notes)&&(identical(other.is_active, is_active) || other.is_active == is_active)&&(identical(other.image, image) || other.image == image)&&(identical(other.category_id, category_id) || other.category_id == category_id)&&(identical(other.created_at, created_at) || other.created_at == created_at)&&(identical(other.updated_at, updated_at) || other.updated_at == updated_at)&&const DeepCollectionEquality().equals(other.category, category)&&const DeepCollectionEquality().equals(other.service, service));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,ar_name,en_name,kr_name,is_active,image,category_id,created_at,updated_at);
+int get hashCode => Object.hash(runtimeType,id,user_id,service_id,name,price,notes,is_active,image,category_id,created_at,updated_at,const DeepCollectionEquality().hash(category),const DeepCollectionEquality().hash(service));
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'ServiceEntity(id: $id, ar_name: $ar_name, en_name: $en_name, kr_name: $kr_name, is_active: $is_active, image: $image, category_id: $category_id, created_at: $created_at, updated_at: $updated_at)';
+  return 'ServiceEntity(id: $id, user_id: $user_id, service_id: $service_id, name: $name, price: $price, notes: $notes, is_active: $is_active, image: $image, category_id: $category_id, created_at: $created_at, updated_at: $updated_at, category: $category, service: $service)';
 }
 
 
@@ -54,7 +54,7 @@ abstract mixin class $ServiceEntityCopyWith<$Res>  {
   factory $ServiceEntityCopyWith(ServiceEntity value, $Res Function(ServiceEntity) _then) = _$ServiceEntityCopyWithImpl;
 @useResult
 $Res call({
- int? id, String? ar_name, String? en_name, String? kr_name, bool? is_active, String? image, int? category_id, String? created_at, String? updated_at
+ int? id, int? user_id, int? service_id, String? name, String? price, String? notes, bool? is_active, String? image, int? category_id, String? created_at, String? updated_at, Map<String, dynamic>? category, Map<String, dynamic>? service
 });
 
 
@@ -71,18 +71,22 @@ class _$ServiceEntityCopyWithImpl<$Res>
 
 /// Create a copy of ServiceEntity
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? ar_name = freezed,Object? en_name = freezed,Object? kr_name = freezed,Object? is_active = freezed,Object? image = freezed,Object? category_id = freezed,Object? created_at = freezed,Object? updated_at = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? user_id = freezed,Object? service_id = freezed,Object? name = freezed,Object? price = freezed,Object? notes = freezed,Object? is_active = freezed,Object? image = freezed,Object? category_id = freezed,Object? created_at = freezed,Object? updated_at = freezed,Object? category = freezed,Object? service = freezed,}) {
   return _then(_self.copyWith(
 id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int?,ar_name: freezed == ar_name ? _self.ar_name : ar_name // ignore: cast_nullable_to_non_nullable
-as String?,en_name: freezed == en_name ? _self.en_name : en_name // ignore: cast_nullable_to_non_nullable
-as String?,kr_name: freezed == kr_name ? _self.kr_name : kr_name // ignore: cast_nullable_to_non_nullable
+as int?,user_id: freezed == user_id ? _self.user_id : user_id // ignore: cast_nullable_to_non_nullable
+as int?,service_id: freezed == service_id ? _self.service_id : service_id // ignore: cast_nullable_to_non_nullable
+as int?,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String?,price: freezed == price ? _self.price : price // ignore: cast_nullable_to_non_nullable
+as String?,notes: freezed == notes ? _self.notes : notes // ignore: cast_nullable_to_non_nullable
 as String?,is_active: freezed == is_active ? _self.is_active : is_active // ignore: cast_nullable_to_non_nullable
 as bool?,image: freezed == image ? _self.image : image // ignore: cast_nullable_to_non_nullable
 as String?,category_id: freezed == category_id ? _self.category_id : category_id // ignore: cast_nullable_to_non_nullable
 as int?,created_at: freezed == created_at ? _self.created_at : created_at // ignore: cast_nullable_to_non_nullable
 as String?,updated_at: freezed == updated_at ? _self.updated_at : updated_at // ignore: cast_nullable_to_non_nullable
-as String?,
+as String?,category: freezed == category ? _self.category : category // ignore: cast_nullable_to_non_nullable
+as Map<String, dynamic>?,service: freezed == service ? _self.service : service // ignore: cast_nullable_to_non_nullable
+as Map<String, dynamic>?,
   ));
 }
 
@@ -167,10 +171,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int? id,  String? ar_name,  String? en_name,  String? kr_name,  bool? is_active,  String? image,  int? category_id,  String? created_at,  String? updated_at)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int? id,  int? user_id,  int? service_id,  String? name,  String? price,  String? notes,  bool? is_active,  String? image,  int? category_id,  String? created_at,  String? updated_at,  Map<String, dynamic>? category,  Map<String, dynamic>? service)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ServiceEntity() when $default != null:
-return $default(_that.id,_that.ar_name,_that.en_name,_that.kr_name,_that.is_active,_that.image,_that.category_id,_that.created_at,_that.updated_at);case _:
+return $default(_that.id,_that.user_id,_that.service_id,_that.name,_that.price,_that.notes,_that.is_active,_that.image,_that.category_id,_that.created_at,_that.updated_at,_that.category,_that.service);case _:
   return orElse();
 
 }
@@ -188,10 +192,10 @@ return $default(_that.id,_that.ar_name,_that.en_name,_that.kr_name,_that.is_acti
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int? id,  String? ar_name,  String? en_name,  String? kr_name,  bool? is_active,  String? image,  int? category_id,  String? created_at,  String? updated_at)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int? id,  int? user_id,  int? service_id,  String? name,  String? price,  String? notes,  bool? is_active,  String? image,  int? category_id,  String? created_at,  String? updated_at,  Map<String, dynamic>? category,  Map<String, dynamic>? service)  $default,) {final _that = this;
 switch (_that) {
 case _ServiceEntity():
-return $default(_that.id,_that.ar_name,_that.en_name,_that.kr_name,_that.is_active,_that.image,_that.category_id,_that.created_at,_that.updated_at);case _:
+return $default(_that.id,_that.user_id,_that.service_id,_that.name,_that.price,_that.notes,_that.is_active,_that.image,_that.category_id,_that.created_at,_that.updated_at,_that.category,_that.service);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -208,10 +212,10 @@ return $default(_that.id,_that.ar_name,_that.en_name,_that.kr_name,_that.is_acti
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int? id,  String? ar_name,  String? en_name,  String? kr_name,  bool? is_active,  String? image,  int? category_id,  String? created_at,  String? updated_at)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int? id,  int? user_id,  int? service_id,  String? name,  String? price,  String? notes,  bool? is_active,  String? image,  int? category_id,  String? created_at,  String? updated_at,  Map<String, dynamic>? category,  Map<String, dynamic>? service)?  $default,) {final _that = this;
 switch (_that) {
 case _ServiceEntity() when $default != null:
-return $default(_that.id,_that.ar_name,_that.en_name,_that.kr_name,_that.is_active,_that.image,_that.category_id,_that.created_at,_that.updated_at);case _:
+return $default(_that.id,_that.user_id,_that.service_id,_that.name,_that.price,_that.notes,_that.is_active,_that.image,_that.category_id,_that.created_at,_that.updated_at,_that.category,_that.service);case _:
   return null;
 
 }
@@ -223,18 +227,38 @@ return $default(_that.id,_that.ar_name,_that.en_name,_that.kr_name,_that.is_acti
 @JsonSerializable()
 
 class _ServiceEntity with DiagnosticableTreeMixin implements ServiceEntity {
-  const _ServiceEntity({this.id = 0, this.ar_name = "", this.en_name = "", this.kr_name = "", this.is_active = false, this.image = "", this.category_id = 0, this.created_at = "", this.updated_at = ""});
+  const _ServiceEntity({this.id = 0, this.user_id = 0, this.service_id = 0, this.name = "", this.price = "", this.notes = "", this.is_active = false, this.image = "", this.category_id = 0, this.created_at = "", this.updated_at = "", final  Map<String, dynamic>? category = const {}, final  Map<String, dynamic>? service = const {}}): _category = category,_service = service;
   factory _ServiceEntity.fromJson(Map<String, dynamic> json) => _$ServiceEntityFromJson(json);
 
 @override@JsonKey() final  int? id;
-@override@JsonKey() final  String? ar_name;
-@override@JsonKey() final  String? en_name;
-@override@JsonKey() final  String? kr_name;
+@override@JsonKey() final  int? user_id;
+@override@JsonKey() final  int? service_id;
+@override@JsonKey() final  String? name;
+@override@JsonKey() final  String? price;
+@override@JsonKey() final  String? notes;
 @override@JsonKey() final  bool? is_active;
 @override@JsonKey() final  String? image;
 @override@JsonKey() final  int? category_id;
 @override@JsonKey() final  String? created_at;
 @override@JsonKey() final  String? updated_at;
+ final  Map<String, dynamic>? _category;
+@override@JsonKey() Map<String, dynamic>? get category {
+  final value = _category;
+  if (value == null) return null;
+  if (_category is EqualUnmodifiableMapView) return _category;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableMapView(value);
+}
+
+ final  Map<String, dynamic>? _service;
+@override@JsonKey() Map<String, dynamic>? get service {
+  final value = _service;
+  if (value == null) return null;
+  if (_service is EqualUnmodifiableMapView) return _service;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableMapView(value);
+}
+
 
 /// Create a copy of ServiceEntity
 /// with the given fields replaced by the non-null parameter values.
@@ -250,21 +274,21 @@ Map<String, dynamic> toJson() {
 void debugFillProperties(DiagnosticPropertiesBuilder properties) {
   properties
     ..add(DiagnosticsProperty('type', 'ServiceEntity'))
-    ..add(DiagnosticsProperty('id', id))..add(DiagnosticsProperty('ar_name', ar_name))..add(DiagnosticsProperty('en_name', en_name))..add(DiagnosticsProperty('kr_name', kr_name))..add(DiagnosticsProperty('is_active', is_active))..add(DiagnosticsProperty('image', image))..add(DiagnosticsProperty('category_id', category_id))..add(DiagnosticsProperty('created_at', created_at))..add(DiagnosticsProperty('updated_at', updated_at));
+    ..add(DiagnosticsProperty('id', id))..add(DiagnosticsProperty('user_id', user_id))..add(DiagnosticsProperty('service_id', service_id))..add(DiagnosticsProperty('name', name))..add(DiagnosticsProperty('price', price))..add(DiagnosticsProperty('notes', notes))..add(DiagnosticsProperty('is_active', is_active))..add(DiagnosticsProperty('image', image))..add(DiagnosticsProperty('category_id', category_id))..add(DiagnosticsProperty('created_at', created_at))..add(DiagnosticsProperty('updated_at', updated_at))..add(DiagnosticsProperty('category', category))..add(DiagnosticsProperty('service', service));
 }
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ServiceEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.ar_name, ar_name) || other.ar_name == ar_name)&&(identical(other.en_name, en_name) || other.en_name == en_name)&&(identical(other.kr_name, kr_name) || other.kr_name == kr_name)&&(identical(other.is_active, is_active) || other.is_active == is_active)&&(identical(other.image, image) || other.image == image)&&(identical(other.category_id, category_id) || other.category_id == category_id)&&(identical(other.created_at, created_at) || other.created_at == created_at)&&(identical(other.updated_at, updated_at) || other.updated_at == updated_at));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ServiceEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.user_id, user_id) || other.user_id == user_id)&&(identical(other.service_id, service_id) || other.service_id == service_id)&&(identical(other.name, name) || other.name == name)&&(identical(other.price, price) || other.price == price)&&(identical(other.notes, notes) || other.notes == notes)&&(identical(other.is_active, is_active) || other.is_active == is_active)&&(identical(other.image, image) || other.image == image)&&(identical(other.category_id, category_id) || other.category_id == category_id)&&(identical(other.created_at, created_at) || other.created_at == created_at)&&(identical(other.updated_at, updated_at) || other.updated_at == updated_at)&&const DeepCollectionEquality().equals(other._category, _category)&&const DeepCollectionEquality().equals(other._service, _service));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,ar_name,en_name,kr_name,is_active,image,category_id,created_at,updated_at);
+int get hashCode => Object.hash(runtimeType,id,user_id,service_id,name,price,notes,is_active,image,category_id,created_at,updated_at,const DeepCollectionEquality().hash(_category),const DeepCollectionEquality().hash(_service));
 
 @override
 String toString({ DiagnosticLevel minLevel = DiagnosticLevel.info }) {
-  return 'ServiceEntity(id: $id, ar_name: $ar_name, en_name: $en_name, kr_name: $kr_name, is_active: $is_active, image: $image, category_id: $category_id, created_at: $created_at, updated_at: $updated_at)';
+  return 'ServiceEntity(id: $id, user_id: $user_id, service_id: $service_id, name: $name, price: $price, notes: $notes, is_active: $is_active, image: $image, category_id: $category_id, created_at: $created_at, updated_at: $updated_at, category: $category, service: $service)';
 }
 
 
@@ -275,7 +299,7 @@ abstract mixin class _$ServiceEntityCopyWith<$Res> implements $ServiceEntityCopy
   factory _$ServiceEntityCopyWith(_ServiceEntity value, $Res Function(_ServiceEntity) _then) = __$ServiceEntityCopyWithImpl;
 @override @useResult
 $Res call({
- int? id, String? ar_name, String? en_name, String? kr_name, bool? is_active, String? image, int? category_id, String? created_at, String? updated_at
+ int? id, int? user_id, int? service_id, String? name, String? price, String? notes, bool? is_active, String? image, int? category_id, String? created_at, String? updated_at, Map<String, dynamic>? category, Map<String, dynamic>? service
 });
 
 
@@ -292,18 +316,22 @@ class __$ServiceEntityCopyWithImpl<$Res>
 
 /// Create a copy of ServiceEntity
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? ar_name = freezed,Object? en_name = freezed,Object? kr_name = freezed,Object? is_active = freezed,Object? image = freezed,Object? category_id = freezed,Object? created_at = freezed,Object? updated_at = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? user_id = freezed,Object? service_id = freezed,Object? name = freezed,Object? price = freezed,Object? notes = freezed,Object? is_active = freezed,Object? image = freezed,Object? category_id = freezed,Object? created_at = freezed,Object? updated_at = freezed,Object? category = freezed,Object? service = freezed,}) {
   return _then(_ServiceEntity(
 id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
-as int?,ar_name: freezed == ar_name ? _self.ar_name : ar_name // ignore: cast_nullable_to_non_nullable
-as String?,en_name: freezed == en_name ? _self.en_name : en_name // ignore: cast_nullable_to_non_nullable
-as String?,kr_name: freezed == kr_name ? _self.kr_name : kr_name // ignore: cast_nullable_to_non_nullable
+as int?,user_id: freezed == user_id ? _self.user_id : user_id // ignore: cast_nullable_to_non_nullable
+as int?,service_id: freezed == service_id ? _self.service_id : service_id // ignore: cast_nullable_to_non_nullable
+as int?,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
+as String?,price: freezed == price ? _self.price : price // ignore: cast_nullable_to_non_nullable
+as String?,notes: freezed == notes ? _self.notes : notes // ignore: cast_nullable_to_non_nullable
 as String?,is_active: freezed == is_active ? _self.is_active : is_active // ignore: cast_nullable_to_non_nullable
 as bool?,image: freezed == image ? _self.image : image // ignore: cast_nullable_to_non_nullable
 as String?,category_id: freezed == category_id ? _self.category_id : category_id // ignore: cast_nullable_to_non_nullable
 as int?,created_at: freezed == created_at ? _self.created_at : created_at // ignore: cast_nullable_to_non_nullable
 as String?,updated_at: freezed == updated_at ? _self.updated_at : updated_at // ignore: cast_nullable_to_non_nullable
-as String?,
+as String?,category: freezed == category ? _self._category : category // ignore: cast_nullable_to_non_nullable
+as Map<String, dynamic>?,service: freezed == service ? _self._service : service // ignore: cast_nullable_to_non_nullable
+as Map<String, dynamic>?,
   ));
 }
 

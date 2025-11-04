@@ -11,6 +11,10 @@ import 'package:hosta_provider/features/otp_page/data/models/otp_model.dart';
 import 'package:hosta_provider/features/otp_page/domain/repositories/otp_verifiy_repository.dart';
 import 'package:hosta_provider/features/otp_page/domain/usecases/otp_verify_usecase.dart';
 import 'package:hosta_provider/features/otp_page/presentation/bloc/otp_page_bloc.dart';
+import 'package:hosta_provider/features/refresh_token/domain/entities/token_entity.dart';
+import 'package:hosta_provider/features/refresh_token/domain/repositories/refresh_token_repository.dart';
+import 'package:hosta_provider/features/refresh_token/domain/usecases/refresh_token_usecase.dart';
+import 'package:hosta_provider/features/refresh_token/presentation/bloc/refresh_token_bloc.dart';
 import 'package:hosta_provider/features/signup_page/data/models/city_model.dart';
 import 'package:hosta_provider/features/signup_page/data/models/country_model.dart';
 import 'package:hosta_provider/features/signup_page/data/models/signup_model.dart';
@@ -40,6 +44,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../config/app/app_preferences.dart';
 import '../features/login_page/data/repositories/login_repository_implements.dart';
 import '../features/otp_page/data/repositories/otp_verify_repository_implements.dart';
+import '../features/refresh_token/data/repositories/refresh_token_repository_implements.dart';
 
 GetIt getItInstance = GetIt.instance;
 Future<void> initDependencies() async {
@@ -136,4 +141,27 @@ Future<void> initDependencies() async {
     () => OtpPageBloc(getItInstance()),
   );
   // end of signup
+  // refresh token
+  //models and entities
+  getItInstance.registerSingleton<TokenEntity>(TokenEntity());
+
+  //repository
+  getItInstance.registerSingleton<RefreshTokenRepository>(
+    RefreshTokenRepositoryImplements(
+      commonService: getItInstance(),
+      checkConnectivity: getItInstance(),
+    ),
+  );
+
+  //use case
+  getItInstance.registerSingleton<RefreshTokenUsecase>(
+    RefreshTokenUsecase(refreshTokenRepository: getItInstance()),
+  );
+
+  //bloc
+  getItInstance.registerFactory<RefreshTokenBloc>(
+    () => RefreshTokenBloc(getItInstance()),
+  );
+
+  // end of refresh token
 }

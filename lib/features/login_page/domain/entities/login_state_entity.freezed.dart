@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$LoginStateEntity {
 
- String? get access_token; String? get refresh_token; String? get token_type; int? get expires_in; Map<String, dynamic> get user; LoginStateEnum? get loginStateEnum;
+ String? get access_token; String? get refresh_token; String? get token_type; int? get expires_in; Map<String, dynamic> get user; String? get created_at; LoginStateEnum? get loginStateEnum;
 /// Create a copy of LoginStateEntity
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $LoginStateEntityCopyWith<LoginStateEntity> get copyWith => _$LoginStateEntityCo
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is LoginStateEntity&&(identical(other.access_token, access_token) || other.access_token == access_token)&&(identical(other.refresh_token, refresh_token) || other.refresh_token == refresh_token)&&(identical(other.token_type, token_type) || other.token_type == token_type)&&(identical(other.expires_in, expires_in) || other.expires_in == expires_in)&&const DeepCollectionEquality().equals(other.user, user)&&(identical(other.loginStateEnum, loginStateEnum) || other.loginStateEnum == loginStateEnum));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LoginStateEntity&&(identical(other.access_token, access_token) || other.access_token == access_token)&&(identical(other.refresh_token, refresh_token) || other.refresh_token == refresh_token)&&(identical(other.token_type, token_type) || other.token_type == token_type)&&(identical(other.expires_in, expires_in) || other.expires_in == expires_in)&&const DeepCollectionEquality().equals(other.user, user)&&(identical(other.created_at, created_at) || other.created_at == created_at)&&(identical(other.loginStateEnum, loginStateEnum) || other.loginStateEnum == loginStateEnum));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,access_token,refresh_token,token_type,expires_in,const DeepCollectionEquality().hash(user),loginStateEnum);
+int get hashCode => Object.hash(runtimeType,access_token,refresh_token,token_type,expires_in,const DeepCollectionEquality().hash(user),created_at,loginStateEnum);
 
 @override
 String toString() {
-  return 'LoginStateEntity(access_token: $access_token, refresh_token: $refresh_token, token_type: $token_type, expires_in: $expires_in, user: $user, loginStateEnum: $loginStateEnum)';
+  return 'LoginStateEntity(access_token: $access_token, refresh_token: $refresh_token, token_type: $token_type, expires_in: $expires_in, user: $user, created_at: $created_at, loginStateEnum: $loginStateEnum)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $LoginStateEntityCopyWith<$Res>  {
   factory $LoginStateEntityCopyWith(LoginStateEntity value, $Res Function(LoginStateEntity) _then) = _$LoginStateEntityCopyWithImpl;
 @useResult
 $Res call({
- String? access_token, String? refresh_token, String? token_type, int? expires_in, Map<String, dynamic> user, LoginStateEnum? loginStateEnum
+ String? access_token, String? refresh_token, String? token_type, int? expires_in, Map<String, dynamic> user, String? created_at, LoginStateEnum? loginStateEnum
 });
 
 
@@ -65,14 +65,15 @@ class _$LoginStateEntityCopyWithImpl<$Res>
 
 /// Create a copy of LoginStateEntity
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? access_token = freezed,Object? refresh_token = freezed,Object? token_type = freezed,Object? expires_in = freezed,Object? user = null,Object? loginStateEnum = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? access_token = freezed,Object? refresh_token = freezed,Object? token_type = freezed,Object? expires_in = freezed,Object? user = null,Object? created_at = freezed,Object? loginStateEnum = freezed,}) {
   return _then(_self.copyWith(
 access_token: freezed == access_token ? _self.access_token : access_token // ignore: cast_nullable_to_non_nullable
 as String?,refresh_token: freezed == refresh_token ? _self.refresh_token : refresh_token // ignore: cast_nullable_to_non_nullable
 as String?,token_type: freezed == token_type ? _self.token_type : token_type // ignore: cast_nullable_to_non_nullable
 as String?,expires_in: freezed == expires_in ? _self.expires_in : expires_in // ignore: cast_nullable_to_non_nullable
 as int?,user: null == user ? _self.user : user // ignore: cast_nullable_to_non_nullable
-as Map<String, dynamic>,loginStateEnum: freezed == loginStateEnum ? _self.loginStateEnum : loginStateEnum // ignore: cast_nullable_to_non_nullable
+as Map<String, dynamic>,created_at: freezed == created_at ? _self.created_at : created_at // ignore: cast_nullable_to_non_nullable
+as String?,loginStateEnum: freezed == loginStateEnum ? _self.loginStateEnum : loginStateEnum // ignore: cast_nullable_to_non_nullable
 as LoginStateEnum?,
   ));
 }
@@ -158,10 +159,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? access_token,  String? refresh_token,  String? token_type,  int? expires_in,  Map<String, dynamic> user,  LoginStateEnum? loginStateEnum)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? access_token,  String? refresh_token,  String? token_type,  int? expires_in,  Map<String, dynamic> user,  String? created_at,  LoginStateEnum? loginStateEnum)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _LoginStateEntity() when $default != null:
-return $default(_that.access_token,_that.refresh_token,_that.token_type,_that.expires_in,_that.user,_that.loginStateEnum);case _:
+return $default(_that.access_token,_that.refresh_token,_that.token_type,_that.expires_in,_that.user,_that.created_at,_that.loginStateEnum);case _:
   return orElse();
 
 }
@@ -179,10 +180,10 @@ return $default(_that.access_token,_that.refresh_token,_that.token_type,_that.ex
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? access_token,  String? refresh_token,  String? token_type,  int? expires_in,  Map<String, dynamic> user,  LoginStateEnum? loginStateEnum)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? access_token,  String? refresh_token,  String? token_type,  int? expires_in,  Map<String, dynamic> user,  String? created_at,  LoginStateEnum? loginStateEnum)  $default,) {final _that = this;
 switch (_that) {
 case _LoginStateEntity():
-return $default(_that.access_token,_that.refresh_token,_that.token_type,_that.expires_in,_that.user,_that.loginStateEnum);case _:
+return $default(_that.access_token,_that.refresh_token,_that.token_type,_that.expires_in,_that.user,_that.created_at,_that.loginStateEnum);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -199,10 +200,10 @@ return $default(_that.access_token,_that.refresh_token,_that.token_type,_that.ex
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? access_token,  String? refresh_token,  String? token_type,  int? expires_in,  Map<String, dynamic> user,  LoginStateEnum? loginStateEnum)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? access_token,  String? refresh_token,  String? token_type,  int? expires_in,  Map<String, dynamic> user,  String? created_at,  LoginStateEnum? loginStateEnum)?  $default,) {final _that = this;
 switch (_that) {
 case _LoginStateEntity() when $default != null:
-return $default(_that.access_token,_that.refresh_token,_that.token_type,_that.expires_in,_that.user,_that.loginStateEnum);case _:
+return $default(_that.access_token,_that.refresh_token,_that.token_type,_that.expires_in,_that.user,_that.created_at,_that.loginStateEnum);case _:
   return null;
 
 }
@@ -214,7 +215,7 @@ return $default(_that.access_token,_that.refresh_token,_that.token_type,_that.ex
 @JsonSerializable()
 
 class _LoginStateEntity implements LoginStateEntity {
-  const _LoginStateEntity({this.access_token = "", this.refresh_token = "", this.token_type = "", this.expires_in = 0, final  Map<String, dynamic> user = const {}, this.loginStateEnum = LoginStateEnum.unlogined}): _user = user;
+  const _LoginStateEntity({this.access_token = "", this.refresh_token = "", this.token_type = "", this.expires_in = 0, final  Map<String, dynamic> user = const {}, this.created_at = "", this.loginStateEnum = LoginStateEnum.unlogined}): _user = user;
   factory _LoginStateEntity.fromJson(Map<String, dynamic> json) => _$LoginStateEntityFromJson(json);
 
 @override@JsonKey() final  String? access_token;
@@ -228,6 +229,7 @@ class _LoginStateEntity implements LoginStateEntity {
   return EqualUnmodifiableMapView(_user);
 }
 
+@override@JsonKey() final  String? created_at;
 @override@JsonKey() final  LoginStateEnum? loginStateEnum;
 
 /// Create a copy of LoginStateEntity
@@ -243,16 +245,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LoginStateEntity&&(identical(other.access_token, access_token) || other.access_token == access_token)&&(identical(other.refresh_token, refresh_token) || other.refresh_token == refresh_token)&&(identical(other.token_type, token_type) || other.token_type == token_type)&&(identical(other.expires_in, expires_in) || other.expires_in == expires_in)&&const DeepCollectionEquality().equals(other._user, _user)&&(identical(other.loginStateEnum, loginStateEnum) || other.loginStateEnum == loginStateEnum));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LoginStateEntity&&(identical(other.access_token, access_token) || other.access_token == access_token)&&(identical(other.refresh_token, refresh_token) || other.refresh_token == refresh_token)&&(identical(other.token_type, token_type) || other.token_type == token_type)&&(identical(other.expires_in, expires_in) || other.expires_in == expires_in)&&const DeepCollectionEquality().equals(other._user, _user)&&(identical(other.created_at, created_at) || other.created_at == created_at)&&(identical(other.loginStateEnum, loginStateEnum) || other.loginStateEnum == loginStateEnum));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,access_token,refresh_token,token_type,expires_in,const DeepCollectionEquality().hash(_user),loginStateEnum);
+int get hashCode => Object.hash(runtimeType,access_token,refresh_token,token_type,expires_in,const DeepCollectionEquality().hash(_user),created_at,loginStateEnum);
 
 @override
 String toString() {
-  return 'LoginStateEntity(access_token: $access_token, refresh_token: $refresh_token, token_type: $token_type, expires_in: $expires_in, user: $user, loginStateEnum: $loginStateEnum)';
+  return 'LoginStateEntity(access_token: $access_token, refresh_token: $refresh_token, token_type: $token_type, expires_in: $expires_in, user: $user, created_at: $created_at, loginStateEnum: $loginStateEnum)';
 }
 
 
@@ -263,7 +265,7 @@ abstract mixin class _$LoginStateEntityCopyWith<$Res> implements $LoginStateEnti
   factory _$LoginStateEntityCopyWith(_LoginStateEntity value, $Res Function(_LoginStateEntity) _then) = __$LoginStateEntityCopyWithImpl;
 @override @useResult
 $Res call({
- String? access_token, String? refresh_token, String? token_type, int? expires_in, Map<String, dynamic> user, LoginStateEnum? loginStateEnum
+ String? access_token, String? refresh_token, String? token_type, int? expires_in, Map<String, dynamic> user, String? created_at, LoginStateEnum? loginStateEnum
 });
 
 
@@ -280,14 +282,15 @@ class __$LoginStateEntityCopyWithImpl<$Res>
 
 /// Create a copy of LoginStateEntity
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? access_token = freezed,Object? refresh_token = freezed,Object? token_type = freezed,Object? expires_in = freezed,Object? user = null,Object? loginStateEnum = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? access_token = freezed,Object? refresh_token = freezed,Object? token_type = freezed,Object? expires_in = freezed,Object? user = null,Object? created_at = freezed,Object? loginStateEnum = freezed,}) {
   return _then(_LoginStateEntity(
 access_token: freezed == access_token ? _self.access_token : access_token // ignore: cast_nullable_to_non_nullable
 as String?,refresh_token: freezed == refresh_token ? _self.refresh_token : refresh_token // ignore: cast_nullable_to_non_nullable
 as String?,token_type: freezed == token_type ? _self.token_type : token_type // ignore: cast_nullable_to_non_nullable
 as String?,expires_in: freezed == expires_in ? _self.expires_in : expires_in // ignore: cast_nullable_to_non_nullable
 as int?,user: null == user ? _self._user : user // ignore: cast_nullable_to_non_nullable
-as Map<String, dynamic>,loginStateEnum: freezed == loginStateEnum ? _self.loginStateEnum : loginStateEnum // ignore: cast_nullable_to_non_nullable
+as Map<String, dynamic>,created_at: freezed == created_at ? _self.created_at : created_at // ignore: cast_nullable_to_non_nullable
+as String?,loginStateEnum: freezed == loginStateEnum ? _self.loginStateEnum : loginStateEnum // ignore: cast_nullable_to_non_nullable
 as LoginStateEnum?,
   ));
 }

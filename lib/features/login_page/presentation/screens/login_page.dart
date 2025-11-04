@@ -57,6 +57,7 @@ class _LoginPageState extends State<LoginPage> {
             getItInstance<AppPreferences>().setUserInfo(
               loginStateEntity: state.loginStateEntity?.copyWith(
                 loginStateEnum: LoginStateEnum.logined,
+                created_at: DateTime.now().toString(),
               ),
             );
             context.pushNamed(RoutesName.homePage);

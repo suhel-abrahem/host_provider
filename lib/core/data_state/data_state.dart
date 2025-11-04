@@ -39,3 +39,7 @@ class LocationPermissionDeniedDataState<T> extends DataState<T> {
 class LocationPermissionDeniedForeverDataState<T> extends DataState<T> {
   const LocationPermissionDeniedForeverDataState();
 }
+
+class UnauthenticatedDataState<T> extends DataState<T> {
+  const UnauthenticatedDataState({required super.error});
+}

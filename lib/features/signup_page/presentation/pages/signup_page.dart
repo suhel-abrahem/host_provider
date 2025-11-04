@@ -25,6 +25,7 @@ import 'package:hosta_provider/features/signup_page/presentation/bloc/get_cities
 import 'package:hosta_provider/features/signup_page/presentation/bloc/get_countries_bloc.dart';
 import 'package:hosta_provider/features/signup_page/presentation/bloc/get_position_bloc.dart';
 import 'package:hosta_provider/features/signup_page/presentation/bloc/signup_bloc_bloc.dart';
+import 'package:restart/restart.dart';
 
 import '../../../../config/route/routes_manager.dart';
 import '../../../../core/constants/font_constants.dart';
@@ -108,19 +109,30 @@ class _SignupPageState extends State<SignupPage> {
             listener: (context, getPositionState) {
               print("getPositionState:$getPositionState");
               getPositionState.when(
-                initial: () => showMessage(message: "ini", context: context),
-                loading: () => null,
+                initial: () {
+                  showMessage(message: "ini", context: context);
+                  setState(() {
+                    isSignupButtonLoading = false;
+                  });
+                },
+                loading: () {
+                  setState(() {
+                    isSignupButtonLoading = true;
+                  });
+                },
                 locationPermissionDenied: () async {
                   showMessage(
                     message: LocaleKeys.common_youMustAcceptLocationPermission
                         .tr(),
                     context: context,
                   );
+                  setState(() {
+                    isSignupButtonLoading = false;
+                  });
                   await Geolocator.requestPermission();
                   requestLocationPermissionCounter++;
                   if (requestLocationPermissionCounter >= 2) {
                     await Geolocator.openAppSettings();
-                    await Geolocator.openLocationSettings();
                   }
                 },
                 locationPermissionDeniedForever: () async {
@@ -130,10 +142,12 @@ class _SignupPageState extends State<SignupPage> {
                         .tr(),
                     context: context,
                   );
+                  setState(() {
+                    isSignupButtonLoading = false;
+                  });
                   await Geolocator.requestPermission();
                   requestLocationPermissionCounter++;
                   await Geolocator.openAppSettings();
-                  await Geolocator.openLocationSettings();
                 },
                 locationDisabled: () async {
                   showMessage(
@@ -141,17 +155,28 @@ class _SignupPageState extends State<SignupPage> {
                         .tr(),
                     context: context,
                   );
+                  setState(() {
+                    isSignupButtonLoading = false;
+                  });
                   await Geolocator.openAppSettings();
                   await Geolocator.openLocationSettings();
                 },
                 got: (newPositionEntity) {
+                  setState(() {
+                    isSignupButtonLoading = false;
+                  });
                   positionEntity = newPositionEntity;
                   requestLocationPermissionCounter = 0;
                 },
-                error: () => showMessage(
-                  message: LocaleKeys.common_anErrorHasOccurs.tr(),
-                  context: context,
-                ),
+                error: () {
+                  setState(() {
+                    isSignupButtonLoading = false;
+                  });
+                  showMessage(
+                    message: LocaleKeys.common_anErrorHasOccurs.tr(),
+                    context: context,
+                  );
+                },
               );
             },
             child: BlocListener<SignupBlocBloc, SignupBlocState>(
@@ -159,6 +184,7 @@ class _SignupPageState extends State<SignupPage> {
                 state.when(
                   initial: () => isSignupButtonLoading = false,
                   signupSignedUp: (data) async {
+                    isSignupButtonLoading = false;
                     print("signUpRe:$data");
                     SignupInfoEntity? signupInfoEntity = data;
                     signupInfoEntity = signupInfoEntity?.copyWith(
@@ -168,6 +194,7 @@ class _SignupPageState extends State<SignupPage> {
                     await getItInstance<AppPreferences>().setUserSignUpInfo(
                       signupEntity: signupInfoEntity,
                     );
+
                     context.push(RoutesPath.otpPage);
                   },
                   loading: () => isSignupButtonLoading = true,
@@ -935,29 +962,28 @@ class _SignupPageState extends State<SignupPage> {
 
                           Padding(
                             padding: EdgeInsets.symmetric(vertical: 20.h),
-                            child: SizedBox(
-                              width: 300.w,
-                              height: 50.h,
-                              child: ElevatedButton(
-                                key: ValueKey(isSignupButtonLoading),
-                                style: Theme.of(context)
-                                    .elevatedButtonTheme
-                                    .style
-                                    ?.copyWith(
-                                      backgroundColor: WidgetStatePropertyAll(
-                                        Theme.of(context).colorScheme.primary,
+                            child: AnimatedSwitcher(
+                              duration: Duration(milliseconds: 300),
+                              child: SizedBox(
+                                width: 300.w,
+                                height: 50.h,
+                                child: ElevatedButton(
+                                  key: ValueKey(isSignupButtonLoading),
+                                  style: Theme.of(context)
+                                      .elevatedButtonTheme
+                                      .style
+                                      ?.copyWith(
+                                        backgroundColor: WidgetStatePropertyAll(
+                                          Theme.of(context).colorScheme.primary,
+                                        ),
                                       ),
-                                    ),
-                                onPressed: () {
-                                  if (positionEntity == null) {
-                                    print("pressed");
-
-                                    context.read<GetPositionBloc>().add(
-                                      GetPositionEvent.get(),
-                                    );
-                                  } else {
-                                    if (formKey.currentState?.validate() ??
-                                        false) {
+                                  onPressed: () {
+                                    if ((formKey.currentState?.validate() ??
+                                            false) &&
+                                        !(isSignupButtonLoading ?? false)) {
+                                      context.read<GetPositionBloc>().add(
+                                        GetPositionEvent.get(),
+                                      );
                                       signupModel = signupModel?.copyWith(
                                         lat: num.tryParse(
                                           positionEntity?.lat ?? "",
@@ -976,22 +1002,28 @@ class _SignupPageState extends State<SignupPage> {
                                         ),
                                       );
                                     }
-                                  }
-                                },
-                                child: (isSignupButtonLoading ?? false)
-                                    ? CircularProgressIndicator()
-                                    : Text(
-                                        LocaleKeys.loginPage_signUp.tr(),
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .labelLarge
-                                            ?.copyWith(
-                                              fontFamily:
-                                                  FontConstants.fontFamily(
-                                                    context.locale,
-                                                  ),
-                                            ),
-                                      ),
+                                  },
+                                  child: (isSignupButtonLoading ?? false)
+                                      ? Center(
+                                          child: CircularProgressIndicator(
+                                            color: Theme.of(
+                                              context,
+                                            ).colorScheme.onPrimary,
+                                          ),
+                                        )
+                                      : Text(
+                                          LocaleKeys.loginPage_signUp.tr(),
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .labelLarge
+                                              ?.copyWith(
+                                                fontFamily:
+                                                    FontConstants.fontFamily(
+                                                      context.locale,
+                                                    ),
+                                              ),
+                                        ),
+                                ),
                               ),
                             ),
                           ),

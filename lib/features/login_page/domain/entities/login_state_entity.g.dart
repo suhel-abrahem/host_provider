@@ -13,6 +13,7 @@ _LoginStateEntity _$LoginStateEntityFromJson(Map<String, dynamic> json) =>
       token_type: json['token_type'] as String? ?? "",
       expires_in: (json['expires_in'] as num?)?.toInt() ?? 0,
       user: json['user'] as Map<String, dynamic>? ?? const {},
+      created_at: json['created_at'] as String? ?? "",
       loginStateEnum:
           $enumDecodeNullable(
             _$LoginStateEnumEnumMap,
@@ -28,6 +29,7 @@ Map<String, dynamic> _$LoginStateEntityToJson(_LoginStateEntity instance) =>
       'token_type': instance.token_type,
       'expires_in': instance.expires_in,
       'user': instance.user,
+      'created_at': instance.created_at,
       'loginStateEnum': _$LoginStateEnumEnumMap[instance.loginStateEnum],
     };
 

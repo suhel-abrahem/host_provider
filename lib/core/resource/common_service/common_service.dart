@@ -35,12 +35,13 @@ class CommonService {
       );
       if (response.statusCode == 204) {
         return DataSuccess(data: null);
-      } else if (response.statusCode == 401) {
-        return DataFailed(error: "Unauthorized");
       }
 
       return DataSuccess(data: response);
-    } catch (e) {
+    } on DioException catch (e) {
+      if ((e.response?.statusCode ?? 0) == 401) {
+        return UnauthenticatedDataState(error: e.response?.data?["message"]);
+      }
       return DataFailed(error: e.toString());
     }
   }
@@ -61,7 +62,9 @@ class CommonService {
         return DataFailed(error: response.statusMessage);
       }
     } on DioException catch (e) {
-      if ((e.response?.statusCode ?? 0) == 422) {
+      if ((e.response?.statusCode ?? 0) == 401) {
+        return UnauthenticatedDataState(error: e.response?.data?["message"]);
+      } else if ((e.response?.statusCode ?? 0) == 422) {
         return DataError(data: e.response, error: e.response?.statusMessage);
       }
       return DataFailed(error: e.toString());

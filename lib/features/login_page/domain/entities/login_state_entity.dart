@@ -12,6 +12,7 @@ abstract class LoginStateEntity with _$LoginStateEntity {
     @Default("") String? token_type,
     @Default(0) int? expires_in,
     @Default({}) Map<String, dynamic> user,
+    @Default("") String? created_at,
     @Default(LoginStateEnum.unlogined) LoginStateEnum? loginStateEnum,
   }) = _LoginStateEntity;
 
