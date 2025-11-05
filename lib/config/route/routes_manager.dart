@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:animated_theme_switcher/animated_theme_switcher.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -5,7 +7,9 @@ import 'package:hosta_provider/config/app/app_preferences.dart';
 import 'package:hosta_provider/config/route/route_tracker.dart';
 import 'package:hosta_provider/core/dependencies_injection.dart';
 import 'package:hosta_provider/core/enums/login_state_enum.dart';
+import 'package:hosta_provider/features/categories_page/domain/entities/category_entity.dart';
 import 'package:hosta_provider/features/categories_page/presentation/pages/categories_page_page.dart';
+import 'package:hosta_provider/features/category_services_page/presentation/widgets/category_services_page_page.dart';
 import 'package:hosta_provider/features/first_use_page/presentation/screens/first_use_page.dart';
 import 'package:hosta_provider/features/home_page/presentation/pages/home_page_page.dart';
 import 'package:hosta_provider/features/login_page/presentation/screens/login_page.dart';
@@ -30,6 +34,7 @@ class RoutesName {
   static String myServicesPage = "myServicesPage";
   static String profilePage = "profilePage";
   static String otpPage = "otpPage";
+  static String categoryServicesPage = "categoryServicesPage";
 }
 
 class RoutesPath {
@@ -44,6 +49,7 @@ class RoutesPath {
   static String myServicesPage = '/myServices';
   static String profilePage = '/profile';
   static String otpPage = "/otpPage";
+  static String categoryServicesPage = "/categoryServicesPage/:categoryEntity";
 }
 
 GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -120,8 +126,43 @@ GoRouter goRouter = GoRouter(
             ),
           ],
         ),
+
         StatefulShellBranch(
           routes: [
+            GoRoute(
+              path: RoutesPath.categoriesPage,
+              name: RoutesName.categoriesPage,
+              pageBuilder: (context, state) {
+                return _customTransitionPage(
+                  child: CategoriesPagePage(),
+                  state: state,
+                );
+              },
+            ),
+            GoRoute(
+              path: RoutesPath.myServicesPage,
+              name: RoutesName.myServicesPage,
+              pageBuilder: (context, state) {
+                return _customTransitionPage(
+                  child: MyServicesPagePage(),
+                  state: state,
+                );
+              },
+            ),
+            GoRoute(
+              path: RoutesPath.categoryServicesPage,
+              name: RoutesName.categoryServicesPage,
+              pageBuilder: (context, state) {
+                return _customTransitionPage(
+                  child: CategoryServicesPagePage(
+                    categoryEntity: CategoryEntity.fromJson(
+                      jsonDecode(state.pathParameters["categoryEntity"] ?? ""),
+                    ),
+                  ),
+                  state: state,
+                );
+              },
+            ),
             GoRoute(
               path: RoutesPath.homePage,
               name: RoutesName.homePage,
@@ -142,32 +183,13 @@ GoRouter goRouter = GoRouter(
                 );
               },
             ),
-            GoRoute(
-              path: RoutesPath.myServicesPage,
-              name: RoutesName.myServicesPage,
-              pageBuilder: (context, state) {
-                return _customTransitionPage(
-                  child: MyServicesPagePage(),
-                  state: state,
-                );
-              },
-            ),
+
             GoRoute(
               path: RoutesPath.profilePage,
               name: RoutesName.profilePage,
               pageBuilder: (context, state) {
                 return _customTransitionPage(
                   child: ProfilePagePage(),
-                  state: state,
-                );
-              },
-            ),
-            GoRoute(
-              path: RoutesPath.categoriesPage,
-              name: RoutesName.categoriesPage,
-              pageBuilder: (context, state) {
-                return _customTransitionPage(
-                  child: CategoriesPagePage(),
                   state: state,
                 );
               },

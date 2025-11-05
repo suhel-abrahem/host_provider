@@ -24,7 +24,7 @@ class RefreshTokenRepositoryImplements implements RefreshTokenRepository {
   Future<DataState<TokenEntity?>?> get({
     RefreshTokenModel? refreshTokenModel,
   }) async {
-    ConnectivityResult? connectivityResult = ConnectivityResult.none;
+    ConnectivityResult? connectivityResult;
     _checkConnectivity.checkConnectivity().then(
       (onValue) => connectivityResult = onValue.last,
     );
@@ -55,18 +55,21 @@ class RefreshTokenRepositoryImplements implements RefreshTokenRepository {
       );
     } else {
       try {
-        await _commonService.post(ApiConstant.refreshTokenEndpoint).then((
-          onValue,
-        ) {
-          if (onValue is DataSuccess) {
-            response = DataSuccess(
-              data: TokenEntity.fromJson(onValue.data?.data),
-            );
-            return response;
-          } else {
-            return onValue;
-          }
-        });
+        await _commonService
+            .post(
+              ApiConstant.refreshTokenEndpoint,
+              data: {"refresh_token": refreshTokenModel?.refresh_token},
+            )
+            .then((onValue) {
+              if (onValue is DataSuccess) {
+                response = DataSuccess(
+                  data: TokenEntity.fromJson(onValue.data?.data),
+                );
+                return response;
+              } else {
+                return onValue;
+              }
+            });
         return response;
       } catch (e) {
         response = DataFailed(error: e.toString());

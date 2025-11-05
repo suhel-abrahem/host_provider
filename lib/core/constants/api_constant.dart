@@ -8,4 +8,5 @@ class ApiConstant {
   static const String citiesList = "/cities";
   static const String countryList = "/countries";
   static const String refreshTokenEndpoint = "/refresh-token";
+  static const String categoryEndpoint = "/categories";
 }

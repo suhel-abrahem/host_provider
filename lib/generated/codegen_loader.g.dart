@@ -62,7 +62,9 @@ class CodegenLoader extends AssetLoader{
     "close": "إغلاق",
     "youMustEnableLocationServices": "You must enable Location Services!",
     "youMustAcceptLocationPermission": "You must accept Location Permission!",
-    "youDeniedLocationPermissionForever": "Seams like You denied Location Permission forever!. so You must go to device setting and accept it!"
+    "youDeniedLocationPermissionForever": "Seams like You denied Location Permission forever!. so You must go to device setting and accept it!",
+    "add": "Add",
+    "price": "Price"
   },
   "theme": {
     "choose": "اختر سمة",
@@ -132,7 +134,8 @@ class CodegenLoader extends AssetLoader{
   },
   "categoriesPage": {
     "title": "Categories Page",
-    "servicesCategories": " Services Categories"
+    "servicesCategories": " Services Categories",
+    "services": "Services"
   },
   "otpPage": {
     "title": "Otp Page",
@@ -143,6 +146,9 @@ class CodegenLoader extends AssetLoader{
     "wrongOtp": "Wrong Otp",
     "verified": "Verified",
     "verify": "Verify"
+  },
+  "categoryServices": {
+    "title": "Category Services"
   }
 };
 static const Map<String,dynamic> _en = {
@@ -193,7 +199,9 @@ static const Map<String,dynamic> _en = {
     "close": "Close",
     "youMustEnableLocationServices": "You must enable Location Services!",
     "youMustAcceptLocationPermission": "You must accept Location Permission!",
-    "youDeniedLocationPermissionForever": "Seams like You denied Location Permission forever!. so You must go to device setting and accept it!"
+    "youDeniedLocationPermissionForever": "Seams like You denied Location Permission forever!. so You must go to device setting and accept it!",
+    "add": "Add",
+    "price": "Price"
   },
   "theme": {
     "choose": "Choose a theme",
@@ -262,7 +270,8 @@ static const Map<String,dynamic> _en = {
   },
   "categoriesPage": {
     "title": "Categories Page",
-    "servicesCategories": " Services Categories"
+    "servicesCategories": " Services Categories",
+    "services": "Services"
   },
   "otpPage": {
     "title": "Otp Page",
@@ -273,6 +282,9 @@ static const Map<String,dynamic> _en = {
     "wrongOtp": "Wrong Otp",
     "verified": "Verified",
     "verify": "Verify"
+  },
+  "categoryServices": {
+    "title": "Category Services"
   }
 };
 static const Map<String,dynamic> _fa = {
@@ -323,7 +335,9 @@ static const Map<String,dynamic> _fa = {
     "close": "داخستن",
     "youMustEnableLocationServices": "You must enable Location Services!",
     "youMustAcceptLocationPermission": "You must accept Location Permission!",
-    "youDeniedLocationPermissionForever": "Seams like You denied Location Permission forever!. so You must go to device setting and accept it!"
+    "youDeniedLocationPermissionForever": "Seams like You denied Location Permission forever!. so You must go to device setting and accept it!",
+    "add": "Add",
+    "price": "Price"
   },
   "theme": {
     "choose": "مۆدێلێک هەڵبژێرە",
@@ -392,7 +406,8 @@ static const Map<String,dynamic> _fa = {
   },
   "categoriesPage": {
     "title": "Categories Page",
-    "servicesCategories": " Services Categories"
+    "servicesCategories": " Services Categories",
+    "services": "Services"
   },
   "otpPage": {
     "title": "Otp Page",
@@ -403,6 +418,9 @@ static const Map<String,dynamic> _fa = {
     "wrongOtp": "Wrong Otp",
     "verified": "Verified",
     "verify": "Verify"
+  },
+  "categoryServices": {
+    "title": "Category Services"
   }
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": _ar, "en": _en, "fa": _fa};

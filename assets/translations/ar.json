@@ -46,7 +46,9 @@
     "close": "إغلاق",
     "youMustEnableLocationServices": "You must enable Location Services!",
     "youMustAcceptLocationPermission": "You must accept Location Permission!",
-    "youDeniedLocationPermissionForever": "Seams like You denied Location Permission forever!. so You must go to device setting and accept it!"
+    "youDeniedLocationPermissionForever": "Seams like You denied Location Permission forever!. so You must go to device setting and accept it!",
+    "add": "Add",
+    "price": "Price"
   },
   "theme": {
     "choose": "اختر سمة",
@@ -116,7 +118,8 @@
   },
   "categoriesPage": {
     "title": "Categories Page",
-    "servicesCategories": " Services Categories"
+    "servicesCategories": " Services Categories",
+    "services": "Services"
   },
   "otpPage": {
     "title": "Otp Page",
@@ -127,5 +130,8 @@
     "wrongOtp": "Wrong Otp",
     "verified": "Verified",
     "verify": "Verify"
+  },
+  "categoryServices": {
+    "title": "Category Services"
   }
 }

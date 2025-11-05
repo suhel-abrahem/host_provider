@@ -1,9 +1,14 @@
 part of 'categories_page_bloc.dart';
 
-abstract class CategoriesPageState extends Equatable {
-  const CategoriesPageState();  
-
-  @override
-  List<Object> get props => [];
+@freezed
+class CategoriesPageState with _$CategoriesPageState {
+  const factory CategoriesPageState.initial() = CategoriesPageStateInitial;
+  const factory CategoriesPageState.error() = CategoriesPageStateError;
+  const factory CategoriesPageState.noInternet() =
+      CategoriesPageStateNoInternet;
+  const factory CategoriesPageState.unAuthorized() =
+      CategoriesPageStateUnAuthorized;
+  const factory CategoriesPageState.loading() = CategoriesPageStateLoading;
+  const factory CategoriesPageState.got(List<CategoryEntity?>? categoryEntity) =
+      CategoriesPageStateGot;
 }
-class CategoriesPageInitial extends CategoriesPageState {}

@@ -49,6 +49,8 @@ abstract class  LocaleKeys {
   static const common_youMustEnableLocationServices = 'common.youMustEnableLocationServices';
   static const common_youMustAcceptLocationPermission = 'common.youMustAcceptLocationPermission';
   static const common_youDeniedLocationPermissionForever = 'common.youDeniedLocationPermissionForever';
+  static const common_add = 'common.add';
+  static const common_price = 'common.price';
   static const common = 'common';
   static const theme_choose = 'theme.choose';
   static const theme_system = 'theme.system';
@@ -111,6 +113,7 @@ abstract class  LocaleKeys {
   static const myServicesPage = 'myServicesPage';
   static const categoriesPage_title = 'categoriesPage.title';
   static const categoriesPage_servicesCategories = 'categoriesPage.servicesCategories';
+  static const categoriesPage_services = 'categoriesPage.services';
   static const categoriesPage = 'categoriesPage';
   static const otpPage_title = 'otpPage.title';
   static const otpPage_verification = 'otpPage.verification';
@@ -121,5 +124,7 @@ abstract class  LocaleKeys {
   static const otpPage_verified = 'otpPage.verified';
   static const otpPage_verify = 'otpPage.verify';
   static const otpPage = 'otpPage';
+  static const categoryServices_title = 'categoryServices.title';
+  static const categoryServices = 'categoryServices';
 
 }
