@@ -132,6 +132,15 @@
     "verify": "Verify"
   },
   "categoryServices": {
-    "title": "Category Services"
+    "title": "Category Services",
+    "theServiceIdFieldIsRequired": "The service id field is required.",
+    "thePriceFieldIsRequired": "The price field is required.",
+    "theIsActiveFieldMustBeTrueOrFalse": "The is active field must be true or false.",
+    "serviceIsAlreadyAdded": "Service is already added",
+    "addService": "Add Service",
+    "price": "Price",
+    "isActive": "Is Active",
+    "durationInMinutes": "Duration In Minutes",
+    "notes": "Notes"
   }
 }

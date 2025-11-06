@@ -3,6 +3,7 @@ import 'package:hosta_provider/core/constants/api_constant.dart';
 import 'package:hosta_provider/core/data_state/data_state.dart';
 
 import 'package:hosta_provider/core/resource/common_entity/service_entity.dart';
+import 'package:hosta_provider/core/resource/common_entity/service_error_entity.dart';
 import 'package:hosta_provider/core/resource/common_service/common_service.dart';
 import 'package:hosta_provider/core/resource/connectivity/check_connectivity.dart';
 
@@ -71,8 +72,57 @@ class CategoryServicesRepositoryImplements
   @override
   Future<DataState<ServiceEntity?>?> setService(
     SetServiceModel? setServiceModel,
-  ) {
-    // TODO: implement setService
-    throw UnimplementedError();
+  ) async {
+    ConnectivityResult? connectivityResult;
+    await _checkConnectivity.checkConnectivity().then(
+      (onValue) => connectivityResult = onValue.last,
+    );
+    if (connectivityResult == ConnectivityResult.none) {
+      return NOInternetDataState();
+    }
+    print("from repo token:${setServiceModel?.authorization}");
+    CommonService commonService = CommonService(
+      headers: {
+        "Authorization": "Bearer ${setServiceModel?.authorization}",
+        "accept": "application/json",
+        "Content-Type": "application/json",
+      },
+    );
+    DataState<ServiceEntity?>? response;
+
+    try {
+      print("from repo json:${setServiceModel?.serviceModel?.toJson()}");
+      await commonService
+          .post(
+            ApiConstant.setServices,
+            data: setServiceModel?.serviceModel?.toJson(),
+          )
+          .then((onValue) {
+            if (onValue is DataSuccess) {
+              response = DataSuccess(
+                data: ServiceEntity.fromJson(onValue.data?.data["data"]),
+              );
+              return response;
+            } else if (onValue is UnauthenticatedDataState) {
+              response = UnauthenticatedDataState(error: onValue.error);
+              return response;
+            } else if (onValue is DataError) {
+              response = DataError(
+                data: ServiceEntity(
+                  serviceErrorEntity: ServiceErrorEntity.fromJson(
+                    onValue.data?.data["errors"],
+                  ),
+                ),
+              );
+            } else {
+              response = DataFailed(error: onValue.error);
+              return response;
+            }
+          });
+    } catch (e) {
+      response = DataFailed(error: e.toString());
+      return response;
+    }
+    return response;
   }
 }

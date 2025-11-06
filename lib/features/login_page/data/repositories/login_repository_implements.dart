@@ -15,7 +15,7 @@ class LoginRepositoryImplements implements LoginRepository {
   LoginRepositoryImplements(this._commonService, this._checkConnectivity);
   ConnectivityResult connectivityResult = ConnectivityResult.none;
   @override
-  Future<DataState<LoginStateEntity>> loginUser({
+  Future<DataState<LoginStateEntity?>?> loginUser({
     required LoginStateModel? loginStateModel,
   }) async {
     await _checkConnectivity.checkConnectivity().then(
@@ -26,28 +26,38 @@ class LoginRepositoryImplements implements LoginRepository {
     }
     LoginStateEntity? loginStateEntity;
     DataState<LoginStateEntity>? dataState;
-    await _commonService
-        .post(
-          ApiConstant.loginEndpoint,
-          data: LoginModel(
-            login: (loginStateModel?.phone?.trim().isEmpty ?? false)
-                ? loginStateModel?.email?.trim()
-                : loginStateModel?.phone?.trim(),
-            password: loginStateModel?.password,
-          ).toJson(),
-        )
-        .then((response) {
-          if (response is DataSuccess<Response?>) {
-            if (response.data?.statusCode == 200) {
-              loginStateEntity = LoginStateEntity.fromJson(response.data?.data);
-              dataState = DataSuccess(data: loginStateEntity);
-            } else {
-              dataState = OtpRequestedDataState();
+    try {
+      await _commonService
+          .post(
+            ApiConstant.loginEndpoint,
+            data: LoginModel(
+              login: (loginStateModel?.phone?.trim().isEmpty ?? false)
+                  ? loginStateModel?.email?.trim()
+                  : loginStateModel?.phone?.trim(),
+              password: loginStateModel?.password,
+            ).toJson(),
+          )
+          .then((response) {
+            if (response is DataSuccess<Response?>) {
+              if (response.data?.statusCode == 200) {
+                loginStateEntity = LoginStateEntity.fromJson(
+                  response.data?.data,
+                );
+                dataState = DataSuccess(data: loginStateEntity);
+                return dataState;
+              } else {
+                dataState = OtpRequestedDataState();
+                return dataState;
+              }
+            } else if (response is DataFailed) {
+              dataState = DataFailed(error: response.error);
+              return dataState;
             }
-          } else if (response is DataFailed) {
-            dataState = DataFailed(error: response.error);
-          }
-        });
-    return Future.value(dataState);
+          });
+      return dataState;
+    } catch (e) {
+      dataState = DataFailed(error: e.toString());
+      return dataState;
+    }
   }
 }

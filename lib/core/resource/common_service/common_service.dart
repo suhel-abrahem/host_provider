@@ -66,6 +66,9 @@ class CommonService {
         return UnauthenticatedDataState(error: e.response?.data?["message"]);
       } else if ((e.response?.statusCode ?? 0) == 422) {
         return DataError(data: e.response, error: e.response?.statusMessage);
+      } else if ((e.response?.statusCode ?? 0) == 403) {
+        print("error 403:${e.response}");
+        return DataError(data: e.response, error: e.response?.statusMessage);
       }
       return DataFailed(error: e.toString());
     }

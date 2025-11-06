@@ -9,7 +9,7 @@ import 'package:hosta_provider/core/dependencies_injection.dart';
 import 'package:hosta_provider/core/enums/login_state_enum.dart';
 import 'package:hosta_provider/features/categories_page/domain/entities/category_entity.dart';
 import 'package:hosta_provider/features/categories_page/presentation/pages/categories_page_page.dart';
-import 'package:hosta_provider/features/category_services_page/presentation/widgets/category_services_page_page.dart';
+import 'package:hosta_provider/features/category_services_page/presentation/pages/category_services_page_page.dart';
 import 'package:hosta_provider/features/first_use_page/presentation/screens/first_use_page.dart';
 import 'package:hosta_provider/features/home_page/presentation/pages/home_page_page.dart';
 import 'package:hosta_provider/features/login_page/presentation/screens/login_page.dart';

@@ -148,7 +148,16 @@ class CodegenLoader extends AssetLoader{
     "verify": "Verify"
   },
   "categoryServices": {
-    "title": "Category Services"
+    "title": "Category Services",
+    "theServiceIdFieldIsRequired": "The service id field is required.",
+    "thePriceFieldIsRequired": "The price field is required.",
+    "theIsActiveFieldMustBeTrueOrFalse": "The is active field must be true or false.",
+    "serviceIsAlreadyAdded": "Service is already added",
+    "addService": "Add Service",
+    "price": "Price",
+    "isActive": "Is Active",
+    "durationInMinutes": "Duration In Minutes",
+    "notes": "Notes"
   }
 };
 static const Map<String,dynamic> _en = {
@@ -284,7 +293,16 @@ static const Map<String,dynamic> _en = {
     "verify": "Verify"
   },
   "categoryServices": {
-    "title": "Category Services"
+    "title": "Category Services",
+    "theServiceIdFieldIsRequired": "The service id field is required.",
+    "thePriceFieldIsRequired": "The price field is required.",
+    "theIsActiveFieldMustBeTrueOrFalse": "The is active field must be true or false.",
+    "serviceIsAlreadyAdded": "Service is already added",
+    "addService": "Add Service",
+    "price": "Price",
+    "isActive": "Is Active",
+    "durationInMinutes": "Duration In Minutes",
+    "notes": "Notes"
   }
 };
 static const Map<String,dynamic> _fa = {
@@ -420,7 +438,16 @@ static const Map<String,dynamic> _fa = {
     "verify": "Verify"
   },
   "categoryServices": {
-    "title": "Category Services"
+    "title": "Category Services",
+    "theServiceIdFieldIsRequired": "The service id field is required.",
+    "thePriceFieldIsRequired": "The price field is required.",
+    "theIsActiveFieldMustBeTrueOrFalse": "The is active field must be true or false.",
+    "serviceIsAlreadyAdded": "Service is already added",
+    "addService": "Add Service",
+    "price": "Price",
+    "isActive": "Is Active",
+    "durationInMinutes": "Duration In Minutes",
+    "notes": "Notes"
   }
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": _ar, "en": _en, "fa": _fa};

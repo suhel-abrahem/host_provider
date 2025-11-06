@@ -4,7 +4,7 @@ import 'package:hosta_provider/features/login_page/domain/entities/login_state_e
 import '../../../../core/data_state/data_state.dart';
 
 abstract class LoginRepository {
-  Future<DataState<LoginStateEntity>> loginUser({
+  Future<DataState<LoginStateEntity?>?> loginUser({
     required LoginStateModel? loginStateModel,
   });
 }

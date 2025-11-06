@@ -3,6 +3,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hosta_provider/core/resource/common_entity/service_entity.dart';
 import 'package:hosta_provider/features/category_services_page/data/models/get_service_model.dart';
 import 'package:hosta_provider/features/category_services_page/domain/usecases/get_services_usecase.dart';
+import 'package:hosta_provider/features/category_services_page/domain/usecases/set_service_usecase.dart';
 import 'package:hosta_provider/features/refresh_token/domain/usecases/refresh_token_usecase.dart';
 
 import '../../../../config/app/app_preferences.dart';
@@ -10,6 +11,7 @@ import '../../../../core/data_state/data_state.dart';
 import '../../../../core/dependencies_injection.dart';
 import '../../../login_page/domain/entities/login_state_entity.dart';
 import '../../../refresh_token/data/models/refresh_token_model.dart';
+import '../../data/models/set_service_model.dart';
 
 part 'category_services_event.dart';
 part 'category_services_state.dart';
@@ -17,8 +19,9 @@ part 'category_services_bloc.freezed.dart';
 
 class CategoryServicesBloc
     extends Bloc<CategoryServicesEvent, CategoryServicesState> {
-  RefreshTokenUsecase _refreshTokenUsecase;
-  GetServicesUsecase _getServicesUsecase;
+  final RefreshTokenUsecase _refreshTokenUsecase;
+  final GetServicesUsecase _getServicesUsecase;
+
   CategoryServicesBloc(this._getServicesUsecase, this._refreshTokenUsecase)
     : super(CategoryServicesState.initial()) {
     on<CategoryServicesEventStarted>((event, emit) {});
@@ -54,9 +57,9 @@ class CategoryServicesBloc
                     } else if (getServicesOnValue is NOInternetDataState) {
                       emit(CategoryServicesState.noInternet());
                     } else if (getServicesOnValue is DataFailed) {
-                      emit(CategoryServicesState.error());
+                      emit(CategoryServicesState.getError());
                     } else {
-                      emit(CategoryServicesState.error());
+                      emit(CategoryServicesState.getError());
                     }
                   });
             } else if (onValue is UnauthenticatedDataState) {
@@ -64,9 +67,9 @@ class CategoryServicesBloc
             } else if (onValue is NOInternetDataState) {
               emit(CategoryServicesState.noInternet());
             } else if (onValue is DataFailed) {
-              emit(CategoryServicesState.error());
+              emit(CategoryServicesState.getError());
             } else {
-              emit(CategoryServicesState.error());
+              emit(CategoryServicesState.getError());
             }
           });
     });

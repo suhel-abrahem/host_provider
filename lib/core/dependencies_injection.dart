@@ -11,7 +11,9 @@ import 'package:hosta_provider/features/categories_page/domain/usecases/get_cate
 import 'package:hosta_provider/features/category_services_page/data/repositories/category_Services_repository_implements.dart';
 import 'package:hosta_provider/features/category_services_page/domain/repositories/category_services_repository.dart';
 import 'package:hosta_provider/features/category_services_page/domain/usecases/get_services_usecase.dart';
+import 'package:hosta_provider/features/category_services_page/domain/usecases/set_service_usecase.dart';
 import 'package:hosta_provider/features/category_services_page/presentation/bloc/category_services_bloc.dart';
+import 'package:hosta_provider/features/category_services_page/presentation/bloc/set_service_bloc.dart';
 
 import 'package:hosta_provider/features/login_page/data/models/login_model.dart';
 import 'package:hosta_provider/features/login_page/data/models/login_state_model.dart';
@@ -199,13 +201,18 @@ Future<void> initDependencies() async {
   getItInstance.registerSingleton<GetServicesUsecase>(
     GetServicesUsecase(categoryServicesRepository: getItInstance()),
   );
-
+  getItInstance.registerSingleton<SetServiceUseCase>(
+    SetServiceUseCase(categoryServicesRepository: getItInstance()),
+  );
   //bloc
   getItInstance.registerFactory<CategoriesPageBloc>(
     () => CategoriesPageBloc(getItInstance(), getItInstance()),
   );
   getItInstance.registerFactory<CategoryServicesBloc>(
     () => CategoryServicesBloc(getItInstance(), getItInstance()),
+  );
+  getItInstance.registerFactory<SetServiceBloc>(
+    () => SetServiceBloc(getItInstance(), getItInstance()),
   );
   // end of categories page
 }

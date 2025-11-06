@@ -19,7 +19,7 @@ class CategoryContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: () {
-        context.goNamed(
+        context.pushNamed(
           RoutesName.categoryServicesPage,
           pathParameters: {"categoryEntity": jsonEncode(categoryEntity)},
         );

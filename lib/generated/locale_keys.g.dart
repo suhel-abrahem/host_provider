@@ -125,6 +125,15 @@ abstract class  LocaleKeys {
   static const otpPage_verify = 'otpPage.verify';
   static const otpPage = 'otpPage';
   static const categoryServices_title = 'categoryServices.title';
+  static const categoryServices_theServiceIdFieldIsRequired = 'categoryServices.theServiceIdFieldIsRequired';
+  static const categoryServices_thePriceFieldIsRequired = 'categoryServices.thePriceFieldIsRequired';
+  static const categoryServices_theIsActiveFieldMustBeTrueOrFalse = 'categoryServices.theIsActiveFieldMustBeTrueOrFalse';
+  static const categoryServices_serviceIsAlreadyAdded = 'categoryServices.serviceIsAlreadyAdded';
+  static const categoryServices_addService = 'categoryServices.addService';
+  static const categoryServices_price = 'categoryServices.price';
+  static const categoryServices_isActive = 'categoryServices.isActive';
+  static const categoryServices_durationInMinutes = 'categoryServices.durationInMinutes';
+  static const categoryServices_notes = 'categoryServices.notes';
   static const categoryServices = 'categoryServices';
 
 }

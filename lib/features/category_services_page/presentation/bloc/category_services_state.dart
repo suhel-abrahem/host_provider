@@ -6,9 +6,13 @@ class CategoryServicesState with _$CategoryServicesState {
   const factory CategoryServicesState.noInternet() =
       CategoryServicesStateNoInternet;
   const factory CategoryServicesState.loading() = CategoryServicesStateLoading;
-  const factory CategoryServicesState.error() = CategoryServicesStateError;
+  const factory CategoryServicesState.getError({ServiceEntity? serviceEntity}) =
+      CategoryServicesStateGetError;
+
   const factory CategoryServicesState.got(List<ServiceEntity?>? serviceEntity) =
       CategoryServicesStateGot;
+  const factory CategoryServicesState.added(ServiceEntity? serviceEntity) =
+      CategoryServicesStateAdded;
   const factory CategoryServicesState.unAuthorized() =
       CategoryServicesStateUnAuthorized;
 }

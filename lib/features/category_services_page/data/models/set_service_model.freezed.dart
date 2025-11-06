@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$SetServiceModel {
 
- int? get service_id; String? get name; String? get price; String? get notes; String? get duration_minutes; String? get buffer_minutes;
+ ServiceModel? get serviceModel; String? get acceptedLanguage; String? get authorization;
 /// Create a copy of SetServiceModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $SetServiceModelCopyWith<SetServiceModel> get copyWith => _$SetServiceModelCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SetServiceModel&&(identical(other.service_id, service_id) || other.service_id == service_id)&&(identical(other.name, name) || other.name == name)&&(identical(other.price, price) || other.price == price)&&(identical(other.notes, notes) || other.notes == notes)&&(identical(other.duration_minutes, duration_minutes) || other.duration_minutes == duration_minutes)&&(identical(other.buffer_minutes, buffer_minutes) || other.buffer_minutes == buffer_minutes));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SetServiceModel&&(identical(other.serviceModel, serviceModel) || other.serviceModel == serviceModel)&&(identical(other.acceptedLanguage, acceptedLanguage) || other.acceptedLanguage == acceptedLanguage)&&(identical(other.authorization, authorization) || other.authorization == authorization));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,service_id,name,price,notes,duration_minutes,buffer_minutes);
+int get hashCode => Object.hash(runtimeType,serviceModel,acceptedLanguage,authorization);
 
 @override
 String toString() {
-  return 'SetServiceModel(service_id: $service_id, name: $name, price: $price, notes: $notes, duration_minutes: $duration_minutes, buffer_minutes: $buffer_minutes)';
+  return 'SetServiceModel(serviceModel: $serviceModel, acceptedLanguage: $acceptedLanguage, authorization: $authorization)';
 }
 
 
@@ -48,11 +48,11 @@ abstract mixin class $SetServiceModelCopyWith<$Res>  {
   factory $SetServiceModelCopyWith(SetServiceModel value, $Res Function(SetServiceModel) _then) = _$SetServiceModelCopyWithImpl;
 @useResult
 $Res call({
- int? service_id, String? name, String? price, String? notes, String? duration_minutes, String? buffer_minutes
+ ServiceModel? serviceModel, String? acceptedLanguage, String? authorization
 });
 
 
-
+$ServiceModelCopyWith<$Res>? get serviceModel;
 
 }
 /// @nodoc
@@ -65,18 +65,27 @@ class _$SetServiceModelCopyWithImpl<$Res>
 
 /// Create a copy of SetServiceModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? service_id = freezed,Object? name = freezed,Object? price = freezed,Object? notes = freezed,Object? duration_minutes = freezed,Object? buffer_minutes = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? serviceModel = freezed,Object? acceptedLanguage = freezed,Object? authorization = freezed,}) {
   return _then(_self.copyWith(
-service_id: freezed == service_id ? _self.service_id : service_id // ignore: cast_nullable_to_non_nullable
-as int?,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
-as String?,price: freezed == price ? _self.price : price // ignore: cast_nullable_to_non_nullable
-as String?,notes: freezed == notes ? _self.notes : notes // ignore: cast_nullable_to_non_nullable
-as String?,duration_minutes: freezed == duration_minutes ? _self.duration_minutes : duration_minutes // ignore: cast_nullable_to_non_nullable
-as String?,buffer_minutes: freezed == buffer_minutes ? _self.buffer_minutes : buffer_minutes // ignore: cast_nullable_to_non_nullable
+serviceModel: freezed == serviceModel ? _self.serviceModel : serviceModel // ignore: cast_nullable_to_non_nullable
+as ServiceModel?,acceptedLanguage: freezed == acceptedLanguage ? _self.acceptedLanguage : acceptedLanguage // ignore: cast_nullable_to_non_nullable
+as String?,authorization: freezed == authorization ? _self.authorization : authorization // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }
+/// Create a copy of SetServiceModel
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ServiceModelCopyWith<$Res>? get serviceModel {
+    if (_self.serviceModel == null) {
+    return null;
+  }
 
+  return $ServiceModelCopyWith<$Res>(_self.serviceModel!, (value) {
+    return _then(_self.copyWith(serviceModel: value));
+  });
+}
 }
 
 
@@ -158,10 +167,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int? service_id,  String? name,  String? price,  String? notes,  String? duration_minutes,  String? buffer_minutes)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( ServiceModel? serviceModel,  String? acceptedLanguage,  String? authorization)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _SetServiceModel() when $default != null:
-return $default(_that.service_id,_that.name,_that.price,_that.notes,_that.duration_minutes,_that.buffer_minutes);case _:
+return $default(_that.serviceModel,_that.acceptedLanguage,_that.authorization);case _:
   return orElse();
 
 }
@@ -179,10 +188,10 @@ return $default(_that.service_id,_that.name,_that.price,_that.notes,_that.durati
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int? service_id,  String? name,  String? price,  String? notes,  String? duration_minutes,  String? buffer_minutes)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( ServiceModel? serviceModel,  String? acceptedLanguage,  String? authorization)  $default,) {final _that = this;
 switch (_that) {
 case _SetServiceModel():
-return $default(_that.service_id,_that.name,_that.price,_that.notes,_that.duration_minutes,_that.buffer_minutes);case _:
+return $default(_that.serviceModel,_that.acceptedLanguage,_that.authorization);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -199,10 +208,10 @@ return $default(_that.service_id,_that.name,_that.price,_that.notes,_that.durati
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int? service_id,  String? name,  String? price,  String? notes,  String? duration_minutes,  String? buffer_minutes)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( ServiceModel? serviceModel,  String? acceptedLanguage,  String? authorization)?  $default,) {final _that = this;
 switch (_that) {
 case _SetServiceModel() when $default != null:
-return $default(_that.service_id,_that.name,_that.price,_that.notes,_that.duration_minutes,_that.buffer_minutes);case _:
+return $default(_that.serviceModel,_that.acceptedLanguage,_that.authorization);case _:
   return null;
 
 }
@@ -214,15 +223,12 @@ return $default(_that.service_id,_that.name,_that.price,_that.notes,_that.durati
 @JsonSerializable()
 
 class _SetServiceModel implements SetServiceModel {
-  const _SetServiceModel({this.service_id = 0, this.name = "", this.price = "", this.notes = "", this.duration_minutes = "", this.buffer_minutes = ""});
+  const _SetServiceModel({this.serviceModel = const ServiceModel(), this.acceptedLanguage = "", this.authorization = ""});
   factory _SetServiceModel.fromJson(Map<String, dynamic> json) => _$SetServiceModelFromJson(json);
 
-@override@JsonKey() final  int? service_id;
-@override@JsonKey() final  String? name;
-@override@JsonKey() final  String? price;
-@override@JsonKey() final  String? notes;
-@override@JsonKey() final  String? duration_minutes;
-@override@JsonKey() final  String? buffer_minutes;
+@override@JsonKey() final  ServiceModel? serviceModel;
+@override@JsonKey() final  String? acceptedLanguage;
+@override@JsonKey() final  String? authorization;
 
 /// Create a copy of SetServiceModel
 /// with the given fields replaced by the non-null parameter values.
@@ -237,16 +243,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SetServiceModel&&(identical(other.service_id, service_id) || other.service_id == service_id)&&(identical(other.name, name) || other.name == name)&&(identical(other.price, price) || other.price == price)&&(identical(other.notes, notes) || other.notes == notes)&&(identical(other.duration_minutes, duration_minutes) || other.duration_minutes == duration_minutes)&&(identical(other.buffer_minutes, buffer_minutes) || other.buffer_minutes == buffer_minutes));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SetServiceModel&&(identical(other.serviceModel, serviceModel) || other.serviceModel == serviceModel)&&(identical(other.acceptedLanguage, acceptedLanguage) || other.acceptedLanguage == acceptedLanguage)&&(identical(other.authorization, authorization) || other.authorization == authorization));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,service_id,name,price,notes,duration_minutes,buffer_minutes);
+int get hashCode => Object.hash(runtimeType,serviceModel,acceptedLanguage,authorization);
 
 @override
 String toString() {
-  return 'SetServiceModel(service_id: $service_id, name: $name, price: $price, notes: $notes, duration_minutes: $duration_minutes, buffer_minutes: $buffer_minutes)';
+  return 'SetServiceModel(serviceModel: $serviceModel, acceptedLanguage: $acceptedLanguage, authorization: $authorization)';
 }
 
 
@@ -257,11 +263,11 @@ abstract mixin class _$SetServiceModelCopyWith<$Res> implements $SetServiceModel
   factory _$SetServiceModelCopyWith(_SetServiceModel value, $Res Function(_SetServiceModel) _then) = __$SetServiceModelCopyWithImpl;
 @override @useResult
 $Res call({
- int? service_id, String? name, String? price, String? notes, String? duration_minutes, String? buffer_minutes
+ ServiceModel? serviceModel, String? acceptedLanguage, String? authorization
 });
 
 
-
+@override $ServiceModelCopyWith<$Res>? get serviceModel;
 
 }
 /// @nodoc
@@ -274,19 +280,28 @@ class __$SetServiceModelCopyWithImpl<$Res>
 
 /// Create a copy of SetServiceModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? service_id = freezed,Object? name = freezed,Object? price = freezed,Object? notes = freezed,Object? duration_minutes = freezed,Object? buffer_minutes = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? serviceModel = freezed,Object? acceptedLanguage = freezed,Object? authorization = freezed,}) {
   return _then(_SetServiceModel(
-service_id: freezed == service_id ? _self.service_id : service_id // ignore: cast_nullable_to_non_nullable
-as int?,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
-as String?,price: freezed == price ? _self.price : price // ignore: cast_nullable_to_non_nullable
-as String?,notes: freezed == notes ? _self.notes : notes // ignore: cast_nullable_to_non_nullable
-as String?,duration_minutes: freezed == duration_minutes ? _self.duration_minutes : duration_minutes // ignore: cast_nullable_to_non_nullable
-as String?,buffer_minutes: freezed == buffer_minutes ? _self.buffer_minutes : buffer_minutes // ignore: cast_nullable_to_non_nullable
+serviceModel: freezed == serviceModel ? _self.serviceModel : serviceModel // ignore: cast_nullable_to_non_nullable
+as ServiceModel?,acceptedLanguage: freezed == acceptedLanguage ? _self.acceptedLanguage : acceptedLanguage // ignore: cast_nullable_to_non_nullable
+as String?,authorization: freezed == authorization ? _self.authorization : authorization // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }
 
+/// Create a copy of SetServiceModel
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ServiceModelCopyWith<$Res>? get serviceModel {
+    if (_self.serviceModel == null) {
+    return null;
+  }
 
+  return $ServiceModelCopyWith<$Res>(_self.serviceModel!, (value) {
+    return _then(_self.copyWith(serviceModel: value));
+  });
+}
 }
 
 // dart format on
