@@ -125,4 +125,115 @@ class CategoryServicesRepositoryImplements
     }
     return response;
   }
+
+  @override
+  Future<DataState<ServiceEntity?>?> updateService(
+    SetServiceModel? setServiceModel,
+  ) async {
+    ConnectivityResult? connectivityResult;
+    await _checkConnectivity.checkConnectivity().then(
+      (onValue) => connectivityResult = onValue.last,
+    );
+    if (connectivityResult == ConnectivityResult.none) {
+      return NOInternetDataState();
+    }
+    print("from repo token:${setServiceModel?.authorization}");
+    CommonService commonService = CommonService(
+      headers: {
+        "Authorization": "Bearer ${setServiceModel?.authorization}",
+        "accept": "application/json",
+        "Content-Type": "application/json",
+      },
+    );
+    DataState<ServiceEntity?>? response;
+
+    try {
+      print("from repo json:${setServiceModel?.serviceModel?.toJson()}");
+      await commonService
+          .put(
+            "${ApiConstant.setServices}/${setServiceModel?.serviceModel?.id}",
+            data: setServiceModel?.serviceModel?.toJson(),
+          )
+          .then((onValue) {
+            if (onValue is DataSuccess) {
+              response = DataSuccess(
+                data: ServiceEntity.fromJson(onValue.data?.data["data"]),
+              );
+              return response;
+            } else if (onValue is UnauthenticatedDataState) {
+              response = UnauthenticatedDataState(error: onValue.error);
+              return response;
+            } else if (onValue is DataError) {
+              response = DataError(
+                data: ServiceEntity(
+                  serviceErrorEntity: ServiceErrorEntity.fromJson(
+                    onValue.data?.data["errors"],
+                  ),
+                ),
+              );
+            } else {
+              response = DataFailed(error: onValue.error);
+              return response;
+            }
+          });
+    } catch (e) {
+      response = DataFailed(error: e.toString());
+      return response;
+    }
+    return response;
+  }
+
+  @override
+  Future<DataState<ServiceEntity?>?> deleteService(
+    SetServiceModel? setServiceModel,
+  ) async {
+    ConnectivityResult? connectivityResult;
+    await _checkConnectivity.checkConnectivity().then(
+      (onValue) => connectivityResult = onValue.last,
+    );
+    if (connectivityResult == ConnectivityResult.none) {
+      return NOInternetDataState();
+    }
+    print("from repo token:${setServiceModel?.authorization}");
+    CommonService commonService = CommonService(
+      headers: {
+        "Authorization": "Bearer ${setServiceModel?.authorization}",
+        "accept": "application/json",
+      },
+    );
+    DataState<ServiceEntity?>? response;
+
+    try {
+      print("from repo json:${setServiceModel?.serviceModel?.toJson()}");
+      await commonService
+          .delete(
+            "${ApiConstant.setServices}/${setServiceModel?.serviceModel?.id}",
+          )
+          .then((onValue) {
+            print("im delet repo:$onValue");
+            if (onValue is DataSuccess) {
+              response = DataSuccess();
+              return response;
+            } else if (onValue is UnauthenticatedDataState) {
+              response = UnauthenticatedDataState(error: onValue.error);
+              return response;
+            } else if (onValue is DataError) {
+              response = DataError(
+                data: ServiceEntity(
+                  serviceErrorEntity: ServiceErrorEntity.fromJson(
+                    onValue.data?.data["errors"],
+                  ),
+                ),
+              );
+            } else {
+              response = DataFailed(error: onValue.error);
+              return response;
+            }
+          });
+    } catch (e) {
+      response = DataFailed(error: e.toString());
+      return response;
+    }
+    return response;
+  }
 }

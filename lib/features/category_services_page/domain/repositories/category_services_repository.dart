@@ -8,6 +8,12 @@ abstract class CategoryServicesRepository {
   Future<DataState<ServiceEntity?>?> setService(
     SetServiceModel? setServiceModel,
   );
+  Future<DataState<ServiceEntity?>?> updateService(
+    SetServiceModel? setServiceModel,
+  );
+  Future<DataState<ServiceEntity?>?> deleteService(
+    SetServiceModel? setServiceModel,
+  );
   Future<DataState<List<ServiceEntity?>?>?> getServices(
     GetServiceModel? getServiceModel,
   );

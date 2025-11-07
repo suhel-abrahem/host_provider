@@ -69,6 +69,8 @@ class CommonService {
       } else if ((e.response?.statusCode ?? 0) == 403) {
         print("error 403:${e.response}");
         return DataError(data: e.response, error: e.response?.statusMessage);
+      } else if ((e.response?.statusCode ?? 0) == 404) {
+        return NotFoundDataState(error: e.response?.statusMessage);
       }
       return DataFailed(error: e.toString());
     }
@@ -83,8 +85,23 @@ class CommonService {
     final url = ApiConstant.baseUrl + endpoint;
     try {
       final response = await _dio.put(url, data: data, options: options);
-      return DataSuccess(data: response);
-    } catch (e) {
+      if ((response.statusCode ?? 0) >= 200 ||
+          (response.statusCode ?? 0) <= 204) {
+        return DataSuccess(data: response);
+      } else {
+        return DataFailed(error: response.statusMessage);
+      }
+    } on DioException catch (e) {
+      if ((e.response?.statusCode ?? 0) == 401) {
+        return UnauthenticatedDataState(error: e.response?.data?["message"]);
+      } else if ((e.response?.statusCode ?? 0) == 422) {
+        return DataError(data: e.response, error: e.response?.statusMessage);
+      } else if ((e.response?.statusCode ?? 0) == 403) {
+        print("error 403:${e.response}");
+        return DataError(data: e.response, error: e.response?.statusMessage);
+      } else if ((e.response?.statusCode ?? 0) == 404) {
+        return NotFoundDataState(error: e.response?.statusMessage);
+      }
       return DataFailed(error: e.toString());
     }
   }
@@ -97,13 +114,26 @@ class CommonService {
   }) async {
     final url = ApiConstant.baseUrl + endpoint;
     try {
-      final response = await _dio.delete(
-        url,
-        queryParameters: params,
-        options: options,
-      );
-      return DataSuccess(data: response);
-    } catch (e) {
+      final response = await _dio.delete(url, data: params, options: options);
+      if ((response.statusCode ?? 0) >= 200 ||
+          (response.statusCode ?? 0) <= 204) {
+        return DataSuccess(data: response);
+      } else {
+        return DataFailed(error: response.statusMessage);
+      }
+    } on DioException catch (e) {
+      if ((e.response?.statusCode ?? 0) == 401) {
+        return UnauthenticatedDataState(error: e.response?.data?["message"]);
+      } else if ((e.response?.statusCode ?? 0) == 422) {
+        return DataError(data: e.response, error: e.response?.statusMessage);
+      } else if ((e.response?.statusCode ?? 0) == 403) {
+        print("error 403:${e.response}");
+        return DataError(data: e.response, error: e.response?.statusMessage);
+      } else if ((e.response?.statusCode ?? 0) == 404) {
+        return NotFoundDataState(error: e.response?.statusMessage);
+      } else if ((e.response?.statusCode ?? 0) == 204) {
+        return DataSuccess();
+      }
       return DataFailed(error: e.toString());
     }
   }

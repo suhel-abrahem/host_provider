@@ -1,0 +1,18 @@
+import 'package:hosta_provider/core/data_state/data_state.dart';
+import 'package:hosta_provider/core/resource/common_entity/service_entity.dart';
+import 'package:hosta_provider/core/usecase/usecase.dart';
+import 'package:hosta_provider/features/category_services_page/data/models/set_service_model.dart';
+import 'package:hosta_provider/features/category_services_page/domain/repositories/category_services_repository.dart';
+
+class UpdateServiceUsecase
+    implements UseCase<DataState<ServiceEntity?>?, SetServiceModel?> {
+  final CategoryServicesRepository _categoryServicesRepository;
+
+  UpdateServiceUsecase({
+    required CategoryServicesRepository categoryServicesRepository,
+  }) : _categoryServicesRepository = categoryServicesRepository;
+  @override
+  Future<DataState<ServiceEntity?>?> call({SetServiceModel? params}) async {
+    return await _categoryServicesRepository.updateService(params);
+  }
+}

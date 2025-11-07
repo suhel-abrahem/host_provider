@@ -16,7 +16,11 @@ String get iconPath {
   return "icons/";
 }
 
-class LottiesName {}
+class LottiesName {
+  static const String noInternet = "no_Internet.json";
+  static const String error = "error.json";
+  static const String noData = "no_data.json";
+}
 
 class ImagesName {
   static String loginImage = 'loginImage.svg';

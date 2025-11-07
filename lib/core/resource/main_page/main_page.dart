@@ -39,7 +39,7 @@ class MainPage extends StatelessWidget {
             appBar ??
             PreferredSize(
               preferredSize: Size.fromHeight(
-                haveBottomNavigationBar == true ? 100.h : 50.h,
+                haveBottomNavigationBar == true ? 110.h : 50.h,
               ),
               child: Column(
                 children: [

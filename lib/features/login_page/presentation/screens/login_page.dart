@@ -61,6 +61,8 @@ class _LoginPageState extends State<LoginPage> {
               ),
             );
             context.pushNamed(RoutesName.homePage);
+          } else if (state is LoginStateUnAuthorized) {
+            context.pushNamed(RoutesName.otpPage);
           }
         },
         child: Scaffold(

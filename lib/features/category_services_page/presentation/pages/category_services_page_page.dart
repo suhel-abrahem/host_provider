@@ -86,6 +86,7 @@ class _CategoryServicesPagePageState extends State<CategoryServicesPagePage> {
               message: LocaleKeys.common_success.tr(),
               context: context,
             );
+            setServiceModel = SetServiceModel();
             if (context.canPop()) {
               context.pop();
             }
@@ -133,6 +134,7 @@ class _CategoryServicesPagePageState extends State<CategoryServicesPagePage> {
                       padding: EdgeInsets.symmetric(vertical: 25.h),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             widget.categoryEntity?.name ?? "",
@@ -145,7 +147,7 @@ class _CategoryServicesPagePageState extends State<CategoryServicesPagePage> {
                             textAlign: TextAlign.center,
                           ),
                           Text(
-                            "//${widget.categoryEntity?.services_count} ${LocaleKeys.categoriesPage_services.tr()}",
+                            "${widget.categoryEntity?.services_count} ${LocaleKeys.categoriesPage_services.tr()}",
                             style: Theme.of(context).textTheme.labelLarge
                                 ?.copyWith(
                                   fontFamily: FontConstants.fontFamily(
@@ -399,6 +401,107 @@ class _CategoryServicesPagePageState extends State<CategoryServicesPagePage> {
                                                               ),
                                                           child: CustomInputField(
                                                             label: LocaleKeys
+                                                                .categoryServices_durationInMinutes
+                                                                .tr(),
+                                                            initialValue:
+                                                                setServiceModel
+                                                                    ?.serviceModel
+                                                                    ?.buffer_minutes,
+                                                            onChanged: (value) {
+                                                              setServiceModel = setServiceModel?.copyWith(
+                                                                serviceModel: setServiceModel
+                                                                    ?.serviceModel
+                                                                    ?.copyWith(
+                                                                      duration_minutes:
+                                                                          value,
+                                                                    ),
+                                                              );
+                                                              setState(() {});
+                                                            },
+                                                            validator: (value) {
+                                                              if (value ==
+                                                                      null &&
+                                                                  (value
+                                                                          ?.trim()
+                                                                          .isEmpty ??
+                                                                      false)) {
+                                                                return LocaleKeys
+                                                                    .categoryServices_durationInMinutesIsRequired
+                                                                    .tr();
+                                                              } else {
+                                                                int?
+                                                                valueAsInt =
+                                                                    int.tryParse(
+                                                                      value ??
+                                                                          "",
+                                                                    );
+
+                                                                if ((valueAsInt ??
+                                                                        0) <=
+                                                                    0) {
+                                                                  return LocaleKeys
+                                                                      .categoryServices_durationInMinutesIsRequired
+                                                                      .tr();
+                                                                }
+                                                              }
+
+                                                              return null;
+                                                            },
+                                                          ),
+                                                        ),
+                                                        CustomInputField(
+                                                          label: LocaleKeys
+                                                              .categoryServices_bufferInMinutes
+                                                              .tr(),
+                                                          initialValue:
+                                                              setServiceModel
+                                                                  ?.serviceModel
+                                                                  ?.buffer_minutes,
+                                                          onChanged: (value) {
+                                                            setServiceModel = setServiceModel?.copyWith(
+                                                              serviceModel: setServiceModel
+                                                                  ?.serviceModel
+                                                                  ?.copyWith(
+                                                                    buffer_minutes:
+                                                                        value,
+                                                                  ),
+                                                            );
+                                                            setState(() {});
+                                                          },
+                                                          validator: (value) {
+                                                            if (value == null &&
+                                                                (value
+                                                                        ?.trim()
+                                                                        .isEmpty ??
+                                                                    false)) {
+                                                              return LocaleKeys
+                                                                  .categoryServices_bufferInMinutesIsRequired
+                                                                  .tr();
+                                                            } else {
+                                                              int? valueAsInt =
+                                                                  int.tryParse(
+                                                                    value ?? "",
+                                                                  );
+
+                                                              if ((valueAsInt ??
+                                                                      0) <=
+                                                                  0) {
+                                                                return LocaleKeys
+                                                                    .categoryServices_bufferInMinutesIsRequired
+                                                                    .tr();
+                                                              }
+                                                            }
+
+                                                            return null;
+                                                          },
+                                                        ),
+                                                        Padding(
+                                                          padding:
+                                                              EdgeInsetsGeometry.symmetric(
+                                                                vertical: 8.h,
+                                                              ),
+                                                          child: CustomInputField(
+                                                            label: LocaleKeys
                                                                 .categoryServices_notes
                                                                 .tr(),
                                                             isRequired: false,
@@ -611,8 +714,8 @@ class _CategoryServicesPagePageState extends State<CategoryServicesPagePage> {
                                                       MainAxisAlignment
                                                           .spaceEvenly,
                                                 ).asGlass(
-                                                  blurX: 0,
-                                                  blurY: 0,
+                                                  blurX: 3,
+                                                  blurY: 3,
                                                   tintColor: Theme.of(context)
                                                       .colorScheme
                                                       .primaryContainer

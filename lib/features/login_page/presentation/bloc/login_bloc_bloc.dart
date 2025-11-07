@@ -32,6 +32,8 @@ class LoginBlocBloc extends Bloc<LoginBlocEvent, LoginBlocState> {
           );
         } else if (dataState is NOInternetDataState<LoginStateModel?>) {
           emit(LoginBlocState.loginStateNoInternet());
+        } else if (dataState is OtpRequestedDataState) {
+          emit(LoginBlocState.unAuthorized());
         } else {
           emit(LoginBlocState.loginStateError(message: "An error occurred"));
         }

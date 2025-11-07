@@ -64,7 +64,8 @@ class CodegenLoader extends AssetLoader{
     "youMustAcceptLocationPermission": "You must accept Location Permission!",
     "youDeniedLocationPermissionForever": "Seams like You denied Location Permission forever!. so You must go to device setting and accept it!",
     "add": "Add",
-    "price": "Price"
+    "price": "Price",
+    "noThingToShow": "No Thing to Show"
   },
   "theme": {
     "choose": "اختر سمة",
@@ -130,7 +131,13 @@ class CodegenLoader extends AssetLoader{
   },
   "myServicesPage": {
     "title": "My Services Page",
-    "label": "My Services"
+    "label": "My Services",
+    "active": "Active",
+    "inactive": "Inactive",
+    "iqd": "IQD",
+    "edit": "تعديل",
+    "toggleStatus": "Toggle Status",
+    "delete": "حذف"
   },
   "categoriesPage": {
     "title": "Categories Page",
@@ -157,6 +164,9 @@ class CodegenLoader extends AssetLoader{
     "price": "Price",
     "isActive": "Is Active",
     "durationInMinutes": "Duration In Minutes",
+    "durationInMinutesIsRequired": "Duration In Minutes Is Required",
+    "bufferInMinutes": "bufferInMinutes",
+    "bufferInMinutesIsRequired": "buffer In Minutes Is Required",
     "notes": "Notes"
   }
 };
@@ -210,7 +220,8 @@ static const Map<String,dynamic> _en = {
     "youMustAcceptLocationPermission": "You must accept Location Permission!",
     "youDeniedLocationPermissionForever": "Seams like You denied Location Permission forever!. so You must go to device setting and accept it!",
     "add": "Add",
-    "price": "Price"
+    "price": "Price",
+    "noThingToShow": "No Thing to Show"
   },
   "theme": {
     "choose": "Choose a theme",
@@ -275,7 +286,13 @@ static const Map<String,dynamic> _en = {
   },
   "myServicesPage": {
     "title": "My Services Page",
-    "label": "My Services"
+    "label": "My Services",
+    "active": "Active",
+    "inactive": "Inactive",
+    "iqd": "IQD",
+    "edit": "تعديل",
+    "toggleStatus": "Toggle Status",
+    "delete": "حذف"
   },
   "categoriesPage": {
     "title": "Categories Page",
@@ -302,6 +319,9 @@ static const Map<String,dynamic> _en = {
     "price": "Price",
     "isActive": "Is Active",
     "durationInMinutes": "Duration In Minutes",
+    "durationInMinutesIsRequired": "Duration In Minutes Is Required",
+    "bufferInMinutes": "bufferInMinutes",
+    "bufferInMinutesIsRequired": "buffer In Minutes Is Required",
     "notes": "Notes"
   }
 };
@@ -355,7 +375,8 @@ static const Map<String,dynamic> _fa = {
     "youMustAcceptLocationPermission": "You must accept Location Permission!",
     "youDeniedLocationPermissionForever": "Seams like You denied Location Permission forever!. so You must go to device setting and accept it!",
     "add": "Add",
-    "price": "Price"
+    "price": "Price",
+    "noThingToShow": "No Thing to Show"
   },
   "theme": {
     "choose": "مۆدێلێک هەڵبژێرە",
@@ -420,7 +441,13 @@ static const Map<String,dynamic> _fa = {
   },
   "myServicesPage": {
     "title": "My Services Page",
-    "label": "My Services"
+    "label": "My Services",
+    "active": "Active",
+    "inactive": "Inactive",
+    "iqd": "IQD",
+    "edit": "تعديل",
+    "toggleStatus": "Toggle Status",
+    "delete": "حذف"
   },
   "categoriesPage": {
     "title": "Categories Page",
@@ -447,6 +474,9 @@ static const Map<String,dynamic> _fa = {
     "price": "Price",
     "isActive": "Is Active",
     "durationInMinutes": "Duration In Minutes",
+    "durationInMinutesIsRequired": "Duration In Minutes Is Required",
+    "bufferInMinutes": "bufferInMinutes",
+    "bufferInMinutesIsRequired": "buffer In Minutes Is Required",
     "notes": "Notes"
   }
 };

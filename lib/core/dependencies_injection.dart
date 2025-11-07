@@ -10,8 +10,10 @@ import 'package:hosta_provider/features/categories_page/domain/repositories/cate
 import 'package:hosta_provider/features/categories_page/domain/usecases/get_category_usecase.dart';
 import 'package:hosta_provider/features/category_services_page/data/repositories/category_Services_repository_implements.dart';
 import 'package:hosta_provider/features/category_services_page/domain/repositories/category_services_repository.dart';
+import 'package:hosta_provider/features/category_services_page/domain/usecases/delete_service_usecase.dart';
 import 'package:hosta_provider/features/category_services_page/domain/usecases/get_services_usecase.dart';
 import 'package:hosta_provider/features/category_services_page/domain/usecases/set_service_usecase.dart';
+import 'package:hosta_provider/features/category_services_page/domain/usecases/update_service_usecase.dart';
 import 'package:hosta_provider/features/category_services_page/presentation/bloc/category_services_bloc.dart';
 import 'package:hosta_provider/features/category_services_page/presentation/bloc/set_service_bloc.dart';
 
@@ -21,6 +23,10 @@ import 'package:hosta_provider/features/login_page/domain/entities/login_state_e
 import 'package:hosta_provider/features/login_page/domain/repositories/login_repository.dart';
 import 'package:hosta_provider/features/login_page/domain/usecases/login_usecase.dart';
 import 'package:hosta_provider/features/login_page/presentation/bloc/login_bloc_bloc.dart';
+import 'package:hosta_provider/features/my_services_page/data/repositories/my_service_repository_implements.dart';
+import 'package:hosta_provider/features/my_services_page/domain/repositories/my_services_repository.dart';
+import 'package:hosta_provider/features/my_services_page/domain/usecases/my_service_usecase.dart';
+import 'package:hosta_provider/features/my_services_page/presentation/bloc/my_service_bloc.dart';
 import 'package:hosta_provider/features/otp_page/data/models/otp_model.dart';
 import 'package:hosta_provider/features/otp_page/domain/repositories/otp_verifiy_repository.dart';
 import 'package:hosta_provider/features/otp_page/domain/usecases/otp_verify_usecase.dart';
@@ -204,6 +210,12 @@ Future<void> initDependencies() async {
   getItInstance.registerSingleton<SetServiceUseCase>(
     SetServiceUseCase(categoryServicesRepository: getItInstance()),
   );
+  getItInstance.registerSingleton<UpdateServiceUsecase>(
+    UpdateServiceUsecase(categoryServicesRepository: getItInstance()),
+  );
+  getItInstance.registerSingleton<DeleteServiceUsecase>(
+    DeleteServiceUsecase(categoryServicesRepository: getItInstance()),
+  );
   //bloc
   getItInstance.registerFactory<CategoriesPageBloc>(
     () => CategoriesPageBloc(getItInstance(), getItInstance()),
@@ -212,7 +224,30 @@ Future<void> initDependencies() async {
     () => CategoryServicesBloc(getItInstance(), getItInstance()),
   );
   getItInstance.registerFactory<SetServiceBloc>(
-    () => SetServiceBloc(getItInstance(), getItInstance()),
+    () => SetServiceBloc(
+      getItInstance(),
+      getItInstance(),
+      getItInstance(),
+      getItInstance(),
+    ),
   );
   // end of categories page
+  // my services
+
+  //repository
+  getItInstance.registerSingleton<MyServicesRepository>(
+    MyServiceRepositoryImplements(checkConnectivity: getItInstance()),
+  );
+
+  //use case
+  getItInstance.registerSingleton<MyServiceUsecase>(
+    MyServiceUsecase(myServicesRepository: getItInstance()),
+  );
+
+  //bloc
+  getItInstance.registerFactory<MyServiceBloc>(
+    () => MyServiceBloc(getItInstance(), getItInstance()),
+  );
+
+  // end of refresh token
 }

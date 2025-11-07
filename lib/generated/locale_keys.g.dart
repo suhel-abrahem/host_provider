@@ -51,6 +51,7 @@ abstract class  LocaleKeys {
   static const common_youDeniedLocationPermissionForever = 'common.youDeniedLocationPermissionForever';
   static const common_add = 'common.add';
   static const common_price = 'common.price';
+  static const common_noThingToShow = 'common.noThingToShow';
   static const common = 'common';
   static const theme_choose = 'theme.choose';
   static const theme_system = 'theme.system';
@@ -110,6 +111,12 @@ abstract class  LocaleKeys {
   static const profilePage = 'profilePage';
   static const myServicesPage_title = 'myServicesPage.title';
   static const myServicesPage_label = 'myServicesPage.label';
+  static const myServicesPage_active = 'myServicesPage.active';
+  static const myServicesPage_inactive = 'myServicesPage.inactive';
+  static const myServicesPage_iqd = 'myServicesPage.iqd';
+  static const myServicesPage_edit = 'myServicesPage.edit';
+  static const myServicesPage_toggleStatus = 'myServicesPage.toggleStatus';
+  static const myServicesPage_delete = 'myServicesPage.delete';
   static const myServicesPage = 'myServicesPage';
   static const categoriesPage_title = 'categoriesPage.title';
   static const categoriesPage_servicesCategories = 'categoriesPage.servicesCategories';
@@ -133,6 +140,9 @@ abstract class  LocaleKeys {
   static const categoryServices_price = 'categoryServices.price';
   static const categoryServices_isActive = 'categoryServices.isActive';
   static const categoryServices_durationInMinutes = 'categoryServices.durationInMinutes';
+  static const categoryServices_durationInMinutesIsRequired = 'categoryServices.durationInMinutesIsRequired';
+  static const categoryServices_bufferInMinutes = 'categoryServices.bufferInMinutes';
+  static const categoryServices_bufferInMinutesIsRequired = 'categoryServices.bufferInMinutesIsRequired';
   static const categoryServices_notes = 'categoryServices.notes';
   static const categoryServices = 'categoryServices';
 

@@ -32,7 +32,7 @@ class CategoryContainer extends StatelessWidget {
           if (states.contains(WidgetState.pressed)) {
             return EdgeInsets.symmetric(vertical: 5.h, horizontal: 2.w);
           }
-          return EdgeInsets.symmetric(vertical: 0.h, horizontal: 0.w);
+          return EdgeInsets.symmetric(vertical: 0.h, horizontal: 8.w);
         }),
       ),
       child: Column(
@@ -58,21 +58,23 @@ class CategoryContainer extends StatelessWidget {
             ),
             textAlign: TextAlign.center,
           ),
-          Container(
-            width: 80.w,
-            height: 30.h,
-            decoration: BoxDecoration(
-              color: Theme.of(context).primaryColor.withValues(alpha: 0.3),
-              borderRadius: BorderRadius.circular(12.r),
-            ),
-            child: Center(
-              child: Text(
-                "${categoryEntity?.services_count} ${LocaleKeys.categoriesPage_services.tr()}",
-                style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                  fontFamily: FontConstants.fontFamily(context.locale),
-                  fontSize: 14.sp,
+          Center(
+            child: Container(
+              height: 30.h,
+              padding: EdgeInsets.symmetric(horizontal: 4.w),
+              decoration: BoxDecoration(
+                color: Theme.of(context).primaryColor.withValues(alpha: 0.3),
+                borderRadius: BorderRadius.circular(12.r),
+              ),
+              child: Center(
+                child: Text(
+                  "${categoryEntity?.services_count} ${LocaleKeys.categoriesPage_services.tr()}",
+                  style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                    fontFamily: FontConstants.fontFamily(context.locale),
+                    fontSize: 14.sp,
+                  ),
+                  textAlign: TextAlign.center,
                 ),
-                textAlign: TextAlign.center,
               ),
             ),
           ),

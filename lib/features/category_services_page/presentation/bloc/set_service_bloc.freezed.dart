@@ -55,12 +55,14 @@ extension SetServiceEventPatterns on SetServiceEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( SetServiceEventStarted value)?  started,TResult Function( SetServiceEventSet value)?  set,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( SetServiceEventStarted value)?  started,TResult Function( SetServiceEventSet value)?  set,TResult Function( SetServiceEventUpdate value)?  update,TResult Function( SetServiceEventDelete value)?  delete,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case SetServiceEventStarted() when started != null:
 return started(_that);case SetServiceEventSet() when set != null:
-return set(_that);case _:
+return set(_that);case SetServiceEventUpdate() when update != null:
+return update(_that);case SetServiceEventDelete() when delete != null:
+return delete(_that);case _:
   return orElse();
 
 }
@@ -78,12 +80,14 @@ return set(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( SetServiceEventStarted value)  started,required TResult Function( SetServiceEventSet value)  set,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( SetServiceEventStarted value)  started,required TResult Function( SetServiceEventSet value)  set,required TResult Function( SetServiceEventUpdate value)  update,required TResult Function( SetServiceEventDelete value)  delete,}){
 final _that = this;
 switch (_that) {
 case SetServiceEventStarted():
 return started(_that);case SetServiceEventSet():
-return set(_that);case _:
+return set(_that);case SetServiceEventUpdate():
+return update(_that);case SetServiceEventDelete():
+return delete(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -100,12 +104,14 @@ return set(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( SetServiceEventStarted value)?  started,TResult? Function( SetServiceEventSet value)?  set,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( SetServiceEventStarted value)?  started,TResult? Function( SetServiceEventSet value)?  set,TResult? Function( SetServiceEventUpdate value)?  update,TResult? Function( SetServiceEventDelete value)?  delete,}){
 final _that = this;
 switch (_that) {
 case SetServiceEventStarted() when started != null:
 return started(_that);case SetServiceEventSet() when set != null:
-return set(_that);case _:
+return set(_that);case SetServiceEventUpdate() when update != null:
+return update(_that);case SetServiceEventDelete() when delete != null:
+return delete(_that);case _:
   return null;
 
 }
@@ -122,11 +128,13 @@ return set(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  started,TResult Function( SetServiceModel? setServiceModel)?  set,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  started,TResult Function( SetServiceModel? setServiceModel)?  set,TResult Function( SetServiceModel? setServiceModel)?  update,TResult Function( SetServiceModel? setServiceModel)?  delete,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case SetServiceEventStarted() when started != null:
 return started();case SetServiceEventSet() when set != null:
-return set(_that.setServiceModel);case _:
+return set(_that.setServiceModel);case SetServiceEventUpdate() when update != null:
+return update(_that.setServiceModel);case SetServiceEventDelete() when delete != null:
+return delete(_that.setServiceModel);case _:
   return orElse();
 
 }
@@ -144,11 +152,13 @@ return set(_that.setServiceModel);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  started,required TResult Function( SetServiceModel? setServiceModel)  set,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  started,required TResult Function( SetServiceModel? setServiceModel)  set,required TResult Function( SetServiceModel? setServiceModel)  update,required TResult Function( SetServiceModel? setServiceModel)  delete,}) {final _that = this;
 switch (_that) {
 case SetServiceEventStarted():
 return started();case SetServiceEventSet():
-return set(_that.setServiceModel);case _:
+return set(_that.setServiceModel);case SetServiceEventUpdate():
+return update(_that.setServiceModel);case SetServiceEventDelete():
+return delete(_that.setServiceModel);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -165,11 +175,13 @@ return set(_that.setServiceModel);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  started,TResult? Function( SetServiceModel? setServiceModel)?  set,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  started,TResult? Function( SetServiceModel? setServiceModel)?  set,TResult? Function( SetServiceModel? setServiceModel)?  update,TResult? Function( SetServiceModel? setServiceModel)?  delete,}) {final _that = this;
 switch (_that) {
 case SetServiceEventStarted() when started != null:
 return started();case SetServiceEventSet() when set != null:
-return set(_that.setServiceModel);case _:
+return set(_that.setServiceModel);case SetServiceEventUpdate() when update != null:
+return update(_that.setServiceModel);case SetServiceEventDelete() when delete != null:
+return delete(_that.setServiceModel);case _:
   return null;
 
 }
@@ -288,6 +300,162 @@ $SetServiceModelCopyWith<$Res>? get setServiceModel {
 }
 
 /// @nodoc
+
+
+class SetServiceEventUpdate implements SetServiceEvent {
+  const SetServiceEventUpdate(this.setServiceModel);
+  
+
+ final  SetServiceModel? setServiceModel;
+
+/// Create a copy of SetServiceEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$SetServiceEventUpdateCopyWith<SetServiceEventUpdate> get copyWith => _$SetServiceEventUpdateCopyWithImpl<SetServiceEventUpdate>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SetServiceEventUpdate&&(identical(other.setServiceModel, setServiceModel) || other.setServiceModel == setServiceModel));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,setServiceModel);
+
+@override
+String toString() {
+  return 'SetServiceEvent.update(setServiceModel: $setServiceModel)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $SetServiceEventUpdateCopyWith<$Res> implements $SetServiceEventCopyWith<$Res> {
+  factory $SetServiceEventUpdateCopyWith(SetServiceEventUpdate value, $Res Function(SetServiceEventUpdate) _then) = _$SetServiceEventUpdateCopyWithImpl;
+@useResult
+$Res call({
+ SetServiceModel? setServiceModel
+});
+
+
+$SetServiceModelCopyWith<$Res>? get setServiceModel;
+
+}
+/// @nodoc
+class _$SetServiceEventUpdateCopyWithImpl<$Res>
+    implements $SetServiceEventUpdateCopyWith<$Res> {
+  _$SetServiceEventUpdateCopyWithImpl(this._self, this._then);
+
+  final SetServiceEventUpdate _self;
+  final $Res Function(SetServiceEventUpdate) _then;
+
+/// Create a copy of SetServiceEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? setServiceModel = freezed,}) {
+  return _then(SetServiceEventUpdate(
+freezed == setServiceModel ? _self.setServiceModel : setServiceModel // ignore: cast_nullable_to_non_nullable
+as SetServiceModel?,
+  ));
+}
+
+/// Create a copy of SetServiceEvent
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$SetServiceModelCopyWith<$Res>? get setServiceModel {
+    if (_self.setServiceModel == null) {
+    return null;
+  }
+
+  return $SetServiceModelCopyWith<$Res>(_self.setServiceModel!, (value) {
+    return _then(_self.copyWith(setServiceModel: value));
+  });
+}
+}
+
+/// @nodoc
+
+
+class SetServiceEventDelete implements SetServiceEvent {
+  const SetServiceEventDelete(this.setServiceModel);
+  
+
+ final  SetServiceModel? setServiceModel;
+
+/// Create a copy of SetServiceEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$SetServiceEventDeleteCopyWith<SetServiceEventDelete> get copyWith => _$SetServiceEventDeleteCopyWithImpl<SetServiceEventDelete>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SetServiceEventDelete&&(identical(other.setServiceModel, setServiceModel) || other.setServiceModel == setServiceModel));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,setServiceModel);
+
+@override
+String toString() {
+  return 'SetServiceEvent.delete(setServiceModel: $setServiceModel)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $SetServiceEventDeleteCopyWith<$Res> implements $SetServiceEventCopyWith<$Res> {
+  factory $SetServiceEventDeleteCopyWith(SetServiceEventDelete value, $Res Function(SetServiceEventDelete) _then) = _$SetServiceEventDeleteCopyWithImpl;
+@useResult
+$Res call({
+ SetServiceModel? setServiceModel
+});
+
+
+$SetServiceModelCopyWith<$Res>? get setServiceModel;
+
+}
+/// @nodoc
+class _$SetServiceEventDeleteCopyWithImpl<$Res>
+    implements $SetServiceEventDeleteCopyWith<$Res> {
+  _$SetServiceEventDeleteCopyWithImpl(this._self, this._then);
+
+  final SetServiceEventDelete _self;
+  final $Res Function(SetServiceEventDelete) _then;
+
+/// Create a copy of SetServiceEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? setServiceModel = freezed,}) {
+  return _then(SetServiceEventDelete(
+freezed == setServiceModel ? _self.setServiceModel : setServiceModel // ignore: cast_nullable_to_non_nullable
+as SetServiceModel?,
+  ));
+}
+
+/// Create a copy of SetServiceEvent
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$SetServiceModelCopyWith<$Res>? get setServiceModel {
+    if (_self.setServiceModel == null) {
+    return null;
+  }
+
+  return $SetServiceModelCopyWith<$Res>(_self.setServiceModel!, (value) {
+    return _then(_self.copyWith(setServiceModel: value));
+  });
+}
+}
+
+/// @nodoc
 mixin _$SetServiceState {
 
 
@@ -331,16 +499,19 @@ extension SetServiceStatePatterns on SetServiceState {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( SetServiceStateInitial value)?  initial,TResult Function( SetServiceStateNoInternet value)?  noInternet,TResult Function( SetServiceStateLoading value)?  loading,TResult Function( SetServiceStateSetError value)?  setError,TResult Function( SetServiceStateSetServiceStateAlreadyExist value)?  SetServiceStateAlreadyExist,TResult Function( SetServiceStateAdded value)?  added,TResult Function( SetServiceStateUnAuthorized value)?  unAuthorized,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( SetServiceStateInitial value)?  initial,TResult Function( SetServiceStateNoInternet value)?  noInternet,TResult Function( SetServiceStateLoading value)?  loading,TResult Function( SetServiceStateError value)?  error,TResult Function( SetServiceStateSetError value)?  setError,TResult Function( SetServiceStateSetServiceStateAlreadyExist value)?  SetServiceStateAlreadyExist,TResult Function( SetServiceStateAdded value)?  added,TResult Function( SetServiceStateUpdated value)?  updated,TResult Function( SetServiceStateDeleted value)?  deleted,TResult Function( SetServiceStateUnAuthorized value)?  unAuthorized,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case SetServiceStateInitial() when initial != null:
 return initial(_that);case SetServiceStateNoInternet() when noInternet != null:
 return noInternet(_that);case SetServiceStateLoading() when loading != null:
-return loading(_that);case SetServiceStateSetError() when setError != null:
+return loading(_that);case SetServiceStateError() when error != null:
+return error(_that);case SetServiceStateSetError() when setError != null:
 return setError(_that);case SetServiceStateSetServiceStateAlreadyExist() when SetServiceStateAlreadyExist != null:
 return SetServiceStateAlreadyExist(_that);case SetServiceStateAdded() when added != null:
-return added(_that);case SetServiceStateUnAuthorized() when unAuthorized != null:
+return added(_that);case SetServiceStateUpdated() when updated != null:
+return updated(_that);case SetServiceStateDeleted() when deleted != null:
+return deleted(_that);case SetServiceStateUnAuthorized() when unAuthorized != null:
 return unAuthorized(_that);case _:
   return orElse();
 
@@ -359,16 +530,19 @@ return unAuthorized(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( SetServiceStateInitial value)  initial,required TResult Function( SetServiceStateNoInternet value)  noInternet,required TResult Function( SetServiceStateLoading value)  loading,required TResult Function( SetServiceStateSetError value)  setError,required TResult Function( SetServiceStateSetServiceStateAlreadyExist value)  SetServiceStateAlreadyExist,required TResult Function( SetServiceStateAdded value)  added,required TResult Function( SetServiceStateUnAuthorized value)  unAuthorized,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( SetServiceStateInitial value)  initial,required TResult Function( SetServiceStateNoInternet value)  noInternet,required TResult Function( SetServiceStateLoading value)  loading,required TResult Function( SetServiceStateError value)  error,required TResult Function( SetServiceStateSetError value)  setError,required TResult Function( SetServiceStateSetServiceStateAlreadyExist value)  SetServiceStateAlreadyExist,required TResult Function( SetServiceStateAdded value)  added,required TResult Function( SetServiceStateUpdated value)  updated,required TResult Function( SetServiceStateDeleted value)  deleted,required TResult Function( SetServiceStateUnAuthorized value)  unAuthorized,}){
 final _that = this;
 switch (_that) {
 case SetServiceStateInitial():
 return initial(_that);case SetServiceStateNoInternet():
 return noInternet(_that);case SetServiceStateLoading():
-return loading(_that);case SetServiceStateSetError():
+return loading(_that);case SetServiceStateError():
+return error(_that);case SetServiceStateSetError():
 return setError(_that);case SetServiceStateSetServiceStateAlreadyExist():
 return SetServiceStateAlreadyExist(_that);case SetServiceStateAdded():
-return added(_that);case SetServiceStateUnAuthorized():
+return added(_that);case SetServiceStateUpdated():
+return updated(_that);case SetServiceStateDeleted():
+return deleted(_that);case SetServiceStateUnAuthorized():
 return unAuthorized(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -386,16 +560,19 @@ return unAuthorized(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( SetServiceStateInitial value)?  initial,TResult? Function( SetServiceStateNoInternet value)?  noInternet,TResult? Function( SetServiceStateLoading value)?  loading,TResult? Function( SetServiceStateSetError value)?  setError,TResult? Function( SetServiceStateSetServiceStateAlreadyExist value)?  SetServiceStateAlreadyExist,TResult? Function( SetServiceStateAdded value)?  added,TResult? Function( SetServiceStateUnAuthorized value)?  unAuthorized,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( SetServiceStateInitial value)?  initial,TResult? Function( SetServiceStateNoInternet value)?  noInternet,TResult? Function( SetServiceStateLoading value)?  loading,TResult? Function( SetServiceStateError value)?  error,TResult? Function( SetServiceStateSetError value)?  setError,TResult? Function( SetServiceStateSetServiceStateAlreadyExist value)?  SetServiceStateAlreadyExist,TResult? Function( SetServiceStateAdded value)?  added,TResult? Function( SetServiceStateUpdated value)?  updated,TResult? Function( SetServiceStateDeleted value)?  deleted,TResult? Function( SetServiceStateUnAuthorized value)?  unAuthorized,}){
 final _that = this;
 switch (_that) {
 case SetServiceStateInitial() when initial != null:
 return initial(_that);case SetServiceStateNoInternet() when noInternet != null:
 return noInternet(_that);case SetServiceStateLoading() when loading != null:
-return loading(_that);case SetServiceStateSetError() when setError != null:
+return loading(_that);case SetServiceStateError() when error != null:
+return error(_that);case SetServiceStateSetError() when setError != null:
 return setError(_that);case SetServiceStateSetServiceStateAlreadyExist() when SetServiceStateAlreadyExist != null:
 return SetServiceStateAlreadyExist(_that);case SetServiceStateAdded() when added != null:
-return added(_that);case SetServiceStateUnAuthorized() when unAuthorized != null:
+return added(_that);case SetServiceStateUpdated() when updated != null:
+return updated(_that);case SetServiceStateDeleted() when deleted != null:
+return deleted(_that);case SetServiceStateUnAuthorized() when unAuthorized != null:
 return unAuthorized(_that);case _:
   return null;
 
@@ -413,15 +590,18 @@ return unAuthorized(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  noInternet,TResult Function()?  loading,TResult Function( ServiceEntity? serviceEntity)?  setError,TResult Function( ServiceEntity? serviceEntity)?  SetServiceStateAlreadyExist,TResult Function( ServiceEntity? serviceEntity)?  added,TResult Function()?  unAuthorized,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  noInternet,TResult Function()?  loading,TResult Function()?  error,TResult Function( ServiceEntity? serviceEntity)?  setError,TResult Function( ServiceEntity? serviceEntity)?  SetServiceStateAlreadyExist,TResult Function( ServiceEntity? serviceEntity)?  added,TResult Function( ServiceEntity? serviceEntity)?  updated,TResult Function( ServiceEntity? serviceEntity)?  deleted,TResult Function()?  unAuthorized,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case SetServiceStateInitial() when initial != null:
 return initial();case SetServiceStateNoInternet() when noInternet != null:
 return noInternet();case SetServiceStateLoading() when loading != null:
-return loading();case SetServiceStateSetError() when setError != null:
+return loading();case SetServiceStateError() when error != null:
+return error();case SetServiceStateSetError() when setError != null:
 return setError(_that.serviceEntity);case SetServiceStateSetServiceStateAlreadyExist() when SetServiceStateAlreadyExist != null:
 return SetServiceStateAlreadyExist(_that.serviceEntity);case SetServiceStateAdded() when added != null:
-return added(_that.serviceEntity);case SetServiceStateUnAuthorized() when unAuthorized != null:
+return added(_that.serviceEntity);case SetServiceStateUpdated() when updated != null:
+return updated(_that.serviceEntity);case SetServiceStateDeleted() when deleted != null:
+return deleted(_that.serviceEntity);case SetServiceStateUnAuthorized() when unAuthorized != null:
 return unAuthorized();case _:
   return orElse();
 
@@ -440,15 +620,18 @@ return unAuthorized();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  noInternet,required TResult Function()  loading,required TResult Function( ServiceEntity? serviceEntity)  setError,required TResult Function( ServiceEntity? serviceEntity)  SetServiceStateAlreadyExist,required TResult Function( ServiceEntity? serviceEntity)  added,required TResult Function()  unAuthorized,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  noInternet,required TResult Function()  loading,required TResult Function()  error,required TResult Function( ServiceEntity? serviceEntity)  setError,required TResult Function( ServiceEntity? serviceEntity)  SetServiceStateAlreadyExist,required TResult Function( ServiceEntity? serviceEntity)  added,required TResult Function( ServiceEntity? serviceEntity)  updated,required TResult Function( ServiceEntity? serviceEntity)  deleted,required TResult Function()  unAuthorized,}) {final _that = this;
 switch (_that) {
 case SetServiceStateInitial():
 return initial();case SetServiceStateNoInternet():
 return noInternet();case SetServiceStateLoading():
-return loading();case SetServiceStateSetError():
+return loading();case SetServiceStateError():
+return error();case SetServiceStateSetError():
 return setError(_that.serviceEntity);case SetServiceStateSetServiceStateAlreadyExist():
 return SetServiceStateAlreadyExist(_that.serviceEntity);case SetServiceStateAdded():
-return added(_that.serviceEntity);case SetServiceStateUnAuthorized():
+return added(_that.serviceEntity);case SetServiceStateUpdated():
+return updated(_that.serviceEntity);case SetServiceStateDeleted():
+return deleted(_that.serviceEntity);case SetServiceStateUnAuthorized():
 return unAuthorized();case _:
   throw StateError('Unexpected subclass');
 
@@ -466,15 +649,18 @@ return unAuthorized();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  noInternet,TResult? Function()?  loading,TResult? Function( ServiceEntity? serviceEntity)?  setError,TResult? Function( ServiceEntity? serviceEntity)?  SetServiceStateAlreadyExist,TResult? Function( ServiceEntity? serviceEntity)?  added,TResult? Function()?  unAuthorized,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  noInternet,TResult? Function()?  loading,TResult? Function()?  error,TResult? Function( ServiceEntity? serviceEntity)?  setError,TResult? Function( ServiceEntity? serviceEntity)?  SetServiceStateAlreadyExist,TResult? Function( ServiceEntity? serviceEntity)?  added,TResult? Function( ServiceEntity? serviceEntity)?  updated,TResult? Function( ServiceEntity? serviceEntity)?  deleted,TResult? Function()?  unAuthorized,}) {final _that = this;
 switch (_that) {
 case SetServiceStateInitial() when initial != null:
 return initial();case SetServiceStateNoInternet() when noInternet != null:
 return noInternet();case SetServiceStateLoading() when loading != null:
-return loading();case SetServiceStateSetError() when setError != null:
+return loading();case SetServiceStateError() when error != null:
+return error();case SetServiceStateSetError() when setError != null:
 return setError(_that.serviceEntity);case SetServiceStateSetServiceStateAlreadyExist() when SetServiceStateAlreadyExist != null:
 return SetServiceStateAlreadyExist(_that.serviceEntity);case SetServiceStateAdded() when added != null:
-return added(_that.serviceEntity);case SetServiceStateUnAuthorized() when unAuthorized != null:
+return added(_that.serviceEntity);case SetServiceStateUpdated() when updated != null:
+return updated(_that.serviceEntity);case SetServiceStateDeleted() when deleted != null:
+return deleted(_that.serviceEntity);case SetServiceStateUnAuthorized() when unAuthorized != null:
 return unAuthorized();case _:
   return null;
 
@@ -571,6 +757,38 @@ int get hashCode => runtimeType.hashCode;
 @override
 String toString() {
   return 'SetServiceState.loading()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class SetServiceStateError implements SetServiceState {
+  const SetServiceStateError();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SetServiceStateError);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'SetServiceState.error()';
 }
 
 
@@ -793,6 +1011,162 @@ class _$SetServiceStateAddedCopyWithImpl<$Res>
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') $Res call({Object? serviceEntity = freezed,}) {
   return _then(SetServiceStateAdded(
+freezed == serviceEntity ? _self.serviceEntity : serviceEntity // ignore: cast_nullable_to_non_nullable
+as ServiceEntity?,
+  ));
+}
+
+/// Create a copy of SetServiceState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ServiceEntityCopyWith<$Res>? get serviceEntity {
+    if (_self.serviceEntity == null) {
+    return null;
+  }
+
+  return $ServiceEntityCopyWith<$Res>(_self.serviceEntity!, (value) {
+    return _then(_self.copyWith(serviceEntity: value));
+  });
+}
+}
+
+/// @nodoc
+
+
+class SetServiceStateUpdated implements SetServiceState {
+  const SetServiceStateUpdated(this.serviceEntity);
+  
+
+ final  ServiceEntity? serviceEntity;
+
+/// Create a copy of SetServiceState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$SetServiceStateUpdatedCopyWith<SetServiceStateUpdated> get copyWith => _$SetServiceStateUpdatedCopyWithImpl<SetServiceStateUpdated>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SetServiceStateUpdated&&(identical(other.serviceEntity, serviceEntity) || other.serviceEntity == serviceEntity));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,serviceEntity);
+
+@override
+String toString() {
+  return 'SetServiceState.updated(serviceEntity: $serviceEntity)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $SetServiceStateUpdatedCopyWith<$Res> implements $SetServiceStateCopyWith<$Res> {
+  factory $SetServiceStateUpdatedCopyWith(SetServiceStateUpdated value, $Res Function(SetServiceStateUpdated) _then) = _$SetServiceStateUpdatedCopyWithImpl;
+@useResult
+$Res call({
+ ServiceEntity? serviceEntity
+});
+
+
+$ServiceEntityCopyWith<$Res>? get serviceEntity;
+
+}
+/// @nodoc
+class _$SetServiceStateUpdatedCopyWithImpl<$Res>
+    implements $SetServiceStateUpdatedCopyWith<$Res> {
+  _$SetServiceStateUpdatedCopyWithImpl(this._self, this._then);
+
+  final SetServiceStateUpdated _self;
+  final $Res Function(SetServiceStateUpdated) _then;
+
+/// Create a copy of SetServiceState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? serviceEntity = freezed,}) {
+  return _then(SetServiceStateUpdated(
+freezed == serviceEntity ? _self.serviceEntity : serviceEntity // ignore: cast_nullable_to_non_nullable
+as ServiceEntity?,
+  ));
+}
+
+/// Create a copy of SetServiceState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ServiceEntityCopyWith<$Res>? get serviceEntity {
+    if (_self.serviceEntity == null) {
+    return null;
+  }
+
+  return $ServiceEntityCopyWith<$Res>(_self.serviceEntity!, (value) {
+    return _then(_self.copyWith(serviceEntity: value));
+  });
+}
+}
+
+/// @nodoc
+
+
+class SetServiceStateDeleted implements SetServiceState {
+  const SetServiceStateDeleted(this.serviceEntity);
+  
+
+ final  ServiceEntity? serviceEntity;
+
+/// Create a copy of SetServiceState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$SetServiceStateDeletedCopyWith<SetServiceStateDeleted> get copyWith => _$SetServiceStateDeletedCopyWithImpl<SetServiceStateDeleted>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SetServiceStateDeleted&&(identical(other.serviceEntity, serviceEntity) || other.serviceEntity == serviceEntity));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,serviceEntity);
+
+@override
+String toString() {
+  return 'SetServiceState.deleted(serviceEntity: $serviceEntity)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $SetServiceStateDeletedCopyWith<$Res> implements $SetServiceStateCopyWith<$Res> {
+  factory $SetServiceStateDeletedCopyWith(SetServiceStateDeleted value, $Res Function(SetServiceStateDeleted) _then) = _$SetServiceStateDeletedCopyWithImpl;
+@useResult
+$Res call({
+ ServiceEntity? serviceEntity
+});
+
+
+$ServiceEntityCopyWith<$Res>? get serviceEntity;
+
+}
+/// @nodoc
+class _$SetServiceStateDeletedCopyWithImpl<$Res>
+    implements $SetServiceStateDeletedCopyWith<$Res> {
+  _$SetServiceStateDeletedCopyWithImpl(this._self, this._then);
+
+  final SetServiceStateDeleted _self;
+  final $Res Function(SetServiceStateDeleted) _then;
+
+/// Create a copy of SetServiceState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? serviceEntity = freezed,}) {
+  return _then(SetServiceStateDeleted(
 freezed == serviceEntity ? _self.serviceEntity : serviceEntity // ignore: cast_nullable_to_non_nullable
 as ServiceEntity?,
   ));

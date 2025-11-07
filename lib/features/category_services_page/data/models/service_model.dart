@@ -6,6 +6,7 @@ part 'service_model.freezed.dart';
 abstract class ServiceModel with _$ServiceModel {
   const factory ServiceModel({
     @Default(0) int? service_id,
+    @Default(0) int? id,
     @Default(false) bool? is_active,
 
     @Default(0) int? price,
