@@ -35,7 +35,7 @@ class _BookingPagePageState extends State<BookingPagePage> {
         break;
       case 1:
         getBookingModel = GetBookingModel(
-          status: 'accepted',
+          status: 'confirmed',
           acceptLanguage: Helper.getCountryCode(context),
         );
         break;
@@ -59,7 +59,7 @@ class _BookingPagePageState extends State<BookingPagePage> {
         break;
       case 5:
         getBookingModel = GetBookingModel(
-          status: 'canceled',
+          status: 'cancelled',
           acceptLanguage: Helper.getCountryCode(context),
         );
         break;
@@ -101,7 +101,7 @@ class _BookingPagePageState extends State<BookingPagePage> {
                         break;
                       case 1:
                         getBookingModel = GetBookingModel(
-                          status: 'accepted',
+                          status: 'confirmed',
                           acceptLanguage: Helper.getCountryCode(context),
                         );
                         break;
@@ -125,7 +125,7 @@ class _BookingPagePageState extends State<BookingPagePage> {
                         break;
                       case 5:
                         getBookingModel = GetBookingModel(
-                          status: 'canceled',
+                          status: 'cancelled',
                           acceptLanguage: Helper.getCountryCode(context),
                         );
                         break;
