@@ -1,6 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:hosta_provider/core/resource/common_service/common_service.dart';
 import 'package:hosta_provider/core/resource/connectivity/check_connectivity.dart';
+import 'package:hosta_provider/features/booking_page/data/repositories/booking_repository_implements.dart';
 import 'package:hosta_provider/features/categories_page/data/models/get_category_model.dart';
 import 'package:hosta_provider/features/categories_page/data/models/get_my_service_model.dart';
 import 'package:hosta_provider/features/category_services_page/data/models/get_service_model.dart';
@@ -62,6 +63,11 @@ import 'package:hosta_provider/features/signup_page/presentation/bloc/signup_blo
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../config/app/app_preferences.dart';
+import '../features/booking_page/data/models/get_booking_model.dart';
+import '../features/booking_page/domain/entities/booking_entity.dart';
+import '../features/booking_page/domain/repositories/booking_repository.dart';
+import '../features/booking_page/domain/usecases/get_booking_usecase.dart';
+import '../features/booking_page/presentation/bloc/get_booking_bloc.dart';
 import '../features/categories_page/presentation/bloc/categories_page_bloc.dart';
 import '../features/categories_page/domain/entities/category_entity.dart';
 import '../features/login_page/data/repositories/login_repository_implements.dart';
@@ -250,4 +256,20 @@ Future<void> initDependencies() async {
   );
 
   // end of refresh token
+  // booking page
+  //models and entities
+  getItInstance.registerSingleton<BookingEntity>(BookingEntity());
+  getItInstance.registerSingleton<GetBookingModel>(GetBookingModel());
+  //repository
+  getItInstance.registerSingleton<BookingRepository>(
+    BookingRepositoryImpl(getItInstance()),
+  );
+  //use case
+  getItInstance.registerSingleton<GetBookingUsecase>(
+    GetBookingUsecase(getItInstance()),
+  );
+  //bloc
+  getItInstance.registerFactory<GetBookingBloc>(
+    () => GetBookingBloc(getItInstance(), getItInstance()),
+  );
 }

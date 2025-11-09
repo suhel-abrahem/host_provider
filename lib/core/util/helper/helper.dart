@@ -109,4 +109,22 @@ class Helper {
       ),
     );
   }
+
+  static Color? getColorByStatus(String? status, BuildContext context) {
+    switch (status?.toLowerCase()) {
+      case 'pending':
+        return Colors.orange;
+      case 'confirmed':
+        return Theme.of(context).colorScheme.primary;
+      case 'in_progress':
+        return Theme.of(context).colorScheme.primary;
+      case 'completed':
+        return Colors.green;
+
+      case 'canceled':
+        return Theme.of(context).colorScheme.error;
+      default:
+        return Theme.of(context).colorScheme.error;
+    }
+  }
 }

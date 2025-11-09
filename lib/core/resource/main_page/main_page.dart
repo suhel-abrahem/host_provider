@@ -11,12 +11,13 @@ class MainPage extends StatelessWidget {
   final String? title;
   final Widget? floatingActionButton;
   final Widget? bottomNavigationBar;
-  final bool? haveBottomNavigationBar;
+  final bool? haveBottomBar;
   final Widget? navigationTaps;
   final Widget? drawer;
   final String? pagePath;
 
   final List<Widget>? actions;
+  final PreferredSizeWidget? bottom;
   const MainPage({
     super.key,
     required this.body,
@@ -27,8 +28,9 @@ class MainPage extends StatelessWidget {
     this.actions,
     this.pagePath,
     this.drawer,
-    this.haveBottomNavigationBar,
+    this.haveBottomBar,
     this.appBar,
+    this.bottom,
   });
 
   @override
@@ -39,78 +41,73 @@ class MainPage extends StatelessWidget {
             appBar ??
             PreferredSize(
               preferredSize: Size.fromHeight(
-                haveBottomNavigationBar == true ? 110.h : 50.h,
+                haveBottomBar == true ? 110.h : 50.h,
               ),
-              child: Column(
-                children: [
-                  AppBar(
-                    centerTitle: true,
-                    title: Text(
-                      title ?? "",
-                      style: Theme.of(context).textTheme.headlineMedium,
-                    ),
-                    leading: SizedBox(
-                      width: 36.w,
-                      height: 36.h,
-                      child: Center(
-                        child: Builder(
-                          builder: (builderContext) {
-                            return ElevatedButton(
-                              style: Theme.of(context).elevatedButtonTheme.style
-                                  ?.copyWith(
-                                    backgroundColor: WidgetStatePropertyAll(
-                                      Theme.of(context).scaffoldBackgroundColor,
-                                    ),
-                                    shape: WidgetStatePropertyAll(
-                                      CircleBorder(eccentricity: 0),
-                                    ),
-                                    padding: WidgetStatePropertyAll(
-                                      EdgeInsets.all(0),
-                                    ),
-                                    shadowColor: WidgetStatePropertyAll(
-                                      Colors.transparent,
-                                    ),
-                                  ),
-                              onPressed: () {
-                                Scaffold.of(builderContext).openDrawer();
-                              },
-                              child: Icon(
-                                Icons.menu,
-                                size: 28.sp,
-                                color: Theme.of(
-                                  context,
-                                ).textTheme.labelLarge?.color,
+              child: AppBar(
+                centerTitle: true,
+                title: Text(
+                  title ?? "",
+                  style: Theme.of(context).textTheme.headlineMedium,
+                ),
+                leading: SizedBox(
+                  width: 36.w,
+                  height: 36.h,
+                  child: Center(
+                    child: Builder(
+                      builder: (builderContext) {
+                        return ElevatedButton(
+                          style: Theme.of(context).elevatedButtonTheme.style
+                              ?.copyWith(
+                                backgroundColor: WidgetStatePropertyAll(
+                                  Theme.of(context).scaffoldBackgroundColor,
+                                ),
+                                shape: WidgetStatePropertyAll(
+                                  CircleBorder(eccentricity: 0),
+                                ),
+                                padding: WidgetStatePropertyAll(
+                                  EdgeInsets.all(0),
+                                ),
+                                shadowColor: WidgetStatePropertyAll(
+                                  Colors.transparent,
+                                ),
                               ),
-                            );
+                          onPressed: () {
+                            Scaffold.of(builderContext).openDrawer();
                           },
+                          child: Icon(
+                            Icons.menu,
+                            size: 28.sp,
+                            color: Theme.of(
+                              context,
+                            ).textTheme.labelLarge?.color,
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ),
+                actions:
+                    actions ??
+                    [
+                      IconButton(
+                        onPressed: context.canPop()
+                            ? () => context.canPop()
+                                  ? context.pop()
+                                  : showMessage(
+                                      message: "Can not pop",
+                                      context: context,
+                                    )
+                            : null,
+                        icon: Icon(
+                          Icons.arrow_back_rounded,
+                          size: 32.sp,
+                          color: context.canPop()
+                              ? Theme.of(context).textTheme.displayLarge?.color
+                              : Theme.of(context).disabledColor,
                         ),
                       ),
-                    ),
-                    actions:
-                        actions ??
-                        [
-                          IconButton(
-                            onPressed: context.canPop()
-                                ? () => context.canPop()
-                                      ? context.pop()
-                                      : showMessage(
-                                          message: "Can not pop",
-                                          context: context,
-                                        )
-                                : null,
-                            icon: Icon(
-                              Icons.arrow_back_rounded,
-                              size: 32.sp,
-                              color: context.canPop()
-                                  ? Theme.of(
-                                      context,
-                                    ).textTheme.displayLarge?.color
-                                  : Theme.of(context).disabledColor,
-                            ),
-                          ),
-                        ],
-                  ),
-                ],
+                    ],
+                bottom: bottom,
               ),
             ),
         body: body,

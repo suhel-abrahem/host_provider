@@ -16,7 +16,7 @@
     "name": "ناو",
     "nameIsRequired": "ناو پێویستە",
     "mobile": "ژمارەی مۆبایل",
-    "mobileIsRequired": "ژمارەی مۆبایل پێویست",
+    "mobileIsRequired": "ژمارەی مۆبایل پێویستە",
     "city": "شار",
     "cityIsRequired": "شار پێویستە",
     "address": "ناونیشان",
@@ -25,18 +25,18 @@
     "dateOfBirthIsRequired": "ڕۆژی لەدایکبوون پێویستە",
     "already_have_account": "ئەژماری هەیە؟",
     "loginFailed": "چوونەژوورەوە سەرکەوتوو نەبو. تکایە دڵنیابە لە زانیاریەکانت و دووبارە هەوڵبدەرەوە.",
-    "country": "Country",
-    "countryIsRequired": "Country is required",
-    "thisPhoneIsTaken": "This phone Is taken",
-    "thisEmailIsTaken": "This email Is taken",
-    "ThePasswordFieldMustBeAtLeast8Characters": "The password field must be at least 8 characters",
-    "errors": "Errors"
+    "country": "وڵات",
+    "countryIsRequired": "وڵات پێویستە",
+    "thisPhoneIsTaken": "ئەم ژمارەی مۆبایلە هەیە",
+    "thisEmailIsTaken": "ئەم ئیمەیڵە هەیە",
+    "ThePasswordFieldMustBeAtLeast8Characters": "پێویستی وشەی نهێنی بەرزتر لە 8 پیتە",
+    "errors": "هەڵەکان"
   },
   "common": {
     "loading": "چاوەڕێ بکە...",
     "error": "هەڵە",
-    "anErrorHasOccurs": "An Error has occurs. try again by pulling the page down!",
-    "noInternetPullDown": "Seams like You don't have internet connection. Check Your connection and try again by pulling the page down!",
+    "anErrorHasOccurs": "هەڵەیەک ڕوودەدات. تکایە دووبارە هەوڵبدەرەوە لە ڕووی پەیجەکە!",
+    "noInternetPullDown": "وەکوو دێت، وەڵامەیەکی ئینتەرنێت نیە. پەیوەندیت چیک بکە و دووبارە هەوڵبدەرەوە لە ڕووی پەیجەکە!",
     "success": "سەرکەوتوو",
     "retry": "دووبارە هەوڵدان",
     "cancel": "هەڵوەشاندنەوە",
@@ -44,12 +44,12 @@
     "delete": "سڕینەوە",
     "edit": "دەستکاری",
     "close": "داخستن",
-    "youMustEnableLocationServices": "You must enable Location Services!",
-    "youMustAcceptLocationPermission": "You must accept Location Permission!",
-    "youDeniedLocationPermissionForever": "Seams like You denied Location Permission forever!. so You must go to device setting and accept it!",
-    "add": "Add",
-    "price": "Price",
-    "noThingToShow": "No Thing to Show"
+    "youMustEnableLocationServices": "پێویستە خزمەتی شوێنەکان چالاک بکەیت!",
+    "youMustAcceptLocationPermission": "پێویستە مافەکانی شوێنەکان بپەسندیت!",
+    "youDeniedLocationPermissionForever": "بەهەمان شێوە، پەیوەندیدانی مافەکانی شوێنەکان بەرز ناکەیت! پێویستە بڕۆیت بۆ ڕووکاری ئەندازە و پەسند بکەیت!",
+    "add": "زیادکردن",
+    "price": "قیمت",
+    "noThingToShow": "هیچ شتێک بۆ نیشاندانی نیە"
   },
   "theme": {
     "choose": "مۆدێلێک هەڵبژێرە",
@@ -105,51 +105,67 @@
     "annualStatistics": "ئامارەکانی ساڵانە"
   },
   "bookingPage": {
-    "title": "Booking Page",
-    "label": "Booking"
+    "title": "پەیجی ئاراستەکردن",
+    "label": "ئاراستەکردنەکان",
+    "all": "هەمووی",
+    "accepted": "پەسەندکراو",
+    "completed": "تەواوكراو",
+    "inProgress": "لە جێبەجێکردندا",
+    "canceled": "هەڵوەشاوە",
+    "pending": "لە چاوەڕوانیدا",
+    "finishService": "کۆتایی پێبەینە",
+    "acceptBooking": "پەسەندکردنی ئاراستەکردن",
+    "rejectBooking": "رەتکردنەوەی ئاراستەکردن",
+    "startService": "دەست پێکردنی خزمەت",
+    "areYouSureYouWantToRejectThisBooking": "دڵنیای کە دەتەوێت ئەم ئاراستەکردنە رەت بکەیتەوە؟",
+    "yesReject": "بەڵێ، رەت بکە",
+    "noCancel": "نەخێر، هەڵبوەشێنەوە",
+    "noBookingsAvailable": "هیچ ئاراستەکردنێک بوونی نییە",
+    "startTime": "کاتژمێری دەست پێکردن",
+    "endTime": "کاتژمێری کۆتایی"
   },
   "profilePage": {
-    "title": "Profile Page",
-    "label": "Profile"
+    "title": "شاشەی پڕۆفایل",
+    "label": "پڕۆفایل"
   },
   "myServicesPage": {
-    "title": "My Services Page",
-    "label": "My Services",
-    "active": "Active",
-    "inactive": "Inactive",
-    "iqd": "IQD",
-    "edit": "تعديل",
-    "toggleStatus": "Toggle Status",
-    "delete": "حذف"
+    "title": "شاشەی خزمەتگوزاریەکانم",
+    "label": "خزمەتگوزاریەکانم",
+    "active": "چالاک",
+    "inactive": "نەچالاک",
+    "iqd": "ع.د",
+    "edit": "دەستکاری",
+    "toggleStatus": "گۆڕینی دۆخ",
+    "delete": "سڕینەوە"
   },
   "categoriesPage": {
-    "title": "Categories Page",
-    "servicesCategories": " Services Categories",
-    "services": "Services"
+    "title": "شاشەی پۆلەکان",
+    "servicesCategories": "پۆلەکانی خزمەتگوزاری",
+    "services": "خزمەتگوزاریەکان"
   },
   "otpPage": {
-    "title": "Otp Page",
-    "verification": "Verification",
-    "enterTheCodeSentToTheNumber": "enter The code sent To The number",
-    "didntReceiveCode": "Didnt receive code",
-    "resend": "Resend",
-    "wrongOtp": "Wrong Otp",
-    "verified": "Verified",
-    "verify": "Verify"
+    "title": "شاشەی OTP",
+    "verification": "پشکنینی",
+    "enterTheCodeSentToTheNumber": "کۆدی ناردراو بۆ ژمارە بنووسە",
+    "didntReceiveCode": "کۆدەکە نادەگات",
+    "resend": "دووبارە ناردن",
+    "wrongOtp": "OTP نادروست",
+    "verified": "پشکنین کراو",
+    "verify": "پشکنین"
   },
   "categoryServices": {
-    "title": "Category Services",
-    "theServiceIdFieldIsRequired": "The service id field is required.",
-    "thePriceFieldIsRequired": "The price field is required.",
-    "theIsActiveFieldMustBeTrueOrFalse": "The is active field must be true or false.",
-    "serviceIsAlreadyAdded": "Service is already added",
-    "addService": "Add Service",
-    "price": "Price",
-    "isActive": "Is Active",
-    "durationInMinutes": "Duration In Minutes",
-    "durationInMinutesIsRequired": "Duration In Minutes Is Required",
-    "bufferInMinutes": "bufferInMinutes",
-    "bufferInMinutesIsRequired": "buffer In Minutes Is Required",
-    "notes": "Notes"
+    "title": "خزمەتگوزاریەکانی پۆل",
+    "theServiceIdFieldIsRequired": "پەڕەی ID ی خزمەتگوزاری پێویستە.",
+    "thePriceFieldIsRequired": "پەڕەی قیمت پێویستە.",
+    "theIsActiveFieldMustBeTrueOrFalse": "پەڕەی چالاکی پێویستە ڕاست یان هەڵە بێت.",
+    "serviceIsAlreadyAdded": "خزمەتگوزاری پێشتر زیادکراوە",
+    "addService": "زیادکردنی خزمەتگوزاری",
+    "price": "قیمت",
+    "isActive": "چالاکە",
+    "durationInMinutes": "ماوە لە دقایق",
+    "durationInMinutesIsRequired": "ماوە لە دقایق پێویستە",
+    "bufferInMinutes": "ماوەی بەرز لە دقایق",
+    "bufferInMinutesIsRequired": "ماوەی بەرز لە دقایق پێویستە",
+    "notes": "تێبینی"
   }
 }

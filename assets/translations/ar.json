@@ -27,16 +27,16 @@
     "loginFailed": "فشل تسجيل الدخول. يرجى التحقق من بيانات الاعتماد الخاصة بك والمحاولة مرة أخرى.",
     "country": "الدولة",
     "countryIsRequired": "الدولة مطلوبة",
-    "thisPhoneIsTaken": "This phone Is taken",
-    "thisEmailIsTaken": "This email Is taken",
-    "ThePasswordFieldMustBeAtLeast8Characters": "The password field must be at least 8 characters",
-    "errors": "Errors"
+    "thisPhoneIsTaken": "رقم الهاتف مستخدم بالفعل",
+    "thisEmailIsTaken": "البريد الإلكتروني مستخدم بالفعل",
+    "ThePasswordFieldMustBeAtLeast8Characters": "يجب أن تكون كلمة المرور مكونة من 8 أحرف على الأقل",
+    "errors": "أخطاء"
   },
   "common": {
     "loading": "جاري التحميل...",
     "error": "خطأ",
-    "anErrorHasOccurs": "An Error has occurs. try again by pulling the page down!",
-    "noInternetPullDown": "Seams like You don't have internet connection. Check Your connection and try again by pulling the page down!",
+    "anErrorHasOccurs": "حدث خطأ. حاول مرة أخرى بسحب الصفحة إلى الأسفل!",
+    "noInternetPullDown": "يبدو أنك غير متصل بالإنترنت. تحقق من الاتصال وحاول مرة أخرى بسحب الصفحة إلى الأسفل!",
     "success": "نجاح",
     "retry": "إعادة المحاولة",
     "cancel": "إلغاء",
@@ -44,12 +44,12 @@
     "delete": "حذف",
     "edit": "تعديل",
     "close": "إغلاق",
-    "youMustEnableLocationServices": "You must enable Location Services!",
-    "youMustAcceptLocationPermission": "You must accept Location Permission!",
-    "youDeniedLocationPermissionForever": "Seams like You denied Location Permission forever!. so You must go to device setting and accept it!",
-    "add": "Add",
-    "price": "Price",
-    "noThingToShow": "No Thing to Show"
+    "youMustEnableLocationServices": "يجب عليك تفعيل خدمات الموقع!",
+    "youMustAcceptLocationPermission": "يجب عليك منح صلاحية الموقع!",
+    "youDeniedLocationPermissionForever": "يبدو أنك رفضت صلاحية الموقع بشكل دائم. يجب أن تذهب إلى إعدادات الجهاز وتوافق عليها!",
+    "add": "إضافة",
+    "price": "السعر",
+    "noThingToShow": "لا يوجد شيء للعرض"
   },
   "theme": {
     "choose": "اختر سمة",
@@ -106,51 +106,67 @@
     "annualStatistics": "الإحصائيات السنوية"
   },
   "bookingPage": {
-    "title": "Booking Page",
-    "label": "Booking"
+    "title": "صفحة الحجوزات",
+    "label": "الحجوزات",
+    "all": "الكل",
+    "accepted": "مقبولة",
+    "completed": "مكتملة",
+    "inProgress": "قيد التنفيذ",
+    "canceled": "ملغاة",
+    "pending": "معلقة",
+    "finishService": "إنهاء الخدمة",
+    "acceptBooking": "قبول الحجز",
+    "rejectBooking": "رفض الحجز",
+    "startService": "بدء الخدمة",
+    "areYouSureYouWantToRejectThisBooking": "هل أنت متأكد من أنك تريد رفض هذا الحجز؟",
+    "yesReject": "نعم، رفض",
+    "noCancel": "لا، إلغاء",
+    "noBookingsAvailable": "لا توجد حجوزات متاحة",
+    "startTime": "وقت البدء",
+    "endTime": "وقت الانتهاء"
   },
   "profilePage": {
-    "title": "Profile Page",
-    "label": "Profile"
+    "title": "صفحة الملف الشخصي",
+    "label": "الملف الشخصي"
   },
   "myServicesPage": {
-    "title": "My Services Page",
-    "label": "My Services",
-    "active": "Active",
-    "inactive": "Inactive",
-    "iqd": "IQD",
+    "title": "صفحة خدماتي",
+    "label": "خدماتي",
+    "active": "نشط",
+    "inactive": "غير نشط",
+    "iqd": "د.ع",
     "edit": "تعديل",
-    "toggleStatus": "Toggle Status",
+    "toggleStatus": "تبديل الحالة",
     "delete": "حذف"
   },
   "categoriesPage": {
-    "title": "Categories Page",
-    "servicesCategories": " Services Categories",
-    "services": "Services"
+    "title": "صفحة الفئات",
+    "servicesCategories": "فئات الخدمات",
+    "services": "الخدمات"
   },
   "otpPage": {
-    "title": "Otp Page",
-    "verification": "Verification",
-    "enterTheCodeSentToTheNumber": "enter The code sent To The number",
-    "didntReceiveCode": "Didnt receive code",
-    "resend": "Resend",
-    "wrongOtp": "Wrong Otp",
-    "verified": "Verified",
-    "verify": "Verify"
+    "title": "صفحة التحقق",
+    "verification": "التحقق",
+    "enterTheCodeSentToTheNumber": "أدخل الرمز المرسل إلى الرقم",
+    "didntReceiveCode": "لم تستلم الرمز",
+    "resend": "إعادة الإرسال",
+    "wrongOtp": "رمز تحقق خاطئ",
+    "verified": "تم التحقق",
+    "verify": "تحقق"
   },
   "categoryServices": {
-    "title": "Category Services",
-    "theServiceIdFieldIsRequired": "The service id field is required.",
-    "thePriceFieldIsRequired": "The price field is required.",
-    "theIsActiveFieldMustBeTrueOrFalse": "The is active field must be true or false.",
-    "serviceIsAlreadyAdded": "Service is already added",
-    "addService": "Add Service",
-    "price": "Price",
-    "isActive": "Is Active",
-    "durationInMinutes": "Duration In Minutes",
-    "durationInMinutesIsRequired": "Duration In Minutes Is Required",
-    "bufferInMinutes": "bufferInMinutes",
-    "bufferInMinutesIsRequired": "buffer In Minutes Is Required",
-    "notes": "Notes"
+    "title": "خدمات الفئة",
+    "theServiceIdFieldIsRequired": "معرّف الخدمة مطلوب.",
+    "thePriceFieldIsRequired": "حقل السعر مطلوب.",
+    "theIsActiveFieldMustBeTrueOrFalse": "يجب أن يكون حقل حالة التفعيل صحيحاً أو خاطئاً.",
+    "serviceIsAlreadyAdded": "تمت إضافة الخدمة بالفعل",
+    "addService": "إضافة خدمة",
+    "price": "السعر",
+    "isActive": "مفعل",
+    "durationInMinutes": "المدة بالدقائق",
+    "durationInMinutesIsRequired": "المدة بالدقائق مطلوبة",
+    "bufferInMinutes": "الفاصل بالدقائق",
+    "bufferInMinutesIsRequired": "الفاصل بالدقائق مطلوب",
+    "notes": "ملاحظات"
   }
 }

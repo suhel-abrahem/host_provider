@@ -10,6 +10,7 @@ import '../../../../generated/locale_keys.g.dart';
 class AddButton extends StatefulWidget {
   final VoidCallback onPressed;
   final bool? validator;
+
   const AddButton({super.key, required this.onPressed, this.validator});
 
   @override

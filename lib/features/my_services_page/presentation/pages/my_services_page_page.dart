@@ -59,7 +59,12 @@ class _MyServicesPagePageState extends State<MyServicesPagePage> {
             BlocBuilder<MyServiceBloc, MyServiceState>(
               builder: (context, state) => state.when(
                 initial: () => SizedBox(),
-                noInternet: () => NoInternetStateWidget(),
+                noInternet: () => Expanded(
+                  child: NoInternetStateWidget(
+                    lottieHeight: 200.h,
+                    lottieWidth: 200.w,
+                  ),
+                ),
                 loading: () => Expanded(
                   child: Center(
                     child: SizedBox(
@@ -69,7 +74,12 @@ class _MyServicesPagePageState extends State<MyServicesPagePage> {
                     ),
                   ),
                 ),
-                getError: () => ErrorStateWidget(),
+                getError: () => Expanded(
+                  child: ErrorStateWidget(
+                    lottieHeight: 200.h,
+                    lottieWidth: 200.w,
+                  ),
+                ),
                 got: (data) => Expanded(
                   child: Padding(
                     padding: EdgeInsets.symmetric(horizontal: 20.w),
@@ -100,7 +110,12 @@ class _MyServicesPagePageState extends State<MyServicesPagePage> {
                   ),
                 ),
                 unAuthorized: () => SizedBox(),
-                noData: () => NodataStateWidget(),
+                noData: () => Expanded(
+                  child: NodataStateWidget(
+                    lottieHeight: 200.h,
+                    lottieWidth: 200.w,
+                  ),
+                ),
               ),
             ),
           ],
