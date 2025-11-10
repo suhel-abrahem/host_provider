@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$CustomerEntity {
 
- int? get id; String? get name; String? get email; String? get phone; AddressesEntity? get addresses;
+ int? get id; String? get name; String? get email; String? get phone; List<AddressesEntity>? get addresses; String? get avatar;
 /// Create a copy of CustomerEntity
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $CustomerEntityCopyWith<CustomerEntity> get copyWith => _$CustomerEntityCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is CustomerEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.email, email) || other.email == email)&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.addresses, addresses) || other.addresses == addresses));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is CustomerEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.email, email) || other.email == email)&&(identical(other.phone, phone) || other.phone == phone)&&const DeepCollectionEquality().equals(other.addresses, addresses)&&(identical(other.avatar, avatar) || other.avatar == avatar));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,email,phone,addresses);
+int get hashCode => Object.hash(runtimeType,id,name,email,phone,const DeepCollectionEquality().hash(addresses),avatar);
 
 @override
 String toString() {
-  return 'CustomerEntity(id: $id, name: $name, email: $email, phone: $phone, addresses: $addresses)';
+  return 'CustomerEntity(id: $id, name: $name, email: $email, phone: $phone, addresses: $addresses, avatar: $avatar)';
 }
 
 
@@ -48,11 +48,11 @@ abstract mixin class $CustomerEntityCopyWith<$Res>  {
   factory $CustomerEntityCopyWith(CustomerEntity value, $Res Function(CustomerEntity) _then) = _$CustomerEntityCopyWithImpl;
 @useResult
 $Res call({
- int? id, String? name, String? email, String? phone, AddressesEntity? addresses
+ int? id, String? name, String? email, String? phone, List<AddressesEntity>? addresses, String? avatar
 });
 
 
-$AddressesEntityCopyWith<$Res>? get addresses;
+
 
 }
 /// @nodoc
@@ -65,29 +65,18 @@ class _$CustomerEntityCopyWithImpl<$Res>
 
 /// Create a copy of CustomerEntity
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? name = freezed,Object? email = freezed,Object? phone = freezed,Object? addresses = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? name = freezed,Object? email = freezed,Object? phone = freezed,Object? addresses = freezed,Object? avatar = freezed,}) {
   return _then(_self.copyWith(
 id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int?,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String?,email: freezed == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as String?,phone: freezed == phone ? _self.phone : phone // ignore: cast_nullable_to_non_nullable
 as String?,addresses: freezed == addresses ? _self.addresses : addresses // ignore: cast_nullable_to_non_nullable
-as AddressesEntity?,
+as List<AddressesEntity>?,avatar: freezed == avatar ? _self.avatar : avatar // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
-/// Create a copy of CustomerEntity
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$AddressesEntityCopyWith<$Res>? get addresses {
-    if (_self.addresses == null) {
-    return null;
-  }
 
-  return $AddressesEntityCopyWith<$Res>(_self.addresses!, (value) {
-    return _then(_self.copyWith(addresses: value));
-  });
-}
 }
 
 
@@ -169,10 +158,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int? id,  String? name,  String? email,  String? phone,  AddressesEntity? addresses)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int? id,  String? name,  String? email,  String? phone,  List<AddressesEntity>? addresses,  String? avatar)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _CustomerEntity() when $default != null:
-return $default(_that.id,_that.name,_that.email,_that.phone,_that.addresses);case _:
+return $default(_that.id,_that.name,_that.email,_that.phone,_that.addresses,_that.avatar);case _:
   return orElse();
 
 }
@@ -190,10 +179,10 @@ return $default(_that.id,_that.name,_that.email,_that.phone,_that.addresses);cas
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int? id,  String? name,  String? email,  String? phone,  AddressesEntity? addresses)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int? id,  String? name,  String? email,  String? phone,  List<AddressesEntity>? addresses,  String? avatar)  $default,) {final _that = this;
 switch (_that) {
 case _CustomerEntity():
-return $default(_that.id,_that.name,_that.email,_that.phone,_that.addresses);case _:
+return $default(_that.id,_that.name,_that.email,_that.phone,_that.addresses,_that.avatar);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -210,10 +199,10 @@ return $default(_that.id,_that.name,_that.email,_that.phone,_that.addresses);cas
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int? id,  String? name,  String? email,  String? phone,  AddressesEntity? addresses)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int? id,  String? name,  String? email,  String? phone,  List<AddressesEntity>? addresses,  String? avatar)?  $default,) {final _that = this;
 switch (_that) {
 case _CustomerEntity() when $default != null:
-return $default(_that.id,_that.name,_that.email,_that.phone,_that.addresses);case _:
+return $default(_that.id,_that.name,_that.email,_that.phone,_that.addresses,_that.avatar);case _:
   return null;
 
 }
@@ -225,14 +214,23 @@ return $default(_that.id,_that.name,_that.email,_that.phone,_that.addresses);cas
 @JsonSerializable()
 
 class _CustomerEntity implements CustomerEntity {
-  const _CustomerEntity({this.id = 0, this.name = "", this.email = "", this.phone = "", this.addresses = const AddressesEntity()});
+  const _CustomerEntity({this.id = 0, this.name = "", this.email = "", this.phone = "", final  List<AddressesEntity>? addresses = const [], this.avatar = ""}): _addresses = addresses;
   factory _CustomerEntity.fromJson(Map<String, dynamic> json) => _$CustomerEntityFromJson(json);
 
 @override@JsonKey() final  int? id;
 @override@JsonKey() final  String? name;
 @override@JsonKey() final  String? email;
 @override@JsonKey() final  String? phone;
-@override@JsonKey() final  AddressesEntity? addresses;
+ final  List<AddressesEntity>? _addresses;
+@override@JsonKey() List<AddressesEntity>? get addresses {
+  final value = _addresses;
+  if (value == null) return null;
+  if (_addresses is EqualUnmodifiableListView) return _addresses;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(value);
+}
+
+@override@JsonKey() final  String? avatar;
 
 /// Create a copy of CustomerEntity
 /// with the given fields replaced by the non-null parameter values.
@@ -247,16 +245,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CustomerEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.email, email) || other.email == email)&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.addresses, addresses) || other.addresses == addresses));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CustomerEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.email, email) || other.email == email)&&(identical(other.phone, phone) || other.phone == phone)&&const DeepCollectionEquality().equals(other._addresses, _addresses)&&(identical(other.avatar, avatar) || other.avatar == avatar));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,email,phone,addresses);
+int get hashCode => Object.hash(runtimeType,id,name,email,phone,const DeepCollectionEquality().hash(_addresses),avatar);
 
 @override
 String toString() {
-  return 'CustomerEntity(id: $id, name: $name, email: $email, phone: $phone, addresses: $addresses)';
+  return 'CustomerEntity(id: $id, name: $name, email: $email, phone: $phone, addresses: $addresses, avatar: $avatar)';
 }
 
 
@@ -267,11 +265,11 @@ abstract mixin class _$CustomerEntityCopyWith<$Res> implements $CustomerEntityCo
   factory _$CustomerEntityCopyWith(_CustomerEntity value, $Res Function(_CustomerEntity) _then) = __$CustomerEntityCopyWithImpl;
 @override @useResult
 $Res call({
- int? id, String? name, String? email, String? phone, AddressesEntity? addresses
+ int? id, String? name, String? email, String? phone, List<AddressesEntity>? addresses, String? avatar
 });
 
 
-@override $AddressesEntityCopyWith<$Res>? get addresses;
+
 
 }
 /// @nodoc
@@ -284,30 +282,19 @@ class __$CustomerEntityCopyWithImpl<$Res>
 
 /// Create a copy of CustomerEntity
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? name = freezed,Object? email = freezed,Object? phone = freezed,Object? addresses = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? name = freezed,Object? email = freezed,Object? phone = freezed,Object? addresses = freezed,Object? avatar = freezed,}) {
   return _then(_CustomerEntity(
 id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int?,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String?,email: freezed == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as String?,phone: freezed == phone ? _self.phone : phone // ignore: cast_nullable_to_non_nullable
-as String?,addresses: freezed == addresses ? _self.addresses : addresses // ignore: cast_nullable_to_non_nullable
-as AddressesEntity?,
+as String?,addresses: freezed == addresses ? _self._addresses : addresses // ignore: cast_nullable_to_non_nullable
+as List<AddressesEntity>?,avatar: freezed == avatar ? _self.avatar : avatar // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 
-/// Create a copy of CustomerEntity
-/// with the given fields replaced by the non-null parameter values.
-@override
-@pragma('vm:prefer-inline')
-$AddressesEntityCopyWith<$Res>? get addresses {
-    if (_self.addresses == null) {
-    return null;
-  }
 
-  return $AddressesEntityCopyWith<$Res>(_self.addresses!, (value) {
-    return _then(_self.copyWith(addresses: value));
-  });
-}
 }
 
 // dart format on

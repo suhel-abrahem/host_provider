@@ -161,5 +161,24 @@ abstract class  LocaleKeys {
   static const categoryServices_bufferInMinutesIsRequired = 'categoryServices.bufferInMinutesIsRequired';
   static const categoryServices_notes = 'categoryServices.notes';
   static const categoryServices = 'categoryServices';
+  static const serviceDetailsPage_title = 'serviceDetailsPage.title';
+  static const serviceDetailsPage_description = 'serviceDetailsPage.description';
+  static const serviceDetailsPage_duration = 'serviceDetailsPage.duration';
+  static const serviceDetailsPage_bufferTime = 'serviceDetailsPage.bufferTime';
+  static const serviceDetailsPage_price = 'serviceDetailsPage.price';
+  static const serviceDetailsPage_clientInfo = 'serviceDetailsPage.clientInfo';
+  static const serviceDetailsPage_service = 'serviceDetailsPage.service';
+  static const serviceDetailsPage_clientName = 'serviceDetailsPage.clientName';
+  static const serviceDetailsPage_clientEmail = 'serviceDetailsPage.clientEmail';
+  static const serviceDetailsPage_clientPhone = 'serviceDetailsPage.clientPhone';
+  static const serviceDetailsPage_dateAndTime = 'serviceDetailsPage.dateAndTime';
+  static const serviceDetailsPage_notes = 'serviceDetailsPage.notes';
+  static const serviceDetailsPage_noNotes = 'serviceDetailsPage.noNotes';
+  static const serviceDetailsPage_clientAddress = 'serviceDetailsPage.clientAddress';
+  static const serviceDetailsPage_noAddress = 'serviceDetailsPage.noAddress';
+  static const serviceDetailsPage_showOnMap = 'serviceDetailsPage.showOnMap';
+  static const serviceDetailsPage_callClient = 'serviceDetailsPage.callClient';
+  static const serviceDetailsPage_cantShowMap = 'serviceDetailsPage.cantShowMap';
+  static const serviceDetailsPage = 'serviceDetailsPage';
 
 }

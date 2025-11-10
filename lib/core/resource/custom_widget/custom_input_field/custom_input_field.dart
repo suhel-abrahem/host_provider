@@ -110,7 +110,11 @@ class CustomInputField extends StatelessWidget {
           contentPadding:
               contentPadding ??
               EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
-          label: Helper.labelText(label: label, isRequired: isRequired),
+          label: Helper.labelText(
+            label: label,
+            isRequired: isRequired,
+            context: context,
+          ),
           suffixIcon: suffix != null
               ? Padding(
                   padding:
@@ -154,6 +158,7 @@ class CustomInputField extends StatelessWidget {
                       child: Helper.labelText(
                         label: outerLabel ?? '',
                         isRequired: isRequired,
+                        context: context,
                       ),
                     ),
                     field,
@@ -164,6 +169,7 @@ class CustomInputField extends StatelessWidget {
                     Padding(
                       padding: outerLabelPadding ?? EdgeInsets.zero,
                       child: Helper.labelText(
+                        context: context,
                         label: outerLabel ?? '',
                         isRequired: isRequired,
                       ),

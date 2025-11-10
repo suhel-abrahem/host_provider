@@ -168,5 +168,25 @@
     "bufferInMinutes": "الفاصل بالدقائق",
     "bufferInMinutesIsRequired": "الفاصل بالدقائق مطلوب",
     "notes": "ملاحظات"
+  },
+  "serviceDetailsPage": {
+    "title": "تفاصيل الخدمة",
+    "description": "الوصف",
+    "duration": "المدة",
+    "bufferTime": "وقت الفاصل",
+    "price": "السعر",
+    "clientInfo": "معلومات العميل",
+    "service": " الخدمة",
+    "clientName": " اسم العميل",
+    "clientEmail": " بريد العميل الإلكتروني",
+    "clientPhone": " هاتف العميل",
+    "dateAndTime": " تاريخ و وقت الحجز",
+    "notes": "ملاحظات",
+    "noNotes": "لا توجد ملاحظات",
+    "clientAddress": "عنوان العميل",
+    "noAddress": "لا يوجد عنوان",
+    "showOnMap": "عرض على الخريطة",
+    "callClient": "الاتصال بالعميل",
+    "cantShowMap": "لا يمكن عرض الخريطة"
   }
 }

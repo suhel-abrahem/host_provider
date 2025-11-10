@@ -122,7 +122,7 @@ return getBookings(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  started,TResult Function( GetBookingModel getBookingModel)?  getBookings,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  started,TResult Function( GetBookingModel? getBookingModel)?  getBookings,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case GetBookingEventStarted() when started != null:
 return started();case GetBookingEventGetBookings() when getBookings != null:
@@ -144,7 +144,7 @@ return getBookings(_that.getBookingModel);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  started,required TResult Function( GetBookingModel getBookingModel)  getBookings,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  started,required TResult Function( GetBookingModel? getBookingModel)  getBookings,}) {final _that = this;
 switch (_that) {
 case GetBookingEventStarted():
 return started();case GetBookingEventGetBookings():
@@ -165,7 +165,7 @@ return getBookings(_that.getBookingModel);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  started,TResult? Function( GetBookingModel getBookingModel)?  getBookings,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  started,TResult? Function( GetBookingModel? getBookingModel)?  getBookings,}) {final _that = this;
 switch (_that) {
 case GetBookingEventStarted() when started != null:
 return started();case GetBookingEventGetBookings() when getBookings != null:
@@ -216,7 +216,7 @@ class GetBookingEventGetBookings implements GetBookingEvent {
   const GetBookingEventGetBookings({required this.getBookingModel});
   
 
- final  GetBookingModel getBookingModel;
+ final  GetBookingModel? getBookingModel;
 
 /// Create a copy of GetBookingEvent
 /// with the given fields replaced by the non-null parameter values.
@@ -248,11 +248,11 @@ abstract mixin class $GetBookingEventGetBookingsCopyWith<$Res> implements $GetBo
   factory $GetBookingEventGetBookingsCopyWith(GetBookingEventGetBookings value, $Res Function(GetBookingEventGetBookings) _then) = _$GetBookingEventGetBookingsCopyWithImpl;
 @useResult
 $Res call({
- GetBookingModel getBookingModel
+ GetBookingModel? getBookingModel
 });
 
 
-$GetBookingModelCopyWith<$Res> get getBookingModel;
+$GetBookingModelCopyWith<$Res>? get getBookingModel;
 
 }
 /// @nodoc
@@ -265,10 +265,10 @@ class _$GetBookingEventGetBookingsCopyWithImpl<$Res>
 
 /// Create a copy of GetBookingEvent
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') $Res call({Object? getBookingModel = null,}) {
+@pragma('vm:prefer-inline') $Res call({Object? getBookingModel = freezed,}) {
   return _then(GetBookingEventGetBookings(
-getBookingModel: null == getBookingModel ? _self.getBookingModel : getBookingModel // ignore: cast_nullable_to_non_nullable
-as GetBookingModel,
+getBookingModel: freezed == getBookingModel ? _self.getBookingModel : getBookingModel // ignore: cast_nullable_to_non_nullable
+as GetBookingModel?,
   ));
 }
 
@@ -276,9 +276,12 @@ as GetBookingModel,
 /// with the given fields replaced by the non-null parameter values.
 @override
 @pragma('vm:prefer-inline')
-$GetBookingModelCopyWith<$Res> get getBookingModel {
-  
-  return $GetBookingModelCopyWith<$Res>(_self.getBookingModel, (value) {
+$GetBookingModelCopyWith<$Res>? get getBookingModel {
+    if (_self.getBookingModel == null) {
+    return null;
+  }
+
+  return $GetBookingModelCopyWith<$Res>(_self.getBookingModel!, (value) {
     return _then(_self.copyWith(getBookingModel: value));
   });
 }

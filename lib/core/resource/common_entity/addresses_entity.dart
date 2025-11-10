@@ -7,6 +7,8 @@ abstract class AddressesEntity with _$AddressesEntity {
   const factory AddressesEntity({
     @Default(0) int? id,
     @Default("") String? address,
+    @Default("") String? lat,
+    @Default("") String? lng,
   }) = _AddressesEntity;
   factory AddressesEntity.fromJson(Map<String, dynamic> json) =>
       _$AddressesEntityFromJson(json);

@@ -7,4 +7,5 @@ abstract class BookingRepository {
   Future<DataState<List<BookingEntity?>?>?> getBookings({
     GetBookingModel? getBookingModel,
   });
+  Future<DataState<BookingEntity?>?> set({GetBookingModel? getBookingModel});
 }

@@ -57,6 +57,7 @@ class Helper {
   }
 
   static RichText labelText({
+    required BuildContext context,
     String label = '',
     bool isRequired = true,
     TextStyle? labelStyle,
@@ -65,45 +66,16 @@ class Helper {
     return RichText(
       text: TextSpan(
         text: label,
-        style:
-            labelStyle ??
-            (navigatorKey.currentContext != null
-                ? (readText
-                          ? Theme.of(
-                              navigatorKey.currentContext!,
-                            ).textTheme.labelLarge?.copyWith(
-                              color: Theme.of(
-                                navigatorKey.currentContext!,
-                              ).colorScheme.error,
-                              fontFamily: FontConstants.fontFamily(
-                                navigatorKey.currentContext?.locale,
-                              ),
-                            )
-                          : Theme.of(
-                              navigatorKey.currentContext!,
-                            ).textTheme.labelLarge)
-                      ?.copyWith(
-                        fontFamily: FontConstants.fontFamily(
-                          navigatorKey.currentContext?.locale,
-                        ),
-                      )
-                : TextStyle(
-                    fontFamily: FontConstants.fontFamily(
-                      navigatorKey.currentContext?.locale,
-                    ),
-                    fontSize: 18.sp,
-                    fontWeight: FontWeight.w600,
-                    color: ColorManager.textColor,
-                  )),
+        style: Theme.of(context).textTheme.labelLarge?.copyWith(
+          color: readText ? Theme.of(context).colorScheme.error : null,
+          fontFamily: FontConstants.fontFamily(context.locale),
+        ),
+
         children: [
           if (isRequired && label.isNotEmpty)
             TextSpan(
               text: " *",
-              style: navigatorKey.currentContext != null
-                  ? Theme.of(
-                      navigatorKey.currentContext!,
-                    ).inputDecorationTheme.errorStyle
-                  : const TextStyle(color: ColorManager.error),
+              style: Theme.of(context).inputDecorationTheme.errorStyle,
             ),
         ],
       ),

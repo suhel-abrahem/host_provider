@@ -184,6 +184,26 @@ class CodegenLoader extends AssetLoader{
     "bufferInMinutes": "الفاصل بالدقائق",
     "bufferInMinutesIsRequired": "الفاصل بالدقائق مطلوب",
     "notes": "ملاحظات"
+  },
+  "serviceDetailsPage": {
+    "title": "تفاصيل الخدمة",
+    "description": "الوصف",
+    "duration": "المدة",
+    "bufferTime": "وقت الفاصل",
+    "price": "السعر",
+    "clientInfo": "معلومات العميل",
+    "service": " الخدمة",
+    "clientName": " اسم العميل",
+    "clientEmail": " بريد العميل الإلكتروني",
+    "clientPhone": " هاتف العميل",
+    "dateAndTime": " تاريخ و وقت الحجز",
+    "notes": "ملاحظات",
+    "noNotes": "لا توجد ملاحظات",
+    "clientAddress": "عنوان العميل",
+    "noAddress": "لا يوجد عنوان",
+    "showOnMap": "عرض على الخريطة",
+    "callClient": "الاتصال بالعميل",
+    "cantShowMap": "لا يمكن عرض الخريطة"
   }
 };
 static const Map<String,dynamic> _en = {
@@ -356,6 +376,26 @@ static const Map<String,dynamic> _en = {
     "bufferInMinutes": "Buffer (minutes)",
     "bufferInMinutesIsRequired": "Buffer (minutes) is required",
     "notes": "Notes"
+  },
+  "serviceDetailsPage": {
+    "title": "Service Details",
+    "description": "Description",
+    "duration": "Duration",
+    "bufferTime": "Buffer time",
+    "price": "Price",
+    "clientInfo": "Client information",
+    "service": " Service",
+    "clientName": " Client name",
+    "clientEmail": " Client email",
+    "clientPhone": " Client phone",
+    "dateAndTime": " Date and time",
+    "notes": "Notes",
+    "noNotes": "No notes",
+    "clientAddress": "Client address",
+    "noAddress": "No address",
+    "showOnMap": "Show on map",
+    "callClient": "Call client",
+    "cantShowMap": "Can't show map"
   }
 };
 static const Map<String,dynamic> _fa = {
@@ -527,6 +567,26 @@ static const Map<String,dynamic> _fa = {
     "bufferInMinutes": "ماوەی بەرز لە دقایق",
     "bufferInMinutesIsRequired": "ماوەی بەرز لە دقایق پێویستە",
     "notes": "تێبینی"
+  },
+  "serviceDetailsPage": {
+    "title": "وردەکاریی خزمەتگوزاری",
+    "description": "پێناسە",
+    "duration": "ماوە",
+    "bufferTime": "ماوەی بەرز",
+    "price": "قیمت",
+    "clientInfo": "زانیاریەکانی موشتەری",
+    "service": "خزمەتگوزاری",
+    "clientName": "ناوی موشتەری",
+    "clientEmail": "ئیمەیڵی موشتەری",
+    "clientPhone": "ژمارەی مۆبایلی موشتەری",
+    "dateAndTime": "ڕێکەوت و کات",
+    "notes": "تێبینی",
+    "noNotes": "هیچ تێبینییەک نیە",
+    "clientAddress": "ناونیشانی موشتەری",
+    "noAddress": "هیچ ناونیشانێک نیە",
+    "showOnMap": "نیشانبدە لەسەر نەخشە",
+    "callClient": "پەیوەندی بکە بە موشتەری",
+    "cantShowMap": "ناتوانرێت نەخشە نیشانبدرێت"
   }
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": _ar, "en": _en, "fa": _fa};

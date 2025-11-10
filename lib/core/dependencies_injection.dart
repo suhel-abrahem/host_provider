@@ -67,7 +67,9 @@ import '../features/booking_page/data/models/get_booking_model.dart';
 import '../features/booking_page/domain/entities/booking_entity.dart';
 import '../features/booking_page/domain/repositories/booking_repository.dart';
 import '../features/booking_page/domain/usecases/get_booking_usecase.dart';
+import '../features/booking_page/domain/usecases/set_booking_usecase.dart';
 import '../features/booking_page/presentation/bloc/get_booking_bloc.dart';
+import '../features/booking_page/presentation/bloc/set_booking_bloc.dart';
 import '../features/categories_page/presentation/bloc/categories_page_bloc.dart';
 import '../features/categories_page/domain/entities/category_entity.dart';
 import '../features/login_page/data/repositories/login_repository_implements.dart';
@@ -268,8 +270,15 @@ Future<void> initDependencies() async {
   getItInstance.registerSingleton<GetBookingUsecase>(
     GetBookingUsecase(getItInstance()),
   );
+  getItInstance.registerSingleton<SetBookingUsecase>(
+    SetBookingUsecase(getItInstance()),
+  );
   //bloc
   getItInstance.registerFactory<GetBookingBloc>(
     () => GetBookingBloc(getItInstance(), getItInstance()),
+  );
+
+  getItInstance.registerFactory<SetBookingBloc>(
+    () => SetBookingBloc(getItInstance(), getItInstance()),
   );
 }

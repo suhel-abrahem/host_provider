@@ -168,5 +168,25 @@
     "bufferInMinutes": "Buffer (minutes)",
     "bufferInMinutesIsRequired": "Buffer (minutes) is required",
     "notes": "Notes"
+  },
+  "serviceDetailsPage": {
+    "title": "Service Details",
+    "description": "Description",
+    "duration": "Duration",
+    "bufferTime": "Buffer time",
+    "price": "Price",
+    "clientInfo": "Client information",
+    "service": " Service",
+    "clientName": " Client name",
+    "clientEmail": " Client email",
+    "clientPhone": " Client phone",
+    "dateAndTime": " Date and time",
+    "notes": "Notes",
+    "noNotes": "No notes",
+    "clientAddress": "Client address",
+    "noAddress": "No address",
+    "showOnMap": "Show on map",
+    "callClient": "Call client",
+    "cantShowMap": "Can't show map"
   }
 }

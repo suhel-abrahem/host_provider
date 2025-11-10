@@ -10,7 +10,14 @@ _AddressesEntity _$AddressesEntityFromJson(Map<String, dynamic> json) =>
     _AddressesEntity(
       id: (json['id'] as num?)?.toInt() ?? 0,
       address: json['address'] as String? ?? "",
+      lat: json['lat'] as String? ?? "",
+      lng: json['lng'] as String? ?? "",
     );
 
 Map<String, dynamic> _$AddressesEntityToJson(_AddressesEntity instance) =>
-    <String, dynamic>{'id': instance.id, 'address': instance.address};
+    <String, dynamic>{
+      'id': instance.id,
+      'address': instance.address,
+      'lat': instance.lat,
+      'lng': instance.lng,
+    };

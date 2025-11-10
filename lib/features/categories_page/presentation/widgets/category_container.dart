@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hosta_provider/config/route/routes_manager.dart';
+import 'package:hosta_provider/core/constants/api_constant.dart';
 import 'package:hosta_provider/core/constants/font_constants.dart';
 import 'package:hosta_provider/features/categories_page/domain/entities/category_entity.dart';
 import 'package:hosta_provider/generated/locale_keys.g.dart';
@@ -17,6 +18,7 @@ class CategoryContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("categoryEntity: ${categoryEntity?.icon}");
     return ElevatedButton(
       onPressed: () {
         context.pushNamed(
@@ -43,7 +45,7 @@ class CategoryContainer extends StatelessWidget {
             width: 50.w,
             height: 50.h,
             progressIndicatorBuilder: (context, url, progress) =>
-                CircularProgressIndicator(),
+                CircularProgressIndicator(value: progress.progress),
             imageUrl: categoryEntity?.icon ?? "",
             errorWidget: (context, url, error) => Icon(
               Icons.error,

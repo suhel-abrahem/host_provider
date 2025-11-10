@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$AddressesEntity {
 
- int? get id; String? get address;
+ int? get id; String? get address; String? get lat; String? get lng;
 /// Create a copy of AddressesEntity
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $AddressesEntityCopyWith<AddressesEntity> get copyWith => _$AddressesEntityCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AddressesEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.address, address) || other.address == address));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AddressesEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.address, address) || other.address == address)&&(identical(other.lat, lat) || other.lat == lat)&&(identical(other.lng, lng) || other.lng == lng));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,address);
+int get hashCode => Object.hash(runtimeType,id,address,lat,lng);
 
 @override
 String toString() {
-  return 'AddressesEntity(id: $id, address: $address)';
+  return 'AddressesEntity(id: $id, address: $address, lat: $lat, lng: $lng)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $AddressesEntityCopyWith<$Res>  {
   factory $AddressesEntityCopyWith(AddressesEntity value, $Res Function(AddressesEntity) _then) = _$AddressesEntityCopyWithImpl;
 @useResult
 $Res call({
- int? id, String? address
+ int? id, String? address, String? lat, String? lng
 });
 
 
@@ -65,10 +65,12 @@ class _$AddressesEntityCopyWithImpl<$Res>
 
 /// Create a copy of AddressesEntity
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? address = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? address = freezed,Object? lat = freezed,Object? lng = freezed,}) {
   return _then(_self.copyWith(
 id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int?,address: freezed == address ? _self.address : address // ignore: cast_nullable_to_non_nullable
+as String?,lat: freezed == lat ? _self.lat : lat // ignore: cast_nullable_to_non_nullable
+as String?,lng: freezed == lng ? _self.lng : lng // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }
@@ -154,10 +156,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int? id,  String? address)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int? id,  String? address,  String? lat,  String? lng)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _AddressesEntity() when $default != null:
-return $default(_that.id,_that.address);case _:
+return $default(_that.id,_that.address,_that.lat,_that.lng);case _:
   return orElse();
 
 }
@@ -175,10 +177,10 @@ return $default(_that.id,_that.address);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int? id,  String? address)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int? id,  String? address,  String? lat,  String? lng)  $default,) {final _that = this;
 switch (_that) {
 case _AddressesEntity():
-return $default(_that.id,_that.address);case _:
+return $default(_that.id,_that.address,_that.lat,_that.lng);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -195,10 +197,10 @@ return $default(_that.id,_that.address);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int? id,  String? address)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int? id,  String? address,  String? lat,  String? lng)?  $default,) {final _that = this;
 switch (_that) {
 case _AddressesEntity() when $default != null:
-return $default(_that.id,_that.address);case _:
+return $default(_that.id,_that.address,_that.lat,_that.lng);case _:
   return null;
 
 }
@@ -210,11 +212,13 @@ return $default(_that.id,_that.address);case _:
 @JsonSerializable()
 
 class _AddressesEntity implements AddressesEntity {
-  const _AddressesEntity({this.id = 0, this.address = ""});
+  const _AddressesEntity({this.id = 0, this.address = "", this.lat = "", this.lng = ""});
   factory _AddressesEntity.fromJson(Map<String, dynamic> json) => _$AddressesEntityFromJson(json);
 
 @override@JsonKey() final  int? id;
 @override@JsonKey() final  String? address;
+@override@JsonKey() final  String? lat;
+@override@JsonKey() final  String? lng;
 
 /// Create a copy of AddressesEntity
 /// with the given fields replaced by the non-null parameter values.
@@ -229,16 +233,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AddressesEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.address, address) || other.address == address));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AddressesEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.address, address) || other.address == address)&&(identical(other.lat, lat) || other.lat == lat)&&(identical(other.lng, lng) || other.lng == lng));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,address);
+int get hashCode => Object.hash(runtimeType,id,address,lat,lng);
 
 @override
 String toString() {
-  return 'AddressesEntity(id: $id, address: $address)';
+  return 'AddressesEntity(id: $id, address: $address, lat: $lat, lng: $lng)';
 }
 
 
@@ -249,7 +253,7 @@ abstract mixin class _$AddressesEntityCopyWith<$Res> implements $AddressesEntity
   factory _$AddressesEntityCopyWith(_AddressesEntity value, $Res Function(_AddressesEntity) _then) = __$AddressesEntityCopyWithImpl;
 @override @useResult
 $Res call({
- int? id, String? address
+ int? id, String? address, String? lat, String? lng
 });
 
 
@@ -266,10 +270,12 @@ class __$AddressesEntityCopyWithImpl<$Res>
 
 /// Create a copy of AddressesEntity
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? address = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? address = freezed,Object? lat = freezed,Object? lng = freezed,}) {
   return _then(_AddressesEntity(
 id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int?,address: freezed == address ? _self.address : address // ignore: cast_nullable_to_non_nullable
+as String?,lat: freezed == lat ? _self.lat : lat // ignore: cast_nullable_to_non_nullable
+as String?,lng: freezed == lng ? _self.lng : lng // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }

@@ -10,7 +10,8 @@ abstract class CustomerEntity with _$CustomerEntity {
     @Default("") String? name,
     @Default("") String? email,
     @Default("") String? phone,
-    @Default(AddressesEntity()) AddressesEntity? addresses,
+    @Default([]) List<AddressesEntity>? addresses,
+    @Default("") String? avatar,
   }) = _CustomerEntity;
   factory CustomerEntity.fromJson(Map<String, dynamic> json) =>
       _$CustomerEntityFromJson(json);

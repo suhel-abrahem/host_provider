@@ -167,5 +167,25 @@
     "bufferInMinutes": "ماوەی بەرز لە دقایق",
     "bufferInMinutesIsRequired": "ماوەی بەرز لە دقایق پێویستە",
     "notes": "تێبینی"
+  },
+  "serviceDetailsPage": {
+    "title": "وردەکاریی خزمەتگوزاری",
+    "description": "پێناسە",
+    "duration": "ماوە",
+    "bufferTime": "ماوەی بەرز",
+    "price": "قیمت",
+    "clientInfo": "زانیاریەکانی موشتەری",
+    "service": "خزمەتگوزاری",
+    "clientName": "ناوی موشتەری",
+    "clientEmail": "ئیمەیڵی موشتەری",
+    "clientPhone": "ژمارەی مۆبایلی موشتەری",
+    "dateAndTime": "ڕێکەوت و کات",
+    "notes": "تێبینی",
+    "noNotes": "هیچ تێبینییەک نیە",
+    "clientAddress": "ناونیشانی موشتەری",
+    "noAddress": "هیچ ناونیشانێک نیە",
+    "showOnMap": "نیشانبدە لەسەر نەخشە",
+    "callClient": "پەیوەندی بکە بە موشتەری",
+    "cantShowMap": "ناتوانرێت نەخشە نیشانبدرێت"
   }
 }

@@ -7,6 +7,7 @@ import 'package:hosta_provider/config/app/app_preferences.dart';
 import 'package:hosta_provider/config/route/route_tracker.dart';
 import 'package:hosta_provider/core/dependencies_injection.dart';
 import 'package:hosta_provider/core/enums/login_state_enum.dart';
+import 'package:hosta_provider/features/booking_page/presentation/pages/service_info_page.dart';
 import 'package:hosta_provider/features/categories_page/domain/entities/category_entity.dart';
 import 'package:hosta_provider/features/categories_page/presentation/pages/categories_page_page.dart';
 import 'package:hosta_provider/features/category_services_page/presentation/pages/category_services_page_page.dart';
@@ -31,6 +32,7 @@ class RoutesName {
   static String firstUsePage = "firstUsePage";
   static String signupPage = "signupPage";
   static String bookingPage = "bookingPage";
+  static String serviceInfoPage = "serviceInfoPage";
   static String myServicesPage = "myServicesPage";
   static String profilePage = "profilePage";
   static String otpPage = "otpPage";
@@ -45,11 +47,12 @@ class RoutesPath {
   static String loginPage = '/login';
   static String firstUsePage = '/firstUse';
   static String signupPage = '/signup';
-  static String bookingPage = '/booking';
+  static String bookingPage = '/booking/:pageIndex';
   static String myServicesPage = '/myServices';
   static String profilePage = '/profile';
   static String otpPage = "/otpPage";
   static String categoryServicesPage = "/categoryServicesPage/:categoryEntity";
+  static String serviceInfoPage = "/serviceInfoPage/:serviceId";
 }
 
 GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -178,12 +181,29 @@ GoRouter goRouter = GoRouter(
               name: RoutesName.bookingPage,
               pageBuilder: (context, state) {
                 return _customTransitionPage(
-                  child: BookingPagePage(),
+                  child: BookingPagePage(
+                    initialIndex:
+                        int.tryParse(
+                          state.pathParameters["pageIndex"] ?? "0",
+                        ) ??
+                        0,
+                  ),
                   state: state,
                 );
               },
             ),
-
+            GoRoute(
+              path: RoutesPath.serviceInfoPage,
+              name: RoutesName.serviceInfoPage,
+              pageBuilder: (context, state) {
+                return _customTransitionPage(
+                  child: ServiceInfoPage(
+                    serviceId: state.pathParameters["serviceId"],
+                  ),
+                  state: state,
+                );
+              },
+            ),
             GoRoute(
               path: RoutesPath.profilePage,
               name: RoutesName.profilePage,

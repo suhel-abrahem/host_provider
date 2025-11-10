@@ -38,14 +38,18 @@ class BookingRepositoryImpl implements BookingRepository {
     try {
       await commonService
           .get(
-            ApiConstant.bookingEndpoint,
-            params: {"status": getBookingModel?.status ?? "ar"},
+            "${ApiConstant.bookingEndpoint}/${getBookingModel?.id}",
+            params: {"status": getBookingModel?.status ?? ""},
           )
           .then((onValue) {
-            print("get booking repo res${onValue}");
+            print("get booking repo res${onValue.data?.data["data"]}");
             if (onValue is DataSuccess) {
-              final List? rawBookings = onValue.data?.data["data"];
-
+              List? rawBookings;
+              if (onValue.data?.data["data"] is List) {
+                rawBookings = onValue.data?.data["data"];
+              } else {
+                rawBookings = [onValue.data?.data["data"]];
+              }
               List<BookingEntity?>? bookings = [];
               rawBookings?.forEach(
                 (action) => bookings.add(BookingEntity.fromJson(action)),
@@ -66,6 +70,58 @@ class BookingRepositoryImpl implements BookingRepository {
       response = DataFailed(error: e.toString());
       return response;
     }
+    return response;
+  }
+
+  @override
+  Future<DataState<BookingEntity?>?> set({
+    GetBookingModel? getBookingModel,
+  }) async {
+    ConnectivityResult? connectivityResult;
+    await _checkConnectivity.checkConnectivity().then(
+      (onValue) => connectivityResult = onValue.last,
+    );
+    if (connectivityResult == ConnectivityResult.none) {
+      return NOInternetDataState();
+    }
+    print("get booking repo res${getBookingModel}");
+    CommonService commonService = CommonService(
+      headers: {
+        "Authorization": "Bearer ${getBookingModel?.auth}",
+        "accept": "application/json",
+      },
+    );
+    DataState<BookingEntity?>? response;
+    try {
+      print(
+        "get booking repo res url${"${ApiConstant.bookingEndpoint}/${getBookingModel?.id}/${getBookingModel?.status}"}",
+      );
+      await commonService
+          .post(
+            "${ApiConstant.bookingEndpoint}/${getBookingModel?.id}/${getBookingModel?.status}",
+          )
+          .then((onValue) {
+            print("get booking repo res${onValue.data?.data["data"]}");
+            if (onValue is DataSuccess) {
+              print("get booking repo res raw${onValue.data?.data["data"]}");
+              response = DataSuccess(
+                data: BookingEntity.fromJson(onValue.data?.data["data"]),
+              );
+              return response;
+            } else if (onValue is UnauthenticatedDataState) {
+              response = UnauthenticatedDataState(error: onValue.error);
+              return response;
+            } else {
+              response = DataFailed(error: onValue.error);
+              return response;
+            }
+          });
+    } catch (e) {
+      print("get booking repo res yup catch");
+      response = DataFailed(error: e.toString());
+      return response;
+    }
+    print("get booking repo res final${response?.error}");
     return response;
   }
 }
