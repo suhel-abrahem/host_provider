@@ -1,0 +1,84 @@
+import 'package:bloc/bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:hosta_provider/features/login_page/domain/entities/login_state_entity.dart';
+import 'package:hosta_provider/features/profile_page/domain/repositories/profile_repository.dart';
+import 'package:hosta_provider/features/profile_page/domain/usecases/get_profile_usecase.dart';
+import 'package:hosta_provider/features/refresh_token/domain/usecases/refresh_token_usecase.dart';
+
+import '../../../../config/app/app_preferences.dart';
+import '../../../../core/data_state/data_state.dart';
+import '../../../../core/dependencies_injection.dart';
+import '../../../refresh_token/data/models/refresh_token_model.dart';
+import '../../data/models/profile_model.dart';
+import '../../domain/entities/profile_entity.dart';
+
+part 'get_profile_event.dart';
+part 'get_profile_state.dart';
+part 'get_profile_bloc.freezed.dart';
+
+class GetProfileBloc extends Bloc<GetProfileEvent, GetProfileState> {
+  final GetProfileUseCase _profileUsecase;
+  final RefreshTokenUsecase _refreshTokenUsecase;
+  GetProfileBloc(this._profileUsecase, this._refreshTokenUsecase)
+    : super(GetProfileState.initial()) {
+    on<GetProfileEventStarted>((event, emit) {
+      emit(GetProfileState.initial());
+    });
+    on<GetProfileEventGetProfile>((event, emit) async {
+      final LoginStateEntity? userInfo = getItInstance<AppPreferences>()
+          .getUserInfo();
+      emit(GetProfileState.loading());
+      await _refreshTokenUsecase
+          .call(
+            params: RefreshTokenModel(
+              token: userInfo?.access_token,
+              refresh_token: userInfo?.refresh_token,
+            ),
+          )
+          .then((onValue) async {
+            print(
+              "categoris page bloc get auth:${onValue?.data?.access_token}",
+            );
+            if (onValue is DataSuccess) {
+              print(
+                "bloc token: ${event.profileModel?.copyWith(authToken: onValue?.data?.access_token)}",
+              );
+              await _profileUsecase
+                  .call(
+                    params: event.profileModel?.copyWith(
+                      authToken: onValue?.data?.access_token,
+                    ),
+                  )
+                  .then((getServicesOnValue) {
+                    print(
+                      "category page bloc get Services:${getServicesOnValue?.error}",
+                    );
+                    if (getServicesOnValue is DataSuccess) {
+                      emit(
+                        GetProfileState.loaded(
+                          profileEntity: getServicesOnValue?.data,
+                        ),
+                      );
+                    } else if (getServicesOnValue is UnauthenticatedDataState) {
+                      emit(GetProfileState.unauthorized());
+                    } else if (getServicesOnValue is NOInternetDataState) {
+                      emit(GetProfileState.noInternet());
+                    } else if (onValue is DataFailed) {
+                      emit(GetProfileState.error());
+                    } else {
+                      emit(GetProfileState.error());
+                    }
+                  });
+            } else if (onValue is UnauthenticatedDataState) {
+              emit(GetProfileState.unauthorized());
+            } else if (onValue is NOInternetDataState) {
+              emit(GetProfileState.noInternet());
+            } else if (onValue is DataFailed) {
+              emit(GetProfileState.error());
+            } else {
+              emit(GetProfileState.error());
+            }
+          });
+    });
+  }
+}

@@ -74,6 +74,10 @@ import '../features/categories_page/presentation/bloc/categories_page_bloc.dart'
 import '../features/categories_page/domain/entities/category_entity.dart';
 import '../features/login_page/data/repositories/login_repository_implements.dart';
 import '../features/otp_page/data/repositories/otp_verify_repository_implements.dart';
+import '../features/profile_page/data/models/profile_model.dart';
+import '../features/profile_page/data/models/set_working_hours_model.dart';
+import '../features/profile_page/domain/entities/profile_entity.dart';
+import '../features/profile_page/domain/entities/working_hours_entity.dart';
 import '../features/refresh_token/data/repositories/refresh_token_repository_implements.dart';
 
 GetIt getItInstance = GetIt.instance;
@@ -281,4 +285,11 @@ Future<void> initDependencies() async {
   getItInstance.registerFactory<SetBookingBloc>(
     () => SetBookingBloc(getItInstance(), getItInstance()),
   );
+  // end of booking page
+  // profile page
+  //entities and models
+  getItInstance.registerSingleton<WorkingHoursEntity>(WorkingHoursEntity());
+  getItInstance.registerSingleton<SetWorkingHoursModel>(SetWorkingHoursModel());
+  getItInstance.registerSingleton<ProfileEntity>(ProfileEntity());
+  getItInstance.registerSingleton<ProfileModel>(ProfileModel());
 }

@@ -40,8 +40,6 @@ String getAssetsPath({
       output = '$assetsPath$imagePath$assetsName';
     case AssetsType.icon:
       output = '$assetsPath$iconPath$assetsName';
-    default:
-      output = '';
   }
   return output;
 }

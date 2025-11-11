@@ -1,0 +1,14 @@
+part of 'get_profile_bloc.dart';
+
+@freezed
+class GetProfileState with _$GetProfileState {
+  const factory GetProfileState.initial() = GetProfileStateInitial;
+  const factory GetProfileState.loading() = GetProfileStateLoading;
+  const factory GetProfileState.loaded({
+    required ProfileEntity? profileEntity,
+  }) = GetProfileStateLoaded;
+  const factory GetProfileState.error({String? message}) = GetProfileStateError;
+  const factory GetProfileState.noInternet() = GetProfileStateNoInternet;
+  const factory GetProfileState.noData() = GetProfileStateNoData;
+  const factory GetProfileState.unauthorized() = GetProfileStateUnauthorized;
+}
