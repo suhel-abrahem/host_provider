@@ -7,6 +7,8 @@ abstract class AddressesEntity with _$AddressesEntity {
   const factory AddressesEntity({
     @Default(0) int? id,
     @Default("") String? address,
+    @Default({}) Map<String, dynamic>? city,
+    @Default({}) Map<String, dynamic>? country,
     @Default("") String? lat,
     @Default("") String? lng,
   }) = _AddressesEntity;

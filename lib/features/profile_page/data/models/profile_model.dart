@@ -7,6 +7,7 @@ abstract class ProfileModel with _$ProfileModel {
   const factory ProfileModel({
     @Default("") String? acceptLanguage,
     @Default("") String? authToken,
+    @Default("") String? id,
   }) = _ProfileModel;
   factory ProfileModel.fromJson(Map<String, dynamic> json) =>
       _$ProfileModelFromJson(json);

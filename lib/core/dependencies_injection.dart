@@ -76,8 +76,12 @@ import '../features/login_page/data/repositories/login_repository_implements.dar
 import '../features/otp_page/data/repositories/otp_verify_repository_implements.dart';
 import '../features/profile_page/data/models/profile_model.dart';
 import '../features/profile_page/data/models/set_working_hours_model.dart';
+import '../features/profile_page/data/repositories/profile_repository_implements.dart';
 import '../features/profile_page/domain/entities/profile_entity.dart';
 import '../features/profile_page/domain/entities/working_hours_entity.dart';
+import '../features/profile_page/domain/repositories/profile_repository.dart';
+import '../features/profile_page/domain/usecases/get_profile_usecase.dart';
+import '../features/profile_page/presentation/bloc/get_profile_bloc.dart';
 import '../features/refresh_token/data/repositories/refresh_token_repository_implements.dart';
 
 GetIt getItInstance = GetIt.instance;
@@ -292,4 +296,16 @@ Future<void> initDependencies() async {
   getItInstance.registerSingleton<SetWorkingHoursModel>(SetWorkingHoursModel());
   getItInstance.registerSingleton<ProfileEntity>(ProfileEntity());
   getItInstance.registerSingleton<ProfileModel>(ProfileModel());
+  //repository
+  getItInstance.registerSingleton<ProfileRepository>(
+    ProfileRepositoryImplements(getItInstance()),
+  );
+  //usecase
+  getItInstance.registerSingleton<GetProfileUseCase>(
+    GetProfileUseCase(getItInstance()),
+  );
+  //bloc
+  getItInstance.registerFactory<GetProfileBloc>(
+    () => GetProfileBloc(getItInstance(), getItInstance()),
+  );
 }

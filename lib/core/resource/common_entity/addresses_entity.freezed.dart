@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$AddressesEntity {
 
- int? get id; String? get address; String? get lat; String? get lng;
+ int? get id; String? get address; Map<String, dynamic>? get city; Map<String, dynamic>? get country; String? get lat; String? get lng;
 /// Create a copy of AddressesEntity
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $AddressesEntityCopyWith<AddressesEntity> get copyWith => _$AddressesEntityCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is AddressesEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.address, address) || other.address == address)&&(identical(other.lat, lat) || other.lat == lat)&&(identical(other.lng, lng) || other.lng == lng));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is AddressesEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.address, address) || other.address == address)&&const DeepCollectionEquality().equals(other.city, city)&&const DeepCollectionEquality().equals(other.country, country)&&(identical(other.lat, lat) || other.lat == lat)&&(identical(other.lng, lng) || other.lng == lng));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,address,lat,lng);
+int get hashCode => Object.hash(runtimeType,id,address,const DeepCollectionEquality().hash(city),const DeepCollectionEquality().hash(country),lat,lng);
 
 @override
 String toString() {
-  return 'AddressesEntity(id: $id, address: $address, lat: $lat, lng: $lng)';
+  return 'AddressesEntity(id: $id, address: $address, city: $city, country: $country, lat: $lat, lng: $lng)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $AddressesEntityCopyWith<$Res>  {
   factory $AddressesEntityCopyWith(AddressesEntity value, $Res Function(AddressesEntity) _then) = _$AddressesEntityCopyWithImpl;
 @useResult
 $Res call({
- int? id, String? address, String? lat, String? lng
+ int? id, String? address, Map<String, dynamic>? city, Map<String, dynamic>? country, String? lat, String? lng
 });
 
 
@@ -65,11 +65,13 @@ class _$AddressesEntityCopyWithImpl<$Res>
 
 /// Create a copy of AddressesEntity
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? address = freezed,Object? lat = freezed,Object? lng = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? address = freezed,Object? city = freezed,Object? country = freezed,Object? lat = freezed,Object? lng = freezed,}) {
   return _then(_self.copyWith(
 id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int?,address: freezed == address ? _self.address : address // ignore: cast_nullable_to_non_nullable
-as String?,lat: freezed == lat ? _self.lat : lat // ignore: cast_nullable_to_non_nullable
+as String?,city: freezed == city ? _self.city : city // ignore: cast_nullable_to_non_nullable
+as Map<String, dynamic>?,country: freezed == country ? _self.country : country // ignore: cast_nullable_to_non_nullable
+as Map<String, dynamic>?,lat: freezed == lat ? _self.lat : lat // ignore: cast_nullable_to_non_nullable
 as String?,lng: freezed == lng ? _self.lng : lng // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
@@ -156,10 +158,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int? id,  String? address,  String? lat,  String? lng)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int? id,  String? address,  Map<String, dynamic>? city,  Map<String, dynamic>? country,  String? lat,  String? lng)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _AddressesEntity() when $default != null:
-return $default(_that.id,_that.address,_that.lat,_that.lng);case _:
+return $default(_that.id,_that.address,_that.city,_that.country,_that.lat,_that.lng);case _:
   return orElse();
 
 }
@@ -177,10 +179,10 @@ return $default(_that.id,_that.address,_that.lat,_that.lng);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int? id,  String? address,  String? lat,  String? lng)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int? id,  String? address,  Map<String, dynamic>? city,  Map<String, dynamic>? country,  String? lat,  String? lng)  $default,) {final _that = this;
 switch (_that) {
 case _AddressesEntity():
-return $default(_that.id,_that.address,_that.lat,_that.lng);case _:
+return $default(_that.id,_that.address,_that.city,_that.country,_that.lat,_that.lng);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -197,10 +199,10 @@ return $default(_that.id,_that.address,_that.lat,_that.lng);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int? id,  String? address,  String? lat,  String? lng)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int? id,  String? address,  Map<String, dynamic>? city,  Map<String, dynamic>? country,  String? lat,  String? lng)?  $default,) {final _that = this;
 switch (_that) {
 case _AddressesEntity() when $default != null:
-return $default(_that.id,_that.address,_that.lat,_that.lng);case _:
+return $default(_that.id,_that.address,_that.city,_that.country,_that.lat,_that.lng);case _:
   return null;
 
 }
@@ -212,11 +214,29 @@ return $default(_that.id,_that.address,_that.lat,_that.lng);case _:
 @JsonSerializable()
 
 class _AddressesEntity implements AddressesEntity {
-  const _AddressesEntity({this.id = 0, this.address = "", this.lat = "", this.lng = ""});
+  const _AddressesEntity({this.id = 0, this.address = "", final  Map<String, dynamic>? city = const {}, final  Map<String, dynamic>? country = const {}, this.lat = "", this.lng = ""}): _city = city,_country = country;
   factory _AddressesEntity.fromJson(Map<String, dynamic> json) => _$AddressesEntityFromJson(json);
 
 @override@JsonKey() final  int? id;
 @override@JsonKey() final  String? address;
+ final  Map<String, dynamic>? _city;
+@override@JsonKey() Map<String, dynamic>? get city {
+  final value = _city;
+  if (value == null) return null;
+  if (_city is EqualUnmodifiableMapView) return _city;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableMapView(value);
+}
+
+ final  Map<String, dynamic>? _country;
+@override@JsonKey() Map<String, dynamic>? get country {
+  final value = _country;
+  if (value == null) return null;
+  if (_country is EqualUnmodifiableMapView) return _country;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableMapView(value);
+}
+
 @override@JsonKey() final  String? lat;
 @override@JsonKey() final  String? lng;
 
@@ -233,16 +253,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AddressesEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.address, address) || other.address == address)&&(identical(other.lat, lat) || other.lat == lat)&&(identical(other.lng, lng) || other.lng == lng));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _AddressesEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.address, address) || other.address == address)&&const DeepCollectionEquality().equals(other._city, _city)&&const DeepCollectionEquality().equals(other._country, _country)&&(identical(other.lat, lat) || other.lat == lat)&&(identical(other.lng, lng) || other.lng == lng));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,address,lat,lng);
+int get hashCode => Object.hash(runtimeType,id,address,const DeepCollectionEquality().hash(_city),const DeepCollectionEquality().hash(_country),lat,lng);
 
 @override
 String toString() {
-  return 'AddressesEntity(id: $id, address: $address, lat: $lat, lng: $lng)';
+  return 'AddressesEntity(id: $id, address: $address, city: $city, country: $country, lat: $lat, lng: $lng)';
 }
 
 
@@ -253,7 +273,7 @@ abstract mixin class _$AddressesEntityCopyWith<$Res> implements $AddressesEntity
   factory _$AddressesEntityCopyWith(_AddressesEntity value, $Res Function(_AddressesEntity) _then) = __$AddressesEntityCopyWithImpl;
 @override @useResult
 $Res call({
- int? id, String? address, String? lat, String? lng
+ int? id, String? address, Map<String, dynamic>? city, Map<String, dynamic>? country, String? lat, String? lng
 });
 
 
@@ -270,11 +290,13 @@ class __$AddressesEntityCopyWithImpl<$Res>
 
 /// Create a copy of AddressesEntity
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? address = freezed,Object? lat = freezed,Object? lng = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? address = freezed,Object? city = freezed,Object? country = freezed,Object? lat = freezed,Object? lng = freezed,}) {
   return _then(_AddressesEntity(
 id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int?,address: freezed == address ? _self.address : address // ignore: cast_nullable_to_non_nullable
-as String?,lat: freezed == lat ? _self.lat : lat // ignore: cast_nullable_to_non_nullable
+as String?,city: freezed == city ? _self._city : city // ignore: cast_nullable_to_non_nullable
+as Map<String, dynamic>?,country: freezed == country ? _self._country : country // ignore: cast_nullable_to_non_nullable
+as Map<String, dynamic>?,lat: freezed == lat ? _self.lat : lat // ignore: cast_nullable_to_non_nullable
 as String?,lng: freezed == lng ? _self.lng : lng // ignore: cast_nullable_to_non_nullable
 as String?,
   ));

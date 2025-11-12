@@ -45,56 +45,51 @@ class _MainBottomBarState extends State<MainBottomBar> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.transparent,
-        boxShadow: [
-          BoxShadow(
-            color: Theme.of(context).colorScheme.shadow,
-            spreadRadius: 0.r,
-            blurRadius: 2.r,
-          ),
-        ],
-      ),
-      child: BottomNavigationBar(
-        elevation: 10.r,
+    return BottomNavigationBar(
+      elevation: 2.r,
+      backgroundColor: Colors.transparent,
+      currentIndex: _currentIndex ?? 0,
+      onTap: (newIndex) {
+        setState(() {
+          _currentIndex = newIndex;
+          context.push(_getPathByIndex(_currentIndex ?? 0));
+        });
+      },
 
-        currentIndex: _currentIndex ?? 0,
-        onTap: (newIndex) {
-          setState(() {
-            _currentIndex = newIndex;
-            context.push(_getPathByIndex(_currentIndex ?? 0));
-          });
-        },
-        backgroundColor: Theme.of(context).colorScheme.surface,
-        selectedItemColor: Theme.of(context).primaryColor,
-        unselectedItemColor: Theme.of(context).textTheme.labelLarge?.color,
-        items: [
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.home_outlined),
-            activeIcon: const Icon(Icons.home),
-            label: LocaleKeys.homePage_label.tr(),
-            tooltip: LocaleKeys.homePage_title.tr(),
-          ),
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.calendar_today_outlined),
-            activeIcon: const Icon(Icons.calendar_today),
-            label: LocaleKeys.bookingPage_label.tr(),
-            tooltip: LocaleKeys.bookingPage_title.tr(),
-          ),
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.miscellaneous_services_outlined),
-            activeIcon: const Icon(Icons.miscellaneous_services),
-            label: LocaleKeys.myServicesPage_label.tr(),
-            tooltip: LocaleKeys.myServicesPage_title.tr(),
-          ),
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.person_outline),
-            activeIcon: const Icon(Icons.person),
-            label: LocaleKeys.profilePage_label.tr(),
-          ),
-        ],
-      ),
+      selectedItemColor: Theme.of(context).primaryColor,
+      unselectedItemColor: Theme.of(context).textTheme.labelLarge?.color,
+      items: [
+        BottomNavigationBarItem(
+          icon: const Icon(Icons.home_outlined),
+          activeIcon: const Icon(Icons.home),
+          label: LocaleKeys.homePage_label.tr(),
+          tooltip: LocaleKeys.homePage_title.tr(),
+        ),
+        BottomNavigationBarItem(
+          icon: const Icon(Icons.calendar_today_outlined),
+          activeIcon: const Icon(Icons.calendar_today),
+          label: LocaleKeys.bookingPage_label.tr(),
+          tooltip: LocaleKeys.bookingPage_title.tr(),
+        ),
+        BottomNavigationBarItem(
+          icon: const Icon(Icons.miscellaneous_services_outlined),
+          activeIcon: const Icon(Icons.miscellaneous_services),
+          label: LocaleKeys.myServicesPage_label.tr(),
+          tooltip: LocaleKeys.myServicesPage_title.tr(),
+        ),
+        BottomNavigationBarItem(
+          icon: const Icon(Icons.person_outline),
+          activeIcon: const Icon(Icons.person),
+          label: LocaleKeys.profilePage_label.tr(),
+        ),
+      ],
+    ).asGlass(
+      tintColor: Theme.of(
+        context,
+      ).scaffoldBackgroundColor.withValues(alpha: 0.3),
+      blurX: 10,
+      blurY: 10,
+      clipBorderRadius: BorderRadius.zero,
     );
   }
 }

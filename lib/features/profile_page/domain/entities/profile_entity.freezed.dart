@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ProfileEntity {
 
- int? get id; String? get name; String? get email; String? get phone; String? get dob; Map<String, dynamic>? get addresses;
+ int? get id; String? get name; String? get email; String? get phone; String? get dob; List? get addresses;
 /// Create a copy of ProfileEntity
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $ProfileEntityCopyWith<$Res>  {
   factory $ProfileEntityCopyWith(ProfileEntity value, $Res Function(ProfileEntity) _then) = _$ProfileEntityCopyWithImpl;
 @useResult
 $Res call({
- int? id, String? name, String? email, String? phone, String? dob, Map<String, dynamic>? addresses
+ int? id, String? name, String? email, String? phone, String? dob, List? addresses
 });
 
 
@@ -73,7 +73,7 @@ as String?,email: freezed == email ? _self.email : email // ignore: cast_nullabl
 as String?,phone: freezed == phone ? _self.phone : phone // ignore: cast_nullable_to_non_nullable
 as String?,dob: freezed == dob ? _self.dob : dob // ignore: cast_nullable_to_non_nullable
 as String?,addresses: freezed == addresses ? _self.addresses : addresses // ignore: cast_nullable_to_non_nullable
-as Map<String, dynamic>?,
+as List?,
   ));
 }
 
@@ -158,7 +158,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int? id,  String? name,  String? email,  String? phone,  String? dob,  Map<String, dynamic>? addresses)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int? id,  String? name,  String? email,  String? phone,  String? dob,  List? addresses)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ProfileEntity() when $default != null:
 return $default(_that.id,_that.name,_that.email,_that.phone,_that.dob,_that.addresses);case _:
@@ -179,7 +179,7 @@ return $default(_that.id,_that.name,_that.email,_that.phone,_that.dob,_that.addr
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int? id,  String? name,  String? email,  String? phone,  String? dob,  Map<String, dynamic>? addresses)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int? id,  String? name,  String? email,  String? phone,  String? dob,  List? addresses)  $default,) {final _that = this;
 switch (_that) {
 case _ProfileEntity():
 return $default(_that.id,_that.name,_that.email,_that.phone,_that.dob,_that.addresses);case _:
@@ -199,7 +199,7 @@ return $default(_that.id,_that.name,_that.email,_that.phone,_that.dob,_that.addr
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int? id,  String? name,  String? email,  String? phone,  String? dob,  Map<String, dynamic>? addresses)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int? id,  String? name,  String? email,  String? phone,  String? dob,  List? addresses)?  $default,) {final _that = this;
 switch (_that) {
 case _ProfileEntity() when $default != null:
 return $default(_that.id,_that.name,_that.email,_that.phone,_that.dob,_that.addresses);case _:
@@ -214,7 +214,7 @@ return $default(_that.id,_that.name,_that.email,_that.phone,_that.dob,_that.addr
 @JsonSerializable()
 
 class _ProfileEntity implements ProfileEntity {
-  const _ProfileEntity({this.id = 0, this.name = "", this.email = "", this.phone = "", this.dob = "", final  Map<String, dynamic>? addresses = const {}}): _addresses = addresses;
+  const _ProfileEntity({this.id = 0, this.name = "", this.email = "", this.phone = "", this.dob = "", final  List? addresses = const []}): _addresses = addresses;
   factory _ProfileEntity.fromJson(Map<String, dynamic> json) => _$ProfileEntityFromJson(json);
 
 @override@JsonKey() final  int? id;
@@ -222,13 +222,13 @@ class _ProfileEntity implements ProfileEntity {
 @override@JsonKey() final  String? email;
 @override@JsonKey() final  String? phone;
 @override@JsonKey() final  String? dob;
- final  Map<String, dynamic>? _addresses;
-@override@JsonKey() Map<String, dynamic>? get addresses {
+ final  List? _addresses;
+@override@JsonKey() List? get addresses {
   final value = _addresses;
   if (value == null) return null;
-  if (_addresses is EqualUnmodifiableMapView) return _addresses;
+  if (_addresses is EqualUnmodifiableListView) return _addresses;
   // ignore: implicit_dynamic_type
-  return EqualUnmodifiableMapView(value);
+  return EqualUnmodifiableListView(value);
 }
 
 
@@ -265,7 +265,7 @@ abstract mixin class _$ProfileEntityCopyWith<$Res> implements $ProfileEntityCopy
   factory _$ProfileEntityCopyWith(_ProfileEntity value, $Res Function(_ProfileEntity) _then) = __$ProfileEntityCopyWithImpl;
 @override @useResult
 $Res call({
- int? id, String? name, String? email, String? phone, String? dob, Map<String, dynamic>? addresses
+ int? id, String? name, String? email, String? phone, String? dob, List? addresses
 });
 
 
@@ -290,7 +290,7 @@ as String?,email: freezed == email ? _self.email : email // ignore: cast_nullabl
 as String?,phone: freezed == phone ? _self.phone : phone // ignore: cast_nullable_to_non_nullable
 as String?,dob: freezed == dob ? _self.dob : dob // ignore: cast_nullable_to_non_nullable
 as String?,addresses: freezed == addresses ? _self._addresses : addresses // ignore: cast_nullable_to_non_nullable
-as Map<String, dynamic>?,
+as List?,
   ));
 }
 

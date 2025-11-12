@@ -169,7 +169,16 @@
     "subject": "Subject",
     "subjectIsRequired": "Subject is required",
     "messageIsRequired": "Message is required",
-    "contactInfo": "Contact information"
+    "contactInfo": "Contact information",
+    "account": "Account",
+    "manageYourAccountInformation": "Manage your account information",
+    "settingsAndPreferences": "Settings and preferences",
+    "languageAndTheme": "Language and theme",
+    "contactAsForAssistance": "Contact us for assistance",
+    "signOutOfYourAccount": "Sign out of your account",
+    "languageChangedSuccessfully": "Language changed successfully",
+    "themeChangedSuccessfully": "Theme changed successfully",
+    "languagesIspeak": "Languages I speak"
   },
   "myServicesPage": {
     "title": "My services page",

@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:glass/glass.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hosta_provider/config/theme/app_theme.dart';
 import 'package:hosta_provider/core/dependencies_injection.dart';
 import 'package:hosta_provider/core/resource/common_entity/customer_entity.dart';
 import 'package:hosta_provider/core/resource/common_state_widget/error_state_widget.dart';
@@ -118,53 +119,62 @@ class _ServiceInfoPageState extends State<ServiceInfoPage> {
                                     ),
                                     Padding(
                                       padding: EdgeInsets.only(top: 12.h),
-                                      child: Container(
-                                        width: double.maxFinite,
-                                        padding: EdgeInsets.symmetric(
-                                          horizontal: 16.w,
-                                          vertical: 12.h,
-                                        ),
-                                        decoration: BoxDecoration(
-                                          color: Theme.of(context)
-                                              .colorScheme
-                                              .primaryContainer
-                                              .withValues(alpha: 0.6),
-                                          borderRadius: BorderRadius.circular(
-                                            12.r,
-                                          ),
-                                        ),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              data?.last?.notes ??
-                                                  LocaleKeys
-                                                      .serviceDetailsPage_noNotes
-                                                      .tr(),
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .labelMedium
-                                                  ?.copyWith(
-                                                    fontFamily:
-                                                        FontConstants.fontFamily(
-                                                          context.locale,
-                                                        ),
-                                                  ),
+                                      child:
+                                          Container(
+                                            width: double.maxFinite,
+                                            padding: EdgeInsets.symmetric(
+                                              horizontal: 16.w,
+                                              vertical: 12.h,
                                             ),
-                                          ],
-                                        ),
-                                      ),
+
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  data?.last?.notes ??
+                                                      LocaleKeys
+                                                          .serviceDetailsPage_noNotes
+                                                          .tr(),
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .labelMedium
+                                                      ?.copyWith(
+                                                        fontFamily:
+                                                            FontConstants.fontFamily(
+                                                              context.locale,
+                                                            ),
+                                                      ),
+                                                ),
+                                              ],
+                                            ),
+                                          ).asGlass(
+                                            frosted: true,
+                                            blurX: 18,
+                                            blurY: 18,
+                                            tintColor: Theme.of(context)
+                                                .colorScheme
+                                                .primaryContainer
+                                                .withValues(alpha: 0.9),
+                                            clipBorderRadius:
+                                                BorderRadius.circular(12.r),
+                                            border: Theme.of(
+                                              context,
+                                            ).defaultBorderSide,
+                                          ),
                                     ),
                                   ],
                                 ),
                               ).asGlass(
-                                tintColor: Theme.of(
-                                  context,
-                                ).colorScheme.primaryContainer,
+                                frosted: true,
+                                blurX: 8,
+                                blurY: 8,
+                                tintColor: Theme.of(context)
+                                    .colorScheme
+                                    .primaryContainer
+                                    .withValues(alpha: 0.9),
                                 clipBorderRadius: BorderRadius.circular(12.r),
-                                blurX: 3,
-                                blurY: 3,
+                                border: Theme.of(context).defaultBorderSide,
                               ),
                         ),
                         Padding(

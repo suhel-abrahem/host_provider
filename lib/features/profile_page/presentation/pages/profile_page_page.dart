@@ -1,5 +1,25 @@
+import 'package:bloc/bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:glass/glass.dart';
+import 'package:go_router/go_router.dart';
+import 'package:hosta_provider/config/theme/app_theme.dart';
+import 'package:hosta_provider/core/resource/common_entity/addresses_entity.dart';
+import 'package:hosta_provider/core/resource/common_state_widget/no_data_state_widget.dart';
+import 'package:hosta_provider/core/resource/common_state_widget/no_internet_state_widget.dart';
 import 'package:hosta_provider/core/resource/main_page/main_page.dart';
+import 'package:hosta_provider/core/util/helper/helper.dart';
+import 'package:hosta_provider/features/profile_page/presentation/widgets/user_info_container_widget.dart';
+
+import '../../../../config/route/routes_manager.dart';
+import '../../../../core/constants/font_constants.dart';
+import '../../../../core/dependencies_injection.dart';
+import '../../../../core/resource/common_state_widget/error_state_widget.dart';
+import '../../../../generated/locale_keys.g.dart';
+import '../../data/models/profile_model.dart';
+import '../bloc/get_profile_bloc.dart';
 
 class ProfilePagePage extends StatefulWidget {
   const ProfilePagePage({super.key});
@@ -9,10 +29,418 @@ class ProfilePagePage extends StatefulWidget {
 }
 
 class _ProfilePagePageState extends State<ProfilePagePage> {
+  ProfileModel profileModel = ProfileModel();
+  @override
+  void didChangeDependencies() {
+    profileModel = profileModel.copyWith(
+      acceptLanguage: Helper.getCountryCode(context),
+    );
+
+    super.didChangeDependencies();
+  }
+
+  @override
+  void didUpdateWidget(covariant ProfilePagePage oldWidget) {
+    profileModel = profileModel.copyWith(
+      acceptLanguage: Helper.getCountryCode(context),
+    );
+    super.didUpdateWidget(oldWidget);
+  }
+
   @override
   Widget build(BuildContext context) {
     return MainPage(
-      body: ListView(children: [Center(child: Text("Profile Page"))]),
+      title: LocaleKeys.profilePage_title.tr(),
+      body: BlocProvider<GetProfileBloc>(
+        create: (context) =>
+            getItInstance<GetProfileBloc>()
+              ..add(GetProfileEvent.getProfile(profileModel: profileModel)),
+        child: ListView(
+          children: [
+            BlocBuilder<GetProfileBloc, GetProfileState>(
+              builder: (context, state) {
+                return state.when(
+                  initial: () => Center(child: ErrorStateWidget()),
+                  loading: () => Center(child: CircularProgressIndicator()),
+                  loaded: (data) => Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 20.w,
+                      vertical: 20.h,
+                    ),
+                    child: UserInfoContainerWidget(
+                      profileEntity: data,
+                      addressesEntity: AddressesEntity.fromJson(
+                        data?.addresses?.first,
+                      ),
+                    ),
+                  ),
+                  error: (error) => Center(child: ErrorStateWidget()),
+                  noInternet: () => Center(child: NoInternetStateWidget()),
+                  noData: () => Center(child: NodataStateWidget()),
+                  unauthorized: () => Center(child: ErrorStateWidget()),
+                );
+              },
+            ),
+            Padding(
+              padding: EdgeInsetsGeometry.symmetric(
+                vertical: 20.h,
+                horizontal: 20.w,
+              ),
+              child: Text(
+                LocaleKeys.profilePage_myAccount.tr(),
+                style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                  fontFamily: FontConstants.fontFamily(context.locale),
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              child: ElevatedButton(
+                onPressed: () {
+                  context.pushNamed(RoutesName.accountPage);
+                },
+                style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
+                  backgroundColor: WidgetStatePropertyAll(Colors.transparent),
+                  shadowColor: WidgetStatePropertyAll(Colors.transparent),
+                  padding: WidgetStatePropertyAll(EdgeInsets.zero),
+                ),
+                child:
+                    Container(
+                      padding: EdgeInsets.symmetric(
+                        vertical: 16.h,
+                        horizontal: 16.w,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 4.w,
+                              vertical: 4.h,
+                            ),
+                            child: Icon(
+                              Icons.account_circle_outlined,
+                              color: Theme.of(context).primaryColor,
+                              size: 24.r,
+                            ),
+                          ).asGlass(
+                            frosted: true,
+                            blurX: 28,
+                            blurY: 28,
+                            tintColor: Theme.of(context)
+                                .colorScheme
+                                .primaryContainer
+                                .withValues(alpha: 0.9),
+                            clipBorderRadius: BorderRadius.circular(12.r),
+                            border: Theme.of(context).defaultBorderSide,
+                          ),
+                          SizedBox(
+                            width: 220.w,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  LocaleKeys.profilePage_account.tr(),
+                                  style: Theme.of(context).textTheme.labelLarge
+                                      ?.copyWith(
+                                        fontFamily: FontConstants.fontFamily(
+                                          context.locale,
+                                        ),
+                                      ),
+                                ),
+                                Text(
+                                  LocaleKeys
+                                      .profilePage_manageYourAccountInformation
+                                      .tr(),
+                                  style: Theme.of(context).textTheme.labelSmall
+                                      ?.copyWith(
+                                        fontFamily: FontConstants.fontFamily(
+                                          context.locale,
+                                        ),
+                                      ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Icon(
+                            Icons.arrow_forward_ios,
+                            color: Theme.of(context).iconTheme.color,
+                            size: 16.r,
+                          ),
+                        ],
+                      ),
+                    ).asGlass(
+                      frosted: true,
+                      blurX: 8,
+                      blurY: 8,
+                      tintColor: Theme.of(
+                        context,
+                      ).colorScheme.primaryContainer.withValues(alpha: 0.9),
+                      clipBorderRadius: BorderRadius.circular(12.r),
+                      border: Theme.of(context).defaultBorderSide,
+                    ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.h),
+              child: ElevatedButton(
+                onPressed: () {},
+                style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
+                  backgroundColor: WidgetStatePropertyAll(Colors.transparent),
+                  shadowColor: WidgetStatePropertyAll(Colors.transparent),
+                  padding: WidgetStatePropertyAll(EdgeInsets.zero),
+                ),
+                child:
+                    Container(
+                      padding: EdgeInsets.symmetric(
+                        vertical: 16.h,
+                        horizontal: 16.w,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 4.w,
+                              vertical: 4.h,
+                            ),
+                            child: Icon(
+                              Icons.settings_outlined,
+                              color: Theme.of(context).primaryColor,
+                              size: 24.r,
+                            ),
+                          ).asGlass(
+                            frosted: true,
+                            blurX: 28,
+                            blurY: 28,
+                            tintColor: Theme.of(context)
+                                .colorScheme
+                                .primaryContainer
+                                .withValues(alpha: 0.9),
+                            clipBorderRadius: BorderRadius.circular(12.r),
+                            border: Theme.of(context).defaultBorderSide,
+                          ),
+                          SizedBox(
+                            width: 220.w,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  LocaleKeys.profilePage_settings.tr(),
+                                  style: Theme.of(context).textTheme.labelLarge
+                                      ?.copyWith(
+                                        fontFamily: FontConstants.fontFamily(
+                                          context.locale,
+                                        ),
+                                      ),
+                                ),
+                                Text(
+                                  LocaleKeys.profilePage_languageAndTheme.tr(),
+                                  style: Theme.of(context).textTheme.labelSmall
+                                      ?.copyWith(
+                                        fontFamily: FontConstants.fontFamily(
+                                          context.locale,
+                                        ),
+                                      ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Icon(
+                            Icons.arrow_forward_ios,
+                            color: Theme.of(context).iconTheme.color,
+                            size: 16.r,
+                          ),
+                        ],
+                      ),
+                    ).asGlass(
+                      frosted: true,
+                      blurX: 8,
+                      blurY: 8,
+                      tintColor: Theme.of(
+                        context,
+                      ).colorScheme.primaryContainer.withValues(alpha: 0.9),
+                      clipBorderRadius: BorderRadius.circular(12.r),
+                      border: Theme.of(context).defaultBorderSide,
+                    ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              child: ElevatedButton(
+                onPressed: () {},
+                style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
+                  backgroundColor: WidgetStatePropertyAll(Colors.transparent),
+                  shadowColor: WidgetStatePropertyAll(Colors.transparent),
+                  padding: WidgetStatePropertyAll(EdgeInsets.zero),
+                ),
+                child:
+                    Container(
+                      padding: EdgeInsets.symmetric(
+                        vertical: 16.h,
+                        horizontal: 16.w,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 4.w,
+                              vertical: 4.h,
+                            ),
+                            child: Icon(
+                              Icons.help_outline,
+                              color: Theme.of(context).primaryColor,
+                              size: 24.r,
+                            ),
+                          ).asGlass(
+                            frosted: true,
+                            blurX: 28,
+                            blurY: 28,
+                            tintColor: Theme.of(context)
+                                .colorScheme
+                                .primaryContainer
+                                .withValues(alpha: 0.9),
+                            clipBorderRadius: BorderRadius.circular(12.r),
+                            border: Theme.of(context).defaultBorderSide,
+                          ),
+                          SizedBox(
+                            width: 220.w,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  LocaleKeys.profilePage_helpAndSupport.tr(),
+                                  style: Theme.of(context).textTheme.labelLarge
+                                      ?.copyWith(
+                                        fontFamily: FontConstants.fontFamily(
+                                          context.locale,
+                                        ),
+                                      ),
+                                ),
+                                Text(
+                                  LocaleKeys.profilePage_contactAsForAssistance
+                                      .tr(),
+                                  style: Theme.of(context).textTheme.labelSmall
+                                      ?.copyWith(
+                                        fontFamily: FontConstants.fontFamily(
+                                          context.locale,
+                                        ),
+                                      ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Icon(
+                            Icons.arrow_forward_ios,
+                            color: Theme.of(context).iconTheme.color,
+                            size: 16.r,
+                          ),
+                        ],
+                      ),
+                    ).asGlass(
+                      frosted: true,
+                      blurX: 8,
+                      blurY: 8,
+                      tintColor: Theme.of(
+                        context,
+                      ).colorScheme.primaryContainer.withValues(alpha: 0.9),
+                      clipBorderRadius: BorderRadius.circular(12.r),
+                      border: Theme.of(context).defaultBorderSide,
+                    ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 50.h),
+              child: ElevatedButton(
+                onPressed: () {},
+                style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
+                  backgroundColor: WidgetStatePropertyAll(Colors.transparent),
+                  shadowColor: WidgetStatePropertyAll(Colors.transparent),
+                  padding: WidgetStatePropertyAll(EdgeInsets.zero),
+                ),
+                child:
+                    Container(
+                      padding: EdgeInsets.symmetric(
+                        vertical: 16.h,
+                        horizontal: 16.w,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Container(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 4.w,
+                              vertical: 4.h,
+                            ),
+                            child: Icon(
+                              Icons.logout_outlined,
+                              color: Theme.of(context).colorScheme.error,
+                              size: 24.r,
+                            ),
+                          ).asGlass(
+                            frosted: true,
+                            blurX: 28,
+                            blurY: 28,
+                            tintColor: Theme.of(
+                              context,
+                            ).colorScheme.error.withValues(alpha: 0.9),
+                            clipBorderRadius: BorderRadius.circular(12.r),
+                            border: Theme.of(context).defaultBorderSideError,
+                          ),
+                          SizedBox(
+                            width: 220.w,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  LocaleKeys.profilePage_logout.tr(),
+                                  style: Theme.of(context).textTheme.labelLarge
+                                      ?.copyWith(
+                                        fontFamily: FontConstants.fontFamily(
+                                          context.locale,
+                                        ),
+                                      ),
+                                ),
+                                Text(
+                                  LocaleKeys.profilePage_signOutOfYourAccount
+                                      .tr(),
+                                  style: Theme.of(context).textTheme.labelSmall
+                                      ?.copyWith(
+                                        fontFamily: FontConstants.fontFamily(
+                                          context.locale,
+                                        ),
+                                      ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Icon(
+                            Icons.arrow_forward_ios,
+                            color: Theme.of(context).iconTheme.color,
+                            size: 16.r,
+                          ),
+                        ],
+                      ),
+                    ).asGlass(
+                      frosted: true,
+                      blurX: 8,
+                      blurY: 8,
+                      tintColor: Theme.of(
+                        context,
+                      ).colorScheme.error.withValues(alpha: 0.9),
+                      clipBorderRadius: BorderRadius.circular(12.r),
+                      border: Theme.of(context).defaultBorderSideError,
+                    ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

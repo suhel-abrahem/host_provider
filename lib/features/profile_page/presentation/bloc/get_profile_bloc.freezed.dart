@@ -228,12 +228,12 @@ $GetProfileEventGetProfileCopyWith<GetProfileEventGetProfile> get copyWith => _$
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is GetProfileEventGetProfile&&const DeepCollectionEquality().equals(other.profileModel, profileModel));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is GetProfileEventGetProfile&&(identical(other.profileModel, profileModel) || other.profileModel == profileModel));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(profileModel));
+int get hashCode => Object.hash(runtimeType,profileModel);
 
 @override
 String toString() {
@@ -252,7 +252,7 @@ $Res call({
 });
 
 
-
+$ProfileModelCopyWith<$Res>? get profileModel;
 
 }
 /// @nodoc
@@ -272,7 +272,19 @@ as ProfileModel?,
   ));
 }
 
+/// Create a copy of GetProfileEvent
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ProfileModelCopyWith<$Res>? get profileModel {
+    if (_self.profileModel == null) {
+    return null;
+  }
 
+  return $ProfileModelCopyWith<$Res>(_self.profileModel!, (value) {
+    return _then(_self.copyWith(profileModel: value));
+  });
+}
 }
 
 /// @nodoc
@@ -554,12 +566,12 @@ $GetProfileStateLoadedCopyWith<GetProfileStateLoaded> get copyWith => _$GetProfi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is GetProfileStateLoaded&&const DeepCollectionEquality().equals(other.profileEntity, profileEntity));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is GetProfileStateLoaded&&(identical(other.profileEntity, profileEntity) || other.profileEntity == profileEntity));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(profileEntity));
+int get hashCode => Object.hash(runtimeType,profileEntity);
 
 @override
 String toString() {
@@ -578,7 +590,7 @@ $Res call({
 });
 
 
-
+$ProfileEntityCopyWith<$Res>? get profileEntity;
 
 }
 /// @nodoc
@@ -598,7 +610,19 @@ as ProfileEntity?,
   ));
 }
 
+/// Create a copy of GetProfileState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ProfileEntityCopyWith<$Res>? get profileEntity {
+    if (_self.profileEntity == null) {
+    return null;
+  }
 
+  return $ProfileEntityCopyWith<$Res>(_self.profileEntity!, (value) {
+    return _then(_self.copyWith(profileEntity: value));
+  });
+}
 }
 
 /// @nodoc

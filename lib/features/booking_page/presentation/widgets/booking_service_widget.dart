@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:glass/glass.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hosta_provider/config/theme/app_theme.dart';
 import 'package:hosta_provider/core/constants/font_constants.dart';
 import 'package:hosta_provider/core/dependencies_injection.dart';
 import 'package:hosta_provider/core/resource/custom_widget/snake_bar_widget/snake_bar_widget.dart';
@@ -402,10 +403,14 @@ class BookingServiceWidget extends StatelessWidget {
               ],
             ),
           ).asGlass(
-            tintColor: Theme.of(context).colorScheme.primaryContainer,
-            clipBorderRadius: BorderRadius.circular(12),
-            blurX: 3,
-            blurY: 3,
+            frosted: true,
+            blurX: 8,
+            blurY: 8,
+            tintColor: Theme.of(
+              context,
+            ).colorScheme.primaryContainer.withValues(alpha: 0.9),
+            clipBorderRadius: BorderRadius.circular(12.r),
+            border: Theme.of(context).defaultBorderSide,
           ),
     );
   }

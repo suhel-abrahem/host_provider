@@ -1,4 +1,7 @@
+import 'package:connectivity_plus/connectivity_plus.dart';
+import 'package:hosta_provider/core/constants/api_constant.dart';
 import 'package:hosta_provider/core/data_state/data_state.dart';
+import 'package:hosta_provider/core/resource/common_service/common_service.dart';
 
 import 'package:hosta_provider/features/profile_page/data/models/profile_model.dart';
 
@@ -12,13 +15,54 @@ import 'package:hosta_provider/features/profile_page/domain/entities/time_of_ent
 
 import 'package:hosta_provider/features/profile_page/domain/entities/working_hours_entity.dart';
 
+import '../../../../core/resource/connectivity/check_connectivity.dart';
 import '../../domain/repositories/profile_repository.dart';
 
 class ProfileRepositoryImplements implements ProfileRepository {
+  final CheckConnectivity _checkConnectivity;
+  ProfileRepositoryImplements(this._checkConnectivity);
   @override
-  Future<DataState<ProfileEntity?>?> getProfile(ProfileModel? profileModel) {
-    // TODO: implement getProfile
-    throw UnimplementedError();
+  Future<DataState<ProfileEntity?>?> getProfile(
+    ProfileModel? profileModel,
+  ) async {
+    ConnectivityResult? connectivityResult;
+    await _checkConnectivity.checkConnectivity().then((onValue) {
+      connectivityResult = onValue.last;
+    });
+    if (connectivityResult == ConnectivityResult.none) {
+      return NOInternetDataState();
+    }
+    DataState<ProfileEntity?>? dataState;
+    CommonService _commonService = CommonService(
+      headers: {
+        'Authorization': 'Bearer ${profileModel?.authToken}',
+        "Accept-Language": profileModel?.acceptLanguage ?? "ar",
+      },
+    );
+    try {
+      await _commonService.get(ApiConstant.meEndpoint).then((response) {
+        if (response is DataSuccess) {
+          dataState = DataSuccess<ProfileEntity?>(
+            data: ProfileEntity.fromJson(response.data?.data["data"]),
+          );
+        } else if (response is UnauthenticatedDataState) {
+          dataState = UnauthenticatedDataState(
+            error:
+                response.error ??
+                'Something went wrong, please try again later.',
+          );
+        } else {
+          dataState = DataFailed(
+            error:
+                response.error ??
+                'Something went wrong, please try again later.',
+          );
+        }
+      });
+    } catch (e) {
+      dataState = DataFailed(error: e.toString());
+    }
+    return dataState;
   }
 
   @override

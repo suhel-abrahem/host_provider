@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:glass/glass.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hosta_provider/config/route/routes_manager.dart';
+import 'package:hosta_provider/config/theme/app_theme.dart';
 import 'package:hosta_provider/core/constants/font_constants.dart';
 import 'package:hosta_provider/core/data_state/data_state.dart';
 import 'package:hosta_provider/core/dependencies_injection.dart';
@@ -97,13 +98,15 @@ class _MyServicesPagePageState extends State<MyServicesPagePage> {
                               serviceEntity: data?[index],
                               optionsOnPressed: () {},
                             ).asGlass(
-                              blurX: 5,
-                              blurY: 5,
+                              frosted: true,
+                              blurX: 8,
+                              blurY: 8,
                               tintColor: Theme.of(context)
                                   .colorScheme
                                   .primaryContainer
-                                  .withValues(alpha: 0.6),
+                                  .withValues(alpha: 0.9),
                               clipBorderRadius: BorderRadius.circular(12.r),
+                              border: Theme.of(context).defaultBorderSide,
                             ),
                       ),
                     ),

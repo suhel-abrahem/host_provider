@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:animated_theme_switcher/animated_theme_switcher.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hosta_provider/config/app/app_preferences.dart';
 import 'package:hosta_provider/config/route/route_tracker.dart';
@@ -22,6 +23,8 @@ import 'package:hosta_provider/features/signup_page/presentation/pages/signup_pa
 import '../../core/resource/main_page/main_bottom_bar.dart';
 import '../../core/resource/main_page/main_page.dart';
 import '../../features/booking_page/presentation/pages/booking_page_page.dart';
+import '../../features/profile_page/domain/entities/profile_entity.dart';
+import '../../features/profile_page/presentation/pages/account_page_page.dart';
 
 class RoutesName {
   static String homePage = "homePage";
@@ -37,6 +40,7 @@ class RoutesName {
   static String profilePage = "profilePage";
   static String otpPage = "otpPage";
   static String categoryServicesPage = "categoryServicesPage";
+  static String accountPage = "accountPage";
 }
 
 class RoutesPath {
@@ -53,6 +57,7 @@ class RoutesPath {
   static String otpPage = "/otpPage";
   static String categoryServicesPage = "/categoryServicesPage/:categoryEntity";
   static String serviceInfoPage = "/serviceInfoPage/:serviceId";
+  static String accountPage = "/accountPage";
 }
 
 GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -77,17 +82,32 @@ GoRouter goRouter = GoRouter(
   routes: [
     StatefulShellRoute.indexedStack(
       builder: (context, state, navigationShell) => ThemeSwitchingArea(
-        child: Scaffold(
-          body: navigationShell,
-          bottomNavigationBar:
-              !(state.uri.toString().endsWith(RoutesPath.loginPage) ||
-                  state.uri.toString().endsWith(RoutesPath.firstUsePage) ||
-                  state.uri.toString().endsWith(RoutesPath.signupPage) ||
-                  state.uri.toString().endsWith(RoutesPath.otpPage))
-              ? MainBottomBar(
-                  currentIndex: _routerToIndex(state.uri.toString()),
-                )
-              : null,
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                const Color.fromARGB(255, 35, 89, 116).withValues(alpha: 0.9),
+                Color.fromARGB(255, 11, 56, 102).withValues(alpha: 0.8),
+                Color.fromARGB(255, 4, 38, 75),
+              ],
+              stops: const [0.0, 0.5, 1.0],
+            ),
+          ),
+          child: Scaffold(
+            backgroundColor: Colors.transparent,
+            body: navigationShell,
+            bottomNavigationBar:
+                !(state.uri.toString().endsWith(RoutesPath.loginPage) ||
+                    state.uri.toString().endsWith(RoutesPath.firstUsePage) ||
+                    state.uri.toString().endsWith(RoutesPath.signupPage) ||
+                    state.uri.toString().endsWith(RoutesPath.otpPage))
+                ? MainBottomBar(
+                    currentIndex: _routerToIndex(state.uri.toString()),
+                  ).animate().scaleY(duration: 500.ms)
+                : null,
+          ),
         ),
       ),
       branches: [
@@ -210,6 +230,16 @@ GoRouter goRouter = GoRouter(
               pageBuilder: (context, state) {
                 return _customTransitionPage(
                   child: ProfilePagePage(),
+                  state: state,
+                );
+              },
+            ),
+            GoRoute(
+              path: RoutesPath.accountPage,
+              name: RoutesName.accountPage,
+              pageBuilder: (context, state) {
+                return _customTransitionPage(
+                  child: AccountPagePage(),
                   state: state,
                 );
               },

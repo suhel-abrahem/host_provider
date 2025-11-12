@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:glass/glass.dart';
+import 'package:hosta_provider/config/theme/app_theme.dart';
 
 import 'package:hosta_provider/core/constants/font_constants.dart';
 import 'package:hosta_provider/core/resource/common_entity/customer_entity.dart';
@@ -67,43 +68,68 @@ class ClientInfoWidget extends StatelessWidget {
                   ),
                 ],
               ),
-              ElevatedButton(
-                onPressed: () async {
-                  final Uri phoneUri = Uri(
-                    scheme: 'tel',
-                    path: customerEntity?.phone ?? "",
-                  );
-
-                  if (await canLaunchUrl(phoneUri)) {
-                    await launchUrl(phoneUri);
-                  } else {
-                    if (!context.mounted) return;
-                    showMessage(
-                      message: LocaleKeys.common_error.tr(),
-                      context: context,
+              SizedBox(
+                width: 50.w,
+                height: 40.h,
+                child: ElevatedButton(
+                  onPressed: () async {
+                    final Uri phoneUri = Uri(
+                      scheme: 'tel',
+                      path: customerEntity?.phone ?? "",
                     );
-                  }
-                },
-                style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
-                  padding: WidgetStatePropertyAll(
-                    EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
+
+                    if (await canLaunchUrl(phoneUri)) {
+                      await launchUrl(phoneUri);
+                    } else {
+                      if (!context.mounted) return;
+                      showMessage(
+                        message: LocaleKeys.common_error.tr(),
+                        context: context,
+                      );
+                    }
+                  },
+                  style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
+                    padding: WidgetStatePropertyAll(EdgeInsets.zero),
+                    backgroundColor: WidgetStatePropertyAll(Colors.transparent),
+                    shadowColor: WidgetStatePropertyAll(Colors.transparent),
                   ),
-                  backgroundColor: WidgetStatePropertyAll(
-                    Theme.of(context).colorScheme.primaryContainer,
-                  ),
-                  shape: WidgetStatePropertyAll(CircleBorder()),
+                  child:
+                      Container(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 12.w,
+                          vertical: 8.h,
+                        ),
+
+                        child: Icon(
+                          Icons.phone,
+                          color: Colors.green,
+                          size: 22.sp,
+                        ),
+                      ).asGlass(
+                        frosted: true,
+                        blurX: 28,
+                        blurY: 28,
+                        tintColor: Theme.of(
+                          context,
+                        ).colorScheme.primaryContainer.withValues(alpha: 0.9),
+                        clipBorderRadius: BorderRadius.circular(12.r),
+                        border: Theme.of(context).defaultBorderSide,
+                      ),
                 ),
-                child: Icon(Icons.phone, color: Colors.green, size: 22.sp),
               ),
             ],
           ),
         ],
       ),
     ).asGlass(
-      tintColor: Theme.of(context).colorScheme.primaryContainer,
-      clipBorderRadius: BorderRadius.circular(12),
-      blurX: 3,
-      blurY: 3,
+      frosted: true,
+      blurX: 8,
+      blurY: 8,
+      tintColor: Theme.of(
+        context,
+      ).colorScheme.primaryContainer.withValues(alpha: 0.9),
+      clipBorderRadius: BorderRadius.circular(12.r),
+      border: Theme.of(context).defaultBorderSide,
     );
   }
 }

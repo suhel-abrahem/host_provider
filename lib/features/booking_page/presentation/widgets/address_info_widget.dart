@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:glass/glass.dart';
+import 'package:hosta_provider/config/theme/app_theme.dart';
 import 'package:hosta_provider/core/constants/font_constants.dart';
 import 'package:hosta_provider/core/resource/common_entity/addresses_entity.dart';
 import 'package:hosta_provider/generated/locale_keys.g.dart';
@@ -98,10 +99,14 @@ class AddressInfoWidget extends StatelessWidget {
         ],
       ),
     ).asGlass(
-      tintColor: Theme.of(context).colorScheme.primaryContainer,
-      clipBorderRadius: BorderRadius.circular(12),
-      blurX: 3,
-      blurY: 3,
+      frosted: true,
+      blurX: 8,
+      blurY: 8,
+      tintColor: Theme.of(
+        context,
+      ).colorScheme.primaryContainer.withValues(alpha: 0.9),
+      clipBorderRadius: BorderRadius.circular(12.r),
+      border: Theme.of(context).defaultBorderSide,
     );
   }
 }

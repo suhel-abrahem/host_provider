@@ -41,20 +41,20 @@ class ColorManager {
   // Background and Surfaces
   static const Color backgroundColor = Color.fromARGB(
     255,
-    158,
-    158,
-    158,
+    204,
+    204,
+    204,
   ); // Bright Neutral Background
   static const Color cardColor = Color(0xFFFFFFFF); // White Cards
   static const Color surfaceColor = Color(0xFFFAFAFA); // Very Light Surface
 
   // Text Colors
-  static const Color textColor = Color(0xFF212121); // Near Black
+  static const Color textColor = Color.fromARGB(255, 3, 3, 3); // Near Black
   static const Color secondaryTextColor = Color.fromARGB(
     255,
-    46,
-    45,
-    45,
+    36,
+    34,
+    34,
   ); // Medium Gray
 
   // Functional Colors

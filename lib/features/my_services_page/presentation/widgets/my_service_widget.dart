@@ -8,10 +8,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:glass/glass.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hosta_provider/config/route/routes_manager.dart';
+import 'package:hosta_provider/config/theme/app_theme.dart';
 import 'package:hosta_provider/core/constants/api_constant.dart';
 import 'package:hosta_provider/core/constants/font_constants.dart';
 import 'package:hosta_provider/core/dependencies_injection.dart';
 import 'package:hosta_provider/core/resource/common_entity/service_entity.dart';
+import 'package:hosta_provider/core/resource/image_widget.dart';
 import 'package:hosta_provider/features/my_services_page/presentation/widgets/add_button_my_service.dart';
 import 'package:hosta_provider/generated/locale_keys.g.dart';
 
@@ -122,24 +124,11 @@ class _MyServiceWidgetState extends State<MyServiceWidget> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 8.w),
               child: Center(
-                child: SizedBox(
+                child: ImageWidget(
+                  imageUrl: widget.serviceEntity?.image ?? "",
                   width: 50.w,
                   height: 50.h,
-                  child: CachedNetworkImage(
-                    cacheKey:
-                        widget.serviceEntity?.category_id.toString() ?? "",
-                    width: 50.w,
-                    height: 50.h,
-                    progressIndicatorBuilder: (context, url, progress) =>
-                        CircularProgressIndicator(),
-                    imageUrl:
-                        "${ApiConstant.imageBaseUrl}${widget.serviceEntity?.image}",
-                    errorWidget: (context, url, error) => Icon(
-                      Icons.error,
-                      color: Theme.of(context).textTheme.labelLarge?.color,
-                      size: 32.sp,
-                    ),
-                  ),
+                  errorIconSize: 32.sp,
                 ),
               ),
             ),
@@ -198,103 +187,128 @@ class _MyServiceWidgetState extends State<MyServiceWidget> {
                 create: (context) =>
                     getItInstance<SetServiceBloc>()
                       ..add(SetServiceEvent.started()),
-                child: PopupMenuButton<String>(
-                  icon: Icon(
-                    Icons.more_vert,
-                    color: Theme.of(context).textTheme.labelLarge?.color,
-                    size: 26.sp,
-                  ),
-                  onSelected: (value) {
-                    switch (value) {
-                      case "edit":
-                        serviceEditMethod(context);
-                        break;
-                      case "toggle":
-                        setServiceModel = setServiceModel?.copyWith(
-                          serviceModel: setServiceModel?.serviceModel?.copyWith(
-                            service_id: widget.serviceEntity?.service_id,
-                            price: widget.serviceEntity?.price,
-                            id: widget.serviceEntity?.id,
-                            is_active:
-                                !(widget.serviceEntity?.is_active ?? false),
-                          ),
-                        );
-                        if (setServiceModel?.serviceModel?.is_active == null) {
-                          setServiceModel = setServiceModel?.copyWith(
-                            serviceModel: setServiceModel?.serviceModel
-                                ?.copyWith(is_active: false),
-                          );
+                child:
+                    PopupMenuButton<String>(
+                      color: Theme.of(
+                        context,
+                      ).colorScheme.primaryContainer.withValues(alpha: 0.9),
+                      icon: Icon(
+                        Icons.more_vert,
+                        color: Theme.of(context).textTheme.labelLarge?.color,
+                        size: 26.sp,
+                      ),
+                      onSelected: (value) {
+                        switch (value) {
+                          case "edit":
+                            serviceEditMethod(context);
+                            break;
+                          case "toggle":
+                            setServiceModel = setServiceModel?.copyWith(
+                              serviceModel: setServiceModel?.serviceModel
+                                  ?.copyWith(
+                                    service_id:
+                                        widget.serviceEntity?.service_id,
+                                    price: widget.serviceEntity?.price,
+                                    id: widget.serviceEntity?.id,
+                                    is_active:
+                                        !(widget.serviceEntity?.is_active ??
+                                            false),
+                                  ),
+                            );
+                            if (setServiceModel?.serviceModel?.is_active ==
+                                null) {
+                              setServiceModel = setServiceModel?.copyWith(
+                                serviceModel: setServiceModel?.serviceModel
+                                    ?.copyWith(is_active: false),
+                              );
+                            }
+                            print("from Add:${setServiceModel?.serviceModel}");
+                            context.read<SetServiceBloc>().add(
+                              SetServiceEvent.update(setServiceModel),
+                            );
+                            break;
+                          case "delete":
+                            setServiceModel = setServiceModel?.copyWith(
+                              serviceModel: setServiceModel?.serviceModel
+                                  ?.copyWith(
+                                    service_id:
+                                        widget.serviceEntity?.service_id,
+                                    id: widget.serviceEntity?.id,
+                                    is_active:
+                                        !(widget.serviceEntity?.is_active ??
+                                            false),
+                                  ),
+                            );
+                            if (setServiceModel?.serviceModel?.is_active ==
+                                null) {
+                              setServiceModel = setServiceModel?.copyWith(
+                                serviceModel: setServiceModel?.serviceModel
+                                    ?.copyWith(is_active: false),
+                              );
+                            }
+                            print("from Add:${setServiceModel?.serviceModel}");
+                            context.read<SetServiceBloc>().add(
+                              SetServiceEvent.delete(setServiceModel),
+                            );
                         }
-                        print("from Add:${setServiceModel?.serviceModel}");
-                        context.read<SetServiceBloc>().add(
-                          SetServiceEvent.update(setServiceModel),
-                        );
-                        break;
-                      case "delete":
-                        setServiceModel = setServiceModel?.copyWith(
-                          serviceModel: setServiceModel?.serviceModel?.copyWith(
-                            service_id: widget.serviceEntity?.service_id,
-                            id: widget.serviceEntity?.id,
-                            is_active:
-                                !(widget.serviceEntity?.is_active ?? false),
-                          ),
-                        );
-                        if (setServiceModel?.serviceModel?.is_active == null) {
-                          setServiceModel = setServiceModel?.copyWith(
-                            serviceModel: setServiceModel?.serviceModel
-                                ?.copyWith(is_active: false),
-                          );
-                        }
-                        print("from Add:${setServiceModel?.serviceModel}");
-                        context.read<SetServiceBloc>().add(
-                          SetServiceEvent.delete(setServiceModel),
-                        );
-                    }
-                  },
-                  itemBuilder: (context) => [
-                    PopupMenuItem(
-                      value: 'edit',
-                      child: Row(
-                        children: [
-                          const Icon(Icons.edit),
+                      },
+                      itemBuilder: (context) => [
+                        PopupMenuItem(
+                          value: 'edit',
+                          child: Row(
+                            children: [
+                              const Icon(Icons.edit),
 
-                          Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 12.w),
-                            child: Text(LocaleKeys.myServicesPage_edit.tr()),
+                              Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 12.w),
+                                child: Text(
+                                  LocaleKeys.myServicesPage_edit.tr(),
+                                ),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
-                    ),
-                    PopupMenuItem(
-                      value: 'toggle',
-                      child: Row(
-                        children: [
-                          const Icon(Icons.power_settings_new),
-                          const SizedBox(width: 8),
-                          Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 12.w),
-                            child: Text(
-                              LocaleKeys.myServicesPage_toggleStatus.tr(),
-                            ),
+                        ),
+                        PopupMenuItem(
+                          value: 'toggle',
+                          child: Row(
+                            children: [
+                              const Icon(Icons.power_settings_new),
+                              const SizedBox(width: 8),
+                              Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 12.w),
+                                child: Text(
+                                  LocaleKeys.myServicesPage_toggleStatus.tr(),
+                                ),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
-                    ),
-                    PopupMenuItem(
-                      value: 'delete',
-                      child: Row(
-                        children: [
-                          const Icon(Icons.delete, color: Colors.red),
-                          const SizedBox(width: 8),
-                          Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 12.w),
-                            child: Text(LocaleKeys.myServicesPage_delete.tr()),
+                        ),
+                        PopupMenuItem(
+                          value: 'delete',
+                          child: Row(
+                            children: [
+                              const Icon(Icons.delete, color: Colors.red),
+                              const SizedBox(width: 8),
+                              Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 12.w),
+                                child: Text(
+                                  LocaleKeys.myServicesPage_delete.tr(),
+                                ),
+                              ),
+                            ],
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
+                    ).asGlass(
+                      frosted: true,
+                      blurX: 18,
+                      blurY: 18,
+                      tintColor: Theme.of(
+                        context,
+                      ).colorScheme.primaryContainer.withValues(alpha: 0.9),
+                      clipBorderRadius: BorderRadius.circular(12.r),
+                      border: Theme.of(context).defaultBorderSide,
                     ),
-                  ],
-                ),
               ),
             ),
           ],

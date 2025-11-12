@@ -169,7 +169,16 @@
     "subject": "الموضوع",
     "subjectIsRequired": "الموضوع مطلوب",
     "messageIsRequired": "الرسالة مطلوبة",
-    "contactInfo": "معلومات الاتصال"
+    "contactInfo": "معلومات الاتصال",
+    "account": "الحساب",
+    "manageYourAccountInformation": "إدارة معلومات حسابك",
+    "settingsAndPreferences": "الإعدادات والتفضيلات",
+    "languageAndTheme": "اللغة والسمة",
+    "contactAsForAssistance": "اتصل بنا للمساعدة",
+    "signOutOfYourAccount": "تسجيل الخروج من حسابك",
+    "languageChangedSuccessfully": "تم تغيير اللغة بنجاح",
+    "themeChangedSuccessfully": "تم تغيير السمة بنجاح",
+    "languagesIspeak": "اللغات التي أتحدثها"
   },
   "myServicesPage": {
     "title": "صفحة خدماتي",

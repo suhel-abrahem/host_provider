@@ -1,0 +1,95 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:glass/glass.dart';
+import 'package:hosta_provider/config/theme/app_theme.dart';
+import 'package:hosta_provider/core/constants/font_constants.dart';
+import 'package:hosta_provider/core/resource/common_entity/addresses_entity.dart';
+import 'package:hosta_provider/features/profile_page/domain/entities/profile_entity.dart';
+
+class UserInfoContainerWidget extends StatelessWidget {
+  final ProfileEntity? profileEntity;
+  final AddressesEntity? addressesEntity;
+  const UserInfoContainerWidget({
+    super.key,
+    this.profileEntity,
+    this.addressesEntity,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          CircleAvatar(
+            radius: 30.r,
+            backgroundImage: NetworkImage(
+              "https://www.pngall.com/wp-content/uploads/5/Profile-PNG-High-Quality-Image.png",
+            ),
+          ),
+          SizedBox(
+            width: 220.w,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Text(
+                    profileEntity?.name ?? "",
+                    style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                      fontFamily: FontConstants.fontFamily(context.locale),
+                    ),
+                  ),
+                ),
+
+                FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Align(
+                    alignment: AlignmentDirectional.centerStart,
+                    child: Text(
+                      profileEntity?.email ?? "",
+                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                        fontFamily: FontConstants.fontFamily(context.locale),
+                      ),
+                      textAlign: TextAlign.start,
+                    ),
+                  ),
+                ),
+                FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Text(
+                    profileEntity?.phone ?? "",
+                    style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                      fontFamily: FontConstants.fontFamily(context.locale),
+                    ),
+                  ),
+                ),
+                FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Text(
+                    addressesEntity?.city?["name"] ?? "",
+                    style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                      fontFamily: FontConstants.fontFamily(context.locale),
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    ).asGlass(
+      frosted: true,
+      blurX: 8,
+      blurY: 8,
+      tintColor: Theme.of(
+        context,
+      ).colorScheme.primaryContainer.withValues(alpha: 0.9),
+      clipBorderRadius: BorderRadius.circular(12.r),
+      border: Theme.of(context).defaultBorderSide,
+    );
+  }
+}

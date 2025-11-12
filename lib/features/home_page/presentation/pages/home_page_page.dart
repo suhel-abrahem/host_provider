@@ -1,7 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:glass/glass.dart';
+import 'package:hosta_provider/config/theme/app_theme.dart';
 import 'package:hosta_provider/core/constants/font_constants.dart';
 import 'package:hosta_provider/core/resource/charts/chart_model/line_chart_model.dart';
 
@@ -25,6 +28,7 @@ class _HomePagePageState extends State<HomePagePage> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(60.h),
         child: AppBar(
+          backgroundColor: Colors.transparent,
           actions: [
             IconButton(
               onPressed: () {},
@@ -130,7 +134,7 @@ class _HomePagePageState extends State<HomePagePage> {
               ),
             ],
           ),
-        ),
+        ).animate().slideX(duration: 500.ms),
       ),
       body: ListView(
         children: [
@@ -185,55 +189,68 @@ class _HomePagePageState extends State<HomePagePage> {
 
           Padding(
             padding: EdgeInsets.only(left: 20.w, right: 20.w, bottom: 20.h),
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.h),
-              decoration: BoxDecoration(
-                color: Theme.of(context).colorScheme.primaryContainer,
-                borderRadius: BorderRadius.circular(12.r),
-              ),
-              child: Column(
-                children: [
-                  Padding(
-                    padding: EdgeInsetsGeometry.zero,
-                    child: Text(
-                      LocaleKeys.homePage_annualStatistics.tr(),
-                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                        fontFamily: FontConstants.fontFamily(context.locale),
-                      ),
-                    ),
+            child:
+                Container(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 20.w,
+                    vertical: 12.h,
                   ),
-                  CostumeLineChart.CustomLineChart(
-                    containerWidth: 320.w,
-                    minX: 0,
-                    maxX: 12,
-                    minY: 0,
-                    maxY: 20,
-                    containerHeight: 220.h,
 
-                    title: LocaleKeys.homePage_annualStatistics.tr(),
-                    barsInfo: [
-                      LineChartModel(
-                        color: Theme.of(context).colorScheme.primary,
-                        spots: [
-                          FlSpot(0, 3),
-                          FlSpot(1, 1.5),
-                          FlSpot(2, 4),
-                          FlSpot(3, 3.5),
-                          FlSpot(4, 5),
-                          FlSpot(5, 4),
-                          FlSpot(6, 6),
-                          FlSpot(7, 5),
-                          FlSpot(8, 7),
-                          FlSpot(9, 6),
-                          FlSpot(10, 8),
-                          FlSpot(11, 20),
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: EdgeInsetsGeometry.zero,
+                        child: Text(
+                          LocaleKeys.homePage_annualStatistics.tr(),
+                          style: Theme.of(context).textTheme.labelLarge
+                              ?.copyWith(
+                                fontFamily: FontConstants.fontFamily(
+                                  context.locale,
+                                ),
+                              ),
+                        ),
+                      ),
+                      CostumeLineChart.CustomLineChart(
+                        containerWidth: 320.w,
+                        minX: 0,
+                        maxX: 12,
+                        minY: 0,
+                        maxY: 20,
+                        containerHeight: 220.h,
+
+                        title: LocaleKeys.homePage_annualStatistics.tr(),
+                        barsInfo: [
+                          LineChartModel(
+                            color: Theme.of(context).colorScheme.primary,
+                            spots: [
+                              FlSpot(0, 3),
+                              FlSpot(1, 1.5),
+                              FlSpot(2, 4),
+                              FlSpot(3, 3.5),
+                              FlSpot(4, 5),
+                              FlSpot(5, 4),
+                              FlSpot(6, 6),
+                              FlSpot(7, 5),
+                              FlSpot(8, 7),
+                              FlSpot(9, 6),
+                              FlSpot(10, 8),
+                              FlSpot(11, 20),
+                            ],
+                          ),
                         ],
                       ),
                     ],
                   ),
-                ],
-              ),
-            ),
+                ).asGlass(
+                  frosted: true,
+                  blurX: 28,
+                  blurY: 28,
+                  tintColor: Theme.of(
+                    context,
+                  ).colorScheme.primaryContainer.withValues(alpha: 1.0),
+                  clipBorderRadius: BorderRadius.circular(12.r),
+                  border: Theme.of(context).defaultBorderSide,
+                ),
           ),
         ],
       ),

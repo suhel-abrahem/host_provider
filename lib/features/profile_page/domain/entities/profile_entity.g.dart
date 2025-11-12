@@ -13,7 +13,7 @@ _ProfileEntity _$ProfileEntityFromJson(Map<String, dynamic> json) =>
       email: json['email'] as String? ?? "",
       phone: json['phone'] as String? ?? "",
       dob: json['dob'] as String? ?? "",
-      addresses: json['addresses'] as Map<String, dynamic>? ?? const {},
+      addresses: json['addresses'] as List<dynamic>? ?? const [],
     );
 
 Map<String, dynamic> _$ProfileEntityToJson(_ProfileEntity instance) =>

@@ -10,10 +10,12 @@ _ProfileModel _$ProfileModelFromJson(Map<String, dynamic> json) =>
     _ProfileModel(
       acceptLanguage: json['acceptLanguage'] as String? ?? "",
       authToken: json['authToken'] as String? ?? "",
+      id: json['id'] as String? ?? "",
     );
 
 Map<String, dynamic> _$ProfileModelToJson(_ProfileModel instance) =>
     <String, dynamic>{
       'acceptLanguage': instance.acceptLanguage,
       'authToken': instance.authToken,
+      'id': instance.id,
     };

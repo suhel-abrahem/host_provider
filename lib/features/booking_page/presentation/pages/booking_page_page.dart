@@ -2,6 +2,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:glass/glass.dart';
+import 'package:hosta_provider/config/theme/app_theme.dart';
+import 'package:hosta_provider/core/constants/font_constants.dart';
 import 'package:hosta_provider/core/dependencies_injection.dart';
 import 'package:hosta_provider/core/extensions/screen_size.dart';
 import 'package:hosta_provider/core/resource/main_page/main_page.dart';
@@ -100,6 +103,17 @@ class _BookingPagePageState extends State<BookingPagePage>
           child: Builder(
             builder: (context) {
               return TabBar(
+                labelStyle: Theme.of(context).textTheme.labelLarge?.copyWith(
+                  fontFamily: FontConstants.fontFamily(context.locale),
+                  fontSize: 14.sp,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+                unselectedLabelStyle: Theme.of(context).textTheme.labelLarge
+                    ?.copyWith(
+                      fontFamily: FontConstants.fontFamily(context.locale),
+                      fontSize: 14.sp,
+                    ),
+
                 controller: tabController,
                 labelPadding: EdgeInsets.symmetric(
                   horizontal: 4.w,
@@ -117,85 +131,120 @@ class _BookingPagePageState extends State<BookingPagePage>
                 },
                 tabs: [
                   Tab(
-                    child: SizedBox(
-                      child: Container(
-                        height: 60.h,
-                        padding: EdgeInsets.symmetric(horizontal: 12.w),
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).colorScheme.primaryContainer,
-                          borderRadius: BorderRadius.circular(12.r),
+                    child:
+                        Container(
+                          height: 60.h,
+                          padding: EdgeInsets.symmetric(horizontal: 12.w),
+
+                          child: Center(
+                            child: Text(LocaleKeys.bookingPage_all.tr()),
+                          ),
+                        ).asGlass(
+                          frosted: true,
+                          blurX: 8,
+                          blurY: 8,
+                          tintColor: Theme.of(
+                            context,
+                          ).colorScheme.primaryContainer.withValues(alpha: 0.9),
+                          clipBorderRadius: BorderRadius.circular(12.r),
+                          border: Theme.of(context).defaultBorderSide,
                         ),
-                        child: Center(
-                          child: Text(LocaleKeys.bookingPage_all.tr()),
-                        ),
-                      ),
-                    ),
                   ),
 
                   Tab(
                     child: Container(
                       height: 60.h,
                       padding: EdgeInsets.symmetric(horizontal: 12.w),
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.primaryContainer,
-                        borderRadius: BorderRadius.circular(12.r),
-                      ),
+
                       child: Center(
                         child: Text(LocaleKeys.bookingPage_accepted.tr()),
                       ),
                     ),
+                  ).asGlass(
+                    frosted: true,
+                    blurX: 8,
+                    blurY: 8,
+                    tintColor: Theme.of(
+                      context,
+                    ).colorScheme.primaryContainer.withValues(alpha: 0.9),
+                    clipBorderRadius: BorderRadius.circular(12.r),
+                    border: Theme.of(context).defaultBorderSide,
                   ),
                   Tab(
                     child: Container(
                       height: 60.h,
                       padding: EdgeInsets.symmetric(horizontal: 12.w),
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.primaryContainer,
-                        borderRadius: BorderRadius.circular(12.r),
-                      ),
+
                       child: Center(
                         child: Text(LocaleKeys.bookingPage_inProgress.tr()),
                       ),
                     ),
+                  ).asGlass(
+                    frosted: true,
+                    blurX: 8,
+                    blurY: 8,
+                    tintColor: Theme.of(
+                      context,
+                    ).colorScheme.primaryContainer.withValues(alpha: 0.9),
+                    clipBorderRadius: BorderRadius.circular(12.r),
+                    border: Theme.of(context).defaultBorderSide,
                   ),
                   Tab(
                     child: Container(
                       height: 60.h,
                       padding: EdgeInsets.symmetric(horizontal: 12.w),
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.primaryContainer,
-                        borderRadius: BorderRadius.circular(12.r),
-                      ),
+
                       child: Center(
                         child: Text(LocaleKeys.bookingPage_completed.tr()),
                       ),
                     ),
+                  ).asGlass(
+                    frosted: true,
+                    blurX: 8,
+                    blurY: 8,
+                    tintColor: Theme.of(
+                      context,
+                    ).colorScheme.primaryContainer.withValues(alpha: 0.9),
+                    clipBorderRadius: BorderRadius.circular(12.r),
+                    border: Theme.of(context).defaultBorderSide,
                   ),
                   Tab(
                     child: Container(
                       height: 60.h,
                       padding: EdgeInsets.symmetric(horizontal: 12.w),
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.primaryContainer,
-                        borderRadius: BorderRadius.circular(12.r),
-                      ),
+
                       child: Center(
                         child: Text(LocaleKeys.bookingPage_pending.tr()),
                       ),
                     ),
+                  ).asGlass(
+                    frosted: true,
+                    blurX: 8,
+                    blurY: 8,
+                    tintColor: Theme.of(
+                      context,
+                    ).colorScheme.primaryContainer.withValues(alpha: 0.9),
+                    clipBorderRadius: BorderRadius.circular(12.r),
+                    border: Theme.of(context).defaultBorderSide,
                   ),
                   Tab(
                     child: Container(
                       height: 60.h,
                       padding: EdgeInsets.symmetric(horizontal: 12.w),
-                      decoration: BoxDecoration(
-                        color: Theme.of(context).colorScheme.primaryContainer,
-                        borderRadius: BorderRadius.circular(12.r),
-                      ),
+
                       child: Center(
                         child: Text(LocaleKeys.bookingPage_canceled.tr()),
                       ),
                     ),
+                  ).asGlass(
+                    frosted: true,
+                    blurX: 8,
+                    blurY: 8,
+                    tintColor: Theme.of(
+                      context,
+                    ).colorScheme.primaryContainer.withValues(alpha: 0.9),
+                    clipBorderRadius: BorderRadius.circular(12.r),
+                    border: Theme.of(context).defaultBorderSide,
                   ),
                 ],
               );

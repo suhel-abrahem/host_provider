@@ -7,12 +7,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:glass/glass.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hosta_provider/config/theme/app_theme.dart';
 import 'package:hosta_provider/core/dependencies_injection.dart';
 import 'package:hosta_provider/core/resource/common_entity/service_error_entity.dart';
 import 'package:hosta_provider/core/resource/common_state_widget/no_data_state_widget.dart';
 import 'package:hosta_provider/core/resource/common_state_widget/no_internet_state_widget.dart';
 import 'package:hosta_provider/core/resource/custom_widget/custom_input_field/custom_input_field.dart';
 import 'package:hosta_provider/core/resource/custom_widget/snake_bar_widget/snake_bar_widget.dart';
+import 'package:hosta_provider/core/resource/image_widget.dart';
 import 'package:hosta_provider/core/resource/main_page/main_page.dart';
 import 'package:hosta_provider/core/util/helper/helper.dart';
 import 'package:hosta_provider/features/categories_page/domain/entities/category_entity.dart';
@@ -111,9 +113,7 @@ class _CategoryServicesPagePageState extends State<CategoryServicesPagePage> {
             children: [
               Container(
                 height: 100.h,
-                decoration: BoxDecoration(
-                  color: Theme.of(context).colorScheme.primaryContainer,
-                ),
+                decoration: BoxDecoration(),
                 child: Row(
                   children: [
                     Padding(
@@ -165,6 +165,15 @@ class _CategoryServicesPagePageState extends State<CategoryServicesPagePage> {
                     ),
                   ],
                 ),
+              ).asGlass(
+                frosted: true,
+                blurX: 8,
+                blurY: 8,
+                tintColor: Theme.of(
+                  context,
+                ).colorScheme.primaryContainer.withValues(alpha: 0.9),
+
+                border: Theme.of(context).defaultBorderSide,
               ),
               Expanded(
                 child: Padding(
@@ -191,96 +200,80 @@ class _CategoryServicesPagePageState extends State<CategoryServicesPagePage> {
                               )
                             : ListView.builder(
                                 physics: AlwaysScrollableScrollPhysics(),
-                                itemCount: data?.length,
+                                itemCount: data.length,
                                 itemBuilder: (context, index) => Padding(
                                   padding: EdgeInsets.symmetric(vertical: 6.h),
-                                  child: Container(
-                                    height: 100.h,
-                                    decoration: BoxDecoration(
-                                      color: Theme.of(
-                                        context,
-                                      ).colorScheme.primaryContainer,
-                                      borderRadius: BorderRadius.circular(12.r),
-                                    ),
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        SizedBox(
-                                          width: 50.w,
-                                          height: 50.h,
-                                          child: CachedNetworkImage(
-                                            cacheKey:
-                                                widget
-                                                    .categoryEntity
-                                                    ?.category_id
-                                                    .toString() ??
-                                                "",
-                                            width: 50.w,
-                                            height: 50.h,
-                                            progressIndicatorBuilder:
-                                                (context, url, progress) =>
-                                                    CircularProgressIndicator(),
-                                            imageUrl:
-                                                widget.categoryEntity?.icon ??
-                                                "",
-                                            errorWidget:
-                                                (context, url, error) => Icon(
-                                                  Icons.error,
-                                                  color: Theme.of(
-                                                    context,
-                                                  ).textTheme.labelLarge?.color,
-                                                  size: 32.sp,
-                                                ),
+                                  child:
+                                      Container(
+                                        padding: EdgeInsets.symmetric(
+                                          vertical: 8.h,
+                                          horizontal: 8.w,
+                                        ),
+                                        height: 120.h,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(
+                                            12.r,
                                           ),
                                         ),
-                                        SizedBox(
-                                          width: 170.w,
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceEvenly,
-                                            children: [
-                                              Text(
-                                                data?[index]?.name ?? "",
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .labelLarge
-                                                    ?.copyWith(
-                                                      fontFamily:
-                                                          FontConstants.fontFamily(
-                                                            context.locale,
-                                                          ),
-                                                    ),
-                                                textAlign: TextAlign.center,
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.center,
+                                          children: [
+                                            ImageWidget(
+                                              imageUrl:
+                                                  widget.categoryEntity?.icon ??
+                                                  "",
+                                              width: 50.w,
+                                              height: 50.h,
+                                              errorIconSize: 32.sp,
+                                            ),
+                                            SizedBox(
+                                              width: 170.w,
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceEvenly,
+                                                children: [
+                                                  Text(
+                                                    data[index]?.name ?? "",
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .labelLarge
+                                                        ?.copyWith(
+                                                          fontFamily:
+                                                              FontConstants.fontFamily(
+                                                                context.locale,
+                                                              ),
+                                                        ),
+                                                    textAlign: TextAlign.center,
+                                                  ),
+                                                  // Text(
+                                                  //   data?[index]?.notes ?? "",
+                                                  //   style: Theme.of(context)
+                                                  //       .textTheme
+                                                  //       .labelLarge
+                                                  //       ?.copyWith(
+                                                  //         fontFamily:
+                                                  //             FontConstants.fontFamily(
+                                                  //               context.locale,
+                                                  //             ),
+                                                  //         fontSize: 14.sp,
+                                                  //       ),
+                                                  //   textAlign: TextAlign.center,
+                                                  // ),
+                                                ],
                                               ),
-                                              Text(
-                                                data?[index]?.notes ?? "",
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .labelLarge
-                                                    ?.copyWith(
-                                                      fontFamily:
-                                                          FontConstants.fontFamily(
-                                                            context.locale,
-                                                          ),
-                                                      fontSize: 14.sp,
-                                                    ),
-                                                textAlign: TextAlign.center,
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        Align(
-                                          alignment:
-                                              AlignmentDirectional.centerEnd,
-                                          child: SizedBox(
-                                            height: 30.h,
-                                            width: 60.w,
-                                            child: ElevatedButton(
-                                              style: Theme.of(context)
-                                                  .elevatedButtonTheme
-                                                  .style
-                                                  ?.copyWith(
+                                            ),
+                                            Align(
+                                              alignment: AlignmentDirectional
+                                                  .centerEnd,
+                                              child: SizedBox(
+                                                height: 30.h,
+                                                width: 60.w,
+                                                child: ElevatedButton(
+                                                  style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
                                                     backgroundColor:
                                                         WidgetStateProperty.resolveWith((
                                                           state,
@@ -324,460 +317,448 @@ class _CategoryServicesPagePageState extends State<CategoryServicesPagePage> {
                                                           );
                                                         }),
                                                   ),
-                                              onPressed: () {
-                                                showAdaptiveDialog(
-                                                  context: context,
-                                                  builder: (dialogContext) => StatefulBuilder(
-                                                    builder: (builderContext, setState) {
-                                                      return AlertDialog.adaptive(
-                                                        icon: Icon(
-                                                          Icons
-                                                              .add_business_outlined,
-                                                          color:
-                                                              Theme.of(context)
-                                                                  .textTheme
-                                                                  .labelLarge
-                                                                  ?.color,
-                                                          size: 32.sp,
-                                                        ),
-                                                        backgroundColor:
-                                                            Colors.transparent,
-                                                        title: Text(
-                                                          LocaleKeys
-                                                              .categoryServices_addService
-                                                              .tr(),
-                                                          style: Theme.of(context)
-                                                              .textTheme
-                                                              .labelLarge
-                                                              ?.copyWith(
-                                                                fontFamily:
-                                                                    FontConstants.fontFamily(
-                                                                      context
-                                                                          .locale,
-                                                                    ),
-                                                              ),
-                                                        ),
-                                                        scrollable: true,
-                                                        content: Form(
-                                                          key:
-                                                              setServiceFormKey,
-                                                          autovalidateMode:
-                                                              AutovalidateMode
-                                                                  .onUserInteraction,
-                                                          child: Column(
-                                                            children: [
-                                                              CustomInputField(
-                                                                label: LocaleKeys
-                                                                    .categoryServices_price
-                                                                    .tr(),
-                                                                initialValue:
-                                                                    setServiceModel
-                                                                        ?.serviceModel
-                                                                        ?.price
-                                                                        .toString(),
-                                                                onChanged: (value) {
-                                                                  setServiceModel = setServiceModel?.copyWith(
-                                                                    serviceModel: setServiceModel
-                                                                        ?.serviceModel
-                                                                        ?.copyWith(
-                                                                          price: int.tryParse(
-                                                                            value,
-                                                                          ),
-                                                                        ),
-                                                                  );
-                                                                  setState(
-                                                                    () {},
-                                                                  );
-                                                                },
-                                                                validator: (value) {
-                                                                  if (value ==
-                                                                          null &&
-                                                                      (value?.trim().isEmpty ??
-                                                                          false)) {
-                                                                    return LocaleKeys
-                                                                        .categoryServices_thePriceFieldIsRequired
-                                                                        .tr();
-                                                                  } else {
-                                                                    int?
-                                                                    valueAsInt =
-                                                                        int.tryParse(
-                                                                          value ??
-                                                                              "",
-                                                                        );
-
-                                                                    if ((valueAsInt ??
-                                                                            0) <=
-                                                                        0) {
-                                                                      return LocaleKeys
-                                                                          .categoryServices_thePriceFieldIsRequired
-                                                                          .tr();
-                                                                    }
-                                                                  }
-
-                                                                  return null;
-                                                                },
-                                                              ),
-                                                              Padding(
-                                                                padding:
-                                                                    EdgeInsetsGeometry.symmetric(
-                                                                      vertical:
-                                                                          8.h,
-                                                                    ),
-                                                                child: CustomInputField(
-                                                                  label: LocaleKeys
-                                                                      .categoryServices_durationInMinutes
-                                                                      .tr(),
-                                                                  initialValue:
-                                                                      setServiceModel
-                                                                          ?.serviceModel
-                                                                          ?.buffer_minutes,
-                                                                  onChanged: (value) {
-                                                                    setServiceModel = setServiceModel?.copyWith(
-                                                                      serviceModel: setServiceModel
-                                                                          ?.serviceModel
-                                                                          ?.copyWith(
-                                                                            duration_minutes:
-                                                                                value,
-                                                                          ),
-                                                                    );
-                                                                    setState(
-                                                                      () {},
-                                                                    );
-                                                                  },
-                                                                  validator: (value) {
-                                                                    if (value ==
-                                                                            null &&
-                                                                        (value?.trim().isEmpty ??
-                                                                            false)) {
-                                                                      return LocaleKeys
-                                                                          .categoryServices_durationInMinutesIsRequired
-                                                                          .tr();
-                                                                    } else {
-                                                                      int?
-                                                                      valueAsInt = int.tryParse(
-                                                                        value ??
-                                                                            "",
-                                                                      );
-
-                                                                      if ((valueAsInt ??
-                                                                              0) <=
-                                                                          0) {
-                                                                        return LocaleKeys
-                                                                            .categoryServices_durationInMinutesIsRequired
-                                                                            .tr();
-                                                                      }
-                                                                    }
-
-                                                                    return null;
-                                                                  },
+                                                  onPressed: () {
+                                                    showAdaptiveDialog(
+                                                      context: context,
+                                                      builder: (dialogContext) => StatefulBuilder(
+                                                        builder:
+                                                            (
+                                                              builderContext,
+                                                              setState,
+                                                            ) {
+                                                              return AlertDialog.adaptive(
+                                                                icon: Icon(
+                                                                  Icons
+                                                                      .add_business_outlined,
+                                                                  color: Theme.of(context)
+                                                                      .textTheme
+                                                                      .labelLarge
+                                                                      ?.color,
+                                                                  size: 32.sp,
                                                                 ),
-                                                              ),
-                                                              CustomInputField(
-                                                                label: LocaleKeys
-                                                                    .categoryServices_bufferInMinutes
-                                                                    .tr(),
-                                                                initialValue:
-                                                                    setServiceModel
-                                                                        ?.serviceModel
-                                                                        ?.buffer_minutes,
-                                                                onChanged: (value) {
-                                                                  setServiceModel = setServiceModel?.copyWith(
-                                                                    serviceModel: setServiceModel
-                                                                        ?.serviceModel
-                                                                        ?.copyWith(
-                                                                          buffer_minutes:
-                                                                              value,
-                                                                        ),
-                                                                  );
-                                                                  setState(
-                                                                    () {},
-                                                                  );
-                                                                },
-                                                                validator: (value) {
-                                                                  if (value ==
-                                                                          null &&
-                                                                      (value?.trim().isEmpty ??
-                                                                          false)) {
-                                                                    return LocaleKeys
-                                                                        .categoryServices_bufferInMinutesIsRequired
-                                                                        .tr();
-                                                                  } else {
-                                                                    int?
-                                                                    valueAsInt =
-                                                                        int.tryParse(
-                                                                          value ??
-                                                                              "",
-                                                                        );
-
-                                                                    if ((valueAsInt ??
-                                                                            0) <=
-                                                                        0) {
-                                                                      return LocaleKeys
-                                                                          .categoryServices_bufferInMinutesIsRequired
-                                                                          .tr();
-                                                                    }
-                                                                  }
-
-                                                                  return null;
-                                                                },
-                                                              ),
-                                                              Padding(
-                                                                padding:
-                                                                    EdgeInsetsGeometry.symmetric(
-                                                                      vertical:
-                                                                          8.h,
-                                                                    ),
-                                                                child: CustomInputField(
-                                                                  label: LocaleKeys
-                                                                      .categoryServices_notes
+                                                                backgroundColor:
+                                                                    Colors
+                                                                        .transparent,
+                                                                title: Text(
+                                                                  LocaleKeys
+                                                                      .categoryServices_addService
                                                                       .tr(),
-                                                                  isRequired:
-                                                                      false,
-                                                                  initialValue:
-                                                                      setServiceModel
-                                                                          ?.serviceModel
-                                                                          ?.notes,
-                                                                  onChanged: (value) {
-                                                                    setServiceModel = setServiceModel?.copyWith(
-                                                                      serviceModel: setServiceModel
-                                                                          ?.serviceModel
-                                                                          ?.copyWith(
-                                                                            notes:
-                                                                                value,
-                                                                          ),
-                                                                    );
-                                                                  },
-                                                                  maxLines: 3,
-                                                                  maxLength:
-                                                                      500,
-                                                                ),
-                                                              ),
-                                                              Padding(
-                                                                padding:
-                                                                    EdgeInsets.symmetric(
-                                                                      vertical:
-                                                                          8.h,
-                                                                    ),
-                                                                child: Row(
-                                                                  crossAxisAlignment:
-                                                                      CrossAxisAlignment
-                                                                          .center,
-                                                                  children: [
-                                                                    Text(
-                                                                      LocaleKeys
-                                                                          .categoryServices_isActive
-                                                                          .tr(),
-                                                                      style: Theme.of(context)
-                                                                          .textTheme
-                                                                          .labelLarge
-                                                                          ?.copyWith(
-                                                                            fontFamily: FontConstants.fontFamily(
-                                                                              context.locale,
-                                                                            ),
-                                                                          ),
-                                                                    ),
-
-                                                                    Padding(
-                                                                      padding: EdgeInsets.symmetric(
-                                                                        horizontal:
-                                                                            20.w,
+                                                                  style: Theme.of(context)
+                                                                      .textTheme
+                                                                      .labelLarge
+                                                                      ?.copyWith(
+                                                                        fontFamily: FontConstants.fontFamily(
+                                                                          context
+                                                                              .locale,
+                                                                        ),
                                                                       ),
-                                                                      child: SizedBox(
-                                                                        width:
-                                                                            20.w,
-                                                                        height:
-                                                                            20.h,
-                                                                        child: Checkbox.adaptive(
-                                                                          value:
-                                                                              setServiceModel?.serviceModel?.is_active ??
-                                                                              false,
+                                                                ),
+                                                                scrollable:
+                                                                    true,
+                                                                content: Form(
+                                                                  key:
+                                                                      setServiceFormKey,
+                                                                  autovalidateMode:
+                                                                      AutovalidateMode
+                                                                          .onUserInteraction,
+                                                                  child: Column(
+                                                                    children: [
+                                                                      CustomInputField(
+                                                                        label: LocaleKeys
+                                                                            .categoryServices_price
+                                                                            .tr(),
+                                                                        initialValue: setServiceModel
+                                                                            ?.serviceModel
+                                                                            ?.price
+                                                                            .toString(),
+                                                                        onChanged: (value) {
+                                                                          setServiceModel = setServiceModel?.copyWith(
+                                                                            serviceModel: setServiceModel?.serviceModel?.copyWith(
+                                                                              price: int.tryParse(
+                                                                                value,
+                                                                              ),
+                                                                            ),
+                                                                          );
+                                                                          setState(
+                                                                            () {},
+                                                                          );
+                                                                        },
+                                                                        validator: (value) {
+                                                                          if (value ==
+                                                                                  null &&
+                                                                              (value?.trim().isEmpty ??
+                                                                                  false)) {
+                                                                            return LocaleKeys.categoryServices_thePriceFieldIsRequired.tr();
+                                                                          } else {
+                                                                            int?
+                                                                            valueAsInt = int.tryParse(
+                                                                              value ??
+                                                                                  "",
+                                                                            );
+
+                                                                            if ((valueAsInt ??
+                                                                                    0) <=
+                                                                                0) {
+                                                                              return LocaleKeys.categoryServices_thePriceFieldIsRequired.tr();
+                                                                            }
+                                                                          }
+
+                                                                          return null;
+                                                                        },
+                                                                      ),
+                                                                      Padding(
+                                                                        padding: EdgeInsetsGeometry.symmetric(
+                                                                          vertical:
+                                                                              8.h,
+                                                                        ),
+                                                                        child: CustomInputField(
+                                                                          label: LocaleKeys
+                                                                              .categoryServices_durationInMinutes
+                                                                              .tr(),
+                                                                          initialValue: setServiceModel
+                                                                              ?.serviceModel
+                                                                              ?.buffer_minutes,
                                                                           onChanged:
                                                                               (
-                                                                                newState,
+                                                                                value,
                                                                               ) {
-                                                                                setState(
-                                                                                  () {
-                                                                                    setServiceModel = setServiceModel?.copyWith(
-                                                                                      serviceModel: setServiceModel?.serviceModel?.copyWith(
-                                                                                        is_active: newState,
-                                                                                      ),
-                                                                                    );
-                                                                                  },
+                                                                                setServiceModel = setServiceModel?.copyWith(
+                                                                                  serviceModel: setServiceModel?.serviceModel?.copyWith(
+                                                                                    duration_minutes: value,
+                                                                                  ),
                                                                                 );
+                                                                                setState(
+                                                                                  () {},
+                                                                                );
+                                                                              },
+                                                                          validator:
+                                                                              (
+                                                                                value,
+                                                                              ) {
+                                                                                if (value ==
+                                                                                        null &&
+                                                                                    (value?.trim().isEmpty ??
+                                                                                        false)) {
+                                                                                  return LocaleKeys.categoryServices_durationInMinutesIsRequired.tr();
+                                                                                } else {
+                                                                                  int? valueAsInt = int.tryParse(
+                                                                                    value ??
+                                                                                        "",
+                                                                                  );
+
+                                                                                  if ((valueAsInt ??
+                                                                                          0) <=
+                                                                                      0) {
+                                                                                    return LocaleKeys.categoryServices_durationInMinutesIsRequired.tr();
+                                                                                  }
+                                                                                }
+
+                                                                                return null;
                                                                               },
                                                                         ),
                                                                       ),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                        actionsPadding:
-                                                            EdgeInsets.symmetric(
-                                                              horizontal: 12.w,
-                                                              vertical: 20.h,
-                                                            ),
-                                                        actions: [
-                                                          AddButton(
-                                                            onPressed: () {
-                                                              setServiceModel = setServiceModel?.copyWith(
-                                                                serviceModel: setServiceModel
-                                                                    ?.serviceModel
-                                                                    ?.copyWith(
-                                                                      service_id:
-                                                                          data?[index]
-                                                                              ?.id,
-                                                                    ),
-                                                              );
-                                                              if (setServiceModel
-                                                                      ?.serviceModel
-                                                                      ?.is_active ==
-                                                                  null) {
-                                                                setServiceModel = setServiceModel?.copyWith(
-                                                                  serviceModel: setServiceModel
-                                                                      ?.serviceModel
-                                                                      ?.copyWith(
-                                                                        is_active:
-                                                                            false,
+                                                                      CustomInputField(
+                                                                        label: LocaleKeys
+                                                                            .categoryServices_bufferInMinutes
+                                                                            .tr(),
+                                                                        initialValue: setServiceModel
+                                                                            ?.serviceModel
+                                                                            ?.buffer_minutes,
+                                                                        onChanged: (value) {
+                                                                          setServiceModel = setServiceModel?.copyWith(
+                                                                            serviceModel: setServiceModel?.serviceModel?.copyWith(
+                                                                              buffer_minutes: value,
+                                                                            ),
+                                                                          );
+                                                                          setState(
+                                                                            () {},
+                                                                          );
+                                                                        },
+                                                                        validator: (value) {
+                                                                          if (value ==
+                                                                                  null &&
+                                                                              (value?.trim().isEmpty ??
+                                                                                  false)) {
+                                                                            return LocaleKeys.categoryServices_bufferInMinutesIsRequired.tr();
+                                                                          } else {
+                                                                            int?
+                                                                            valueAsInt = int.tryParse(
+                                                                              value ??
+                                                                                  "",
+                                                                            );
+
+                                                                            if ((valueAsInt ??
+                                                                                    0) <=
+                                                                                0) {
+                                                                              return LocaleKeys.categoryServices_bufferInMinutesIsRequired.tr();
+                                                                            }
+                                                                          }
+
+                                                                          return null;
+                                                                        },
                                                                       ),
-                                                                );
-                                                              }
-                                                              print(
-                                                                "from Add:${setServiceModel?.serviceModel}",
-                                                              );
-                                                              context
-                                                                  .read<
-                                                                    SetServiceBloc
-                                                                  >()
-                                                                  .add(
-                                                                    SetServiceEvent.set(
-                                                                      setServiceModel,
-                                                                    ),
-                                                                  );
-                                                            },
-                                                            validator:
-                                                                (setServiceModel
-                                                                        ?.serviceModel
-                                                                        ?.price ??
-                                                                    0) >
-                                                                0,
-                                                          ),
-                                                          SizedBox(
-                                                            width: 95.w,
-                                                            height: 40.h,
-                                                            child: ElevatedButton(
-                                                              style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
-                                                                padding: WidgetStateProperty.resolveWith((
-                                                                  callback,
-                                                                ) {
-                                                                  if (callback
-                                                                      .contains(
-                                                                        WidgetState
-                                                                            .pressed,
-                                                                      )) {
-                                                                    return EdgeInsets.symmetric(
-                                                                      horizontal:
-                                                                          8.w,
-                                                                      vertical:
-                                                                          13.h,
-                                                                    );
-                                                                  }
-                                                                  if (callback
-                                                                      .contains(
-                                                                        WidgetState
-                                                                            .hovered,
-                                                                      )) {
-                                                                    return EdgeInsets.symmetric(
-                                                                      horizontal:
-                                                                          5.w,
-                                                                      vertical:
-                                                                          13.h,
-                                                                    );
-                                                                  }
-                                                                  return EdgeInsets.symmetric(
-                                                                    horizontal:
-                                                                        5.w,
-                                                                    vertical:
-                                                                        5.h,
-                                                                  );
-                                                                }),
-                                                                backgroundColor:
-                                                                    WidgetStatePropertyAll(
-                                                                      Theme.of(
-                                                                        context,
-                                                                      ).scaffoldBackgroundColor,
-                                                                    ),
-                                                              ),
-                                                              onPressed: () {
-                                                                setServiceModel =
-                                                                    setServiceModel?.copyWith(
-                                                                      serviceModel:
-                                                                          ServiceModel(),
-                                                                    );
-                                                                dialogContext
-                                                                    .pop();
-                                                              },
-                                                              child: Text(
-                                                                LocaleKeys
-                                                                    .common_cancel
-                                                                    .tr(),
-                                                                style: Theme.of(context)
-                                                                    .textTheme
-                                                                    .labelLarge
-                                                                    ?.copyWith(
-                                                                      fontFamily:
-                                                                          FontConstants.fontFamily(
-                                                                            context.locale,
-                                                                          ),
-                                                                      fontSize:
-                                                                          16.sp,
-                                                                    ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                        actionsAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceEvenly,
-                                                      ).asGlass(
-                                                        blurX: 1,
-                                                        blurY: 1,
-                                                        tintColor:
-                                                            Theme.of(context)
-                                                                .colorScheme
-                                                                .primaryContainer
-                                                                .withValues(
-                                                                  alpha: 0.6,
+                                                                      Padding(
+                                                                        padding: EdgeInsetsGeometry.symmetric(
+                                                                          vertical:
+                                                                              8.h,
+                                                                        ),
+                                                                        child: CustomInputField(
+                                                                          label: LocaleKeys
+                                                                              .categoryServices_notes
+                                                                              .tr(),
+                                                                          isRequired:
+                                                                              false,
+                                                                          initialValue: setServiceModel
+                                                                              ?.serviceModel
+                                                                              ?.notes,
+                                                                          onChanged:
+                                                                              (
+                                                                                value,
+                                                                              ) {
+                                                                                setServiceModel = setServiceModel?.copyWith(
+                                                                                  serviceModel: setServiceModel?.serviceModel?.copyWith(
+                                                                                    notes: value,
+                                                                                  ),
+                                                                                );
+                                                                              },
+                                                                          maxLines:
+                                                                              3,
+                                                                          maxLength:
+                                                                              500,
+                                                                        ),
+                                                                      ),
+                                                                      Padding(
+                                                                        padding: EdgeInsets.symmetric(
+                                                                          vertical:
+                                                                              8.h,
+                                                                        ),
+                                                                        child: Row(
+                                                                          crossAxisAlignment:
+                                                                              CrossAxisAlignment.center,
+                                                                          children: [
+                                                                            Text(
+                                                                              LocaleKeys.categoryServices_isActive.tr(),
+                                                                              style:
+                                                                                  Theme.of(
+                                                                                    context,
+                                                                                  ).textTheme.labelLarge?.copyWith(
+                                                                                    fontFamily: FontConstants.fontFamily(
+                                                                                      context.locale,
+                                                                                    ),
+                                                                                  ),
+                                                                            ),
+
+                                                                            Padding(
+                                                                              padding: EdgeInsets.symmetric(
+                                                                                horizontal: 20.w,
+                                                                              ),
+                                                                              child: SizedBox(
+                                                                                width: 20.w,
+                                                                                height: 20.h,
+                                                                                child: Checkbox.adaptive(
+                                                                                  value:
+                                                                                      setServiceModel?.serviceModel?.is_active ??
+                                                                                      false,
+                                                                                  onChanged:
+                                                                                      (
+                                                                                        newState,
+                                                                                      ) {
+                                                                                        setState(
+                                                                                          () {
+                                                                                            setServiceModel = setServiceModel?.copyWith(
+                                                                                              serviceModel: setServiceModel?.serviceModel?.copyWith(
+                                                                                                is_active: newState,
+                                                                                              ),
+                                                                                            );
+                                                                                          },
+                                                                                        );
+                                                                                      },
+                                                                                ),
+                                                                              ),
+                                                                            ),
+                                                                          ],
+                                                                        ),
+                                                                      ),
+                                                                    ],
+                                                                  ),
                                                                 ),
-                                                      );
-                                                    },
-                                                  ),
-                                                );
-                                              },
-                                              child: Center(
-                                                child: Text(
-                                                  LocaleKeys.common_add.tr(),
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .labelLarge
-                                                      ?.copyWith(
-                                                        fontFamily:
-                                                            FontConstants.fontFamily(
-                                                              context.locale,
-                                                            ),
-                                                        fontSize: 16.sp,
+                                                                actionsPadding:
+                                                                    EdgeInsets.symmetric(
+                                                                      horizontal:
+                                                                          12.w,
+                                                                      vertical:
+                                                                          20.h,
+                                                                    ),
+                                                                actions: [
+                                                                  AddButton(
+                                                                    onPressed: () {
+                                                                      setServiceModel = setServiceModel?.copyWith(
+                                                                        serviceModel: setServiceModel
+                                                                            ?.serviceModel
+                                                                            ?.copyWith(
+                                                                              service_id: data?[index]?.id,
+                                                                            ),
+                                                                      );
+                                                                      if (setServiceModel
+                                                                              ?.serviceModel
+                                                                              ?.is_active ==
+                                                                          null) {
+                                                                        setServiceModel = setServiceModel?.copyWith(
+                                                                          serviceModel: setServiceModel?.serviceModel?.copyWith(
+                                                                            is_active:
+                                                                                false,
+                                                                          ),
+                                                                        );
+                                                                      }
+                                                                      print(
+                                                                        "from Add:${setServiceModel?.serviceModel}",
+                                                                      );
+                                                                      context
+                                                                          .read<
+                                                                            SetServiceBloc
+                                                                          >()
+                                                                          .add(
+                                                                            SetServiceEvent.set(
+                                                                              setServiceModel,
+                                                                            ),
+                                                                          );
+                                                                    },
+                                                                    validator:
+                                                                        (setServiceModel?.serviceModel?.price ??
+                                                                            0) >
+                                                                        0,
+                                                                  ),
+                                                                  SizedBox(
+                                                                    width: 95.w,
+                                                                    height:
+                                                                        40.h,
+                                                                    child: ElevatedButton(
+                                                                      style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
+                                                                        padding: WidgetStateProperty.resolveWith((
+                                                                          callback,
+                                                                        ) {
+                                                                          if (callback.contains(
+                                                                            WidgetState.pressed,
+                                                                          )) {
+                                                                            return EdgeInsets.symmetric(
+                                                                              horizontal: 8.w,
+                                                                              vertical: 13.h,
+                                                                            );
+                                                                          }
+                                                                          if (callback.contains(
+                                                                            WidgetState.hovered,
+                                                                          )) {
+                                                                            return EdgeInsets.symmetric(
+                                                                              horizontal: 5.w,
+                                                                              vertical: 13.h,
+                                                                            );
+                                                                          }
+                                                                          return EdgeInsets.symmetric(
+                                                                            horizontal:
+                                                                                5.w,
+                                                                            vertical:
+                                                                                5.h,
+                                                                          );
+                                                                        }),
+                                                                        backgroundColor: WidgetStatePropertyAll(
+                                                                          Theme.of(
+                                                                            context,
+                                                                          ).scaffoldBackgroundColor,
+                                                                        ),
+                                                                      ),
+                                                                      onPressed: () {
+                                                                        setServiceModel = setServiceModel?.copyWith(
+                                                                          serviceModel:
+                                                                              ServiceModel(),
+                                                                        );
+                                                                        dialogContext
+                                                                            .pop();
+                                                                      },
+                                                                      child: Text(
+                                                                        LocaleKeys
+                                                                            .common_cancel
+                                                                            .tr(),
+                                                                        style:
+                                                                            Theme.of(
+                                                                              context,
+                                                                            ).textTheme.labelLarge?.copyWith(
+                                                                              fontFamily: FontConstants.fontFamily(
+                                                                                context.locale,
+                                                                              ),
+                                                                              fontSize: 16.sp,
+                                                                            ),
+                                                                      ),
+                                                                    ),
+                                                                  ),
+                                                                ],
+                                                                actionsAlignment:
+                                                                    MainAxisAlignment
+                                                                        .spaceEvenly,
+                                                              ).asGlass(
+                                                                frosted: true,
+                                                                blurX: 3,
+                                                                blurY: 3,
+                                                                tintColor:
+                                                                    Theme.of(
+                                                                          context,
+                                                                        )
+                                                                        .colorScheme
+                                                                        .primaryContainer
+                                                                        .withValues(
+                                                                          alpha:
+                                                                              0.9,
+                                                                        ),
+                                                                clipBorderRadius:
+                                                                    BorderRadius.circular(
+                                                                      12.r,
+                                                                    ),
+                                                                border: Theme.of(
+                                                                  context,
+                                                                ).defaultBorderSide,
+                                                              );
+                                                            },
                                                       ),
-                                                  textAlign: TextAlign.center,
+                                                    );
+                                                  },
+                                                  child: Center(
+                                                    child: Text(
+                                                      LocaleKeys.common_add
+                                                          .tr(),
+                                                      style: Theme.of(context)
+                                                          .textTheme
+                                                          .labelLarge
+                                                          ?.copyWith(
+                                                            fontFamily:
+                                                                FontConstants.fontFamily(
+                                                                  context
+                                                                      .locale,
+                                                                ),
+                                                            fontSize: 16.sp,
+                                                          ),
+                                                      textAlign:
+                                                          TextAlign.center,
+                                                    ),
+                                                  ),
                                                 ),
                                               ),
                                             ),
-                                          ),
+                                          ],
                                         ),
-                                      ],
-                                    ),
-                                  ),
+                                      ).asGlass(
+                                        frosted: true,
+                                        blurX: 8,
+                                        blurY: 8,
+                                        tintColor: Theme.of(context)
+                                            .colorScheme
+                                            .primaryContainer
+                                            .withValues(alpha: 0.9),
+                                        clipBorderRadius: BorderRadius.circular(
+                                          12.r,
+                                        ),
+                                        border: Theme.of(
+                                          context,
+                                        ).defaultBorderSide,
+                                      ),
                                 ),
                               ),
                         unAuthorized: () => ErrorStateWidget(

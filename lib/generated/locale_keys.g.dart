@@ -166,6 +166,15 @@ abstract class  LocaleKeys {
   static const profilePage_subjectIsRequired = 'profilePage.subjectIsRequired';
   static const profilePage_messageIsRequired = 'profilePage.messageIsRequired';
   static const profilePage_contactInfo = 'profilePage.contactInfo';
+  static const profilePage_account = 'profilePage.account';
+  static const profilePage_manageYourAccountInformation = 'profilePage.manageYourAccountInformation';
+  static const profilePage_settingsAndPreferences = 'profilePage.settingsAndPreferences';
+  static const profilePage_languageAndTheme = 'profilePage.languageAndTheme';
+  static const profilePage_contactAsForAssistance = 'profilePage.contactAsForAssistance';
+  static const profilePage_signOutOfYourAccount = 'profilePage.signOutOfYourAccount';
+  static const profilePage_languageChangedSuccessfully = 'profilePage.languageChangedSuccessfully';
+  static const profilePage_themeChangedSuccessfully = 'profilePage.themeChangedSuccessfully';
+  static const profilePage_languagesIspeak = 'profilePage.languagesIspeak';
   static const profilePage = 'profilePage';
   static const myServicesPage_title = 'myServicesPage.title';
   static const myServicesPage_label = 'myServicesPage.label';
