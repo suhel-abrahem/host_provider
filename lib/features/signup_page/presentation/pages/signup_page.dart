@@ -994,7 +994,7 @@ class _SignupPageState extends State<SignupPage> {
                                         role: "Provider",
                                       );
                                       signupModel = signupModel?.copyWith(
-                                        verify_via: "email",
+                                        verify_via: "whatsapp",
                                       );
                                       context.read<SignupBlocBloc>().add(
                                         SignupBlocEvent.signupSignedInEvent(

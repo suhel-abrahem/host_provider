@@ -36,7 +36,7 @@ class SquerContainerWithPresseWidget extends StatelessWidget {
         onPressed: onPressed,
         child:
             Container(
-              padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 20.h),
+              padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -48,7 +48,7 @@ class SquerContainerWithPresseWidget extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(
-                          height: 40.h,
+                          height: 50.h,
                           child: Text(
                             title ?? '',
                             style: Theme.of(context).textTheme.labelMedium
@@ -96,8 +96,8 @@ class SquerContainerWithPresseWidget extends StatelessWidget {
               ),
             ).asGlass(
               frosted: true,
-              blurX: 18,
-              blurY: 18,
+              blurX: 38,
+              blurY: 38,
               tintColor:
                   backgroundColor?.withValues(alpha: 0.9) ??
                   Theme.of(

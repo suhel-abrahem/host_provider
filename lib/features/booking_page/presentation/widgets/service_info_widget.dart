@@ -27,7 +27,7 @@ class ServiceInfoWidget extends StatelessWidget {
             children: [
               Text(
                 bookingEntity?.booking_number.toString() ?? "",
-                style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                style: Theme.of(context).textTheme.labelMedium?.copyWith(
                   fontFamily: FontConstants.fontFamily(context.locale),
                 ),
               ),
@@ -139,8 +139,8 @@ class ServiceInfoWidget extends StatelessWidget {
       ),
     ).asGlass(
       frosted: true,
-      blurX: 8,
-      blurY: 8,
+      blurX: 38,
+      blurY: 38,
       tintColor: Theme.of(
         context,
       ).colorScheme.primaryContainer.withValues(alpha: 0.9),

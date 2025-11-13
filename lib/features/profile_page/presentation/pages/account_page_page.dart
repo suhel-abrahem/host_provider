@@ -15,9 +15,13 @@ import 'package:hosta_provider/core/resource/main_page/main_page.dart';
 import 'package:hosta_provider/core/util/helper/helper.dart';
 import 'package:hosta_provider/features/profile_page/data/models/profile_model.dart';
 import 'package:hosta_provider/features/profile_page/domain/entities/profile_entity.dart';
+import 'package:hosta_provider/features/profile_page/domain/entities/working_hours_entity.dart';
 import 'package:hosta_provider/features/profile_page/presentation/bloc/get_profile_bloc.dart';
+import 'package:hosta_provider/features/profile_page/presentation/bloc/get_working_time_bloc.dart';
 import 'package:hosta_provider/features/profile_page/presentation/widgets/account_info_row_widget.dart';
 import 'package:hosta_provider/generated/locale_keys.g.dart';
+
+import '../widgets/day_container_widget.dart';
 
 class AccountPagePage extends StatefulWidget {
   const AccountPagePage({super.key});
@@ -29,6 +33,8 @@ class AccountPagePage extends StatefulWidget {
 class _AccountPagePageState extends State<AccountPagePage> {
   ProfileModel profileModel = ProfileModel();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  List<WorkingHoursEntity?>? workingHours = [];
+  bool? workingTimeWidgetCanEdit = false;
   @override
   void didChangeDependencies() {
     profileModel = profileModel.copyWith(
@@ -414,6 +420,182 @@ class _AccountPagePageState extends State<AccountPagePage> {
                     clipBorderRadius: BorderRadius.circular(12.r),
                     border: Theme.of(context).defaultBorderSide,
                   ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.w),
+              child: BlocProvider<GetWorkingTimeBloc>(
+                create: (context) => getItInstance<GetWorkingTimeBloc>()
+                  ..add(
+                    GetWorkingTimeEvent.getWorkingTime(
+                      profileModel: profileModel,
+                    ),
+                  ),
+                child:
+                    BlocListener<GetWorkingTimeBloc, GetWorkingTimeState>(
+                      listener: (context, state) {
+                        state.when(
+                          initial: () {},
+                          loading: () {},
+                          loaded: (workingHoursData) {
+                            workingHours = workingHoursData;
+                          },
+                          error: () {},
+                          noInternet: () {},
+                          noData: () {},
+                          unauthorized: () {},
+                          updated: () {},
+                          setSuccessfully: () {},
+                          itemsAlreadySet: () {},
+                          itemNotFound: () {},
+                        );
+                      },
+                      child: Container(
+                        padding: EdgeInsetsGeometry.symmetric(
+                          horizontal: 16.w,
+                          vertical: 16.h,
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Icon(
+                                  Icons.schedule_outlined,
+                                  size: 24.r,
+                                  color: Theme.of(context).colorScheme.primary,
+                                ),
+                                Text(
+                                  LocaleKeys.profilePage_workingSchedule.tr(),
+                                  style: Theme.of(context).textTheme.labelMedium
+                                      ?.copyWith(
+                                        fontFamily: FontConstants.fontFamily(
+                                          context.locale,
+                                        ),
+                                      ),
+                                ),
+                                SizedBox(
+                                  width: 40.w,
+                                  height: 40.h,
+                                  child: ElevatedButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        workingTimeWidgetCanEdit =
+                                            !(workingTimeWidgetCanEdit ??
+                                                false);
+                                      });
+                                    },
+                                    style: Theme.of(context)
+                                        .elevatedButtonTheme
+                                        .style
+                                        ?.copyWith(
+                                          backgroundColor:
+                                              WidgetStatePropertyAll(
+                                                Colors.transparent,
+                                              ),
+                                          shadowColor: WidgetStatePropertyAll(
+                                            Colors.transparent,
+                                          ),
+                                          padding: WidgetStatePropertyAll(
+                                            EdgeInsets.zero,
+                                          ),
+                                        ),
+                                    child: Container(
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal: 4.w,
+                                        vertical: 4.h,
+                                      ),
+                                      child: FittedBox(
+                                        fit: BoxFit.scaleDown,
+                                        child: Icon(
+                                          Icons.edit_outlined,
+                                          size: 20.sp,
+                                          color: Theme.of(
+                                            context,
+                                          ).colorScheme.onPrimaryContainer,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            BlocBuilder<
+                              GetWorkingTimeBloc,
+                              GetWorkingTimeState
+                            >(
+                              buildWhen: (prev, curr) => curr != prev,
+                              builder: (context, state) {
+                                if (state is GetWorkingTimeStateLoading) {
+                                  return Center(
+                                    child: CircularProgressIndicator(),
+                                  );
+                                } else {
+                                  return ListView.builder(
+                                    itemBuilder: (context, index) {
+                                      return Padding(
+                                        padding: EdgeInsets.symmetric(
+                                          vertical: 8.h,
+                                        ),
+                                        child: DayContainerWidget(
+                                          canEdit: workingTimeWidgetCanEdit,
+                                          workingHoursEntity:
+                                              workingHours?[index],
+                                        ),
+                                      );
+                                    },
+                                    itemCount: workingHours?.length ?? 0,
+                                    shrinkWrap: true,
+                                    physics: NeverScrollableScrollPhysics(),
+                                  );
+                                }
+                              },
+                            ),
+                            if (workingTimeWidgetCanEdit ?? false)
+                              Padding(
+                                padding: EdgeInsets.only(top: 12.h),
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    //save working time
+                                  },
+                                  style: Theme.of(context)
+                                      .elevatedButtonTheme
+                                      .style
+                                      ?.copyWith(
+                                        backgroundColor: WidgetStatePropertyAll(
+                                          Theme.of(context).colorScheme.primary,
+                                        ),
+                                      ),
+                                  child: Text(
+                                    LocaleKeys.profilePage_submit.tr(),
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .labelMedium
+                                        ?.copyWith(
+                                          fontFamily: FontConstants.fontFamily(
+                                            context.locale,
+                                          ),
+                                          color: Theme.of(
+                                            context,
+                                          ).colorScheme.onPrimary,
+                                        ),
+                                  ),
+                                ),
+                              ),
+                          ],
+                        ),
+                      ),
+                    ).asGlass(
+                      frosted: true,
+                      blurX: 18,
+                      blurY: 18,
+                      tintColor: Theme.of(
+                        context,
+                      ).colorScheme.primary.withValues(alpha: 0.9),
+                      clipBorderRadius: BorderRadius.circular(12.r),
+                      border: Theme.of(context).defaultBorderSide,
+                    ),
+              ),
             ),
           ],
         ),

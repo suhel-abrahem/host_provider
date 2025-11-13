@@ -7,6 +7,7 @@ import 'package:hosta_provider/core/constants/font_constants.dart';
 
 import '../../../config/route/routes_manager.dart';
 
+import '../../../generated/locale_keys.g.dart';
 import '../../constants/language_constant.dart';
 import '../../resource/color_manager.dart';
 
@@ -97,6 +98,27 @@ class Helper {
         return Theme.of(context).colorScheme.error;
       default:
         return Theme.of(context).colorScheme.error;
+    }
+  }
+
+  static String? getDayById(int? dayId) {
+    switch (dayId) {
+      case 0:
+        return LocaleKeys.profilePage_sunday;
+      case 1:
+        return LocaleKeys.profilePage_monday;
+      case 2:
+        return LocaleKeys.profilePage_tuesday;
+      case 3:
+        return LocaleKeys.profilePage_wednesday;
+      case 4:
+        return LocaleKeys.profilePage_thursday;
+      case 5:
+        return LocaleKeys.profilePage_friday;
+      case 6:
+        return LocaleKeys.profilePage_saturday;
+      default:
+        return null;
     }
   }
 }

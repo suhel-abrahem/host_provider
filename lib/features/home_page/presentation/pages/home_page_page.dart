@@ -243,8 +243,8 @@ class _HomePagePageState extends State<HomePagePage> {
                   ),
                 ).asGlass(
                   frosted: true,
-                  blurX: 28,
-                  blurY: 28,
+                  blurX: 38,
+                  blurY: 38,
                   tintColor: Theme.of(
                     context,
                   ).colorScheme.primaryContainer.withValues(alpha: 1.0),

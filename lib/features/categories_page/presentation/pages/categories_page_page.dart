@@ -98,16 +98,17 @@ class _CategoriesPagePageState extends State<CategoriesPagePage> {
                           vertical: 20.h,
                         ),
                         child: GridView.builder(
-                          itemCount: data?.length,
+                          itemCount: data.length,
                           gridDelegate:
                               SliverGridDelegateWithFixedCrossAxisCount(
                                 crossAxisCount: 2,
                                 crossAxisSpacing: 12.w,
                                 mainAxisSpacing: 12.h,
+                                mainAxisExtent: 180.h,
                               ),
                           itemBuilder: (context, index) {
                             return CategoryContainer(
-                              categoryEntity: data?[index],
+                              categoryEntity: data[index],
                             );
                           },
                         ),

@@ -112,7 +112,7 @@ class _CategoryServicesPagePageState extends State<CategoryServicesPagePage> {
           body: Column(
             children: [
               Container(
-                height: 100.h,
+                height: 110.h,
                 decoration: BoxDecoration(),
                 child: Row(
                   children: [
@@ -326,357 +326,25 @@ class _CategoryServicesPagePageState extends State<CategoryServicesPagePage> {
                                                               builderContext,
                                                               setState,
                                                             ) {
-                                                              return AlertDialog.adaptive(
-                                                                icon: Icon(
-                                                                  Icons
-                                                                      .add_business_outlined,
-                                                                  color: Theme.of(context)
-                                                                      .textTheme
-                                                                      .labelLarge
-                                                                      ?.color,
-                                                                  size: 32.sp,
-                                                                ),
-                                                                backgroundColor:
-                                                                    Colors
-                                                                        .transparent,
-                                                                title: Text(
-                                                                  LocaleKeys
-                                                                      .categoryServices_addService
-                                                                      .tr(),
-                                                                  style: Theme.of(context)
-                                                                      .textTheme
-                                                                      .labelLarge
-                                                                      ?.copyWith(
-                                                                        fontFamily: FontConstants.fontFamily(
-                                                                          context
-                                                                              .locale,
-                                                                        ),
+                                                              return SizedBox(
+                                                                width: 300.w,
+                                                                child:
+                                                                    AlertDialog(
+                                                                      icon: Icon(
+                                                                        Icons
+                                                                            .add_business_outlined,
+                                                                        color: Theme.of(
+                                                                          context,
+                                                                        ).textTheme.labelLarge?.color,
+                                                                        size: 32
+                                                                            .sp,
                                                                       ),
-                                                                ),
-                                                                scrollable:
-                                                                    true,
-                                                                content: Form(
-                                                                  key:
-                                                                      setServiceFormKey,
-                                                                  autovalidateMode:
-                                                                      AutovalidateMode
-                                                                          .onUserInteraction,
-                                                                  child: Column(
-                                                                    children: [
-                                                                      CustomInputField(
-                                                                        label: LocaleKeys
-                                                                            .categoryServices_price
-                                                                            .tr(),
-                                                                        initialValue: setServiceModel
-                                                                            ?.serviceModel
-                                                                            ?.price
-                                                                            .toString(),
-                                                                        onChanged: (value) {
-                                                                          setServiceModel = setServiceModel?.copyWith(
-                                                                            serviceModel: setServiceModel?.serviceModel?.copyWith(
-                                                                              price: int.tryParse(
-                                                                                value,
-                                                                              ),
-                                                                            ),
-                                                                          );
-                                                                          setState(
-                                                                            () {},
-                                                                          );
-                                                                        },
-                                                                        validator: (value) {
-                                                                          if (value ==
-                                                                                  null &&
-                                                                              (value?.trim().isEmpty ??
-                                                                                  false)) {
-                                                                            return LocaleKeys.categoryServices_thePriceFieldIsRequired.tr();
-                                                                          } else {
-                                                                            int?
-                                                                            valueAsInt = int.tryParse(
-                                                                              value ??
-                                                                                  "",
-                                                                            );
-
-                                                                            if ((valueAsInt ??
-                                                                                    0) <=
-                                                                                0) {
-                                                                              return LocaleKeys.categoryServices_thePriceFieldIsRequired.tr();
-                                                                            }
-                                                                          }
-
-                                                                          return null;
-                                                                        },
-                                                                      ),
-                                                                      Padding(
-                                                                        padding: EdgeInsetsGeometry.symmetric(
-                                                                          vertical:
-                                                                              8.h,
-                                                                        ),
-                                                                        child: CustomInputField(
-                                                                          label: LocaleKeys
-                                                                              .categoryServices_durationInMinutes
-                                                                              .tr(),
-                                                                          initialValue: setServiceModel
-                                                                              ?.serviceModel
-                                                                              ?.buffer_minutes,
-                                                                          onChanged:
-                                                                              (
-                                                                                value,
-                                                                              ) {
-                                                                                setServiceModel = setServiceModel?.copyWith(
-                                                                                  serviceModel: setServiceModel?.serviceModel?.copyWith(
-                                                                                    duration_minutes: value,
-                                                                                  ),
-                                                                                );
-                                                                                setState(
-                                                                                  () {},
-                                                                                );
-                                                                              },
-                                                                          validator:
-                                                                              (
-                                                                                value,
-                                                                              ) {
-                                                                                if (value ==
-                                                                                        null &&
-                                                                                    (value?.trim().isEmpty ??
-                                                                                        false)) {
-                                                                                  return LocaleKeys.categoryServices_durationInMinutesIsRequired.tr();
-                                                                                } else {
-                                                                                  int? valueAsInt = int.tryParse(
-                                                                                    value ??
-                                                                                        "",
-                                                                                  );
-
-                                                                                  if ((valueAsInt ??
-                                                                                          0) <=
-                                                                                      0) {
-                                                                                    return LocaleKeys.categoryServices_durationInMinutesIsRequired.tr();
-                                                                                  }
-                                                                                }
-
-                                                                                return null;
-                                                                              },
-                                                                        ),
-                                                                      ),
-                                                                      CustomInputField(
-                                                                        label: LocaleKeys
-                                                                            .categoryServices_bufferInMinutes
-                                                                            .tr(),
-                                                                        initialValue: setServiceModel
-                                                                            ?.serviceModel
-                                                                            ?.buffer_minutes,
-                                                                        onChanged: (value) {
-                                                                          setServiceModel = setServiceModel?.copyWith(
-                                                                            serviceModel: setServiceModel?.serviceModel?.copyWith(
-                                                                              buffer_minutes: value,
-                                                                            ),
-                                                                          );
-                                                                          setState(
-                                                                            () {},
-                                                                          );
-                                                                        },
-                                                                        validator: (value) {
-                                                                          if (value ==
-                                                                                  null &&
-                                                                              (value?.trim().isEmpty ??
-                                                                                  false)) {
-                                                                            return LocaleKeys.categoryServices_bufferInMinutesIsRequired.tr();
-                                                                          } else {
-                                                                            int?
-                                                                            valueAsInt = int.tryParse(
-                                                                              value ??
-                                                                                  "",
-                                                                            );
-
-                                                                            if ((valueAsInt ??
-                                                                                    0) <=
-                                                                                0) {
-                                                                              return LocaleKeys.categoryServices_bufferInMinutesIsRequired.tr();
-                                                                            }
-                                                                          }
-
-                                                                          return null;
-                                                                        },
-                                                                      ),
-                                                                      Padding(
-                                                                        padding: EdgeInsetsGeometry.symmetric(
-                                                                          vertical:
-                                                                              8.h,
-                                                                        ),
-                                                                        child: CustomInputField(
-                                                                          label: LocaleKeys
-                                                                              .categoryServices_notes
-                                                                              .tr(),
-                                                                          isRequired:
-                                                                              false,
-                                                                          initialValue: setServiceModel
-                                                                              ?.serviceModel
-                                                                              ?.notes,
-                                                                          onChanged:
-                                                                              (
-                                                                                value,
-                                                                              ) {
-                                                                                setServiceModel = setServiceModel?.copyWith(
-                                                                                  serviceModel: setServiceModel?.serviceModel?.copyWith(
-                                                                                    notes: value,
-                                                                                  ),
-                                                                                );
-                                                                              },
-                                                                          maxLines:
-                                                                              3,
-                                                                          maxLength:
-                                                                              500,
-                                                                        ),
-                                                                      ),
-                                                                      Padding(
-                                                                        padding: EdgeInsets.symmetric(
-                                                                          vertical:
-                                                                              8.h,
-                                                                        ),
-                                                                        child: Row(
-                                                                          crossAxisAlignment:
-                                                                              CrossAxisAlignment.center,
-                                                                          children: [
-                                                                            Text(
-                                                                              LocaleKeys.categoryServices_isActive.tr(),
-                                                                              style:
-                                                                                  Theme.of(
-                                                                                    context,
-                                                                                  ).textTheme.labelLarge?.copyWith(
-                                                                                    fontFamily: FontConstants.fontFamily(
-                                                                                      context.locale,
-                                                                                    ),
-                                                                                  ),
-                                                                            ),
-
-                                                                            Padding(
-                                                                              padding: EdgeInsets.symmetric(
-                                                                                horizontal: 20.w,
-                                                                              ),
-                                                                              child: SizedBox(
-                                                                                width: 20.w,
-                                                                                height: 20.h,
-                                                                                child: Checkbox.adaptive(
-                                                                                  value:
-                                                                                      setServiceModel?.serviceModel?.is_active ??
-                                                                                      false,
-                                                                                  onChanged:
-                                                                                      (
-                                                                                        newState,
-                                                                                      ) {
-                                                                                        setState(
-                                                                                          () {
-                                                                                            setServiceModel = setServiceModel?.copyWith(
-                                                                                              serviceModel: setServiceModel?.serviceModel?.copyWith(
-                                                                                                is_active: newState,
-                                                                                              ),
-                                                                                            );
-                                                                                          },
-                                                                                        );
-                                                                                      },
-                                                                                ),
-                                                                              ),
-                                                                            ),
-                                                                          ],
-                                                                        ),
-                                                                      ),
-                                                                    ],
-                                                                  ),
-                                                                ),
-                                                                actionsPadding:
-                                                                    EdgeInsets.symmetric(
-                                                                      horizontal:
-                                                                          12.w,
-                                                                      vertical:
-                                                                          20.h,
-                                                                    ),
-                                                                actions: [
-                                                                  AddButton(
-                                                                    onPressed: () {
-                                                                      setServiceModel = setServiceModel?.copyWith(
-                                                                        serviceModel: setServiceModel
-                                                                            ?.serviceModel
-                                                                            ?.copyWith(
-                                                                              service_id: data?[index]?.id,
-                                                                            ),
-                                                                      );
-                                                                      if (setServiceModel
-                                                                              ?.serviceModel
-                                                                              ?.is_active ==
-                                                                          null) {
-                                                                        setServiceModel = setServiceModel?.copyWith(
-                                                                          serviceModel: setServiceModel?.serviceModel?.copyWith(
-                                                                            is_active:
-                                                                                false,
-                                                                          ),
-                                                                        );
-                                                                      }
-                                                                      print(
-                                                                        "from Add:${setServiceModel?.serviceModel}",
-                                                                      );
-                                                                      context
-                                                                          .read<
-                                                                            SetServiceBloc
-                                                                          >()
-                                                                          .add(
-                                                                            SetServiceEvent.set(
-                                                                              setServiceModel,
-                                                                            ),
-                                                                          );
-                                                                    },
-                                                                    validator:
-                                                                        (setServiceModel?.serviceModel?.price ??
-                                                                            0) >
-                                                                        0,
-                                                                  ),
-                                                                  SizedBox(
-                                                                    width: 95.w,
-                                                                    height:
-                                                                        40.h,
-                                                                    child: ElevatedButton(
-                                                                      style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
-                                                                        padding: WidgetStateProperty.resolveWith((
-                                                                          callback,
-                                                                        ) {
-                                                                          if (callback.contains(
-                                                                            WidgetState.pressed,
-                                                                          )) {
-                                                                            return EdgeInsets.symmetric(
-                                                                              horizontal: 8.w,
-                                                                              vertical: 13.h,
-                                                                            );
-                                                                          }
-                                                                          if (callback.contains(
-                                                                            WidgetState.hovered,
-                                                                          )) {
-                                                                            return EdgeInsets.symmetric(
-                                                                              horizontal: 5.w,
-                                                                              vertical: 13.h,
-                                                                            );
-                                                                          }
-                                                                          return EdgeInsets.symmetric(
-                                                                            horizontal:
-                                                                                5.w,
-                                                                            vertical:
-                                                                                5.h,
-                                                                          );
-                                                                        }),
-                                                                        backgroundColor: WidgetStatePropertyAll(
-                                                                          Theme.of(
-                                                                            context,
-                                                                          ).scaffoldBackgroundColor,
-                                                                        ),
-                                                                      ),
-                                                                      onPressed: () {
-                                                                        setServiceModel = setServiceModel?.copyWith(
-                                                                          serviceModel:
-                                                                              ServiceModel(),
-                                                                        );
-                                                                        dialogContext
-                                                                            .pop();
-                                                                      },
-                                                                      child: Text(
+                                                                      backgroundColor:
+                                                                          Colors
+                                                                              .transparent,
+                                                                      title: Text(
                                                                         LocaleKeys
-                                                                            .common_cancel
+                                                                            .categoryServices_addService
                                                                             .tr(),
                                                                         style:
                                                                             Theme.of(
@@ -685,36 +353,350 @@ class _CategoryServicesPagePageState extends State<CategoryServicesPagePage> {
                                                                               fontFamily: FontConstants.fontFamily(
                                                                                 context.locale,
                                                                               ),
-                                                                              fontSize: 16.sp,
                                                                             ),
                                                                       ),
-                                                                    ),
-                                                                  ),
-                                                                ],
-                                                                actionsAlignment:
-                                                                    MainAxisAlignment
-                                                                        .spaceEvenly,
-                                                              ).asGlass(
-                                                                frosted: true,
-                                                                blurX: 3,
-                                                                blurY: 3,
-                                                                tintColor:
-                                                                    Theme.of(
-                                                                          context,
-                                                                        )
-                                                                        .colorScheme
-                                                                        .primaryContainer
-                                                                        .withValues(
-                                                                          alpha:
-                                                                              0.9,
+                                                                      scrollable:
+                                                                          true,
+                                                                      content: Form(
+                                                                        key:
+                                                                            setServiceFormKey,
+                                                                        autovalidateMode:
+                                                                            AutovalidateMode.onUserInteraction,
+                                                                        child: Column(
+                                                                          mainAxisAlignment:
+                                                                              MainAxisAlignment.spaceEvenly,
+                                                                          children: [
+                                                                            CustomInputField(
+                                                                              label: LocaleKeys.categoryServices_price.tr(),
+                                                                              initialValue: setServiceModel?.serviceModel?.price.toString(),
+                                                                              onChanged:
+                                                                                  (
+                                                                                    value,
+                                                                                  ) {
+                                                                                    setServiceModel = setServiceModel?.copyWith(
+                                                                                      serviceModel: setServiceModel?.serviceModel?.copyWith(
+                                                                                        price: int.tryParse(
+                                                                                          value,
+                                                                                        ),
+                                                                                      ),
+                                                                                    );
+                                                                                    setState(
+                                                                                      () {},
+                                                                                    );
+                                                                                  },
+                                                                              validator:
+                                                                                  (
+                                                                                    value,
+                                                                                  ) {
+                                                                                    if (value ==
+                                                                                            null &&
+                                                                                        (value?.trim().isEmpty ??
+                                                                                            false)) {
+                                                                                      return LocaleKeys.categoryServices_thePriceFieldIsRequired.tr();
+                                                                                    } else {
+                                                                                      int? valueAsInt = int.tryParse(
+                                                                                        value ??
+                                                                                            "",
+                                                                                      );
+
+                                                                                      if ((valueAsInt ??
+                                                                                              0) <=
+                                                                                          0) {
+                                                                                        return LocaleKeys.categoryServices_thePriceFieldIsRequired.tr();
+                                                                                      }
+                                                                                    }
+
+                                                                                    return null;
+                                                                                  },
+                                                                            ),
+                                                                            Padding(
+                                                                              padding: EdgeInsetsGeometry.symmetric(
+                                                                                vertical: 16.h,
+                                                                              ),
+                                                                              child: CustomInputField(
+                                                                                label: LocaleKeys.categoryServices_durationInMinutes.tr(),
+                                                                                initialValue: setServiceModel?.serviceModel?.buffer_minutes,
+                                                                                onChanged:
+                                                                                    (
+                                                                                      value,
+                                                                                    ) {
+                                                                                      setServiceModel = setServiceModel?.copyWith(
+                                                                                        serviceModel: setServiceModel?.serviceModel?.copyWith(
+                                                                                          duration_minutes: value,
+                                                                                        ),
+                                                                                      );
+                                                                                      setState(
+                                                                                        () {},
+                                                                                      );
+                                                                                    },
+                                                                                validator:
+                                                                                    (
+                                                                                      value,
+                                                                                    ) {
+                                                                                      if (value ==
+                                                                                              null &&
+                                                                                          (value?.trim().isEmpty ??
+                                                                                              false)) {
+                                                                                        return LocaleKeys.categoryServices_durationInMinutesIsRequired.tr();
+                                                                                      } else {
+                                                                                        int? valueAsInt = int.tryParse(
+                                                                                          value ??
+                                                                                              "",
+                                                                                        );
+
+                                                                                        if ((valueAsInt ??
+                                                                                                0) <=
+                                                                                            0) {
+                                                                                          return LocaleKeys.categoryServices_durationInMinutesIsRequired.tr();
+                                                                                        }
+                                                                                      }
+
+                                                                                      return null;
+                                                                                    },
+                                                                              ),
+                                                                            ),
+                                                                            CustomInputField(
+                                                                              label: LocaleKeys.categoryServices_bufferInMinutes.tr(),
+                                                                              initialValue: setServiceModel?.serviceModel?.buffer_minutes,
+                                                                              onChanged:
+                                                                                  (
+                                                                                    value,
+                                                                                  ) {
+                                                                                    setServiceModel = setServiceModel?.copyWith(
+                                                                                      serviceModel: setServiceModel?.serviceModel?.copyWith(
+                                                                                        buffer_minutes: value,
+                                                                                      ),
+                                                                                    );
+                                                                                    setState(
+                                                                                      () {},
+                                                                                    );
+                                                                                  },
+                                                                              validator:
+                                                                                  (
+                                                                                    value,
+                                                                                  ) {
+                                                                                    if (value ==
+                                                                                            null &&
+                                                                                        (value?.trim().isEmpty ??
+                                                                                            false)) {
+                                                                                      return LocaleKeys.categoryServices_bufferInMinutesIsRequired.tr();
+                                                                                    } else {
+                                                                                      int? valueAsInt = int.tryParse(
+                                                                                        value ??
+                                                                                            "",
+                                                                                      );
+
+                                                                                      if ((valueAsInt ??
+                                                                                              0) <=
+                                                                                          0) {
+                                                                                        return LocaleKeys.categoryServices_bufferInMinutesIsRequired.tr();
+                                                                                      }
+                                                                                    }
+
+                                                                                    return null;
+                                                                                  },
+                                                                            ),
+                                                                            Padding(
+                                                                              padding: EdgeInsetsGeometry.symmetric(
+                                                                                vertical: 16.h,
+                                                                              ),
+                                                                              child: CustomInputField(
+                                                                                label: LocaleKeys.categoryServices_notes.tr(),
+                                                                                isRequired: false,
+                                                                                initialValue: setServiceModel?.serviceModel?.notes,
+                                                                                onChanged:
+                                                                                    (
+                                                                                      value,
+                                                                                    ) {
+                                                                                      setServiceModel = setServiceModel?.copyWith(
+                                                                                        serviceModel: setServiceModel?.serviceModel?.copyWith(
+                                                                                          notes: value,
+                                                                                        ),
+                                                                                      );
+                                                                                    },
+                                                                                maxLines: 3,
+                                                                                maxLength: 500,
+                                                                              ),
+                                                                            ),
+                                                                            Padding(
+                                                                              padding: EdgeInsets.symmetric(
+                                                                                vertical: 16.h,
+                                                                              ),
+                                                                              child: Row(
+                                                                                crossAxisAlignment: CrossAxisAlignment.center,
+                                                                                children: [
+                                                                                  Text(
+                                                                                    LocaleKeys.categoryServices_isActive.tr(),
+                                                                                    style:
+                                                                                        Theme.of(
+                                                                                          context,
+                                                                                        ).textTheme.labelLarge?.copyWith(
+                                                                                          fontFamily: FontConstants.fontFamily(
+                                                                                            context.locale,
+                                                                                          ),
+                                                                                        ),
+                                                                                  ),
+
+                                                                                  Padding(
+                                                                                    padding: EdgeInsets.symmetric(
+                                                                                      horizontal: 20.w,
+                                                                                    ),
+                                                                                    child: SizedBox(
+                                                                                      width: 20.w,
+                                                                                      height: 20.h,
+                                                                                      child: Checkbox.adaptive(
+                                                                                        value:
+                                                                                            setServiceModel?.serviceModel?.is_active ??
+                                                                                            false,
+                                                                                        onChanged:
+                                                                                            (
+                                                                                              newState,
+                                                                                            ) {
+                                                                                              setState(
+                                                                                                () {
+                                                                                                  setServiceModel = setServiceModel?.copyWith(
+                                                                                                    serviceModel: setServiceModel?.serviceModel?.copyWith(
+                                                                                                      is_active: newState,
+                                                                                                    ),
+                                                                                                  );
+                                                                                                },
+                                                                                              );
+                                                                                            },
+                                                                                      ),
+                                                                                    ),
+                                                                                  ),
+                                                                                ],
+                                                                              ),
+                                                                            ),
+                                                                          ],
                                                                         ),
-                                                                clipBorderRadius:
-                                                                    BorderRadius.circular(
-                                                                      12.r,
+                                                                      ),
+                                                                      actionsPadding: EdgeInsets.symmetric(
+                                                                        horizontal:
+                                                                            12.w,
+                                                                        vertical:
+                                                                            20.h,
+                                                                      ),
+                                                                      actions: [
+                                                                        AddButton(
+                                                                          onPressed: () {
+                                                                            setServiceModel = setServiceModel?.copyWith(
+                                                                              serviceModel: setServiceModel?.serviceModel?.copyWith(
+                                                                                service_id: data?[index]?.id,
+                                                                              ),
+                                                                            );
+                                                                            if (setServiceModel?.serviceModel?.is_active ==
+                                                                                null) {
+                                                                              setServiceModel = setServiceModel?.copyWith(
+                                                                                serviceModel: setServiceModel?.serviceModel?.copyWith(
+                                                                                  is_active: false,
+                                                                                ),
+                                                                              );
+                                                                            }
+                                                                            print(
+                                                                              "from Add:${setServiceModel?.serviceModel}",
+                                                                            );
+                                                                            context
+                                                                                .read<
+                                                                                  SetServiceBloc
+                                                                                >()
+                                                                                .add(
+                                                                                  SetServiceEvent.set(
+                                                                                    setServiceModel,
+                                                                                  ),
+                                                                                );
+                                                                          },
+                                                                          validator:
+                                                                              (setServiceModel?.serviceModel?.price ??
+                                                                                  0) >
+                                                                              0,
+                                                                        ),
+                                                                        SizedBox(
+                                                                          width:
+                                                                              95.w,
+                                                                          height:
+                                                                              40.h,
+                                                                          child: ElevatedButton(
+                                                                            style:
+                                                                                Theme.of(
+                                                                                  context,
+                                                                                ).elevatedButtonTheme.style?.copyWith(
+                                                                                  padding: WidgetStateProperty.resolveWith(
+                                                                                    (
+                                                                                      callback,
+                                                                                    ) {
+                                                                                      if (callback.contains(
+                                                                                        WidgetState.pressed,
+                                                                                      )) {
+                                                                                        return EdgeInsets.symmetric(
+                                                                                          horizontal: 8.w,
+                                                                                          vertical: 13.h,
+                                                                                        );
+                                                                                      }
+                                                                                      if (callback.contains(
+                                                                                        WidgetState.hovered,
+                                                                                      )) {
+                                                                                        return EdgeInsets.symmetric(
+                                                                                          horizontal: 5.w,
+                                                                                          vertical: 13.h,
+                                                                                        );
+                                                                                      }
+                                                                                      return EdgeInsets.symmetric(
+                                                                                        horizontal: 5.w,
+                                                                                        vertical: 5.h,
+                                                                                      );
+                                                                                    },
+                                                                                  ),
+                                                                                  backgroundColor: WidgetStatePropertyAll(
+                                                                                    Theme.of(
+                                                                                      context,
+                                                                                    ).scaffoldBackgroundColor,
+                                                                                  ),
+                                                                                ),
+                                                                            onPressed: () {
+                                                                              setServiceModel = setServiceModel?.copyWith(
+                                                                                serviceModel: ServiceModel(),
+                                                                              );
+                                                                              dialogContext.pop();
+                                                                            },
+                                                                            child: Text(
+                                                                              LocaleKeys.common_cancel.tr(),
+                                                                              style:
+                                                                                  Theme.of(
+                                                                                    context,
+                                                                                  ).textTheme.labelLarge?.copyWith(
+                                                                                    fontFamily: FontConstants.fontFamily(
+                                                                                      context.locale,
+                                                                                    ),
+                                                                                    fontSize: 16.sp,
+                                                                                  ),
+                                                                            ),
+                                                                          ),
+                                                                        ),
+                                                                      ],
+                                                                      actionsAlignment:
+                                                                          MainAxisAlignment
+                                                                              .spaceEvenly,
+                                                                    ).asGlass(
+                                                                      frosted:
+                                                                          true,
+                                                                      blurX: 3,
+                                                                      blurY: 3,
+                                                                      tintColor: Theme.of(context)
+                                                                          .colorScheme
+                                                                          .primaryContainer
+                                                                          .withValues(
+                                                                            alpha:
+                                                                                0.9,
+                                                                          ),
+                                                                      clipBorderRadius:
+                                                                          BorderRadius.circular(
+                                                                            12.r,
+                                                                          ),
+                                                                      border: Theme.of(
+                                                                        context,
+                                                                      ).defaultBorderSide,
                                                                     ),
-                                                                border: Theme.of(
-                                                                  context,
-                                                                ).defaultBorderSide,
                                                               );
                                                             },
                                                       ),

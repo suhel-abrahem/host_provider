@@ -69,8 +69,8 @@ class _MyServicesPagePageState extends State<MyServicesPagePage> {
                 loading: () => Expanded(
                   child: Center(
                     child: SizedBox(
-                      width: 80.w,
-                      height: 80.h,
+                      width: 50.w,
+                      height: 50.h,
                       child: CircularProgressIndicator(),
                     ),
                   ),

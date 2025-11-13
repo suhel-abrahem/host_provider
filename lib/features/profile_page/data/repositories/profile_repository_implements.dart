@@ -76,9 +76,51 @@ class ProfileRepositoryImplements implements ProfileRepository {
   @override
   Future<DataState<List<WorkingHoursEntity?>?>?> getWorkingHours(
     ProfileModel? profileModel,
-  ) {
-    // TODO: implement getWorkingHours
-    throw UnimplementedError();
+  ) async {
+    ConnectivityResult? connectivityResult;
+    await _checkConnectivity.checkConnectivity().then((onValue) {
+      connectivityResult = onValue.last;
+    });
+    if (connectivityResult == ConnectivityResult.none) {
+      return NOInternetDataState();
+    }
+    DataState<List<WorkingHoursEntity?>?>? dataState;
+    CommonService _commonService = CommonService(
+      headers: {
+        'Authorization': 'Bearer ${profileModel?.authToken}',
+        "Accept-Language": profileModel?.acceptLanguage ?? "ar",
+      },
+    );
+    try {
+      await _commonService
+          .get("${ApiConstant.workingHoursEndpoint}/${profileModel?.id}")
+          .then((response) {
+            if (response is DataSuccess) {
+              List<WorkingHoursEntity?> workingHours = [];
+              for (var item in response.data?.data["data"]) {
+                workingHours.add(WorkingHoursEntity.fromJson(item));
+              }
+              dataState = DataSuccess<List<WorkingHoursEntity?>?>(
+                data: workingHours,
+              );
+            } else if (response is UnauthenticatedDataState) {
+              dataState = UnauthenticatedDataState(
+                error:
+                    response.error ??
+                    'Something went wrong, please try again later.',
+              );
+            } else {
+              dataState = DataFailed(
+                error:
+                    response.error ??
+                    'Something went wrong, please try again later.',
+              );
+            }
+          });
+    } catch (e) {
+      dataState = DataFailed(error: e.toString());
+    }
+    return dataState;
   }
 
   @override

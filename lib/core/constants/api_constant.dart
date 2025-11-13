@@ -7,7 +7,7 @@ class ApiConstant {
   static const String verifyOtpEndpoint = "/users/{user}/verify-otp";
   static const String resendOtpEndpoint = "/resend-otp";
   static const String meEndpoint = "/me";
-  static const String workingHoursEndpoint = "/working-hours";
+  static const String workingHoursEndpoint = "/provider/working-hours";
   static const String getServices = "/services";
   static const String setServices = "/provider-services";
   static const String getMyServices = "/provider-services";

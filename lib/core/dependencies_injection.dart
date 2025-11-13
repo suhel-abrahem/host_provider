@@ -32,6 +32,8 @@ import 'package:hosta_provider/features/otp_page/data/models/otp_model.dart';
 import 'package:hosta_provider/features/otp_page/domain/repositories/otp_verifiy_repository.dart';
 import 'package:hosta_provider/features/otp_page/domain/usecases/otp_verify_usecase.dart';
 import 'package:hosta_provider/features/otp_page/presentation/bloc/otp_page_bloc.dart';
+import 'package:hosta_provider/features/profile_page/domain/usecases/get_working_time_usecase.dart';
+import 'package:hosta_provider/features/profile_page/domain/usecases/set_working_time_usecase.dart';
 import 'package:hosta_provider/features/refresh_token/domain/entities/token_entity.dart';
 import 'package:hosta_provider/features/refresh_token/domain/repositories/refresh_token_repository.dart';
 import 'package:hosta_provider/features/refresh_token/domain/usecases/refresh_token_usecase.dart';
@@ -81,7 +83,9 @@ import '../features/profile_page/domain/entities/profile_entity.dart';
 import '../features/profile_page/domain/entities/working_hours_entity.dart';
 import '../features/profile_page/domain/repositories/profile_repository.dart';
 import '../features/profile_page/domain/usecases/get_profile_usecase.dart';
+import '../features/profile_page/domain/usecases/update_working_time_usecase.dart';
 import '../features/profile_page/presentation/bloc/get_profile_bloc.dart';
+import '../features/profile_page/presentation/bloc/get_working_time_bloc.dart';
 import '../features/refresh_token/data/repositories/refresh_token_repository_implements.dart';
 
 GetIt getItInstance = GetIt.instance;
@@ -304,8 +308,25 @@ Future<void> initDependencies() async {
   getItInstance.registerSingleton<GetProfileUseCase>(
     GetProfileUseCase(getItInstance()),
   );
+  getItInstance.registerSingleton<GetWorkingTimeUseCase>(
+    GetWorkingTimeUseCase(getItInstance()),
+  );
+  getItInstance.registerSingleton<SetWorkingTimeUseCase>(
+    SetWorkingTimeUseCase(getItInstance()),
+  );
+  getItInstance.registerSingleton<UpdateWorkingTimeUseCase>(
+    UpdateWorkingTimeUseCase(getItInstance()),
+  );
   //bloc
   getItInstance.registerFactory<GetProfileBloc>(
     () => GetProfileBloc(getItInstance(), getItInstance()),
+  );
+  getItInstance.registerFactory<GetWorkingTimeBloc>(
+    () => GetWorkingTimeBloc(
+      getItInstance(),
+      getItInstance(),
+      getItInstance(),
+      getItInstance(),
+    ),
   );
 }

@@ -7,6 +7,8 @@ import 'package:go_router/go_router.dart';
 import 'package:hosta_provider/core/resource/custom_widget/snake_bar_widget/snake_bar_widget.dart';
 import 'package:hosta_provider/core/resource/main_page/drawer.dart';
 
+import 'animated_body_wrapper.dart';
+
 class MainPage extends StatelessWidget {
   final PreferredSizeWidget? appBar;
   final Widget body;
@@ -130,7 +132,8 @@ class MainPage extends StatelessWidget {
                   bottom: bottom,
                 ).animate().slideX(duration: 500.ms),
               ),
-          body: body.animate().scaleXY(duration: 500.ms),
+          body: RepaintBoundary(child: AnimatedBodyWrapper(child: body)),
+
           drawer: drawer ?? CustomDrawer(currentPagePath: pagePath),
           floatingActionButton: floatingActionButton,
 

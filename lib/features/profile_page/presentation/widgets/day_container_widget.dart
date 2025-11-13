@@ -1,0 +1,158 @@
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:glass/glass.dart';
+import 'package:hosta_provider/config/theme/app_theme.dart';
+import 'package:hosta_provider/core/constants/font_constants.dart';
+import 'package:hosta_provider/core/resource/custom_widget/custom_input_field/custom_input_field.dart';
+import 'package:hosta_provider/core/util/helper/helper.dart';
+import 'package:hosta_provider/features/profile_page/data/models/set_working_hours_model.dart';
+import 'package:hosta_provider/features/profile_page/domain/entities/working_hours_entity.dart';
+
+import '../../../../generated/locale_keys.g.dart';
+
+class DayContainerWidget extends StatefulWidget {
+  final WorkingHoursEntity? workingHoursEntity;
+  final bool? canEdit;
+
+  const DayContainerWidget({super.key, this.workingHoursEntity, this.canEdit});
+
+  @override
+  State<DayContainerWidget> createState() => _DayContainerWidgetState();
+}
+
+class _DayContainerWidgetState extends State<DayContainerWidget> {
+  late SetWorkingHoursModel setWorkingHoursModel;
+
+  @override
+  void initState() {
+    super.initState();
+    final entity = widget.workingHoursEntity;
+    setWorkingHoursModel = SetWorkingHoursModel(
+      day_of_week: entity?.day_of_week,
+      is_available: entity?.is_available,
+      start_time: entity?.start_time,
+      end_time: entity?.end_time,
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final canEdit = widget.canEdit ?? false;
+    final theme = Theme.of(context);
+    final locale = context.locale;
+
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          Helper.getDayById(widget.workingHoursEntity?.day_of_week)?.tr() ?? '',
+          style: theme.textTheme.labelSmall?.copyWith(
+            fontFamily: FontConstants.fontFamily(locale),
+          ),
+        ),
+        AnimatedContainer(
+          duration: const Duration(milliseconds: 300),
+          height: canEdit ? 100.h : 58.h,
+          padding: EdgeInsets.symmetric(horizontal: 16.w),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              if (canEdit)
+                Row(
+                  children: [
+                    Text(
+                      LocaleKeys.profilePage_dayOff.tr(),
+                      style: theme.textTheme.labelMedium?.copyWith(
+                        fontFamily: FontConstants.fontFamily(locale),
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsetsDirectional.only(start: 8.w),
+                      child: Switch(
+                        value: !(setWorkingHoursModel.is_available ?? false),
+                        onChanged: (value) => setState(() {
+                          setWorkingHoursModel = setWorkingHoursModel.copyWith(
+                            is_available: !value,
+                          );
+                        }),
+                      ),
+                    ),
+                  ],
+                ),
+              AnimatedSwitcher(
+                duration: const Duration(milliseconds: 400),
+                child: (setWorkingHoursModel.is_available ?? false)
+                    ? Row(
+                        key: ValueKey(
+                          'available_${setWorkingHoursModel.day_of_week}',
+                        ),
+                        children: [
+                          _buildTimeField(
+                            context,
+                            setWorkingHoursModel.start_time,
+                            locale,
+                          ),
+                          Text(
+                            ' - ',
+                            style: theme.textTheme.labelLarge?.copyWith(
+                              fontFamily: FontConstants.fontFamily(locale),
+                            ),
+                          ),
+                          _buildTimeField(
+                            context,
+                            setWorkingHoursModel.end_time,
+                            locale,
+                          ),
+                        ],
+                      )
+                    : Center(
+                        key: ValueKey(
+                          'dayoff_${setWorkingHoursModel.day_of_week}',
+                        ),
+                        child: Text(
+                          LocaleKeys.profilePage_dayOff.tr(),
+                          style: theme.textTheme.labelMedium?.copyWith(
+                            fontFamily: FontConstants.fontFamily(locale),
+                            color: theme.colorScheme.error,
+                          ),
+                        ),
+                      ),
+              ),
+            ],
+          ),
+        ).asGlass(
+          frosted: true,
+          blurX: 58,
+          blurY: 58,
+          tintColor: theme.colorScheme.primary.withOpacity(0.9),
+          clipBorderRadius: BorderRadius.circular(12.r),
+          border: theme.defaultBorderSide,
+        ),
+      ],
+    );
+  }
+
+  Widget _buildTimeField(BuildContext context, String? time, Locale locale) {
+    final theme = Theme.of(context);
+    String formattedTime = '';
+
+    if (time?.isNotEmpty ?? false) {
+      try {
+        formattedTime = DateFormat(
+          'HH:mm',
+        ).format(DateFormat('HH:mm:ss').parse(time!));
+      } catch (_) {}
+    }
+
+    return CustomInputField(
+      width: 62.w,
+      height: 25.h,
+      style: theme.textTheme.labelSmall?.copyWith(
+        fontFamily: FontConstants.fontFamily(locale),
+      ),
+      contentPadding: EdgeInsets.symmetric(horizontal: 4.w),
+      initialValue: formattedTime,
+    );
+  }
+}
