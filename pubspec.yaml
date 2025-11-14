@@ -113,6 +113,16 @@ flutter:
           weight: 600
         - asset: assets/fonts/Mirza-Bold.ttf
           weight: 700
+    - family: Amiri
+      fonts:
+        - asset: assets/fonts/Amiri-Regular.ttf
+        - asset: assets/fonts/Amiri-Italic.ttf
+          weight: 500
+        - asset: assets/fonts/Amiri-BoldItalic.ttf
+          weight: 600
+        - asset: assets/fonts/Amiri-Bold.ttf
+          weight: 700
+
 
 flutter_launcher_icons:
   android: "launcher_icon"

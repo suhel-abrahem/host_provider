@@ -680,8 +680,8 @@ class _CategoryServicesPagePageState extends State<CategoryServicesPagePage> {
                                                                     ).asGlass(
                                                                       frosted:
                                                                           true,
-                                                                      blurX: 3,
-                                                                      blurY: 3,
+                                                                      blurX: 0,
+                                                                      blurY: 0,
                                                                       tintColor: Theme.of(context)
                                                                           .colorScheme
                                                                           .primaryContainer
@@ -728,8 +728,8 @@ class _CategoryServicesPagePageState extends State<CategoryServicesPagePage> {
                                         ),
                                       ).asGlass(
                                         frosted: true,
-                                        blurX: 8,
-                                        blurY: 8,
+                                        blurX: 0,
+                                        blurY: 0,
                                         tintColor: Theme.of(context)
                                             .colorScheme
                                             .primaryContainer

@@ -7,9 +7,10 @@ class FontConstants {
     locale ??= LanguageConstant.arLoacle;
     return locale == LanguageConstant.enLoacle
         ? poppinsFontFamily
-        : mirzaFontFamily;
+        : amiriFontFamily;
   }
 
   static const String poppinsFontFamily = "Poppins";
   static const String mirzaFontFamily = "Mirza";
+  static const String amiriFontFamily = "Amiri";
 }
