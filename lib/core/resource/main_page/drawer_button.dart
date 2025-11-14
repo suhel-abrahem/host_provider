@@ -1,18 +1,20 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../../constants/font_constants.dart';
 
 class DrawerButtonWidget extends StatelessWidget {
   final String? title;
   final IconData? icon;
   final VoidCallback? onPressed;
-  final String? pagePath;
-  final String? currentPagePath;
+  final bool? selected;
   const DrawerButtonWidget({
     super.key,
     this.title,
     this.icon,
     this.onPressed,
-    this.pagePath, this.currentPagePath,
+     this.selected,
   });
 
   @override
@@ -24,7 +26,7 @@ class DrawerButtonWidget extends StatelessWidget {
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 12.w),
         child: SizedBox(
-          width: 200.w,
+          
           height: 50.h,
           child: ElevatedButton(
             onPressed: onPressed,
@@ -32,9 +34,7 @@ class DrawerButtonWidget extends StatelessWidget {
               elevation: WidgetStateProperty.fromMap({WidgetState.pressed: 10}),
               shadowColor: WidgetStatePropertyAll(Colors.transparent),
               backgroundColor: WidgetStatePropertyAll(
-                pagePath == currentPagePath
-                    ? Theme.of(context).colorScheme.surface
-                    : Theme.of(context).colorScheme.primary,
+                Colors.transparent,
               ),
               foregroundColor: WidgetStatePropertyAll(
                 Theme.of(context).textTheme.labelLarge?.color,
@@ -45,22 +45,41 @@ class DrawerButtonWidget extends StatelessWidget {
                 EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.h),
               ),
             ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Icon(
-                  icon,
-                  color: Theme.of(context).textTheme.labelLarge?.color,
-                  size: 24.sp,
-                ),
-                Padding(
-                  padding: EdgeInsetsDirectional.only(start: 24.sp),
-                  child: Text(
-                    title ?? "",
-                    style: Theme.of(context).textTheme.labelLarge,
+            child: SizedBox(
+              height: 50.h,
+              width: double.maxFinite,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Icon(
+                    icon,
+                    color: (selected ?? false)
+                                ? Theme.of(context).colorScheme.primary
+                                : Theme.of(context)
+                                    .textTheme
+                                    .labelLarge
+                                    ?.color,
+                    size: 24.sp,
                   ),
-                ),
-              ],
+                  Padding(
+                    padding: EdgeInsetsDirectional.only(start: 24.sp),
+                    child: Text(
+                      title ?? "",
+                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                            fontFamily: FontConstants.fontFamily(context.locale),
+                            fontWeight: FontWeight.w500,
+                            color: (selected ?? false)
+                                ? Theme.of(context).colorScheme.primary
+                                : Theme.of(context)
+                                    .textTheme
+                                    .labelLarge
+                                    ?.color,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

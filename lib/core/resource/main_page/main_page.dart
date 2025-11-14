@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hosta_provider/config/app/app_preferences.dart';
+import 'package:hosta_provider/core/dependencies_injection.dart';
 
 import 'package:hosta_provider/core/resource/custom_widget/snake_bar_widget/snake_bar_widget.dart';
 import 'package:hosta_provider/core/resource/main_page/drawer.dart';
@@ -46,9 +48,14 @@ class MainPage extends StatelessWidget {
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
             colors: [
-              const Color.fromARGB(255, 35, 89, 116).withValues(alpha: 0.9),
-              Color.fromARGB(255, 11, 56, 102).withValues(alpha: 0.8),
-              Color.fromARGB(255, 4, 38, 75),
+              if(getItInstance<AppPreferences>().getAppTheme() ?? false) ...[
+                const Color.fromARGB(255, 32, 32, 32).withValues(alpha: 0.9),
+                const Color.fromARGB(255, 0, 32, 55).withValues(alpha: 0.8),
+                const Color.fromARGB(255, 2, 92, 97),
+              ] else ...[
+              const Color.fromARGB(255, 195, 199, 198).withValues(alpha: 0.9),
+              const Color.fromARGB(255, 14, 125, 204).withValues(alpha: 0.8),
+                const Color.fromARGB(255, 2, 145, 152),]
             ],
             stops: const [0.0, 0.5, 1.0],
           ),
@@ -79,7 +86,7 @@ class MainPage extends StatelessWidget {
                                 ?.copyWith(
                                   backgroundColor: WidgetStatePropertyAll(
                                     Theme.of(context).scaffoldBackgroundColor
-                                        .withValues(alpha: 0.2),
+                                        .withValues(alpha: 0.6),
                                   ),
                                   shape: WidgetStatePropertyAll(
                                     CircleBorder(eccentricity: 0),
@@ -119,12 +126,12 @@ class MainPage extends StatelessWidget {
                                       )
                               : null,
                           icon: Icon(
-                            Icons.arrow_back_rounded,
+                            Icons.arrow_back_ios,
                             size: 32.sp,
                             color: context.canPop()
                                 ? Theme.of(
                                     context,
-                                  ).textTheme.displayLarge?.color
+                                  ).textTheme.labelLarge?.color
                                 : Theme.of(context).disabledColor,
                           ),
                         ),
@@ -134,7 +141,7 @@ class MainPage extends StatelessWidget {
               ),
           body: RepaintBoundary(child: AnimatedBodyWrapper(child: body)),
 
-          drawer: drawer ?? CustomDrawer(currentPagePath: pagePath),
+          drawer: drawer ?? CustomDrawer(),
           floatingActionButton: floatingActionButton,
 
           floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
