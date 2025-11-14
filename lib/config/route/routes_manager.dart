@@ -26,6 +26,8 @@ import '../../features/booking_page/presentation/pages/booking_page_page.dart';
 import '../../features/profile_page/domain/entities/profile_entity.dart';
 import '../../features/profile_page/presentation/pages/account_page_page.dart';
 
+String? currentPath = RoutesPath.homePage;
+
 class RoutesName {
   static String homePage = "homePage";
   static String categoriesPage = "categoriesPage";
@@ -64,6 +66,7 @@ GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 GoRouter goRouter = GoRouter(
   observers: [RouteTracker()],
   redirect: (context, state) {
+    currentPath = state.uri.toString();
     print("Current route: ${state.uri.toString()}");
     if (getItInstance<AppPreferences>().isFirstUse() == false) {
       return RoutesPath.firstUsePage;
