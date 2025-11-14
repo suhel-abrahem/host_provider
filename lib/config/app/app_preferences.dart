@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:hosta_provider/features/login_page/domain/entities/login_state_entity.dart';
-import 'package:hosta_provider/features/signup_page/domain/entities/signup_entity.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../core/constants/language_constant.dart';
