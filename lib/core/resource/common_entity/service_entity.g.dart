@@ -28,6 +28,8 @@ _ServiceEntity _$ServiceEntityFromJson(Map<String, dynamic> json) =>
       category: json['category'] as Map<String, dynamic>? ?? const {},
       service: json['service'] as Map<String, dynamic>? ?? const {},
       provider: json['provider'] as Map<String, dynamic>? ?? const {},
+      duration_minutes: (json['duration_minutes'] as num?)?.toInt() ?? 0,
+      buffer_minutes: (json['buffer_minutes'] as num?)?.toInt() ?? 0,
     );
 
 Map<String, dynamic> _$ServiceEntityToJson(_ServiceEntity instance) =>
@@ -48,4 +50,6 @@ Map<String, dynamic> _$ServiceEntityToJson(_ServiceEntity instance) =>
       'category': instance.category,
       'service': instance.service,
       'provider': instance.provider,
+      'duration_minutes': instance.duration_minutes,
+      'buffer_minutes': instance.buffer_minutes,
     };

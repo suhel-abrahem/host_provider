@@ -38,10 +38,7 @@ class _MyServicesPagePageState extends State<MyServicesPagePage> {
               getItInstance<MyServiceBloc>()
                 ..add(MyServiceEvent.get(getServiceModel: GetServiceModel())),
         ),
-        BlocProvider(
-          create: (context) =>
-              getItInstance<SetServiceBloc>()..add(SetServiceEvent.started()),
-        ),
+        
       ],
       child: MainPage(
         title: LocaleKeys.myServicesPage_title.tr(),

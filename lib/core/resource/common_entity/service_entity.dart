@@ -26,6 +26,8 @@ abstract class ServiceEntity with _$ServiceEntity {
     @Default({}) Map<String, dynamic>? category,
     @Default({}) Map<String, dynamic>? service,
     @Default({}) Map<String, dynamic>? provider,
+    @Default(0) int? duration_minutes,
+    @Default(0) int? buffer_minutes,
   }) = _ServiceEntity;
   factory ServiceEntity.fromJson(Map<String, dynamic> json) =>
       _$ServiceEntityFromJson(json);
