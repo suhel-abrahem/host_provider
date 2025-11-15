@@ -6,4 +6,6 @@ class GetProfileEvent with _$GetProfileEvent {
   const factory GetProfileEvent.getProfile({
     required ProfileModel? profileModel,
   }) = GetProfileEventGetProfile;
+  const factory GetProfileEvent.logout({required ProfileModel? profileModel}) =
+      GetProfileEventLogout;
 }

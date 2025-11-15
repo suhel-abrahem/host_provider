@@ -9,10 +9,13 @@ import 'package:hosta_provider/config/theme/app_theme.dart';
 import 'package:hosta_provider/core/resource/common_entity/addresses_entity.dart';
 import 'package:hosta_provider/core/resource/common_state_widget/no_data_state_widget.dart';
 import 'package:hosta_provider/core/resource/common_state_widget/no_internet_state_widget.dart';
+import 'package:hosta_provider/core/resource/custom_widget/snake_bar_widget/snake_bar_widget.dart';
 import 'package:hosta_provider/core/resource/main_page/main_page.dart';
 import 'package:hosta_provider/core/util/helper/helper.dart';
+import 'package:hosta_provider/features/login_page/domain/entities/login_state_entity.dart';
 import 'package:hosta_provider/features/profile_page/presentation/widgets/user_info_container_widget.dart';
 
+import '../../../../config/app/app_preferences.dart';
 import '../../../../config/route/routes_manager.dart';
 import '../../../../core/constants/font_constants.dart';
 import '../../../../core/dependencies_injection.dart';
@@ -78,6 +81,8 @@ class _ProfilePagePageState extends State<ProfilePagePage> {
                   noInternet: () => Center(child: NoInternetStateWidget()),
                   noData: () => Center(child: NodataStateWidget()),
                   unauthorized: () => Center(child: ErrorStateWidget()),
+                  loggedOut: () => SizedBox(),
+                  logoutError: (String? message) => SizedBox(),
                 );
               },
             ),
@@ -185,7 +190,9 @@ class _ProfilePagePageState extends State<ProfilePagePage> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 12.h),
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  context.pushNamed(RoutesName.settingPage);
+                },
                 style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
                   backgroundColor: WidgetStatePropertyAll(Colors.transparent),
                   shadowColor: WidgetStatePropertyAll(Colors.transparent),
@@ -270,7 +277,9 @@ class _ProfilePagePageState extends State<ProfilePagePage> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.w),
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  context.pushNamed(RoutesName.helpPage);
+                },
                 style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
                   backgroundColor: WidgetStatePropertyAll(Colors.transparent),
                   shadowColor: WidgetStatePropertyAll(Colors.transparent),
@@ -355,87 +364,142 @@ class _ProfilePagePageState extends State<ProfilePagePage> {
             ),
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 50.h),
-              child: ElevatedButton(
-                onPressed: () {},
-                style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
-                  backgroundColor: WidgetStatePropertyAll(Colors.transparent),
-                  shadowColor: WidgetStatePropertyAll(Colors.transparent),
-                  padding: WidgetStatePropertyAll(EdgeInsets.zero),
+              child: BlocProvider<GetProfileBloc>(
+                create: (context) =>
+                    getItInstance<GetProfileBloc>()
+                      ..add(GetProfileEvent.started()),
+                child: BlocListener<GetProfileBloc, GetProfileState>(
+                  listener: (context, state) {
+                    print("logout state: $state");
+                    if (state is GetProfileStateLoggedOut) {
+                      getItInstance<AppPreferences>().setUserInfo(
+                        loginStateEntity: LoginStateEntity(),
+                      );
+                      // Navigate to login page or perform other actions
+                      context.goNamed(RoutesName.loginPage);
+                    } else if (state is GetProfileStateLogoutError) {
+                      // Show error message
+                      showMessage(
+                        message: state.message ?? LocaleKeys.common_error.tr(),
+                        context: context,
+                      );
+                      context.read<GetProfileBloc>().add(
+                        GetProfileEvent.getProfile(profileModel: profileModel),
+                      );
+                    }
+                  },
+                  child: Builder(
+                    builder: (context) {
+                      return ElevatedButton(
+                        onPressed: () {
+                          context.read<GetProfileBloc>().add(
+                            GetProfileEvent.logout(profileModel: profileModel),
+                          );
+                        },
+                        style: Theme.of(context).elevatedButtonTheme.style
+                            ?.copyWith(
+                              backgroundColor: WidgetStatePropertyAll(
+                                Colors.transparent,
+                              ),
+                              shadowColor: WidgetStatePropertyAll(
+                                Colors.transparent,
+                              ),
+                              padding: WidgetStatePropertyAll(EdgeInsets.zero),
+                            ),
+                        child:
+                            Container(
+                              padding: EdgeInsets.symmetric(
+                                vertical: 16.h,
+                                horizontal: 16.w,
+                              ),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Container(
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 4.w,
+                                      vertical: 4.h,
+                                    ),
+                                    child: Icon(
+                                      Icons.logout_outlined,
+                                      color: Theme.of(
+                                        context,
+                                      ).colorScheme.error,
+                                      size: 24.r,
+                                    ),
+                                  ).asGlass(
+                                    frosted: true,
+                                    blurX: 28,
+                                    blurY: 28,
+                                    tintColor: Theme.of(
+                                      context,
+                                    ).colorScheme.error.withValues(alpha: 0.9),
+                                    clipBorderRadius: BorderRadius.circular(
+                                      12.r,
+                                    ),
+                                    border: Theme.of(
+                                      context,
+                                    ).defaultBorderSideError,
+                                  ),
+                                  SizedBox(
+                                    width: 220.w,
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          LocaleKeys.profilePage_logout.tr(),
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .labelLarge
+                                              ?.copyWith(
+                                                fontFamily:
+                                                    FontConstants.fontFamily(
+                                                      context.locale,
+                                                    ),
+                                              ),
+                                        ),
+                                        Text(
+                                          LocaleKeys
+                                              .profilePage_signOutOfYourAccount
+                                              .tr(),
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .labelSmall
+                                              ?.copyWith(
+                                                fontFamily:
+                                                    FontConstants.fontFamily(
+                                                      context.locale,
+                                                    ),
+                                              ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Icon(
+                                    Icons.arrow_forward_ios,
+                                    color: Theme.of(context).iconTheme.color,
+                                    size: 16.r,
+                                  ),
+                                ],
+                              ),
+                            ).asGlass(
+                              frosted: true,
+                              blurX: 8,
+                              blurY: 8,
+                              tintColor: Theme.of(
+                                context,
+                              ).colorScheme.error.withValues(alpha: 0.9),
+                              clipBorderRadius: BorderRadius.circular(12.r),
+                              border: Theme.of(context).defaultBorderSideError,
+                            ),
+                      );
+                    },
+                  ),
                 ),
-                child:
-                    Container(
-                      padding: EdgeInsets.symmetric(
-                        vertical: 16.h,
-                        horizontal: 16.w,
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 4.w,
-                              vertical: 4.h,
-                            ),
-                            child: Icon(
-                              Icons.logout_outlined,
-                              color: Theme.of(context).colorScheme.error,
-                              size: 24.r,
-                            ),
-                          ).asGlass(
-                            frosted: true,
-                            blurX: 28,
-                            blurY: 28,
-                            tintColor: Theme.of(
-                              context,
-                            ).colorScheme.error.withValues(alpha: 0.9),
-                            clipBorderRadius: BorderRadius.circular(12.r),
-                            border: Theme.of(context).defaultBorderSideError,
-                          ),
-                          SizedBox(
-                            width: 220.w,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  LocaleKeys.profilePage_logout.tr(),
-                                  style: Theme.of(context).textTheme.labelLarge
-                                      ?.copyWith(
-                                        fontFamily: FontConstants.fontFamily(
-                                          context.locale,
-                                        ),
-                                      ),
-                                ),
-                                Text(
-                                  LocaleKeys.profilePage_signOutOfYourAccount
-                                      .tr(),
-                                  style: Theme.of(context).textTheme.labelSmall
-                                      ?.copyWith(
-                                        fontFamily: FontConstants.fontFamily(
-                                          context.locale,
-                                        ),
-                                      ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Icon(
-                            Icons.arrow_forward_ios,
-                            color: Theme.of(context).iconTheme.color,
-                            size: 16.r,
-                          ),
-                        ],
-                      ),
-                    ).asGlass(
-                      frosted: true,
-                      blurX: 8,
-                      blurY: 8,
-                      tintColor: Theme.of(
-                        context,
-                      ).colorScheme.error.withValues(alpha: 0.9),
-                      clipBorderRadius: BorderRadius.circular(12.r),
-                      border: Theme.of(context).defaultBorderSideError,
-                    ),
               ),
             ),
           ],

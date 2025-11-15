@@ -55,12 +55,13 @@ extension GetProfileEventPatterns on GetProfileEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( GetProfileEventStarted value)?  started,TResult Function( GetProfileEventGetProfile value)?  getProfile,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( GetProfileEventStarted value)?  started,TResult Function( GetProfileEventGetProfile value)?  getProfile,TResult Function( GetProfileEventLogout value)?  logout,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case GetProfileEventStarted() when started != null:
 return started(_that);case GetProfileEventGetProfile() when getProfile != null:
-return getProfile(_that);case _:
+return getProfile(_that);case GetProfileEventLogout() when logout != null:
+return logout(_that);case _:
   return orElse();
 
 }
@@ -78,12 +79,13 @@ return getProfile(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( GetProfileEventStarted value)  started,required TResult Function( GetProfileEventGetProfile value)  getProfile,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( GetProfileEventStarted value)  started,required TResult Function( GetProfileEventGetProfile value)  getProfile,required TResult Function( GetProfileEventLogout value)  logout,}){
 final _that = this;
 switch (_that) {
 case GetProfileEventStarted():
 return started(_that);case GetProfileEventGetProfile():
-return getProfile(_that);case _:
+return getProfile(_that);case GetProfileEventLogout():
+return logout(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -100,12 +102,13 @@ return getProfile(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( GetProfileEventStarted value)?  started,TResult? Function( GetProfileEventGetProfile value)?  getProfile,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( GetProfileEventStarted value)?  started,TResult? Function( GetProfileEventGetProfile value)?  getProfile,TResult? Function( GetProfileEventLogout value)?  logout,}){
 final _that = this;
 switch (_that) {
 case GetProfileEventStarted() when started != null:
 return started(_that);case GetProfileEventGetProfile() when getProfile != null:
-return getProfile(_that);case _:
+return getProfile(_that);case GetProfileEventLogout() when logout != null:
+return logout(_that);case _:
   return null;
 
 }
@@ -122,11 +125,12 @@ return getProfile(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  started,TResult Function( ProfileModel? profileModel)?  getProfile,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  started,TResult Function( ProfileModel? profileModel)?  getProfile,TResult Function( ProfileModel? profileModel)?  logout,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case GetProfileEventStarted() when started != null:
 return started();case GetProfileEventGetProfile() when getProfile != null:
-return getProfile(_that.profileModel);case _:
+return getProfile(_that.profileModel);case GetProfileEventLogout() when logout != null:
+return logout(_that.profileModel);case _:
   return orElse();
 
 }
@@ -144,11 +148,12 @@ return getProfile(_that.profileModel);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  started,required TResult Function( ProfileModel? profileModel)  getProfile,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  started,required TResult Function( ProfileModel? profileModel)  getProfile,required TResult Function( ProfileModel? profileModel)  logout,}) {final _that = this;
 switch (_that) {
 case GetProfileEventStarted():
 return started();case GetProfileEventGetProfile():
-return getProfile(_that.profileModel);case _:
+return getProfile(_that.profileModel);case GetProfileEventLogout():
+return logout(_that.profileModel);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -165,11 +170,12 @@ return getProfile(_that.profileModel);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  started,TResult? Function( ProfileModel? profileModel)?  getProfile,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  started,TResult? Function( ProfileModel? profileModel)?  getProfile,TResult? Function( ProfileModel? profileModel)?  logout,}) {final _that = this;
 switch (_that) {
 case GetProfileEventStarted() when started != null:
 return started();case GetProfileEventGetProfile() when getProfile != null:
-return getProfile(_that.profileModel);case _:
+return getProfile(_that.profileModel);case GetProfileEventLogout() when logout != null:
+return logout(_that.profileModel);case _:
   return null;
 
 }
@@ -288,6 +294,84 @@ $ProfileModelCopyWith<$Res>? get profileModel {
 }
 
 /// @nodoc
+
+
+class GetProfileEventLogout implements GetProfileEvent {
+  const GetProfileEventLogout({required this.profileModel});
+  
+
+ final  ProfileModel? profileModel;
+
+/// Create a copy of GetProfileEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$GetProfileEventLogoutCopyWith<GetProfileEventLogout> get copyWith => _$GetProfileEventLogoutCopyWithImpl<GetProfileEventLogout>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is GetProfileEventLogout&&(identical(other.profileModel, profileModel) || other.profileModel == profileModel));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,profileModel);
+
+@override
+String toString() {
+  return 'GetProfileEvent.logout(profileModel: $profileModel)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $GetProfileEventLogoutCopyWith<$Res> implements $GetProfileEventCopyWith<$Res> {
+  factory $GetProfileEventLogoutCopyWith(GetProfileEventLogout value, $Res Function(GetProfileEventLogout) _then) = _$GetProfileEventLogoutCopyWithImpl;
+@useResult
+$Res call({
+ ProfileModel? profileModel
+});
+
+
+$ProfileModelCopyWith<$Res>? get profileModel;
+
+}
+/// @nodoc
+class _$GetProfileEventLogoutCopyWithImpl<$Res>
+    implements $GetProfileEventLogoutCopyWith<$Res> {
+  _$GetProfileEventLogoutCopyWithImpl(this._self, this._then);
+
+  final GetProfileEventLogout _self;
+  final $Res Function(GetProfileEventLogout) _then;
+
+/// Create a copy of GetProfileEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? profileModel = freezed,}) {
+  return _then(GetProfileEventLogout(
+profileModel: freezed == profileModel ? _self.profileModel : profileModel // ignore: cast_nullable_to_non_nullable
+as ProfileModel?,
+  ));
+}
+
+/// Create a copy of GetProfileEvent
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$ProfileModelCopyWith<$Res>? get profileModel {
+    if (_self.profileModel == null) {
+    return null;
+  }
+
+  return $ProfileModelCopyWith<$Res>(_self.profileModel!, (value) {
+    return _then(_self.copyWith(profileModel: value));
+  });
+}
+}
+
+/// @nodoc
 mixin _$GetProfileState {
 
 
@@ -331,7 +415,7 @@ extension GetProfileStatePatterns on GetProfileState {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( GetProfileStateInitial value)?  initial,TResult Function( GetProfileStateLoading value)?  loading,TResult Function( GetProfileStateLoaded value)?  loaded,TResult Function( GetProfileStateError value)?  error,TResult Function( GetProfileStateNoInternet value)?  noInternet,TResult Function( GetProfileStateNoData value)?  noData,TResult Function( GetProfileStateUnauthorized value)?  unauthorized,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( GetProfileStateInitial value)?  initial,TResult Function( GetProfileStateLoading value)?  loading,TResult Function( GetProfileStateLoaded value)?  loaded,TResult Function( GetProfileStateError value)?  error,TResult Function( GetProfileStateNoInternet value)?  noInternet,TResult Function( GetProfileStateNoData value)?  noData,TResult Function( GetProfileStateUnauthorized value)?  unauthorized,TResult Function( GetProfileStateLoggedOut value)?  loggedOut,TResult Function( GetProfileStateLogoutError value)?  logoutError,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case GetProfileStateInitial() when initial != null:
@@ -341,7 +425,9 @@ return loaded(_that);case GetProfileStateError() when error != null:
 return error(_that);case GetProfileStateNoInternet() when noInternet != null:
 return noInternet(_that);case GetProfileStateNoData() when noData != null:
 return noData(_that);case GetProfileStateUnauthorized() when unauthorized != null:
-return unauthorized(_that);case _:
+return unauthorized(_that);case GetProfileStateLoggedOut() when loggedOut != null:
+return loggedOut(_that);case GetProfileStateLogoutError() when logoutError != null:
+return logoutError(_that);case _:
   return orElse();
 
 }
@@ -359,7 +445,7 @@ return unauthorized(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( GetProfileStateInitial value)  initial,required TResult Function( GetProfileStateLoading value)  loading,required TResult Function( GetProfileStateLoaded value)  loaded,required TResult Function( GetProfileStateError value)  error,required TResult Function( GetProfileStateNoInternet value)  noInternet,required TResult Function( GetProfileStateNoData value)  noData,required TResult Function( GetProfileStateUnauthorized value)  unauthorized,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( GetProfileStateInitial value)  initial,required TResult Function( GetProfileStateLoading value)  loading,required TResult Function( GetProfileStateLoaded value)  loaded,required TResult Function( GetProfileStateError value)  error,required TResult Function( GetProfileStateNoInternet value)  noInternet,required TResult Function( GetProfileStateNoData value)  noData,required TResult Function( GetProfileStateUnauthorized value)  unauthorized,required TResult Function( GetProfileStateLoggedOut value)  loggedOut,required TResult Function( GetProfileStateLogoutError value)  logoutError,}){
 final _that = this;
 switch (_that) {
 case GetProfileStateInitial():
@@ -369,7 +455,9 @@ return loaded(_that);case GetProfileStateError():
 return error(_that);case GetProfileStateNoInternet():
 return noInternet(_that);case GetProfileStateNoData():
 return noData(_that);case GetProfileStateUnauthorized():
-return unauthorized(_that);case _:
+return unauthorized(_that);case GetProfileStateLoggedOut():
+return loggedOut(_that);case GetProfileStateLogoutError():
+return logoutError(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -386,7 +474,7 @@ return unauthorized(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( GetProfileStateInitial value)?  initial,TResult? Function( GetProfileStateLoading value)?  loading,TResult? Function( GetProfileStateLoaded value)?  loaded,TResult? Function( GetProfileStateError value)?  error,TResult? Function( GetProfileStateNoInternet value)?  noInternet,TResult? Function( GetProfileStateNoData value)?  noData,TResult? Function( GetProfileStateUnauthorized value)?  unauthorized,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( GetProfileStateInitial value)?  initial,TResult? Function( GetProfileStateLoading value)?  loading,TResult? Function( GetProfileStateLoaded value)?  loaded,TResult? Function( GetProfileStateError value)?  error,TResult? Function( GetProfileStateNoInternet value)?  noInternet,TResult? Function( GetProfileStateNoData value)?  noData,TResult? Function( GetProfileStateUnauthorized value)?  unauthorized,TResult? Function( GetProfileStateLoggedOut value)?  loggedOut,TResult? Function( GetProfileStateLogoutError value)?  logoutError,}){
 final _that = this;
 switch (_that) {
 case GetProfileStateInitial() when initial != null:
@@ -396,7 +484,9 @@ return loaded(_that);case GetProfileStateError() when error != null:
 return error(_that);case GetProfileStateNoInternet() when noInternet != null:
 return noInternet(_that);case GetProfileStateNoData() when noData != null:
 return noData(_that);case GetProfileStateUnauthorized() when unauthorized != null:
-return unauthorized(_that);case _:
+return unauthorized(_that);case GetProfileStateLoggedOut() when loggedOut != null:
+return loggedOut(_that);case GetProfileStateLogoutError() when logoutError != null:
+return logoutError(_that);case _:
   return null;
 
 }
@@ -413,7 +503,7 @@ return unauthorized(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( ProfileEntity? profileEntity)?  loaded,TResult Function( String? message)?  error,TResult Function()?  noInternet,TResult Function()?  noData,TResult Function()?  unauthorized,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( ProfileEntity? profileEntity)?  loaded,TResult Function( String? message)?  error,TResult Function()?  noInternet,TResult Function()?  noData,TResult Function()?  unauthorized,TResult Function()?  loggedOut,TResult Function( String? message)?  logoutError,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case GetProfileStateInitial() when initial != null:
 return initial();case GetProfileStateLoading() when loading != null:
@@ -422,7 +512,9 @@ return loaded(_that.profileEntity);case GetProfileStateError() when error != nul
 return error(_that.message);case GetProfileStateNoInternet() when noInternet != null:
 return noInternet();case GetProfileStateNoData() when noData != null:
 return noData();case GetProfileStateUnauthorized() when unauthorized != null:
-return unauthorized();case _:
+return unauthorized();case GetProfileStateLoggedOut() when loggedOut != null:
+return loggedOut();case GetProfileStateLogoutError() when logoutError != null:
+return logoutError(_that.message);case _:
   return orElse();
 
 }
@@ -440,7 +532,7 @@ return unauthorized();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( ProfileEntity? profileEntity)  loaded,required TResult Function( String? message)  error,required TResult Function()  noInternet,required TResult Function()  noData,required TResult Function()  unauthorized,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( ProfileEntity? profileEntity)  loaded,required TResult Function( String? message)  error,required TResult Function()  noInternet,required TResult Function()  noData,required TResult Function()  unauthorized,required TResult Function()  loggedOut,required TResult Function( String? message)  logoutError,}) {final _that = this;
 switch (_that) {
 case GetProfileStateInitial():
 return initial();case GetProfileStateLoading():
@@ -449,7 +541,9 @@ return loaded(_that.profileEntity);case GetProfileStateError():
 return error(_that.message);case GetProfileStateNoInternet():
 return noInternet();case GetProfileStateNoData():
 return noData();case GetProfileStateUnauthorized():
-return unauthorized();case _:
+return unauthorized();case GetProfileStateLoggedOut():
+return loggedOut();case GetProfileStateLogoutError():
+return logoutError(_that.message);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -466,7 +560,7 @@ return unauthorized();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( ProfileEntity? profileEntity)?  loaded,TResult? Function( String? message)?  error,TResult? Function()?  noInternet,TResult? Function()?  noData,TResult? Function()?  unauthorized,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( ProfileEntity? profileEntity)?  loaded,TResult? Function( String? message)?  error,TResult? Function()?  noInternet,TResult? Function()?  noData,TResult? Function()?  unauthorized,TResult? Function()?  loggedOut,TResult? Function( String? message)?  logoutError,}) {final _that = this;
 switch (_that) {
 case GetProfileStateInitial() when initial != null:
 return initial();case GetProfileStateLoading() when loading != null:
@@ -475,7 +569,9 @@ return loaded(_that.profileEntity);case GetProfileStateError() when error != nul
 return error(_that.message);case GetProfileStateNoInternet() when noInternet != null:
 return noInternet();case GetProfileStateNoData() when noData != null:
 return noData();case GetProfileStateUnauthorized() when unauthorized != null:
-return unauthorized();case _:
+return unauthorized();case GetProfileStateLoggedOut() when loggedOut != null:
+return loggedOut();case GetProfileStateLogoutError() when logoutError != null:
+return logoutError(_that.message);case _:
   return null;
 
 }
@@ -786,5 +882,103 @@ String toString() {
 
 
 
+
+/// @nodoc
+
+
+class GetProfileStateLoggedOut implements GetProfileState {
+  const GetProfileStateLoggedOut();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is GetProfileStateLoggedOut);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'GetProfileState.loggedOut()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class GetProfileStateLogoutError implements GetProfileState {
+  const GetProfileStateLogoutError({this.message});
+  
+
+ final  String? message;
+
+/// Create a copy of GetProfileState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$GetProfileStateLogoutErrorCopyWith<GetProfileStateLogoutError> get copyWith => _$GetProfileStateLogoutErrorCopyWithImpl<GetProfileStateLogoutError>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is GetProfileStateLogoutError&&(identical(other.message, message) || other.message == message));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,message);
+
+@override
+String toString() {
+  return 'GetProfileState.logoutError(message: $message)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $GetProfileStateLogoutErrorCopyWith<$Res> implements $GetProfileStateCopyWith<$Res> {
+  factory $GetProfileStateLogoutErrorCopyWith(GetProfileStateLogoutError value, $Res Function(GetProfileStateLogoutError) _then) = _$GetProfileStateLogoutErrorCopyWithImpl;
+@useResult
+$Res call({
+ String? message
+});
+
+
+
+
+}
+/// @nodoc
+class _$GetProfileStateLogoutErrorCopyWithImpl<$Res>
+    implements $GetProfileStateLogoutErrorCopyWith<$Res> {
+  _$GetProfileStateLogoutErrorCopyWithImpl(this._self, this._then);
+
+  final GetProfileStateLogoutError _self;
+  final $Res Function(GetProfileStateLogoutError) _then;
+
+/// Create a copy of GetProfileState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? message = freezed,}) {
+  return _then(GetProfileStateLogoutError(
+message: freezed == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
+as String?,
+  ));
+}
+
+
+}
 
 // dart format on

@@ -124,14 +124,49 @@ class ProfileRepositoryImplements implements ProfileRepository {
   }
 
   @override
-  Future<DataState<void>?> logout(ProfileModel? profileModel) {
-    // TODO: implement logout
-    throw UnimplementedError();
+  Future<DataState<void>?> logout(ProfileModel? profileModel) async {
+    await _checkConnectivity.checkConnectivity().then((onValue) {
+      if (onValue.last == ConnectivityResult.none) {
+        return NOInternetDataState();
+      }
+    });
+    DataState<void>? dataState;
+    CommonService _commonService = CommonService(
+      headers: {
+        'Authorization': 'Bearer ${profileModel?.authToken}',
+        "Accept-Language": profileModel?.acceptLanguage ?? "ar",
+      },
+    );
+    try {
+      await _commonService.post(ApiConstant.logoutEndpoint).then((response) {
+        if (response is DataSuccess) {
+          dataState = DataSuccess<void>(data: null);
+          return dataState;
+        } else if (response is UnauthenticatedDataState) {
+          dataState = UnauthenticatedDataState(
+            error:
+                response.error ??
+                'Something went wrong, please try again later.',
+          );
+          return dataState;
+        } else {
+          dataState = DataFailed(
+            error:
+                response.error ??
+                'Something went wrong, please try again later.',
+          );
+          return dataState;
+        }
+      });
+    } catch (e) {
+      dataState = DataFailed(error: e.toString());
+      return dataState;
+    }
+    return dataState;
   }
 
   @override
   Future<DataState<TimeOfEntity>?> setTimeOff(SetTimeOffModel? timeOfModel) {
-    // TODO: implement setTimeOff
     throw UnimplementedError();
   }
 

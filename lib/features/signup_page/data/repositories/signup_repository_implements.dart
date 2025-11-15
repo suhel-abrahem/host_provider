@@ -55,13 +55,9 @@ class SignupRepositoryImplements implements SignupRepository {
                 signupEntityJson,
               );
               print(" en$signupEntity");
-              final OtpEntity otpEntity = OtpEntity.fromJson(
-                onValue.data?.data["otp"],
-              );
-              print("otp en$otpEntity");
+
               final SignupInfoEntity signupInfoEntity = SignupInfoEntity(
                 signupEntity: signupEntity,
-                otpEntity: otpEntity,
               );
               print("all en$signupInfoEntity");
               response = DataSuccess(data: signupInfoEntity);

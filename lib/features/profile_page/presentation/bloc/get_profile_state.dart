@@ -11,4 +11,7 @@ class GetProfileState with _$GetProfileState {
   const factory GetProfileState.noInternet() = GetProfileStateNoInternet;
   const factory GetProfileState.noData() = GetProfileStateNoData;
   const factory GetProfileState.unauthorized() = GetProfileStateUnauthorized;
+  const factory GetProfileState.loggedOut() = GetProfileStateLoggedOut;
+  const factory GetProfileState.logoutError({String? message}) =
+      GetProfileStateLogoutError;
 }

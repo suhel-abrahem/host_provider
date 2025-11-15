@@ -25,6 +25,8 @@ import '../../core/resource/main_page/main_page.dart';
 import '../../features/booking_page/presentation/pages/booking_page_page.dart';
 import '../../features/profile_page/domain/entities/profile_entity.dart';
 import '../../features/profile_page/presentation/pages/account_page_page.dart';
+import '../../features/profile_page/presentation/pages/help_page_page.dart';
+import '../../features/profile_page/presentation/pages/setting_page_page.dart';
 
 String? currentPath = RoutesPath.homePage;
 
@@ -43,6 +45,8 @@ class RoutesName {
   static String otpPage = "otpPage";
   static String categoryServicesPage = "categoryServicesPage";
   static String accountPage = "accountPage";
+  static String settingsPage = "settingsPage";
+  static String helpPage = "helpPage";
 }
 
 class RoutesPath {
@@ -60,6 +64,8 @@ class RoutesPath {
   static String categoryServicesPage = "/categoryServicesPage/:categoryEntity";
   static String serviceInfoPage = "/serviceInfoPage/:serviceId";
   static String accountPage = "/accountPage";
+  static String settingsPage = "/settingsPage";
+  static String helpPage = "/helpPage";
 }
 
 GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -243,6 +249,26 @@ GoRouter goRouter = GoRouter(
               pageBuilder: (context, state) {
                 return _customTransitionPage(
                   child: AccountPagePage(),
+                  state: state,
+                );
+              },
+            ),
+            GoRoute(
+              path: RoutesPath.settingPage,
+              name: RoutesName.settingPage,
+              pageBuilder: (context, state) {
+                return _customTransitionPage(
+                  child: SettingPagePage(),
+                  state: state,
+                );
+              },
+            ),
+            GoRoute(
+              path: RoutesPath.helpPage,
+              name: RoutesName.helpPage,
+              pageBuilder: (context, state) {
+                return _customTransitionPage(
+                  child: HelpPagePage(),
                   state: state,
                 );
               },

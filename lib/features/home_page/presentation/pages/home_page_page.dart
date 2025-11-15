@@ -38,6 +38,44 @@ class _HomePagePageState extends State<HomePagePage> {
                 color: Theme.of(context).colorScheme.onBackground,
               ),
             ),
+            Padding(
+              padding: EdgeInsetsDirectional.only(end: 8.w),
+              child: SizedBox(
+                width: 36.w,
+                height: 36.h,
+                child: Center(
+                  child: Builder(
+                    builder: (builderContext) {
+                      return ElevatedButton(
+                        style: Theme.of(context).elevatedButtonTheme.style
+                            ?.copyWith(
+                              backgroundColor: WidgetStatePropertyAll(
+                                Colors.transparent,
+                              ),
+                              shape: WidgetStatePropertyAll(
+                                CircleBorder(eccentricity: 0),
+                              ),
+                              padding: WidgetStatePropertyAll(
+                                EdgeInsets.all(0),
+                              ),
+                              shadowColor: WidgetStatePropertyAll(
+                                Colors.transparent,
+                              ),
+                            ),
+                        onPressed: () {
+                          Scaffold.of(builderContext).openDrawer();
+                        },
+                        child: Icon(
+                          Icons.menu,
+                          size: 28.sp,
+                          color: Theme.of(context).textTheme.labelLarge?.color,
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ),
+            ),
           ],
           automaticallyImplyLeading: false,
           leadingWidth: 200.w,

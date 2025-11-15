@@ -175,6 +175,7 @@ abstract class  LocaleKeys {
   static const profilePage_languageChangedSuccessfully = 'profilePage.languageChangedSuccessfully';
   static const profilePage_themeChangedSuccessfully = 'profilePage.themeChangedSuccessfully';
   static const profilePage_languagesIspeak = 'profilePage.languagesIspeak';
+  static const profilePage_message = 'profilePage.message';
   static const profilePage = 'profilePage';
   static const myServicesPage_title = 'myServicesPage.title';
   static const myServicesPage_label = 'myServicesPage.label';

@@ -33,6 +33,7 @@ import 'package:hosta_provider/features/otp_page/domain/repositories/otp_verifiy
 import 'package:hosta_provider/features/otp_page/domain/usecases/otp_verify_usecase.dart';
 import 'package:hosta_provider/features/otp_page/presentation/bloc/otp_page_bloc.dart';
 import 'package:hosta_provider/features/profile_page/domain/usecases/get_working_time_usecase.dart';
+import 'package:hosta_provider/features/profile_page/domain/usecases/logout_usecase.dart';
 import 'package:hosta_provider/features/profile_page/domain/usecases/set_working_time_usecase.dart';
 import 'package:hosta_provider/features/refresh_token/domain/entities/token_entity.dart';
 import 'package:hosta_provider/features/refresh_token/domain/repositories/refresh_token_repository.dart';
@@ -317,9 +318,12 @@ Future<void> initDependencies() async {
   getItInstance.registerSingleton<UpdateWorkingTimeUseCase>(
     UpdateWorkingTimeUseCase(getItInstance()),
   );
+  getItInstance.registerSingleton<LogoutUseCase>(
+    LogoutUseCase(getItInstance()),
+  );
   //bloc
   getItInstance.registerFactory<GetProfileBloc>(
-    () => GetProfileBloc(getItInstance(), getItInstance()),
+    () => GetProfileBloc(getItInstance(), getItInstance(), getItInstance()),
   );
   getItInstance.registerFactory<GetWorkingTimeBloc>(
     () => GetWorkingTimeBloc(

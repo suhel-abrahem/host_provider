@@ -178,7 +178,8 @@
     "signOutOfYourAccount": "تسجيل الخروج من حسابك",
     "languageChangedSuccessfully": "تم تغيير اللغة بنجاح",
     "themeChangedSuccessfully": "تم تغيير السمة بنجاح",
-    "languagesIspeak": "اللغات التي أتحدثها"
+    "languagesIspeak": "اللغات التي أتحدثها",
+    "message": "الرسالة"
   },
   "myServicesPage": {
     "title": "صفحة خدماتي",

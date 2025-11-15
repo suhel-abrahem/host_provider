@@ -336,6 +336,8 @@ class _AccountPagePageState extends State<AccountPagePage> {
                   noInternet: () => NoInternetStateWidget(),
                   noData: () => NodataStateWidget(),
                   unauthorized: () => ErrorStateWidget(),
+                  loggedOut: () => SizedBox(),
+                  logoutError: (String? message) => SizedBox(),
                 );
               },
             ),

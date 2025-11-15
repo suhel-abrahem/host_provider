@@ -1,8 +1,11 @@
+import 'dart:math';
+
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hosta_provider/features/login_page/domain/entities/login_state_entity.dart';
 import 'package:hosta_provider/features/profile_page/domain/repositories/profile_repository.dart';
 import 'package:hosta_provider/features/profile_page/domain/usecases/get_profile_usecase.dart';
+import 'package:hosta_provider/features/profile_page/domain/usecases/logout_usecase.dart';
 import 'package:hosta_provider/features/refresh_token/domain/usecases/refresh_token_usecase.dart';
 
 import '../../../../config/app/app_preferences.dart';
@@ -18,9 +21,13 @@ part 'get_profile_bloc.freezed.dart';
 
 class GetProfileBloc extends Bloc<GetProfileEvent, GetProfileState> {
   final GetProfileUseCase _profileUsecase;
+  final LogoutUseCase _logoutUsecase;
   final RefreshTokenUsecase _refreshTokenUsecase;
-  GetProfileBloc(this._profileUsecase, this._refreshTokenUsecase)
-    : super(GetProfileState.initial()) {
+  GetProfileBloc(
+    this._profileUsecase,
+    this._refreshTokenUsecase,
+    this._logoutUsecase,
+  ) : super(GetProfileState.initial()) {
     on<GetProfileEventStarted>((event, emit) {
       emit(GetProfileState.initial());
     });
@@ -77,6 +84,52 @@ class GetProfileBloc extends Bloc<GetProfileEvent, GetProfileState> {
               emit(GetProfileState.error());
             } else {
               emit(GetProfileState.error());
+            }
+          });
+    });
+    on<GetProfileEventLogout>((event, emit) async {
+      final LoginStateEntity? userInfo = getItInstance<AppPreferences>()
+          .getUserInfo();
+
+      emit(GetProfileState.loading());
+      await _refreshTokenUsecase
+          .call(
+            params: RefreshTokenModel(
+              token: userInfo?.access_token,
+              refresh_token: userInfo?.refresh_token,
+            ),
+          )
+          .then((onValue) async {
+            print("logout page bloc get auth:${onValue?.data?.access_token}");
+            if (onValue is DataSuccess) {
+              await _logoutUsecase
+                  .call(
+                    params: ProfileModel(
+                      authToken: onValue?.data?.access_token,
+                      acceptLanguage: event.profileModel?.acceptLanguage,
+                    ),
+                  )
+                  .then((logoutOnValue) {
+                    if (logoutOnValue is DataSuccess) {
+                      emit(GetProfileState.loggedOut());
+                    } else if (logoutOnValue is UnauthenticatedDataState) {
+                      emit(GetProfileState.unauthorized());
+                    } else if (logoutOnValue is NOInternetDataState) {
+                      emit(GetProfileState.noInternet());
+                    } else if (onValue is DataFailed) {
+                      emit(GetProfileState.logoutError());
+                    } else {
+                      emit(GetProfileState.logoutError());
+                    }
+                  });
+            } else if (onValue is UnauthenticatedDataState) {
+              emit(GetProfileState.unauthorized());
+            } else if (onValue is NOInternetDataState) {
+              emit(GetProfileState.noInternet());
+            } else if (onValue is DataFailed) {
+              emit(GetProfileState.logoutError());
+            } else {
+              emit(GetProfileState.logoutError());
             }
           });
     });

@@ -178,7 +178,8 @@
     "signOutOfYourAccount": "Sign out of your account",
     "languageChangedSuccessfully": "Language changed successfully",
     "themeChangedSuccessfully": "Theme changed successfully",
-    "languagesIspeak": "Languages I speak"
+    "languagesIspeak": "Languages I speak",
+    "message": "Message"
   },
   "myServicesPage": {
     "title": "My services page",

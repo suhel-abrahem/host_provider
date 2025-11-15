@@ -178,7 +178,8 @@
     "signOutOfYourAccount": "چوونە دەرەوە لە ئەژمارەکەت",
     "languageChangedSuccessfully": "زمان بە سەرکەوتوویی گۆڕدرا",
     "themeChangedSuccessfully": "مۆدێل بە سەرکەوتوویی گۆڕدرا",
-    "languagesIspeak": "زمانەکانم"
+    "languagesIspeak": "زمانەکانم",
+    "message": "پەیام"
   },
   "myServicesPage": {
     "title": "شاشەی خزمەتگوزاریەکانم",

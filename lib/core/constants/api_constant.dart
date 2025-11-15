@@ -2,6 +2,7 @@ class ApiConstant {
   static const String baseUrl = "http://75.119.145.174/api";
   static const String imageBaseUrl = "http://75.119.145.174";
   static const String loginEndpoint = "/login";
+  static const String logoutEndpoint = "/logout";
   static const String registerEndpoint = "/register";
   static const String bookingEndpoint = "/provider/bookings";
   static const String verifyOtpEndpoint = "/users/{user}/verify-otp";
