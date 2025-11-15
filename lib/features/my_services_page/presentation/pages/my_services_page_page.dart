@@ -13,6 +13,7 @@ import 'package:hosta_provider/core/dependencies_injection.dart';
 import 'package:hosta_provider/core/resource/common_state_widget/error_state_widget.dart';
 import 'package:hosta_provider/core/resource/common_state_widget/no_internet_state_widget.dart';
 import 'package:hosta_provider/core/resource/main_page/main_page.dart';
+import 'package:hosta_provider/core/util/helper/helper.dart';
 import 'package:hosta_provider/features/category_services_page/data/models/get_service_model.dart';
 import 'package:hosta_provider/features/my_services_page/presentation/bloc/my_service_bloc.dart';
 import 'package:hosta_provider/features/my_services_page/presentation/widgets/my_service_widget.dart';
@@ -29,6 +30,23 @@ class MyServicesPagePage extends StatefulWidget {
 }
 
 class _MyServicesPagePageState extends State<MyServicesPagePage> {
+  GetServiceModel getServiceModel = GetServiceModel();
+  @override
+  void didChangeDependencies() {
+    getServiceModel = getServiceModel.copyWith(
+      acceptLanguage: Helper.getCountryCode(context),
+    );
+    super.didChangeDependencies();
+  }
+
+  @override
+  void didUpdateWidget(covariant MyServicesPagePage oldWidget) {
+    getServiceModel = getServiceModel.copyWith(
+      acceptLanguage: Helper.getCountryCode(context),
+    );
+    super.didUpdateWidget(oldWidget);
+  }
+
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -36,9 +54,8 @@ class _MyServicesPagePageState extends State<MyServicesPagePage> {
         BlocProvider<MyServiceBloc>(
           create: (context) =>
               getItInstance<MyServiceBloc>()
-                ..add(MyServiceEvent.get(getServiceModel: GetServiceModel())),
+                ..add(MyServiceEvent.get(getServiceModel: getServiceModel)),
         ),
-        
       ],
       child: MainPage(
         title: LocaleKeys.myServicesPage_title.tr(),
