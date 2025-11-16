@@ -7,4 +7,6 @@ class OtpPageState with _$OtpPageState {
   const factory OtpPageState.loading() = OtpPageStateLoading;
   const factory OtpPageState.verified(LoginStateEntity? loginStateEntity) =
       OtpPageStateVerified;
+  const factory OtpPageState.resent(LoginStateEntity? loginStateEntity) =
+      OtpPageStateResent;
 }

@@ -13,8 +13,8 @@ _ServiceModel _$ServiceModelFromJson(Map<String, dynamic> json) =>
       is_active: json['is_active'] as bool? ?? false,
       price: (json['price'] as num?)?.toInt() ?? 0,
       notes: json['notes'] as String? ?? "",
-      duration_minutes: json['duration_minutes'] as String? ?? "",
-      buffer_minutes: json['buffer_minutes'] as String? ?? "",
+      duration_minutes: (json['duration_minutes'] as num?)?.toInt() ?? 0,
+      buffer_minutes: (json['buffer_minutes'] as num?)?.toInt() ?? 0,
     );
 
 Map<String, dynamic> _$ServiceModelToJson(_ServiceModel instance) =>

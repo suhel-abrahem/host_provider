@@ -26,6 +26,7 @@ abstract class BookingEntity with _$BookingEntity {
     @Default([]) List? images,
     @Default("") String? created_at,
     @Default("") String? updated_at,
+    @Default("") String? image,
   }) = _BookingEntity;
   factory BookingEntity.fromJson(Map<String, dynamic> json) =>
       _$BookingEntityFromJson(json);

@@ -10,6 +10,7 @@ class ImageWidget extends StatelessWidget {
   final double? width;
   final double? height;
   final double? errorIconSize;
+  final Widget? errorWidget;
   const ImageWidget({
     super.key,
     required this.imageUrl,
@@ -17,40 +18,57 @@ class ImageWidget extends StatelessWidget {
     this.width,
     this.height,
     this.errorIconSize,
+    this.errorWidget,
   });
 
   @override
   Widget build(BuildContext context) {
     if (imageUrl.toLowerCase().endsWith('.svg')) {
-      return SvgPicture.network(
-        imageUrl,
+      return SizedBox(
         width: width,
         height: height,
-        fit: boxFit ?? BoxFit.contain,
-        errorBuilder: (context, error, stackTrace) => Icon(
-          Icons.error,
-          color: Theme.of(context).colorScheme.error,
-          size: errorIconSize,
-        ),
-        placeholderBuilder: (context) => SizedBox(
+        child: SvgPicture.network(
+          imageUrl,
           width: width,
           height: height,
-          child: CircularProgressIndicator(),
+          fit: boxFit ?? BoxFit.contain,
+          errorBuilder: (context, error, stackTrace) =>
+              errorWidget ??
+              Icon(
+                Icons.error,
+                color: Theme.of(context).colorScheme.error,
+                size: errorIconSize,
+              ),
+          placeholderBuilder: (context) => SizedBox(
+            width: width,
+            height: height,
+            child: SizedBox(
+              width: 50.w,
+              height: 50.h,
+              child: CircularProgressIndicator(),
+            ),
+          ),
         ),
       );
     } else {
-      return CachedNetworkImage(
-        fit: boxFit ?? BoxFit.contain,
+      return SizedBox(
         width: width,
         height: height,
-        imageUrl: imageUrl,
+        child: CachedNetworkImage(
+          fit: boxFit ?? BoxFit.contain,
+          width: width,
+          height: height,
+          imageUrl: imageUrl,
 
-        progressIndicatorBuilder: (context, url, progress) =>
-            CircularProgressIndicator(value: progress.progress),
-        errorWidget: (_, __, ___) => Icon(
-          Icons.error,
-          color: Theme.of(context).colorScheme.error,
-          size: errorIconSize,
+          progressIndicatorBuilder: (context, url, progress) =>
+              CircularProgressIndicator(value: progress.progress),
+          errorWidget: (_, __, ___) =>
+              errorWidget ??
+              Icon(
+                Icons.error,
+                color: Theme.of(context).colorScheme.error,
+                size: errorIconSize,
+              ),
         ),
       );
     }

@@ -4,15 +4,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:glass/glass.dart';
+import 'package:go_router/go_router.dart';
+import 'package:hosta_provider/config/route/routes_manager.dart';
 import 'package:hosta_provider/config/theme/app_theme.dart';
 import 'package:hosta_provider/core/constants/font_constants.dart';
 import 'package:hosta_provider/core/resource/charts/chart_model/line_chart_model.dart';
 
 import 'package:hosta_provider/core/resource/main_page/main_page.dart';
 import 'package:hosta_provider/features/home_page/presentation/widgets/squer_container_with_presse_widget.dart';
+import 'package:hosta_provider/features/login_page/domain/entities/login_state_entity.dart';
 import 'package:hosta_provider/generated/locale_keys.g.dart';
 
+import '../../../../config/app/app_preferences.dart';
+import '../../../../core/dependencies_injection.dart';
 import '../../../../core/resource/charts/line_charts/custom_line_chart.dart';
+import '../../../../core/resource/image_widget.dart';
 
 class HomePagePage extends StatefulWidget {
   const HomePagePage({super.key});
@@ -22,6 +28,7 @@ class HomePagePage extends StatefulWidget {
 }
 
 class _HomePagePageState extends State<HomePagePage> {
+  LoginStateEntity? userInfo = getItInstance<AppPreferences>().getUserInfo();
   @override
   Widget build(BuildContext context) {
     return MainPage(
@@ -79,98 +86,120 @@ class _HomePagePageState extends State<HomePagePage> {
           ],
           automaticallyImplyLeading: false,
           leadingWidth: 200.w,
-          leading: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              CircleAvatar(
-                radius: 20.r,
-                backgroundImage: AssetImage("assets/images/app-icon.png"),
-              ),
-              SizedBox(
-                width: 120.w,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      width: 120.w,
-                      child: Text(
-                        "ابراهيم سهيل",
-                        style: Theme.of(context).textTheme.labelLarge,
-                        textAlign: TextAlign.start,
+
+          leading: SizedBox(
+            height: 60.h,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                CircleAvatar(
+                  radius: 20.r,
+                  child: ClipOval(
+                    child: ImageWidget(
+                      errorWidget: Icon(
+                        Icons.account_circle,
+                        size: 40.sp,
+                        color: Theme.of(context).colorScheme.onSurface,
                       ),
+                      imageUrl: userInfo?.user["avatar"] ?? "",
                     ),
-                    SizedBox(
-                      height: 20.h,
-                      width: 120.w,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          SizedBox(
-                            width: 50.w,
-                            child: FittedBox(
-                              fit: BoxFit.scaleDown,
-                              child: Text(
-                                LocaleKeys.homePage_myRating,
-                                textAlign: TextAlign.start,
-                              ).tr(),
+                  ),
+                ),
+                SizedBox(
+                  width: 120.w,
+
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.symmetric(vertical: 2.h),
+                        child: SizedBox(
+                          width: 120.w,
+                          child: FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: Text(
+                              userInfo?.user["name"] ?? "",
+                              style: Theme.of(context).textTheme.labelLarge,
+                              textAlign: TextAlign.start,
                             ),
                           ),
-                          Container(
-                            margin: EdgeInsetsDirectional.only(start: 12.w),
-                            width: 50.w,
-                            height: 40.h,
-                            decoration: BoxDecoration(
-                              color: Theme.of(context).colorScheme.primary,
-                              borderRadius: BorderRadius.circular(12.r),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20.h,
+                        width: 120.w,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              width: 50.w,
+                              child: FittedBox(
+                                fit: BoxFit.scaleDown,
+                                child: Text(
+                                  LocaleKeys.homePage_myRating,
+                                  textAlign: TextAlign.start,
+                                ).tr(),
+                              ),
                             ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Align(
-                                  alignment: AlignmentGeometry.center,
-                                  child: SizedBox(
-                                    width: 20.w,
-                                    child: FittedBox(
-                                      fit: BoxFit.scaleDown,
-                                      child: Text(
-                                        "4.5",
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .labelLarge
-                                            ?.copyWith(
-                                              fontFamily:
-                                                  FontConstants.fontFamily(
-                                                    context.locale,
-                                                  ),
-                                              color: Theme.of(
-                                                context,
-                                              ).colorScheme.onSurface,
-                                            ),
-                                        textAlign: TextAlign.center,
+                            Container(
+                              margin: EdgeInsetsDirectional.only(start: 12.w),
+                              width: 50.w,
+                              height: 40.h,
+                              decoration: BoxDecoration(
+                                color: Theme.of(context).colorScheme.primary,
+                                borderRadius: BorderRadius.circular(12.r),
+                              ),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceEvenly,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Align(
+                                    alignment: AlignmentGeometry.center,
+                                    child: SizedBox(
+                                      width: 20.w,
+                                      child: FittedBox(
+                                        fit: BoxFit.scaleDown,
+                                        child: Text(
+                                          "4.5",
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .labelLarge
+                                              ?.copyWith(
+                                                fontFamily:
+                                                    FontConstants.fontFamily(
+                                                      context.locale,
+                                                    ),
+                                                color: Theme.of(
+                                                  context,
+                                                ).colorScheme.onSurface,
+                                              ),
+                                          textAlign: TextAlign.center,
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
-                                Icon(
-                                  Icons.star,
-                                  size: 12.sp,
-                                  color: Theme.of(
-                                    context,
-                                  ).colorScheme.onSurface,
-                                ),
-                              ],
+                                  Icon(
+                                    Icons.star,
+                                    size: 12.sp,
+                                    color: Theme.of(
+                                      context,
+                                    ).colorScheme.onSurface,
+                                  ),
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ).animate().slideX(duration: 500.ms),
       ),
@@ -203,22 +232,30 @@ class _HomePagePageState extends State<HomePagePage> {
                   SquerContainerWithPresseWidget(
                     title: LocaleKeys.homePage_monthlyBookings.tr(),
                     info: "25",
-                    onPressed: () {},
                   ),
                   SquerContainerWithPresseWidget(
                     title: LocaleKeys.homePage_monthlyTotal.tr(),
                     info: "300,000,000",
-                    onPressed: () {},
                   ),
                   SquerContainerWithPresseWidget(
                     title: LocaleKeys.homePage_currentBookings.tr(),
                     info: "25",
-                    onPressed: () {},
+                    onPressed: () {
+                      context.pushNamed(
+                        RoutesName.bookingPage,
+                        pathParameters: {"pageIndex": "2"},
+                      );
+                    },
                   ),
                   SquerContainerWithPresseWidget(
                     title: LocaleKeys.homePage_pendingBookings.tr(),
                     info: "25",
-                    onPressed: () {},
+                    onPressed: () {
+                      context.pushNamed(
+                        RoutesName.bookingPage,
+                        pathParameters: {"pageIndex": "4"},
+                      );
+                    },
                   ),
                 ],
               ),

@@ -123,7 +123,8 @@
     "noCancel": "No, cancel",
     "noBookingsAvailable": "No bookings available",
     "startTime": "Start time",
-    "endTime": "End time"
+    "endTime": "End time",
+    "serviceImages": "Service images"
   },
   "profilePage": {
     "title": "Profile page",

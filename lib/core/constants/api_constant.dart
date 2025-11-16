@@ -6,7 +6,7 @@ class ApiConstant {
   static const String registerEndpoint = "/register";
   static const String bookingEndpoint = "/provider/bookings";
   static const String verifyOtpEndpoint = "/users/{user}/verify-otp";
-  static const String resendOtpEndpoint = "/resend-otp";
+  static const String resendOtpEndpoint = "/users/{user}/resend-otp";
   static const String meEndpoint = "/me";
   static const String workingHoursEndpoint = "/provider/working-hours";
   static const String getServices = "/services";

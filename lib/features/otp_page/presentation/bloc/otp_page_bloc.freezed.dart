@@ -55,12 +55,13 @@ extension OtpPageEventPatterns on OtpPageEvent {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( OtpPageEventStarted value)?  started,TResult Function( OtpPageEventVerify value)?  verify,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( OtpPageEventStarted value)?  started,TResult Function( OtpPageEventVerify value)?  verify,TResult Function( OtpPageEventResend value)?  resend,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case OtpPageEventStarted() when started != null:
 return started(_that);case OtpPageEventVerify() when verify != null:
-return verify(_that);case _:
+return verify(_that);case OtpPageEventResend() when resend != null:
+return resend(_that);case _:
   return orElse();
 
 }
@@ -78,12 +79,13 @@ return verify(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( OtpPageEventStarted value)  started,required TResult Function( OtpPageEventVerify value)  verify,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( OtpPageEventStarted value)  started,required TResult Function( OtpPageEventVerify value)  verify,required TResult Function( OtpPageEventResend value)  resend,}){
 final _that = this;
 switch (_that) {
 case OtpPageEventStarted():
 return started(_that);case OtpPageEventVerify():
-return verify(_that);case _:
+return verify(_that);case OtpPageEventResend():
+return resend(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -100,12 +102,13 @@ return verify(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( OtpPageEventStarted value)?  started,TResult? Function( OtpPageEventVerify value)?  verify,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( OtpPageEventStarted value)?  started,TResult? Function( OtpPageEventVerify value)?  verify,TResult? Function( OtpPageEventResend value)?  resend,}){
 final _that = this;
 switch (_that) {
 case OtpPageEventStarted() when started != null:
 return started(_that);case OtpPageEventVerify() when verify != null:
-return verify(_that);case _:
+return verify(_that);case OtpPageEventResend() when resend != null:
+return resend(_that);case _:
   return null;
 
 }
@@ -122,11 +125,12 @@ return verify(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  started,TResult Function( OtpModel? otpModel)?  verify,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  started,TResult Function( OtpModel? otpModel)?  verify,TResult Function( OtpModel? otpModel)?  resend,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case OtpPageEventStarted() when started != null:
 return started();case OtpPageEventVerify() when verify != null:
-return verify(_that.otpModel);case _:
+return verify(_that.otpModel);case OtpPageEventResend() when resend != null:
+return resend(_that.otpModel);case _:
   return orElse();
 
 }
@@ -144,11 +148,12 @@ return verify(_that.otpModel);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  started,required TResult Function( OtpModel? otpModel)  verify,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  started,required TResult Function( OtpModel? otpModel)  verify,required TResult Function( OtpModel? otpModel)  resend,}) {final _that = this;
 switch (_that) {
 case OtpPageEventStarted():
 return started();case OtpPageEventVerify():
-return verify(_that.otpModel);case _:
+return verify(_that.otpModel);case OtpPageEventResend():
+return resend(_that.otpModel);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -165,11 +170,12 @@ return verify(_that.otpModel);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  started,TResult? Function( OtpModel? otpModel)?  verify,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  started,TResult? Function( OtpModel? otpModel)?  verify,TResult? Function( OtpModel? otpModel)?  resend,}) {final _that = this;
 switch (_that) {
 case OtpPageEventStarted() when started != null:
 return started();case OtpPageEventVerify() when verify != null:
-return verify(_that.otpModel);case _:
+return verify(_that.otpModel);case OtpPageEventResend() when resend != null:
+return resend(_that.otpModel);case _:
   return null;
 
 }
@@ -288,6 +294,84 @@ $OtpModelCopyWith<$Res>? get otpModel {
 }
 
 /// @nodoc
+
+
+class OtpPageEventResend implements OtpPageEvent {
+  const OtpPageEventResend(this.otpModel);
+  
+
+ final  OtpModel? otpModel;
+
+/// Create a copy of OtpPageEvent
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$OtpPageEventResendCopyWith<OtpPageEventResend> get copyWith => _$OtpPageEventResendCopyWithImpl<OtpPageEventResend>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is OtpPageEventResend&&(identical(other.otpModel, otpModel) || other.otpModel == otpModel));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,otpModel);
+
+@override
+String toString() {
+  return 'OtpPageEvent.resend(otpModel: $otpModel)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $OtpPageEventResendCopyWith<$Res> implements $OtpPageEventCopyWith<$Res> {
+  factory $OtpPageEventResendCopyWith(OtpPageEventResend value, $Res Function(OtpPageEventResend) _then) = _$OtpPageEventResendCopyWithImpl;
+@useResult
+$Res call({
+ OtpModel? otpModel
+});
+
+
+$OtpModelCopyWith<$Res>? get otpModel;
+
+}
+/// @nodoc
+class _$OtpPageEventResendCopyWithImpl<$Res>
+    implements $OtpPageEventResendCopyWith<$Res> {
+  _$OtpPageEventResendCopyWithImpl(this._self, this._then);
+
+  final OtpPageEventResend _self;
+  final $Res Function(OtpPageEventResend) _then;
+
+/// Create a copy of OtpPageEvent
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? otpModel = freezed,}) {
+  return _then(OtpPageEventResend(
+freezed == otpModel ? _self.otpModel : otpModel // ignore: cast_nullable_to_non_nullable
+as OtpModel?,
+  ));
+}
+
+/// Create a copy of OtpPageEvent
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$OtpModelCopyWith<$Res>? get otpModel {
+    if (_self.otpModel == null) {
+    return null;
+  }
+
+  return $OtpModelCopyWith<$Res>(_self.otpModel!, (value) {
+    return _then(_self.copyWith(otpModel: value));
+  });
+}
+}
+
+/// @nodoc
 mixin _$OtpPageState {
 
 
@@ -331,14 +415,15 @@ extension OtpPageStatePatterns on OtpPageState {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( OtpPageStateInitial value)?  initial,TResult Function( OtpPageStateError value)?  error,TResult Function( OtpPageStateLoading value)?  loading,TResult Function( OtpPageStateVerified value)?  verified,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( OtpPageStateInitial value)?  initial,TResult Function( OtpPageStateError value)?  error,TResult Function( OtpPageStateLoading value)?  loading,TResult Function( OtpPageStateVerified value)?  verified,TResult Function( OtpPageStateResent value)?  resent,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case OtpPageStateInitial() when initial != null:
 return initial(_that);case OtpPageStateError() when error != null:
 return error(_that);case OtpPageStateLoading() when loading != null:
 return loading(_that);case OtpPageStateVerified() when verified != null:
-return verified(_that);case _:
+return verified(_that);case OtpPageStateResent() when resent != null:
+return resent(_that);case _:
   return orElse();
 
 }
@@ -356,14 +441,15 @@ return verified(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( OtpPageStateInitial value)  initial,required TResult Function( OtpPageStateError value)  error,required TResult Function( OtpPageStateLoading value)  loading,required TResult Function( OtpPageStateVerified value)  verified,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( OtpPageStateInitial value)  initial,required TResult Function( OtpPageStateError value)  error,required TResult Function( OtpPageStateLoading value)  loading,required TResult Function( OtpPageStateVerified value)  verified,required TResult Function( OtpPageStateResent value)  resent,}){
 final _that = this;
 switch (_that) {
 case OtpPageStateInitial():
 return initial(_that);case OtpPageStateError():
 return error(_that);case OtpPageStateLoading():
 return loading(_that);case OtpPageStateVerified():
-return verified(_that);case _:
+return verified(_that);case OtpPageStateResent():
+return resent(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -380,14 +466,15 @@ return verified(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( OtpPageStateInitial value)?  initial,TResult? Function( OtpPageStateError value)?  error,TResult? Function( OtpPageStateLoading value)?  loading,TResult? Function( OtpPageStateVerified value)?  verified,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( OtpPageStateInitial value)?  initial,TResult? Function( OtpPageStateError value)?  error,TResult? Function( OtpPageStateLoading value)?  loading,TResult? Function( OtpPageStateVerified value)?  verified,TResult? Function( OtpPageStateResent value)?  resent,}){
 final _that = this;
 switch (_that) {
 case OtpPageStateInitial() when initial != null:
 return initial(_that);case OtpPageStateError() when error != null:
 return error(_that);case OtpPageStateLoading() when loading != null:
 return loading(_that);case OtpPageStateVerified() when verified != null:
-return verified(_that);case _:
+return verified(_that);case OtpPageStateResent() when resent != null:
+return resent(_that);case _:
   return null;
 
 }
@@ -404,13 +491,14 @@ return verified(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  error,TResult Function()?  loading,TResult Function( LoginStateEntity? loginStateEntity)?  verified,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  error,TResult Function()?  loading,TResult Function( LoginStateEntity? loginStateEntity)?  verified,TResult Function( LoginStateEntity? loginStateEntity)?  resent,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case OtpPageStateInitial() when initial != null:
 return initial();case OtpPageStateError() when error != null:
 return error();case OtpPageStateLoading() when loading != null:
 return loading();case OtpPageStateVerified() when verified != null:
-return verified(_that.loginStateEntity);case _:
+return verified(_that.loginStateEntity);case OtpPageStateResent() when resent != null:
+return resent(_that.loginStateEntity);case _:
   return orElse();
 
 }
@@ -428,13 +516,14 @@ return verified(_that.loginStateEntity);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  error,required TResult Function()  loading,required TResult Function( LoginStateEntity? loginStateEntity)  verified,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  error,required TResult Function()  loading,required TResult Function( LoginStateEntity? loginStateEntity)  verified,required TResult Function( LoginStateEntity? loginStateEntity)  resent,}) {final _that = this;
 switch (_that) {
 case OtpPageStateInitial():
 return initial();case OtpPageStateError():
 return error();case OtpPageStateLoading():
 return loading();case OtpPageStateVerified():
-return verified(_that.loginStateEntity);case _:
+return verified(_that.loginStateEntity);case OtpPageStateResent():
+return resent(_that.loginStateEntity);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -451,13 +540,14 @@ return verified(_that.loginStateEntity);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  error,TResult? Function()?  loading,TResult? Function( LoginStateEntity? loginStateEntity)?  verified,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  error,TResult? Function()?  loading,TResult? Function( LoginStateEntity? loginStateEntity)?  verified,TResult? Function( LoginStateEntity? loginStateEntity)?  resent,}) {final _that = this;
 switch (_that) {
 case OtpPageStateInitial() when initial != null:
 return initial();case OtpPageStateError() when error != null:
 return error();case OtpPageStateLoading() when loading != null:
 return loading();case OtpPageStateVerified() when verified != null:
-return verified(_that.loginStateEntity);case _:
+return verified(_that.loginStateEntity);case OtpPageStateResent() when resent != null:
+return resent(_that.loginStateEntity);case _:
   return null;
 
 }
@@ -619,6 +709,84 @@ class _$OtpPageStateVerifiedCopyWithImpl<$Res>
 /// with the given fields replaced by the non-null parameter values.
 @pragma('vm:prefer-inline') $Res call({Object? loginStateEntity = freezed,}) {
   return _then(OtpPageStateVerified(
+freezed == loginStateEntity ? _self.loginStateEntity : loginStateEntity // ignore: cast_nullable_to_non_nullable
+as LoginStateEntity?,
+  ));
+}
+
+/// Create a copy of OtpPageState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$LoginStateEntityCopyWith<$Res>? get loginStateEntity {
+    if (_self.loginStateEntity == null) {
+    return null;
+  }
+
+  return $LoginStateEntityCopyWith<$Res>(_self.loginStateEntity!, (value) {
+    return _then(_self.copyWith(loginStateEntity: value));
+  });
+}
+}
+
+/// @nodoc
+
+
+class OtpPageStateResent implements OtpPageState {
+  const OtpPageStateResent(this.loginStateEntity);
+  
+
+ final  LoginStateEntity? loginStateEntity;
+
+/// Create a copy of OtpPageState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$OtpPageStateResentCopyWith<OtpPageStateResent> get copyWith => _$OtpPageStateResentCopyWithImpl<OtpPageStateResent>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is OtpPageStateResent&&(identical(other.loginStateEntity, loginStateEntity) || other.loginStateEntity == loginStateEntity));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,loginStateEntity);
+
+@override
+String toString() {
+  return 'OtpPageState.resent(loginStateEntity: $loginStateEntity)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $OtpPageStateResentCopyWith<$Res> implements $OtpPageStateCopyWith<$Res> {
+  factory $OtpPageStateResentCopyWith(OtpPageStateResent value, $Res Function(OtpPageStateResent) _then) = _$OtpPageStateResentCopyWithImpl;
+@useResult
+$Res call({
+ LoginStateEntity? loginStateEntity
+});
+
+
+$LoginStateEntityCopyWith<$Res>? get loginStateEntity;
+
+}
+/// @nodoc
+class _$OtpPageStateResentCopyWithImpl<$Res>
+    implements $OtpPageStateResentCopyWith<$Res> {
+  _$OtpPageStateResentCopyWithImpl(this._self, this._then);
+
+  final OtpPageStateResent _self;
+  final $Res Function(OtpPageStateResent) _then;
+
+/// Create a copy of OtpPageState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? loginStateEntity = freezed,}) {
+  return _then(OtpPageStateResent(
 freezed == loginStateEntity ? _self.loginStateEntity : loginStateEntity // ignore: cast_nullable_to_non_nullable
 as LoginStateEntity?,
   ));

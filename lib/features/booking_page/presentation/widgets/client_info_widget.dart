@@ -8,6 +8,7 @@ import 'package:hosta_provider/config/theme/app_theme.dart';
 import 'package:hosta_provider/core/constants/font_constants.dart';
 import 'package:hosta_provider/core/resource/common_entity/customer_entity.dart';
 import 'package:hosta_provider/core/resource/custom_widget/snake_bar_widget/snake_bar_widget.dart';
+import 'package:hosta_provider/core/resource/image_widget.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../../generated/locale_keys.g.dart';
@@ -34,14 +35,17 @@ class ClientInfoWidget extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              CircleAvatar(
-                radius: 30.r,
-                child: CachedNetworkImage(
-                  imageUrl: customerEntity?.avatar ?? "",
-                  fit: BoxFit.cover,
-                  progressIndicatorBuilder: (context, url, progress) =>
-                      CircularProgressIndicator(value: progress.progress),
-                  errorWidget: (context, url, error) => Icon(Icons.error),
+              ClipOval(
+                child: CircleAvatar(
+                  radius: 30.r,
+                  child: ImageWidget(
+                    errorWidget: Icon(
+                      Icons.design_services,
+                      size: 30.sp,
+                      color: Theme.of(context).colorScheme.onPrimaryContainer,
+                    ),
+                    imageUrl: customerEntity?.avatar ?? "",
+                  ),
                 ),
               ),
               Column(

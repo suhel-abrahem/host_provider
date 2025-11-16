@@ -4,4 +4,5 @@ import 'package:hosta_provider/features/otp_page/data/models/otp_model.dart';
 
 abstract class OtpVerifyRepository {
   Future<DataState<LoginStateEntity?>?> verify({OtpModel? otpModel});
+  Future<DataState<LoginStateEntity?>?> resend({OtpModel? otpModel});
 }

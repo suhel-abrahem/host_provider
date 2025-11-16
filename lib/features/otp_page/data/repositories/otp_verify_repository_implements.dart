@@ -59,4 +59,45 @@ class OtpVerifyRepositoryImplements implements OtpVerifyRepository {
       return DataFailed(error: e.toString());
     }
   }
+
+  @override
+  Future<DataState<LoginStateEntity?>?> resend({OtpModel? otpModel}) async {
+    ConnectivityResult connectivityResult = ConnectivityResult.none;
+    await _checkConnectivity.checkConnectivity().then(
+      (action) => connectivityResult = action.last,
+    );
+    if (connectivityResult == ConnectivityResult.none) {
+      return Future.value(NOInternetDataState());
+    }
+    DataState<LoginStateEntity?>? response;
+    try {
+      String endpoint = ApiConstant.resendOtpEndpoint.replaceFirst(
+        "{user}",
+        "${otpModel?.userId}",
+      );
+      print("im otp rep endpo:${endpoint}");
+      print("im otp rep otp:${otpModel?.otp}");
+      await _commonService
+          .post(endpoint, data: {"verify_method": otpModel?.verifyMethod})
+          .then((onValue) {
+            print("im otp rep:${onValue}");
+            if (onValue is DataSuccess) {
+              print("raw data${onValue.data?.data}");
+              response = DataSuccess(
+                data: LoginStateEntity.fromJson(onValue.data?.data),
+              );
+
+              return response;
+            } else {
+              print("yup");
+              response = DataError(error: onValue.error);
+              return response;
+            }
+          });
+      return response;
+    } catch (e) {
+      print("yupp");
+      return DataFailed(error: e.toString());
+    }
+  }
 }

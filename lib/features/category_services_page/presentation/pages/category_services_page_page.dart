@@ -221,13 +221,19 @@ class _CategoryServicesPagePageState extends State<CategoryServicesPagePage> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.center,
                                           children: [
-                                            ImageWidget(
-                                              imageUrl:
-                                                  widget.categoryEntity?.icon ??
-                                                  "",
+                                            SizedBox(
                                               width: 50.w,
                                               height: 50.h,
-                                              errorIconSize: 32.sp,
+                                              child: ImageWidget(
+                                                imageUrl:
+                                                    widget
+                                                        .categoryEntity
+                                                        ?.icon ??
+                                                    "",
+                                                width: 50.w,
+                                                height: 50.h,
+                                                errorIconSize: 32.sp,
+                                              ),
                                             ),
                                             SizedBox(
                                               width: 170.w,
@@ -415,14 +421,19 @@ class _CategoryServicesPagePageState extends State<CategoryServicesPagePage> {
                                                                               ),
                                                                               child: CustomInputField(
                                                                                 label: LocaleKeys.categoryServices_durationInMinutes.tr(),
-                                                                                initialValue: setServiceModel?.serviceModel?.buffer_minutes,
+                                                                                initialValue: setServiceModel?.serviceModel?.duration_minutes.toString(),
                                                                                 onChanged:
                                                                                     (
                                                                                       value,
                                                                                     ) {
                                                                                       setServiceModel = setServiceModel?.copyWith(
                                                                                         serviceModel: setServiceModel?.serviceModel?.copyWith(
-                                                                                          duration_minutes: value,
+                                                                                          duration_minutes:
+                                                                                              int.tryParse(
+                                                                                                value ??
+                                                                                                    "0",
+                                                                                              ) ??
+                                                                                              0,
                                                                                         ),
                                                                                       );
                                                                                       setState(
@@ -457,14 +468,19 @@ class _CategoryServicesPagePageState extends State<CategoryServicesPagePage> {
                                                                             ),
                                                                             CustomInputField(
                                                                               label: LocaleKeys.categoryServices_bufferInMinutes.tr(),
-                                                                              initialValue: setServiceModel?.serviceModel?.buffer_minutes,
+                                                                              initialValue: setServiceModel?.serviceModel?.buffer_minutes.toString(),
                                                                               onChanged:
                                                                                   (
                                                                                     value,
                                                                                   ) {
                                                                                     setServiceModel = setServiceModel?.copyWith(
                                                                                       serviceModel: setServiceModel?.serviceModel?.copyWith(
-                                                                                        buffer_minutes: value,
+                                                                                        buffer_minutes:
+                                                                                            int.tryParse(
+                                                                                              value ??
+                                                                                                  "0",
+                                                                                            ) ??
+                                                                                            0,
                                                                                       ),
                                                                                     );
                                                                                     setState(

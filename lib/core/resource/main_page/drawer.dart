@@ -66,7 +66,16 @@ class _CustomDrawerState extends State<CustomDrawer> {
                 children: [
                   CircleAvatar(
                     radius: 30.r,
-                    child: ImageWidget(imageUrl: "assets/images/logo.png"),
+                    child: ClipOval(
+                      child: ImageWidget(
+                        errorWidget: Icon(
+                          Icons.account_circle,
+                          size: 60.sp,
+                          color: Theme.of(context).colorScheme.onSurface,
+                        ),
+                        imageUrl: userInfo?.user["avatar"] ?? "",
+                      ),
+                    ),
                   ),
                   SizedBox(
                     width: 150.w,

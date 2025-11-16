@@ -139,7 +139,8 @@ class CodegenLoader extends AssetLoader{
     "noCancel": "لا، إلغاء",
     "noBookingsAvailable": "لا توجد حجوزات متاحة",
     "startTime": "وقت البدء",
-    "endTime": "وقت الانتهاء"
+    "endTime": "وقت الانتهاء",
+    "serviceImages": "صور الخدمة"
   },
   "profilePage": {
     "title": "صفحة الملف الشخصي",
@@ -383,7 +384,8 @@ static const Map<String,dynamic> _en = {
     "noCancel": "No, cancel",
     "noBookingsAvailable": "No bookings available",
     "startTime": "Start time",
-    "endTime": "End time"
+    "endTime": "End time",
+    "serviceImages": "Service images"
   },
   "profilePage": {
     "title": "Profile page",
@@ -627,7 +629,8 @@ static const Map<String,dynamic> _fa = {
     "noCancel": "نەخێر، هەڵبوەشێنەوە",
     "noBookingsAvailable": "هیچ ئاراستەکردنێک بوونی نییە",
     "startTime": "کاتژمێری دەست پێکردن",
-    "endTime": "کاتژمێری کۆتایی"
+    "endTime": "کاتژمێری کۆتایی",
+    "serviceImages": "وێنەکانی خزمەتگوزاری"
   },
   "profilePage": {
     "title": "پەیجی پڕۆفایل",

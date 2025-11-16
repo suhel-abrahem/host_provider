@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$OtpModel {
 
- int? get userId; String? get otp;
+ int? get userId; String? get otp; String? get verifyMethod;
 /// Create a copy of OtpModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $OtpModelCopyWith<OtpModel> get copyWith => _$OtpModelCopyWithImpl<OtpModel>(thi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is OtpModel&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.otp, otp) || other.otp == otp));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is OtpModel&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.otp, otp) || other.otp == otp)&&(identical(other.verifyMethod, verifyMethod) || other.verifyMethod == verifyMethod));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,userId,otp);
+int get hashCode => Object.hash(runtimeType,userId,otp,verifyMethod);
 
 @override
 String toString() {
-  return 'OtpModel(userId: $userId, otp: $otp)';
+  return 'OtpModel(userId: $userId, otp: $otp, verifyMethod: $verifyMethod)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $OtpModelCopyWith<$Res>  {
   factory $OtpModelCopyWith(OtpModel value, $Res Function(OtpModel) _then) = _$OtpModelCopyWithImpl;
 @useResult
 $Res call({
- int? userId, String? otp
+ int? userId, String? otp, String? verifyMethod
 });
 
 
@@ -65,10 +65,11 @@ class _$OtpModelCopyWithImpl<$Res>
 
 /// Create a copy of OtpModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? userId = freezed,Object? otp = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? userId = freezed,Object? otp = freezed,Object? verifyMethod = freezed,}) {
   return _then(_self.copyWith(
 userId: freezed == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
 as int?,otp: freezed == otp ? _self.otp : otp // ignore: cast_nullable_to_non_nullable
+as String?,verifyMethod: freezed == verifyMethod ? _self.verifyMethod : verifyMethod // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }
@@ -154,10 +155,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int? userId,  String? otp)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int? userId,  String? otp,  String? verifyMethod)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _OtpModel() when $default != null:
-return $default(_that.userId,_that.otp);case _:
+return $default(_that.userId,_that.otp,_that.verifyMethod);case _:
   return orElse();
 
 }
@@ -175,10 +176,10 @@ return $default(_that.userId,_that.otp);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int? userId,  String? otp)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int? userId,  String? otp,  String? verifyMethod)  $default,) {final _that = this;
 switch (_that) {
 case _OtpModel():
-return $default(_that.userId,_that.otp);case _:
+return $default(_that.userId,_that.otp,_that.verifyMethod);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -195,10 +196,10 @@ return $default(_that.userId,_that.otp);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int? userId,  String? otp)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int? userId,  String? otp,  String? verifyMethod)?  $default,) {final _that = this;
 switch (_that) {
 case _OtpModel() when $default != null:
-return $default(_that.userId,_that.otp);case _:
+return $default(_that.userId,_that.otp,_that.verifyMethod);case _:
   return null;
 
 }
@@ -210,11 +211,12 @@ return $default(_that.userId,_that.otp);case _:
 @JsonSerializable()
 
 class _OtpModel implements OtpModel {
-  const _OtpModel({this.userId = 0, this.otp = ""});
+  const _OtpModel({this.userId = 0, this.otp = "", this.verifyMethod = ""});
   factory _OtpModel.fromJson(Map<String, dynamic> json) => _$OtpModelFromJson(json);
 
 @override@JsonKey() final  int? userId;
 @override@JsonKey() final  String? otp;
+@override@JsonKey() final  String? verifyMethod;
 
 /// Create a copy of OtpModel
 /// with the given fields replaced by the non-null parameter values.
@@ -229,16 +231,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _OtpModel&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.otp, otp) || other.otp == otp));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _OtpModel&&(identical(other.userId, userId) || other.userId == userId)&&(identical(other.otp, otp) || other.otp == otp)&&(identical(other.verifyMethod, verifyMethod) || other.verifyMethod == verifyMethod));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,userId,otp);
+int get hashCode => Object.hash(runtimeType,userId,otp,verifyMethod);
 
 @override
 String toString() {
-  return 'OtpModel(userId: $userId, otp: $otp)';
+  return 'OtpModel(userId: $userId, otp: $otp, verifyMethod: $verifyMethod)';
 }
 
 
@@ -249,7 +251,7 @@ abstract mixin class _$OtpModelCopyWith<$Res> implements $OtpModelCopyWith<$Res>
   factory _$OtpModelCopyWith(_OtpModel value, $Res Function(_OtpModel) _then) = __$OtpModelCopyWithImpl;
 @override @useResult
 $Res call({
- int? userId, String? otp
+ int? userId, String? otp, String? verifyMethod
 });
 
 
@@ -266,10 +268,11 @@ class __$OtpModelCopyWithImpl<$Res>
 
 /// Create a copy of OtpModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? userId = freezed,Object? otp = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? userId = freezed,Object? otp = freezed,Object? verifyMethod = freezed,}) {
   return _then(_OtpModel(
 userId: freezed == userId ? _self.userId : userId // ignore: cast_nullable_to_non_nullable
 as int?,otp: freezed == otp ? _self.otp : otp // ignore: cast_nullable_to_non_nullable
+as String?,verifyMethod: freezed == verifyMethod ? _self.verifyMethod : verifyMethod // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }

@@ -123,7 +123,8 @@
     "noCancel": "لا، إلغاء",
     "noBookingsAvailable": "لا توجد حجوزات متاحة",
     "startTime": "وقت البدء",
-    "endTime": "وقت الانتهاء"
+    "endTime": "وقت الانتهاء",
+    "serviceImages": "صور الخدمة"
   },
   "profilePage": {
     "title": "صفحة الملف الشخصي",

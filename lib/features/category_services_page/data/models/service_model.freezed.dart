@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ServiceModel {
 
- int? get service_id; int? get id; bool? get is_active; int? get price; String? get notes; String? get duration_minutes; String? get buffer_minutes;
+ int? get service_id; int? get id; bool? get is_active; int? get price; String? get notes; int? get duration_minutes; int? get buffer_minutes;
 /// Create a copy of ServiceModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $ServiceModelCopyWith<$Res>  {
   factory $ServiceModelCopyWith(ServiceModel value, $Res Function(ServiceModel) _then) = _$ServiceModelCopyWithImpl;
 @useResult
 $Res call({
- int? service_id, int? id, bool? is_active, int? price, String? notes, String? duration_minutes, String? buffer_minutes
+ int? service_id, int? id, bool? is_active, int? price, String? notes, int? duration_minutes, int? buffer_minutes
 });
 
 
@@ -73,8 +73,8 @@ as int?,is_active: freezed == is_active ? _self.is_active : is_active // ignore:
 as bool?,price: freezed == price ? _self.price : price // ignore: cast_nullable_to_non_nullable
 as int?,notes: freezed == notes ? _self.notes : notes // ignore: cast_nullable_to_non_nullable
 as String?,duration_minutes: freezed == duration_minutes ? _self.duration_minutes : duration_minutes // ignore: cast_nullable_to_non_nullable
-as String?,buffer_minutes: freezed == buffer_minutes ? _self.buffer_minutes : buffer_minutes // ignore: cast_nullable_to_non_nullable
-as String?,
+as int?,buffer_minutes: freezed == buffer_minutes ? _self.buffer_minutes : buffer_minutes // ignore: cast_nullable_to_non_nullable
+as int?,
   ));
 }
 
@@ -159,7 +159,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int? service_id,  int? id,  bool? is_active,  int? price,  String? notes,  String? duration_minutes,  String? buffer_minutes)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int? service_id,  int? id,  bool? is_active,  int? price,  String? notes,  int? duration_minutes,  int? buffer_minutes)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ServiceModel() when $default != null:
 return $default(_that.service_id,_that.id,_that.is_active,_that.price,_that.notes,_that.duration_minutes,_that.buffer_minutes);case _:
@@ -180,7 +180,7 @@ return $default(_that.service_id,_that.id,_that.is_active,_that.price,_that.note
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int? service_id,  int? id,  bool? is_active,  int? price,  String? notes,  String? duration_minutes,  String? buffer_minutes)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int? service_id,  int? id,  bool? is_active,  int? price,  String? notes,  int? duration_minutes,  int? buffer_minutes)  $default,) {final _that = this;
 switch (_that) {
 case _ServiceModel():
 return $default(_that.service_id,_that.id,_that.is_active,_that.price,_that.notes,_that.duration_minutes,_that.buffer_minutes);case _:
@@ -200,7 +200,7 @@ return $default(_that.service_id,_that.id,_that.is_active,_that.price,_that.note
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int? service_id,  int? id,  bool? is_active,  int? price,  String? notes,  String? duration_minutes,  String? buffer_minutes)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int? service_id,  int? id,  bool? is_active,  int? price,  String? notes,  int? duration_minutes,  int? buffer_minutes)?  $default,) {final _that = this;
 switch (_that) {
 case _ServiceModel() when $default != null:
 return $default(_that.service_id,_that.id,_that.is_active,_that.price,_that.notes,_that.duration_minutes,_that.buffer_minutes);case _:
@@ -215,7 +215,7 @@ return $default(_that.service_id,_that.id,_that.is_active,_that.price,_that.note
 @JsonSerializable()
 
 class _ServiceModel implements ServiceModel {
-  const _ServiceModel({this.service_id = 0, this.id = 0, this.is_active = false, this.price = 0, this.notes = "", this.duration_minutes = "", this.buffer_minutes = ""});
+  const _ServiceModel({this.service_id = 0, this.id = 0, this.is_active = false, this.price = 0, this.notes = "", this.duration_minutes = 0, this.buffer_minutes = 0});
   factory _ServiceModel.fromJson(Map<String, dynamic> json) => _$ServiceModelFromJson(json);
 
 @override@JsonKey() final  int? service_id;
@@ -223,8 +223,8 @@ class _ServiceModel implements ServiceModel {
 @override@JsonKey() final  bool? is_active;
 @override@JsonKey() final  int? price;
 @override@JsonKey() final  String? notes;
-@override@JsonKey() final  String? duration_minutes;
-@override@JsonKey() final  String? buffer_minutes;
+@override@JsonKey() final  int? duration_minutes;
+@override@JsonKey() final  int? buffer_minutes;
 
 /// Create a copy of ServiceModel
 /// with the given fields replaced by the non-null parameter values.
@@ -259,7 +259,7 @@ abstract mixin class _$ServiceModelCopyWith<$Res> implements $ServiceModelCopyWi
   factory _$ServiceModelCopyWith(_ServiceModel value, $Res Function(_ServiceModel) _then) = __$ServiceModelCopyWithImpl;
 @override @useResult
 $Res call({
- int? service_id, int? id, bool? is_active, int? price, String? notes, String? duration_minutes, String? buffer_minutes
+ int? service_id, int? id, bool? is_active, int? price, String? notes, int? duration_minutes, int? buffer_minutes
 });
 
 
@@ -284,8 +284,8 @@ as int?,is_active: freezed == is_active ? _self.is_active : is_active // ignore:
 as bool?,price: freezed == price ? _self.price : price // ignore: cast_nullable_to_non_nullable
 as int?,notes: freezed == notes ? _self.notes : notes // ignore: cast_nullable_to_non_nullable
 as String?,duration_minutes: freezed == duration_minutes ? _self.duration_minutes : duration_minutes // ignore: cast_nullable_to_non_nullable
-as String?,buffer_minutes: freezed == buffer_minutes ? _self.buffer_minutes : buffer_minutes // ignore: cast_nullable_to_non_nullable
-as String?,
+as int?,buffer_minutes: freezed == buffer_minutes ? _self.buffer_minutes : buffer_minutes // ignore: cast_nullable_to_non_nullable
+as int?,
   ));
 }
 

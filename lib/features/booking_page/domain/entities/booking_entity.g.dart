@@ -26,6 +26,7 @@ _BookingEntity _$BookingEntityFromJson(Map<String, dynamic> json) =>
       images: json['images'] as List<dynamic>? ?? const [],
       created_at: json['created_at'] as String? ?? "",
       updated_at: json['updated_at'] as String? ?? "",
+      image: json['image'] as String? ?? "",
     );
 
 Map<String, dynamic> _$BookingEntityToJson(_BookingEntity instance) =>
@@ -48,4 +49,5 @@ Map<String, dynamic> _$BookingEntityToJson(_BookingEntity instance) =>
       'images': instance.images,
       'created_at': instance.created_at,
       'updated_at': instance.updated_at,
+      'image': instance.image,
     };

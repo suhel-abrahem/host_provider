@@ -29,10 +29,16 @@ class OtpPagePage extends StatefulWidget {
 class _OtpPagePageState extends State<OtpPagePage> {
   SignupInfoEntity? signupInfoEntity;
   TextEditingController otpController = TextEditingController();
+  OtpModel otpModel = const OtpModel();
   @override
   void initState() {
     signupInfoEntity = getItInstance<AppPreferences>().getSignupInfo();
     otpController.text = (signupInfoEntity?.otpEntity?.otp.toString()) ?? "";
+    otpModel = otpModel.copyWith(
+      userId: signupInfoEntity?.signupEntity?.user_id,
+
+      verifyMethod: "whatsapp",
+    );
     super.initState();
   }
 
@@ -62,6 +68,12 @@ class _OtpPagePageState extends State<OtpPagePage> {
                 loginStateEntity: loginStateEntity,
               );
               context.pushNamed(RoutesName.homePage);
+            },
+            resent: (LoginStateEntity? loginStateEntity) {
+              showMessage(
+                message: LocaleKeys.common_success.tr(),
+                context: context,
+              );
             },
           );
         },
@@ -120,6 +132,10 @@ class _OtpPagePageState extends State<OtpPagePage> {
                 child: Center(
                   child: Pinput(
                     length: 6,
+                    onChanged: (value) {
+                      print("otp value:$value");
+                      otpModel = otpModel.copyWith(otp: value);
+                    },
                     controller: otpController,
                     defaultPinTheme: PinTheme(
                       width: 50.w,
@@ -162,14 +178,7 @@ class _OtpPagePageState extends State<OtpPagePage> {
                           // ✅ Validation happens *on press*, not during build
                           onPressed: () {
                             context.read<OtpPageBloc>().add(
-                              OtpPageEvent.verify(
-                                OtpModel(
-                                  otp: signupInfoEntity?.otpEntity?.otp
-                                      .toString(),
-                                  userId:
-                                      signupInfoEntity?.signupEntity?.user_id,
-                                ),
-                              ),
+                              OtpPageEvent.verify(otpModel),
                             );
                           },
                           child: Text(
@@ -196,16 +205,27 @@ class _OtpPagePageState extends State<OtpPagePage> {
                       fontFamily: FontConstants.fontFamily(context.locale),
                     ),
                   ),
-                  TextButton(
-                    onPressed: null,
-                    child: Text(
-                      LocaleKeys.otpPage_resend.tr(),
-                      style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                        fontWeight: FontWeight.w600,
-                        fontFamily: FontConstants.fontFamily(context.locale),
-                        decoration: TextDecoration.underline,
-                      ),
-                    ),
+                  Builder(
+                    builder: (context) {
+                      return TextButton(
+                        onPressed: () {
+                          context.read<OtpPageBloc>().add(
+                            OtpPageEvent.resend(otpModel),
+                          );
+                        },
+                        child: Text(
+                          LocaleKeys.otpPage_resend.tr(),
+                          style: Theme.of(context).textTheme.labelMedium
+                              ?.copyWith(
+                                fontWeight: FontWeight.w600,
+                                fontFamily: FontConstants.fontFamily(
+                                  context.locale,
+                                ),
+                                decoration: TextDecoration.underline,
+                              ),
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),

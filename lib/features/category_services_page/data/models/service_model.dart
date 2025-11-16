@@ -11,8 +11,8 @@ abstract class ServiceModel with _$ServiceModel {
 
     @Default(0) int? price,
     @Default("") String? notes,
-    @Default("") String? duration_minutes,
-    @Default("") String? buffer_minutes,
+    @Default(0) int? duration_minutes,
+    @Default(0) int? buffer_minutes,
   }) = _ServiceModel;
   factory ServiceModel.fromJson(Map<String, dynamic> json) =>
       _$ServiceModelFromJson(json);

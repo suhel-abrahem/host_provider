@@ -121,6 +121,7 @@ abstract class  LocaleKeys {
   static const bookingPage_noBookingsAvailable = 'bookingPage.noBookingsAvailable';
   static const bookingPage_startTime = 'bookingPage.startTime';
   static const bookingPage_endTime = 'bookingPage.endTime';
+  static const bookingPage_serviceImages = 'bookingPage.serviceImages';
   static const bookingPage = 'bookingPage';
   static const profilePage_title = 'profilePage.title';
   static const profilePage_label = 'profilePage.label';

@@ -30,6 +30,7 @@ import 'package:hosta_provider/features/my_services_page/domain/usecases/my_serv
 import 'package:hosta_provider/features/my_services_page/presentation/bloc/my_service_bloc.dart';
 import 'package:hosta_provider/features/otp_page/data/models/otp_model.dart';
 import 'package:hosta_provider/features/otp_page/domain/repositories/otp_verifiy_repository.dart';
+import 'package:hosta_provider/features/otp_page/domain/usecases/otp_resend_usecase.dart';
 import 'package:hosta_provider/features/otp_page/domain/usecases/otp_verify_usecase.dart';
 import 'package:hosta_provider/features/otp_page/presentation/bloc/otp_page_bloc.dart';
 import 'package:hosta_provider/features/profile_page/domain/usecases/get_working_time_usecase.dart';
@@ -167,6 +168,9 @@ Future<void> initDependencies() async {
   getItInstance.registerSingleton<OtpVerifyUsecase>(
     OtpVerifyUsecase(otpVerifyRepository: getItInstance()),
   );
+  getItInstance.registerSingleton<OtpResendUseCase>(
+    OtpResendUseCase(otpVerifyRepository: getItInstance()),
+  );
   //bloc
   getItInstance.registerFactory<SignupBlocBloc>(
     () => SignupBlocBloc(getItInstance()),
@@ -181,7 +185,7 @@ Future<void> initDependencies() async {
     () => GetPositionBloc(getItInstance()),
   );
   getItInstance.registerFactory<OtpPageBloc>(
-    () => OtpPageBloc(getItInstance()),
+    () => OtpPageBloc(getItInstance(), getItInstance()),
   );
   // end of signup
   // refresh token

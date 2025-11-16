@@ -46,11 +46,12 @@ class _MyServiceWidgetState extends State<MyServiceWidget> {
   bool isAddServiceHaveError = false;
   @override
   void initState() {
+    print("service entity in widget : ${widget.serviceEntity?.toJson()}");
     setServiceModel = setServiceModel?.copyWith(
       serviceModel: setServiceModel?.serviceModel?.copyWith(
         price: widget.serviceEntity?.price,
-        duration_minutes: widget.serviceEntity?.duration_minutes.toString(),
-        buffer_minutes: widget.serviceEntity?.buffer_minutes.toString(),
+        duration_minutes: widget.serviceEntity?.duration_minutes,
+        buffer_minutes: widget.serviceEntity?.buffer_minutes,
         notes: widget.serviceEntity?.notes,
         is_active: widget.serviceEntity?.is_active,
       ),
@@ -453,12 +454,14 @@ class _MyServiceWidgetState extends State<MyServiceWidget> {
                     padding: EdgeInsetsGeometry.symmetric(vertical: 8.h),
                     child: CustomInputField(
                       label: LocaleKeys.categoryServices_durationInMinutes.tr(),
-                      initialValue:
-                          setServiceModel?.serviceModel?.buffer_minutes,
+                      initialValue: setServiceModel
+                          ?.serviceModel
+                          ?.duration_minutes
+                          .toString(),
                       onChanged: (value) {
                         setServiceModel = setServiceModel?.copyWith(
                           serviceModel: setServiceModel?.serviceModel?.copyWith(
-                            duration_minutes: value,
+                            duration_minutes: int.tryParse(value),
                           ),
                         );
                         setState(() {});
@@ -484,11 +487,12 @@ class _MyServiceWidgetState extends State<MyServiceWidget> {
                   ),
                   CustomInputField(
                     label: LocaleKeys.categoryServices_bufferInMinutes.tr(),
-                    initialValue: setServiceModel?.serviceModel?.buffer_minutes,
+                    initialValue: setServiceModel?.serviceModel?.buffer_minutes
+                        .toString(),
                     onChanged: (value) {
                       setServiceModel = setServiceModel?.copyWith(
                         serviceModel: setServiceModel?.serviceModel?.copyWith(
-                          buffer_minutes: value,
+                          buffer_minutes: int.tryParse(value),
                         ),
                       );
                       setState(() {});
@@ -624,9 +628,7 @@ class _MyServiceWidgetState extends State<MyServiceWidget> {
                     ),
                   ),
                   onPressed: () {
-                    setServiceModel = setServiceModel?.copyWith(
-                      serviceModel: ServiceModel(),
-                    );
+                    setServiceModel = setServiceModel?.copyWith();
                     dialogContext.pop();
                   },
                   child: Text(
