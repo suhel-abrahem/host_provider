@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ProfileEntity {
 
- int? get id; String? get name; String? get email; String? get phone; String? get dob; List? get addresses;
+ int? get id; String? get name; String? get email; String? get phone; String? get dob; String? get avatar; List? get addresses;
 /// Create a copy of ProfileEntity
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $ProfileEntityCopyWith<ProfileEntity> get copyWith => _$ProfileEntityCopyWithImp
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProfileEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.email, email) || other.email == email)&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.dob, dob) || other.dob == dob)&&const DeepCollectionEquality().equals(other.addresses, addresses));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProfileEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.email, email) || other.email == email)&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.dob, dob) || other.dob == dob)&&(identical(other.avatar, avatar) || other.avatar == avatar)&&const DeepCollectionEquality().equals(other.addresses, addresses));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,email,phone,dob,const DeepCollectionEquality().hash(addresses));
+int get hashCode => Object.hash(runtimeType,id,name,email,phone,dob,avatar,const DeepCollectionEquality().hash(addresses));
 
 @override
 String toString() {
-  return 'ProfileEntity(id: $id, name: $name, email: $email, phone: $phone, dob: $dob, addresses: $addresses)';
+  return 'ProfileEntity(id: $id, name: $name, email: $email, phone: $phone, dob: $dob, avatar: $avatar, addresses: $addresses)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $ProfileEntityCopyWith<$Res>  {
   factory $ProfileEntityCopyWith(ProfileEntity value, $Res Function(ProfileEntity) _then) = _$ProfileEntityCopyWithImpl;
 @useResult
 $Res call({
- int? id, String? name, String? email, String? phone, String? dob, List? addresses
+ int? id, String? name, String? email, String? phone, String? dob, String? avatar, List? addresses
 });
 
 
@@ -65,13 +65,14 @@ class _$ProfileEntityCopyWithImpl<$Res>
 
 /// Create a copy of ProfileEntity
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? name = freezed,Object? email = freezed,Object? phone = freezed,Object? dob = freezed,Object? addresses = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? name = freezed,Object? email = freezed,Object? phone = freezed,Object? dob = freezed,Object? avatar = freezed,Object? addresses = freezed,}) {
   return _then(_self.copyWith(
 id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int?,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String?,email: freezed == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as String?,phone: freezed == phone ? _self.phone : phone // ignore: cast_nullable_to_non_nullable
 as String?,dob: freezed == dob ? _self.dob : dob // ignore: cast_nullable_to_non_nullable
+as String?,avatar: freezed == avatar ? _self.avatar : avatar // ignore: cast_nullable_to_non_nullable
 as String?,addresses: freezed == addresses ? _self.addresses : addresses // ignore: cast_nullable_to_non_nullable
 as List?,
   ));
@@ -158,10 +159,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int? id,  String? name,  String? email,  String? phone,  String? dob,  List? addresses)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int? id,  String? name,  String? email,  String? phone,  String? dob,  String? avatar,  List? addresses)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ProfileEntity() when $default != null:
-return $default(_that.id,_that.name,_that.email,_that.phone,_that.dob,_that.addresses);case _:
+return $default(_that.id,_that.name,_that.email,_that.phone,_that.dob,_that.avatar,_that.addresses);case _:
   return orElse();
 
 }
@@ -179,10 +180,10 @@ return $default(_that.id,_that.name,_that.email,_that.phone,_that.dob,_that.addr
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int? id,  String? name,  String? email,  String? phone,  String? dob,  List? addresses)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int? id,  String? name,  String? email,  String? phone,  String? dob,  String? avatar,  List? addresses)  $default,) {final _that = this;
 switch (_that) {
 case _ProfileEntity():
-return $default(_that.id,_that.name,_that.email,_that.phone,_that.dob,_that.addresses);case _:
+return $default(_that.id,_that.name,_that.email,_that.phone,_that.dob,_that.avatar,_that.addresses);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -199,10 +200,10 @@ return $default(_that.id,_that.name,_that.email,_that.phone,_that.dob,_that.addr
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int? id,  String? name,  String? email,  String? phone,  String? dob,  List? addresses)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int? id,  String? name,  String? email,  String? phone,  String? dob,  String? avatar,  List? addresses)?  $default,) {final _that = this;
 switch (_that) {
 case _ProfileEntity() when $default != null:
-return $default(_that.id,_that.name,_that.email,_that.phone,_that.dob,_that.addresses);case _:
+return $default(_that.id,_that.name,_that.email,_that.phone,_that.dob,_that.avatar,_that.addresses);case _:
   return null;
 
 }
@@ -214,7 +215,7 @@ return $default(_that.id,_that.name,_that.email,_that.phone,_that.dob,_that.addr
 @JsonSerializable()
 
 class _ProfileEntity implements ProfileEntity {
-  const _ProfileEntity({this.id = 0, this.name = "", this.email = "", this.phone = "", this.dob = "", final  List? addresses = const []}): _addresses = addresses;
+  const _ProfileEntity({this.id = 0, this.name = "", this.email = "", this.phone = "", this.dob = "", this.avatar = "", final  List? addresses = const []}): _addresses = addresses;
   factory _ProfileEntity.fromJson(Map<String, dynamic> json) => _$ProfileEntityFromJson(json);
 
 @override@JsonKey() final  int? id;
@@ -222,6 +223,7 @@ class _ProfileEntity implements ProfileEntity {
 @override@JsonKey() final  String? email;
 @override@JsonKey() final  String? phone;
 @override@JsonKey() final  String? dob;
+@override@JsonKey() final  String? avatar;
  final  List? _addresses;
 @override@JsonKey() List? get addresses {
   final value = _addresses;
@@ -245,16 +247,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProfileEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.email, email) || other.email == email)&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.dob, dob) || other.dob == dob)&&const DeepCollectionEquality().equals(other._addresses, _addresses));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProfileEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.name, name) || other.name == name)&&(identical(other.email, email) || other.email == email)&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.dob, dob) || other.dob == dob)&&(identical(other.avatar, avatar) || other.avatar == avatar)&&const DeepCollectionEquality().equals(other._addresses, _addresses));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,name,email,phone,dob,const DeepCollectionEquality().hash(_addresses));
+int get hashCode => Object.hash(runtimeType,id,name,email,phone,dob,avatar,const DeepCollectionEquality().hash(_addresses));
 
 @override
 String toString() {
-  return 'ProfileEntity(id: $id, name: $name, email: $email, phone: $phone, dob: $dob, addresses: $addresses)';
+  return 'ProfileEntity(id: $id, name: $name, email: $email, phone: $phone, dob: $dob, avatar: $avatar, addresses: $addresses)';
 }
 
 
@@ -265,7 +267,7 @@ abstract mixin class _$ProfileEntityCopyWith<$Res> implements $ProfileEntityCopy
   factory _$ProfileEntityCopyWith(_ProfileEntity value, $Res Function(_ProfileEntity) _then) = __$ProfileEntityCopyWithImpl;
 @override @useResult
 $Res call({
- int? id, String? name, String? email, String? phone, String? dob, List? addresses
+ int? id, String? name, String? email, String? phone, String? dob, String? avatar, List? addresses
 });
 
 
@@ -282,13 +284,14 @@ class __$ProfileEntityCopyWithImpl<$Res>
 
 /// Create a copy of ProfileEntity
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? name = freezed,Object? email = freezed,Object? phone = freezed,Object? dob = freezed,Object? addresses = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? name = freezed,Object? email = freezed,Object? phone = freezed,Object? dob = freezed,Object? avatar = freezed,Object? addresses = freezed,}) {
   return _then(_ProfileEntity(
 id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int?,name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String?,email: freezed == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as String?,phone: freezed == phone ? _self.phone : phone // ignore: cast_nullable_to_non_nullable
 as String?,dob: freezed == dob ? _self.dob : dob // ignore: cast_nullable_to_non_nullable
+as String?,avatar: freezed == avatar ? _self.avatar : avatar // ignore: cast_nullable_to_non_nullable
 as String?,addresses: freezed == addresses ? _self._addresses : addresses // ignore: cast_nullable_to_non_nullable
 as List?,
   ));

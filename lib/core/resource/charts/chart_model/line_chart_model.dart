@@ -6,8 +6,9 @@ part "line_chart_model.freezed.dart";
 
 @freezed
 abstract class LineChartModel with _$LineChartModel {
-  const factory LineChartModel(
-      {@Default('') String? name,
-     @Default(Colors.blueAccent) Color? color,
-      @Default([FlSpot(0, 0)]) List<FlSpot> spots}) = _LineChartModel;
+  const factory LineChartModel({
+    @Default('') String? name,
+    @Default(Colors.yellow) Color? color,
+    @Default([FlSpot(0, 0)]) List<FlSpot> spots,
+  }) = _LineChartModel;
 }

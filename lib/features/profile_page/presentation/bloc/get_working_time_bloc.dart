@@ -83,5 +83,47 @@ class GetWorkingTimeBloc
             }
           });
     });
+    on<GetWorkingTimeEventSetWorkingTime>((event, emit) async {
+      emit(GetWorkingTimeState.loading());
+      await _refreshTokenUsecase
+          .call(
+            params: RefreshTokenModel(
+              refresh_token: getItInstance<AppPreferences>()
+                  .getUserInfo()
+                  ?.refresh_token,
+            ),
+          )
+          .then((onValue) async {
+            if (onValue is DataSuccess) {
+              await _setWorkingTimeUseCase
+                  .call(
+                    params: event.setWorkingHoursModel?.copyWith(
+                      authToken: onValue?.data?.access_token,
+                    ),
+                  )
+                  .then((setWorkingTimeOnValue) {
+                    print(
+                      "im set working hours bloc :${setWorkingTimeOnValue}",
+                    );
+                    if (setWorkingTimeOnValue is DataSuccess) {
+                      emit(GetWorkingTimeState.setSuccessfully());
+                    } else if (setWorkingTimeOnValue
+                        is UnauthenticatedDataState) {
+                      emit(GetWorkingTimeState.unauthorized());
+                    } else if (setWorkingTimeOnValue is NOInternetDataState) {
+                      emit(GetWorkingTimeState.noInternet());
+                    } else {
+                      emit(GetWorkingTimeState.setError());
+                    }
+                  });
+            } else if (onValue is UnauthenticatedDataState) {
+              emit(GetWorkingTimeState.unauthorized());
+            } else if (onValue is NOInternetDataState) {
+              emit(GetWorkingTimeState.noInternet());
+            } else {
+              emit(GetWorkingTimeState.setError());
+            }
+          });
+    });
   }
 }

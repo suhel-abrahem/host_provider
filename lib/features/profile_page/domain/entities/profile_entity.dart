@@ -10,6 +10,7 @@ abstract class ProfileEntity with _$ProfileEntity {
     @Default("") String? email,
     @Default("") String? phone,
     @Default("") String? dob,
+    @Default("") String? avatar,
     @Default([]) List? addresses,
   }) = _ProfileEntity;
   factory ProfileEntity.fromJson(Map<String, dynamic> json) =>

@@ -8,4 +8,7 @@ class GetProfileEvent with _$GetProfileEvent {
   }) = GetProfileEventGetProfile;
   const factory GetProfileEvent.logout({required ProfileModel? profileModel}) =
       GetProfileEventLogout;
+  const factory GetProfileEvent.updateProfile({
+    required ProfileModel? profileModel,
+  }) = GetProfileEventUpdateProfile;
 }

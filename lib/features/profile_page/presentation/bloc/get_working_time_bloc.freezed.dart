@@ -499,7 +499,7 @@ extension GetWorkingTimeStatePatterns on GetWorkingTimeState {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( GetWorkingTimeStateInitial value)?  initial,TResult Function( GetWorkingTimeStateLoading value)?  loading,TResult Function( GetWorkingTimeStateLoaded value)?  loaded,TResult Function( GetWorkingTimeStateError value)?  error,TResult Function( GetWorkingTimeStateUnauthorized value)?  unauthorized,TResult Function( GetWorkingTimeStateNoInternet value)?  noInternet,TResult Function( GetWorkingTimeStateUpdated value)?  updated,TResult Function( GetWorkingTimeStateNoData value)?  noData,TResult Function( GetWorkingTimeStateSetSuccessfully value)?  setSuccessfully,TResult Function( GetWorkingTimeStateitemsAlreadySet value)?  itemsAlreadySet,TResult Function( GetWorkingTimeStateItemsNotFound value)?  itemNotFound,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( GetWorkingTimeStateInitial value)?  initial,TResult Function( GetWorkingTimeStateLoading value)?  loading,TResult Function( GetWorkingTimeStateLoaded value)?  loaded,TResult Function( GetWorkingTimeStateError value)?  error,TResult Function( GetWorkingTimeStateUnauthorized value)?  unauthorized,TResult Function( GetWorkingTimeStateNoInternet value)?  noInternet,TResult Function( GetWorkingTimeStateUpdated value)?  updated,TResult Function( GetWorkingTimeStateNoData value)?  noData,TResult Function( GetWorkingTimeStateSetSuccessfully value)?  setSuccessfully,TResult Function( GetWorkingTimeStateSetError value)?  setError,TResult Function( GetWorkingTimeStateItemsNotFound value)?  itemNotFound,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case GetWorkingTimeStateInitial() when initial != null:
@@ -511,8 +511,8 @@ return unauthorized(_that);case GetWorkingTimeStateNoInternet() when noInternet 
 return noInternet(_that);case GetWorkingTimeStateUpdated() when updated != null:
 return updated(_that);case GetWorkingTimeStateNoData() when noData != null:
 return noData(_that);case GetWorkingTimeStateSetSuccessfully() when setSuccessfully != null:
-return setSuccessfully(_that);case GetWorkingTimeStateitemsAlreadySet() when itemsAlreadySet != null:
-return itemsAlreadySet(_that);case GetWorkingTimeStateItemsNotFound() when itemNotFound != null:
+return setSuccessfully(_that);case GetWorkingTimeStateSetError() when setError != null:
+return setError(_that);case GetWorkingTimeStateItemsNotFound() when itemNotFound != null:
 return itemNotFound(_that);case _:
   return orElse();
 
@@ -531,7 +531,7 @@ return itemNotFound(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( GetWorkingTimeStateInitial value)  initial,required TResult Function( GetWorkingTimeStateLoading value)  loading,required TResult Function( GetWorkingTimeStateLoaded value)  loaded,required TResult Function( GetWorkingTimeStateError value)  error,required TResult Function( GetWorkingTimeStateUnauthorized value)  unauthorized,required TResult Function( GetWorkingTimeStateNoInternet value)  noInternet,required TResult Function( GetWorkingTimeStateUpdated value)  updated,required TResult Function( GetWorkingTimeStateNoData value)  noData,required TResult Function( GetWorkingTimeStateSetSuccessfully value)  setSuccessfully,required TResult Function( GetWorkingTimeStateitemsAlreadySet value)  itemsAlreadySet,required TResult Function( GetWorkingTimeStateItemsNotFound value)  itemNotFound,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( GetWorkingTimeStateInitial value)  initial,required TResult Function( GetWorkingTimeStateLoading value)  loading,required TResult Function( GetWorkingTimeStateLoaded value)  loaded,required TResult Function( GetWorkingTimeStateError value)  error,required TResult Function( GetWorkingTimeStateUnauthorized value)  unauthorized,required TResult Function( GetWorkingTimeStateNoInternet value)  noInternet,required TResult Function( GetWorkingTimeStateUpdated value)  updated,required TResult Function( GetWorkingTimeStateNoData value)  noData,required TResult Function( GetWorkingTimeStateSetSuccessfully value)  setSuccessfully,required TResult Function( GetWorkingTimeStateSetError value)  setError,required TResult Function( GetWorkingTimeStateItemsNotFound value)  itemNotFound,}){
 final _that = this;
 switch (_that) {
 case GetWorkingTimeStateInitial():
@@ -543,8 +543,8 @@ return unauthorized(_that);case GetWorkingTimeStateNoInternet():
 return noInternet(_that);case GetWorkingTimeStateUpdated():
 return updated(_that);case GetWorkingTimeStateNoData():
 return noData(_that);case GetWorkingTimeStateSetSuccessfully():
-return setSuccessfully(_that);case GetWorkingTimeStateitemsAlreadySet():
-return itemsAlreadySet(_that);case GetWorkingTimeStateItemsNotFound():
+return setSuccessfully(_that);case GetWorkingTimeStateSetError():
+return setError(_that);case GetWorkingTimeStateItemsNotFound():
 return itemNotFound(_that);case _:
   throw StateError('Unexpected subclass');
 
@@ -562,7 +562,7 @@ return itemNotFound(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( GetWorkingTimeStateInitial value)?  initial,TResult? Function( GetWorkingTimeStateLoading value)?  loading,TResult? Function( GetWorkingTimeStateLoaded value)?  loaded,TResult? Function( GetWorkingTimeStateError value)?  error,TResult? Function( GetWorkingTimeStateUnauthorized value)?  unauthorized,TResult? Function( GetWorkingTimeStateNoInternet value)?  noInternet,TResult? Function( GetWorkingTimeStateUpdated value)?  updated,TResult? Function( GetWorkingTimeStateNoData value)?  noData,TResult? Function( GetWorkingTimeStateSetSuccessfully value)?  setSuccessfully,TResult? Function( GetWorkingTimeStateitemsAlreadySet value)?  itemsAlreadySet,TResult? Function( GetWorkingTimeStateItemsNotFound value)?  itemNotFound,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( GetWorkingTimeStateInitial value)?  initial,TResult? Function( GetWorkingTimeStateLoading value)?  loading,TResult? Function( GetWorkingTimeStateLoaded value)?  loaded,TResult? Function( GetWorkingTimeStateError value)?  error,TResult? Function( GetWorkingTimeStateUnauthorized value)?  unauthorized,TResult? Function( GetWorkingTimeStateNoInternet value)?  noInternet,TResult? Function( GetWorkingTimeStateUpdated value)?  updated,TResult? Function( GetWorkingTimeStateNoData value)?  noData,TResult? Function( GetWorkingTimeStateSetSuccessfully value)?  setSuccessfully,TResult? Function( GetWorkingTimeStateSetError value)?  setError,TResult? Function( GetWorkingTimeStateItemsNotFound value)?  itemNotFound,}){
 final _that = this;
 switch (_that) {
 case GetWorkingTimeStateInitial() when initial != null:
@@ -574,8 +574,8 @@ return unauthorized(_that);case GetWorkingTimeStateNoInternet() when noInternet 
 return noInternet(_that);case GetWorkingTimeStateUpdated() when updated != null:
 return updated(_that);case GetWorkingTimeStateNoData() when noData != null:
 return noData(_that);case GetWorkingTimeStateSetSuccessfully() when setSuccessfully != null:
-return setSuccessfully(_that);case GetWorkingTimeStateitemsAlreadySet() when itemsAlreadySet != null:
-return itemsAlreadySet(_that);case GetWorkingTimeStateItemsNotFound() when itemNotFound != null:
+return setSuccessfully(_that);case GetWorkingTimeStateSetError() when setError != null:
+return setError(_that);case GetWorkingTimeStateItemsNotFound() when itemNotFound != null:
 return itemNotFound(_that);case _:
   return null;
 
@@ -593,7 +593,7 @@ return itemNotFound(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( List<WorkingHoursEntity?>? workingHours)?  loaded,TResult Function()?  error,TResult Function()?  unauthorized,TResult Function()?  noInternet,TResult Function()?  updated,TResult Function()?  noData,TResult Function()?  setSuccessfully,TResult Function()?  itemsAlreadySet,TResult Function()?  itemNotFound,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( List<WorkingHoursEntity?>? workingHours)?  loaded,TResult Function()?  error,TResult Function()?  unauthorized,TResult Function()?  noInternet,TResult Function()?  updated,TResult Function()?  noData,TResult Function()?  setSuccessfully,TResult Function()?  setError,TResult Function()?  itemNotFound,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case GetWorkingTimeStateInitial() when initial != null:
 return initial();case GetWorkingTimeStateLoading() when loading != null:
@@ -604,8 +604,8 @@ return unauthorized();case GetWorkingTimeStateNoInternet() when noInternet != nu
 return noInternet();case GetWorkingTimeStateUpdated() when updated != null:
 return updated();case GetWorkingTimeStateNoData() when noData != null:
 return noData();case GetWorkingTimeStateSetSuccessfully() when setSuccessfully != null:
-return setSuccessfully();case GetWorkingTimeStateitemsAlreadySet() when itemsAlreadySet != null:
-return itemsAlreadySet();case GetWorkingTimeStateItemsNotFound() when itemNotFound != null:
+return setSuccessfully();case GetWorkingTimeStateSetError() when setError != null:
+return setError();case GetWorkingTimeStateItemsNotFound() when itemNotFound != null:
 return itemNotFound();case _:
   return orElse();
 
@@ -624,7 +624,7 @@ return itemNotFound();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( List<WorkingHoursEntity?>? workingHours)  loaded,required TResult Function()  error,required TResult Function()  unauthorized,required TResult Function()  noInternet,required TResult Function()  updated,required TResult Function()  noData,required TResult Function()  setSuccessfully,required TResult Function()  itemsAlreadySet,required TResult Function()  itemNotFound,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( List<WorkingHoursEntity?>? workingHours)  loaded,required TResult Function()  error,required TResult Function()  unauthorized,required TResult Function()  noInternet,required TResult Function()  updated,required TResult Function()  noData,required TResult Function()  setSuccessfully,required TResult Function()  setError,required TResult Function()  itemNotFound,}) {final _that = this;
 switch (_that) {
 case GetWorkingTimeStateInitial():
 return initial();case GetWorkingTimeStateLoading():
@@ -635,8 +635,8 @@ return unauthorized();case GetWorkingTimeStateNoInternet():
 return noInternet();case GetWorkingTimeStateUpdated():
 return updated();case GetWorkingTimeStateNoData():
 return noData();case GetWorkingTimeStateSetSuccessfully():
-return setSuccessfully();case GetWorkingTimeStateitemsAlreadySet():
-return itemsAlreadySet();case GetWorkingTimeStateItemsNotFound():
+return setSuccessfully();case GetWorkingTimeStateSetError():
+return setError();case GetWorkingTimeStateItemsNotFound():
 return itemNotFound();case _:
   throw StateError('Unexpected subclass');
 
@@ -654,7 +654,7 @@ return itemNotFound();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( List<WorkingHoursEntity?>? workingHours)?  loaded,TResult? Function()?  error,TResult? Function()?  unauthorized,TResult? Function()?  noInternet,TResult? Function()?  updated,TResult? Function()?  noData,TResult? Function()?  setSuccessfully,TResult? Function()?  itemsAlreadySet,TResult? Function()?  itemNotFound,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( List<WorkingHoursEntity?>? workingHours)?  loaded,TResult? Function()?  error,TResult? Function()?  unauthorized,TResult? Function()?  noInternet,TResult? Function()?  updated,TResult? Function()?  noData,TResult? Function()?  setSuccessfully,TResult? Function()?  setError,TResult? Function()?  itemNotFound,}) {final _that = this;
 switch (_that) {
 case GetWorkingTimeStateInitial() when initial != null:
 return initial();case GetWorkingTimeStateLoading() when loading != null:
@@ -665,8 +665,8 @@ return unauthorized();case GetWorkingTimeStateNoInternet() when noInternet != nu
 return noInternet();case GetWorkingTimeStateUpdated() when updated != null:
 return updated();case GetWorkingTimeStateNoData() when noData != null:
 return noData();case GetWorkingTimeStateSetSuccessfully() when setSuccessfully != null:
-return setSuccessfully();case GetWorkingTimeStateitemsAlreadySet() when itemsAlreadySet != null:
-return itemsAlreadySet();case GetWorkingTimeStateItemsNotFound() when itemNotFound != null:
+return setSuccessfully();case GetWorkingTimeStateSetError() when setError != null:
+return setError();case GetWorkingTimeStateItemsNotFound() when itemNotFound != null:
 return itemNotFound();case _:
   return null;
 
@@ -1008,8 +1008,8 @@ String toString() {
 /// @nodoc
 
 
-class GetWorkingTimeStateitemsAlreadySet implements GetWorkingTimeState {
-  const GetWorkingTimeStateitemsAlreadySet();
+class GetWorkingTimeStateSetError implements GetWorkingTimeState {
+  const GetWorkingTimeStateSetError();
   
 
 
@@ -1019,7 +1019,7 @@ class GetWorkingTimeStateitemsAlreadySet implements GetWorkingTimeState {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is GetWorkingTimeStateitemsAlreadySet);
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is GetWorkingTimeStateSetError);
 }
 
 
@@ -1028,7 +1028,7 @@ int get hashCode => runtimeType.hashCode;
 
 @override
 String toString() {
-  return 'GetWorkingTimeState.itemsAlreadySet()';
+  return 'GetWorkingTimeState.setError()';
 }
 
 

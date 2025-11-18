@@ -16,8 +16,7 @@ class GetWorkingTimeState with _$GetWorkingTimeState {
   const factory GetWorkingTimeState.noData() = GetWorkingTimeStateNoData;
   const factory GetWorkingTimeState.setSuccessfully() =
       GetWorkingTimeStateSetSuccessfully;
-  const factory GetWorkingTimeState.itemsAlreadySet() =
-      GetWorkingTimeStateitemsAlreadySet;
+  const factory GetWorkingTimeState.setError() = GetWorkingTimeStateSetError;
   const factory GetWorkingTimeState.itemNotFound() =
       GetWorkingTimeStateItemsNotFound;
 }

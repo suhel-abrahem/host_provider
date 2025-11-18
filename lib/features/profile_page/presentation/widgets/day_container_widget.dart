@@ -7,6 +7,7 @@ import 'package:hosta_provider/core/constants/font_constants.dart';
 import 'package:hosta_provider/core/resource/custom_widget/custom_input_field/custom_input_field.dart';
 import 'package:hosta_provider/core/util/helper/helper.dart';
 import 'package:hosta_provider/features/profile_page/data/models/set_working_hours_model.dart';
+import 'package:hosta_provider/features/profile_page/data/models/working_time_model.dart';
 import 'package:hosta_provider/features/profile_page/domain/entities/working_hours_entity.dart';
 
 import '../../../../generated/locale_keys.g.dart';
@@ -14,21 +15,27 @@ import '../../../../generated/locale_keys.g.dart';
 class DayContainerWidget extends StatefulWidget {
   final WorkingHoursEntity? workingHoursEntity;
   final bool? canEdit;
+  final ValueChanged<WorkingTimeModel?>? onChanged;
 
-  const DayContainerWidget({super.key, this.workingHoursEntity, this.canEdit});
+  const DayContainerWidget({
+    super.key,
+    this.workingHoursEntity,
+    this.canEdit,
+    this.onChanged,
+  });
 
   @override
   State<DayContainerWidget> createState() => _DayContainerWidgetState();
 }
 
 class _DayContainerWidgetState extends State<DayContainerWidget> {
-  late SetWorkingHoursModel setWorkingHoursModel;
+  late WorkingTimeModel workingHoursModel;
 
   @override
   void initState() {
     super.initState();
     final entity = widget.workingHoursEntity;
-    setWorkingHoursModel = SetWorkingHoursModel(
+    workingHoursModel = WorkingTimeModel(
       day_of_week: entity?.day_of_week,
       is_available: entity?.is_available,
       start_time: entity?.start_time,
@@ -70,11 +77,14 @@ class _DayContainerWidgetState extends State<DayContainerWidget> {
                     Padding(
                       padding: EdgeInsetsDirectional.only(start: 8.w),
                       child: Switch(
-                        value: !(setWorkingHoursModel.is_available ?? false),
+                        value: !(workingHoursModel.is_available ?? false),
                         onChanged: (value) => setState(() {
-                          setWorkingHoursModel = setWorkingHoursModel.copyWith(
+                          workingHoursModel = workingHoursModel.copyWith(
                             is_available: !value,
                           );
+                          if (widget.onChanged != null) {
+                            widget.onChanged!(workingHoursModel);
+                          }
                         }),
                       ),
                     ),
@@ -82,16 +92,21 @@ class _DayContainerWidgetState extends State<DayContainerWidget> {
                 ),
               AnimatedSwitcher(
                 duration: const Duration(milliseconds: 400),
-                child: (setWorkingHoursModel.is_available ?? false)
+                child: (workingHoursModel.is_available ?? false)
                     ? Row(
                         key: ValueKey(
-                          'available_${setWorkingHoursModel.day_of_week}',
+                          'available_${workingHoursModel.day_of_week}',
                         ),
                         children: [
                           _buildTimeField(
                             context,
-                            setWorkingHoursModel.start_time,
+                            workingHoursModel.start_time,
                             locale,
+                            (value) {
+                              if (widget.onChanged != null) {
+                                widget.onChanged!(workingHoursModel);
+                              }
+                            },
                           ),
                           Text(
                             ' - ',
@@ -101,14 +116,19 @@ class _DayContainerWidgetState extends State<DayContainerWidget> {
                           ),
                           _buildTimeField(
                             context,
-                            setWorkingHoursModel.end_time,
+                            workingHoursModel.end_time,
                             locale,
+                            (value) {
+                              if (widget.onChanged != null) {
+                                widget.onChanged!(workingHoursModel);
+                              }
+                            },
                           ),
                         ],
                       )
                     : Center(
                         key: ValueKey(
-                          'dayoff_${setWorkingHoursModel.day_of_week}',
+                          'dayoff_${workingHoursModel.day_of_week}',
                         ),
                         child: Text(
                           LocaleKeys.profilePage_dayOff.tr(),
@@ -133,7 +153,12 @@ class _DayContainerWidgetState extends State<DayContainerWidget> {
     );
   }
 
-  Widget _buildTimeField(BuildContext context, String? time, Locale locale) {
+  Widget _buildTimeField(
+    BuildContext context,
+    String? time,
+    Locale locale,
+    Function(dynamic)? onChanged,
+  ) {
     final theme = Theme.of(context);
     String formattedTime = '';
 
@@ -141,7 +166,7 @@ class _DayContainerWidgetState extends State<DayContainerWidget> {
       try {
         formattedTime = DateFormat(
           'HH:mm',
-        ).format(DateFormat('HH:mm:ss').parse(time!));
+        ).format(DateFormat('HH:mm').parse(time!));
       } catch (_) {}
     }
 
@@ -153,6 +178,7 @@ class _DayContainerWidgetState extends State<DayContainerWidget> {
       ),
       contentPadding: EdgeInsets.symmetric(horizontal: 4.w),
       initialValue: formattedTime,
+      onChanged: onChanged,
     );
   }
 }

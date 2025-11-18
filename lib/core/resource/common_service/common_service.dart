@@ -49,7 +49,7 @@ class CommonService {
   /// POST request
   Future<DataState<Response?>> post(
     String endpoint, {
-    Map<String, dynamic>? data,
+    Object? data,
     Options? options,
   }) async {
     final url = ApiConstant.baseUrl + endpoint;

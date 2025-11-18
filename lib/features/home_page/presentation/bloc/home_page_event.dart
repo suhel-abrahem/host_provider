@@ -1,8 +1,9 @@
-// part of 'home_page_bloc.dart';
+part of 'home_page_bloc.dart';
 
-// abstract class HomePageEvent extends Equatable {
-//   const HomePageEvent();
-
-//   @override
-//   List<Object> get props => [];
-// }
+@freezed
+class HomePageEvent with _$HomePageEvent {
+  const factory HomePageEvent.started() = HomePageEventStarted;
+  const factory HomePageEvent.fetchHomePageData({
+    required HomePageModel? model,
+  }) = HomePageEventFetchHomePageData;
+}

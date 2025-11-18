@@ -25,8 +25,13 @@ class UserInfoContainerWidget extends StatelessWidget {
         children: [
           CircleAvatar(
             radius: 30.r,
-            backgroundImage: NetworkImage(
-              "https://www.pngall.com/wp-content/uploads/5/Profile-PNG-High-Quality-Image.png",
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(30.r),
+              child: Image.network(
+                profileEntity?.avatar ??
+                    "https://www.pngall.com/wp-content/uploads/5/Profile-PNG-High-Quality-Image.png",
+                fit: BoxFit.cover,
+              ),
             ),
           ),
           SizedBox(

@@ -14,6 +14,7 @@ import '../../../../core/dependencies_injection.dart';
 import '../../../refresh_token/data/models/refresh_token_model.dart';
 import '../../data/models/profile_model.dart';
 import '../../domain/entities/profile_entity.dart';
+import '../../domain/usecases/update_profile_usecase.dart';
 
 part 'get_profile_event.dart';
 part 'get_profile_state.dart';
@@ -21,12 +22,14 @@ part 'get_profile_bloc.freezed.dart';
 
 class GetProfileBloc extends Bloc<GetProfileEvent, GetProfileState> {
   final GetProfileUseCase _profileUsecase;
+  final UpdateProfileUsecase _updateProfileUsecase;
   final LogoutUseCase _logoutUsecase;
   final RefreshTokenUsecase _refreshTokenUsecase;
   GetProfileBloc(
     this._profileUsecase,
     this._refreshTokenUsecase,
     this._logoutUsecase,
+    this._updateProfileUsecase,
   ) : super(GetProfileState.initial()) {
     on<GetProfileEventStarted>((event, emit) {
       emit(GetProfileState.initial());
@@ -130,6 +133,50 @@ class GetProfileBloc extends Bloc<GetProfileEvent, GetProfileState> {
               emit(GetProfileState.logoutError());
             } else {
               emit(GetProfileState.logoutError());
+            }
+          });
+    });
+    on<GetProfileEventUpdateProfile>((event, emit) async {
+      final LoginStateEntity? userInfo = getItInstance<AppPreferences>()
+          .getUserInfo();
+      emit(GetProfileState.loading());
+      await _refreshTokenUsecase
+          .call(
+            params: RefreshTokenModel(
+              token: userInfo?.access_token,
+              refresh_token: userInfo?.refresh_token,
+            ),
+          )
+          .then((onValue) async {
+            if (onValue is DataSuccess) {
+              await _updateProfileUsecase
+                  .call(
+                    params: event.profileModel?.copyWith(
+                      authToken: onValue?.data?.access_token,
+                    ),
+                  )
+                  .then((updateProfileOnValue) {
+                    if (updateProfileOnValue is DataSuccess) {
+                      emit(
+                        GetProfileState.updated(
+                          profileEntity: updateProfileOnValue?.data,
+                        ),
+                      );
+                    } else if (updateProfileOnValue
+                        is UnauthenticatedDataState) {
+                      emit(GetProfileState.unauthorized());
+                    } else if (updateProfileOnValue is NOInternetDataState) {
+                      emit(GetProfileState.noInternet());
+                    } else {
+                      emit(GetProfileState.updateError());
+                    }
+                  });
+            } else if (onValue is UnauthenticatedDataState) {
+              emit(GetProfileState.unauthorized());
+            } else if (onValue is NOInternetDataState) {
+              emit(GetProfileState.noInternet());
+            } else {
+              emit(GetProfileState.updateError());
             }
           });
     });

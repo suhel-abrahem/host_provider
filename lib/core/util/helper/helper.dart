@@ -121,4 +121,45 @@ class Helper {
         return null;
     }
   }
+
+  static String formatPrice(int? price) {
+    if (price == null) return "0";
+    return price
+        .toStringAsFixed(0)
+        .replaceAllMapped(
+          RegExp(r'(\d{1,3})(?=(\d{3})+(?!\d))'),
+          (Match m) => '${m[1]},',
+        );
+  }
+
+  static double? monthNumberFromName(String? monthName) {
+    switch (monthName?.toLowerCase()) {
+      case "january":
+        return 0;
+      case "february":
+        return 1;
+      case "march":
+        return 2;
+      case "april":
+        return 3;
+      case "may":
+        return 4;
+      case "june":
+        return 5;
+      case "july":
+        return 6;
+      case "august":
+        return 7;
+      case "september":
+        return 8;
+      case "october":
+        return 9;
+      case "november":
+        return 10;
+      case "december":
+        return 11;
+      default:
+        return null;
+    }
+  }
 }

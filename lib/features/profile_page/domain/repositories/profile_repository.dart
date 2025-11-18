@@ -1,6 +1,8 @@
 import 'package:hosta_provider/core/data_state/data_state.dart';
+import 'package:hosta_provider/features/profile_page/data/models/language_model.dart';
 import 'package:hosta_provider/features/profile_page/data/models/profile_model.dart';
 import 'package:hosta_provider/features/profile_page/data/models/set_time_off_model.dart';
+import 'package:hosta_provider/features/profile_page/domain/entities/language_entity.dart';
 import 'package:hosta_provider/features/profile_page/domain/entities/time_of_entity.dart';
 import 'package:hosta_provider/features/profile_page/domain/entities/working_hours_entity.dart';
 
@@ -13,10 +15,10 @@ abstract class ProfileRepository {
   Future<DataState<List<WorkingHoursEntity?>?>?> getWorkingHours(
     ProfileModel? profileModel,
   );
-  Future<DataState<WorkingHoursEntity?>?> setWorkingHours(
+  Future<DataState<List<WorkingHoursEntity?>?>?> setWorkingHours(
     SetWorkingHoursModel? profileModel,
   );
-  Future<DataState<WorkingHoursEntity?>?> updateWorkingHours(
+  Future<DataState<List<WorkingHoursEntity?>?>?> updateWorkingHours(
     SetWorkingHoursModel? profileModel,
   );
   Future<DataState<List<TimeOfEntity?>?>?> getTimeOff(
@@ -24,4 +26,10 @@ abstract class ProfileRepository {
   );
   Future<DataState<TimeOfEntity>?> setTimeOff(SetTimeOffModel? timeOfModel);
   Future<DataState<void>?> logout(ProfileModel? profileModel);
+  Future<DataState<List<LanguageEntity?>?>?> getLanguages(
+    LanguageModel? languageModel,
+  );
+  Future<DataState<List<LanguageEntity?>?>?> updateLanguage(
+    LanguageModel? languageModel,
+  );
 }

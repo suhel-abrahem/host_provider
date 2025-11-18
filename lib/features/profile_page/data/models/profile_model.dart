@@ -1,4 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:hosta_provider/features/profile_page/data/models/set_profile_model.dart';
 part 'profile_model.freezed.dart';
 part 'profile_model.g.dart';
 
@@ -8,6 +9,7 @@ abstract class ProfileModel with _$ProfileModel {
     @Default("") String? acceptLanguage,
     @Default("") String? authToken,
     @Default("") String? id,
+    @Default(SetProfileModel()) SetProfileModel? profile,
   }) = _ProfileModel;
   factory ProfileModel.fromJson(Map<String, dynamic> json) =>
       _$ProfileModelFromJson(json);

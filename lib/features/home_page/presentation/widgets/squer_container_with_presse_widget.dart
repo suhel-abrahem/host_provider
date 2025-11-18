@@ -5,18 +5,21 @@ import 'package:glass/glass.dart';
 import 'package:hosta_provider/config/theme/app_theme.dart';
 import 'package:hosta_provider/core/constants/font_constants.dart';
 import 'package:hosta_provider/core/constants/language_constant.dart';
+import 'package:hosta_provider/features/home_page/presentation/bloc/home_page_bloc.dart';
 
 class SquerContainerWithPresseWidget extends StatelessWidget {
   final Color? backgroundColor;
   final String? title;
   final String? info;
   final VoidCallback? onPressed;
+  final HomePageState? state;
   const SquerContainerWithPresseWidget({
     super.key,
     this.backgroundColor,
     this.title,
     this.info,
     this.onPressed,
+    this.state,
   });
 
   @override
@@ -37,63 +40,67 @@ class SquerContainerWithPresseWidget extends StatelessWidget {
         child:
             Container(
               padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    width: 100.w,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      crossAxisAlignment: CrossAxisAlignment.start,
+              child: (state is HomePageStateLoading)
+                  ? Center(child: CircularProgressIndicator())
+                  : Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         SizedBox(
-                          height: 50.h,
-                          child: Text(
-                            title ?? '',
-                            style: Theme.of(context).textTheme.labelMedium
-                                ?.copyWith(
-                                  fontSize: 14.sp,
-                                  fontWeight: FontWeight.w600,
-                                  fontFamily: FontConstants.fontFamily(
-                                    context.locale,
-                                  ),
+                          width: 100.w,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              SizedBox(
+                                height: 50.h,
+                                child: Text(
+                                  title ?? '',
+                                  style: Theme.of(context).textTheme.labelMedium
+                                      ?.copyWith(
+                                        fontSize: 14.sp,
+                                        fontWeight: FontWeight.w600,
+                                        fontFamily: FontConstants.fontFamily(
+                                          context.locale,
+                                        ),
+                                      ),
+                                  overflow: TextOverflow.fade,
                                 ),
-                            overflow: TextOverflow.fade,
+                              ),
+                              SizedBox(height: 4.h),
+                              FittedBox(
+                                fit: BoxFit.scaleDown,
+                                child: Text(
+                                  info ?? '',
+                                  style: Theme.of(context).textTheme.labelLarge
+                                      ?.copyWith(
+                                        fontFamily: FontConstants.fontFamily(
+                                          context.locale,
+                                        ),
+                                      ),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                        SizedBox(height: 4.h),
-                        FittedBox(
-                          fit: BoxFit.scaleDown,
-                          child: Text(
-                            info ?? '',
-                            style: Theme.of(context).textTheme.labelLarge
-                                ?.copyWith(
-                                  fontFamily: FontConstants.fontFamily(
-                                    context.locale,
-                                  ),
-                                ),
+                        if (onPressed != null)
+                          SizedBox(
+                            width: 15.w,
+                            child: FittedBox(
+                              fit: BoxFit.fitWidth,
+                              child: Icon(
+                                context.locale == LanguageConstant.enLoacle
+                                    ? Icons.arrow_forward_ios
+                                    : Icons.arrow_back_ios,
+
+                                color: Theme.of(
+                                  context,
+                                ).textTheme.labelLarge?.color,
+                              ),
+                            ),
                           ),
-                        ),
                       ],
                     ),
-                  ),
-                  if (onPressed != null)
-                    SizedBox(
-                      width: 15.w,
-                      child: FittedBox(
-                        fit: BoxFit.fitWidth,
-                        child: Icon(
-                          context.locale == LanguageConstant.enLoacle
-                              ? Icons.arrow_forward_ios
-                              : Icons.arrow_back_ios,
-
-                          color: Theme.of(context).textTheme.labelLarge?.color,
-                        ),
-                      ),
-                    ),
-                ],
-              ),
             ).asGlass(
               frosted: true,
               blurX: 38,

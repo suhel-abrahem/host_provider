@@ -119,7 +119,9 @@ class CodegenLoader extends AssetLoader{
     "pendingBookings": "الحجوزات المعلقة",
     "completedBookings": "الحجوزات المكتملة",
     "annualTotal": "الإجمالي السنوي",
-    "annualStatistics": "الإحصائيات السنوية"
+    "annualStatistics": "الإحصائيات السنوية",
+    "revenue": "الإيرادات",
+    "bookings": "الحجوزات"
   },
   "bookingPage": {
     "title": "صفحة الحجوزات",
@@ -196,7 +198,9 @@ class CodegenLoader extends AssetLoader{
     "languageChangedSuccessfully": "تم تغيير اللغة بنجاح",
     "themeChangedSuccessfully": "تم تغيير السمة بنجاح",
     "languagesIspeak": "اللغات التي أتحدثها",
-    "message": "الرسالة"
+    "message": "الرسالة",
+    "profileImage": "صورة الملف الشخصي",
+    "dob": "تاريخ الميلاد"
   },
   "myServicesPage": {
     "title": "صفحة خدماتي",
@@ -364,7 +368,9 @@ static const Map<String,dynamic> _en = {
     "pendingBookings": "Pending bookings",
     "completedBookings": "Completed bookings",
     "annualTotal": "Annual total",
-    "annualStatistics": "Annual statistics"
+    "annualStatistics": "Annual statistics",
+    "revenue": "Revenue",
+    "bookings": "Bookings"
   },
   "bookingPage": {
     "title": "Bookings page",
@@ -441,7 +447,9 @@ static const Map<String,dynamic> _en = {
     "languageChangedSuccessfully": "Language changed successfully",
     "themeChangedSuccessfully": "Theme changed successfully",
     "languagesIspeak": "Languages I speak",
-    "message": "Message"
+    "message": "Message",
+    "profileImage": "Profile image",
+    "dob": "Date of Birth"
   },
   "myServicesPage": {
     "title": "My services page",
@@ -609,7 +617,9 @@ static const Map<String,dynamic> _fa = {
     "pendingBookings": "بۆکینگەکانی چاوەڕوان",
     "completedBookings": "بۆکینگەکانی تەواوکراو",
     "annualTotal": "کۆی ساڵانە",
-    "annualStatistics": "ئامارەکانی ساڵانە"
+    "annualStatistics": "ئامارەکانی ساڵانە",
+    "revenue": "داهات",
+    "bookings": "بۆکینگەکان"
   },
   "bookingPage": {
     "title": "پەیجی ئاراستەکردن",
@@ -686,7 +696,9 @@ static const Map<String,dynamic> _fa = {
     "languageChangedSuccessfully": "زمان بە سەرکەوتوویی گۆڕدرا",
     "themeChangedSuccessfully": "مۆدێل بە سەرکەوتوویی گۆڕدرا",
     "languagesIspeak": "زمانەکانم",
-    "message": "پەیام"
+    "message": "پەیام",
+    "profileImage": "وێنەی پڕۆفایل",
+    "dob": "ڕۆژی لەدایکبوون"
   },
   "myServicesPage": {
     "title": "شاشەی خزمەتگوزاریەکانم",

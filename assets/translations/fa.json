@@ -103,7 +103,9 @@
     "pendingBookings": "بۆکینگەکانی چاوەڕوان",
     "completedBookings": "بۆکینگەکانی تەواوکراو",
     "annualTotal": "کۆی ساڵانە",
-    "annualStatistics": "ئامارەکانی ساڵانە"
+    "annualStatistics": "ئامارەکانی ساڵانە",
+    "revenue": "داهات",
+    "bookings": "بۆکینگەکان"
   },
   "bookingPage": {
     "title": "پەیجی ئاراستەکردن",
@@ -180,7 +182,9 @@
     "languageChangedSuccessfully": "زمان بە سەرکەوتوویی گۆڕدرا",
     "themeChangedSuccessfully": "مۆدێل بە سەرکەوتوویی گۆڕدرا",
     "languagesIspeak": "زمانەکانم",
-    "message": "پەیام"
+    "message": "پەیام",
+    "profileImage": "وێنەی پڕۆفایل",
+    "dob": "ڕۆژی لەدایکبوون"
   },
   "myServicesPage": {
     "title": "شاشەی خزمەتگوزاریەکانم",

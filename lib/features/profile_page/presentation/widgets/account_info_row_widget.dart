@@ -11,6 +11,7 @@ class AccountInfoRowWidget extends StatefulWidget {
   final IconData? iconData;
   final String? label;
   final ValueChanged<String?> onChanged;
+  final VoidCallback? onEdit;
   final String? Function(String?)? validator;
   const AccountInfoRowWidget({
     super.key,
@@ -19,6 +20,7 @@ class AccountInfoRowWidget extends StatefulWidget {
     this.label,
     required this.onChanged,
     this.validator,
+    this.onEdit,
   });
 
   @override
@@ -74,6 +76,9 @@ class _AccountInfoRowWidgetState extends State<AccountInfoRowWidget> {
               setState(() {
                 enabled = !enabled;
               });
+              if (widget.onEdit != null && enabled) {
+                widget.onEdit!();
+              }
             },
             style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
               backgroundColor: WidgetStatePropertyAll(Colors.transparent),

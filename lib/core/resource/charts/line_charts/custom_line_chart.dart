@@ -67,7 +67,7 @@ class _CostumeLineChartState extends State<CostumeLineChart> {
           LineChartBarData(
             spots: element.spots,
             color: barsColor[index],
-            isCurved: true,
+            isCurved: false,
             dotData: FlDotData(show: true),
             belowBarData: chartType == LineChartType.oneLine
                 ? BarAreaData(
@@ -94,7 +94,7 @@ class _CostumeLineChartState extends State<CostumeLineChart> {
         child: LineChart(
           duration: const Duration(milliseconds: 300),
           LineChartData(
-            clipData: FlClipData.all(),
+            clipData: FlClipData.none(),
             lineBarsData: lineChartBarData,
             minX: widget.minX,
             maxX: widget.maxX,
@@ -108,7 +108,7 @@ class _CostumeLineChartState extends State<CostumeLineChart> {
 
                 drawBelowEverything: true,
                 sideTitles: SideTitles(
-                  reservedSize: 20.h,
+                  reservedSize: 30.h,
                   showTitles: true,
                   getTitlesWidget: (value, meta) {
                     String output = '';
@@ -138,11 +138,14 @@ class _CostumeLineChartState extends State<CostumeLineChart> {
                       case 11:
                         output = "Dec";
                     }
-                    return Text(
-                      output,
-                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                        fontFamily: FontConstants.fontFamily(context.locale),
-                        fontSize: 12.sp,
+                    return Padding(
+                      padding: EdgeInsets.only(top: 8.h),
+                      child: Text(
+                        output,
+                        style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                          fontFamily: FontConstants.fontFamily(context.locale),
+                          fontSize: 14.sp,
+                        ),
                       ),
                     );
                   },
@@ -153,7 +156,7 @@ class _CostumeLineChartState extends State<CostumeLineChart> {
                   ? AxisTitles(
                       sideTitleAlignment: SideTitleAlignment.outside,
                       sideTitles: SideTitles(
-                        reservedSize: 25.w,
+                        reservedSize: 30.w,
                         showTitles: true,
                         getTitlesWidget: (value, meta) {
                           String output = '';
@@ -165,18 +168,21 @@ class _CostumeLineChartState extends State<CostumeLineChart> {
                             output = "${value / 1000000.0}M";
                           }
                           return SizedBox(
-                            width: 25.w,
+                            width: 30.w,
                             child: FittedBox(
                               fit: BoxFit.scaleDown,
-                              child: Text(
-                                output,
-                                style: Theme.of(context).textTheme.labelLarge
-                                    ?.copyWith(
-                                      fontFamily: FontConstants.fontFamily(
-                                        context.locale,
+                              child: Padding(
+                                padding: EdgeInsets.only(left: 8.w),
+                                child: Text(
+                                  output,
+                                  style: Theme.of(context).textTheme.labelLarge
+                                      ?.copyWith(
+                                        fontFamily: FontConstants.fontFamily(
+                                          context.locale,
+                                        ),
+                                        fontSize: 14.sp,
                                       ),
-                                      fontSize: 12.sp,
-                                    ),
+                                ),
                               ),
                             ),
                           );
@@ -189,7 +195,7 @@ class _CostumeLineChartState extends State<CostumeLineChart> {
                       sideTitleAlignment: SideTitleAlignment.outside,
                       drawBelowEverything: true,
                       sideTitles: SideTitles(
-                        reservedSize: 25.w,
+                        reservedSize: 30.w,
                         showTitles: true,
                         getTitlesWidget: (value, meta) {
                           String output = '';
@@ -201,18 +207,21 @@ class _CostumeLineChartState extends State<CostumeLineChart> {
                             output = "${value / 1000000.0}M";
                           }
                           return SizedBox(
-                            width: 25.w,
+                            width: 30.w,
                             child: FittedBox(
                               fit: BoxFit.scaleDown,
-                              child: Text(
-                                output,
-                                style: Theme.of(context).textTheme.labelLarge
-                                    ?.copyWith(
-                                      fontFamily: FontConstants.fontFamily(
-                                        context.locale,
+                              child: Padding(
+                                padding: EdgeInsets.only(right: 8.w),
+                                child: Text(
+                                  output,
+                                  style: Theme.of(context).textTheme.labelLarge
+                                      ?.copyWith(
+                                        fontFamily: FontConstants.fontFamily(
+                                          context.locale,
+                                        ),
+                                        fontSize: 14.sp,
                                       ),
-                                      fontSize: 12.sp,
-                                    ),
+                                ),
                               ),
                             ),
                           );

@@ -103,7 +103,9 @@
     "pendingBookings": "الحجوزات المعلقة",
     "completedBookings": "الحجوزات المكتملة",
     "annualTotal": "الإجمالي السنوي",
-    "annualStatistics": "الإحصائيات السنوية"
+    "annualStatistics": "الإحصائيات السنوية",
+    "revenue": "الإيرادات",
+    "bookings": "الحجوزات"
   },
   "bookingPage": {
     "title": "صفحة الحجوزات",
@@ -180,7 +182,9 @@
     "languageChangedSuccessfully": "تم تغيير اللغة بنجاح",
     "themeChangedSuccessfully": "تم تغيير السمة بنجاح",
     "languagesIspeak": "اللغات التي أتحدثها",
-    "message": "الرسالة"
+    "message": "الرسالة",
+    "profileImage": "صورة الملف الشخصي",
+    "dob": "تاريخ الميلاد"
   },
   "myServicesPage": {
     "title": "صفحة خدماتي",

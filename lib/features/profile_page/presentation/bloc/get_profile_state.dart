@@ -14,4 +14,10 @@ class GetProfileState with _$GetProfileState {
   const factory GetProfileState.loggedOut() = GetProfileStateLoggedOut;
   const factory GetProfileState.logoutError({String? message}) =
       GetProfileStateLogoutError;
+
+  const factory GetProfileState.updated({
+    required ProfileEntity? profileEntity,
+  }) = GetProfileStateUpdated;
+  const factory GetProfileState.updateError({String? message}) =
+      GetProfileStateUpdateError;
 }

@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$SetWorkingHoursModel {
 
- int? get provider_id; int? get day_of_week; String? get start_time; String? get end_time; bool? get is_available;
+ List<WorkingTimeModel?>? get workingTime; String? get authToken; String? get acceptLanguage;
 /// Create a copy of SetWorkingHoursModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $SetWorkingHoursModelCopyWith<SetWorkingHoursModel> get copyWith => _$SetWorking
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SetWorkingHoursModel&&(identical(other.provider_id, provider_id) || other.provider_id == provider_id)&&(identical(other.day_of_week, day_of_week) || other.day_of_week == day_of_week)&&(identical(other.start_time, start_time) || other.start_time == start_time)&&(identical(other.end_time, end_time) || other.end_time == end_time)&&(identical(other.is_available, is_available) || other.is_available == is_available));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SetWorkingHoursModel&&const DeepCollectionEquality().equals(other.workingTime, workingTime)&&(identical(other.authToken, authToken) || other.authToken == authToken)&&(identical(other.acceptLanguage, acceptLanguage) || other.acceptLanguage == acceptLanguage));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,provider_id,day_of_week,start_time,end_time,is_available);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(workingTime),authToken,acceptLanguage);
 
 @override
 String toString() {
-  return 'SetWorkingHoursModel(provider_id: $provider_id, day_of_week: $day_of_week, start_time: $start_time, end_time: $end_time, is_available: $is_available)';
+  return 'SetWorkingHoursModel(workingTime: $workingTime, authToken: $authToken, acceptLanguage: $acceptLanguage)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $SetWorkingHoursModelCopyWith<$Res>  {
   factory $SetWorkingHoursModelCopyWith(SetWorkingHoursModel value, $Res Function(SetWorkingHoursModel) _then) = _$SetWorkingHoursModelCopyWithImpl;
 @useResult
 $Res call({
- int? provider_id, int? day_of_week, String? start_time, String? end_time, bool? is_available
+ List<WorkingTimeModel?>? workingTime, String? authToken, String? acceptLanguage
 });
 
 
@@ -65,14 +65,12 @@ class _$SetWorkingHoursModelCopyWithImpl<$Res>
 
 /// Create a copy of SetWorkingHoursModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? provider_id = freezed,Object? day_of_week = freezed,Object? start_time = freezed,Object? end_time = freezed,Object? is_available = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? workingTime = freezed,Object? authToken = freezed,Object? acceptLanguage = freezed,}) {
   return _then(_self.copyWith(
-provider_id: freezed == provider_id ? _self.provider_id : provider_id // ignore: cast_nullable_to_non_nullable
-as int?,day_of_week: freezed == day_of_week ? _self.day_of_week : day_of_week // ignore: cast_nullable_to_non_nullable
-as int?,start_time: freezed == start_time ? _self.start_time : start_time // ignore: cast_nullable_to_non_nullable
-as String?,end_time: freezed == end_time ? _self.end_time : end_time // ignore: cast_nullable_to_non_nullable
-as String?,is_available: freezed == is_available ? _self.is_available : is_available // ignore: cast_nullable_to_non_nullable
-as bool?,
+workingTime: freezed == workingTime ? _self.workingTime : workingTime // ignore: cast_nullable_to_non_nullable
+as List<WorkingTimeModel?>?,authToken: freezed == authToken ? _self.authToken : authToken // ignore: cast_nullable_to_non_nullable
+as String?,acceptLanguage: freezed == acceptLanguage ? _self.acceptLanguage : acceptLanguage // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 
@@ -157,10 +155,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int? provider_id,  int? day_of_week,  String? start_time,  String? end_time,  bool? is_available)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( List<WorkingTimeModel?>? workingTime,  String? authToken,  String? acceptLanguage)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _SetWorkingHoursModel() when $default != null:
-return $default(_that.provider_id,_that.day_of_week,_that.start_time,_that.end_time,_that.is_available);case _:
+return $default(_that.workingTime,_that.authToken,_that.acceptLanguage);case _:
   return orElse();
 
 }
@@ -178,10 +176,10 @@ return $default(_that.provider_id,_that.day_of_week,_that.start_time,_that.end_t
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int? provider_id,  int? day_of_week,  String? start_time,  String? end_time,  bool? is_available)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( List<WorkingTimeModel?>? workingTime,  String? authToken,  String? acceptLanguage)  $default,) {final _that = this;
 switch (_that) {
 case _SetWorkingHoursModel():
-return $default(_that.provider_id,_that.day_of_week,_that.start_time,_that.end_time,_that.is_available);case _:
+return $default(_that.workingTime,_that.authToken,_that.acceptLanguage);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -198,10 +196,10 @@ return $default(_that.provider_id,_that.day_of_week,_that.start_time,_that.end_t
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int? provider_id,  int? day_of_week,  String? start_time,  String? end_time,  bool? is_available)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( List<WorkingTimeModel?>? workingTime,  String? authToken,  String? acceptLanguage)?  $default,) {final _that = this;
 switch (_that) {
 case _SetWorkingHoursModel() when $default != null:
-return $default(_that.provider_id,_that.day_of_week,_that.start_time,_that.end_time,_that.is_available);case _:
+return $default(_that.workingTime,_that.authToken,_that.acceptLanguage);case _:
   return null;
 
 }
@@ -213,14 +211,20 @@ return $default(_that.provider_id,_that.day_of_week,_that.start_time,_that.end_t
 @JsonSerializable()
 
 class _SetWorkingHoursModel implements SetWorkingHoursModel {
-  const _SetWorkingHoursModel({this.provider_id = 0, this.day_of_week = 0, this.start_time = "", this.end_time = "", this.is_available = false});
+  const _SetWorkingHoursModel({final  List<WorkingTimeModel?>? workingTime = const [], this.authToken = "", this.acceptLanguage = ""}): _workingTime = workingTime;
   factory _SetWorkingHoursModel.fromJson(Map<String, dynamic> json) => _$SetWorkingHoursModelFromJson(json);
 
-@override@JsonKey() final  int? provider_id;
-@override@JsonKey() final  int? day_of_week;
-@override@JsonKey() final  String? start_time;
-@override@JsonKey() final  String? end_time;
-@override@JsonKey() final  bool? is_available;
+ final  List<WorkingTimeModel?>? _workingTime;
+@override@JsonKey() List<WorkingTimeModel?>? get workingTime {
+  final value = _workingTime;
+  if (value == null) return null;
+  if (_workingTime is EqualUnmodifiableListView) return _workingTime;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(value);
+}
+
+@override@JsonKey() final  String? authToken;
+@override@JsonKey() final  String? acceptLanguage;
 
 /// Create a copy of SetWorkingHoursModel
 /// with the given fields replaced by the non-null parameter values.
@@ -235,16 +239,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SetWorkingHoursModel&&(identical(other.provider_id, provider_id) || other.provider_id == provider_id)&&(identical(other.day_of_week, day_of_week) || other.day_of_week == day_of_week)&&(identical(other.start_time, start_time) || other.start_time == start_time)&&(identical(other.end_time, end_time) || other.end_time == end_time)&&(identical(other.is_available, is_available) || other.is_available == is_available));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SetWorkingHoursModel&&const DeepCollectionEquality().equals(other._workingTime, _workingTime)&&(identical(other.authToken, authToken) || other.authToken == authToken)&&(identical(other.acceptLanguage, acceptLanguage) || other.acceptLanguage == acceptLanguage));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,provider_id,day_of_week,start_time,end_time,is_available);
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_workingTime),authToken,acceptLanguage);
 
 @override
 String toString() {
-  return 'SetWorkingHoursModel(provider_id: $provider_id, day_of_week: $day_of_week, start_time: $start_time, end_time: $end_time, is_available: $is_available)';
+  return 'SetWorkingHoursModel(workingTime: $workingTime, authToken: $authToken, acceptLanguage: $acceptLanguage)';
 }
 
 
@@ -255,7 +259,7 @@ abstract mixin class _$SetWorkingHoursModelCopyWith<$Res> implements $SetWorking
   factory _$SetWorkingHoursModelCopyWith(_SetWorkingHoursModel value, $Res Function(_SetWorkingHoursModel) _then) = __$SetWorkingHoursModelCopyWithImpl;
 @override @useResult
 $Res call({
- int? provider_id, int? day_of_week, String? start_time, String? end_time, bool? is_available
+ List<WorkingTimeModel?>? workingTime, String? authToken, String? acceptLanguage
 });
 
 
@@ -272,14 +276,12 @@ class __$SetWorkingHoursModelCopyWithImpl<$Res>
 
 /// Create a copy of SetWorkingHoursModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? provider_id = freezed,Object? day_of_week = freezed,Object? start_time = freezed,Object? end_time = freezed,Object? is_available = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? workingTime = freezed,Object? authToken = freezed,Object? acceptLanguage = freezed,}) {
   return _then(_SetWorkingHoursModel(
-provider_id: freezed == provider_id ? _self.provider_id : provider_id // ignore: cast_nullable_to_non_nullable
-as int?,day_of_week: freezed == day_of_week ? _self.day_of_week : day_of_week // ignore: cast_nullable_to_non_nullable
-as int?,start_time: freezed == start_time ? _self.start_time : start_time // ignore: cast_nullable_to_non_nullable
-as String?,end_time: freezed == end_time ? _self.end_time : end_time // ignore: cast_nullable_to_non_nullable
-as String?,is_available: freezed == is_available ? _self.is_available : is_available // ignore: cast_nullable_to_non_nullable
-as bool?,
+workingTime: freezed == workingTime ? _self._workingTime : workingTime // ignore: cast_nullable_to_non_nullable
+as List<WorkingTimeModel?>?,authToken: freezed == authToken ? _self.authToken : authToken // ignore: cast_nullable_to_non_nullable
+as String?,acceptLanguage: freezed == acceptLanguage ? _self.acceptLanguage : acceptLanguage // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 

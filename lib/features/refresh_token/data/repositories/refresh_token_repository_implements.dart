@@ -62,8 +62,18 @@ class RefreshTokenRepositoryImplements implements RefreshTokenRepository {
             )
             .then((onValue) {
               if (onValue is DataSuccess) {
+                LoginStateEntity? userInfo = getItInstance<AppPreferences>()
+                    .getUserInfo();
                 response = DataSuccess(
                   data: TokenEntity.fromJson(onValue.data?.data),
+                );
+                userInfo = userInfo?.copyWith(
+                  access_token: response?.data?.access_token,
+
+                  created_at: DateTime.now().toIso8601String(),
+                );
+                getItInstance<AppPreferences>().setUserInfo(
+                  loginStateEntity: userInfo,
                 );
                 return response;
               } else {

@@ -310,52 +310,157 @@ class BookingServiceWidget extends StatelessWidget {
                               ),
                             ],
                           ),
-                          "confirmed" => SizedBox(
-                            height: 40.h,
-                            child: ElevatedButton(
-                              onPressed: () {
-                                context.read<SetBookingBloc>().add(
-                                  SetBookingEvent.setBookings(
-                                    getBookingModel: GetBookingModel(
-                                      id: bookingEntity?.id.toString(),
-                                      status: "start",
-                                    ),
-                                  ),
-                                );
-                              },
-                              style: Theme.of(context).elevatedButtonTheme.style
-                                  ?.copyWith(
-                                    padding: WidgetStateProperty.resolveWith((
-                                      callback,
-                                    ) {
-                                      if (callback.contains(
-                                        WidgetState.pressed,
-                                      )) {
-                                        return EdgeInsets.symmetric(
-                                          vertical: 12.h,
-                                        );
-                                      }
-                                      return EdgeInsets.zero;
-                                    }),
-                                    backgroundColor: WidgetStatePropertyAll(
-                                      Helper.getColorByStatus(
-                                        "confirmed",
-                                        context,
-                                      )!,
-                                    ),
-                                  ),
-                              child: Center(
-                                child: Text(
-                                  LocaleKeys.bookingPage_startService.tr(),
-                                  style: Theme.of(context).textTheme.labelLarge
-                                      ?.copyWith(
-                                        fontFamily: FontConstants.fontFamily(
-                                          context.locale,
+                          "confirmed" => Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              SizedBox(
+                                height: 40.h,
+                                width: 100.w,
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    context.read<SetBookingBloc>().add(
+                                      SetBookingEvent.setBookings(
+                                        getBookingModel: GetBookingModel(
+                                          id: bookingEntity?.id.toString(),
+                                          status: "start",
                                         ),
                                       ),
+                                    );
+                                  },
+                                  style: Theme.of(context)
+                                      .elevatedButtonTheme
+                                      .style
+                                      ?.copyWith(
+                                        padding:
+                                            WidgetStateProperty.resolveWith((
+                                              callback,
+                                            ) {
+                                              if (callback.contains(
+                                                WidgetState.pressed,
+                                              )) {
+                                                return EdgeInsets.symmetric(
+                                                  vertical: 12.h,
+                                                );
+                                              }
+                                              return EdgeInsets.zero;
+                                            }),
+                                        backgroundColor: WidgetStatePropertyAll(
+                                          Helper.getColorByStatus(
+                                            "confirmed",
+                                            context,
+                                          )!,
+                                        ),
+                                      ),
+                                  child: Center(
+                                    child: Text(
+                                      LocaleKeys.bookingPage_startService.tr(),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .labelLarge
+                                          ?.copyWith(
+                                            fontFamily:
+                                                FontConstants.fontFamily(
+                                                  context.locale,
+                                                ),
+                                          ),
+                                    ),
+                                  ),
                                 ),
                               ),
-                            ),
+                              SizedBox(
+                                height: 40.h,
+                                width: 100.w,
+                                child: ElevatedButton(
+                                  onPressed: () {
+                                    showDialog(
+                                      context: context,
+                                      builder: (context) {
+                                        return AlertDialog(
+                                          title: Text(
+                                            LocaleKeys.bookingPage_rejectBooking
+                                                .tr(),
+                                          ),
+                                          content: Text(
+                                            LocaleKeys
+                                                .bookingPage_areYouSureYouWantToRejectThisBooking
+                                                .tr(),
+                                          ),
+                                          actions: [
+                                            TextButton(
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                              child: Text(
+                                                LocaleKeys.common_cancel.tr(),
+                                              ),
+                                            ),
+                                            TextButton(
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                                context
+                                                    .read<SetBookingBloc>()
+                                                    .add(
+                                                      SetBookingEvent.setBookings(
+                                                        getBookingModel:
+                                                            GetBookingModel(
+                                                              id: bookingEntity
+                                                                  ?.id
+                                                                  .toString(),
+                                                              status: "cancel",
+                                                            ),
+                                                      ),
+                                                    );
+                                              },
+                                              child: Text(
+                                                LocaleKeys.common_save.tr(),
+                                              ),
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    );
+                                  },
+                                  style: Theme.of(context)
+                                      .elevatedButtonTheme
+                                      .style
+                                      ?.copyWith(
+                                        padding:
+                                            WidgetStateProperty.resolveWith((
+                                              callback,
+                                            ) {
+                                              if (callback.contains(
+                                                WidgetState.pressed,
+                                              )) {
+                                                return EdgeInsets.symmetric(
+                                                  vertical: 12.h,
+                                                );
+                                              }
+                                              return EdgeInsets.zero;
+                                            }),
+                                        backgroundColor: WidgetStatePropertyAll(
+                                          Helper.getColorByStatus(
+                                            "rejected",
+                                            context,
+                                          )!,
+                                        ),
+                                      ),
+                                  child: Center(
+                                    child: Text(
+                                      LocaleKeys.bookingPage_rejectBooking.tr(),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .labelLarge
+                                          ?.copyWith(
+                                            fontFamily:
+                                                FontConstants.fontFamily(
+                                                  context.locale,
+                                                ),
+                                          ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                           "in_progress" => SizedBox(
                             height: 40.h,

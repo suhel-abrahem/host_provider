@@ -6,11 +6,12 @@ import '../../../../core/usecase/usecase.dart';
 import '../repositories/profile_repository.dart';
 
 class UpdateWorkingTimeUseCase
-    implements UseCase<DataState<WorkingHoursEntity?>?, SetWorkingHoursModel?> {
+    implements
+        UseCase<DataState<List<WorkingHoursEntity?>?>?, SetWorkingHoursModel?> {
   final ProfileRepository _profileRepository;
   UpdateWorkingTimeUseCase(this._profileRepository);
   @override
-  Future<DataState<WorkingHoursEntity?>?> call({
+  Future<DataState<List<WorkingHoursEntity?>?>?> call({
     SetWorkingHoursModel? params,
   }) async {
     return await _profileRepository.updateWorkingHours(params);

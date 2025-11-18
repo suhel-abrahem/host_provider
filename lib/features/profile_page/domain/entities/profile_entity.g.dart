@@ -13,6 +13,7 @@ _ProfileEntity _$ProfileEntityFromJson(Map<String, dynamic> json) =>
       email: json['email'] as String? ?? "",
       phone: json['phone'] as String? ?? "",
       dob: json['dob'] as String? ?? "",
+      avatar: json['avatar'] as String? ?? "",
       addresses: json['addresses'] as List<dynamic>? ?? const [],
     );
 
@@ -23,5 +24,6 @@ Map<String, dynamic> _$ProfileEntityToJson(_ProfileEntity instance) =>
       'email': instance.email,
       'phone': instance.phone,
       'dob': instance.dob,
+      'avatar': instance.avatar,
       'addresses': instance.addresses,
     };

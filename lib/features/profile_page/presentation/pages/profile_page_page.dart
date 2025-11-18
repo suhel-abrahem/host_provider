@@ -1,4 +1,3 @@
-import 'package:bloc/bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,6 +21,7 @@ import '../../../../core/dependencies_injection.dart';
 import '../../../../core/resource/common_state_widget/error_state_widget.dart';
 import '../../../../generated/locale_keys.g.dart';
 import '../../data/models/profile_model.dart';
+import '../../domain/entities/profile_entity.dart';
 import '../bloc/get_profile_bloc.dart';
 
 class ProfilePagePage extends StatefulWidget {
@@ -83,6 +83,8 @@ class _ProfilePagePageState extends State<ProfilePagePage> {
                   unauthorized: () => Center(child: ErrorStateWidget()),
                   loggedOut: () => SizedBox(),
                   logoutError: (String? message) => SizedBox(),
+                  updated: (ProfileEntity? profileEntity) => ErrorStateWidget(),
+                  updateError: (String? message) => ErrorStateWidget(),
                 );
               },
             ),

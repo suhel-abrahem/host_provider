@@ -103,7 +103,9 @@
     "pendingBookings": "Pending bookings",
     "completedBookings": "Completed bookings",
     "annualTotal": "Annual total",
-    "annualStatistics": "Annual statistics"
+    "annualStatistics": "Annual statistics",
+    "revenue": "Revenue",
+    "bookings": "Bookings"
   },
   "bookingPage": {
     "title": "Bookings page",
@@ -180,7 +182,9 @@
     "languageChangedSuccessfully": "Language changed successfully",
     "themeChangedSuccessfully": "Theme changed successfully",
     "languagesIspeak": "Languages I speak",
-    "message": "Message"
+    "message": "Message",
+    "profileImage": "Profile image",
+    "dob": "Date of Birth"
   },
   "myServicesPage": {
     "title": "My services page",

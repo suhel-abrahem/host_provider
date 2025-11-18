@@ -17,6 +17,11 @@ import 'package:hosta_provider/features/category_services_page/domain/usecases/s
 import 'package:hosta_provider/features/category_services_page/domain/usecases/update_service_usecase.dart';
 import 'package:hosta_provider/features/category_services_page/presentation/bloc/category_services_bloc.dart';
 import 'package:hosta_provider/features/category_services_page/presentation/bloc/set_service_bloc.dart';
+import 'package:hosta_provider/features/home_page/data/models/home_page_model.dart';
+import 'package:hosta_provider/features/home_page/data/repositories/home_page_repository_implements.dart';
+import 'package:hosta_provider/features/home_page/domain/entities/home_page_entity.dart';
+import 'package:hosta_provider/features/home_page/domain/repositories/home_page_repository.dart';
+import 'package:hosta_provider/features/home_page/presentation/bloc/home_page_bloc.dart';
 
 import 'package:hosta_provider/features/login_page/data/models/login_model.dart';
 import 'package:hosta_provider/features/login_page/data/models/login_state_model.dart';
@@ -33,6 +38,8 @@ import 'package:hosta_provider/features/otp_page/domain/repositories/otp_verifiy
 import 'package:hosta_provider/features/otp_page/domain/usecases/otp_resend_usecase.dart';
 import 'package:hosta_provider/features/otp_page/domain/usecases/otp_verify_usecase.dart';
 import 'package:hosta_provider/features/otp_page/presentation/bloc/otp_page_bloc.dart';
+import 'package:hosta_provider/features/profile_page/data/models/set_profile_model.dart';
+import 'package:hosta_provider/features/profile_page/domain/usecases/get_languages_usecase.dart';
 import 'package:hosta_provider/features/profile_page/domain/usecases/get_working_time_usecase.dart';
 import 'package:hosta_provider/features/profile_page/domain/usecases/logout_usecase.dart';
 import 'package:hosta_provider/features/profile_page/domain/usecases/set_working_time_usecase.dart';
@@ -76,6 +83,7 @@ import '../features/booking_page/presentation/bloc/get_booking_bloc.dart';
 import '../features/booking_page/presentation/bloc/set_booking_bloc.dart';
 import '../features/categories_page/presentation/bloc/categories_page_bloc.dart';
 import '../features/categories_page/domain/entities/category_entity.dart';
+import '../features/home_page/domain/usecases/home_page_usecase.dart';
 import '../features/login_page/data/repositories/login_repository_implements.dart';
 import '../features/otp_page/data/repositories/otp_verify_repository_implements.dart';
 import '../features/profile_page/data/models/profile_model.dart';
@@ -85,9 +93,12 @@ import '../features/profile_page/domain/entities/profile_entity.dart';
 import '../features/profile_page/domain/entities/working_hours_entity.dart';
 import '../features/profile_page/domain/repositories/profile_repository.dart';
 import '../features/profile_page/domain/usecases/get_profile_usecase.dart';
+import '../features/profile_page/domain/usecases/set_languages_usecase.dart';
+import '../features/profile_page/domain/usecases/update_profile_usecase.dart';
 import '../features/profile_page/domain/usecases/update_working_time_usecase.dart';
 import '../features/profile_page/presentation/bloc/get_profile_bloc.dart';
 import '../features/profile_page/presentation/bloc/get_working_time_bloc.dart';
+import '../features/profile_page/presentation/bloc/languges_bloc.dart';
 import '../features/refresh_token/data/repositories/refresh_token_repository_implements.dart';
 
 GetIt getItInstance = GetIt.instance;
@@ -96,7 +107,7 @@ Future<void> initDependencies() async {
   getItInstance.registerFactory<AppPreferences>(
     () => AppPreferences(sharedPreferences),
   );
-  //comon services and utilities
+  //common services and utilities
   getItInstance.registerSingleton<CommonService>(CommonService());
   getItInstance.registerSingleton<CheckConnectivity>(CheckConnectivity());
   //login feature dependencies
@@ -305,6 +316,7 @@ Future<void> initDependencies() async {
   getItInstance.registerSingleton<SetWorkingHoursModel>(SetWorkingHoursModel());
   getItInstance.registerSingleton<ProfileEntity>(ProfileEntity());
   getItInstance.registerSingleton<ProfileModel>(ProfileModel());
+  getItInstance.registerSingleton<SetProfileModel>(SetProfileModel());
   //repository
   getItInstance.registerSingleton<ProfileRepository>(
     ProfileRepositoryImplements(getItInstance()),
@@ -325,9 +337,24 @@ Future<void> initDependencies() async {
   getItInstance.registerSingleton<LogoutUseCase>(
     LogoutUseCase(getItInstance()),
   );
+  getItInstance.registerSingleton<GetLanguagesUseCase>(
+    GetLanguagesUseCase(getItInstance()),
+  );
+  getItInstance.registerSingleton<SetLanguagesUseCase>(
+    SetLanguagesUseCase(getItInstance()),
+  );
+
+  getItInstance.registerSingleton<UpdateProfileUsecase>(
+    UpdateProfileUsecase(getItInstance()),
+  );
   //bloc
   getItInstance.registerFactory<GetProfileBloc>(
-    () => GetProfileBloc(getItInstance(), getItInstance(), getItInstance()),
+    () => GetProfileBloc(
+      getItInstance(),
+      getItInstance(),
+      getItInstance(),
+      getItInstance(),
+    ),
   );
   getItInstance.registerFactory<GetWorkingTimeBloc>(
     () => GetWorkingTimeBloc(
@@ -337,4 +364,28 @@ Future<void> initDependencies() async {
       getItInstance(),
     ),
   );
+  getItInstance.registerFactory<LangugesBloc>(
+    () => LangugesBloc(getItInstance(), getItInstance(), getItInstance()),
+  );
+  // end of profile page
+  // home page
+  //entities and models
+  getItInstance.registerSingleton<HomePageEntity>(HomePageEntity());
+  getItInstance.registerSingleton<HomePageModel>(HomePageModel());
+
+  //repository
+  getItInstance.registerSingleton<HomePageRepository>(
+    HomePageRepositoryImpl(getItInstance()),
+  );
+  //usecase
+  getItInstance.registerSingleton<HomePageUseCase>(
+    HomePageUseCase(getItInstance()),
+  );
+
+  //bloc
+  getItInstance.registerFactory<HomePageBloc>(
+    () => HomePageBloc(getItInstance(), getItInstance()),
+  );
+
+  // end of home page
 }

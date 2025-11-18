@@ -208,7 +208,7 @@ return $default(_that.name,_that.color,_that.spots);case _:
 
 
 class _LineChartModel implements LineChartModel {
-  const _LineChartModel({this.name = '', this.color = Colors.blueAccent, final  List<FlSpot> spots = const [FlSpot(0, 0)]}): _spots = spots;
+  const _LineChartModel({this.name = '', this.color = Colors.yellow, final  List<FlSpot> spots = const [FlSpot(0, 0)]}): _spots = spots;
   
 
 @override@JsonKey() final  String? name;

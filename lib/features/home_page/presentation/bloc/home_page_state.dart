@@ -1,9 +1,14 @@
-// part of 'home_page_bloc.dart';
+part of 'home_page_bloc.dart';
 
-// abstract class HomePageState extends Equatable {
-//   const HomePageState();
-
-//   @override
-//   List<Object> get props => [];
-// }
-// class HomePageInitial extends HomePageState {}
+@freezed
+class HomePageState with _$HomePageState {
+  const factory HomePageState.initial() = HomePageStateInitial;
+  const factory HomePageState.loading() = HomePageStateLoading;
+  const factory HomePageState.loaded({HomePageEntity? data}) =
+      HomePageStateLoaded;
+  const factory HomePageState.error({required String message}) =
+      HomePageStateError;
+  const factory HomePageState.noData() = HomePageStateNoData;
+  const factory HomePageState.noInternet() = HomePageStateNoInternet;
+  const factory HomePageState.unauthenticated() = HomePageStateUnauthenticated;
+}
