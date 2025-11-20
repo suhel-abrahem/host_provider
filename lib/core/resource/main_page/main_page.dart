@@ -103,7 +103,7 @@ class _MainPageState extends State<MainPage> {
             },
             onVerticalDragEnd: (details) {
               if (yOffset > 90) {
-                context.push(currentPath ?? RoutesPath.homePage);
+                context.go(currentPath ?? RoutesPath.homePage);
               }
               setState(() {
                 yOffset = 0;

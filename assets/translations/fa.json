@@ -126,7 +126,9 @@
     "noBookingsAvailable": "هیچ ئاراستەکردنێک بوونی نییە",
     "startTime": "کاتژمێری دەست پێکردن",
     "endTime": "کاتژمێری کۆتایی",
-    "serviceImages": "وێنەکانی خزمەتگوزاری"
+    "serviceImages": "وێنەکانی خزمەتگوزاری",
+    "rejectReason": "هۆکاری رەتکردنەوە",
+    "pleaseProvideAReasonForRejection": "تکایە هۆکاری رەتکردنەوەکە دابنێ"
   },
   "profilePage": {
     "title": "پەیجی پڕۆفایل",

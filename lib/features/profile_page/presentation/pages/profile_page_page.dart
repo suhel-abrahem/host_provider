@@ -127,7 +127,9 @@ class _ProfilePagePageState extends State<ProfilePagePage> {
                             ),
                             child: Icon(
                               Icons.account_circle_outlined,
-                              color: Theme.of(context).primaryColor,
+                              color: Theme.of(
+                                context,
+                              ).textTheme.labelLarge?.color,
                               size: 24.r,
                             ),
                           ).asGlass(
@@ -216,7 +218,9 @@ class _ProfilePagePageState extends State<ProfilePagePage> {
                             ),
                             child: Icon(
                               Icons.settings_outlined,
-                              color: Theme.of(context).primaryColor,
+                              color: Theme.of(
+                                context,
+                              ).textTheme.labelLarge?.color,
                               size: 24.r,
                             ),
                           ).asGlass(
@@ -303,7 +307,9 @@ class _ProfilePagePageState extends State<ProfilePagePage> {
                             ),
                             child: Icon(
                               Icons.help_outline,
-                              color: Theme.of(context).primaryColor,
+                              color: Theme.of(
+                                context,
+                              ).textTheme.labelLarge?.color,
                               size: 24.r,
                             ),
                           ).asGlass(

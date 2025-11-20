@@ -5,6 +5,7 @@ import 'package:glass/glass.dart';
 import 'package:hosta_provider/config/theme/app_theme.dart';
 import 'package:hosta_provider/core/constants/font_constants.dart';
 import 'package:hosta_provider/core/resource/common_entity/addresses_entity.dart';
+import 'package:hosta_provider/core/resource/image_widget.dart';
 import 'package:hosta_provider/features/profile_page/domain/entities/profile_entity.dart';
 
 class UserInfoContainerWidget extends StatelessWidget {
@@ -23,15 +24,16 @@ class UserInfoContainerWidget extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          CircleAvatar(
-            radius: 30.r,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(30.r),
-              child: Image.network(
-                profileEntity?.avatar ??
-                    "https://www.pngall.com/wp-content/uploads/5/Profile-PNG-High-Quality-Image.png",
-                fit: BoxFit.cover,
-              ),
+          Container(
+            width: 70.w,
+            clipBehavior: Clip.antiAlias,
+            decoration: BoxDecoration(shape: BoxShape.circle),
+            child: ImageWidget(
+              errorWidget: Icon(Icons.account_circle),
+              imageUrl:
+                  profileEntity?.avatar ??
+                  "https://www.pngall.com/wp-content/uploads/5/Profile-PNG-High-Quality-Image.png",
+              boxFit: BoxFit.cover,
             ),
           ),
           SizedBox(
@@ -88,8 +90,8 @@ class UserInfoContainerWidget extends StatelessWidget {
       ),
     ).asGlass(
       frosted: true,
-      blurX: 8,
-      blurY: 8,
+      blurX: 58,
+      blurY: 58,
       tintColor: Theme.of(
         context,
       ).colorScheme.primaryContainer.withValues(alpha: 0.9),

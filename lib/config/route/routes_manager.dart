@@ -113,7 +113,8 @@ GoRouter goRouter = GoRouter(
                     state.uri.toString().endsWith(RoutesPath.signupPage) ||
                     state.uri.toString().endsWith(RoutesPath.otpPage))
                 ? MainBottomBar(
-                    currentIndex: _routerToIndex(state.uri.toString()),
+                    key: ValueKey(currentPath),
+                    currentIndex: _routerToIndex(currentPath ?? ""),
                   ).animate().scaleY(duration: 500.ms)
                 : null,
           ),

@@ -18,11 +18,11 @@ import 'package:hosta_provider/features/booking_page/presentation/bloc/get_booki
 import 'package:hosta_provider/features/booking_page/presentation/widgets/address_info_widget.dart';
 import 'package:hosta_provider/features/booking_page/presentation/widgets/client_info_widget.dart';
 import 'package:hosta_provider/features/booking_page/presentation/widgets/service_info_widget.dart';
-import 'package:hosta_provider/features/categories_page/data/models/get_category_model.dart';
 
 import '../../../../config/route/routes_manager.dart';
 import '../../../../core/constants/font_constants.dart';
 import '../../../../core/resource/common_entity/addresses_entity.dart';
+import '../../../../core/resource/custom_widget/custom_input_field/custom_input_field.dart';
 import '../../../../core/resource/custom_widget/snake_bar_widget/snake_bar_widget.dart';
 import '../../../../core/util/helper/helper.dart';
 import '../../../../generated/locale_keys.g.dart';
@@ -38,7 +38,7 @@ class ServiceInfoPage extends StatefulWidget {
 
 class _ServiceInfoPageState extends State<ServiceInfoPage> {
   GetBookingModel? getBookingModel = GetBookingModel();
-
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -100,152 +100,196 @@ class _ServiceInfoPageState extends State<ServiceInfoPage> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceEvenly,
                                   children: [
-                                    Text(
-                                      LocaleKeys.bookingPage_serviceImages.tr(),
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .labelLarge
-                                          ?.copyWith(
-                                            fontFamily:
-                                                FontConstants.fontFamily(
-                                                  context.locale,
-                                                ),
-                                          ),
+                                    Center(
+                                      child: Text(
+                                        LocaleKeys.bookingPage_serviceImages
+                                            .tr(),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .labelLarge
+                                            ?.copyWith(
+                                              fontFamily:
+                                                  FontConstants.fontFamily(
+                                                    context.locale,
+                                                  ),
+                                            ),
+                                      ),
                                     ),
                                     Expanded(
-                                      child: ListView.builder(
-                                        scrollDirection: Axis.horizontal,
-                                        itemBuilder: (context, index) => Padding(
-                                          padding: EdgeInsetsDirectional.only(
-                                            top: 8.h,
-                                            bottom: 8.h,
-                                            end:
-                                                (data?.last?.images?.length ??
-                                                        0) >
-                                                    1
-                                                ? 16.w
-                                                : 60.w,
-                                            start:
-                                                (data?.last?.images?.length ??
-                                                        0) >
-                                                    1
-                                                ? 0.w
-                                                : 60.w,
-                                          ),
-                                          child: ElevatedButton(
-                                            style: Theme.of(context)
-                                                .elevatedButtonTheme
-                                                .style
-                                                ?.copyWith(
-                                                  padding:
-                                                      WidgetStatePropertyAll(
-                                                        EdgeInsets.zero,
-                                                      ),
-                                                  backgroundColor:
-                                                      WidgetStatePropertyAll(
-                                                        Colors.transparent,
-                                                      ),
-                                                  shadowColor:
-                                                      WidgetStatePropertyAll(
-                                                        Colors.transparent,
-                                                      ),
-                                                  shape: WidgetStatePropertyAll(
-                                                    RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                            20.r,
-                                                          ),
+                                      child:
+                                          !((data?.last?.images?.length ?? 0) ==
+                                              0)
+                                          ? ListView.builder(
+                                              scrollDirection: Axis.horizontal,
+                                              itemBuilder: (context, index) => Padding(
+                                                padding:
+                                                    EdgeInsetsDirectional.only(
+                                                      top: 8.h,
+                                                      bottom: 8.h,
+                                                      end:
+                                                          (data
+                                                                      ?.last
+                                                                      ?.images
+                                                                      ?.length ??
+                                                                  0) >
+                                                              1
+                                                          ? 16.w
+                                                          : 60.w,
+                                                      start:
+                                                          (data
+                                                                      ?.last
+                                                                      ?.images
+                                                                      ?.length ??
+                                                                  0) >
+                                                              1
+                                                          ? 0.w
+                                                          : 60.w,
                                                     ),
-                                                  ),
-                                                ),
-                                            onPressed: () {
-                                              showDialog(
-                                                context: context,
-                                                builder: (context) => Dialog(
-                                                  insetAnimationDuration:
-                                                      const Duration(
-                                                        milliseconds: 300,
+                                                child: ElevatedButton(
+                                                  style: Theme.of(context)
+                                                      .elevatedButtonTheme
+                                                      .style
+                                                      ?.copyWith(
+                                                        padding:
+                                                            WidgetStatePropertyAll(
+                                                              EdgeInsets.zero,
+                                                            ),
+                                                        backgroundColor:
+                                                            WidgetStatePropertyAll(
+                                                              Colors
+                                                                  .transparent,
+                                                            ),
+                                                        shadowColor:
+                                                            WidgetStatePropertyAll(
+                                                              Colors
+                                                                  .transparent,
+                                                            ),
+                                                        shape: WidgetStatePropertyAll(
+                                                          RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius.circular(
+                                                                  20.r,
+                                                                ),
+                                                          ),
+                                                        ),
                                                       ),
-                                                  insetAnimationCurve:
-                                                      Curves.easeInOut,
-                                                  clipBehavior: Clip.antiAlias,
+                                                  onPressed: () {
+                                                    showDialog(
+                                                      context: context,
+                                                      builder: (context) => Dialog(
+                                                        insetAnimationDuration:
+                                                            const Duration(
+                                                              milliseconds: 300,
+                                                            ),
+                                                        insetAnimationCurve:
+                                                            Curves.easeInOut,
+                                                        clipBehavior:
+                                                            Clip.antiAlias,
+                                                        child: ClipRRect(
+                                                          borderRadius:
+                                                              BorderRadius.circular(
+                                                                12.r,
+                                                              ),
+                                                          child: ImageWidget(
+                                                            errorWidget: SizedBox(
+                                                              width: 100.w,
+                                                              height: 100.h,
+                                                              child: Center(
+                                                                child: Icon(
+                                                                  Icons
+                                                                      .broken_image_outlined,
+                                                                  size: 50.r,
+                                                                  color: Theme.of(
+                                                                    context,
+                                                                  ).primaryColor,
+                                                                ),
+                                                              ),
+                                                            ),
+                                                            imageUrl:
+                                                                data
+                                                                    ?.last
+                                                                    ?.images?[index]["image_url"] ??
+                                                                "",
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    );
+                                                  },
                                                   child: ClipRRect(
                                                     borderRadius:
                                                         BorderRadius.circular(
-                                                          12.r,
+                                                          20.r,
                                                         ),
-                                                    child: ImageWidget(
-                                                      errorWidget: SizedBox(
-                                                        width: 100.w,
-                                                        height: 100.h,
-                                                        child: Center(
+                                                    clipBehavior:
+                                                        Clip.antiAlias,
+                                                    child: Container(
+                                                      decoration: BoxDecoration(
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                            color:
+                                                                Theme.of(
+                                                                      context,
+                                                                    )
+                                                                    .colorScheme
+                                                                    .shadow
+                                                                    .withValues(
+                                                                      alpha:
+                                                                          0.2,
+                                                                    ),
+                                                            blurRadius: 8.r,
+                                                            offset: Offset(
+                                                              0,
+                                                              4.h,
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                      height: 200.h,
+                                                      width: 200.w,
+                                                      child: ImageWidget(
+                                                        boxFit: BoxFit.cover,
+                                                        errorWidget: Center(
                                                           child: Icon(
                                                             Icons
                                                                 .broken_image_outlined,
                                                             size: 50.r,
-                                                            color: Theme.of(
-                                                              context,
-                                                            ).primaryColor,
+                                                            color: Theme.of(context)
+                                                                .colorScheme
+                                                                .onErrorContainer,
                                                           ),
                                                         ),
+                                                        imageUrl:
+                                                            data
+                                                                ?.last
+                                                                ?.images?[index]["image_url"] ??
+                                                            "",
+                                                        height: 200.h,
+                                                        width: 200.w,
                                                       ),
-                                                      imageUrl:
-                                                          data
-                                                              ?.last
-                                                              ?.images?[index]["image_url"] ??
-                                                          "",
                                                     ),
                                                   ),
-                                                ),
-                                              );
-                                            },
-                                            child: ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(20.r),
-                                              clipBehavior: Clip.antiAlias,
-                                              child: Container(
-                                                decoration: BoxDecoration(
-                                                  boxShadow: [
-                                                    BoxShadow(
-                                                      color: Theme.of(context)
-                                                          .colorScheme
-                                                          .shadow
-                                                          .withOpacity(0.2),
-                                                      blurRadius: 8.r,
-                                                      offset: Offset(0, 4.h),
-                                                    ),
-                                                  ],
-                                                ),
-                                                height: 200.h,
-                                                width: 200.w,
-                                                child: ImageWidget(
-                                                  boxFit: BoxFit.cover,
-                                                  errorWidget: Center(
-                                                    child: Icon(
-                                                      Icons
-                                                          .broken_image_outlined,
-                                                      size: 50.r,
-                                                      color: Theme.of(context)
-                                                          .colorScheme
-                                                          .onErrorContainer,
-                                                    ),
-                                                  ),
-                                                  imageUrl:
-                                                      data
-                                                          ?.last
-                                                          ?.images?[index]["image_url"] ??
-                                                      "",
-                                                  height: 200.h,
-                                                  width: 200.w,
                                                 ),
                                               ),
+                                              itemCount:
+                                                  data?.last?.images?.length ??
+                                                  0,
+                                              shrinkWrap: true,
+                                            )
+                                          : Center(
+                                              child: Text(
+                                                LocaleKeys.common_noThingToShow
+                                                    .tr(),
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .labelMedium
+                                                    ?.copyWith(
+                                                      fontFamily:
+                                                          FontConstants.fontFamily(
+                                                            context.locale,
+                                                          ),
+                                                    ),
+                                              ),
                                             ),
-                                          ),
-                                        ),
-                                        itemCount:
-                                            data?.last?.images?.length ?? 0,
-                                        shrinkWrap: true,
-                                      ),
                                     ),
                                   ],
                                 ),
@@ -412,6 +456,7 @@ class _ServiceInfoPageState extends State<ServiceInfoPage> {
                                       children: [
                                         SizedBox(
                                           width: 145.w,
+                                          height: 40.h,
                                           child: ElevatedButton(
                                             onPressed: () {
                                               context
@@ -465,6 +510,7 @@ class _ServiceInfoPageState extends State<ServiceInfoPage> {
 
                                         SizedBox(
                                           width: 145.w,
+                                          height: 40.h,
                                           child: ElevatedButton(
                                             onPressed: () {
                                               context
@@ -524,10 +570,12 @@ class _ServiceInfoPageState extends State<ServiceInfoPage> {
                                       ],
                                     ),
                                     "confirmed" => Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
                                       children: [
                                         SizedBox(
                                           height: 40.h,
-                                          width: 300.w,
+                                          width: 145.w,
                                           child: ElevatedButton(
                                             onPressed: () {
                                               context
@@ -586,6 +634,201 @@ class _ServiceInfoPageState extends State<ServiceInfoPage> {
                                             ),
                                           ),
                                         ),
+                                        SizedBox(
+                                          height: 40.h,
+                                          width: 145.w,
+                                          child: Builder(
+                                            builder: (buildContext) {
+                                              return ElevatedButton(
+                                                onPressed: () {
+                                                  String? reason;
+                                                  showDialog(
+                                                    context: context,
+                                                    builder: (context) {
+                                                      return AlertDialog(
+                                                        title: Text(
+                                                          LocaleKeys
+                                                              .bookingPage_rejectBooking
+                                                              .tr(),
+                                                          style: Theme.of(context)
+                                                              .textTheme
+                                                              .labelLarge
+                                                              ?.copyWith(
+                                                                fontFamily:
+                                                                    FontConstants.fontFamily(
+                                                                      context
+                                                                          .locale,
+                                                                    ),
+                                                              ),
+                                                        ),
+                                                        content: SizedBox(
+                                                          height: 250.h,
+                                                          child: Column(
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .spaceEvenly,
+                                                            children: [
+                                                              Text(
+                                                                LocaleKeys
+                                                                    .bookingPage_areYouSureYouWantToRejectThisBooking
+                                                                    .tr(),
+                                                                style: Theme.of(context)
+                                                                    .textTheme
+                                                                    .labelSmall
+                                                                    ?.copyWith(
+                                                                      fontFamily:
+                                                                          FontConstants.fontFamily(
+                                                                            context.locale,
+                                                                          ),
+                                                                    ),
+                                                              ),
+                                                              SizedBox(
+                                                                height: 150.h,
+                                                                child: Form(
+                                                                  key: formKey,
+                                                                  autovalidateMode:
+                                                                      AutovalidateMode
+                                                                          .onUserInteraction,
+                                                                  child: CustomInputField(
+                                                                    label: LocaleKeys
+                                                                        .bookingPage_rejectReason
+                                                                        .tr(),
+                                                                    height:
+                                                                        150.h,
+                                                                    maxLines: 5,
+                                                                    onChanged:
+                                                                        (
+                                                                          value,
+                                                                        ) => reason =
+                                                                            value,
+                                                                    validator: (value) {
+                                                                      if (value ==
+                                                                              null ||
+                                                                          value
+                                                                              .isEmpty) {
+                                                                        return LocaleKeys
+                                                                            .bookingPage_pleaseProvideAReasonForRejection
+                                                                            .tr();
+                                                                      }
+                                                                      return null;
+                                                                    },
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                        ),
+                                                        actions: [
+                                                          TextButton(
+                                                            onPressed: () {
+                                                              Navigator.of(
+                                                                context,
+                                                              ).pop();
+                                                            },
+                                                            child: Text(
+                                                              LocaleKeys
+                                                                  .common_cancel
+                                                                  .tr(),
+                                                            ),
+                                                          ),
+                                                          TextButton(
+                                                            onPressed: () {
+                                                              if (((formKey
+                                                                      .currentState
+                                                                      ?.validate()) ??
+                                                                  false)) {
+                                                                buildContext
+                                                                    .read<
+                                                                      SetBookingBloc
+                                                                    >()
+                                                                    .add(
+                                                                      SetBookingEvent.setBookings(
+                                                                        getBookingModel: GetBookingModel(
+                                                                          reason:
+                                                                              reason,
+                                                                          id: widget
+                                                                              .serviceId
+                                                                              .toString(),
+                                                                          status:
+                                                                              "cancel",
+                                                                        ),
+                                                                      ),
+                                                                    );
+                                                                Navigator.of(
+                                                                  context,
+                                                                ).pop();
+                                                              }
+                                                            },
+                                                            child: Text(
+                                                              LocaleKeys
+                                                                  .common_save
+                                                                  .tr(),
+                                                            ),
+                                                          ),
+                                                        ],
+                                                        backgroundColor:
+                                                            Theme.of(context)
+                                                                .colorScheme
+                                                                .primaryContainer
+                                                                .withValues(
+                                                                  alpha: 0.8,
+                                                                ),
+                                                      );
+                                                    },
+                                                  );
+                                                  print(
+                                                    " Reject reason: $reason ",
+                                                  );
+                                                },
+                                                style: Theme.of(context)
+                                                    .elevatedButtonTheme
+                                                    .style
+                                                    ?.copyWith(
+                                                      padding:
+                                                          WidgetStateProperty.resolveWith((
+                                                            callback,
+                                                          ) {
+                                                            if (callback
+                                                                .contains(
+                                                                  WidgetState
+                                                                      .pressed,
+                                                                )) {
+                                                              return EdgeInsets.symmetric(
+                                                                vertical: 12.h,
+                                                              );
+                                                            }
+                                                            return EdgeInsets
+                                                                .zero;
+                                                          }),
+                                                      backgroundColor:
+                                                          WidgetStatePropertyAll(
+                                                            Helper.getColorByStatus(
+                                                              "rejected",
+                                                              context,
+                                                            )!,
+                                                          ),
+                                                    ),
+                                                child: Center(
+                                                  child: Text(
+                                                    LocaleKeys
+                                                        .bookingPage_rejectBooking
+                                                        .tr(),
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .labelLarge
+                                                        ?.copyWith(
+                                                          fontFamily:
+                                                              FontConstants.fontFamily(
+                                                                context.locale,
+                                                              ),
+                                                          fontSize: 16.sp,
+                                                        ),
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                          ),
+                                        ),
                                       ],
                                     ),
                                     "in_progress" => SizedBox(
@@ -618,6 +861,19 @@ class _ServiceInfoPageState extends State<ServiceInfoPage> {
                                                         context,
                                                       )!,
                                                     ),
+                                                padding:
+                                                    WidgetStateProperty.resolveWith((
+                                                      callback,
+                                                    ) {
+                                                      if (callback.contains(
+                                                        WidgetState.pressed,
+                                                      )) {
+                                                        return EdgeInsets.symmetric(
+                                                          vertical: 12.h,
+                                                        );
+                                                      }
+                                                      return EdgeInsets.zero;
+                                                    }),
                                               ),
                                           child: Center(
                                             child: Text(

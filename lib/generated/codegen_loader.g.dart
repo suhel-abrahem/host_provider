@@ -142,7 +142,9 @@ class CodegenLoader extends AssetLoader{
     "noBookingsAvailable": "لا توجد حجوزات متاحة",
     "startTime": "وقت البدء",
     "endTime": "وقت الانتهاء",
-    "serviceImages": "صور الخدمة"
+    "serviceImages": "صور الخدمة",
+    "rejectReason": "سبب الرفض",
+    "pleaseProvideAReasonForRejection": "يرجى تقديم سبب الرفض"
   },
   "profilePage": {
     "title": "صفحة الملف الشخصي",
@@ -391,7 +393,9 @@ static const Map<String,dynamic> _en = {
     "noBookingsAvailable": "No bookings available",
     "startTime": "Start time",
     "endTime": "End time",
-    "serviceImages": "Service images"
+    "serviceImages": "Service images",
+    "rejectReason": "Reject reason",
+    "pleaseProvideAReasonForRejection": "Please provide a reason for rejection"
   },
   "profilePage": {
     "title": "Profile page",
@@ -640,7 +644,9 @@ static const Map<String,dynamic> _fa = {
     "noBookingsAvailable": "هیچ ئاراستەکردنێک بوونی نییە",
     "startTime": "کاتژمێری دەست پێکردن",
     "endTime": "کاتژمێری کۆتایی",
-    "serviceImages": "وێنەکانی خزمەتگوزاری"
+    "serviceImages": "وێنەکانی خزمەتگوزاری",
+    "rejectReason": "هۆکاری رەتکردنەوە",
+    "pleaseProvideAReasonForRejection": "تکایە هۆکاری رەتکردنەوەکە دابنێ"
   },
   "profilePage": {
     "title": "پەیجی پڕۆفایل",

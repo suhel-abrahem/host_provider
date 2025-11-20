@@ -126,7 +126,9 @@
     "noBookingsAvailable": "No bookings available",
     "startTime": "Start time",
     "endTime": "End time",
-    "serviceImages": "Service images"
+    "serviceImages": "Service images",
+    "rejectReason": "Reject reason",
+    "pleaseProvideAReasonForRejection": "Please provide a reason for rejection"
   },
   "profilePage": {
     "title": "Profile page",

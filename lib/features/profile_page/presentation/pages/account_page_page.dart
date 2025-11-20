@@ -316,121 +316,138 @@ class _AccountPagePageState extends State<AccountPagePage> {
                                         radius: 50.r,
                                         child: Stack(
                                           children: [
-                                            ClipOval(
-                                              child:
-                                                  (isAvatarChanged &&
-                                                      avatarUrl != null)
-                                                  ? Image.file(
-                                                      errorBuilder:
-                                                          (
-                                                            context,
-                                                            error,
-                                                            stackTrace,
-                                                          ) {
-                                                            return ImageWidget(
-                                                              imageUrl:
-                                                                  data?.avatar ??
-                                                                  "https://www.pngall.com/wp-content/uploads/5/Profile-PNG-High-Quality-Image.png",
-                                                            );
-                                                          },
-                                                      key: ValueKey(avatarUrl),
-                                                      File(avatarUrl ?? ""),
-                                                      width: 100.r,
-                                                      height: 100.r,
-                                                      fit: BoxFit.cover,
-                                                    )
-                                                  : ImageWidget(
-                                                      imageUrl:
-                                                          data?.avatar ??
-                                                          "https://www.pngall.com/wp-content/uploads/5/Profile-PNG-High-Quality-Image.png",
-                                                    ),
-                                            ),
-                                            SizedBox(
-                                              width: 30.w,
-                                              height: 30.h,
-                                              child: ElevatedButton(
-                                                style: Theme.of(context)
-                                                    .elevatedButtonTheme
-                                                    .style
-                                                    ?.copyWith(
-                                                      backgroundColor:
-                                                          WidgetStatePropertyAll(
-                                                            Colors.transparent,
-                                                          ),
-                                                      shadowColor:
-                                                          WidgetStatePropertyAll(
-                                                            Colors.transparent,
-                                                          ),
-                                                      padding:
-                                                          WidgetStatePropertyAll(
-                                                            EdgeInsets.zero,
-                                                          ),
-                                                    ),
-                                                onPressed: () async {
-                                                  setState(() {
-                                                    isAvatarChanged = true;
-                                                  });
-                                                  final ImagePicker picker =
-                                                      ImagePicker();
-                                                  final XFile? image =
-                                                      await picker.pickImage(
-                                                        source:
-                                                            ImageSource.gallery,
-                                                      );
-                                                  print(
-                                                    "image ava ${image?.path}",
-                                                  );
-
-                                                  final File? imageFile =
-                                                      image != null
-                                                      ? File(image.path)
-                                                      : null;
-                                                  profileModel = profileModel
-                                                      .copyWith(
-                                                        profile: setProfileModel
-                                                            .copyWith(
-                                                              avatar: imageFile,
-                                                            ),
-                                                      );
-                                                  setState(() {
-                                                    avatarUrl = image?.path;
-                                                  });
-                                                },
+                                            Positioned(
+                                              top: 0,
+                                              left: 0,
+                                              right: 0,
+                                              bottom: 0,
+                                              child: ClipOval(
                                                 child:
-                                                    Container(
-                                                      height: 30.h,
-                                                      width: 30.w,
-                                                      padding:
-                                                          EdgeInsets.symmetric(
-                                                            horizontal: 4.w,
-                                                            vertical: 4.h,
-                                                          ),
-                                                      child: Icon(
-                                                        Icons.edit_outlined,
-                                                        color: Theme.of(context)
-                                                            .colorScheme
-                                                            .onPrimaryContainer,
-                                                        size: 20.sp,
+                                                    (isAvatarChanged &&
+                                                        avatarUrl != null)
+                                                    ? Image.file(
+                                                        errorBuilder:
+                                                            (
+                                                              context,
+                                                              error,
+                                                              stackTrace,
+                                                            ) {
+                                                              return ImageWidget(
+                                                                imageUrl:
+                                                                    data?.avatar ??
+                                                                    "https://www.pngall.com/wp-content/uploads/5/Profile-PNG-High-Quality-Image.png",
+                                                              );
+                                                            },
+                                                        key: ValueKey(
+                                                          avatarUrl,
+                                                        ),
+                                                        File(avatarUrl ?? ""),
+                                                        width: 100.r,
+                                                        height: 100.r,
+                                                        fit: BoxFit.cover,
+                                                      )
+                                                    : ImageWidget(
+                                                        boxFit: BoxFit.cover,
+                                                        imageUrl:
+                                                            data?.avatar ??
+                                                            "https://www.pngall.com/wp-content/uploads/5/Profile-PNG-High-Quality-Image.png",
                                                       ),
-                                                    ).asGlass(
-                                                      frosted: true,
-                                                      blurX: 8,
-                                                      blurY: 8,
-                                                      tintColor:
-                                                          Theme.of(context)
-                                                              .colorScheme
-                                                              .primary
-                                                              .withValues(
-                                                                alpha: 0.9,
+                                              ),
+                                            ),
+                                            PositionedDirectional(
+                                              top: 0,
+                                              start: 0,
+
+                                              child: SizedBox(
+                                                width: 30.w,
+                                                height: 30.h,
+                                                child: ElevatedButton(
+                                                  style: Theme.of(context)
+                                                      .elevatedButtonTheme
+                                                      .style
+                                                      ?.copyWith(
+                                                        backgroundColor:
+                                                            WidgetStatePropertyAll(
+                                                              Colors
+                                                                  .transparent,
+                                                            ),
+                                                        shadowColor:
+                                                            WidgetStatePropertyAll(
+                                                              Colors
+                                                                  .transparent,
+                                                            ),
+                                                        padding:
+                                                            WidgetStatePropertyAll(
+                                                              EdgeInsets.zero,
+                                                            ),
+                                                      ),
+                                                  onPressed: () async {
+                                                    setState(() {
+                                                      isAvatarChanged = true;
+                                                    });
+                                                    final ImagePicker picker =
+                                                        ImagePicker();
+                                                    final XFile? image =
+                                                        await picker.pickImage(
+                                                          source: ImageSource
+                                                              .gallery,
+                                                        );
+                                                    print(
+                                                      "image ava ${image?.path}",
+                                                    );
+
+                                                    final File? imageFile =
+                                                        image != null
+                                                        ? File(image.path)
+                                                        : null;
+                                                    profileModel = profileModel
+                                                        .copyWith(
+                                                          profile: setProfileModel
+                                                              .copyWith(
+                                                                avatar:
+                                                                    imageFile,
                                                               ),
-                                                      clipBorderRadius:
-                                                          BorderRadius.circular(
-                                                            12.r,
-                                                          ),
-                                                      border: Theme.of(
-                                                        context,
-                                                      ).defaultBorderSide,
-                                                    ),
+                                                        );
+                                                    setState(() {
+                                                      avatarUrl = image?.path;
+                                                    });
+                                                  },
+                                                  child:
+                                                      Container(
+                                                        height: 30.h,
+                                                        width: 30.w,
+                                                        padding:
+                                                            EdgeInsets.symmetric(
+                                                              horizontal: 4.w,
+                                                              vertical: 4.h,
+                                                            ),
+                                                        child: Icon(
+                                                          Icons.edit_outlined,
+                                                          color: Theme.of(context)
+                                                              .colorScheme
+                                                              .onPrimaryContainer,
+                                                          size: 20.sp,
+                                                        ),
+                                                      ).asGlass(
+                                                        frosted: true,
+                                                        blurX: 8,
+                                                        blurY: 8,
+                                                        tintColor:
+                                                            Theme.of(context)
+                                                                .colorScheme
+                                                                .primary
+                                                                .withValues(
+                                                                  alpha: 0.9,
+                                                                ),
+                                                        clipBorderRadius:
+                                                            BorderRadius.circular(
+                                                              12.r,
+                                                            ),
+                                                        border: Theme.of(
+                                                          context,
+                                                        ).defaultBorderSide,
+                                                      ),
+                                                ),
                                               ),
                                             ),
                                           ],

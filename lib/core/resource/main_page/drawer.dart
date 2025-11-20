@@ -128,8 +128,15 @@ class _CustomDrawerState extends State<CustomDrawer> {
                         radius: 30.r,
                         child: isUserInfoLoading
                             ? CircularProgressIndicator()
-                            : ClipOval(
+                            : Container(
+                                width: 60.w,
+                                height: 60.w,
+                                clipBehavior: Clip.antiAlias,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                ),
                                 child: ImageWidget(
+                                  boxFit: BoxFit.cover,
                                   errorWidget: Icon(
                                     Icons.account_circle,
                                     size: 60.sp,

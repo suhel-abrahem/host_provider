@@ -124,6 +124,8 @@ abstract class  LocaleKeys {
   static const bookingPage_startTime = 'bookingPage.startTime';
   static const bookingPage_endTime = 'bookingPage.endTime';
   static const bookingPage_serviceImages = 'bookingPage.serviceImages';
+  static const bookingPage_rejectReason = 'bookingPage.rejectReason';
+  static const bookingPage_pleaseProvideAReasonForRejection = 'bookingPage.pleaseProvideAReasonForRejection';
   static const bookingPage = 'bookingPage';
   static const profilePage_title = 'profilePage.title';
   static const profilePage_label = 'profilePage.label';

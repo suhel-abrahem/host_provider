@@ -99,6 +99,11 @@ class BookingRepositoryImpl implements BookingRepository {
       await commonService
           .post(
             "${ApiConstant.bookingEndpoint}/${getBookingModel?.id}/${getBookingModel?.status}",
+            data: {
+              if (getBookingModel?.reason != null ||
+                  getBookingModel?.reason != "")
+                "notes": getBookingModel?.reason,
+            },
           )
           .then((onValue) {
             print("get booking repo res${onValue.data?.data["data"]}");
