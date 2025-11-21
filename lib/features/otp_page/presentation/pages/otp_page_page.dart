@@ -70,7 +70,7 @@ class _OtpPagePageState extends State<OtpPagePage> {
               getItInstance<AppPreferences>().setUserInfo(
                 loginStateEntity: loginStateEntity,
               );
-              context.pushNamed(RoutesName.homePage);
+              context.goNamed(RoutesName.homePage);
             },
             resent: (LoginStateEntity? loginStateEntity) {
               showMessage(

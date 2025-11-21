@@ -105,8 +105,11 @@ class _MainPageState extends State<MainPage> {
                   yOffset = 0;
                   animationDone = false;
                 });
-
-                context.go(currentPath ?? RoutesPath.homePage);
+if(context.canPop()){
+                  context.pop();
+                  return;
+                }
+                context.push(currentPath ?? RoutesPath.homePage);
               }
               setState(() {
                 yOffset = 0;
