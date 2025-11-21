@@ -59,7 +59,13 @@ class _LoginPageState extends State<LoginPage> {
                 created_at: DateTime.now().toString(),
               ),
             );
-            context.pushNamed(RoutesName.homePage);
+            setState(() {
+              currentPath = RoutesPath.homePage;
+            });
+            if (context.canPop()) {
+              context.pop();
+            }
+            context.go(RoutesPath.homePage);
           } else if (state is LoginStateUnAuthorized) {
             context.pushNamed(RoutesName.otpPage);
           }

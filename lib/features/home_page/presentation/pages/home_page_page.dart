@@ -174,7 +174,10 @@ class _HomePagePageState extends State<HomePagePage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       isProfileDataLoading
-                          ? CircularProgressIndicator()
+                          ? Padding(
+                              padding: EdgeInsets.only(top: 8.h),
+                              child: CircularProgressIndicator(),
+                            )
                           : Container(
                               margin: EdgeInsets.only(top: 8.h),
                               width: 50.w,
@@ -362,7 +365,6 @@ class _HomePagePageState extends State<HomePagePage> {
               getItInstance<AppPreferences>().setUserInfo(
                 loginStateEntity: LoginStateEntity(),
               );
-              context.pushNamed(RoutesName.loginPage);
             } else if (state is HomePageStateLoaded) {
               homePageEntity = state.data;
               totalBookingsSpots = [];

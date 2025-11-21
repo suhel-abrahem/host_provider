@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hosta_provider/core/enums/login_state_enum.dart';
 import '../../../config/app/app_preferences.dart';
 import '../../../config/route/routes_manager.dart';
 import '../../dependencies_injection.dart';
@@ -105,12 +106,29 @@ class _MainPageState extends State<MainPage> {
                   yOffset = 0;
                   animationDone = false;
                 });
-
-                context.go(currentPath ?? RoutesPath.homePage);
+                print(
+                  "user info: ${getItInstance<AppPreferences>().getUserInfo()}",
+                );
+                if (getItInstance<AppPreferences>()
+                        .getUserInfo()
+                        ?.loginStateEnum ==
+                    LoginStateEnum.logined) {
+                  String _currentPath = currentPath ?? RoutesPath.homePage;
+                  if (context.canPop()) {
+                    context.pop();
+                  }
+                  context.push(_currentPath);
+                } else {
+                  context.go(RoutesPath.loginPage);
+                }
+                setState(() {
+                  yOffset = 0;
+                });
+              } else {
+                setState(() {
+                  yOffset = 0;
+                });
               }
-              setState(() {
-                yOffset = 0;
-              });
             },
             child: ThemeSwitchingArea(
               child: Container(

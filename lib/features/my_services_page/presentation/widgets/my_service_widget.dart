@@ -299,7 +299,12 @@ class _MyServiceWidgetState extends State<MyServiceWidget> {
                                   value: 'edit',
                                   child: Row(
                                     children: [
-                                      const Icon(CupertinoIcons.pencil_circle),
+                                      Icon(
+                                        CupertinoIcons.pencil_circle,
+                                        color: Theme.of(
+                                          context,
+                                        ).textTheme.labelLarge?.color,
+                                      ),
 
                                       Padding(
                                         padding: EdgeInsets.symmetric(
@@ -307,6 +312,15 @@ class _MyServiceWidgetState extends State<MyServiceWidget> {
                                         ),
                                         child: Text(
                                           LocaleKeys.myServicesPage_edit.tr(),
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .labelLarge
+                                              ?.copyWith(
+                                                fontFamily:
+                                                    FontConstants.fontFamily(
+                                                      context.locale,
+                                                    ),
+                                              ),
                                         ),
                                       ),
                                     ],
@@ -316,8 +330,13 @@ class _MyServiceWidgetState extends State<MyServiceWidget> {
                                   value: 'toggle',
                                   child: Row(
                                     children: [
-                                      const Icon(CupertinoIcons.power),
-                                      const SizedBox(width: 8),
+                                      Icon(
+                                        CupertinoIcons.power,
+                                        color: Theme.of(
+                                          context,
+                                        ).textTheme.labelLarge?.color,
+                                      ),
+
                                       Padding(
                                         padding: EdgeInsets.symmetric(
                                           horizontal: 12.w,
@@ -325,6 +344,15 @@ class _MyServiceWidgetState extends State<MyServiceWidget> {
                                         child: Text(
                                           LocaleKeys.myServicesPage_toggleStatus
                                               .tr(),
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .labelLarge
+                                              ?.copyWith(
+                                                fontFamily:
+                                                    FontConstants.fontFamily(
+                                                      context.locale,
+                                                    ),
+                                              ),
                                         ),
                                       ),
                                     ],
@@ -333,18 +361,29 @@ class _MyServiceWidgetState extends State<MyServiceWidget> {
                                 PopupMenuItem(
                                   value: 'delete',
                                   child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       const Icon(
                                         CupertinoIcons.delete,
                                         color: Colors.red,
                                       ),
-                                      const SizedBox(width: 8),
+
                                       Padding(
                                         padding: EdgeInsets.symmetric(
                                           horizontal: 12.w,
                                         ),
                                         child: Text(
                                           LocaleKeys.myServicesPage_delete.tr(),
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .labelLarge
+                                              ?.copyWith(
+                                                color: Colors.red,
+                                                fontFamily:
+                                                    FontConstants.fontFamily(
+                                                      context.locale,
+                                                    ),
+                                              ),
                                         ),
                                       ),
                                     ],

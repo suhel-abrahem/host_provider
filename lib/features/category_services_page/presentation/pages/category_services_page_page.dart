@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:glass/glass.dart';
 import 'package:go_router/go_router.dart';
+import '../../../../config/app/app_preferences.dart';
 import '../../../../config/theme/app_theme.dart';
 import '../../../../core/dependencies_injection.dart';
 import '../../../../core/resource/common_entity/service_error_entity.dart';
@@ -16,6 +17,7 @@ import '../../../../core/resource/image_widget.dart';
 import '../../../../core/resource/main_page/main_page.dart';
 import '../../../../core/util/helper/helper.dart';
 import '../../../categories_page/domain/entities/category_entity.dart';
+import '../../../login_page/domain/entities/login_state_entity.dart';
 import '../../data/models/get_service_model.dart';
 import '../../data/models/service_model.dart';
 import '../../data/models/set_service_model.dart';
@@ -101,6 +103,10 @@ class _CategoryServicesPagePageState extends State<CategoryServicesPagePage> {
             showMessage(
               message: LocaleKeys.common_error.tr(),
               context: context,
+            );
+          } else if (state is SetServiceStateUnAuthorized) {
+            getItInstance<AppPreferences>().setUserInfo(
+              loginStateEntity: LoginStateEntity(),
             );
           }
         },

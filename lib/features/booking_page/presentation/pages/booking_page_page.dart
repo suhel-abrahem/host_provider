@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:glass/glass.dart';
+import '../../../../config/app/app_preferences.dart';
 import '../../../../config/theme/app_theme.dart';
 import '../../../../core/constants/font_constants.dart';
 import '../../../../core/dependencies_injection.dart';
 import '../../../../core/resource/main_page/main_page.dart';
 import '../../../../core/util/helper/helper.dart';
+import '../../../login_page/domain/entities/login_state_entity.dart';
 import '../../data/models/get_booking_model.dart';
 import '../bloc/get_booking_bloc.dart';
 import 'booking_page_tap_page.dart';
@@ -275,6 +277,10 @@ class _BookingPagePageState extends State<BookingPagePage>
             } else if (state is GetBookingStateInitial) {
               context.read<GetBookingBloc>().add(
                 GetBookingEventGetBookings(getBookingModel: getBookingModel),
+              );
+            } else if (state is GetBookingStateUnauthenticated) {
+              getItInstance<AppPreferences>().setUserInfo(
+                loginStateEntity: LoginStateEntity(),
               );
             }
           },
