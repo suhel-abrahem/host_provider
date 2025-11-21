@@ -3,11 +3,11 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hosta_provider/config/app/app_preferences.dart';
-import 'package:hosta_provider/config/route/routes_manager.dart';
-import 'package:hosta_provider/config/theme/app_theme.dart';
-import 'package:hosta_provider/core/dependencies_injection.dart';
-import 'package:hosta_provider/generated/locale_keys.g.dart';
+import 'app_preferences.dart';
+import '../route/routes_manager.dart';
+import '../theme/app_theme.dart';
+import '../../core/dependencies_injection.dart';
+import '../../generated/locale_keys.g.dart';
 
 import '../../core/constants/language_constant.dart';
 

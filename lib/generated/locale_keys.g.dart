@@ -205,6 +205,7 @@ abstract class  LocaleKeys {
   static const otpPage_wrongOtp = 'otpPage.wrongOtp';
   static const otpPage_verified = 'otpPage.verified';
   static const otpPage_verify = 'otpPage.verify';
+  static const otpPage_resendIn = 'otpPage.resendIn';
   static const otpPage = 'otpPage';
   static const categoryServices_title = 'categoryServices.title';
   static const categoryServices_theServiceIdFieldIsRequired = 'categoryServices.theServiceIdFieldIsRequired';

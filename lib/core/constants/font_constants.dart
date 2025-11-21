@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-import 'package:hosta_provider/core/constants/language_constant.dart';
+import 'language_constant.dart';
 
 class FontConstants {
   static String fontFamily(Locale? locale) {

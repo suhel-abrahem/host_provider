@@ -1,9 +1,6 @@
-import 'dart:io';
-
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hosta_provider/core/resource/common_entity/service_error_entity.dart';
-import 'package:hosta_provider/features/signup_page/data/models/uint8list_json_converter.dart';
+import 'service_error_entity.dart';
 part 'service_entity.freezed.dart';
 part 'service_entity.g.dart';
 

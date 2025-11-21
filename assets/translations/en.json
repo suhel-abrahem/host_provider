@@ -211,7 +211,8 @@
     "resend": "Resend",
     "wrongOtp": "Incorrect verification code",
     "verified": "Verified",
-    "verify": "Verify"
+    "verify": "Verify",
+    "resendIn": "Resend in"
   },
   "categoryServices": {
     "title": "Category services",

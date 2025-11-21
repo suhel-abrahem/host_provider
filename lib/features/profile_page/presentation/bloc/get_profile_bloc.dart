@@ -1,12 +1,9 @@
-import 'dart:math';
-
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hosta_provider/features/login_page/domain/entities/login_state_entity.dart';
-import 'package:hosta_provider/features/profile_page/domain/repositories/profile_repository.dart';
-import 'package:hosta_provider/features/profile_page/domain/usecases/get_profile_usecase.dart';
-import 'package:hosta_provider/features/profile_page/domain/usecases/logout_usecase.dart';
-import 'package:hosta_provider/features/refresh_token/domain/usecases/refresh_token_usecase.dart';
+import '../../../login_page/domain/entities/login_state_entity.dart';
+import '../../domain/usecases/get_profile_usecase.dart';
+import '../../domain/usecases/logout_usecase.dart';
+import '../../../refresh_token/domain/usecases/refresh_token_usecase.dart';
 
 import '../../../../config/app/app_preferences.dart';
 import '../../../../core/data_state/data_state.dart';
@@ -46,13 +43,7 @@ class GetProfileBloc extends Bloc<GetProfileEvent, GetProfileState> {
             ),
           )
           .then((onValue) async {
-            print(
-              "categoris page bloc get auth:${onValue?.data?.access_token}",
-            );
             if (onValue is DataSuccess) {
-              print(
-                "bloc token: ${event.profileModel?.copyWith(authToken: onValue?.data?.access_token)}",
-              );
               await _profileUsecase
                   .call(
                     params: event.profileModel?.copyWith(
@@ -60,9 +51,6 @@ class GetProfileBloc extends Bloc<GetProfileEvent, GetProfileState> {
                     ),
                   )
                   .then((getServicesOnValue) {
-                    print(
-                      "category page bloc get Services:${getServicesOnValue?.error}",
-                    );
                     if (getServicesOnValue is DataSuccess) {
                       emit(
                         GetProfileState.loaded(
@@ -103,7 +91,6 @@ class GetProfileBloc extends Bloc<GetProfileEvent, GetProfileState> {
             ),
           )
           .then((onValue) async {
-            print("logout page bloc get auth:${onValue?.data?.access_token}");
             if (onValue is DataSuccess) {
               await _logoutUsecase
                   .call(

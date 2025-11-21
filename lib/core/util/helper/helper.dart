@@ -1,15 +1,9 @@
-import 'dart:ui';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hosta_provider/core/constants/font_constants.dart';
-
-import '../../../config/route/routes_manager.dart';
+import '../../constants/font_constants.dart';
 
 import '../../../generated/locale_keys.g.dart';
 import '../../constants/language_constant.dart';
-import '../../resource/color_manager.dart';
 
 class Helper {
   static Locale getLocaleByCode(String languageCode) {

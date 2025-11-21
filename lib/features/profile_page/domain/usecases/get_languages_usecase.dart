@@ -1,4 +1,4 @@
-import 'package:hosta_provider/features/profile_page/data/models/language_model.dart';
+import '../../data/models/language_model.dart';
 
 import '../../../../core/data_state/data_state.dart';
 import '../../../../core/usecase/usecase.dart';

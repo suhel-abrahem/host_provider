@@ -1,8 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hosta_provider/core/resource/custom_widget/snake_bar_widget/snake_bar_widget.dart';
-import 'package:hosta_provider/features/category_services_page/data/models/set_service_model.dart';
+import '../../../../core/resource/custom_widget/snake_bar_widget/snake_bar_widget.dart';
 
 import '../../../../core/constants/font_constants.dart';
 import '../../../../generated/locale_keys.g.dart';

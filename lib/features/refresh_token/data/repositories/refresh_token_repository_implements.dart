@@ -1,11 +1,11 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:hosta_provider/core/constants/api_constant.dart';
-import 'package:hosta_provider/core/data_state/data_state.dart';
-import 'package:hosta_provider/core/resource/common_service/common_service.dart';
-import 'package:hosta_provider/core/resource/connectivity/check_connectivity.dart';
-import 'package:hosta_provider/features/refresh_token/data/models/refresh_token_model.dart';
-import 'package:hosta_provider/features/refresh_token/domain/entities/token_entity.dart';
-import 'package:hosta_provider/features/refresh_token/domain/repositories/refresh_token_repository.dart';
+import '../../../../core/constants/api_constant.dart';
+import '../../../../core/data_state/data_state.dart';
+import '../../../../core/resource/common_service/common_service.dart';
+import '../../../../core/resource/connectivity/check_connectivity.dart';
+import '../models/refresh_token_model.dart';
+import '../../domain/entities/token_entity.dart';
+import '../../domain/repositories/refresh_token_repository.dart';
 
 import '../../../../config/app/app_preferences.dart';
 import '../../../../core/dependencies_injection.dart';
@@ -53,6 +53,8 @@ class RefreshTokenRepositoryImplements implements RefreshTokenRepository {
               Duration(milliseconds: 0).inMilliseconds,
         ),
       );
+
+      return response;
     } else {
       try {
         await _commonService
@@ -62,14 +64,15 @@ class RefreshTokenRepositoryImplements implements RefreshTokenRepository {
             )
             .then((onValue) {
               if (onValue is DataSuccess) {
-                LoginStateEntity? userInfo = getItInstance<AppPreferences>()
-                    .getUserInfo();
                 response = DataSuccess(
                   data: TokenEntity.fromJson(onValue.data?.data),
                 );
                 userInfo = userInfo?.copyWith(
                   access_token: response?.data?.access_token,
-
+                  refresh_token:
+                      (response?.data?.refresh_token?.isNotEmpty ?? false)
+                      ? response?.data?.refresh_token
+                      : userInfo?.refresh_token,
                   created_at: DateTime.now().toIso8601String(),
                 );
                 getItInstance<AppPreferences>().setUserInfo(
@@ -86,6 +89,5 @@ class RefreshTokenRepositoryImplements implements RefreshTokenRepository {
         return response;
       }
     }
-    return response;
   }
 }

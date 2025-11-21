@@ -2,11 +2,11 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:glass/glass.dart';
-import 'package:hosta_provider/config/theme/app_theme.dart';
-import 'package:hosta_provider/core/constants/font_constants.dart';
-import 'package:hosta_provider/core/resource/custom_widget/custom_input_field/custom_input_field.dart';
-import 'package:hosta_provider/core/resource/main_page/main_page.dart';
-import 'package:hosta_provider/generated/locale_keys.g.dart';
+import '../../../../config/theme/app_theme.dart';
+import '../../../../core/constants/font_constants.dart';
+import '../../../../core/resource/custom_widget/custom_input_field/custom_input_field.dart';
+import '../../../../core/resource/main_page/main_page.dart';
+import '../../../../generated/locale_keys.g.dart';
 
 class HelpPagePage extends StatelessWidget {
   const HelpPagePage({super.key});

@@ -1,6 +1,6 @@
-import 'package:hosta_provider/core/data_state/data_state.dart';
-import 'package:hosta_provider/features/profile_page/domain/entities/working_hours_entity.dart';
-import 'package:hosta_provider/features/profile_page/domain/repositories/profile_repository.dart';
+import '../../../../core/data_state/data_state.dart';
+import '../entities/working_hours_entity.dart';
+import '../repositories/profile_repository.dart';
 
 import '../../../../core/usecase/usecase.dart';
 import '../../data/models/set_working_hours_model.dart';

@@ -12,7 +12,6 @@ class _AnimatedBodyWrapperState extends State<AnimatedBodyWrapper>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<Offset> _offsetAnimation;
-  Widget? _oldChild;
 
   @override
   void initState() {

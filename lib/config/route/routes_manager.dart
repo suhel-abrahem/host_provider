@@ -4,26 +4,26 @@ import 'package:animated_theme_switcher/animated_theme_switcher.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hosta_provider/config/app/app_preferences.dart';
-import 'package:hosta_provider/config/route/route_tracker.dart';
-import 'package:hosta_provider/core/dependencies_injection.dart';
-import 'package:hosta_provider/core/enums/login_state_enum.dart';
-import 'package:hosta_provider/features/booking_page/presentation/pages/service_info_page.dart';
-import 'package:hosta_provider/features/categories_page/domain/entities/category_entity.dart';
-import 'package:hosta_provider/features/categories_page/presentation/pages/categories_page_page.dart';
-import 'package:hosta_provider/features/category_services_page/presentation/pages/category_services_page_page.dart';
-import 'package:hosta_provider/features/first_use_page/presentation/screens/first_use_page.dart';
-import 'package:hosta_provider/features/home_page/presentation/pages/home_page_page.dart';
-import 'package:hosta_provider/features/login_page/presentation/screens/login_page.dart';
-import 'package:hosta_provider/features/my_services_page/presentation/pages/my_services_page_page.dart';
-import 'package:hosta_provider/features/otp_page/presentation/pages/otp_page_page.dart';
-import 'package:hosta_provider/features/profile_page/presentation/pages/profile_page_page.dart';
-import 'package:hosta_provider/features/signup_page/presentation/pages/signup_page.dart';
+import '../app/app_preferences.dart';
+import 'route_tracker.dart';
+import '../../core/dependencies_injection.dart';
+import '../../core/enums/login_state_enum.dart';
+import '../../features/booking_page/presentation/pages/service_info_page.dart';
+import '../../features/categories_page/domain/entities/category_entity.dart';
+import '../../features/categories_page/presentation/pages/categories_page_page.dart';
+import '../../features/category_services_page/presentation/pages/category_services_page_page.dart';
+import '../../features/first_use_page/presentation/screens/first_use_page.dart';
+import '../../features/home_page/presentation/pages/home_page_page.dart';
+import '../../features/login_page/presentation/screens/login_page.dart';
+import '../../features/my_services_page/presentation/pages/my_services_page_page.dart';
+import '../../features/otp_page/presentation/pages/otp_page_page.dart';
+import '../../features/profile_page/presentation/pages/profile_page_page.dart';
+import '../../features/signup_page/presentation/pages/signup_page.dart';
 
 import '../../core/resource/main_page/main_bottom_bar.dart';
-import '../../core/resource/main_page/main_page.dart';
+
 import '../../features/booking_page/presentation/pages/booking_page_page.dart';
-import '../../features/profile_page/domain/entities/profile_entity.dart';
+
 import '../../features/profile_page/presentation/pages/account_page_page.dart';
 import '../../features/profile_page/presentation/pages/help_page_page.dart';
 import '../../features/profile_page/presentation/pages/setting_page_page.dart';
@@ -73,14 +73,12 @@ GoRouter goRouter = GoRouter(
   observers: [RouteTracker()],
   redirect: (context, state) {
     currentPath = state.uri.toString();
-    print("Current route: ${state.uri.toString()}");
     if (getItInstance<AppPreferences>().isFirstUse() == false) {
       return RoutesPath.firstUsePage;
     } else if (getItInstance<AppPreferences>().getUserInfo()?.loginStateEnum ==
             LoginStateEnum.unlogined &&
         !(state.uri.toString().endsWith(RoutesPath.signupPage) ||
             state.uri.toString().endsWith(RoutesPath.otpPage))) {
-      print(state.fullPath);
       return RoutesPath.loginPage;
     }
 

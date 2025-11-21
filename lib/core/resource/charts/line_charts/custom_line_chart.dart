@@ -2,8 +2,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hosta_provider/core/constants/language_constant.dart';
-import 'package:hosta_provider/core/resource/charts/chart_model/line_chart_model.dart';
+import '../../../constants/language_constant.dart';
+import '../chart_model/line_chart_model.dart';
 
 import '../../../constants/font_constants.dart';
 import '../../../enums/line_chart_type_enum.dart';
@@ -72,7 +72,7 @@ class _CostumeLineChartState extends State<CostumeLineChart> {
             belowBarData: chartType == LineChartType.oneLine
                 ? BarAreaData(
                     show: true,
-                    color: barsColor[index]?.withOpacity(0.3),
+                    color: barsColor[index]?.withValues(alpha: 0.3),
                   )
                 : null,
             barWidth: 2.w,

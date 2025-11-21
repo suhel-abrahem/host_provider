@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:math';
 
 import 'dart:ui';
 
@@ -10,33 +9,33 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:glass/glass.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hosta_provider/config/app/app_preferences.dart';
-import 'package:hosta_provider/config/route/routes_manager.dart';
-import 'package:hosta_provider/config/theme/app_theme.dart';
-import 'package:hosta_provider/core/constants/font_constants.dart';
-import 'package:hosta_provider/core/dependencies_injection.dart';
-import 'package:hosta_provider/core/resource/common_state_widget/error_state_widget.dart';
-import 'package:hosta_provider/core/resource/common_state_widget/no_data_state_widget.dart';
-import 'package:hosta_provider/core/resource/common_state_widget/no_internet_state_widget.dart';
-import 'package:hosta_provider/core/resource/custom_widget/custom_input_field/custom_input_field.dart';
-import 'package:hosta_provider/core/resource/custom_widget/snake_bar_widget/snake_bar_widget.dart';
-import 'package:hosta_provider/core/resource/image_widget.dart';
-import 'package:hosta_provider/core/resource/main_page/main_page.dart';
-import 'package:hosta_provider/core/resource/validator.dart';
-import 'package:hosta_provider/core/util/helper/helper.dart';
-import 'package:hosta_provider/features/login_page/domain/entities/login_state_entity.dart';
-import 'package:hosta_provider/features/profile_page/data/models/language_model.dart';
-import 'package:hosta_provider/features/profile_page/data/models/profile_model.dart';
-import 'package:hosta_provider/features/profile_page/data/models/set_profile_model.dart';
-import 'package:hosta_provider/features/profile_page/data/models/set_working_hours_model.dart';
-import 'package:hosta_provider/features/profile_page/data/models/working_time_model.dart';
-import 'package:hosta_provider/features/profile_page/domain/entities/profile_entity.dart';
-import 'package:hosta_provider/features/profile_page/domain/entities/working_hours_entity.dart';
-import 'package:hosta_provider/features/profile_page/presentation/bloc/get_profile_bloc.dart';
-import 'package:hosta_provider/features/profile_page/presentation/bloc/get_working_time_bloc.dart';
-import 'package:hosta_provider/features/profile_page/presentation/bloc/languges_bloc.dart';
-import 'package:hosta_provider/features/profile_page/presentation/widgets/account_info_row_widget.dart';
-import 'package:hosta_provider/generated/locale_keys.g.dart';
+import '../../../../config/app/app_preferences.dart';
+import '../../../../config/route/routes_manager.dart';
+import '../../../../config/theme/app_theme.dart';
+import '../../../../core/constants/font_constants.dart';
+import '../../../../core/dependencies_injection.dart';
+import '../../../../core/resource/common_state_widget/error_state_widget.dart';
+import '../../../../core/resource/common_state_widget/no_data_state_widget.dart';
+import '../../../../core/resource/common_state_widget/no_internet_state_widget.dart';
+import '../../../../core/resource/custom_widget/custom_input_field/custom_input_field.dart';
+import '../../../../core/resource/custom_widget/snake_bar_widget/snake_bar_widget.dart';
+import '../../../../core/resource/image_widget.dart';
+import '../../../../core/resource/main_page/main_page.dart';
+import '../../../../core/resource/validator.dart';
+import '../../../../core/util/helper/helper.dart';
+import '../../../login_page/domain/entities/login_state_entity.dart';
+import '../../data/models/language_model.dart';
+import '../../data/models/profile_model.dart';
+import '../../data/models/set_profile_model.dart';
+import '../../data/models/set_working_hours_model.dart';
+import '../../data/models/working_time_model.dart';
+import '../../domain/entities/profile_entity.dart';
+import '../../domain/entities/working_hours_entity.dart';
+import '../bloc/get_profile_bloc.dart';
+import '../bloc/get_working_time_bloc.dart';
+import '../bloc/languges_bloc.dart';
+import '../widgets/account_info_row_widget.dart';
+import '../../../../generated/locale_keys.g.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../../../signup_page/data/models/city_model.dart';
@@ -79,6 +78,7 @@ class _AccountPagePageState extends State<AccountPagePage> {
   String? avatarUrl;
   bool animationDone = false;
   List<WorkingTimeModel?>? scheduleList = [];
+  bool isLanguageISpeakError = false;
   @override
   void initState() {
     scheduleList = [
@@ -139,7 +139,6 @@ class _AccountPagePageState extends State<AccountPagePage> {
   Widget build(BuildContext context) {
     return MainPage(
       onAnimationComplete: (value) => setState(() {
-        print("animation done $value");
         animationDone = value;
       }),
       title: LocaleKeys.profilePage_account.tr(),
@@ -392,9 +391,6 @@ class _AccountPagePageState extends State<AccountPagePage> {
                                                           source: ImageSource
                                                               .gallery,
                                                         );
-                                                    print(
-                                                      "image ava ${image?.path}",
-                                                    );
 
                                                     final File? imageFile =
                                                         image != null
@@ -1255,7 +1251,11 @@ class _AccountPagePageState extends State<AccountPagePage> {
               child:
                   AnimatedContainer(
                     duration: const Duration(milliseconds: 300),
-                    height: languagesCanEdit ? 180.h : 130.h,
+                    height: isLanguageISpeakError
+                        ? 300.w
+                        : languagesCanEdit
+                        ? 180.h
+                        : 130.h,
                     padding: EdgeInsetsGeometry.symmetric(
                       horizontal: 16.w,
                       vertical: 16.h,
@@ -1275,6 +1275,9 @@ class _AccountPagePageState extends State<AccountPagePage> {
                                   .tr(),
                               context: context,
                             );
+                            setState(() {
+                              isLanguageISpeakError = true;
+                            });
                           } else if (state is LangugesStateLanguageSetSuccess) {
                             showMessage(
                               message: LocaleKeys.common_success.tr(),
@@ -1287,13 +1290,20 @@ class _AccountPagePageState extends State<AccountPagePage> {
                             );
                             setState(() {
                               languagesCanEdit = false;
+                              isLanguageISpeakError = false;
                             });
                           } else if (state is LangugesStateUnauthenticated) {
+                            setState(() {
+                              isLanguageISpeakError = true;
+                            });
                             getItInstance<AppPreferences>().setUserInfo(
                               loginStateEntity: LoginStateEntity(),
                             );
                             context.pushNamed(RoutesName.loginPage);
                           } else if (state is LangugesStateError) {
+                            setState(() {
+                              isLanguageISpeakError = true;
+                            });
                             showMessage(
                               message: LocaleKeys.common_error.tr(),
                               context: context,
@@ -1385,7 +1395,6 @@ class _AccountPagePageState extends State<AccountPagePage> {
                                         buildWhen: (previous, current) =>
                                             animationDone,
                                         builder: (context, state) {
-                                          print("language state: $state");
                                           return state.when(
                                             initial: () => Center(
                                               child:
@@ -1458,18 +1467,18 @@ class _AccountPagePageState extends State<AccountPagePage> {
                                               );
                                             },
                                             error: (message) => SizedBox(
-                                              height: 200.h,
+                                              height: 220.h,
                                               child: ErrorStateWidget(),
                                             ),
                                             noData: () => NodataStateWidget(),
                                             noInternet: () =>
                                                 NoInternetStateWidget(),
                                             unauthenticated: () => SizedBox(
-                                              height: 200.h,
+                                              height: 220.h,
                                               child: ErrorStateWidget(),
                                             ),
                                             languageSetSuccess: () => SizedBox(
-                                              height: 200.h,
+                                              height: 220.h,
                                               child: ErrorStateWidget(),
                                             ),
                                           );
@@ -1581,9 +1590,6 @@ class _AccountPagePageState extends State<AccountPagePage> {
                                                 if (isKurdishLanguageSelected)
                                                   "ku",
                                               ];
-                                              print(
-                                                "selected languages: $selectedLanguages",
-                                              );
                                               languageModel = languageModel
                                                   .copyWith(
                                                     languages:
@@ -1799,9 +1805,6 @@ class _AccountPagePageState extends State<AccountPagePage> {
                                           workingHoursEntity:
                                               workingHours?[index],
                                           onChanged: (value) {
-                                            print(
-                                              "changed working hours: $value",
-                                            );
                                             final existingIndex = scheduleList
                                                 ?.indexWhere(
                                                   (element) =>
@@ -1837,9 +1840,6 @@ class _AccountPagePageState extends State<AccountPagePage> {
                                       builder: (context, state) {
                                         return ElevatedButton(
                                           onPressed: () {
-                                            print(
-                                              "schedule list: $scheduleList",
-                                            );
                                             context.read<GetWorkingTimeBloc>().add(
                                               GetWorkingTimeEvent.setWorkingTime(
                                                 setWorkingHoursModel:

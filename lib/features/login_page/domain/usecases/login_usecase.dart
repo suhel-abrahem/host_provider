@@ -1,8 +1,8 @@
-import 'package:hosta_provider/core/data_state/data_state.dart';
-import 'package:hosta_provider/core/usecase/usecase.dart';
-import 'package:hosta_provider/features/login_page/data/models/login_state_model.dart';
-import 'package:hosta_provider/features/login_page/domain/entities/login_state_entity.dart';
-import 'package:hosta_provider/features/login_page/domain/repositories/login_repository.dart';
+import '../../../../core/data_state/data_state.dart';
+import '../../../../core/usecase/usecase.dart';
+import '../../data/models/login_state_model.dart';
+import '../entities/login_state_entity.dart';
+import '../repositories/login_repository.dart';
 
 class LoginUsecase
     implements UseCase<DataState<LoginStateEntity?>?, LoginStateModel> {

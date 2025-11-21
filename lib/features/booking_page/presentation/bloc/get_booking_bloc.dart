@@ -1,8 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hosta_provider/features/booking_page/domain/usecases/get_booking_usecase.dart';
-import 'package:hosta_provider/features/refresh_token/domain/repositories/refresh_token_repository.dart';
-import 'package:hosta_provider/features/refresh_token/domain/usecases/refresh_token_usecase.dart';
+import '../../domain/usecases/get_booking_usecase.dart';
+import '../../../refresh_token/domain/usecases/refresh_token_usecase.dart';
 
 import '../../../../config/app/app_preferences.dart';
 import '../../../../core/data_state/data_state.dart';
@@ -37,13 +36,7 @@ class GetBookingBloc extends Bloc<GetBookingEvent, GetBookingState> {
             ),
           )
           .then((onValue) async {
-            print(
-              "categoris page bloc get auth:${onValue?.data?.access_token}",
-            );
             if (onValue is DataSuccess) {
-              print(
-                "bloc token: ${event.getBookingModel?.copyWith(auth: onValue?.data?.access_token)}",
-              );
               await _getBookingUsecase(
                 params: event.getBookingModel?.copyWith(
                   auth: onValue?.data?.access_token,

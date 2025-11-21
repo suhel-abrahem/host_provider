@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hosta_provider/features/profile_page/data/models/set_profile_model.dart';
+import 'set_profile_model.dart';
 part 'profile_model.freezed.dart';
 part 'profile_model.g.dart';
 

@@ -1,15 +1,13 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 
-import 'package:hosta_provider/core/constants/api_constant.dart';
-import 'package:hosta_provider/core/data_state/data_state.dart';
+import '../../../../core/constants/api_constant.dart';
+import '../../../../core/data_state/data_state.dart';
 
-import 'package:hosta_provider/core/resource/common_service/common_service.dart';
-import 'package:hosta_provider/core/resource/connectivity/check_connectivity.dart';
-import 'package:hosta_provider/features/categories_page/data/models/get_category_model.dart';
-import 'package:hosta_provider/features/category_services_page/data/models/get_service_model.dart';
-import 'package:hosta_provider/features/categories_page/domain/entities/category_entity.dart';
-import 'package:hosta_provider/core/resource/common_entity/service_entity.dart';
-import 'package:hosta_provider/features/categories_page/domain/repositories/categories_page_repository.dart';
+import '../../../../core/resource/common_service/common_service.dart';
+import '../../../../core/resource/connectivity/check_connectivity.dart';
+import '../models/get_category_model.dart';
+import '../../domain/entities/category_entity.dart';
+import '../../domain/repositories/categories_page_repository.dart';
 
 class CategoriesPageImplementsRepository implements CategoriesPageRepository {
   final CheckConnectivity _checkConnectivity;

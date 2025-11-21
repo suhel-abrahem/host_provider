@@ -3,14 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hosta_provider/config/app/app_preferences.dart';
-import 'package:hosta_provider/config/route/routes_manager.dart';
-import 'package:hosta_provider/core/dependencies_injection.dart';
+import '../../../config/app/app_preferences.dart';
+import '../../../config/route/routes_manager.dart';
+import '../../dependencies_injection.dart';
 
-import 'package:hosta_provider/core/resource/custom_widget/snake_bar_widget/snake_bar_widget.dart';
-import 'package:hosta_provider/core/resource/main_page/drawer.dart';
-
-import 'animated_body_wrapper.dart';
+import '../custom_widget/snake_bar_widget/snake_bar_widget.dart';
+import 'drawer.dart';
 
 class MainPage extends StatefulWidget {
   final PreferredSizeWidget? appBar;
@@ -103,6 +101,11 @@ class _MainPageState extends State<MainPage> {
             },
             onVerticalDragEnd: (details) {
               if (yOffset > 90) {
+                setState(() {
+                  yOffset = 0;
+                  animationDone = false;
+                });
+
                 context.go(currentPath ?? RoutesPath.homePage);
               }
               setState(() {

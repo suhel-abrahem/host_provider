@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hosta_provider/features/profile_page/data/models/working_time_model.dart';
+import 'working_time_model.dart';
 
 part 'set_working_hours_model.freezed.dart';
 part 'set_working_hours_model.g.dart';

@@ -1,25 +1,24 @@
-import 'dart:convert';
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:hosta_provider/core/constants/api_constant.dart';
-import 'package:hosta_provider/core/data_state/data_state.dart';
-import 'package:hosta_provider/core/resource/common_service/common_service.dart';
-import 'package:hosta_provider/features/profile_page/data/models/language_model.dart';
+import '../../../../core/constants/api_constant.dart';
+import '../../../../core/data_state/data_state.dart';
+import '../../../../core/resource/common_service/common_service.dart';
+import '../models/language_model.dart';
 
-import 'package:hosta_provider/features/profile_page/data/models/profile_model.dart';
+import '../models/profile_model.dart';
 
-import 'package:hosta_provider/features/profile_page/data/models/set_time_off_model.dart';
+import '../models/set_time_off_model.dart';
 
-import 'package:hosta_provider/features/profile_page/data/models/set_working_hours_model.dart';
-import 'package:hosta_provider/features/profile_page/domain/entities/language_entity.dart';
+import '../models/set_working_hours_model.dart';
+import '../../domain/entities/language_entity.dart';
 
-import 'package:hosta_provider/features/profile_page/domain/entities/profile_entity.dart';
+import '../../domain/entities/profile_entity.dart';
 
-import 'package:hosta_provider/features/profile_page/domain/entities/time_of_entity.dart';
+import '../../domain/entities/time_of_entity.dart';
 
-import 'package:hosta_provider/features/profile_page/domain/entities/working_hours_entity.dart';
+import '../../domain/entities/working_hours_entity.dart';
 
 import '../../../../core/resource/connectivity/check_connectivity.dart';
 import '../../domain/repositories/profile_repository.dart';
@@ -40,14 +39,14 @@ class ProfileRepositoryImplements implements ProfileRepository {
       return NOInternetDataState();
     }
     DataState<ProfileEntity?>? dataState;
-    CommonService _commonService = CommonService(
+    CommonService commonService = CommonService(
       headers: {
         'Authorization': 'Bearer ${profileModel?.authToken}',
         "Accept-Language": profileModel?.acceptLanguage ?? "ar",
       },
     );
     try {
-      await _commonService.get(ApiConstant.meEndpoint).then((response) {
+      await commonService.get(ApiConstant.meEndpoint).then((response) {
         if (response is DataSuccess) {
           dataState = DataSuccess<ProfileEntity?>(
             data: ProfileEntity.fromJson(response.data?.data["data"]),
@@ -92,14 +91,14 @@ class ProfileRepositoryImplements implements ProfileRepository {
       return NOInternetDataState();
     }
     DataState<List<WorkingHoursEntity?>?>? dataState;
-    CommonService _commonService = CommonService(
+    CommonService commonService = CommonService(
       headers: {
         'Authorization': 'Bearer ${profileModel?.authToken}',
         "Accept-Language": profileModel?.acceptLanguage ?? "ar",
       },
     );
     try {
-      await _commonService
+      await commonService
           .get("${ApiConstant.workingHoursEndpoint}/${profileModel?.id}")
           .then((response) {
             if (response is DataSuccess) {
@@ -138,14 +137,14 @@ class ProfileRepositoryImplements implements ProfileRepository {
       }
     });
     DataState<void>? dataState;
-    CommonService _commonService = CommonService(
+    CommonService commonService = CommonService(
       headers: {
         'Authorization': 'Bearer ${profileModel?.authToken}',
         "Accept-Language": profileModel?.acceptLanguage ?? "ar",
       },
     );
     try {
-      await _commonService.post(ApiConstant.logoutEndpoint).then((response) {
+      await commonService.post(ApiConstant.logoutEndpoint).then((response) {
         if (response is DataSuccess) {
           dataState = DataSuccess<void>(data: null);
           return dataState;
@@ -189,7 +188,7 @@ class ProfileRepositoryImplements implements ProfileRepository {
       return NOInternetDataState();
     }
     DataState<List<WorkingHoursEntity?>?>? dataState;
-    CommonService _commonService = CommonService(
+    CommonService commonService = CommonService(
       headers: {
         'Authorization': 'Bearer ${profileModel?.authToken}',
         "Accept-Language": profileModel?.acceptLanguage ?? "ar",
@@ -215,12 +214,9 @@ class ProfileRepositoryImplements implements ProfileRepository {
 
       dataMap['schedule'] = workingTimeData;
 
-      print("working time data from repo: $dataMap");
-
-      await _commonService
+      await commonService
           .post("${ApiConstant.workingHoursEndpoint}/bulk", data: dataMap)
           .then((response) {
-            print("Response from setWorkingHours: ${response.error}");
             if (response is DataSuccess) {
               List<WorkingHoursEntity?> workingHours = [];
               for (var item in response.data?.data["data"]) {
@@ -244,7 +240,6 @@ class ProfileRepositoryImplements implements ProfileRepository {
             }
           });
     } catch (e) {
-      print("Error in setWorkingHours catch $e");
       dataState = DataFailed(error: e.toString());
     }
     return dataState;
@@ -262,7 +257,7 @@ class ProfileRepositoryImplements implements ProfileRepository {
       return NOInternetDataState();
     }
     DataState<ProfileEntity?>? dataState;
-    CommonService _commonService = CommonService(
+    CommonService commonService = CommonService(
       headers: {
         'Authorization': 'Bearer ${profileModel?.authToken}',
         "Accept-Language": profileModel?.acceptLanguage ?? "ar",
@@ -301,17 +296,13 @@ class ProfileRepositoryImplements implements ProfileRepository {
 
       // Convert map to FormData
       final formData = FormData.fromMap(dataMap);
-      await _commonService
+      await commonService
           .post(
             ApiConstant.updateProfileEndpoint,
             data: formData,
             options: Options(contentType: 'multipart/form-data'),
           )
           .then((response) {
-            print(
-              "update profile response: ${{if (profileModel?.profile?.name != null || (profileModel?.profile?.name?.trim().isNotEmpty ?? false)) "name": profileModel?.profile?.name, if (profileModel?.profile?.email != null || (profileModel?.profile?.email?.trim().isNotEmpty ?? false)) "email": profileModel?.profile?.email, if (profileModel?.profile?.phone != null || (profileModel?.profile?.phone?.trim().isNotEmpty ?? false)) "phone": profileModel?.profile?.phone, if (profileModel?.profile?.address != null || (profileModel?.profile?.address?.trim().isNotEmpty ?? false)) "address": profileModel?.profile?.address, if (profileModel?.profile?.avatar != null) "avatar": File(profileModel?.profile?.avatar.toString() ?? ""), if (profileModel?.profile?.city_id != null) "city_id": profileModel?.profile?.city_id, if (profileModel?.profile?.dob != null || (profileModel?.profile?.dob?.trim().isNotEmpty ?? false)) "dob": profileModel?.profile?.dob}}",
-            );
-            print("update profile response data: ${response}");
             if (response is DataSuccess) {
               dataState = DataSuccess<ProfileEntity?>(
                 data: ProfileEntity.fromJson(response.data?.data["data"]),
@@ -334,11 +325,9 @@ class ProfileRepositoryImplements implements ProfileRepository {
             }
           });
     } catch (e) {
-      print("update profile error: $e");
       dataState = DataFailed(error: e.toString());
       return dataState;
     }
-    print("data state in repo: ${dataState?.error}");
     return dataState;
   }
 
@@ -362,7 +351,6 @@ class ProfileRepositoryImplements implements ProfileRepository {
       return NOInternetDataState();
     }
     DataState<List<LanguageEntity?>?>? dataState;
-    print("auth token in repo: ${profileModel?.auth}");
     CommonService commonService = CommonService(
       headers: {'Authorization': 'Bearer ${profileModel?.auth}'},
     );
@@ -370,7 +358,6 @@ class ProfileRepositoryImplements implements ProfileRepository {
       await commonService.get(ApiConstant.getLanguagesEndpoint).then((
         response,
       ) {
-        print("get languages response: $response");
         if (response is DataSuccess) {
           List<LanguageEntity?> languages = [];
           for (var item in response.data?.data["data"]) {
@@ -413,14 +400,14 @@ class ProfileRepositoryImplements implements ProfileRepository {
       return NOInternetDataState();
     }
     DataState<List<LanguageEntity?>?>? dataState;
-    CommonService _commonService = CommonService(
+    CommonService commonService = CommonService(
       headers: {
         'Authorization': 'Bearer ${profileModel?.auth}',
         "Accept-Language": profileModel?.acceptLanguage ?? "ar",
       },
     );
     try {
-      await _commonService
+      await commonService
           .post(
             ApiConstant.setLanguagesEndpoint,
             data: {"languages": profileModel?.languages},

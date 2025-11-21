@@ -1,10 +1,10 @@
-import 'package:hosta_provider/core/data_state/data_state.dart';
-import 'package:hosta_provider/features/profile_page/data/models/language_model.dart';
-import 'package:hosta_provider/features/profile_page/data/models/profile_model.dart';
-import 'package:hosta_provider/features/profile_page/data/models/set_time_off_model.dart';
-import 'package:hosta_provider/features/profile_page/domain/entities/language_entity.dart';
-import 'package:hosta_provider/features/profile_page/domain/entities/time_of_entity.dart';
-import 'package:hosta_provider/features/profile_page/domain/entities/working_hours_entity.dart';
+import '../../../../core/data_state/data_state.dart';
+import '../../data/models/language_model.dart';
+import '../../data/models/profile_model.dart';
+import '../../data/models/set_time_off_model.dart';
+import '../entities/language_entity.dart';
+import '../entities/time_of_entity.dart';
+import '../entities/working_hours_entity.dart';
 
 import '../../data/models/set_working_hours_model.dart';
 import '../entities/profile_entity.dart';

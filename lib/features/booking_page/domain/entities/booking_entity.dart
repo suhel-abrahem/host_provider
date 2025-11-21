@@ -1,7 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hosta_provider/core/resource/common_entity/customer_entity.dart';
-import 'package:hosta_provider/core/resource/common_entity/provider_entity.dart';
-import 'package:hosta_provider/core/resource/common_entity/service_entity.dart';
 part 'booking_entity.freezed.dart';
 part 'booking_entity.g.dart';
 

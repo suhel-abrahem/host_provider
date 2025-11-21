@@ -17,6 +17,8 @@
 //     return addressList;
 //   }
 
+// ignore_for_file: file_names
+
 //   @override
 //   String? toJson(List? object) {}
 // }

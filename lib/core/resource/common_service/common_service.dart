@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:hosta_provider/core/constants/api_constant.dart';
+import '../../constants/api_constant.dart';
 
 import '../../data_state/data_state.dart';
 
@@ -67,7 +67,6 @@ class CommonService {
       } else if ((e.response?.statusCode ?? 0) == 422) {
         return DataError(data: e.response, error: e.response?.statusMessage);
       } else if ((e.response?.statusCode ?? 0) == 403) {
-        print("error 403:${e.response}");
         return DataError(data: e.response, error: e.response?.statusMessage);
       } else if ((e.response?.statusCode ?? 0) == 404) {
         return NotFoundDataState(error: e.response?.statusMessage);
@@ -97,7 +96,6 @@ class CommonService {
       } else if ((e.response?.statusCode ?? 0) == 422) {
         return DataError(data: e.response, error: e.response?.statusMessage);
       } else if ((e.response?.statusCode ?? 0) == 403) {
-        print("error 403:${e.response}");
         return DataError(data: e.response, error: e.response?.statusMessage);
       } else if ((e.response?.statusCode ?? 0) == 404) {
         return NotFoundDataState(error: e.response?.statusMessage);
@@ -127,7 +125,6 @@ class CommonService {
       } else if ((e.response?.statusCode ?? 0) == 422) {
         return DataError(data: e.response, error: e.response?.statusMessage);
       } else if ((e.response?.statusCode ?? 0) == 403) {
-        print("error 403:${e.response}");
         return DataError(data: e.response, error: e.response?.statusMessage);
       } else if ((e.response?.statusCode ?? 0) == 404) {
         return NotFoundDataState(error: e.response?.statusMessage);

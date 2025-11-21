@@ -1,15 +1,17 @@
+// ignore_for_file: file_names
+
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:hosta_provider/core/constants/api_constant.dart';
-import 'package:hosta_provider/core/data_state/data_state.dart';
+import '../../../../core/constants/api_constant.dart';
+import '../../../../core/data_state/data_state.dart';
 
-import 'package:hosta_provider/core/resource/common_entity/service_entity.dart';
-import 'package:hosta_provider/core/resource/common_entity/service_error_entity.dart';
-import 'package:hosta_provider/core/resource/common_service/common_service.dart';
-import 'package:hosta_provider/core/resource/connectivity/check_connectivity.dart';
+import '../../../../core/resource/common_entity/service_entity.dart';
+import '../../../../core/resource/common_entity/service_error_entity.dart';
+import '../../../../core/resource/common_service/common_service.dart';
+import '../../../../core/resource/connectivity/check_connectivity.dart';
 
-import 'package:hosta_provider/features/category_services_page/data/models/get_service_model.dart';
+import '../models/get_service_model.dart';
 
-import 'package:hosta_provider/features/category_services_page/data/models/set_service_model.dart';
+import '../models/set_service_model.dart';
 
 import '../../domain/repositories/category_services_repository.dart';
 
@@ -80,7 +82,6 @@ class CategoryServicesRepositoryImplements
     if (connectivityResult == ConnectivityResult.none) {
       return NOInternetDataState();
     }
-    print("from repo token:${setServiceModel?.authorization}");
     CommonService commonService = CommonService(
       headers: {
         "Authorization": "Bearer ${setServiceModel?.authorization}",
@@ -91,7 +92,6 @@ class CategoryServicesRepositoryImplements
     DataState<ServiceEntity?>? response;
 
     try {
-      print("from repo json:${setServiceModel?.serviceModel?.toJson()}");
       await commonService
           .post(
             ApiConstant.setServices,
@@ -137,7 +137,6 @@ class CategoryServicesRepositoryImplements
     if (connectivityResult == ConnectivityResult.none) {
       return NOInternetDataState();
     }
-    print("from repo token:${setServiceModel?.authorization}");
     CommonService commonService = CommonService(
       headers: {
         "Authorization": "Bearer ${setServiceModel?.authorization}",
@@ -148,7 +147,6 @@ class CategoryServicesRepositoryImplements
     DataState<ServiceEntity?>? response;
 
     try {
-      print("from repo json:${setServiceModel?.serviceModel?.toJson()}");
       await commonService
           .put(
             "${ApiConstant.setServices}/${setServiceModel?.serviceModel?.id}",
@@ -194,7 +192,6 @@ class CategoryServicesRepositoryImplements
     if (connectivityResult == ConnectivityResult.none) {
       return NOInternetDataState();
     }
-    print("from repo token:${setServiceModel?.authorization}");
     CommonService commonService = CommonService(
       headers: {
         "Authorization": "Bearer ${setServiceModel?.authorization}",
@@ -204,13 +201,11 @@ class CategoryServicesRepositoryImplements
     DataState<ServiceEntity?>? response;
 
     try {
-      print("from repo json:${setServiceModel?.serviceModel?.toJson()}");
       await commonService
           .delete(
             "${ApiConstant.setServices}/${setServiceModel?.serviceModel?.id}",
           )
           .then((onValue) {
-            print("im delet repo:$onValue");
             if (onValue is DataSuccess) {
               response = DataSuccess();
               return response;

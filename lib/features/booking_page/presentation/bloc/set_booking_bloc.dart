@@ -34,13 +34,7 @@ class SetBookingBloc extends Bloc<SetBookingEvent, SetBookingState> {
             ),
           )
           .then((onValue) async {
-            print(
-              "categoris page bloc get auth:${onValue?.data?.access_token}",
-            );
             if (onValue is DataSuccess) {
-              print(
-                "bloc token: ${event.getBookingModel?.copyWith(auth: onValue?.data?.access_token)}",
-              );
               await _setBookingUsecase(
                 params: event.getBookingModel?.copyWith(
                   auth: onValue?.data?.access_token,

@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$TokenEntity {
 
- String? get access_token; String? get token_type; int? get expires_in; String? get created_in;
+ String? get access_token; String? get refresh_token; String? get token_type; int? get expires_in; String? get created_in;
 /// Create a copy of TokenEntity
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $TokenEntityCopyWith<TokenEntity> get copyWith => _$TokenEntityCopyWithImpl<Toke
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is TokenEntity&&(identical(other.access_token, access_token) || other.access_token == access_token)&&(identical(other.token_type, token_type) || other.token_type == token_type)&&(identical(other.expires_in, expires_in) || other.expires_in == expires_in)&&(identical(other.created_in, created_in) || other.created_in == created_in));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is TokenEntity&&(identical(other.access_token, access_token) || other.access_token == access_token)&&(identical(other.refresh_token, refresh_token) || other.refresh_token == refresh_token)&&(identical(other.token_type, token_type) || other.token_type == token_type)&&(identical(other.expires_in, expires_in) || other.expires_in == expires_in)&&(identical(other.created_in, created_in) || other.created_in == created_in));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,access_token,token_type,expires_in,created_in);
+int get hashCode => Object.hash(runtimeType,access_token,refresh_token,token_type,expires_in,created_in);
 
 @override
 String toString() {
-  return 'TokenEntity(access_token: $access_token, token_type: $token_type, expires_in: $expires_in, created_in: $created_in)';
+  return 'TokenEntity(access_token: $access_token, refresh_token: $refresh_token, token_type: $token_type, expires_in: $expires_in, created_in: $created_in)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $TokenEntityCopyWith<$Res>  {
   factory $TokenEntityCopyWith(TokenEntity value, $Res Function(TokenEntity) _then) = _$TokenEntityCopyWithImpl;
 @useResult
 $Res call({
- String? access_token, String? token_type, int? expires_in, String? created_in
+ String? access_token, String? refresh_token, String? token_type, int? expires_in, String? created_in
 });
 
 
@@ -65,9 +65,10 @@ class _$TokenEntityCopyWithImpl<$Res>
 
 /// Create a copy of TokenEntity
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? access_token = freezed,Object? token_type = freezed,Object? expires_in = freezed,Object? created_in = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? access_token = freezed,Object? refresh_token = freezed,Object? token_type = freezed,Object? expires_in = freezed,Object? created_in = freezed,}) {
   return _then(_self.copyWith(
 access_token: freezed == access_token ? _self.access_token : access_token // ignore: cast_nullable_to_non_nullable
+as String?,refresh_token: freezed == refresh_token ? _self.refresh_token : refresh_token // ignore: cast_nullable_to_non_nullable
 as String?,token_type: freezed == token_type ? _self.token_type : token_type // ignore: cast_nullable_to_non_nullable
 as String?,expires_in: freezed == expires_in ? _self.expires_in : expires_in // ignore: cast_nullable_to_non_nullable
 as int?,created_in: freezed == created_in ? _self.created_in : created_in // ignore: cast_nullable_to_non_nullable
@@ -156,10 +157,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? access_token,  String? token_type,  int? expires_in,  String? created_in)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? access_token,  String? refresh_token,  String? token_type,  int? expires_in,  String? created_in)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _TokenEntity() when $default != null:
-return $default(_that.access_token,_that.token_type,_that.expires_in,_that.created_in);case _:
+return $default(_that.access_token,_that.refresh_token,_that.token_type,_that.expires_in,_that.created_in);case _:
   return orElse();
 
 }
@@ -177,10 +178,10 @@ return $default(_that.access_token,_that.token_type,_that.expires_in,_that.creat
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? access_token,  String? token_type,  int? expires_in,  String? created_in)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? access_token,  String? refresh_token,  String? token_type,  int? expires_in,  String? created_in)  $default,) {final _that = this;
 switch (_that) {
 case _TokenEntity():
-return $default(_that.access_token,_that.token_type,_that.expires_in,_that.created_in);case _:
+return $default(_that.access_token,_that.refresh_token,_that.token_type,_that.expires_in,_that.created_in);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -197,10 +198,10 @@ return $default(_that.access_token,_that.token_type,_that.expires_in,_that.creat
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? access_token,  String? token_type,  int? expires_in,  String? created_in)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? access_token,  String? refresh_token,  String? token_type,  int? expires_in,  String? created_in)?  $default,) {final _that = this;
 switch (_that) {
 case _TokenEntity() when $default != null:
-return $default(_that.access_token,_that.token_type,_that.expires_in,_that.created_in);case _:
+return $default(_that.access_token,_that.refresh_token,_that.token_type,_that.expires_in,_that.created_in);case _:
   return null;
 
 }
@@ -212,10 +213,11 @@ return $default(_that.access_token,_that.token_type,_that.expires_in,_that.creat
 @JsonSerializable()
 
 class _TokenEntity implements TokenEntity {
-  const _TokenEntity({this.access_token = "", this.token_type = "", this.expires_in = 0, this.created_in = ""});
+  const _TokenEntity({this.access_token = "", this.refresh_token = "", this.token_type = "", this.expires_in = 0, this.created_in = ""});
   factory _TokenEntity.fromJson(Map<String, dynamic> json) => _$TokenEntityFromJson(json);
 
 @override@JsonKey() final  String? access_token;
+@override@JsonKey() final  String? refresh_token;
 @override@JsonKey() final  String? token_type;
 @override@JsonKey() final  int? expires_in;
 @override@JsonKey() final  String? created_in;
@@ -233,16 +235,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TokenEntity&&(identical(other.access_token, access_token) || other.access_token == access_token)&&(identical(other.token_type, token_type) || other.token_type == token_type)&&(identical(other.expires_in, expires_in) || other.expires_in == expires_in)&&(identical(other.created_in, created_in) || other.created_in == created_in));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _TokenEntity&&(identical(other.access_token, access_token) || other.access_token == access_token)&&(identical(other.refresh_token, refresh_token) || other.refresh_token == refresh_token)&&(identical(other.token_type, token_type) || other.token_type == token_type)&&(identical(other.expires_in, expires_in) || other.expires_in == expires_in)&&(identical(other.created_in, created_in) || other.created_in == created_in));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,access_token,token_type,expires_in,created_in);
+int get hashCode => Object.hash(runtimeType,access_token,refresh_token,token_type,expires_in,created_in);
 
 @override
 String toString() {
-  return 'TokenEntity(access_token: $access_token, token_type: $token_type, expires_in: $expires_in, created_in: $created_in)';
+  return 'TokenEntity(access_token: $access_token, refresh_token: $refresh_token, token_type: $token_type, expires_in: $expires_in, created_in: $created_in)';
 }
 
 
@@ -253,7 +255,7 @@ abstract mixin class _$TokenEntityCopyWith<$Res> implements $TokenEntityCopyWith
   factory _$TokenEntityCopyWith(_TokenEntity value, $Res Function(_TokenEntity) _then) = __$TokenEntityCopyWithImpl;
 @override @useResult
 $Res call({
- String? access_token, String? token_type, int? expires_in, String? created_in
+ String? access_token, String? refresh_token, String? token_type, int? expires_in, String? created_in
 });
 
 
@@ -270,9 +272,10 @@ class __$TokenEntityCopyWithImpl<$Res>
 
 /// Create a copy of TokenEntity
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? access_token = freezed,Object? token_type = freezed,Object? expires_in = freezed,Object? created_in = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? access_token = freezed,Object? refresh_token = freezed,Object? token_type = freezed,Object? expires_in = freezed,Object? created_in = freezed,}) {
   return _then(_TokenEntity(
 access_token: freezed == access_token ? _self.access_token : access_token // ignore: cast_nullable_to_non_nullable
+as String?,refresh_token: freezed == refresh_token ? _self.refresh_token : refresh_token // ignore: cast_nullable_to_non_nullable
 as String?,token_type: freezed == token_type ? _self.token_type : token_type // ignore: cast_nullable_to_non_nullable
 as String?,expires_in: freezed == expires_in ? _self.expires_in : expires_in // ignore: cast_nullable_to_non_nullable
 as int?,created_in: freezed == created_in ? _self.created_in : created_in // ignore: cast_nullable_to_non_nullable

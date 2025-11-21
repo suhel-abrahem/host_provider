@@ -1,8 +1,8 @@
-import 'package:hosta_provider/core/data_state/data_state.dart';
-import 'package:hosta_provider/core/usecase/usecase.dart';
-import 'package:hosta_provider/features/signup_page/data/models/city_model.dart';
-import 'package:hosta_provider/features/signup_page/domain/entities/city_entity.dart';
-import 'package:hosta_provider/features/signup_page/domain/repositories/get_cities_repository.dart';
+import '../../../../core/data_state/data_state.dart';
+import '../../../../core/usecase/usecase.dart';
+import '../../data/models/city_model.dart';
+import '../entities/city_entity.dart';
+import '../repositories/get_cities_repository.dart';
 
 class GetCitiesUsecase
     implements UseCase<DataState<List<CityEntity?>?>?, CityModel?> {

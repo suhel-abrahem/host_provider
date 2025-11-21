@@ -1,7 +1,4 @@
-import 'dart:io';
-
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hosta_provider/features/signup_page/domain/entities/otp_entity.dart';
 part 'signup_entity.freezed.dart';
 part 'signup_entity.g.dart';
 

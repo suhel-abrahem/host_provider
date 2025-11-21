@@ -1,8 +1,8 @@
-import 'package:hosta_provider/core/data_state/data_state.dart';
-import 'package:hosta_provider/core/usecase/usecase.dart';
-import 'package:hosta_provider/features/login_page/domain/entities/login_state_entity.dart';
-import 'package:hosta_provider/features/otp_page/data/models/otp_model.dart';
-import 'package:hosta_provider/features/otp_page/domain/repositories/otp_verifiy_repository.dart';
+import '../../../../core/data_state/data_state.dart';
+import '../../../../core/usecase/usecase.dart';
+import '../../../login_page/domain/entities/login_state_entity.dart';
+import '../../data/models/otp_model.dart';
+import '../repositories/otp_verifiy_repository.dart';
 
 class OtpVerifyUsecase
     implements UseCase<DataState<LoginStateEntity?>?, OtpModel> {

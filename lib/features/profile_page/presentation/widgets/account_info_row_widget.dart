@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:glass/glass.dart';
-import 'package:hosta_provider/config/theme/app_theme.dart';
+import '../../../../config/theme/app_theme.dart';
 
 import '../../../../core/resource/custom_widget/custom_input_field/custom_input_field.dart';
 

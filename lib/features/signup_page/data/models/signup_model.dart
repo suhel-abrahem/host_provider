@@ -1,8 +1,5 @@
 // ignore_for_file: non_constant_identifier_names
 
-import 'dart:io';
-import 'dart:typed_data';
-
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hosta_provider/features/signup_page/data/models/uint8list_json_converter.dart';
 part 'signup_model.freezed.dart';

@@ -2,15 +2,14 @@ import 'package:easy_localization/easy_localization.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get_it/get_it.dart';
-import 'package:hosta_provider/config/app/app.dart';
-import 'package:hosta_provider/config/app/app_preferences.dart';
-import 'package:hosta_provider/core/constants/language_constant.dart';
-import 'package:hosta_provider/core/dependencies_injection.dart';
-import 'package:hosta_provider/core/util/helper/helper.dart';
+import 'config/app/app.dart';
+import 'config/app/app_preferences.dart';
+import 'core/constants/language_constant.dart';
+import 'core/dependencies_injection.dart';
+import 'core/util/helper/helper.dart';
 
 void main() async {
-  await WidgetsFlutterBinding.ensureInitialized();
+  WidgetsFlutterBinding.ensureInitialized();
   await initDependencies();
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
@@ -43,5 +42,4 @@ void main() async {
       child: HostaProvider(),
     ),
   );
-  print("from main:${getItInstance<AppPreferences>().getUserInfo()}");
 }

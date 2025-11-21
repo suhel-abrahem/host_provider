@@ -2,9 +2,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:glass/glass.dart';
-import 'package:hosta_provider/config/theme/app_theme.dart';
-import 'package:hosta_provider/core/resource/common_entity/service_entity.dart';
-import 'package:hosta_provider/features/booking_page/domain/entities/booking_entity.dart';
+import '../../../../config/theme/app_theme.dart';
+import '../../domain/entities/booking_entity.dart';
 
 import '../../../../core/constants/font_constants.dart';
 import '../../../../core/util/helper/helper.dart';

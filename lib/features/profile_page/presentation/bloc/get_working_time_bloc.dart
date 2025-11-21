@@ -1,12 +1,12 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hosta_provider/features/login_page/domain/entities/login_state_entity.dart';
-import 'package:hosta_provider/features/profile_page/data/models/profile_model.dart';
-import 'package:hosta_provider/features/profile_page/data/models/set_working_hours_model.dart';
-import 'package:hosta_provider/features/profile_page/domain/usecases/get_working_time_usecase.dart';
-import 'package:hosta_provider/features/profile_page/domain/usecases/set_working_time_usecase.dart';
-import 'package:hosta_provider/features/profile_page/domain/usecases/update_working_time_usecase.dart';
-import 'package:hosta_provider/features/refresh_token/domain/usecases/refresh_token_usecase.dart';
+import '../../../login_page/domain/entities/login_state_entity.dart';
+import '../../data/models/profile_model.dart';
+import '../../data/models/set_working_hours_model.dart';
+import '../../domain/usecases/get_working_time_usecase.dart';
+import '../../domain/usecases/set_working_time_usecase.dart';
+import '../../domain/usecases/update_working_time_usecase.dart';
+import '../../../refresh_token/domain/usecases/refresh_token_usecase.dart';
 
 import '../../../../config/app/app_preferences.dart';
 import '../../../../core/data_state/data_state.dart';
@@ -23,6 +23,7 @@ class GetWorkingTimeBloc
   final RefreshTokenUsecase _refreshTokenUsecase;
   final GetWorkingTimeUseCase _getWorkingTimeUseCase;
   final SetWorkingTimeUseCase _setWorkingTimeUseCase;
+  // ignore: unused_field
   final UpdateWorkingTimeUseCase _updateWorkingTimeUseCase;
   GetWorkingTimeBloc(
     this._refreshTokenUsecase,
@@ -53,13 +54,7 @@ class GetWorkingTimeBloc
                     ),
                   )
                   .then((getWorkingTimeOnValue) {
-                    print(
-                      "im working hours bloc :${getWorkingTimeOnValue?.error}",
-                    );
                     if (getWorkingTimeOnValue is DataSuccess) {
-                      print(
-                        "im working hours bloc :${getWorkingTimeOnValue?.data}",
-                      );
                       emit(
                         GetWorkingTimeState.loaded(
                           workingHours: getWorkingTimeOnValue?.data,
@@ -102,9 +97,6 @@ class GetWorkingTimeBloc
                     ),
                   )
                   .then((setWorkingTimeOnValue) {
-                    print(
-                      "im set working hours bloc :${setWorkingTimeOnValue}",
-                    );
                     if (setWorkingTimeOnValue is DataSuccess) {
                       emit(GetWorkingTimeState.setSuccessfully());
                     } else if (setWorkingTimeOnValue

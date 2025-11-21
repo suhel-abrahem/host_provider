@@ -227,7 +227,8 @@ class CodegenLoader extends AssetLoader{
     "resend": "إعادة الإرسال",
     "wrongOtp": "رمز تحقق خاطئ",
     "verified": "تم التحقق",
-    "verify": "تحقق"
+    "verify": "تحقق",
+    "resendIn": "إعادة الإرسال في"
   },
   "categoryServices": {
     "title": "خدمات الفئة",
@@ -478,7 +479,8 @@ static const Map<String,dynamic> _en = {
     "resend": "Resend",
     "wrongOtp": "Incorrect verification code",
     "verified": "Verified",
-    "verify": "Verify"
+    "verify": "Verify",
+    "resendIn": "Resend in"
   },
   "categoryServices": {
     "title": "Category services",
@@ -729,7 +731,8 @@ static const Map<String,dynamic> _fa = {
     "resend": "دووبارە ناردن",
     "wrongOtp": "OTP نادروست",
     "verified": "پشکنین کراو",
-    "verify": "پشکنین"
+    "verify": "پشکنین",
+    "resendIn": "دووبارە ناردن لە"
   },
   "categoryServices": {
     "title": "خزمەتگوزاریەکانی پۆل",

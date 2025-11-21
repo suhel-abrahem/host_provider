@@ -211,7 +211,8 @@
     "resend": "إعادة الإرسال",
     "wrongOtp": "رمز تحقق خاطئ",
     "verified": "تم التحقق",
-    "verify": "تحقق"
+    "verify": "تحقق",
+    "resendIn": "إعادة الإرسال في"
   },
   "categoryServices": {
     "title": "خدمات الفئة",

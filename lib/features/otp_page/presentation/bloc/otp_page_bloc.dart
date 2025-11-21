@@ -1,10 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hosta_provider/core/data_state/data_state.dart';
-import 'package:hosta_provider/features/login_page/domain/entities/login_state_entity.dart';
-import 'package:hosta_provider/features/otp_page/data/models/otp_model.dart';
-import 'package:hosta_provider/features/otp_page/domain/usecases/otp_resend_usecase.dart';
-import 'package:hosta_provider/features/otp_page/domain/usecases/otp_verify_usecase.dart';
+import '../../../../core/data_state/data_state.dart';
+import '../../../login_page/domain/entities/login_state_entity.dart';
+import '../../data/models/otp_model.dart';
+import '../../domain/usecases/otp_resend_usecase.dart';
+import '../../domain/usecases/otp_verify_usecase.dart';
 
 part 'otp_page_event.dart';
 part 'otp_page_state.dart';

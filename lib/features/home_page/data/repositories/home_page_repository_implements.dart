@@ -1,8 +1,8 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:hosta_provider/core/constants/api_constant.dart';
-import 'package:hosta_provider/core/resource/common_service/common_service.dart';
-import 'package:hosta_provider/core/resource/connectivity/check_connectivity.dart';
-import 'package:hosta_provider/features/home_page/data/models/home_page_model.dart';
+import '../../../../core/constants/api_constant.dart';
+import '../../../../core/resource/common_service/common_service.dart';
+import '../../../../core/resource/connectivity/check_connectivity.dart';
+import '../models/home_page_model.dart';
 
 import '../../../../core/data_state/data_state.dart';
 import '../../domain/entities/home_page_entity.dart';

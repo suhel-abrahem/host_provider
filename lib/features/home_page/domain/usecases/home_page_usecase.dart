@@ -1,5 +1,5 @@
-import 'package:hosta_provider/core/data_state/data_state.dart';
-import 'package:hosta_provider/core/usecase/usecase.dart';
+import '../../../../core/data_state/data_state.dart';
+import '../../../../core/usecase/usecase.dart';
 
 import '../../data/models/home_page_model.dart';
 import '../entities/home_page_entity.dart';

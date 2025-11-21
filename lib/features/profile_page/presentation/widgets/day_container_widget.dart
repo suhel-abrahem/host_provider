@@ -2,13 +2,12 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:glass/glass.dart';
-import 'package:hosta_provider/config/theme/app_theme.dart';
-import 'package:hosta_provider/core/constants/font_constants.dart';
-import 'package:hosta_provider/core/resource/custom_widget/custom_input_field/custom_input_field.dart';
-import 'package:hosta_provider/core/util/helper/helper.dart';
-import 'package:hosta_provider/features/profile_page/data/models/set_working_hours_model.dart';
-import 'package:hosta_provider/features/profile_page/data/models/working_time_model.dart';
-import 'package:hosta_provider/features/profile_page/domain/entities/working_hours_entity.dart';
+import '../../../../config/theme/app_theme.dart';
+import '../../../../core/constants/font_constants.dart';
+import '../../../../core/resource/custom_widget/custom_input_field/custom_input_field.dart';
+import '../../../../core/util/helper/helper.dart';
+import '../../data/models/working_time_model.dart';
+import '../../domain/entities/working_hours_entity.dart';
 
 import '../../../../generated/locale_keys.g.dart';
 
@@ -145,7 +144,7 @@ class _DayContainerWidgetState extends State<DayContainerWidget> {
           frosted: true,
           blurX: 58,
           blurY: 58,
-          tintColor: theme.colorScheme.primary.withOpacity(0.9),
+          tintColor: theme.colorScheme.primary.withValues(alpha: 0.9),
           clipBorderRadius: BorderRadius.circular(12.r),
           border: theme.defaultBorderSide,
         ),

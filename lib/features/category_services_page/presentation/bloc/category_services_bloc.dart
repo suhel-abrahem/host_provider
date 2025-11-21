@@ -1,10 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hosta_provider/core/resource/common_entity/service_entity.dart';
-import 'package:hosta_provider/features/category_services_page/data/models/get_service_model.dart';
-import 'package:hosta_provider/features/category_services_page/domain/usecases/get_services_usecase.dart';
-import 'package:hosta_provider/features/category_services_page/domain/usecases/set_service_usecase.dart';
-import 'package:hosta_provider/features/refresh_token/domain/usecases/refresh_token_usecase.dart';
+import '../../../../core/resource/common_entity/service_entity.dart';
+import '../../data/models/get_service_model.dart';
+import '../../domain/usecases/get_services_usecase.dart';
+import '../../../refresh_token/domain/usecases/refresh_token_usecase.dart';
 
 import '../../../../config/app/app_preferences.dart';
 import '../../../../core/data_state/data_state.dart';
@@ -37,9 +36,7 @@ class CategoryServicesBloc
             ),
           )
           .then((onValue) async {
-            print("categoris page bloc get auth:$onValue");
             if (onValue is DataSuccess) {
-              print("bloc cat id: ${event.getServiceModel?.category_id}");
               await _getServicesUsecase
                   .call(
                     params: event.getServiceModel?.copyWith(
@@ -47,9 +44,6 @@ class CategoryServicesBloc
                     ),
                   )
                   .then((getServicesOnValue) {
-                    print(
-                      "category page bloc get Services:${getServicesOnValue?.error}",
-                    );
                     if (getServicesOnValue is DataSuccess) {
                       emit(CategoryServicesState.got(getServicesOnValue?.data));
                     } else if (getServicesOnValue is UnauthenticatedDataState) {

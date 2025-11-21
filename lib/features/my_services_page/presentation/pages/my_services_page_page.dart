@@ -1,26 +1,23 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:floating_action_bubble/floating_action_bubble.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:glass/glass.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hosta_provider/config/route/routes_manager.dart';
-import 'package:hosta_provider/config/theme/app_theme.dart';
-import 'package:hosta_provider/core/constants/font_constants.dart';
-import 'package:hosta_provider/core/data_state/data_state.dart';
-import 'package:hosta_provider/core/dependencies_injection.dart';
-import 'package:hosta_provider/core/resource/common_state_widget/error_state_widget.dart';
-import 'package:hosta_provider/core/resource/common_state_widget/no_internet_state_widget.dart';
-import 'package:hosta_provider/core/resource/main_page/main_page.dart';
-import 'package:hosta_provider/core/util/helper/helper.dart';
-import 'package:hosta_provider/features/category_services_page/data/models/get_service_model.dart';
-import 'package:hosta_provider/features/my_services_page/presentation/bloc/my_service_bloc.dart';
-import 'package:hosta_provider/features/my_services_page/presentation/widgets/my_service_widget.dart';
+import '../../../../config/route/routes_manager.dart';
+import '../../../../config/theme/app_theme.dart';
+import '../../../../core/constants/font_constants.dart';
+import '../../../../core/dependencies_injection.dart';
+import '../../../../core/resource/common_state_widget/error_state_widget.dart';
+import '../../../../core/resource/common_state_widget/no_internet_state_widget.dart';
+import '../../../../core/resource/main_page/main_page.dart';
+import '../../../../core/util/helper/helper.dart';
+import '../../../category_services_page/data/models/get_service_model.dart';
+import '../bloc/my_service_bloc.dart';
+import '../widgets/my_service_widget.dart';
 
 import '../../../../core/resource/common_state_widget/no_data_state_widget.dart';
 import '../../../../generated/locale_keys.g.dart';
-import '../../../category_services_page/presentation/bloc/set_service_bloc.dart';
 
 class MyServicesPagePage extends StatefulWidget {
   const MyServicesPagePage({super.key});

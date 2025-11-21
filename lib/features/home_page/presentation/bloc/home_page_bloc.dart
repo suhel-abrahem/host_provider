@@ -1,13 +1,13 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hosta_provider/config/app/app_preferences.dart';
-import 'package:hosta_provider/core/data_state/data_state.dart';
-import 'package:hosta_provider/core/dependencies_injection.dart';
-import 'package:hosta_provider/features/home_page/domain/entities/home_page_entity.dart';
-import 'package:hosta_provider/features/home_page/domain/usecases/home_page_usecase.dart';
-import 'package:hosta_provider/features/login_page/domain/entities/login_state_entity.dart';
-import 'package:hosta_provider/features/refresh_token/data/models/refresh_token_model.dart';
-import 'package:hosta_provider/features/refresh_token/domain/usecases/refresh_token_usecase.dart';
+import '../../../../config/app/app_preferences.dart';
+import '../../../../core/data_state/data_state.dart';
+import '../../../../core/dependencies_injection.dart';
+import '../../domain/entities/home_page_entity.dart';
+import '../../domain/usecases/home_page_usecase.dart';
+import '../../../login_page/domain/entities/login_state_entity.dart';
+import '../../../refresh_token/data/models/refresh_token_model.dart';
+import '../../../refresh_token/domain/usecases/refresh_token_usecase.dart';
 
 import '../../data/models/home_page_model.dart';
 
@@ -32,7 +32,6 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
             params: RefreshTokenModel(refresh_token: userInfo?.refresh_token),
           )
           .then((onValue) async {
-            print("Refresh token state: $onValue");
             if (onValue is NOInternetDataState) {
               emit(HomePageState.noInternet());
             } else if (onValue is DataFailed) {
@@ -43,13 +42,11 @@ class HomePageBloc extends Bloc<HomePageEvent, HomePageState> {
                 acceptLanguage: event.model?.acceptLanguage ?? "en",
               );
               await _homePageUseCase.call(params: homePageModel).then((value) {
-                print("Home page state: $value");
                 if (value is NOInternetDataState) {
                   emit(HomePageState.noInternet());
                 } else if (value is DataFailed) {
                   emit(HomePageState.error(message: value?.error ?? ""));
                 } else if (value is DataSuccess) {
-                  print("value data: ${value?.data}");
                   if (value?.data != null) {
                     emit(HomePageState.loaded(data: value?.data));
                   } else {

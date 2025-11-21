@@ -1,8 +1,8 @@
-import 'package:hosta_provider/core/data_state/data_state.dart';
-import 'package:hosta_provider/core/usecase/usecase.dart';
-import 'package:hosta_provider/features/signup_page/data/models/signup_model.dart';
+import '../../../../core/data_state/data_state.dart';
+import '../../../../core/usecase/usecase.dart';
+import '../../data/models/signup_model.dart';
 
-import 'package:hosta_provider/features/signup_page/domain/repositories/signup_repository.dart';
+import '../repositories/signup_repository.dart';
 
 import '../entities/signup_info_entity.dart';
 

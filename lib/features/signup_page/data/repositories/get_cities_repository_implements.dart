@@ -1,11 +1,11 @@
 import 'dart:async';
 
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:hosta_provider/core/constants/api_constant.dart';
-import 'package:hosta_provider/core/data_state/data_state.dart';
-import 'package:hosta_provider/features/signup_page/data/models/city_model.dart';
-import 'package:hosta_provider/features/signup_page/domain/entities/city_entity.dart';
-import 'package:hosta_provider/features/signup_page/domain/repositories/get_cities_repository.dart';
+import '../../../../core/constants/api_constant.dart';
+import '../../../../core/data_state/data_state.dart';
+import '../models/city_model.dart';
+import '../../domain/entities/city_entity.dart';
+import '../../domain/repositories/get_cities_repository.dart';
 
 import '../../../../core/resource/common_service/common_service.dart';
 import '../../../../core/resource/connectivity/check_connectivity.dart';
@@ -46,7 +46,6 @@ class GetCitiesRepositoryImplements implements GetCitiesRepository {
                     ? cities.add(CityEntity.fromJson(action))
                     : null,
               );
-              print("cities repo:$onValue");
               getCitiesCompleter.complete(DataSuccess(data: cities));
               return getCitiesCompleter.future;
             } else {

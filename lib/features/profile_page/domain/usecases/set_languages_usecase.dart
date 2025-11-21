@@ -1,8 +1,7 @@
-import 'package:hosta_provider/features/profile_page/data/models/language_model.dart';
+import '../../data/models/language_model.dart';
 
 import '../../../../core/data_state/data_state.dart';
 import '../../../../core/usecase/usecase.dart';
-import '../../data/models/profile_model.dart';
 import '../entities/language_entity.dart';
 import '../repositories/profile_repository.dart';
 

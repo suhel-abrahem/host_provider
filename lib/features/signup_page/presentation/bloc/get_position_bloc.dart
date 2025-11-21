@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hosta_provider/core/data_state/data_state.dart';
-import 'package:hosta_provider/features/signup_page/domain/entities/position_entity.dart';
-import 'package:hosta_provider/features/signup_page/domain/usecases/get_position_usecase.dart';
+import '../../../../core/data_state/data_state.dart';
+import '../../domain/entities/position_entity.dart';
+import '../../domain/usecases/get_position_usecase.dart';
 
 part 'get_position_event.dart';
 part 'get_position_state.dart';

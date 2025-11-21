@@ -1,13 +1,10 @@
-import 'dart:convert';
-
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hosta_provider/core/data_state/data_state.dart';
-import 'package:hosta_provider/features/signup_page/data/models/signup_model.dart';
-import 'package:hosta_provider/features/signup_page/domain/entities/signup_entity.dart';
-import 'package:hosta_provider/features/signup_page/domain/entities/signup_error_entity.dart';
-import 'package:hosta_provider/features/signup_page/domain/usecases/signup_usecase.dart';
+import '../../../../core/data_state/data_state.dart';
+import '../../data/models/signup_model.dart';
+import '../../domain/entities/signup_error_entity.dart';
+import '../../domain/usecases/signup_usecase.dart';
 
 import '../../domain/entities/signup_info_entity.dart';
 
@@ -25,7 +22,6 @@ class SignupBlocBloc extends Bloc<SignupBlocEvent, SignupBlocState> {
         if (onValue is DataSuccess) {
           emit(SignupBlocState.signupSignedUp(signupInfoEntity: onValue?.data));
         } else if (onValue is DataError) {
-          print("onValue?.error:${onValue?.data}");
           emit(SignupBlocState.error(onValue?.data?.signup_error_entity));
         }
       });

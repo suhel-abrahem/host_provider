@@ -1,13 +1,13 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dio/dio.dart';
-import 'package:hosta_provider/core/constants/api_constant.dart';
-import 'package:hosta_provider/core/data_state/data_state.dart';
-import 'package:hosta_provider/core/resource/common_service/common_service.dart';
-import 'package:hosta_provider/core/resource/connectivity/check_connectivity.dart';
-import 'package:hosta_provider/features/login_page/data/models/login_model.dart';
-import 'package:hosta_provider/features/login_page/data/models/login_state_model.dart';
-import 'package:hosta_provider/features/login_page/domain/entities/login_state_entity.dart';
-import 'package:hosta_provider/features/login_page/domain/repositories/login_repository.dart';
+import '../../../../core/constants/api_constant.dart';
+import '../../../../core/data_state/data_state.dart';
+import '../../../../core/resource/common_service/common_service.dart';
+import '../../../../core/resource/connectivity/check_connectivity.dart';
+import '../models/login_model.dart';
+import '../models/login_state_model.dart';
+import '../../domain/entities/login_state_entity.dart';
+import '../../domain/repositories/login_repository.dart';
 
 class LoginRepositoryImplements implements LoginRepository {
   final CommonService _commonService;

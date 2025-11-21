@@ -2,11 +2,11 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:glass/glass.dart';
-import 'package:hosta_provider/config/theme/app_theme.dart';
-import 'package:hosta_provider/core/constants/font_constants.dart';
-import 'package:hosta_provider/core/resource/common_entity/addresses_entity.dart';
-import 'package:hosta_provider/core/resource/image_widget.dart';
-import 'package:hosta_provider/features/profile_page/domain/entities/profile_entity.dart';
+import '../../../../config/theme/app_theme.dart';
+import '../../../../core/constants/font_constants.dart';
+import '../../../../core/resource/common_entity/addresses_entity.dart';
+import '../../../../core/resource/image_widget.dart';
+import '../../domain/entities/profile_entity.dart';
 
 class UserInfoContainerWidget extends StatelessWidget {
   final ProfileEntity? profileEntity;

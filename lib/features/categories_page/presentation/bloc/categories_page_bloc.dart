@@ -1,13 +1,13 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hosta_provider/config/app/app_preferences.dart';
-import 'package:hosta_provider/core/data_state/data_state.dart';
-import 'package:hosta_provider/core/dependencies_injection.dart';
-import 'package:hosta_provider/features/categories_page/data/models/get_category_model.dart';
-import 'package:hosta_provider/features/categories_page/domain/entities/category_entity.dart';
-import 'package:hosta_provider/features/login_page/domain/entities/login_state_entity.dart';
-import 'package:hosta_provider/features/refresh_token/data/models/refresh_token_model.dart';
-import 'package:hosta_provider/features/refresh_token/domain/usecases/refresh_token_usecase.dart';
+import '../../../../config/app/app_preferences.dart';
+import '../../../../core/data_state/data_state.dart';
+import '../../../../core/dependencies_injection.dart';
+import '../../data/models/get_category_model.dart';
+import '../../domain/entities/category_entity.dart';
+import '../../../login_page/domain/entities/login_state_entity.dart';
+import '../../../refresh_token/data/models/refresh_token_model.dart';
+import '../../../refresh_token/domain/usecases/refresh_token_usecase.dart';
 
 import '../../domain/usecases/get_category_usecase.dart';
 
@@ -34,7 +34,6 @@ class CategoriesPageBloc
             ),
           )
           .then((onValue) async {
-            print("categoris Services page bloc get auth:$onValue");
             if (onValue is DataSuccess) {
               await _getCategoryUsecase
                   .call(
@@ -43,9 +42,6 @@ class CategoriesPageBloc
                     ),
                   )
                   .then((getCategoriesOnValue) {
-                    print(
-                      "categoris services page bloc get categories:${getCategoriesOnValue?.error}",
-                    );
                     if (getCategoriesOnValue is DataSuccess) {
                       emit(CategoriesPageState.got(getCategoriesOnValue?.data));
                     } else if (getCategoriesOnValue

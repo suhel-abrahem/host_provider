@@ -1,4 +1,3 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -7,23 +6,21 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:glass/glass.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hosta_provider/config/route/routes_manager.dart';
-import 'package:hosta_provider/config/theme/app_theme.dart';
-import 'package:hosta_provider/core/constants/api_constant.dart';
-import 'package:hosta_provider/core/constants/font_constants.dart';
-import 'package:hosta_provider/core/dependencies_injection.dart';
-import 'package:hosta_provider/core/resource/common_entity/service_entity.dart';
-import 'package:hosta_provider/core/resource/image_widget.dart';
-import 'package:hosta_provider/features/my_services_page/presentation/widgets/add_button_my_service.dart';
-import 'package:hosta_provider/generated/locale_keys.g.dart';
+import '../../../../config/route/routes_manager.dart';
+import '../../../../config/theme/app_theme.dart';
+import '../../../../core/constants/api_constant.dart';
+import '../../../../core/constants/font_constants.dart';
+import '../../../../core/dependencies_injection.dart';
+import '../../../../core/resource/common_entity/service_entity.dart';
+import '../../../../core/resource/image_widget.dart';
+import 'add_button_my_service.dart';
+import '../../../../generated/locale_keys.g.dart';
 
 import '../../../../core/resource/common_entity/service_error_entity.dart';
 import '../../../../core/resource/custom_widget/custom_input_field/custom_input_field.dart';
 import '../../../../core/resource/custom_widget/snake_bar_widget/snake_bar_widget.dart';
-import '../../../category_services_page/data/models/service_model.dart';
 import '../../../category_services_page/data/models/set_service_model.dart';
 import '../../../category_services_page/presentation/bloc/set_service_bloc.dart';
-import '../../../category_services_page/presentation/widgets/add_button.dart';
 
 class MyServiceWidget extends StatefulWidget {
   final ServiceEntity? serviceEntity;
@@ -46,7 +43,6 @@ class _MyServiceWidgetState extends State<MyServiceWidget> {
   bool isAddServiceHaveError = false;
   @override
   void initState() {
-    print("service entity in widget : ${widget.serviceEntity?.toJson()}");
     setServiceModel = setServiceModel?.copyWith(
       serviceModel: setServiceModel?.serviceModel?.copyWith(
         price: widget.serviceEntity?.price,
@@ -60,17 +56,6 @@ class _MyServiceWidgetState extends State<MyServiceWidget> {
   }
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-  }
-
-  @override
-  void didUpdateWidget(covariant MyServiceWidget oldWidget) {
-    // TODO: implement didUpdateWidget
-    super.didUpdateWidget(oldWidget);
-  }
-
-  @override
   Widget build(BuildContext context) {
     return BlocProvider<SetServiceBloc>(
       create: (context) =>
@@ -80,7 +65,6 @@ class _MyServiceWidgetState extends State<MyServiceWidget> {
         builder: (context) {
           return BlocListener<SetServiceBloc, SetServiceState>(
             listener: (context, state) {
-              print("ez state : $state");
               if (state is SetServiceStateAdded) {
                 showMessage(
                   message: LocaleKeys.common_success.tr(),
@@ -274,9 +258,6 @@ class _MyServiceWidgetState extends State<MyServiceWidget> {
                                                 ?.copyWith(is_active: false),
                                           );
                                     }
-                                    print(
-                                      "from Add:${setServiceModel?.serviceModel}",
-                                    );
                                     context.read<SetServiceBloc>().add(
                                       SetServiceEvent.update(setServiceModel),
                                     );
@@ -308,9 +289,6 @@ class _MyServiceWidgetState extends State<MyServiceWidget> {
                                                 ?.copyWith(is_active: false),
                                           );
                                     }
-                                    print(
-                                      "from Add:${setServiceModel?.serviceModel}",
-                                    );
                                     context.read<SetServiceBloc>().add(
                                       SetServiceEvent.delete(setServiceModel),
                                     );
@@ -593,7 +571,6 @@ class _MyServiceWidgetState extends State<MyServiceWidget> {
                       ),
                     );
                   }
-                  print("from Add:${setServiceModel?.serviceModel}");
                   context.read<SetServiceBloc>().add(
                     SetServiceEvent.update(setServiceModel),
                   );

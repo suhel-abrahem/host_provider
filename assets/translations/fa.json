@@ -211,7 +211,8 @@
     "resend": "دووبارە ناردن",
     "wrongOtp": "OTP نادروست",
     "verified": "پشکنین کراو",
-    "verify": "پشکنین"
+    "verify": "پشکنین",
+    "resendIn": "دووبارە ناردن لە"
   },
   "categoryServices": {
     "title": "خزمەتگوزاریەکانی پۆل",

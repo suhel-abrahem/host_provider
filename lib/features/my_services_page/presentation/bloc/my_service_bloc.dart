@@ -1,7 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hosta_provider/features/category_services_page/data/models/get_service_model.dart';
-import 'package:hosta_provider/features/my_services_page/domain/usecases/my_service_usecase.dart';
+import '../../../category_services_page/data/models/get_service_model.dart';
+import '../../domain/usecases/my_service_usecase.dart';
 
 import '../../../../config/app/app_preferences.dart';
 import '../../../../core/data_state/data_state.dart';
@@ -33,13 +33,7 @@ class MyServiceBloc extends Bloc<MyServiceEvent, MyServiceState> {
             ),
           )
           .then((onValue) async {
-            print(
-              "categoris page bloc get auth:${onValue?.data?.access_token}",
-            );
             if (onValue is DataSuccess) {
-              print(
-                "bloc token: ${event.getServiceModel?.copyWith(Authorization: onValue?.data?.access_token)}",
-              );
               await _myServiceUsecase
                   .call(
                     params: event.getServiceModel?.copyWith(
@@ -47,9 +41,6 @@ class MyServiceBloc extends Bloc<MyServiceEvent, MyServiceState> {
                     ),
                   )
                   .then((getServicesOnValue) {
-                    print(
-                      "category page bloc get Services:${getServicesOnValue?.error}",
-                    );
                     if (getServicesOnValue is DataSuccess) {
                       emit(MyServiceState.got(getServicesOnValue?.data));
                     } else if (getServicesOnValue is UnauthenticatedDataState) {

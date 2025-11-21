@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hosta_provider/core/resource/common_state_widget/error_state_widget.dart';
-import 'package:hosta_provider/core/resource/common_state_widget/no_data_state_widget.dart';
-import 'package:hosta_provider/core/resource/common_state_widget/no_internet_state_widget.dart';
-import 'package:hosta_provider/features/booking_page/presentation/bloc/get_booking_bloc.dart';
-import 'package:hosta_provider/features/booking_page/presentation/widgets/booking_service_widget.dart';
+import '../../../../core/resource/common_state_widget/error_state_widget.dart';
+import '../../../../core/resource/common_state_widget/no_data_state_widget.dart';
+import '../../../../core/resource/common_state_widget/no_internet_state_widget.dart';
+import '../bloc/get_booking_bloc.dart';
+import '../widgets/booking_service_widget.dart';
 
 class BookingPageTapPage extends StatelessWidget {
   const BookingPageTapPage({super.key});

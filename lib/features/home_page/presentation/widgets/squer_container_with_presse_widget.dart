@@ -2,10 +2,10 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:glass/glass.dart';
-import 'package:hosta_provider/config/theme/app_theme.dart';
-import 'package:hosta_provider/core/constants/font_constants.dart';
-import 'package:hosta_provider/core/constants/language_constant.dart';
-import 'package:hosta_provider/features/home_page/presentation/bloc/home_page_bloc.dart';
+import '../../../../config/theme/app_theme.dart';
+import '../../../../core/constants/font_constants.dart';
+import '../../../../core/constants/language_constant.dart';
+import '../bloc/home_page_bloc.dart';
 
 class SquerContainerWithPresseWidget extends StatelessWidget {
   final Color? backgroundColor;

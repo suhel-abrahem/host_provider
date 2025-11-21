@@ -6,26 +6,26 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:glass/glass.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hosta_provider/config/route/routes_manager.dart';
-import 'package:hosta_provider/config/theme/app_theme.dart';
-import 'package:hosta_provider/core/constants/font_constants.dart';
-import 'package:hosta_provider/core/constants/language_constant.dart';
-import 'package:hosta_provider/core/resource/charts/chart_model/line_chart_model.dart';
-import 'package:hosta_provider/core/resource/common_state_widget/error_state_widget.dart';
-import 'package:hosta_provider/core/resource/common_state_widget/no_data_state_widget.dart';
-import 'package:hosta_provider/core/resource/common_state_widget/no_internet_state_widget.dart';
-import 'package:hosta_provider/core/resource/custom_widget/snake_bar_widget/snake_bar_widget.dart';
+import '../../../../config/route/routes_manager.dart';
+import '../../../../config/theme/app_theme.dart';
+import '../../../../core/constants/font_constants.dart';
+import '../../../../core/constants/language_constant.dart';
+import '../../../../core/resource/charts/chart_model/line_chart_model.dart';
+import '../../../../core/resource/common_state_widget/error_state_widget.dart';
+import '../../../../core/resource/common_state_widget/no_data_state_widget.dart';
+import '../../../../core/resource/common_state_widget/no_internet_state_widget.dart';
+import '../../../../core/resource/custom_widget/snake_bar_widget/snake_bar_widget.dart';
 
-import 'package:hosta_provider/core/resource/main_page/main_page.dart';
-import 'package:hosta_provider/core/util/helper/helper.dart';
-import 'package:hosta_provider/features/home_page/domain/entities/home_page_entity.dart';
-import 'package:hosta_provider/features/home_page/presentation/bloc/home_page_bloc.dart';
-import 'package:hosta_provider/features/home_page/presentation/widgets/squer_container_with_presse_widget.dart';
-import 'package:hosta_provider/features/login_page/domain/entities/login_state_entity.dart';
-import 'package:hosta_provider/features/profile_page/data/models/profile_model.dart';
-import 'package:hosta_provider/features/profile_page/domain/entities/profile_entity.dart';
-import 'package:hosta_provider/features/profile_page/presentation/bloc/get_profile_bloc.dart';
-import 'package:hosta_provider/generated/locale_keys.g.dart';
+import '../../../../core/resource/main_page/main_page.dart';
+import '../../../../core/util/helper/helper.dart';
+import '../../domain/entities/home_page_entity.dart';
+import '../bloc/home_page_bloc.dart';
+import '../widgets/squer_container_with_presse_widget.dart';
+import '../../../login_page/domain/entities/login_state_entity.dart';
+import '../../../profile_page/data/models/profile_model.dart';
+import '../../../profile_page/domain/entities/profile_entity.dart';
+import '../../../profile_page/presentation/bloc/get_profile_bloc.dart';
+import '../../../../generated/locale_keys.g.dart';
 
 import '../../../../config/app/app_preferences.dart';
 import '../../../../core/dependencies_injection.dart';
@@ -80,7 +80,7 @@ class _HomePagePageState extends State<HomePagePage> {
               icon: Icon(
                 Icons.notifications_none,
                 size: 24.sp,
-                color: Theme.of(context).colorScheme.onBackground,
+                color: Theme.of(context).colorScheme.onSurface,
               ),
             ),
             Padding(
@@ -215,7 +215,7 @@ class _HomePagePageState extends State<HomePagePage> {
                                             ).colorScheme.primary,
                                             backgroundColor: Theme.of(context)
                                                 .colorScheme
-                                                .onBackground
+                                                .onSurface
                                                 .withValues(alpha: 0.1),
                                           ),
                                         )
@@ -344,7 +344,6 @@ class _HomePagePageState extends State<HomePagePage> {
               ..add(HomePageEvent.fetchHomePageData(model: model)),
         child: BlocListener<HomePageBloc, HomePageState>(
           listener: (context, state) {
-            print("Home page state listener: $state");
             if (state is HomePageStateError) {
               showMessage(
                 context: context,

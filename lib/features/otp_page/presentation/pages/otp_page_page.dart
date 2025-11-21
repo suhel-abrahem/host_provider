@@ -3,21 +3,22 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hosta_provider/config/app/app_preferences.dart';
-import 'package:hosta_provider/core/dependencies_injection.dart';
-import 'package:hosta_provider/core/enums/login_state_enum.dart';
-import 'package:hosta_provider/core/resource/custom_widget/snake_bar_widget/snake_bar_widget.dart';
-import 'package:hosta_provider/core/resource/main_page/main_page.dart';
-import 'package:hosta_provider/features/login_page/domain/entities/login_state_entity.dart';
-import 'package:hosta_provider/features/otp_page/data/models/otp_model.dart';
-import 'package:hosta_provider/features/otp_page/presentation/bloc/otp_page_bloc.dart';
-import 'package:hosta_provider/features/signup_page/domain/entities/signup_info_entity.dart';
-import 'package:hosta_provider/generated/locale_keys.g.dart';
+import '../../../../config/app/app_preferences.dart';
+import '../../../../core/dependencies_injection.dart';
+import '../../../../core/enums/login_state_enum.dart';
+import '../../../../core/resource/custom_widget/snake_bar_widget/snake_bar_widget.dart';
+
+import '../../../login_page/domain/entities/login_state_entity.dart';
+import '../../data/models/otp_model.dart';
+import '../bloc/otp_page_bloc.dart';
+import '../../../signup_page/domain/entities/signup_info_entity.dart';
+import '../../../../generated/locale_keys.g.dart';
 import 'package:pinput/pinput.dart';
 
 import '../../../../config/route/routes_manager.dart';
 import '../../../../core/constants/font_constants.dart';
 import '../../../login_page/presentation/bloc/login_bloc_bloc.dart';
+import 'package:flutter_timer_countdown/flutter_timer_countdown.dart';
 
 class OtpPagePage extends StatefulWidget {
   const OtpPagePage({super.key});
@@ -30,10 +31,12 @@ class _OtpPagePageState extends State<OtpPagePage> {
   SignupInfoEntity? signupInfoEntity;
   TextEditingController otpController = TextEditingController();
   OtpModel otpModel = const OtpModel();
+  Duration duration = const Duration(seconds: 60);
+  bool isTimerCompleted = false;
   @override
   void initState() {
     signupInfoEntity = getItInstance<AppPreferences>().getSignupInfo();
-    otpController.text = (signupInfoEntity?.otpEntity?.otp.toString()) ?? "";
+
     otpModel = otpModel.copyWith(
       userId: signupInfoEntity?.signupEntity?.user_id,
 
@@ -133,7 +136,6 @@ class _OtpPagePageState extends State<OtpPagePage> {
                   child: Pinput(
                     length: 6,
                     onChanged: (value) {
-                      print("otp value:$value");
                       otpModel = otpModel.copyWith(otp: value);
                     },
                     controller: otpController,
@@ -205,28 +207,69 @@ class _OtpPagePageState extends State<OtpPagePage> {
                       fontFamily: FontConstants.fontFamily(context.locale),
                     ),
                   ),
-                  Builder(
-                    builder: (context) {
-                      return TextButton(
-                        onPressed: () {
-                          context.read<OtpPageBloc>().add(
-                            OtpPageEvent.resend(otpModel),
-                          );
-                        },
-                        child: Text(
-                          LocaleKeys.otpPage_resend.tr(),
-                          style: Theme.of(context).textTheme.labelMedium
-                              ?.copyWith(
-                                fontWeight: FontWeight.w600,
-                                fontFamily: FontConstants.fontFamily(
-                                  context.locale,
+                  if (isTimerCompleted)
+                    Builder(
+                      builder: (context) {
+                        return TextButton(
+                          onPressed: () {
+                            context.read<OtpPageBloc>().add(
+                              OtpPageEvent.resend(otpModel),
+                            );
+                            setState(() {
+                              isTimerCompleted = false;
+                            });
+                          },
+                          child: Text(
+                            LocaleKeys.otpPage_resend.tr(),
+                            style: Theme.of(context).textTheme.labelMedium
+                                ?.copyWith(
+                                  fontWeight: FontWeight.w600,
+                                  fontFamily: FontConstants.fontFamily(
+                                    context.locale,
+                                  ),
+                                  decoration: TextDecoration.underline,
                                 ),
-                                decoration: TextDecoration.underline,
+                          ),
+                        );
+                      },
+                    ),
+                  !isTimerCompleted
+                      ? Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 5.w),
+                              child: Text(
+                                LocaleKeys.otpPage_resendIn.tr(),
+                                style: Theme.of(context).textTheme.labelSmall
+                                    ?.copyWith(
+                                      fontFamily: FontConstants.fontFamily(
+                                        context.locale,
+                                      ),
+                                    ),
                               ),
-                        ),
-                      );
-                    },
-                  ),
+                            ),
+                            TimerCountdown(
+                              enableDescriptions: false,
+                              format: CountDownTimerFormat.secondsOnly,
+                              endTime: DateTime.now().add(duration),
+                              onEnd: () {
+                                setState(() {
+                                  isTimerCompleted = true;
+                                });
+                              },
+                              timeTextStyle: Theme.of(context)
+                                  .textTheme
+                                  .labelSmall
+                                  ?.copyWith(
+                                    fontFamily: FontConstants.fontFamily(
+                                      context.locale,
+                                    ),
+                                  ),
+                            ),
+                          ],
+                        )
+                      : SizedBox.shrink(),
                 ],
               ),
             ],

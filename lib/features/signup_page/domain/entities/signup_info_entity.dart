@@ -1,6 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hosta_provider/features/signup_page/domain/entities/otp_entity.dart';
-import 'package:hosta_provider/features/signup_page/domain/entities/signup_entity.dart';
+import 'otp_entity.dart';
+import 'signup_entity.dart';
 
 import 'signup_error_entity.dart';
 part 'signup_info_entity.g.dart';

@@ -1,8 +1,8 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:hosta_provider/core/data_state/data_state.dart';
-import 'package:hosta_provider/core/resource/connectivity/check_connectivity.dart';
-import 'package:hosta_provider/features/signup_page/domain/entities/position_entity.dart';
-import 'package:hosta_provider/features/signup_page/domain/repositories/get_position_repository.dart';
+import '../../../../core/data_state/data_state.dart';
+import '../../../../core/resource/connectivity/check_connectivity.dart';
+import '../../domain/entities/position_entity.dart';
+import '../../domain/repositories/get_position_repository.dart';
 import 'package:geolocator/geolocator.dart';
 
 class GetPositionRepositoryImplements implements GetPositionRepository {

@@ -1,5 +1,5 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hosta_provider/features/signup_page/domain/entities/country_entity.dart';
+import 'country_entity.dart';
 part 'city_entity.g.dart';
 part 'city_entity.freezed.dart';
 

@@ -1,9 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hosta_provider/core/data_state/data_state.dart';
-import 'package:hosta_provider/features/refresh_token/data/models/refresh_token_model.dart';
-import 'package:hosta_provider/features/refresh_token/domain/entities/token_entity.dart';
-import 'package:hosta_provider/features/refresh_token/domain/usecases/refresh_token_usecase.dart';
+import '../../../../core/data_state/data_state.dart';
+import '../../data/models/refresh_token_model.dart';
+import '../../domain/entities/token_entity.dart';
+import '../../domain/usecases/refresh_token_usecase.dart';
 
 part 'refresh_token_event.dart';
 part 'refresh_token_state.dart';

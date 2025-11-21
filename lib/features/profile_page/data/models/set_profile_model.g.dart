@@ -14,7 +14,7 @@ _SetProfileModel _$SetProfileModelFromJson(Map<String, dynamic> json) =>
       dob: json['dob'] as String? ?? "",
       avatar: const FilePathConverter().fromJson(json['avatar'] as String?),
       address: json['address'] as String? ?? "",
-      city_id: (json['city_id'] as num?)?.toInt() ?? null,
+      city_id: (json['city_id'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$SetProfileModelToJson(_SetProfileModel instance) =>

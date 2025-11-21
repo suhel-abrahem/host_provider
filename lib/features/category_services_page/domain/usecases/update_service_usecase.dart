@@ -1,8 +1,8 @@
-import 'package:hosta_provider/core/data_state/data_state.dart';
-import 'package:hosta_provider/core/resource/common_entity/service_entity.dart';
-import 'package:hosta_provider/core/usecase/usecase.dart';
-import 'package:hosta_provider/features/category_services_page/data/models/set_service_model.dart';
-import 'package:hosta_provider/features/category_services_page/domain/repositories/category_services_repository.dart';
+import '../../../../core/data_state/data_state.dart';
+import '../../../../core/resource/common_entity/service_entity.dart';
+import '../../../../core/usecase/usecase.dart';
+import '../../data/models/set_service_model.dart';
+import '../repositories/category_services_repository.dart';
 
 class UpdateServiceUsecase
     implements UseCase<DataState<ServiceEntity?>?, SetServiceModel?> {

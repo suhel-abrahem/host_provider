@@ -4,20 +4,20 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:glass/glass.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hosta_provider/config/theme/app_theme.dart';
-import 'package:hosta_provider/core/dependencies_injection.dart';
-import 'package:hosta_provider/core/resource/common_entity/customer_entity.dart';
-import 'package:hosta_provider/core/resource/common_state_widget/error_state_widget.dart';
-import 'package:hosta_provider/core/resource/common_state_widget/no_data_state_widget.dart';
-import 'package:hosta_provider/core/resource/common_state_widget/no_internet_state_widget.dart';
-import 'package:hosta_provider/core/resource/image_widget.dart';
-import 'package:hosta_provider/core/resource/main_page/main_page.dart';
-import 'package:hosta_provider/features/booking_page/data/models/get_booking_model.dart';
-import 'package:hosta_provider/features/booking_page/domain/entities/booking_entity.dart';
-import 'package:hosta_provider/features/booking_page/presentation/bloc/get_booking_bloc.dart';
-import 'package:hosta_provider/features/booking_page/presentation/widgets/address_info_widget.dart';
-import 'package:hosta_provider/features/booking_page/presentation/widgets/client_info_widget.dart';
-import 'package:hosta_provider/features/booking_page/presentation/widgets/service_info_widget.dart';
+import '../../../../config/theme/app_theme.dart';
+import '../../../../core/dependencies_injection.dart';
+import '../../../../core/resource/common_entity/customer_entity.dart';
+import '../../../../core/resource/common_state_widget/error_state_widget.dart';
+import '../../../../core/resource/common_state_widget/no_data_state_widget.dart';
+import '../../../../core/resource/common_state_widget/no_internet_state_widget.dart';
+import '../../../../core/resource/image_widget.dart';
+import '../../../../core/resource/main_page/main_page.dart';
+import '../../data/models/get_booking_model.dart';
+import '../../domain/entities/booking_entity.dart';
+import '../bloc/get_booking_bloc.dart';
+import '../widgets/address_info_widget.dart';
+import '../widgets/client_info_widget.dart';
+import '../widgets/service_info_widget.dart';
 
 import '../../../../config/route/routes_manager.dart';
 import '../../../../core/constants/font_constants.dart';
@@ -39,6 +39,7 @@ class ServiceInfoPage extends StatefulWidget {
 class _ServiceInfoPageState extends State<ServiceInfoPage> {
   GetBookingModel? getBookingModel = GetBookingModel();
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  bool isLoading = false;
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -410,13 +411,25 @@ class _ServiceInfoPageState extends State<ServiceInfoPage> {
                             child: BlocListener<SetBookingBloc, SetBookingState>(
                               listener: (context, state) {
                                 state.when(
-                                  initial: () {},
-                                  loading: () {},
+                                  initial: () {
+                                    setState(() {
+                                      isLoading = false;
+                                    });
+                                  },
+                                  loading: () {
+                                    setState(() {
+                                      isLoading = true;
+                                    });
+                                  },
                                   loaded: (bookings) {
+                                    setState(() {
+                                      isLoading = false;
+                                    });
                                     showMessage(
                                       message: LocaleKeys.common_success.tr(),
                                       context: context,
                                     );
+                                    context.pop();
                                     context.pushNamed(
                                       RoutesName.serviceInfoPage,
                                       pathParameters: {
@@ -425,19 +438,29 @@ class _ServiceInfoPageState extends State<ServiceInfoPage> {
                                     );
                                   },
                                   error: () {
+                                    setState(() {
+                                      isLoading = false;
+                                    });
                                     showMessage(
                                       message: LocaleKeys.common_success.tr(),
                                       context: context,
                                     );
                                   },
                                   unauthenticated: () {
-                                    showMessage(
-                                      message: LocaleKeys.common_success.tr(),
-                                      context: context,
-                                    );
+                                    setState(() {
+                                      isLoading = false;
+                                    });
+                                    context.goNamed(RoutesName.loginPage);
                                   },
-                                  noData: () {},
+                                  noData: () {
+                                    setState(() {
+                                      isLoading = false;
+                                    });
+                                  },
                                   noInternet: () {
+                                    setState(() {
+                                      isLoading = false;
+                                    });
                                     showMessage(
                                       message: LocaleKeys
                                           .common_noInternetPullDown
@@ -458,20 +481,25 @@ class _ServiceInfoPageState extends State<ServiceInfoPage> {
                                           width: 145.w,
                                           height: 40.h,
                                           child: ElevatedButton(
-                                            onPressed: () {
-                                              context
-                                                  .read<SetBookingBloc>()
-                                                  .add(
-                                                    SetBookingEvent.setBookings(
-                                                      getBookingModel:
-                                                          GetBookingModel(
-                                                            id: data?.last?.id
-                                                                .toString(),
-                                                            status: "confirm",
+                                            onPressed: isLoading
+                                                ? null
+                                                : () {
+                                                    context
+                                                        .read<SetBookingBloc>()
+                                                        .add(
+                                                          SetBookingEvent.setBookings(
+                                                            getBookingModel:
+                                                                GetBookingModel(
+                                                                  id: data
+                                                                      ?.last
+                                                                      ?.id
+                                                                      .toString(),
+                                                                  status:
+                                                                      "confirm",
+                                                                ),
                                                           ),
-                                                    ),
-                                                  );
-                                            },
+                                                        );
+                                                  },
                                             style: Theme.of(context)
                                                 .elevatedButtonTheme
                                                 .style
@@ -512,20 +540,25 @@ class _ServiceInfoPageState extends State<ServiceInfoPage> {
                                           width: 145.w,
                                           height: 40.h,
                                           child: ElevatedButton(
-                                            onPressed: () {
-                                              context
-                                                  .read<SetBookingBloc>()
-                                                  .add(
-                                                    SetBookingEvent.setBookings(
-                                                      getBookingModel:
-                                                          GetBookingModel(
-                                                            id: data?.last?.id
-                                                                .toString(),
-                                                            status: "reject",
+                                            onPressed: isLoading
+                                                ? null
+                                                : () {
+                                                    context
+                                                        .read<SetBookingBloc>()
+                                                        .add(
+                                                          SetBookingEvent.setBookings(
+                                                            getBookingModel:
+                                                                GetBookingModel(
+                                                                  id: data
+                                                                      ?.last
+                                                                      ?.id
+                                                                      .toString(),
+                                                                  status:
+                                                                      "reject",
+                                                                ),
                                                           ),
-                                                    ),
-                                                  );
-                                            },
+                                                        );
+                                                  },
                                             style: Theme.of(context)
                                                 .elevatedButtonTheme
                                                 .style
@@ -577,20 +610,25 @@ class _ServiceInfoPageState extends State<ServiceInfoPage> {
                                           height: 40.h,
                                           width: 145.w,
                                           child: ElevatedButton(
-                                            onPressed: () {
-                                              context
-                                                  .read<SetBookingBloc>()
-                                                  .add(
-                                                    SetBookingEvent.setBookings(
-                                                      getBookingModel:
-                                                          GetBookingModel(
-                                                            id: data?.last?.id
-                                                                .toString(),
-                                                            status: "start",
+                                            onPressed: isLoading
+                                                ? null
+                                                : () {
+                                                    context
+                                                        .read<SetBookingBloc>()
+                                                        .add(
+                                                          SetBookingEvent.setBookings(
+                                                            getBookingModel:
+                                                                GetBookingModel(
+                                                                  id: data
+                                                                      ?.last
+                                                                      ?.id
+                                                                      .toString(),
+                                                                  status:
+                                                                      "start",
+                                                                ),
                                                           ),
-                                                    ),
-                                                  );
-                                            },
+                                                        );
+                                                  },
                                             style: Theme.of(context)
                                                 .elevatedButtonTheme
                                                 .style
@@ -640,41 +678,21 @@ class _ServiceInfoPageState extends State<ServiceInfoPage> {
                                           child: Builder(
                                             builder: (buildContext) {
                                               return ElevatedButton(
-                                                onPressed: () {
-                                                  String? reason;
-                                                  showDialog(
-                                                    context: context,
-                                                    builder: (context) {
-                                                      return AlertDialog(
-                                                        title: Text(
-                                                          LocaleKeys
-                                                              .bookingPage_rejectBooking
-                                                              .tr(),
-                                                          style: Theme.of(context)
-                                                              .textTheme
-                                                              .labelLarge
-                                                              ?.copyWith(
-                                                                fontFamily:
-                                                                    FontConstants.fontFamily(
-                                                                      context
-                                                                          .locale,
-                                                                    ),
-                                                              ),
-                                                        ),
-                                                        content: SizedBox(
-                                                          height: 250.h,
-                                                          child: Column(
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .spaceEvenly,
-                                                            children: [
-                                                              Text(
+                                                onPressed: isLoading
+                                                    ? null
+                                                    : () {
+                                                        String? reason;
+                                                        showDialog(
+                                                          context: context,
+                                                          builder: (context) {
+                                                            return AlertDialog(
+                                                              title: Text(
                                                                 LocaleKeys
-                                                                    .bookingPage_areYouSureYouWantToRejectThisBooking
+                                                                    .bookingPage_rejectBooking
                                                                     .tr(),
                                                                 style: Theme.of(context)
                                                                     .textTheme
-                                                                    .labelSmall
+                                                                    .labelLarge
                                                                     ?.copyWith(
                                                                       fontFamily:
                                                                           FontConstants.fontFamily(
@@ -682,104 +700,122 @@ class _ServiceInfoPageState extends State<ServiceInfoPage> {
                                                                           ),
                                                                     ),
                                                               ),
-                                                              SizedBox(
-                                                                height: 150.h,
-                                                                child: Form(
-                                                                  key: formKey,
-                                                                  autovalidateMode:
-                                                                      AutovalidateMode
-                                                                          .onUserInteraction,
-                                                                  child: CustomInputField(
-                                                                    label: LocaleKeys
-                                                                        .bookingPage_rejectReason
-                                                                        .tr(),
-                                                                    height:
-                                                                        150.h,
-                                                                    maxLines: 5,
-                                                                    onChanged:
-                                                                        (
-                                                                          value,
-                                                                        ) => reason =
-                                                                            value,
-                                                                    validator: (value) {
-                                                                      if (value ==
-                                                                              null ||
-                                                                          value
-                                                                              .isEmpty) {
-                                                                        return LocaleKeys
-                                                                            .bookingPage_pleaseProvideAReasonForRejection
-                                                                            .tr();
-                                                                      }
-                                                                      return null;
-                                                                    },
-                                                                  ),
-                                                                ),
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        ),
-                                                        actions: [
-                                                          TextButton(
-                                                            onPressed: () {
-                                                              Navigator.of(
-                                                                context,
-                                                              ).pop();
-                                                            },
-                                                            child: Text(
-                                                              LocaleKeys
-                                                                  .common_cancel
-                                                                  .tr(),
-                                                            ),
-                                                          ),
-                                                          TextButton(
-                                                            onPressed: () {
-                                                              if (((formKey
-                                                                      .currentState
-                                                                      ?.validate()) ??
-                                                                  false)) {
-                                                                buildContext
-                                                                    .read<
-                                                                      SetBookingBloc
-                                                                    >()
-                                                                    .add(
-                                                                      SetBookingEvent.setBookings(
-                                                                        getBookingModel: GetBookingModel(
-                                                                          reason:
-                                                                              reason,
-                                                                          id: widget
-                                                                              .serviceId
-                                                                              .toString(),
-                                                                          status:
-                                                                              "cancel",
+                                                              content: SizedBox(
+                                                                height: 250.h,
+                                                                child: Column(
+                                                                  mainAxisAlignment:
+                                                                      MainAxisAlignment
+                                                                          .spaceEvenly,
+                                                                  children: [
+                                                                    Text(
+                                                                      LocaleKeys
+                                                                          .bookingPage_areYouSureYouWantToRejectThisBooking
+                                                                          .tr(),
+                                                                      style: Theme.of(context)
+                                                                          .textTheme
+                                                                          .labelSmall
+                                                                          ?.copyWith(
+                                                                            fontFamily: FontConstants.fontFamily(
+                                                                              context.locale,
+                                                                            ),
+                                                                          ),
+                                                                    ),
+                                                                    SizedBox(
+                                                                      height:
+                                                                          150.h,
+                                                                      child: Form(
+                                                                        key:
+                                                                            formKey,
+                                                                        autovalidateMode:
+                                                                            AutovalidateMode.onUserInteraction,
+                                                                        child: CustomInputField(
+                                                                          label: LocaleKeys
+                                                                              .bookingPage_rejectReason
+                                                                              .tr(),
+                                                                          height:
+                                                                              150.h,
+                                                                          maxLines:
+                                                                              5,
+                                                                          onChanged:
+                                                                              (
+                                                                                value,
+                                                                              ) => reason = value,
+                                                                          validator:
+                                                                              (
+                                                                                value,
+                                                                              ) {
+                                                                                if (value ==
+                                                                                        null ||
+                                                                                    value.isEmpty) {
+                                                                                  return LocaleKeys.bookingPage_pleaseProvideAReasonForRejection.tr();
+                                                                                }
+                                                                                return null;
+                                                                              },
                                                                         ),
                                                                       ),
-                                                                    );
-                                                                Navigator.of(
-                                                                  context,
-                                                                ).pop();
-                                                              }
-                                                            },
-                                                            child: Text(
-                                                              LocaleKeys
-                                                                  .common_save
-                                                                  .tr(),
-                                                            ),
-                                                          ),
-                                                        ],
-                                                        backgroundColor:
-                                                            Theme.of(context)
-                                                                .colorScheme
-                                                                .primaryContainer
-                                                                .withValues(
-                                                                  alpha: 0.8,
+                                                                    ),
+                                                                  ],
                                                                 ),
-                                                      );
-                                                    },
-                                                  );
-                                                  print(
-                                                    " Reject reason: $reason ",
-                                                  );
-                                                },
+                                                              ),
+                                                              actions: [
+                                                                TextButton(
+                                                                  onPressed: () {
+                                                                    Navigator.of(
+                                                                      context,
+                                                                    ).pop();
+                                                                  },
+                                                                  child: Text(
+                                                                    LocaleKeys
+                                                                        .common_cancel
+                                                                        .tr(),
+                                                                  ),
+                                                                ),
+                                                                TextButton(
+                                                                  onPressed:
+                                                                      isLoading
+                                                                      ? null
+                                                                      : () {
+                                                                          if (((formKey.currentState?.validate()) ??
+                                                                              false)) {
+                                                                            buildContext
+                                                                                .read<
+                                                                                  SetBookingBloc
+                                                                                >()
+                                                                                .add(
+                                                                                  SetBookingEvent.setBookings(
+                                                                                    getBookingModel: GetBookingModel(
+                                                                                      reason: reason,
+                                                                                      id: widget.serviceId.toString(),
+                                                                                      status: "cancel",
+                                                                                    ),
+                                                                                  ),
+                                                                                );
+                                                                            Navigator.of(
+                                                                              context,
+                                                                            ).pop();
+                                                                          }
+                                                                        },
+                                                                  child: Text(
+                                                                    LocaleKeys
+                                                                        .common_save
+                                                                        .tr(),
+                                                                  ),
+                                                                ),
+                                                              ],
+                                                              backgroundColor:
+                                                                  Theme.of(
+                                                                        context,
+                                                                      )
+                                                                      .colorScheme
+                                                                      .primaryContainer
+                                                                      .withValues(
+                                                                        alpha:
+                                                                            0.8,
+                                                                      ),
+                                                            );
+                                                          },
+                                                        );
+                                                      },
                                                 style: Theme.of(context)
                                                     .elevatedButtonTheme
                                                     .style
@@ -838,18 +874,25 @@ class _ServiceInfoPageState extends State<ServiceInfoPage> {
                                           horizontal: 16.w,
                                         ),
                                         child: ElevatedButton(
-                                          onPressed: () {
-                                            context.read<SetBookingBloc>().add(
-                                              SetBookingEvent.setBookings(
-                                                getBookingModel:
-                                                    GetBookingModel(
-                                                      id: data?.last?.id
-                                                          .toString(),
-                                                      status: "complete",
-                                                    ),
-                                              ),
-                                            );
-                                          },
+                                          onPressed: isLoading
+                                              ? null
+                                              : () {
+                                                  context
+                                                      .read<SetBookingBloc>()
+                                                      .add(
+                                                        SetBookingEvent.setBookings(
+                                                          getBookingModel:
+                                                              GetBookingModel(
+                                                                id: data
+                                                                    ?.last
+                                                                    ?.id
+                                                                    .toString(),
+                                                                status:
+                                                                    "complete",
+                                                              ),
+                                                        ),
+                                                      );
+                                                },
                                           style: Theme.of(context)
                                               .elevatedButtonTheme
                                               .style

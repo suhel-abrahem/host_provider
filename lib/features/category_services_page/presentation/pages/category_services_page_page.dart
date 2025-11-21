@@ -1,30 +1,27 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:glass/glass.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hosta_provider/config/theme/app_theme.dart';
-import 'package:hosta_provider/core/dependencies_injection.dart';
-import 'package:hosta_provider/core/resource/common_entity/service_error_entity.dart';
-import 'package:hosta_provider/core/resource/common_state_widget/no_data_state_widget.dart';
-import 'package:hosta_provider/core/resource/common_state_widget/no_internet_state_widget.dart';
-import 'package:hosta_provider/core/resource/custom_widget/custom_input_field/custom_input_field.dart';
-import 'package:hosta_provider/core/resource/custom_widget/snake_bar_widget/snake_bar_widget.dart';
-import 'package:hosta_provider/core/resource/image_widget.dart';
-import 'package:hosta_provider/core/resource/main_page/main_page.dart';
-import 'package:hosta_provider/core/util/helper/helper.dart';
-import 'package:hosta_provider/features/categories_page/domain/entities/category_entity.dart';
-import 'package:hosta_provider/features/categories_page/presentation/bloc/categories_page_bloc.dart';
-import 'package:hosta_provider/features/category_services_page/data/models/get_service_model.dart';
-import 'package:hosta_provider/features/category_services_page/data/models/service_model.dart';
-import 'package:hosta_provider/features/category_services_page/data/models/set_service_model.dart';
-import 'package:hosta_provider/features/category_services_page/presentation/bloc/set_service_bloc.dart';
-import 'package:hosta_provider/features/category_services_page/presentation/widgets/add_button.dart';
-import 'package:hosta_provider/generated/locale_keys.g.dart';
+import '../../../../config/theme/app_theme.dart';
+import '../../../../core/dependencies_injection.dart';
+import '../../../../core/resource/common_entity/service_error_entity.dart';
+import '../../../../core/resource/common_state_widget/no_data_state_widget.dart';
+import '../../../../core/resource/common_state_widget/no_internet_state_widget.dart';
+import '../../../../core/resource/custom_widget/custom_input_field/custom_input_field.dart';
+import '../../../../core/resource/custom_widget/snake_bar_widget/snake_bar_widget.dart';
+import '../../../../core/resource/image_widget.dart';
+import '../../../../core/resource/main_page/main_page.dart';
+import '../../../../core/util/helper/helper.dart';
+import '../../../categories_page/domain/entities/category_entity.dart';
+import '../../data/models/get_service_model.dart';
+import '../../data/models/service_model.dart';
+import '../../data/models/set_service_model.dart';
+import '../bloc/set_service_bloc.dart';
+import '../widgets/add_button.dart';
+import '../../../../generated/locale_keys.g.dart';
 
 import '../../../../core/constants/font_constants.dart';
 import '../../../../core/resource/common_entity/service_entity.dart';
@@ -598,7 +595,7 @@ class _CategoryServicesPagePageState extends State<CategoryServicesPagePage> {
                                                                           onPressed: () {
                                                                             setServiceModel = setServiceModel?.copyWith(
                                                                               serviceModel: setServiceModel?.serviceModel?.copyWith(
-                                                                                service_id: data?[index]?.id,
+                                                                                service_id: data[index]?.id,
                                                                               ),
                                                                             );
                                                                             if (setServiceModel?.serviceModel?.is_active ==
@@ -609,9 +606,6 @@ class _CategoryServicesPagePageState extends State<CategoryServicesPagePage> {
                                                                                 ),
                                                                               );
                                                                             }
-                                                                            print(
-                                                                              "from Add:${setServiceModel?.serviceModel}",
-                                                                            );
                                                                             context
                                                                                 .read<
                                                                                   SetServiceBloc

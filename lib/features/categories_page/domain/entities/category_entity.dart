@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hosta_provider/features/signup_page/data/models/uint8list_json_converter.dart';
 part 'category_entity.freezed.dart';
 part 'category_entity.g.dart';
 

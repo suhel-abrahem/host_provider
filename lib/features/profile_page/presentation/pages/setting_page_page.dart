@@ -5,9 +5,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:glass/glass.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hosta_provider/core/resource/main_page/main_page.dart';
-import 'package:hosta_provider/features/profile_page/presentation/bloc/get_profile_bloc.dart';
-import 'package:hosta_provider/generated/locale_keys.g.dart';
+import '../../../../core/resource/main_page/main_page.dart';
+import '../bloc/get_profile_bloc.dart';
+import '../../../../generated/locale_keys.g.dart';
 
 import '../../../../config/app/app_preferences.dart';
 import '../../../../config/route/routes_manager.dart';
@@ -18,7 +18,6 @@ import '../../../../core/dependencies_injection.dart';
 import '../../../../core/enums/psition_enum.dart';
 import '../../../../core/resource/custom_widget/dropdown/drop_down_with_label.dart';
 import '../../../../core/resource/custom_widget/snake_bar_widget/snake_bar_widget.dart';
-import '../../../../core/resource/main_page/drawer_button.dart';
 import '../../../../core/util/helper/helper.dart';
 import '../../../login_page/domain/entities/login_state_entity.dart';
 import '../../data/models/profile_model.dart';
@@ -192,7 +191,6 @@ class _SettingPagePageState extends State<SettingPagePage> {
                     ..add(GetProfileEvent.started()),
               child: BlocListener<GetProfileBloc, GetProfileState>(
                 listener: (context, state) {
-                  print("logout state: $state");
                   if (state is GetProfileStateLoggedOut) {
                     getItInstance<AppPreferences>().setUserInfo(
                       loginStateEntity: LoginStateEntity(),

@@ -1,9 +1,9 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hosta_provider/features/category_services_page/data/models/set_service_model.dart';
-import 'package:hosta_provider/features/category_services_page/domain/usecases/delete_service_usecase.dart';
-import 'package:hosta_provider/features/category_services_page/domain/usecases/set_service_usecase.dart';
-import 'package:hosta_provider/features/category_services_page/domain/usecases/update_service_usecase.dart';
+import '../../data/models/set_service_model.dart';
+import '../../domain/usecases/delete_service_usecase.dart';
+import '../../domain/usecases/set_service_usecase.dart';
+import '../../domain/usecases/update_service_usecase.dart';
 
 import '../../../../config/app/app_preferences.dart';
 import '../../../../core/data_state/data_state.dart';
@@ -41,11 +41,7 @@ class SetServiceBloc extends Bloc<SetServiceEvent, SetServiceState> {
             ),
           )
           .then((onValue) async {
-            print("categoris page bloc get auth:$onValue");
             if (onValue is DataSuccess) {
-              print(
-                "bloc cat id: ${event.setServiceModel?.serviceModel?.service_id}",
-              );
               await _serviceUseCase
                   .call(
                     params: event.setServiceModel?.copyWith(
@@ -53,9 +49,6 @@ class SetServiceBloc extends Bloc<SetServiceEvent, SetServiceState> {
                     ),
                   )
                   .then((setServicesOnValue) {
-                    print(
-                      "category page bloc get Services:${setServicesOnValue?.error}",
-                    );
                     if (setServicesOnValue is DataSuccess) {
                       emit(SetServiceState.added(setServicesOnValue?.data));
                     } else if (setServicesOnValue is UnauthenticatedDataState) {
@@ -95,11 +88,7 @@ class SetServiceBloc extends Bloc<SetServiceEvent, SetServiceState> {
             ),
           )
           .then((onValue) async {
-            print("categoris page bloc get auth:$onValue");
             if (onValue is DataSuccess) {
-              print(
-                "bloc cat id: ${event.setServiceModel?.serviceModel?.service_id}",
-              );
               await _updateServiceUsecase
                   .call(
                     params: event.setServiceModel?.copyWith(
@@ -107,9 +96,6 @@ class SetServiceBloc extends Bloc<SetServiceEvent, SetServiceState> {
                     ),
                   )
                   .then((setServicesOnValue) {
-                    print(
-                      "category page bloc get Services:${setServicesOnValue?.error}",
-                    );
                     if (setServicesOnValue is DataSuccess) {
                       emit(SetServiceState.updated(setServicesOnValue?.data));
                     } else if (setServicesOnValue is UnauthenticatedDataState) {
@@ -151,11 +137,7 @@ class SetServiceBloc extends Bloc<SetServiceEvent, SetServiceState> {
             ),
           )
           .then((onValue) async {
-            print("categoris page bloc get auth:$onValue");
             if (onValue is DataSuccess) {
-              print(
-                "bloc cat id: ${event.setServiceModel?.serviceModel?.service_id}",
-              );
               await _deleteServiceUsecase
                   .call(
                     params: event.setServiceModel?.copyWith(
@@ -163,10 +145,6 @@ class SetServiceBloc extends Bloc<SetServiceEvent, SetServiceState> {
                     ),
                   )
                   .then((setServicesOnValue) {
-                    print(
-                      "category page bloc get Services:${setServicesOnValue?.error}",
-                    );
-                    print("im delete bloc: $setServicesOnValue");
                     if (setServicesOnValue is DataSuccess) {
                       emit(SetServiceState.deleted(setServicesOnValue.data));
                     } else if (setServicesOnValue is UnauthenticatedDataState) {

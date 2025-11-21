@@ -18,7 +18,7 @@ class ColorManager {
 
   // Primary Colors
   static const Color primaryColor = Color.fromARGB(255, 31, 153, 209);
-  static Color primaryColorLight = primaryColor.withOpacity(0.25);
+  static Color primaryColorLight = primaryColor.withValues(alpha: 0.25);
 
   // Accent Colors
   static const Color accentColor = Color(0xFF388E3C); // Accent Green

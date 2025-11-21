@@ -1,6 +1,6 @@
-import 'package:hosta_provider/core/usecase/usecase.dart';
-import 'package:hosta_provider/features/profile_page/data/models/profile_model.dart';
-import 'package:hosta_provider/features/profile_page/domain/repositories/profile_repository.dart';
+import '../../../../core/usecase/usecase.dart';
+import '../../data/models/profile_model.dart';
+import '../repositories/profile_repository.dart';
 
 import '../../../../core/data_state/data_state.dart';
 

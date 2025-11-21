@@ -7,25 +7,24 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hosta_provider/config/app/app_preferences.dart';
-import 'package:hosta_provider/config/theme/app_theme.dart';
+import '../../../../config/app/app_preferences.dart';
+import '../../../../config/theme/app_theme.dart';
 
-import 'package:hosta_provider/core/dependencies_injection.dart';
-import 'package:hosta_provider/core/resource/custom_widget/snake_bar_widget/snake_bar_widget.dart';
-import 'package:hosta_provider/core/util/helper/helper.dart';
-import 'package:hosta_provider/features/signup_page/data/models/city_model.dart';
-import 'package:hosta_provider/features/signup_page/data/models/country_model.dart';
-import 'package:hosta_provider/features/signup_page/data/models/signup_model.dart';
-import 'package:hosta_provider/features/signup_page/domain/entities/city_entity.dart';
-import 'package:hosta_provider/features/signup_page/domain/entities/country_entity.dart';
-import 'package:hosta_provider/features/signup_page/domain/entities/position_entity.dart';
-import 'package:hosta_provider/features/signup_page/domain/entities/signup_error_entity.dart';
-import 'package:hosta_provider/features/signup_page/domain/entities/signup_info_entity.dart';
-import 'package:hosta_provider/features/signup_page/presentation/bloc/get_cities_bloc.dart';
-import 'package:hosta_provider/features/signup_page/presentation/bloc/get_countries_bloc.dart';
-import 'package:hosta_provider/features/signup_page/presentation/bloc/get_position_bloc.dart';
-import 'package:hosta_provider/features/signup_page/presentation/bloc/signup_bloc_bloc.dart';
-import 'package:restart/restart.dart';
+import '../../../../core/dependencies_injection.dart';
+import '../../../../core/resource/custom_widget/snake_bar_widget/snake_bar_widget.dart';
+import '../../../../core/util/helper/helper.dart';
+import '../../data/models/city_model.dart';
+import '../../data/models/country_model.dart';
+import '../../data/models/signup_model.dart';
+import '../../domain/entities/city_entity.dart';
+import '../../domain/entities/country_entity.dart';
+import '../../domain/entities/position_entity.dart';
+import '../../domain/entities/signup_error_entity.dart';
+import '../../domain/entities/signup_info_entity.dart';
+import '../bloc/get_cities_bloc.dart';
+import '../bloc/get_countries_bloc.dart';
+import '../bloc/get_position_bloc.dart';
+import '../bloc/signup_bloc_bloc.dart';
 
 import '../../../../config/route/routes_manager.dart';
 import '../../../../core/constants/font_constants.dart';
@@ -107,7 +106,6 @@ class _SignupPageState extends State<SignupPage> {
         builder: (context) {
           return BlocListener<GetPositionBloc, GetPositionState>(
             listener: (context, getPositionState) {
-              print("getPositionState:$getPositionState");
               getPositionState.when(
                 initial: () {
                   showMessage(message: "ini", context: context);
@@ -185,7 +183,6 @@ class _SignupPageState extends State<SignupPage> {
                   initial: () => isSignupButtonLoading = false,
                   signupSignedUp: (data) async {
                     isSignupButtonLoading = false;
-                    print("signUpRe:$data");
                     SignupInfoEntity? signupInfoEntity = data;
                     signupInfoEntity = signupInfoEntity?.copyWith(
                       email: signupModel?.email,
@@ -194,8 +191,9 @@ class _SignupPageState extends State<SignupPage> {
                     await getItInstance<AppPreferences>().setUserSignUpInfo(
                       signupEntity: signupInfoEntity,
                     );
-
-                    context.push(RoutesPath.otpPage);
+                    if (mounted) {
+                      context.push(RoutesPath.otpPage);
+                    }
                   },
                   loading: () => isSignupButtonLoading = true,
                   error: (message) {

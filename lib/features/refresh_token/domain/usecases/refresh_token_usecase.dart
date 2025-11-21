@@ -1,8 +1,8 @@
-import 'package:hosta_provider/core/data_state/data_state.dart';
-import 'package:hosta_provider/core/usecase/usecase.dart';
-import 'package:hosta_provider/features/refresh_token/data/models/refresh_token_model.dart';
-import 'package:hosta_provider/features/refresh_token/domain/entities/token_entity.dart';
-import 'package:hosta_provider/features/refresh_token/domain/repositories/refresh_token_repository.dart';
+import '../../../../core/data_state/data_state.dart';
+import '../../../../core/usecase/usecase.dart';
+import '../../data/models/refresh_token_model.dart';
+import '../entities/token_entity.dart';
+import '../repositories/refresh_token_repository.dart';
 
 class RefreshTokenUsecase
     implements UseCase<DataState<TokenEntity?>?, RefreshTokenModel> {
