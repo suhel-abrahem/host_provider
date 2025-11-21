@@ -1299,7 +1299,6 @@ class _AccountPagePageState extends State<AccountPagePage> {
                             getItInstance<AppPreferences>().setUserInfo(
                               loginStateEntity: LoginStateEntity(),
                             );
-                            context.pushNamed(RoutesName.loginPage);
                           } else if (state is LangugesStateError) {
                             setState(() {
                               isLanguageISpeakError = true;

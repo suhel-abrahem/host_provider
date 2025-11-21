@@ -393,6 +393,10 @@ class _ProfilePagePageState extends State<ProfilePagePage> {
                       context.read<GetProfileBloc>().add(
                         GetProfileEvent.getProfile(profileModel: profileModel),
                       );
+                    } else if (state is GetProfileStateUnauthorized) {
+                      getItInstance<AppPreferences>().setUserInfo(
+                        loginStateEntity: LoginStateEntity(),
+                      );
                     }
                   },
                   child: Builder(

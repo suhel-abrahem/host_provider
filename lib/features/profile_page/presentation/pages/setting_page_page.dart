@@ -203,6 +203,10 @@ class _SettingPagePageState extends State<SettingPagePage> {
                       message: state.message ?? LocaleKeys.common_error.tr(),
                       context: context,
                     );
+                  } else if (state is GetProfileStateUnauthorized) {
+                    getItInstance<AppPreferences>().setUserInfo(
+                      loginStateEntity: LoginStateEntity(),
+                    );
                   }
                 },
                 child: Builder(
