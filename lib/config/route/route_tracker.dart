@@ -7,7 +7,6 @@ class RouteTracker extends NavigatorObserver {
   @override
   void didPush(Route route, Route? previousRoute) {
     this.previousRoute = currentRoute;
-
     debugPrint('PUSH: $currentRoute (from $previousRoute)');
   }
 
