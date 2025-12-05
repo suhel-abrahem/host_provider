@@ -7,6 +7,8 @@ abstract class  LocaleKeys {
   static const loginPage_welcome = 'loginPage.welcome';
   static const loginPage_signIn = 'loginPage.signIn';
   static const loginPage_email = 'loginPage.email';
+  static const loginPage_emailOrPhone = 'loginPage.emailOrPhone';
+  static const loginPage_emailOrPhoneIsRequired = 'loginPage.emailOrPhoneIsRequired';
   static const loginPage_emailIsRequired = 'loginPage.emailIsRequired';
   static const loginPage_password = 'loginPage.password';
   static const loginPage_confirmPassword = 'loginPage.confirmPassword';
@@ -34,6 +36,9 @@ abstract class  LocaleKeys {
   static const loginPage_thisEmailIsTaken = 'loginPage.thisEmailIsTaken';
   static const loginPage_ThePasswordFieldMustBeAtLeast8Characters = 'loginPage.ThePasswordFieldMustBeAtLeast8Characters';
   static const loginPage_errors = 'loginPage.errors';
+  static const loginPage_chooseVerificationMethod = 'loginPage.chooseVerificationMethod';
+  static const loginPage_viaEmail = 'loginPage.viaEmail';
+  static const loginPage_viaWhatsapp = 'loginPage.viaWhatsapp';
   static const loginPage = 'loginPage';
   static const common_loading = 'common.loading';
   static const common_error = 'common.error';

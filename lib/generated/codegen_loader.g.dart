@@ -20,6 +20,8 @@ class CodegenLoader extends AssetLoader{
     "welcome": "مرحباً بك في هوستا",
     "signIn": "تسجيل الدخول إلى حسابك",
     "email": "البريد الإلكتروني",
+    "emailOrPhone": "البريد الإلكتروني أو رقم الهاتف",
+    "emailOrPhoneIsRequired": "البريد الإلكتروني أو رقم الهاتف مطلوب",
     "emailIsRequired": "البريد الإلكتروني مطلوب",
     "password": "كلمة المرور",
     "confirmPassword": "تأكيد كلمة المرور",
@@ -46,7 +48,10 @@ class CodegenLoader extends AssetLoader{
     "thisPhoneIsTaken": "رقم الهاتف مستخدم بالفعل",
     "thisEmailIsTaken": "البريد الإلكتروني مستخدم بالفعل",
     "ThePasswordFieldMustBeAtLeast8Characters": "يجب أن تكون كلمة المرور مكونة من 8 أحرف على الأقل",
-    "errors": "أخطاء"
+    "errors": "أخطاء",
+    "chooseVerificationMethod": "اختر طريقة التحقق",
+    "viaEmail": "عبر البريد الإلكتروني",
+    "viaWhatsapp": "عبر الواتساب"
   },
   "common": {
     "loading": "جاري التحميل...",
@@ -77,8 +82,8 @@ class CodegenLoader extends AssetLoader{
     "choose": "اختر لغة",
     "selected": "تم اختيار اللغة",
     "arabic": "العربية",
-    "english": "الإنجليزية",
-    "kurdish": "الكردية"
+    "english": "English",
+    "kurdish": "کوردی"
   },
   "registration": "التسجيل",
   "registration_screen": "شاشة التسجيل",
@@ -272,6 +277,8 @@ static const Map<String,dynamic> _en = {
     "welcome": "Welcome to Hosta",
     "signIn": "Sign in to your account",
     "email": "Email",
+    "emailOrPhone": "Email or Phone Number",
+    "emailOrPhoneIsRequired": "Email or phone number is required",
     "emailIsRequired": "Email is required",
     "password": "Password",
     "confirmPassword": "Confirm Password",
@@ -298,7 +305,10 @@ static const Map<String,dynamic> _en = {
     "thisPhoneIsTaken": "This phone number is already taken",
     "thisEmailIsTaken": "This email is already taken",
     "ThePasswordFieldMustBeAtLeast8Characters": "The password field must be at least 8 characters",
-    "errors": "Errors"
+    "errors": "Errors",
+    "chooseVerificationMethod": "Choose verification method",
+    "viaEmail": "Via Email",
+    "viaWhatsapp": "Via Whatsapp"
   },
   "common": {
     "loading": "Loading...",
@@ -328,9 +338,9 @@ static const Map<String,dynamic> _en = {
   "language": {
     "choose": "Choose language",
     "selected": "Language selected",
-    "arabic": "Arabic",
+    "arabic": "العربية",
     "english": "English",
-    "kurdish": "Kurdish"
+    "kurdish": "کوردی"
   },
   "registration": "Registration",
   "registration_screen": "Registration screen",
@@ -524,6 +534,8 @@ static const Map<String,dynamic> _fa = {
     "welcome": "بەخێربێیت بۆ هۆستا",
     "signIn": "چوونەژوورەوە بۆ ئەژماری خۆت",
     "email": "ئیمەیڵ",
+    "emailOrPhone": "ئیمەیڵ یان ژمارەی مۆبایل",
+    "emailOrPhoneIsRequired": "ئیمەیڵ یان ژمارەی مۆبایل پێویستە",
     "emailIsRequired": "ئیمەیڵ پێویستە",
     "password": "وشەی نهێنی",
     "confirmPassword": "دووبارە وشەی نهێنی بنووسە",
@@ -550,7 +562,10 @@ static const Map<String,dynamic> _fa = {
     "thisPhoneIsTaken": "ئەم ژمارەی مۆبایلە هەیە",
     "thisEmailIsTaken": "ئەم ئیمەیڵە هەیە",
     "ThePasswordFieldMustBeAtLeast8Characters": "پێویستی وشەی نهێنی بەرزتر لە 8 پیتە",
-    "errors": "هەڵەکان"
+    "errors": "هەڵەکان",
+    "chooseVerificationMethod": "ڕێگای پشکنین هەڵبژێرە",
+    "viaEmail": "بەڕێی ئیمەیڵ",
+    "viaWhatsapp": "بەڕێی واتسئاپ"
   },
   "common": {
     "loading": "چاوەڕێ بکە...",
@@ -580,8 +595,8 @@ static const Map<String,dynamic> _fa = {
   "language": {
     "choose": "زمانێک هەڵبژێرە",
     "selected": "زمان هەڵبژێردرا",
-    "arabic": "عەرەبی",
-    "english": "ئینگلیزی",
+    "arabic": "العربية",
+    "english": "English",
     "kurdish": "کوردی"
   },
   "registration": "تۆمارکردن",

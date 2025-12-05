@@ -4,6 +4,7 @@ import 'package:animated_theme_switcher/animated_theme_switcher.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:go_router/go_router.dart';
+import '../../features/notification_page/presentation/pages/notification_page.dart';
 import '../app/app_preferences.dart';
 import 'route_tracker.dart';
 import '../../core/dependencies_injection.dart';
@@ -47,6 +48,7 @@ class RoutesName {
   static String accountPage = "accountPage";
   static String settingsPage = "settingsPage";
   static String helpPage = "helpPage";
+  static String notificationPage = "notificationPage";
 }
 
 class RoutesPath {
@@ -66,6 +68,7 @@ class RoutesPath {
   static String accountPage = "/accountPage";
   static String settingsPage = "/settingsPage";
   static String helpPage = "/helpPage";
+  static String notificationPage = "/notificationPage";
 }
 
 GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -89,33 +92,19 @@ GoRouter goRouter = GoRouter(
   routes: [
     StatefulShellRoute.indexedStack(
       builder: (context, state, navigationShell) => ThemeSwitchingArea(
-        child: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [
-                const Color.fromARGB(255, 35, 89, 116).withValues(alpha: 0.9),
-                Color.fromARGB(255, 11, 56, 102).withValues(alpha: 0.8),
-                Color.fromARGB(255, 4, 38, 75),
-              ],
-              stops: const [0.0, 0.5, 1.0],
-            ),
-          ),
-          child: Scaffold(
-            backgroundColor: Colors.transparent,
-            body: navigationShell,
-            bottomNavigationBar:
-                !(state.uri.toString().endsWith(RoutesPath.loginPage) ||
-                    state.uri.toString().endsWith(RoutesPath.firstUsePage) ||
-                    state.uri.toString().endsWith(RoutesPath.signupPage) ||
-                    state.uri.toString().endsWith(RoutesPath.otpPage))
-                ? MainBottomBar(
-                    key: ValueKey(currentPath),
-                    currentIndex: _routerToIndex(currentPath ?? ""),
-                  ).animate().scaleY(duration: 500.ms)
-                : null,
-          ),
+        child: Scaffold(
+          backgroundColor: Colors.transparent,
+          body: navigationShell,
+          bottomNavigationBar:
+              !(state.uri.toString().endsWith(RoutesPath.loginPage) ||
+                  state.uri.toString().endsWith(RoutesPath.firstUsePage) ||
+                  state.uri.toString().endsWith(RoutesPath.signupPage) ||
+                  state.uri.toString().endsWith(RoutesPath.otpPage))
+              ? MainBottomBar(
+                  key: ValueKey(currentPath),
+                  currentIndex: _routerToIndex(currentPath ?? ""),
+                ).animate().scaleY(duration: 500.ms)
+              : null,
         ),
       ),
       branches: [
@@ -268,6 +257,16 @@ GoRouter goRouter = GoRouter(
               pageBuilder: (context, state) {
                 return _customTransitionPage(
                   child: HelpPagePage(),
+                  state: state,
+                );
+              },
+            ),
+            GoRoute(
+              path: RoutesPath.notificationPage,
+              name: RoutesName.notificationPage,
+              pageBuilder: (context, state) {
+                return _customTransitionPage(
+                  child: NotificationPage(),
                   state: state,
                 );
               },

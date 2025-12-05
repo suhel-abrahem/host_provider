@@ -185,6 +185,7 @@ ThemeData darkTheme() {
       // surface: ColorManager.surfaceColor,
       primaryContainer: ColorManager.darkPrimaryContainerColor,
     ),
+
     inputDecorationTheme: InputDecorationTheme(
       contentPadding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 2.h),
       filled: true,

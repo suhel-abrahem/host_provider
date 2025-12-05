@@ -48,7 +48,7 @@ class Helper {
   static String? getCountryCode(BuildContext context) {
     return context.locale == LanguageConstant.faLocale
         ? "ku"
-        : context.locale.countryCode;
+        : context.locale.languageCode;
   }
 
   static RichText labelText({
@@ -92,6 +92,23 @@ class Helper {
         return Theme.of(context).colorScheme.error;
       default:
         return Theme.of(context).colorScheme.error;
+    }
+  }
+
+  static String? getStatusName(String? status) {
+    switch (status?.toLowerCase()) {
+      case 'pending':
+        return LocaleKeys.bookingPage_pending.tr();
+      case 'confirmed':
+        return LocaleKeys.bookingPage_accepted.tr();
+      case 'in_progress':
+        return LocaleKeys.bookingPage_inProgress.tr();
+      case 'completed':
+        return LocaleKeys.bookingPage_completed.tr();
+      case 'canceled':
+        return LocaleKeys.bookingPage_canceled.tr();
+      default:
+        return null;
     }
   }
 

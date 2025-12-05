@@ -13,6 +13,7 @@ class SquerContainerWithPresseWidget extends StatelessWidget {
   final String? info;
   final VoidCallback? onPressed;
   final HomePageState? state;
+  final bool? isTransparent;
   const SquerContainerWithPresseWidget({
     super.key,
     this.backgroundColor,
@@ -20,6 +21,7 @@ class SquerContainerWithPresseWidget extends StatelessWidget {
     this.info,
     this.onPressed,
     this.state,
+    this.isTransparent = true,
   });
 
   @override
@@ -40,11 +42,14 @@ class SquerContainerWithPresseWidget extends StatelessWidget {
         child:
             Container(
               padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 12.h),
+              decoration: BoxDecoration(
+                color: isTransparent! ? Colors.transparent : backgroundColor,
+              ),
               child: (state is HomePageStateLoading)
                   ? Center(child: CircularProgressIndicator())
                   : Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      crossAxisAlignment: CrossAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         SizedBox(
                           width: 100.w,
@@ -63,6 +68,9 @@ class SquerContainerWithPresseWidget extends StatelessWidget {
                                         fontFamily: FontConstants.fontFamily(
                                           context.locale,
                                         ),
+                                        color: !(isTransparent ?? false)
+                                            ? Colors.white
+                                            : null,
                                       ),
                                   overflow: TextOverflow.fade,
                                 ),
@@ -77,6 +85,9 @@ class SquerContainerWithPresseWidget extends StatelessWidget {
                                         fontFamily: FontConstants.fontFamily(
                                           context.locale,
                                         ),
+                                        color: !(isTransparent ?? false)
+                                            ? Colors.white
+                                            : null,
                                       ),
                                 ),
                               ),

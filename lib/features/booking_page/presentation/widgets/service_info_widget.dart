@@ -40,7 +40,7 @@ class ServiceInfoWidget extends StatelessWidget {
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: Text(
-                  bookingEntity?.status ?? "",
+                  Helper.getStatusName(bookingEntity?.status ?? "") ?? "",
                   style: Theme.of(context).textTheme.labelMedium?.copyWith(
                     fontFamily: FontConstants.fontFamily(context.locale),
                   ),

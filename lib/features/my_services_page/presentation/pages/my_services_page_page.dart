@@ -80,7 +80,15 @@ class _MyServicesPagePageState extends State<MyServicesPagePage> {
               },
               child: BlocBuilder<MyServiceBloc, MyServiceState>(
                 builder: (context, state) => state.when(
-                  initial: () => SizedBox(),
+                  initial: () => Expanded(
+                    child: Center(
+                      child: SizedBox(
+                        width: 50.w,
+                        height: 50.h,
+                        child: CircularProgressIndicator(),
+                      ),
+                    ),
+                  ),
                   noInternet: () => Expanded(
                     child: NoInternetStateWidget(
                       lottieHeight: 200.h,
@@ -135,9 +143,11 @@ class _MyServicesPagePageState extends State<MyServicesPagePage> {
                   ),
                   unAuthorized: () => SizedBox(),
                   noData: () => Expanded(
-                    child: NodataStateWidget(
-                      lottieHeight: 200.h,
-                      lottieWidth: 200.w,
+                    child: Center(
+                      child: NodataStateWidget(
+                        lottieHeight: 300.h,
+                        lottieWidth: 300.w,
+                      ),
                     ),
                   ),
                 ),
@@ -148,6 +158,7 @@ class _MyServicesPagePageState extends State<MyServicesPagePage> {
         floatingActionButton: FloatingActionButton(
           backgroundColor: Theme.of(context).primaryColor,
           child: Icon(Icons.add, color: Colors.white, size: 22.sp),
+
           onPressed: () {
             context.push(RoutesPath.categoriesPage);
           },

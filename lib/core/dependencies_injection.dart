@@ -100,6 +100,7 @@ import '../features/profile_page/presentation/bloc/get_profile_bloc.dart';
 import '../features/profile_page/presentation/bloc/get_working_time_bloc.dart';
 import '../features/profile_page/presentation/bloc/languges_bloc.dart';
 import '../features/refresh_token/data/repositories/refresh_token_repository_implements.dart';
+import 'resource/firebase_common_services/firebase_messageing_service.dart';
 
 GetIt getItInstance = GetIt.instance;
 Future<void> initDependencies() async {
@@ -110,6 +111,9 @@ Future<void> initDependencies() async {
   //common services and utilities
   getItInstance.registerSingleton<CommonService>(CommonService());
   getItInstance.registerSingleton<CheckConnectivity>(CheckConnectivity());
+  getItInstance.registerSingleton<FirebaseMessagingService>(
+    FirebaseMessagingService(),
+  );
   //login feature dependencies
   getItInstance.registerSingleton<LoginStateEntity>(LoginStateEntity());
   getItInstance.registerSingleton<LoginModel>(LoginModel());

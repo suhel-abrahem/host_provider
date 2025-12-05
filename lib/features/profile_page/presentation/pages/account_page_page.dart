@@ -29,6 +29,7 @@ import '../../data/models/profile_model.dart';
 import '../../data/models/set_profile_model.dart';
 import '../../data/models/set_working_hours_model.dart';
 import '../../data/models/working_time_model.dart';
+import '../../domain/entities/language_entity.dart';
 import '../../domain/entities/profile_entity.dart';
 import '../../domain/entities/working_hours_entity.dart';
 import '../bloc/get_profile_bloc.dart';
@@ -79,6 +80,7 @@ class _AccountPagePageState extends State<AccountPagePage> {
   bool animationDone = false;
   List<WorkingTimeModel?>? scheduleList = [];
   bool isLanguageISpeakError = false;
+  List<LanguageEntity?>? preferredLanguages = [];
   @override
   void initState() {
     scheduleList = [
@@ -117,6 +119,23 @@ class _AccountPagePageState extends State<AccountPagePage> {
         start_time: "",
         end_time: "",
         is_available: false,
+      ),
+    ];
+    preferredLanguages = [
+      LanguageEntity(
+        language: "ar",
+        language_name: LocaleKeys.language_arabic.tr(),
+        isSelected: false,
+      ),
+      LanguageEntity(
+        language: "en",
+        language_name: LocaleKeys.language_english.tr(),
+        isSelected: false,
+      ),
+      LanguageEntity(
+        language: "ku",
+        language_name: LocaleKeys.language_kurdish.tr(),
+        isSelected: false,
       ),
     ];
     super.initState();
@@ -1252,7 +1271,7 @@ class _AccountPagePageState extends State<AccountPagePage> {
                   AnimatedContainer(
                     duration: const Duration(milliseconds: 300),
                     height: isLanguageISpeakError
-                        ? 300.w
+                        ? 300.h
                         : languagesCanEdit
                         ? 180.h
                         : 130.h,
@@ -1307,6 +1326,22 @@ class _AccountPagePageState extends State<AccountPagePage> {
                               message: LocaleKeys.common_error.tr(),
                               context: context,
                             );
+                          } else if (state is LangugesStateLoaded) {
+                            preferredLanguages?.forEach((element) {
+                              state.languages?.forEach((action) {
+                                if (element?.language == action?.language) {
+                                  preferredLanguages?[preferredLanguages
+                                          ?.indexOf(element) ??
+                                      0] = action?.copyWith(
+                                    isSelected: true,
+                                  );
+                                  ;
+                                  print(
+                                    "Preferred Languages: $preferredLanguages",
+                                  );
+                                }
+                              });
+                            });
                           }
                         },
                         child: AnimatedSwitcher(
@@ -1489,141 +1524,144 @@ class _AccountPagePageState extends State<AccountPagePage> {
                               else
                                 Padding(
                                   padding: EdgeInsetsGeometry.only(top: 12.h),
-                                  child: Column(
-                                    children: [
-                                      Row(
-                                        children: [
-                                          //arabic language
-                                          Row(
-                                            children: [
-                                              Text(
-                                                LocaleKeys.language_arabic.tr(),
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .labelLarge
-                                                    ?.copyWith(
-                                                      fontFamily:
-                                                          FontConstants.fontFamily(
-                                                            context.locale,
-                                                          ),
-                                                    ),
-                                              ),
-                                              Checkbox(
-                                                value: isArabicLanguageSelected,
-                                                onChanged: (newState) {
-                                                  setState(() {
-                                                    isArabicLanguageSelected =
-                                                        newState ?? false;
-                                                  });
-                                                },
-                                              ),
-                                            ],
-                                          ),
-                                          //english language
-                                          Row(
-                                            children: [
-                                              Text(
-                                                LocaleKeys.language_english
-                                                    .tr(),
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .labelLarge
-                                                    ?.copyWith(
-                                                      fontFamily:
-                                                          FontConstants.fontFamily(
-                                                            context.locale,
-                                                          ),
-                                                    ),
-                                              ),
-                                              Checkbox(
-                                                value:
-                                                    isEnglishLanguageSelected,
-                                                onChanged: (newState) {
-                                                  setState(() {
-                                                    isEnglishLanguageSelected =
-                                                        newState ?? false;
-                                                  });
-                                                },
-                                              ),
-                                            ],
-                                          ),
-                                          //kurdish language
-                                          Row(
-                                            children: [
-                                              Text(
-                                                LocaleKeys.language_kurdish
-                                                    .tr(),
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .labelLarge
-                                                    ?.copyWith(
-                                                      fontFamily:
-                                                          FontConstants.fontFamily(
-                                                            context.locale,
-                                                          ),
-                                                    ),
-                                              ),
-                                              Checkbox(
-                                                value:
-                                                    isKurdishLanguageSelected,
-                                                onChanged: (newState) {
-                                                  setState(() {
-                                                    isKurdishLanguageSelected =
-                                                        newState ?? false;
-                                                  });
-                                                },
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                      BlocBuilder<LangugesBloc, LangugesState>(
-                                        builder: (context, state) {
-                                          return ElevatedButton(
-                                            onPressed: () {
-                                              List<String> selectedLanguages = [
-                                                if (isArabicLanguageSelected)
-                                                  "ar",
-                                                if (isEnglishLanguageSelected)
-                                                  "en",
-                                                if (isKurdishLanguageSelected)
-                                                  "ku",
-                                              ];
-                                              languageModel = languageModel
-                                                  .copyWith(
-                                                    languages:
-                                                        selectedLanguages,
-                                                  );
-                                              context.read<LangugesBloc>().add(
-                                                LangugesEvent.updateLanguage(
-                                                  languageModel: languageModel,
+                                  child: (isLanguageISpeakError)
+                                      ? Padding(
+                                          padding: EdgeInsets.only(bottom: 8.h),
+                                          child: Text(
+                                            LocaleKeys.common_error.tr(),
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .labelMedium
+                                                ?.copyWith(
+                                                  fontFamily:
+                                                      FontConstants.fontFamily(
+                                                        context.locale,
+                                                      ),
+                                                  color: Theme.of(
+                                                    context,
+                                                  ).colorScheme.error,
                                                 ),
-                                              );
-                                            },
-                                            child:
-                                                (state is LangugesStateLoading)
-                                                ? CircularProgressIndicator(
-                                                    color: Theme.of(
-                                                      context,
-                                                    ).colorScheme.onPrimary,
-                                                  )
-                                                : Text(
-                                                    LocaleKeys.common_save.tr(),
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .labelLarge
-                                                        ?.copyWith(
-                                                          fontFamily:
-                                                              FontConstants.fontFamily(
-                                                                context.locale,
-                                                              ),
-                                                        ),
-                                                  ),
-                                          );
-                                        },
-                                      ),
-                                    ],
-                                  ),
+                                          ),
+                                        )
+                                      : Column(
+                                          children: [
+                                            SizedBox(
+                                              height: 30.h,
+                                              width: double.maxFinite,
+                                              child: ListView.builder(
+                                                scrollDirection:
+                                                    Axis.horizontal,
+                                                itemCount:
+                                                    preferredLanguages
+                                                        ?.length ??
+                                                    0,
+                                                itemBuilder: (context, index) => Row(
+                                                  children: [
+                                                    Text(
+                                                      preferredLanguages?[index]
+                                                              ?.language_name ??
+                                                          "",
+                                                      style: Theme.of(context)
+                                                          .textTheme
+                                                          .labelLarge
+                                                          ?.copyWith(
+                                                            fontFamily:
+                                                                FontConstants.fontFamily(
+                                                                  context
+                                                                      .locale,
+                                                                ),
+                                                          ),
+                                                    ),
+                                                    Checkbox(
+                                                      value:
+                                                          preferredLanguages?[index]
+                                                              ?.isSelected ??
+                                                          false,
+                                                      onChanged: (newState) {
+                                                        setState(() {
+                                                          preferredLanguages?[index] =
+                                                              preferredLanguages?[index]
+                                                                  ?.copyWith(
+                                                                    isSelected:
+                                                                        newState,
+                                                                  );
+                                                        });
+                                                      },
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsets.only(
+                                                top: 12.h,
+                                              ),
+                                              child: BlocBuilder<LangugesBloc, LangugesState>(
+                                                builder: (context, state) {
+                                                  return ElevatedButton(
+                                                    onPressed: () {
+                                                      List<String?>
+                                                      selectedLanguages = [];
+                                                      preferredLanguages?.forEach((
+                                                        element,
+                                                      ) {
+                                                        if (element
+                                                                ?.isSelected ??
+                                                            false) {
+                                                          selectedLanguages.add(
+                                                            element?.language,
+                                                          );
+                                                        }
+                                                      });
+                                                      print(
+                                                        "Selected Languages: $selectedLanguages",
+                                                      );
+                                                      languageModel =
+                                                          languageModel.copyWith(
+                                                            languages:
+                                                                selectedLanguages,
+                                                          );
+                                                      context
+                                                          .read<LangugesBloc>()
+                                                          .add(
+                                                            LangugesEvent.updateLanguage(
+                                                              languageModel:
+                                                                  languageModel,
+                                                            ),
+                                                          );
+                                                    },
+                                                    child:
+                                                        (state
+                                                            is LangugesStateLoading)
+                                                        ? CircularProgressIndicator(
+                                                            color:
+                                                                Theme.of(
+                                                                      context,
+                                                                    )
+                                                                    .colorScheme
+                                                                    .onPrimary,
+                                                          )
+                                                        : Text(
+                                                            LocaleKeys
+                                                                .common_save
+                                                                .tr(),
+                                                            style: Theme.of(context)
+                                                                .textTheme
+                                                                .labelLarge
+                                                                ?.copyWith(
+                                                                  fontFamily:
+                                                                      FontConstants.fontFamily(
+                                                                        context
+                                                                            .locale,
+                                                                      ),
+                                                                ),
+                                                          ),
+                                                  );
+                                                },
+                                              ),
+                                            ),
+                                          ],
+                                        ),
                                 ),
                             ],
                           ),

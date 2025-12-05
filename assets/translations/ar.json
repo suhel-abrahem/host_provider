@@ -4,6 +4,8 @@
     "welcome": "مرحباً بك في هوستا",
     "signIn": "تسجيل الدخول إلى حسابك",
     "email": "البريد الإلكتروني",
+    "emailOrPhone": "البريد الإلكتروني أو رقم الهاتف",
+    "emailOrPhoneIsRequired": "البريد الإلكتروني أو رقم الهاتف مطلوب",
     "emailIsRequired": "البريد الإلكتروني مطلوب",
     "password": "كلمة المرور",
     "confirmPassword": "تأكيد كلمة المرور",
@@ -30,7 +32,10 @@
     "thisPhoneIsTaken": "رقم الهاتف مستخدم بالفعل",
     "thisEmailIsTaken": "البريد الإلكتروني مستخدم بالفعل",
     "ThePasswordFieldMustBeAtLeast8Characters": "يجب أن تكون كلمة المرور مكونة من 8 أحرف على الأقل",
-    "errors": "أخطاء"
+    "errors": "أخطاء",
+    "chooseVerificationMethod": "اختر طريقة التحقق",
+    "viaEmail": "عبر البريد الإلكتروني",
+    "viaWhatsapp": "عبر الواتساب"
   },
   "common": {
     "loading": "جاري التحميل...",
@@ -61,8 +66,8 @@
     "choose": "اختر لغة",
     "selected": "تم اختيار اللغة",
     "arabic": "العربية",
-    "english": "الإنجليزية",
-    "kurdish": "الكردية"
+    "english": "English",
+    "kurdish": "کوردی"
   },
   "registration": "التسجيل",
   "registration_screen": "شاشة التسجيل",

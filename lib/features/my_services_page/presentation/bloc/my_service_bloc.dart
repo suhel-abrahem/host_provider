@@ -42,7 +42,12 @@ class MyServiceBloc extends Bloc<MyServiceEvent, MyServiceState> {
                   )
                   .then((getServicesOnValue) {
                     if (getServicesOnValue is DataSuccess) {
-                      emit(MyServiceState.got(getServicesOnValue?.data));
+                      if (getServicesOnValue?.data == null ||
+                          getServicesOnValue!.data!.isEmpty) {
+                        emit(MyServiceState.noData());
+                        return;
+                      }
+                      emit(MyServiceState.got(getServicesOnValue.data));
                     } else if (getServicesOnValue is UnauthenticatedDataState) {
                       emit(MyServiceState.unAuthorized());
                     } else if (getServicesOnValue is NOInternetDataState) {

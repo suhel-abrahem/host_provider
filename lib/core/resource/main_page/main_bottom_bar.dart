@@ -46,7 +46,7 @@ class _MainBottomBarState extends State<MainBottomBar> {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-      elevation: 2.r,
+      elevation: 0.r,
       backgroundColor: Colors.transparent,
       currentIndex: _currentIndex ?? 0,
       onTap: (newIndex) {

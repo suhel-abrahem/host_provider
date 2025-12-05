@@ -1,6 +1,9 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hosta_provider/config/theme/app_theme.dart';
+import 'package:hosta_provider/core/constants/font_constants.dart';
 
 import '../../../enums/psition_enum.dart';
 import '../../../util/validator/validator.dart';
@@ -27,6 +30,9 @@ class DropDownWithLabel<T> extends StatefulWidget {
   final Animation<Color?>? loadingValueColor;
   final Color? loadingBackgroundColor;
   final BorderRadiusGeometry? borderRadius;
+  final BoxShadow? boxShadow;
+  final BoxShadow? menuBoxShadow;
+  final Color? valueColor;
   const DropDownWithLabel({
     super.key,
     required this.items,
@@ -50,6 +56,9 @@ class DropDownWithLabel<T> extends StatefulWidget {
     this.loadingBackgroundColor,
     this.dropDownMinWidth,
     this.borderRadius,
+    this.boxShadow,
+    this.valueColor,
+    this.menuBoxShadow,
   });
 
   @override
@@ -121,14 +130,13 @@ class _DropDownWithLabelState<T> extends State<DropDownWithLabel<T>> {
                       height: widget.dropDownHeight,
                       decoration: BoxDecoration(
                         color: widget.backgroundColor,
+                        boxShadow: widget.boxShadow != null
+                            ? [widget.boxShadow!]
+                            : null,
                         border: Border.fromBorderSide(
-                          (!state.hasError)
-                              ? Theme.of(
-                                  context,
-                                ).inputDecorationTheme.focusedBorder!.borderSide
-                              : Theme.of(
-                                  context,
-                                ).inputDecorationTheme.errorBorder!.borderSide,
+                          (state.hasError)
+                              ? Theme.of(context).defaultBorderSideError
+                              : Theme.of(context).defaultBorderSide,
                         ),
                         borderRadius:
                             widget.borderRadius ??
@@ -178,14 +186,13 @@ class _DropDownWithLabelState<T> extends State<DropDownWithLabel<T>> {
                     Container(
                       decoration: BoxDecoration(
                         color: widget.backgroundColor,
+                        boxShadow: widget.boxShadow != null
+                            ? [widget.boxShadow!]
+                            : null,
                         border: Border.fromBorderSide(
-                          (!state.hasError)
-                              ? Theme.of(
-                                  context,
-                                ).inputDecorationTheme.focusedBorder!.borderSide
-                              : Theme.of(
-                                  context,
-                                ).inputDecorationTheme.errorBorder!.borderSide,
+                          (state.hasError)
+                              ? Theme.of(context).defaultBorderSideError
+                              : Theme.of(context).defaultBorderSide,
                         ),
                         borderRadius:
                             widget.borderRadius ??
@@ -247,7 +254,7 @@ class _DropDownWithLabelState<T> extends State<DropDownWithLabel<T>> {
             padding: widget.contentPadding ?? EdgeInsets.zero,
             child: Row(
               crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 if (selectedValue != null || widget.hint != null)
                   Expanded(
@@ -262,22 +269,32 @@ class _DropDownWithLabelState<T> extends State<DropDownWithLabel<T>> {
                         child: selectedValue != null
                             ? Text(
                                 widget.stringConverter.call(selectedValue as T),
-                                style: Theme.of(context).textTheme.labelLarge,
+                                style: Theme.of(context).textTheme.labelLarge
+                                    ?.copyWith(
+                                      fontFamily: FontConstants.fontFamily(
+                                        context.locale,
+                                      ),
+                                      color: widget.valueColor,
+                                    ),
                                 textAlign: TextAlign.start,
                               )
                             : Text(
                                 widget.hint != null
                                     ? widget.stringConverter(widget.hint as T)
                                     : '',
-                                style: Theme.of(
-                                  context,
-                                ).inputDecorationTheme.hintStyle,
+                                style: Theme.of(context).textTheme.labelLarge
+                                    ?.copyWith(
+                                      fontFamily: FontConstants.fontFamily(
+                                        context.locale,
+                                      ),
+                                      color: widget.valueColor,
+                                    ),
                                 textAlign: TextAlign.start,
                               ),
                       ),
                     ),
                   ),
-                const Expanded(flex: 2, child: SizedBox()),
+
                 if (!widget.readOnly)
                   Expanded(
                     flex: 2,
@@ -288,9 +305,14 @@ class _DropDownWithLabelState<T> extends State<DropDownWithLabel<T>> {
                         return AnimatedRotation(
                           duration: const Duration(milliseconds: 300),
                           turns: value ? 0.5 : 0,
-                          child: const FittedBox(
+                          child: FittedBox(
                             fit: BoxFit.contain,
-                            child: Icon(Icons.keyboard_arrow_down_rounded),
+                            child: Icon(
+                              Icons.keyboard_arrow_down_rounded,
+                              color: Theme.of(context).textTheme.labelLarge
+                                  ?.copyWith(color: widget.valueColor)
+                                  .color,
+                            ),
                           ),
                         );
                       },
@@ -301,7 +323,13 @@ class _DropDownWithLabelState<T> extends State<DropDownWithLabel<T>> {
           ),
         ),
         dropdownStyleData: DropdownStyleData(
-          decoration: BoxDecoration(borderRadius: BorderRadius.circular(9.r)),
+          decoration: BoxDecoration(
+            boxShadow: widget.menuBoxShadow != null
+                ? [widget.menuBoxShadow!]
+                : null,
+            color: widget.backgroundColor,
+            borderRadius: BorderRadius.circular(9.r),
+          ),
           useSafeArea: true,
           isOverButton: false,
           maxHeight: 130.h,

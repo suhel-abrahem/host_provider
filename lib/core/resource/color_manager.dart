@@ -17,7 +17,7 @@ class ColorManager {
       });
 
   // Primary Colors
-  static const Color primaryColor = Color.fromARGB(255, 31, 153, 209);
+  static const Color primaryColor = Color.fromARGB(255, 95, 96, 185);
   static Color primaryColorLight = primaryColor.withValues(alpha: 0.25);
 
   // Accent Colors
@@ -41,9 +41,9 @@ class ColorManager {
   // Background and Surfaces
   static const Color backgroundColor = Color.fromARGB(
     255,
-    204,
-    204,
-    204,
+    218,
+    216,
+    216,
   ); // Bright Neutral Background
   static const Color cardColor = Color(0xFFFFFFFF); // White Cards
   static const Color surfaceColor = Color(0xFFFAFAFA); // Very Light Surface
@@ -90,5 +90,5 @@ class ColorManager {
     42,
   ); //
   // Special Highlight Colors
-  static const Color focusColor = Color(0xFF66BB6A); // Softer Green Focus
+  static const Color focusColor = Color.fromARGB(255, 37, 38, 90);
 }

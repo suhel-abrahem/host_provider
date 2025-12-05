@@ -73,7 +73,10 @@ class _BookingServiceWidgetState extends State<BookingServiceWidget> {
                         borderRadius: BorderRadius.circular(8),
                       ),
                       child: Text(
-                        widget.bookingEntity?.status ?? "",
+                        Helper.getStatusName(
+                              widget.bookingEntity?.status ?? "",
+                            ) ??
+                            "",
                         style: Theme.of(context).textTheme.labelMedium
                             ?.copyWith(
                               fontFamily: FontConstants.fontFamily(

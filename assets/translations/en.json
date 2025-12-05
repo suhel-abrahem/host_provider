@@ -4,6 +4,8 @@
     "welcome": "Welcome to Hosta",
     "signIn": "Sign in to your account",
     "email": "Email",
+    "emailOrPhone": "Email or Phone Number",
+    "emailOrPhoneIsRequired": "Email or phone number is required",
     "emailIsRequired": "Email is required",
     "password": "Password",
     "confirmPassword": "Confirm Password",
@@ -30,7 +32,10 @@
     "thisPhoneIsTaken": "This phone number is already taken",
     "thisEmailIsTaken": "This email is already taken",
     "ThePasswordFieldMustBeAtLeast8Characters": "The password field must be at least 8 characters",
-    "errors": "Errors"
+    "errors": "Errors",
+    "chooseVerificationMethod": "Choose verification method",
+    "viaEmail": "Via Email",
+    "viaWhatsapp": "Via Whatsapp"
   },
   "common": {
     "loading": "Loading...",
@@ -60,9 +65,9 @@
   "language": {
     "choose": "Choose language",
     "selected": "Language selected",
-    "arabic": "Arabic",
+    "arabic": "العربية",
     "english": "English",
-    "kurdish": "Kurdish"
+    "kurdish": "کوردی"
   },
   "registration": "Registration",
   "registration_screen": "Registration screen",

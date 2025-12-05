@@ -92,9 +92,7 @@ class UserInfoContainerWidget extends StatelessWidget {
       frosted: true,
       blurX: 58,
       blurY: 58,
-      tintColor: Theme.of(
-        context,
-      ).colorScheme.primaryContainer.withValues(alpha: 0.9),
+      tintColor: Theme.of(context).colorScheme.primary.withValues(alpha: 1.0),
       clipBorderRadius: BorderRadius.circular(12.r),
       border: Theme.of(context).defaultBorderSide,
     );

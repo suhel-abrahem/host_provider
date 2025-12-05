@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "71598494098",
+    "project_id": "hosta-13e66",
+    "storage_bucket": "hosta-13e66.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:71598494098:android:dbf6ae812514682518314b",
+        "android_client_info": {
+          "package_name": "com.example.hosta_provider"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBU0eSmVFxVWNJa-EfVXIXlxbjVi2rHZq4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

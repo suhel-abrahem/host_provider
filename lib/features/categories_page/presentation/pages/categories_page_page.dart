@@ -33,6 +33,7 @@ class _CategoriesPagePageState extends State<CategoriesPagePage> {
     getCategoryModel = GetCategoryModel(
       acceptLanguage: Helper.getCountryCode(context),
     );
+
     super.didChangeDependencies();
   }
 

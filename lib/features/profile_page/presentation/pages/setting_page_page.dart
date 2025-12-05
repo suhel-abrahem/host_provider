@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:glass/glass.dart';
 import 'package:go_router/go_router.dart';
+import '../../../../core/resource/color_manager.dart';
 import '../../../../core/resource/main_page/main_page.dart';
 import '../bloc/get_profile_bloc.dart';
 import '../../../../generated/locale_keys.g.dart';
@@ -46,7 +47,7 @@ class _SettingPagePageState extends State<SettingPagePage> {
         children: [
           //Language dropdown
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.w),
+            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
             child:
                 Container(
                   padding: EdgeInsets.symmetric(
@@ -56,14 +57,26 @@ class _SettingPagePageState extends State<SettingPagePage> {
                   child: Align(
                     alignment: AlignmentDirectional.centerStart,
                     child: DropDownWithLabel<String>(
-                      label: "Language:",
+                      menuBoxShadow: BoxShadow(
+                        color: Theme.of(context).shadowColor,
+                        blurRadius: 4.r,
+                        offset: Offset(1.w, 2.h),
+                      ),
+                      boxShadow: BoxShadow(
+                        color: Theme.of(context).shadowColor,
+
+                        offset: Offset(0, 1.h),
+                      ),
+                      valueColor: ColorManager.backgroundColor,
+                      borderRadius: BorderRadius.circular(18.r),
+                      label: LocaleKeys.language_choose.tr(),
                       labelStyle: Theme.of(context).textTheme.labelLarge
                           ?.copyWith(
                             fontFamily: FontConstants.fontFamily(
                               context.locale,
                             ),
                           ),
-                      labelPadding: EdgeInsets.symmetric(horizontal: 12.w),
+                      labelPadding: EdgeInsetsDirectional.only(end: 12.w),
                       labelPosition: Position.beside,
                       backgroundColor: Theme.of(context).colorScheme.surface,
                       items: LanguageConstant.supportedLanguagesNames,
@@ -86,9 +99,9 @@ class _SettingPagePageState extends State<SettingPagePage> {
                       stringConverter: (string) {
                         return string.toString();
                       },
-                      dropDownWidth: 100.w,
-                      dropDownHeight: 50.h,
-                      itemWidth: 120.w,
+                      dropDownWidth: 110.w,
+                      dropDownHeight: 40.h,
+                      itemWidth: 140.w,
                       isLoading: false,
                       value: Helper.getLanguageName(
                         selectedLanguage ??
@@ -108,7 +121,7 @@ class _SettingPagePageState extends State<SettingPagePage> {
                 ),
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
+            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 0.h),
             child:
                 Container(
                   padding: EdgeInsets.symmetric(
@@ -120,7 +133,7 @@ class _SettingPagePageState extends State<SettingPagePage> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Text(
-                        "Theme:",
+                        LocaleKeys.theme_choose.tr(),
                         style: Theme.of(context).textTheme.labelLarge?.copyWith(
                           fontFamily: FontConstants.fontFamily(context.locale),
                         ),
@@ -129,42 +142,38 @@ class _SettingPagePageState extends State<SettingPagePage> {
                         padding: EdgeInsets.symmetric(horizontal: 12.w),
                         child: ThemeSwitcher(
                           builder: (context2) {
-                            return SizedBox(
-                              height: 40.h,
-                              child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  padding: EdgeInsets.symmetric(
-                                    horizontal: 12.w,
-                                    vertical: 12.h,
-                                  ),
-                                  backgroundColor: Colors.transparent,
-                                  shape: CircleBorder(),
-                                ),
-                                onPressed: () {
-                                  setState(() {
-                                    isDarkTheme = !(isDarkTheme ?? false);
-                                  });
-                                  getItInstance<AppPreferences>().setAppTheme(
-                                    isDarkTheme: isDarkTheme,
-                                  );
-                                  ThemeSwitcher.of(context2).changeTheme(
-                                    offset: Offset(-1, -1),
-                                    theme: (isDarkTheme ?? false)
-                                        ? darkTheme()
-                                        : lightTheme(),
-                                    isReversed: true,
-                                  );
-                                },
-                                child: Icon(
+                            return Switch.adaptive(
+                              value: isDarkTheme ?? false,
+                              inactiveTrackColor: ColorManager.backgroundColor,
+                              activeTrackColor: ColorManager.primaryColor,
+                              thumbIcon: WidgetStateProperty.resolveWith((
+                                states,
+                              ) {
+                                return Icon(
                                   (isDarkTheme ?? false)
                                       ? Icons.dark_mode
                                       : Icons.light_mode,
-                                  size: 20.sp,
-                                  color: Theme.of(
-                                    context,
-                                  ).textTheme.labelLarge?.color,
-                                ),
-                              ),
+                                  size: 16.sp,
+                                  color: (isDarkTheme ?? false)
+                                      ? ColorManager.darkBackground
+                                      : ColorManager.darkBackground,
+                                );
+                              }),
+                              onChanged: (bool value) {
+                                setState(() {
+                                  isDarkTheme = value;
+                                });
+                                getItInstance<AppPreferences>().setAppTheme(
+                                  isDarkTheme: isDarkTheme,
+                                );
+                                ThemeSwitcher.of(context2).changeTheme(
+                                  offset: Offset(-1, -1),
+                                  theme: (isDarkTheme ?? false)
+                                      ? darkTheme()
+                                      : lightTheme(),
+                                  isReversed: true,
+                                );
+                              },
                             );
                           },
                         ),

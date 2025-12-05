@@ -122,7 +122,7 @@ class _BookingPagePageState extends State<BookingPagePage>
                 labelStyle: Theme.of(context).textTheme.labelLarge?.copyWith(
                   fontFamily: FontConstants.fontFamily(context.locale),
                   fontSize: 14.sp,
-                  color: Theme.of(context).colorScheme.primary,
+                  color: Theme.of(context).colorScheme.background,
                 ),
                 unselectedLabelStyle: Theme.of(context).textTheme.labelLarge
                     ?.copyWith(

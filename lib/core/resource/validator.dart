@@ -1,6 +1,7 @@
 class Validator {
   static const String requiredField = '*';
   static const String emailExample = 'example@example.example';
+  static const String phoneExample = '07xxxxxxxx';
   static const String emailRegex =
       r'^[a-zA-Z0-9_\-\.%+]+@[a-zA-Z]+\.[a-zA-Z]{2,}$';
   static const String passwordRegex =

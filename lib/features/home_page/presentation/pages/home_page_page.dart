@@ -11,6 +11,7 @@ import '../../../../config/theme/app_theme.dart';
 import '../../../../core/constants/font_constants.dart';
 import '../../../../core/constants/language_constant.dart';
 import '../../../../core/resource/charts/chart_model/line_chart_model.dart';
+import '../../../../core/resource/color_manager.dart';
 import '../../../../core/resource/common_state_widget/error_state_widget.dart';
 import '../../../../core/resource/common_state_widget/no_data_state_widget.dart';
 import '../../../../core/resource/common_state_widget/no_internet_state_widget.dart';
@@ -73,14 +74,15 @@ class _HomePagePageState extends State<HomePagePage> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(60.h),
         child: AppBar(
-          backgroundColor: Colors.transparent,
+          bottom: null,
+          backgroundColor: Theme.of(context).primaryColor,
           actions: [
             IconButton(
               onPressed: () {},
               icon: Icon(
                 Icons.notifications_none,
                 size: 24.sp,
-                color: Theme.of(context).colorScheme.onSurface,
+                color: ColorManager.backgroundColor,
               ),
             ),
             Padding(
@@ -113,7 +115,7 @@ class _HomePagePageState extends State<HomePagePage> {
                         child: Icon(
                           Icons.menu,
                           size: 28.sp,
-                          color: Theme.of(context).textTheme.labelLarge?.color,
+                          color: ColorManager.backgroundColor,
                         ),
                       );
                     },
@@ -125,61 +127,59 @@ class _HomePagePageState extends State<HomePagePage> {
           automaticallyImplyLeading: false,
           leadingWidth: 210.w,
 
-          leading: SizedBox(
-            height: 60.h,
-            child: BlocProvider<GetProfileBloc>(
-              create: (context) => getItInstance<GetProfileBloc>()
-                ..add(GetProfileEvent.getProfile(profileModel: profileModel)),
-              child: BlocListener<GetProfileBloc, GetProfileState>(
-                listener: (context, state) {
-                  if (state is GetProfileStateLoading) {
-                    setState(() {
-                      isProfileDataLoading = true;
-                    });
-                  } else if (state is GetProfileStateError) {
-                    showMessage(
-                      context: context,
-                      message: LocaleKeys.common_error.tr(),
-                    );
-                    setState(() {
-                      isProfileDataLoading = false;
-                    });
-                  } else if (state is GetProfileStateNoInternet) {
-                    showMessage(
-                      context: context,
-                      message: LocaleKeys.common_noInternetPullDown.tr(),
-                    );
-                    setState(() {
-                      isProfileDataLoading = false;
-                    });
-                  } else if (state is GetProfileStateUnauthorized) {
-                    getItInstance<AppPreferences>().setUserInfo(
-                      loginStateEntity: LoginStateEntity(),
-                    );
-                    setState(() {
-                      isProfileDataLoading = false;
-                    });
-                    context.pushNamed(RoutesName.loginPage);
-                  } else if (state is GetProfileStateLoaded) {
-                    setState(() {
-                      profileEntity = state.profileEntity;
-                      isProfileDataLoading = false;
-                    });
-                  }
-                },
-                child: SizedBox(
-                  height: 70.h,
+          leading: Padding(
+            padding: EdgeInsets.only(top: 8.h),
+            child: SizedBox(
+              height: 60.h,
+              child: BlocProvider<GetProfileBloc>(
+                create: (context) => getItInstance<GetProfileBloc>()
+                  ..add(GetProfileEvent.getProfile(profileModel: profileModel)),
+                child: BlocListener<GetProfileBloc, GetProfileState>(
+                  listener: (context, state) {
+                    if (state is GetProfileStateLoading) {
+                      setState(() {
+                        isProfileDataLoading = true;
+                      });
+                    } else if (state is GetProfileStateError) {
+                      showMessage(
+                        context: context,
+                        message: LocaleKeys.common_error.tr(),
+                      );
+                      setState(() {
+                        isProfileDataLoading = false;
+                      });
+                    } else if (state is GetProfileStateNoInternet) {
+                      showMessage(
+                        context: context,
+                        message: LocaleKeys.common_noInternetPullDown.tr(),
+                      );
+                      setState(() {
+                        isProfileDataLoading = false;
+                      });
+                    } else if (state is GetProfileStateUnauthorized) {
+                      getItInstance<AppPreferences>().setUserInfo(
+                        loginStateEntity: LoginStateEntity(),
+                      );
+                      setState(() {
+                        isProfileDataLoading = false;
+                      });
+                      context.pushNamed(RoutesName.loginPage);
+                    } else if (state is GetProfileStateLoaded) {
+                      setState(() {
+                        profileEntity = state.profileEntity;
+                        isProfileDataLoading = false;
+                      });
+                    }
+                  },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       isProfileDataLoading
-                          ? Padding(
-                              padding: EdgeInsets.only(top: 8.h),
-                              child: CircularProgressIndicator(),
+                          ? CircularProgressIndicator(
+                              backgroundColor: ColorManager.backgroundColor,
                             )
                           : Container(
-                              margin: EdgeInsets.only(top: 8.h),
                               width: 50.w,
 
                               clipBehavior: Clip.antiAlias,
@@ -198,137 +198,176 @@ class _HomePagePageState extends State<HomePagePage> {
                             ),
                       SizedBox(
                         width: 130.w,
-
+                        height: 60.h,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Padding(
-                              padding: EdgeInsets.symmetric(vertical: 2.h),
-                              child: SizedBox(
-                                child: FittedBox(
-                                  fit: BoxFit.scaleDown,
-                                  child: isProfileDataLoading
-                                      ? SizedBox(
-                                          width: 70.w,
-                                          height: 10.h,
+                            SizedBox(
+                              height: 20.h,
+                              child: FittedBox(
+                                fit: BoxFit.scaleDown,
+                                child: isProfileDataLoading
+                                    ? SizedBox(
+                                        width: 70.w,
+                                        height: 1.h,
+                                        child: Center(
                                           child: LinearProgressIndicator(
-                                            color: Theme.of(
+                                            color: ColorManager.backgroundColor,
+                                            backgroundColor: Theme.of(
                                               context,
                                             ).colorScheme.primary,
-                                            backgroundColor: Theme.of(context)
-                                                .colorScheme
-                                                .onSurface
-                                                .withValues(alpha: 0.1),
                                           ),
-                                        )
-                                      : Text(
-                                          profileEntity?.name ?? "",
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .labelLarge
-                                              ?.copyWith(
-                                                fontFamily:
-                                                    FontConstants.fontFamily(
-                                                      context.locale,
-                                                    ),
-                                              ),
-                                          textAlign: TextAlign.start,
                                         ),
-                                ),
+                                      )
+                                    : Text(
+                                        profileEntity?.name ?? "",
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .labelLarge
+                                            ?.copyWith(
+                                              fontFamily:
+                                                  FontConstants.fontFamily(
+                                                    context.locale,
+                                                  ),
+                                              color:
+                                                  ColorManager.backgroundColor,
+                                            ),
+                                        textAlign: TextAlign.start,
+                                      ),
                               ),
                             ),
                             SizedBox(
                               height: 20.h,
                               width: 130.w,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Center(
-                                    child: SizedBox(
-                                      width:
-                                          context.locale ==
-                                              LanguageConstant.arLoacle
-                                          ? 30.w
-                                          : 70.w,
-                                      child: Align(
-                                        alignment:
-                                            AlignmentDirectional.centerStart,
-                                        child: FittedBox(
-                                          fit: BoxFit.scaleDown,
-                                          child: Text(
-                                            LocaleKeys.homePage_myRating,
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .labelSmall
-                                                ?.copyWith(
-                                                  fontFamily:
-                                                      FontConstants.fontFamily(
-                                                        context.locale,
-                                                      ),
-                                                ),
-                                            textAlign: TextAlign.center,
-                                          ).tr(),
+                              child: isProfileDataLoading
+                                  ? SizedBox(
+                                      width: 70.w,
+                                      height: 10.h,
+                                      child: Center(
+                                        child: LinearProgressIndicator(
+                                          color: ColorManager.backgroundColor,
+
+                                          backgroundColor: Theme.of(
+                                            context,
+                                          ).colorScheme.primary,
                                         ),
                                       ),
-                                    ),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsetsDirectional.only(
-                                      start: 8.w,
-                                    ),
-                                    width: 50.w,
-                                    height: 40.h,
-                                    decoration: BoxDecoration(
-                                      color: Theme.of(
-                                        context,
-                                      ).colorScheme.primary,
-                                      borderRadius: BorderRadius.circular(12.r),
-                                    ),
-                                    child: Row(
+                                    )
+                                  : Row(
                                       mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
+                                          MainAxisAlignment.start,
                                       crossAxisAlignment:
                                           CrossAxisAlignment.center,
                                       children: [
-                                        Align(
-                                          alignment: AlignmentGeometry.center,
+                                        Center(
                                           child: SizedBox(
-                                            width: 20.w,
-                                            child: FittedBox(
-                                              fit: BoxFit.scaleDown,
-                                              child: Text(
-                                                "4.5",
-                                                style: Theme.of(context)
-                                                    .textTheme
-                                                    .labelLarge
-                                                    ?.copyWith(
-                                                      fontFamily:
-                                                          FontConstants.fontFamily(
-                                                            context.locale,
-                                                          ),
-                                                      color: Theme.of(
-                                                        context,
-                                                      ).colorScheme.onSurface,
-                                                    ),
-                                                textAlign: TextAlign.center,
+                                            width:
+                                                context.locale ==
+                                                    LanguageConstant.arLoacle
+                                                ? 30.w
+                                                : 70.w,
+                                            child: Align(
+                                              alignment: AlignmentDirectional
+                                                  .centerStart,
+                                              child: FittedBox(
+                                                fit: BoxFit.scaleDown,
+                                                child: Text(
+                                                  LocaleKeys.homePage_myRating,
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .labelSmall
+                                                      ?.copyWith(
+                                                        fontFamily:
+                                                            FontConstants.fontFamily(
+                                                              context.locale,
+                                                            ),
+                                                        color: ColorManager
+                                                            .backgroundColor,
+                                                      ),
+                                                  textAlign: TextAlign.center,
+                                                ).tr(),
                                               ),
                                             ),
                                           ),
                                         ),
-                                        Icon(
-                                          Icons.star,
-                                          size: 12.sp,
-                                          color: Theme.of(
-                                            context,
-                                          ).colorScheme.onSurface,
+                                        Padding(
+                                          padding: EdgeInsets.symmetric(
+                                            horizontal: 4.w,
+                                          ),
+                                          child:
+                                              Container(
+                                                padding:
+                                                    EdgeInsetsDirectional.symmetric(
+                                                      horizontal: 4.w,
+                                                    ),
+                                                width: 42.w,
+                                                height: 40.h,
+                                                decoration: BoxDecoration(
+                                                  color: Colors.transparent,
+                                                ),
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.center,
+                                                  children: [
+                                                    Align(
+                                                      alignment:
+                                                          AlignmentGeometry
+                                                              .center,
+                                                      child: SizedBox(
+                                                        width: 20.w,
+                                                        child: FittedBox(
+                                                          fit: BoxFit.scaleDown,
+                                                          child: Text(
+                                                            "4.5",
+                                                            style: Theme.of(context)
+                                                                .textTheme
+                                                                .labelLarge
+                                                                ?.copyWith(
+                                                                  fontFamily:
+                                                                      FontConstants.fontFamily(
+                                                                        context
+                                                                            .locale,
+                                                                      ),
+                                                                  color: Theme.of(
+                                                                    context,
+                                                                  ).colorScheme.onSurface,
+                                                                ),
+                                                            textAlign: TextAlign
+                                                                .center,
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Icon(
+                                                      Icons.star,
+                                                      size: 12.sp,
+                                                      color: Theme.of(
+                                                        context,
+                                                      ).colorScheme.onSurface,
+                                                    ),
+                                                  ],
+                                                ),
+                                              ).asGlass(
+                                                frosted: true,
+                                                blurX: 20,
+                                                blurY: 20,
+                                                tintColor: Theme.of(context)
+                                                    .colorScheme
+                                                    .primaryContainer
+                                                    .withValues(alpha: 0.7),
+                                                clipBorderRadius:
+                                                    BorderRadius.circular(12.r),
+                                                border: Theme.of(
+                                                  context,
+                                                ).defaultBorderSide,
+                                              ),
                                         ),
                                       ],
                                     ),
-                                  ),
-                                ],
-                              ),
                             ),
                           ],
                         ),
@@ -380,7 +419,7 @@ class _HomePagePageState extends State<HomePagePage> {
                       horizontal: 20.w,
                     ),
                     child: SizedBox(
-                      height: 402.h,
+                      height: 382.h,
 
                       child: GridView(
                         physics: const NeverScrollableScrollPhysics(),
@@ -399,6 +438,7 @@ class _HomePagePageState extends State<HomePagePage> {
                             backgroundColor: Theme.of(
                               context,
                             ).colorScheme.primary,
+                            isTransparent: false,
                           ),
                           SquerContainerWithPresseWidget(
                             title: LocaleKeys.homePage_daylyTotal.tr(),
@@ -408,6 +448,7 @@ class _HomePagePageState extends State<HomePagePage> {
                             backgroundColor: Theme.of(
                               context,
                             ).colorScheme.primary,
+                            isTransparent: false,
                           ),
                           SquerContainerWithPresseWidget(
                             title: LocaleKeys.homePage_monthlyBookings.tr(),
@@ -415,12 +456,20 @@ class _HomePagePageState extends State<HomePagePage> {
                                 homePageEntity?.current_month_bookings
                                     ?.toString() ??
                                 "",
+                            backgroundColor: Theme.of(
+                              context,
+                            ).colorScheme.primary,
+                            isTransparent: false,
                           ),
                           SquerContainerWithPresseWidget(
                             title: LocaleKeys.homePage_monthlyTotal.tr(),
                             info: Helper.formatPrice(
                               homePageEntity?.current_month_revenue,
                             ),
+                            backgroundColor: Theme.of(
+                              context,
+                            ).colorScheme.primary,
+                            isTransparent: false,
                           ),
                           SquerContainerWithPresseWidget(
                             title: LocaleKeys.homePage_currentBookings.tr(),
@@ -434,6 +483,9 @@ class _HomePagePageState extends State<HomePagePage> {
                                 pathParameters: {"pageIndex": "2"},
                               );
                             },
+                            backgroundColor: Theme.of(
+                              context,
+                            ).colorScheme.primary,
                           ),
                           SquerContainerWithPresseWidget(
                             title: LocaleKeys.homePage_pendingBookings.tr(),
@@ -446,6 +498,9 @@ class _HomePagePageState extends State<HomePagePage> {
                                 pathParameters: {"pageIndex": "4"},
                               );
                             },
+                            backgroundColor: Theme.of(
+                              context,
+                            ).colorScheme.primary,
                           ),
                         ],
                       ),
@@ -453,7 +508,7 @@ class _HomePagePageState extends State<HomePagePage> {
                   ),
 
                   Padding(
-                    padding: EdgeInsets.only(
+                    padding: EdgeInsetsGeometry.only(
                       left: 20.w,
                       right: 20.w,
                       bottom: 20.h,
@@ -506,6 +561,9 @@ class _HomePagePageState extends State<HomePagePage> {
                                     ),
                                     Switch.adaptive(
                                       value: isTotalRevenue,
+                                      inactiveTrackColor: Theme.of(
+                                        context,
+                                      ).disabledColor,
                                       onChanged: (newState) {
                                         setState(() {
                                           isTotalRevenue = newState;
@@ -590,12 +648,19 @@ class _HomePagePageState extends State<HomePagePage> {
                                           barsInfo: [
                                             if (!isTotalRevenue)
                                               LineChartModel(
-                                                color: Colors.yellowAccent,
+                                                color: Theme.of(
+                                                  context,
+                                                ).colorScheme.primary,
                                                 spots: totalBookingsSpots,
                                               )
                                             else
                                               LineChartModel(
-                                                color: Colors.greenAccent,
+                                                color: const Color.fromARGB(
+                                                  255,
+                                                  63,
+                                                  138,
+                                                  252,
+                                                ),
                                                 spots: totalRevenueSpots,
                                               ),
                                           ],
@@ -615,9 +680,7 @@ class _HomePagePageState extends State<HomePagePage> {
                           frosted: true,
                           blurX: 38,
                           blurY: 38,
-                          tintColor: Theme.of(
-                            context,
-                          ).colorScheme.primaryContainer.withValues(alpha: 1.0),
+                          tintColor: Theme.of(context).primaryColor,
                           clipBorderRadius: BorderRadius.circular(12.r),
                           border: Theme.of(context).defaultBorderSide,
                         ),

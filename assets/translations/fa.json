@@ -4,6 +4,8 @@
     "welcome": "بەخێربێیت بۆ هۆستا",
     "signIn": "چوونەژوورەوە بۆ ئەژماری خۆت",
     "email": "ئیمەیڵ",
+    "emailOrPhone": "ئیمەیڵ یان ژمارەی مۆبایل",
+    "emailOrPhoneIsRequired": "ئیمەیڵ یان ژمارەی مۆبایل پێویستە",
     "emailIsRequired": "ئیمەیڵ پێویستە",
     "password": "وشەی نهێنی",
     "confirmPassword": "دووبارە وشەی نهێنی بنووسە",
@@ -30,7 +32,10 @@
     "thisPhoneIsTaken": "ئەم ژمارەی مۆبایلە هەیە",
     "thisEmailIsTaken": "ئەم ئیمەیڵە هەیە",
     "ThePasswordFieldMustBeAtLeast8Characters": "پێویستی وشەی نهێنی بەرزتر لە 8 پیتە",
-    "errors": "هەڵەکان"
+    "errors": "هەڵەکان",
+    "chooseVerificationMethod": "ڕێگای پشکنین هەڵبژێرە",
+    "viaEmail": "بەڕێی ئیمەیڵ",
+    "viaWhatsapp": "بەڕێی واتسئاپ"
   },
   "common": {
     "loading": "چاوەڕێ بکە...",
@@ -60,8 +65,8 @@
   "language": {
     "choose": "زمانێک هەڵبژێرە",
     "selected": "زمان هەڵبژێردرا",
-    "arabic": "عەرەبی",
-    "english": "ئینگلیزی",
+    "arabic": "العربية",
+    "english": "English",
     "kurdish": "کوردی"
   },
   "registration": "تۆمارکردن",

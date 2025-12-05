@@ -112,13 +112,22 @@ class _LoginPageState extends State<LoginPage> {
                         width: 300.w,
                         isRequired: true,
 
-                        label: LocaleKeys.loginPage_email.tr(),
+                        label: LocaleKeys.loginPage_emailOrPhone.tr(),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
-                            return Validator.emailExample;
+                            return LocaleKeys.loginPage_emailOrPhoneIsRequired
+                                .tr();
                           }
-                          if (!RegExp(Validator.emailRegex).hasMatch(value)) {
-                            return Validator.emailExample;
+
+                          if (RegExp(Validator.numberRegex).hasMatch(value)) {
+                            if (value.length < 10) {
+                              return Validator.phoneExample;
+                            }
+                          }
+                          if (RegExp(Validator.stringRegex).hasMatch(value)) {
+                            if (!RegExp(Validator.emailRegex).hasMatch(value)) {
+                              return Validator.emailExample;
+                            }
                           }
                           return null;
                         },
