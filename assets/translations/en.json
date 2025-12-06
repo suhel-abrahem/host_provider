@@ -40,6 +40,8 @@
   "common": {
     "loading": "Loading...",
     "error": "Error",
+    "notificationTokenErrorPleaseFixItOnSettings": "Notification token error. Please fix it in settings!",
+    "someThingWentWrongWhileShowNotification": "Something went wrong while showing the notification",
     "anErrorHasOccurs": "An error occurred. Please pull down the page to try again!",
     "noInternetPullDown": "It seems you are offline. Check your connection and pull down the page to try again!",
     "success": "Success",
@@ -253,5 +255,23 @@
     "showOnMap": "Show on map",
     "callClient": "Call client",
     "cantShowMap": "Can't show map"
+  },
+  "notificationPage": {
+    "title": "Notification page",
+    "label": "Notifications",
+    "noNotificationsAvailable": "No notifications available",
+    "noTitle": "No title",
+    "noBody": "No content",
+    "noImages": "No images",
+    "clearAll": "Clear all",
+    "areYouSureYouWantToClearAllNotifications": "Are you sure you want to clear all notifications?",
+    "yesClear": "Yes, clear",
+    "noCancel": "No, cancel",
+    "notificationDetails": "Notification details",
+    "body": "Content",
+    "images": "Images",
+    "ok": "OK",
+    "show": "Show",
+    "showBooking": "Show booking"
   }
 }

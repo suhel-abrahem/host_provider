@@ -40,6 +40,8 @@
   "common": {
     "loading": "جاري التحميل...",
     "error": "خطأ",
+    "notificationTokenErrorPleaseFixItOnSettings": "خطأ في رمز الاشعارات. يرجى إصلاحه في الإعدادات!",
+    "someThingWentWrongWhileShowNotification": "حدث خطأ أثناء عرض الإشعار",
     "anErrorHasOccurs": "حدث خطأ. حاول مرة أخرى بسحب الصفحة إلى الأسفل!",
     "noInternetPullDown": "يبدو أنك غير متصل بالإنترنت. تحقق من الاتصال وحاول مرة أخرى بسحب الصفحة إلى الأسفل!",
     "success": "نجاح",
@@ -253,5 +255,23 @@
     "showOnMap": "عرض على الخريطة",
     "callClient": "الاتصال بالعميل",
     "cantShowMap": "لا يمكن عرض الخريطة"
+  },
+  "notificationPage": {
+    "title": "صفحة الإشعارات",
+    "label": "الإشعارات",
+    "noNotificationsAvailable": "لا توجد إشعارات متاحة",
+    "noTitle": "لا يوجد عنوان",
+    "noBody": "لا يوجد محتوى",
+    "noImages": "لا توجد صور",
+    "clearAll": "مسح الكل",
+    "areYouSureYouWantToClearAllNotifications": "هل أنت متأكد من أنك تريد مسح جميع الإشعارات؟",
+    "yesClear": "نعم، مسح",
+    "noCancel": "لا، إلغاء",
+    "notificationDetails": "تفاصيل الإشعار",
+    "body": "المحتوى",
+    "images": "الصور",
+    "ok": "موافق",
+    "show": "عرض",
+    "showBooking": "عرض الحجز"
   }
 }

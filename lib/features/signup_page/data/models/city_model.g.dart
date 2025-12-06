@@ -8,8 +8,8 @@ part of 'city_model.dart';
 
 _CityModel _$CityModelFromJson(Map<String, dynamic> json) => _CityModel(
   country_id: (json['country_id'] as num?)?.toInt() ?? 1,
-  per_page: (json['per_page'] as num?)?.toInt(),
-  page: (json['page'] as num?)?.toInt(),
+  per_page: (json['per_page'] as num?)?.toInt() ?? null,
+  page: (json['page'] as num?)?.toInt() ?? null,
   acceptLanguage: json['acceptLanguage'] as String? ?? "",
   canAccessLocation: json['canAccessLocation'] as bool? ?? false,
 );

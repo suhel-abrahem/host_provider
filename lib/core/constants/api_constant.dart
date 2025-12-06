@@ -20,4 +20,6 @@ class ApiConstant {
   static const String countryList = "/countries";
   static const String refreshTokenEndpoint = "/refresh-token";
   static const String categoryEndpoint = "/categories";
+  static const String postDeviceTokenEndpoint =
+      "/notifications/register-device";
 }

@@ -40,6 +40,8 @@
   "common": {
     "loading": "چاوەڕێ بکە...",
     "error": "هەڵە",
+    "notificationTokenErrorPleaseFixItOnSettings": "هەڵەی توکینی ئاگاداری. تکایە لە ڕێکخستنەکاندا چارەسەر بکە!",
+    "someThingWentWrongWhileShowNotification": "هەڵەیەک ڕوودەدات کاتێک ئاگاداری نیشان دەدرێت",
     "anErrorHasOccurs": "هەڵەیەک ڕوودەدات. تکایە دووبارە هەوڵبدەرەوە لە ڕووی پەیجەکە!",
     "noInternetPullDown": "وەکوو دێت، وەڵامەیەکی ئینتەرنێت نیە. پەیوەندیت چیک بکە و دووبارە هەوڵبدەرەوە لە ڕووی پەیجەکە!",
     "success": "سەرکەوتوو",
@@ -253,5 +255,23 @@
     "showOnMap": "نیشانبدە لەسەر نەخشە",
     "callClient": "پەیوەندی بکە بە موشتەری",
     "cantShowMap": "ناتوانرێت نەخشە نیشانبدرێت"
+  },
+  "notificationPage": {
+    "title": "شاشەی ئاگاداری",
+    "label": "ئاگاداریەکان",
+    "noNotificationsAvailable": "ئاگادارییەک نەدۆزرایەوە",
+    "noTitle": "سەرپەڕەی نییە",
+    "noBody": "ناوەڕۆکی نییە",
+    "noImages": "وێنەکان نییە",
+    "clearAll": "هەموو بسڕەوە",
+    "areYouSureYouWantToClearAllNotifications": "دڵنیایت کە دەتەوێت هەموو ئاگاداریەکان بسڕیتەوە؟",
+    "yesClear": "بەڵێ، بسڕەوە",
+    "noCancel": "نەخێر، هەڵوەشاندنەوە",
+    "notificationDetails": "وردەکاریی ئاگاداری",
+    "body": "ناوەڕۆک",
+    "images": "وێنەکان",
+    "ok": "باشە",
+    "show": "نیشان بدە",
+    "showBooking": "نیشان بدەی داواکردن"
   }
 }

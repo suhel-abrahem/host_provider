@@ -8,8 +8,8 @@ part of 'country_model.dart';
 
 _CountryModel _$CountryModelFromJson(Map<String, dynamic> json) =>
     _CountryModel(
-      per_page: (json['per_page'] as num?)?.toInt(),
-      page: (json['page'] as num?)?.toInt(),
+      per_page: (json['per_page'] as num?)?.toInt() ?? null,
+      page: (json['page'] as num?)?.toInt() ?? null,
       acceptLanguage: json['acceptLanguage'] as String? ?? "",
       canAccessLocation: json['canAccessLocation'] as bool? ?? false,
     );

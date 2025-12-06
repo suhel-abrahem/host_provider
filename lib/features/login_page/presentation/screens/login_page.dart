@@ -6,6 +6,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../config/app/app_preferences.dart';
 import '../../../../core/constants/font_constants.dart';
+import '../../../../core/data_state/data_state.dart';
 import '../../../../core/dependencies_injection.dart';
 import '../../../../core/enums/assets_type_enum.dart';
 import '../../../../core/enums/login_state_enum.dart';
@@ -13,6 +14,7 @@ import '../../../../core/resource/assets_manager.dart';
 import '../../../../core/resource/custom_widget/custom_input_field/custom_input_field.dart';
 import '../../../../core/resource/custom_widget/snake_bar_widget/snake_bar_widget.dart';
 
+import '../../../../core/resource/firebase_common_services/firebase_messageing_service.dart';
 import '../../../../core/resource/validator.dart';
 import '../../data/models/login_state_model.dart';
 import '../bloc/login_bloc_bloc.dart';
@@ -31,6 +33,7 @@ class _LoginPageState extends State<LoginPage> {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   late LoginBlocBloc bloc;
   LoginStateModel loginStateModel = LoginStateModel();
+  bool? isFcmTokenSet;
   @override
   void initState() {
     super.initState();
@@ -46,26 +49,46 @@ class _LoginPageState extends State<LoginPage> {
     return BlocProvider.value(
       value: bloc,
       child: BlocListener<LoginBlocBloc, LoginBlocState>(
-        listener: (context, state) {
+        listener: (context, state) async {
           if (state is LoginStateError) {
             showMessage(
               message: LocaleKeys.loginPage_loginFailed.tr(),
               context: context,
             );
           } else if (state is LoginStateLoaded) {
-            getItInstance<AppPreferences>().setUserInfo(
+            await getItInstance<AppPreferences>().setUserInfo(
               loginStateEntity: state.loginStateEntity?.copyWith(
                 loginStateEnum: LoginStateEnum.logined,
                 created_at: DateTime.now().toString(),
               ),
             );
+            await getItInstance<FirebaseMessagingService>()
+                .setDeviceToken()
+                .then((value) async {
+                  if (value is DataSuccess<void>) {
+                    await getItInstance<AppPreferences>().setUserInfo(
+                      loginStateEntity: state.loginStateEntity?.copyWith(
+                        isFcmTokenSet: true,
+                      ),
+                    );
+                  } else {
+                    await getItInstance<AppPreferences>().setUserInfo(
+                      loginStateEntity: state.loginStateEntity?.copyWith(
+                        isFcmTokenSet: false,
+                      ),
+                    );
+                  }
+                });
+
             setState(() {
               currentPath = RoutesPath.homePage;
             });
-            if (context.canPop()) {
-              context.pop();
+            if (mounted) {
+              if (context.canPop()) {
+                context.pop();
+              }
+              context.go(RoutesPath.homePage);
             }
-            context.go(RoutesPath.homePage);
           } else if (state is LoginStateUnAuthorized) {
             context.pushNamed(RoutesName.otpPage);
           }
@@ -114,18 +137,22 @@ class _LoginPageState extends State<LoginPage> {
 
                         label: LocaleKeys.loginPage_emailOrPhone.tr(),
                         validator: (value) {
-                          if (value == null || value.isEmpty) {
+                          if (value == null || value.trim().isEmpty) {
                             return LocaleKeys.loginPage_emailOrPhoneIsRequired
                                 .tr();
                           }
 
                           if (RegExp(Validator.numberRegex).hasMatch(value)) {
-                            if (value.length < 10) {
+                            if (value.trim().length < 10) {
                               return Validator.phoneExample;
                             }
                           }
-                          if (RegExp(Validator.stringRegex).hasMatch(value)) {
-                            if (!RegExp(Validator.emailRegex).hasMatch(value)) {
+                          if (RegExp(
+                            Validator.stringRegex,
+                          ).hasMatch(value.trim())) {
+                            if (!RegExp(
+                              Validator.emailRegex,
+                            ).hasMatch(value.trim())) {
                               return Validator.emailExample;
                             }
                           }
@@ -133,7 +160,7 @@ class _LoginPageState extends State<LoginPage> {
                         },
                         onChanged: (value) {
                           loginStateModel = loginStateModel.copyWith(
-                            email: value,
+                            email: value.trim(),
                           );
                         },
                       ),
@@ -147,7 +174,7 @@ class _LoginPageState extends State<LoginPage> {
                         obscureText: true,
                         label: LocaleKeys.loginPage_password.tr(),
                         validator: (value) {
-                          if (value == null || value.isEmpty) {
+                          if (value == null || value.trim().isEmpty) {
                             return LocaleKeys.loginPage_passwordIsRequired.tr();
                           }
 
@@ -155,7 +182,7 @@ class _LoginPageState extends State<LoginPage> {
                         },
                         onChanged: (value) {
                           loginStateModel = loginStateModel.copyWith(
-                            password: value,
+                            password: value.trim(),
                           );
                         },
                       ),
@@ -206,7 +233,7 @@ class _LoginPageState extends State<LoginPage> {
                                     ),
                                   ),
                               // ✅ Validation happens *on press*, not during build
-                              onPressed: () {
+                              onPressed: () async {
                                 if (formKey.currentState?.validate() ?? false) {
                                   context.read<LoginBlocBloc>().add(
                                     LoginBlocEvent.loginUserEvent(

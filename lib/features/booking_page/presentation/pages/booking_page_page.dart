@@ -101,6 +101,14 @@ class _BookingPagePageState extends State<BookingPagePage>
   }
 
   @override
+  void didUpdateWidget(covariant BookingPagePage oldWidget) {
+    getBookingModel = getBookingModel.copyWith(
+      acceptLanguage: Helper.getCountryCode(context),
+    );
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
   void dispose() {
     tabController?.dispose();
     super.dispose();

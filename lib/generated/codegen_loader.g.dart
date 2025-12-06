@@ -56,6 +56,8 @@ class CodegenLoader extends AssetLoader{
   "common": {
     "loading": "جاري التحميل...",
     "error": "خطأ",
+    "notificationTokenErrorPleaseFixItOnSettings": "خطأ في رمز الاشعارات. يرجى إصلاحه في الإعدادات!",
+    "someThingWentWrongWhileShowNotification": "حدث خطأ أثناء عرض الإشعار",
     "anErrorHasOccurs": "حدث خطأ. حاول مرة أخرى بسحب الصفحة إلى الأسفل!",
     "noInternetPullDown": "يبدو أنك غير متصل بالإنترنت. تحقق من الاتصال وحاول مرة أخرى بسحب الصفحة إلى الأسفل!",
     "success": "نجاح",
@@ -269,6 +271,24 @@ class CodegenLoader extends AssetLoader{
     "showOnMap": "عرض على الخريطة",
     "callClient": "الاتصال بالعميل",
     "cantShowMap": "لا يمكن عرض الخريطة"
+  },
+  "notificationPage": {
+    "title": "صفحة الإشعارات",
+    "label": "الإشعارات",
+    "noNotificationsAvailable": "لا توجد إشعارات متاحة",
+    "noTitle": "لا يوجد عنوان",
+    "noBody": "لا يوجد محتوى",
+    "noImages": "لا توجد صور",
+    "clearAll": "مسح الكل",
+    "areYouSureYouWantToClearAllNotifications": "هل أنت متأكد من أنك تريد مسح جميع الإشعارات؟",
+    "yesClear": "نعم، مسح",
+    "noCancel": "لا، إلغاء",
+    "notificationDetails": "تفاصيل الإشعار",
+    "body": "المحتوى",
+    "images": "الصور",
+    "ok": "موافق",
+    "show": "عرض",
+    "showBooking": "عرض الحجز"
   }
 };
 static const Map<String,dynamic> _en = {
@@ -313,6 +333,8 @@ static const Map<String,dynamic> _en = {
   "common": {
     "loading": "Loading...",
     "error": "Error",
+    "notificationTokenErrorPleaseFixItOnSettings": "Notification token error. Please fix it in settings!",
+    "someThingWentWrongWhileShowNotification": "Something went wrong while showing the notification",
     "anErrorHasOccurs": "An error occurred. Please pull down the page to try again!",
     "noInternetPullDown": "It seems you are offline. Check your connection and pull down the page to try again!",
     "success": "Success",
@@ -526,6 +548,24 @@ static const Map<String,dynamic> _en = {
     "showOnMap": "Show on map",
     "callClient": "Call client",
     "cantShowMap": "Can't show map"
+  },
+  "notificationPage": {
+    "title": "Notification page",
+    "label": "Notifications",
+    "noNotificationsAvailable": "No notifications available",
+    "noTitle": "No title",
+    "noBody": "No content",
+    "noImages": "No images",
+    "clearAll": "Clear all",
+    "areYouSureYouWantToClearAllNotifications": "Are you sure you want to clear all notifications?",
+    "yesClear": "Yes, clear",
+    "noCancel": "No, cancel",
+    "notificationDetails": "Notification details",
+    "body": "Content",
+    "images": "Images",
+    "ok": "OK",
+    "show": "Show",
+    "showBooking": "Show booking"
   }
 };
 static const Map<String,dynamic> _fa = {
@@ -570,6 +610,8 @@ static const Map<String,dynamic> _fa = {
   "common": {
     "loading": "چاوەڕێ بکە...",
     "error": "هەڵە",
+    "notificationTokenErrorPleaseFixItOnSettings": "هەڵەی توکینی ئاگاداری. تکایە لە ڕێکخستنەکاندا چارەسەر بکە!",
+    "someThingWentWrongWhileShowNotification": "هەڵەیەک ڕوودەدات کاتێک ئاگاداری نیشان دەدرێت",
     "anErrorHasOccurs": "هەڵەیەک ڕوودەدات. تکایە دووبارە هەوڵبدەرەوە لە ڕووی پەیجەکە!",
     "noInternetPullDown": "وەکوو دێت، وەڵامەیەکی ئینتەرنێت نیە. پەیوەندیت چیک بکە و دووبارە هەوڵبدەرەوە لە ڕووی پەیجەکە!",
     "success": "سەرکەوتوو",
@@ -783,6 +825,24 @@ static const Map<String,dynamic> _fa = {
     "showOnMap": "نیشانبدە لەسەر نەخشە",
     "callClient": "پەیوەندی بکە بە موشتەری",
     "cantShowMap": "ناتوانرێت نەخشە نیشانبدرێت"
+  },
+  "notificationPage": {
+    "title": "شاشەی ئاگاداری",
+    "label": "ئاگاداریەکان",
+    "noNotificationsAvailable": "ئاگادارییەک نەدۆزرایەوە",
+    "noTitle": "سەرپەڕەی نییە",
+    "noBody": "ناوەڕۆکی نییە",
+    "noImages": "وێنەکان نییە",
+    "clearAll": "هەموو بسڕەوە",
+    "areYouSureYouWantToClearAllNotifications": "دڵنیایت کە دەتەوێت هەموو ئاگاداریەکان بسڕیتەوە؟",
+    "yesClear": "بەڵێ، بسڕەوە",
+    "noCancel": "نەخێر، هەڵوەشاندنەوە",
+    "notificationDetails": "وردەکاریی ئاگاداری",
+    "body": "ناوەڕۆک",
+    "images": "وێنەکان",
+    "ok": "باشە",
+    "show": "نیشان بدە",
+    "showBooking": "نیشان بدەی داواکردن"
   }
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": _ar, "en": _en, "fa": _fa};

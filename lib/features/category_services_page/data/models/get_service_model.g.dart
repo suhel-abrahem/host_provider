@@ -10,8 +10,8 @@ _GetServiceModel _$GetServiceModelFromJson(Map<String, dynamic> json) =>
     _GetServiceModel(
       Authorization: json['Authorization'] as String? ?? "",
       acceptLanguage: json['acceptLanguage'] as String? ?? "",
-      category_id: (json['category_id'] as num?)?.toInt(),
-      service_id: (json['service_id'] as num?)?.toInt(),
+      category_id: (json['category_id'] as num?)?.toInt() ?? null,
+      service_id: (json['service_id'] as num?)?.toInt() ?? null,
     );
 
 Map<String, dynamic> _$GetServiceModelToJson(_GetServiceModel instance) =>

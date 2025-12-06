@@ -5,16 +5,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:glass/glass.dart';
+
 import 'package:go_router/go_router.dart';
 import 'package:hosta_provider/core/enums/login_state_enum.dart';
 import 'package:hosta_provider/core/resource/color_manager.dart';
+import 'package:hosta_provider/features/login_page/domain/entities/login_state_entity.dart';
+import 'package:hosta_provider/generated/locale_keys.g.dart';
 import '../../../config/app/app_preferences.dart';
 import '../../../config/route/routes_manager.dart';
 import '../../constants/font_constants.dart';
+import '../../data_state/data_state.dart';
 import '../../dependencies_injection.dart';
 
 import '../custom_widget/snake_bar_widget/snake_bar_widget.dart';
+
 import '../firebase_common_services/firebase_messageing_service.dart';
 import 'drawer.dart';
 
@@ -71,12 +75,13 @@ class _MainPageState extends State<MainPage> {
                     minWidth: 300.w,
                     minHeight: 550.h,
                     maxWidth: 300.w,
-                    maxHeight: 620.h,
+                    maxHeight: 652.h,
                   ),
                   backgroundColor: Theme.of(context).scaffoldBackgroundColor,
                   title: Center(
                     child: Text(
-                      message.notification?.title ?? "No Title",
+                      message.notification?.title ??
+                          LocaleKeys.notificationPage_noTitle.tr(),
                       style: Theme.of(context).textTheme.labelLarge?.copyWith(
                         fontFamily: FontConstants.fontFamily(context.locale),
                       ),
@@ -86,7 +91,15 @@ class _MainPageState extends State<MainPage> {
                   icon: Icon(
                     Icons.notifications_active,
                     color: Theme.of(context).colorScheme.primary,
-                  ),
+                    shadows: [
+                      BoxShadow(
+                        color: Theme.of(context).shadowColor,
+                        blurRadius: 8.r,
+                        offset: Offset(0, 4.h),
+                      ),
+                    ],
+                    size: 28.sp,
+                  ).animate().shake(duration: 1600.ms),
                   content: Container(
                     padding: EdgeInsets.symmetric(vertical: 8.h),
                     child: Column(
@@ -98,7 +111,7 @@ class _MainPageState extends State<MainPage> {
                             horizontal: 8.w,
                           ),
                           child: Text(
-                            "Notification Message:",
+                            "${LocaleKeys.notificationPage_body.tr()}:",
                             style: Theme.of(context).textTheme.labelMedium
                                 ?.copyWith(
                                   fontFamily: FontConstants.fontFamily(
@@ -117,8 +130,8 @@ class _MainPageState extends State<MainPage> {
                             height: 90.h,
                             width: 284.w,
                             padding: EdgeInsets.symmetric(
-                              vertical: 8.h,
-                              horizontal: 8.w,
+                              vertical: 16.h,
+                              horizontal: 16.w,
                             ),
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(8.r),
@@ -131,7 +144,8 @@ class _MainPageState extends State<MainPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  message.notification?.body ?? "No Body",
+                                  message.notification?.body ??
+                                      LocaleKeys.notificationPage_noBody.tr(),
                                   style: Theme.of(context).textTheme.labelMedium
                                       ?.copyWith(
                                         fontFamily: FontConstants.fontFamily(
@@ -139,33 +153,59 @@ class _MainPageState extends State<MainPage> {
                                         ),
                                       ),
                                   textAlign: TextAlign.start,
-                                  overflow: TextOverflow.ellipsis,
                                 ),
                               ],
                             ),
                           ),
                         ),
-                        if (imageUrl != null && imageUrl.isNotEmpty)
-                          Padding(
-                            padding: EdgeInsets.symmetric(
-                              vertical: 8.h,
-                              horizontal: 8.w,
-                            ),
-                            child: Container(
-                              clipBehavior: Clip.hardEdge,
-                              width: 260.w,
-                              height: 260.h,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12.r),
-                              ),
-                              child: Image.network(
-                                imageUrl,
-                                height: 260.h,
-                                width: 260.w,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 8.w),
+                          child: Text(
+                            "${LocaleKeys.notificationPage_images.tr()}:",
+                            style: Theme.of(context).textTheme.labelMedium
+                                ?.copyWith(
+                                  fontFamily: FontConstants.fontFamily(
+                                    context.locale,
+                                  ),
+                                ),
                           ),
+                        ),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 8.w,
+                            vertical: 8.h,
+                          ),
+                          child: Container(
+                            clipBehavior: Clip.hardEdge,
+                            width: 260.w,
+                            height: 260.h,
+                            decoration: BoxDecoration(
+                              color: Theme.of(context).colorScheme.primary,
+                              borderRadius: BorderRadius.circular(12.r),
+                            ),
+                            child: imageUrl != null && imageUrl.isNotEmpty
+                                ? Image.network(
+                                    imageUrl,
+                                    height: 260.h,
+                                    width: 260.w,
+                                    fit: BoxFit.cover,
+                                  )
+                                : Center(
+                                    child: Text(
+                                      LocaleKeys.notificationPage_noImages.tr(),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .labelMedium
+                                          ?.copyWith(
+                                            fontFamily:
+                                                FontConstants.fontFamily(
+                                                  context.locale,
+                                                ),
+                                          ),
+                                    ),
+                                  ),
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -175,7 +215,7 @@ class _MainPageState extends State<MainPage> {
                         Navigator.of(context).pop();
                       },
                       child: Text(
-                        "OK",
+                        LocaleKeys.notificationPage_ok.tr(),
                         style: Theme.of(context).textTheme.labelMedium
                             ?.copyWith(
                               fontFamily: FontConstants.fontFamily(
@@ -191,7 +231,7 @@ class _MainPageState extends State<MainPage> {
                         context.pushNamed(RoutesName.notificationPage);
                       },
                       child: Text(
-                        "Show",
+                        LocaleKeys.notificationPage_show.tr(),
                         style: Theme.of(context).textTheme.labelMedium
                             ?.copyWith(
                               fontFamily: FontConstants.fontFamily(
@@ -208,24 +248,67 @@ class _MainPageState extends State<MainPage> {
           );
         }
       });
-    } catch (e) {}
-    try {
       FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-        context.pushNamed(RoutesName.notificationPage);
+        if (mounted) {
+          context.pushNamed(RoutesName.notificationPage);
+        }
       });
-    } catch (e) {}
-    try {
       RemoteMessage? initialMessage = await FirebaseMessaging.instance
           .getInitialMessage();
       if (initialMessage != null) {
-        context.pushNamed(RoutesName.notificationPage);
+        if (mounted) {
+          context.pushNamed(RoutesName.notificationPage);
+        }
       }
-    } catch (e) {}
+    } catch (e) {
+      if (mounted) {
+        showMessage(
+          message: LocaleKeys.common_someThingWentWrongWhileShowNotification
+              .tr(),
+          context: context,
+        );
+      }
+    }
+  }
+
+  Future<void> setFcmTokenForCurrentUser() async {
+    final LoginStateEntity? loginState = getItInstance<AppPreferences>()
+        .getUserInfo();
+
+    if (loginState != null && !(loginState.isFcmTokenSet ?? false)) {
+      await getItInstance<FirebaseMessagingService>().setDeviceToken().then((
+        value,
+      ) async {
+        if (value is DataSuccess) {
+          await getItInstance<AppPreferences>().setUserInfo(
+            loginStateEntity: loginState.copyWith(isFcmTokenSet: true),
+          );
+        } else {
+          await getItInstance<AppPreferences>().setUserInfo(
+            loginStateEntity: loginState.copyWith(isFcmTokenSet: false),
+          );
+          if (mounted) {
+            showMessage(
+              message: LocaleKeys
+                  .common_notificationTokenErrorPleaseFixItOnSettings
+                  .tr(),
+              context: context,
+              haveButton: true,
+              buttonTitle: LocaleKeys.profilePage_settings.tr(),
+              onPressed: () {
+                context.pushNamed(RoutesName.settingsPage);
+              },
+            );
+          }
+        }
+      });
+    }
   }
 
   @override
   void initState() {
     super.initState();
+    setFcmTokenForCurrentUser();
     getMessage();
   }
 

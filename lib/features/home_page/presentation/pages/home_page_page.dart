@@ -78,7 +78,9 @@ class _HomePagePageState extends State<HomePagePage> {
           backgroundColor: Theme.of(context).primaryColor,
           actions: [
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                context.pushNamed(RoutesName.notificationPage);
+              },
               icon: Icon(
                 Icons.notifications_none,
                 size: 24.sp,

@@ -4,10 +4,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../config/app/app_preferences.dart';
+import '../../../../core/data_state/data_state.dart';
 import '../../../../core/dependencies_injection.dart';
 import '../../../../core/enums/login_state_enum.dart';
 import '../../../../core/resource/custom_widget/snake_bar_widget/snake_bar_widget.dart';
 
+import '../../../../core/resource/firebase_common_services/firebase_messageing_service.dart';
 import '../../../login_page/domain/entities/login_state_entity.dart';
 import '../../data/models/otp_model.dart';
 import '../bloc/otp_page_bloc.dart';
@@ -61,16 +63,35 @@ class _OtpPagePageState extends State<OtpPagePage> {
               );
             },
             loading: () {},
-            verified: (data) {
+            verified: (data) async {
               LoginStateEntity? loginStateEntity = data;
               loginStateEntity = loginStateEntity?.copyWith(
                 loginStateEnum: LoginStateEnum.logined,
                 created_at: DateTime.now().toString(),
               );
-              getItInstance<AppPreferences>().setUserInfo(
+              await getItInstance<AppPreferences>().setUserInfo(
                 loginStateEntity: loginStateEntity,
               );
-              context.goNamed(RoutesName.homePage);
+              await getItInstance<FirebaseMessagingService>()
+                  .setDeviceToken()
+                  .then((value) async {
+                    if (value is DataSuccess) {
+                      await getItInstance<AppPreferences>().setUserInfo(
+                        loginStateEntity: loginStateEntity?.copyWith(
+                          isFcmTokenSet: true,
+                        ),
+                      );
+                    } else {
+                      await getItInstance<AppPreferences>().setUserInfo(
+                        loginStateEntity: loginStateEntity?.copyWith(
+                          isFcmTokenSet: false,
+                        ),
+                      );
+                    }
+                  });
+              if (mounted) {
+                context.goNamed(RoutesName.homePage);
+              }
             },
             resent: (LoginStateEntity? loginStateEntity) {
               showMessage(

@@ -42,6 +42,8 @@ abstract class  LocaleKeys {
   static const loginPage = 'loginPage';
   static const common_loading = 'common.loading';
   static const common_error = 'common.error';
+  static const common_notificationTokenErrorPleaseFixItOnSettings = 'common.notificationTokenErrorPleaseFixItOnSettings';
+  static const common_someThingWentWrongWhileShowNotification = 'common.someThingWentWrongWhileShowNotification';
   static const common_anErrorHasOccurs = 'common.anErrorHasOccurs';
   static const common_noInternetPullDown = 'common.noInternetPullDown';
   static const common_success = 'common.success';
@@ -245,5 +247,22 @@ abstract class  LocaleKeys {
   static const serviceDetailsPage_callClient = 'serviceDetailsPage.callClient';
   static const serviceDetailsPage_cantShowMap = 'serviceDetailsPage.cantShowMap';
   static const serviceDetailsPage = 'serviceDetailsPage';
+  static const notificationPage_title = 'notificationPage.title';
+  static const notificationPage_label = 'notificationPage.label';
+  static const notificationPage_noNotificationsAvailable = 'notificationPage.noNotificationsAvailable';
+  static const notificationPage_noTitle = 'notificationPage.noTitle';
+  static const notificationPage_noBody = 'notificationPage.noBody';
+  static const notificationPage_noImages = 'notificationPage.noImages';
+  static const notificationPage_clearAll = 'notificationPage.clearAll';
+  static const notificationPage_areYouSureYouWantToClearAllNotifications = 'notificationPage.areYouSureYouWantToClearAllNotifications';
+  static const notificationPage_yesClear = 'notificationPage.yesClear';
+  static const notificationPage_noCancel = 'notificationPage.noCancel';
+  static const notificationPage_notificationDetails = 'notificationPage.notificationDetails';
+  static const notificationPage_body = 'notificationPage.body';
+  static const notificationPage_images = 'notificationPage.images';
+  static const notificationPage_ok = 'notificationPage.ok';
+  static const notificationPage_show = 'notificationPage.show';
+  static const notificationPage_showBooking = 'notificationPage.showBooking';
+  static const notificationPage = 'notificationPage';
 
 }
