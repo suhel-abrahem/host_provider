@@ -63,35 +63,17 @@ class _OtpPagePageState extends State<OtpPagePage> {
               );
             },
             loading: () {},
-            verified: (data) async {
+            verified: (data) {
               LoginStateEntity? loginStateEntity = data;
               loginStateEntity = loginStateEntity?.copyWith(
                 loginStateEnum: LoginStateEnum.logined,
                 created_at: DateTime.now().toString(),
               );
-              await getItInstance<AppPreferences>().setUserInfo(
+              getItInstance<AppPreferences>().setUserInfo(
                 loginStateEntity: loginStateEntity,
               );
-              await getItInstance<FirebaseMessagingService>()
-                  .setDeviceToken()
-                  .then((value) async {
-                    if (value is DataSuccess) {
-                      await getItInstance<AppPreferences>().setUserInfo(
-                        loginStateEntity: loginStateEntity?.copyWith(
-                          isFcmTokenSet: true,
-                        ),
-                      );
-                    } else {
-                      await getItInstance<AppPreferences>().setUserInfo(
-                        loginStateEntity: loginStateEntity?.copyWith(
-                          isFcmTokenSet: false,
-                        ),
-                      );
-                    }
-                  });
-              if (mounted) {
-                context.goNamed(RoutesName.homePage);
-              }
+
+              context.goNamed(RoutesName.homePage);
             },
             resent: (LoginStateEntity? loginStateEntity) {
               showMessage(

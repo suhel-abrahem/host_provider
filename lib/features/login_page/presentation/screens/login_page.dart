@@ -50,36 +50,19 @@ class _LoginPageState extends State<LoginPage> {
       value: bloc,
       child: BlocListener<LoginBlocBloc, LoginBlocState>(
         listener: (context, state) async {
+          print("Login State: $state");
           if (state is LoginStateError) {
             showMessage(
               message: LocaleKeys.loginPage_loginFailed.tr(),
               context: context,
             );
           } else if (state is LoginStateLoaded) {
-            await getItInstance<AppPreferences>().setUserInfo(
+            getItInstance<AppPreferences>().setUserInfo(
               loginStateEntity: state.loginStateEntity?.copyWith(
                 loginStateEnum: LoginStateEnum.logined,
                 created_at: DateTime.now().toString(),
               ),
             );
-            await getItInstance<FirebaseMessagingService>()
-                .setDeviceToken()
-                .then((value) async {
-                  if (value is DataSuccess<void>) {
-                    await getItInstance<AppPreferences>().setUserInfo(
-                      loginStateEntity: state.loginStateEntity?.copyWith(
-                        isFcmTokenSet: true,
-                      ),
-                    );
-                  } else {
-                    await getItInstance<AppPreferences>().setUserInfo(
-                      loginStateEntity: state.loginStateEntity?.copyWith(
-                        isFcmTokenSet: false,
-                      ),
-                    );
-                  }
-                });
-
             setState(() {
               currentPath = RoutesPath.homePage;
             });
