@@ -263,6 +263,12 @@ abstract class  LocaleKeys {
   static const notificationPage_ok = 'notificationPage.ok';
   static const notificationPage_show = 'notificationPage.show';
   static const notificationPage_showBooking = 'notificationPage.showBooking';
+  static const notificationPage_markAsRead = 'notificationPage.markAsRead';
+  static const notificationPage_makeAllAsRead = 'notificationPage.makeAllAsRead';
+  static const notificationPage_notificatios = 'notificationPage.notificatios';
+  static const notificationPage_new = 'notificationPage.new';
+  static const notificationPage_today = 'notificationPage.today';
+  static const notificationPage_earlier = 'notificationPage.earlier';
   static const notificationPage = 'notificationPage';
 
 }

@@ -1,4 +1,13 @@
+import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:hosta_provider/features/notification_page/domain/entities/notification_entity.dart';
+import '../features/notification_page/data/models/notification_model.dart';
+import '../features/notification_page/data/repositories/notification_repository_implements.dart';
+import '../features/notification_page/domain/repositories/notification_repository.dart';
+import '../features/notification_page/domain/usecases/get_notification_usecase.dart';
+import '../features/notification_page/domain/usecases/set_all_notification_as_read_usecase.dart';
+import '../features/notification_page/domain/usecases/set_notification_as_read_usecase.dart';
+import '../features/notification_page/presentation/bloc/notification_page_bloc.dart';
 import 'resource/common_service/common_service.dart';
 import 'resource/connectivity/check_connectivity.dart';
 import '../features/booking_page/data/repositories/booking_repository_implements.dart';
@@ -392,4 +401,31 @@ Future<void> initDependencies() async {
   );
 
   // end of home page
+  // notification page
+  // entities and models
+  getItInstance.registerSingleton<NotificationEntity>(NotificationEntity());
+  getItInstance.registerSingleton<NotificationModel>(NotificationModel());
+  // repository
+  getItInstance.registerSingleton<NotificationRepository>(
+    NotificationRepositoryImpl(getItInstance()),
+  );
+  // usecase
+  getItInstance.registerSingleton<GetNotificationUseCase>(
+    GetNotificationUseCase(getItInstance()),
+  );
+  getItInstance.registerSingleton<SetNotificationAsReadUseCase>(
+    SetNotificationAsReadUseCase(getItInstance()),
+  );
+  getItInstance.registerSingleton<SetAllNotificationAsReadUseCase>(
+    SetAllNotificationAsReadUseCase(getItInstance()),
+  );
+  // bloc
+  getItInstance.registerFactory<NotificationPageBloc>(
+    () => NotificationPageBloc(
+      getItInstance(),
+      getItInstance(),
+      getItInstance(),
+      getItInstance(),
+    ),
+  );
 }

@@ -272,6 +272,12 @@
     "images": "Images",
     "ok": "OK",
     "show": "Show",
-    "showBooking": "Show booking"
+    "showBooking": "Show booking",
+    "markAsRead": "Mark as read",
+    "makeAllAsRead": "Mark all as read",
+    "notificatios": "Notifications",
+    "new": "New",
+    "today": "Today",
+    "earlier": "Earlier"
   }
 }

@@ -22,4 +22,5 @@ class ApiConstant {
   static const String categoryEndpoint = "/categories";
   static const String postDeviceTokenEndpoint =
       "/notifications/register-device";
+  static const String getNotificationsEndpoint = "/notifications";
 }

@@ -1,8 +1,14 @@
 part of 'notification_page_bloc.dart';
 
-abstract class NotificationPageEvent extends Equatable {
-  const NotificationPageEvent();
-
-  @override
-  List<Object> get props => [];
+@freezed
+class NotificationPageEvent with _$NotificationPageEvent {
+  const factory NotificationPageEvent.started() = NotificationPageEventStarted;
+  const factory NotificationPageEvent.getNotifications({
+    required NotificationModel? model,
+  }) = NotificationPageEventGetNotifications;
+  const factory NotificationPageEvent.readNotification({
+    required NotificationModel? model,
+  }) = NotificationPageEventReadNotification;
+  const factory NotificationPageEvent.readAllNotification() =
+      NotificationPageEventReadAllNotification;
 }

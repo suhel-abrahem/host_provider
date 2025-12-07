@@ -61,10 +61,6 @@ class _MainPageState extends State<MainPage> {
   Future<void> getMessage() async {
     try {
       FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-        final String? imageUrl =
-            message.notification?.android?.imageUrl ??
-            message.notification?.apple?.imageUrl ??
-            message.notification?.web?.image;
         if (mounted) {
           showDialog(
             context: context,
@@ -73,9 +69,9 @@ class _MainPageState extends State<MainPage> {
                 child: AlertDialog(
                   constraints: BoxConstraints(
                     minWidth: 300.w,
-                    minHeight: 550.h,
+                    minHeight: 320.h,
                     maxWidth: 300.w,
-                    maxHeight: 652.h,
+                    maxHeight: 320.h,
                   ),
                   backgroundColor: Theme.of(context).scaffoldBackgroundColor,
                   title: Center(
@@ -100,119 +96,65 @@ class _MainPageState extends State<MainPage> {
                     ],
                     size: 28.sp,
                   ).animate().shake(duration: 1600.ms),
-                  content: Container(
-                    padding: EdgeInsets.symmetric(vertical: 8.h),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                            vertical: 8.h,
-                            horizontal: 8.w,
-                          ),
-                          child: Text(
-                            "${LocaleKeys.notificationPage_body.tr()}:",
-                            style: Theme.of(context).textTheme.labelMedium
-                                ?.copyWith(
-                                  fontFamily: FontConstants.fontFamily(
-                                    context.locale,
-                                  ),
+                  content: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 8.w),
+                        child: Text(
+                          "${LocaleKeys.notificationPage_body.tr()}:",
+                          style: Theme.of(context).textTheme.labelMedium
+                              ?.copyWith(
+                                fontFamily: FontConstants.fontFamily(
+                                  context.locale,
                                 ),
-                            overflow: TextOverflow.ellipsis,
-                          ),
+                              ),
+                          overflow: TextOverflow.ellipsis,
                         ),
-                        Padding(
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 8.w,
+                          vertical: 8.h,
+                        ),
+                        child: Container(
+                          height: 90.h,
+                          width: 284.w,
                           padding: EdgeInsets.symmetric(
-                            vertical: 8.h,
-                            horizontal: 8.w,
+                            vertical: 16.h,
+                            horizontal: 16.w,
                           ),
-                          child: Container(
-                            height: 90.h,
-                            width: 284.w,
-                            padding: EdgeInsets.symmetric(
-                              vertical: 16.h,
-                              horizontal: 16.w,
-                            ),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8.r),
-                              color: Theme.of(
-                                context,
-                              ).colorScheme.primaryContainer,
-                            ),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  message.notification?.body ??
-                                      LocaleKeys.notificationPage_noBody.tr(),
-                                  style: Theme.of(context).textTheme.labelMedium
-                                      ?.copyWith(
-                                        fontFamily: FontConstants.fontFamily(
-                                          context.locale,
-                                        ),
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8.r),
+                            color: Theme.of(
+                              context,
+                            ).colorScheme.primaryContainer,
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                message.notification?.body ??
+                                    LocaleKeys.notificationPage_noBody.tr(),
+                                style: Theme.of(context).textTheme.labelMedium
+                                    ?.copyWith(
+                                      fontFamily: FontConstants.fontFamily(
+                                        context.locale,
                                       ),
-                                  textAlign: TextAlign.start,
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 8.w),
-                          child: Text(
-                            "${LocaleKeys.notificationPage_images.tr()}:",
-                            style: Theme.of(context).textTheme.labelMedium
-                                ?.copyWith(
-                                  fontFamily: FontConstants.fontFamily(
-                                    context.locale,
-                                  ),
-                                ),
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 8.w,
-                            vertical: 8.h,
-                          ),
-                          child: Container(
-                            clipBehavior: Clip.hardEdge,
-                            width: 260.w,
-                            height: 260.h,
-                            decoration: BoxDecoration(
-                              color: Theme.of(context).colorScheme.primary,
-                              borderRadius: BorderRadius.circular(12.r),
-                            ),
-                            child: imageUrl != null && imageUrl.isNotEmpty
-                                ? Image.network(
-                                    imageUrl,
-                                    height: 260.h,
-                                    width: 260.w,
-                                    fit: BoxFit.cover,
-                                  )
-                                : Center(
-                                    child: Text(
-                                      LocaleKeys.notificationPage_noImages.tr(),
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .labelMedium
-                                          ?.copyWith(
-                                            fontFamily:
-                                                FontConstants.fontFamily(
-                                                  context.locale,
-                                                ),
-                                          ),
                                     ),
-                                  ),
+                                textAlign: TextAlign.start,
+                              ),
+                            ],
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                    ],
                   ),
                   actions: [
                     TextButton(
                       onPressed: () {
-                        Navigator.of(context).pop();
+                        context.pop();
                       },
                       child: Text(
                         LocaleKeys.notificationPage_ok.tr(),
@@ -227,8 +169,8 @@ class _MainPageState extends State<MainPage> {
                     ),
                     TextButton(
                       onPressed: () {
-                        Navigator.of(context).pop();
-                        context.pushNamed(RoutesName.notificationPage);
+                        context.pop();
+                        context.push(RoutesPath.bookingPage);
                       },
                       child: Text(
                         LocaleKeys.notificationPage_show.tr(),
@@ -250,14 +192,14 @@ class _MainPageState extends State<MainPage> {
       });
       FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
         if (mounted) {
-          context.pushNamed(RoutesName.notificationPage);
+          context.pushNamed(RoutesName.bookingPage);
         }
       });
       RemoteMessage? initialMessage = await FirebaseMessaging.instance
           .getInitialMessage();
       if (initialMessage != null) {
         if (mounted) {
-          context.pushNamed(RoutesName.notificationPage);
+          context.pushNamed(RoutesName.bookingPage);
         }
       }
     } catch (e) {

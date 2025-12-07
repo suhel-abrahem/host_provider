@@ -272,6 +272,12 @@
     "images": "الصور",
     "ok": "موافق",
     "show": "عرض",
-    "showBooking": "عرض الحجز"
+    "showBooking": "عرض الحجز",
+    "markAsRead": "تحديد كمقروء",
+    "makeAllAsRead": "تحديد الكل كمقروءة",
+    "notificatios": "الإشعارات",
+    "new": "جديد",
+    "today": "اليوم",
+    "earlier": "سابقاً"
   }
 }

@@ -288,7 +288,13 @@ class CodegenLoader extends AssetLoader{
     "images": "الصور",
     "ok": "موافق",
     "show": "عرض",
-    "showBooking": "عرض الحجز"
+    "showBooking": "عرض الحجز",
+    "markAsRead": "تحديد كمقروء",
+    "makeAllAsRead": "تحديد الكل كمقروءة",
+    "notificatios": "الإشعارات",
+    "new": "جديد",
+    "today": "اليوم",
+    "earlier": "سابقاً"
   }
 };
 static const Map<String,dynamic> _en = {
@@ -565,7 +571,13 @@ static const Map<String,dynamic> _en = {
     "images": "Images",
     "ok": "OK",
     "show": "Show",
-    "showBooking": "Show booking"
+    "showBooking": "Show booking",
+    "markAsRead": "Mark as read",
+    "makeAllAsRead": "Mark all as read",
+    "notificatios": "Notifications",
+    "new": "New",
+    "today": "Today",
+    "earlier": "Earlier"
   }
 };
 static const Map<String,dynamic> _fa = {
@@ -842,7 +854,13 @@ static const Map<String,dynamic> _fa = {
     "images": "وێنەکان",
     "ok": "باشە",
     "show": "نیشان بدە",
-    "showBooking": "نیشان بدەی داواکردن"
+    "showBooking": "نیشان بدەی داواکردن",
+    "markAsRead": "نیشاندانی وەک خوێندراو",
+    "makeAllAsRead": "هەموو وەک خوێندراو نیشان بدە",
+    "notificatios": "ئاگاداریەکان",
+    "new": "نوێ",
+    "today": "ئەمڕۆ",
+    "earlier": "پێشتر"
   }
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": _ar, "en": _en, "fa": _fa};

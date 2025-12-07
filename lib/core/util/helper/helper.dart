@@ -173,4 +173,18 @@ class Helper {
         return null;
     }
   }
+
+  static bool isDateNew(DateTime? dateToCheck) {
+    DateTime beforeHour = DateTime.now().subtract(const Duration(hours: 1));
+    if (dateToCheck == null) return false;
+    return dateToCheck.isAfter(beforeHour);
+  }
+
+  static bool isDateToday(DateTime? dateToCheck) {
+    DateTime now = DateTime.now();
+    if (dateToCheck == null) return false;
+    return dateToCheck.day == now.day &&
+        dateToCheck.month == now.month &&
+        dateToCheck.year == now.year;
+  }
 }
