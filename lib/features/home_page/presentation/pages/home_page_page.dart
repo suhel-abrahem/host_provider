@@ -18,9 +18,12 @@ import '../../../../core/resource/common_state_widget/no_internet_state_widget.d
 import '../../../../core/resource/custom_widget/snake_bar_widget/snake_bar_widget.dart';
 
 import '../../../../core/resource/main_page/main_page.dart';
+import '../../../../core/resource/rst_stream/rst_stream.dart';
 import '../../../../core/util/helper/helper.dart';
+import '../../../../main.dart';
 import '../../domain/entities/home_page_entity.dart';
 import '../bloc/home_page_bloc.dart';
+import '../widgets/notification_number_widget.dart';
 import '../widgets/squer_container_with_presse_widget.dart';
 import '../../../login_page/domain/entities/login_state_entity.dart';
 import '../../../profile_page/data/models/profile_model.dart';
@@ -50,12 +53,27 @@ class _HomePagePageState extends State<HomePagePage> {
   ProfileModel profileModel = ProfileModel();
   ProfileEntity? profileEntity = ProfileEntity();
   bool isProfileDataLoading = true;
+  int notificationCount = 1;
+  Future<int> getUnreadNotification() async {
+    return await getUnreadCount();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getUnreadNotification().then((onValue) {
+      notificationCount = onValue;
+      streamSocket.addResponse(onValue.toString());
+    });
+  }
+
   @override
   void didChangeDependencies() {
     model = model?.copyWith(acceptLanguage: Helper.getCountryCode(context));
     profileModel = profileModel.copyWith(
       acceptLanguage: Helper.getCountryCode(context),
     );
+
     super.didChangeDependencies();
   }
 
@@ -81,10 +99,31 @@ class _HomePagePageState extends State<HomePagePage> {
               onPressed: () {
                 context.pushNamed(RoutesName.notificationPage);
               },
-              icon: Icon(
-                Icons.notifications_none,
-                size: 24.sp,
-                color: ColorManager.backgroundColor,
+              icon: SizedBox(
+                width: 36.w,
+                height: 36.h,
+                child: Stack(
+                  children: [
+                    PositionedDirectional(
+                      bottom: 0,
+                      top: 0,
+                      start: 0,
+                      child: Icon(
+                        Icons.notifications,
+                        size: 28.sp,
+                        color: ColorManager.backgroundColor,
+                      ),
+                    ),
+                    AnimatedPositionedDirectional(
+                      duration: Duration(milliseconds: 300),
+                      top: notificationCount == 0 ? 4.h : 0.h,
+                      end: notificationCount == 0 ? 12.w : 0.w,
+                      child: BuildWithSocketStream(
+                        onValueChanged: (value) => notificationCount = value,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
             Padding(

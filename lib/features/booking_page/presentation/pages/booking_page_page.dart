@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:glass/glass.dart';
+import 'package:hosta_provider/core/resource/color_manager.dart';
 import '../../../../config/app/app_preferences.dart';
 import '../../../../config/theme/app_theme.dart';
 import '../../../../core/constants/font_constants.dart';
@@ -130,12 +131,13 @@ class _BookingPagePageState extends State<BookingPagePage>
                 labelStyle: Theme.of(context).textTheme.labelLarge?.copyWith(
                   fontFamily: FontConstants.fontFamily(context.locale),
                   fontSize: 14.sp,
-                  color: Theme.of(context).colorScheme.background,
+                  color: ColorManager.backgroundColor,
                 ),
                 unselectedLabelStyle: Theme.of(context).textTheme.labelLarge
                     ?.copyWith(
                       fontFamily: FontConstants.fontFamily(context.locale),
                       fontSize: 14.sp,
+                      color: ColorManager.backgroundColor,
                     ),
 
                 controller: tabController,
@@ -165,11 +167,11 @@ class _BookingPagePageState extends State<BookingPagePage>
                           ),
                         ).asGlass(
                           frosted: true,
-                          blurX: 8,
-                          blurY: 8,
+                          blurX: 18,
+                          blurY: 18,
                           tintColor: Theme.of(
                             context,
-                          ).colorScheme.primaryContainer.withValues(alpha: 0.9),
+                          ).colorScheme.primary.withValues(alpha: 0.9),
                           clipBorderRadius: BorderRadius.circular(12.r),
                           border: Theme.of(context).defaultBorderSide,
                         ),
@@ -186,11 +188,11 @@ class _BookingPagePageState extends State<BookingPagePage>
                     ),
                   ).asGlass(
                     frosted: true,
-                    blurX: 8,
-                    blurY: 8,
+                    blurX: 18,
+                    blurY: 18,
                     tintColor: Theme.of(
                       context,
-                    ).colorScheme.primaryContainer.withValues(alpha: 0.9),
+                    ).colorScheme.primary.withValues(alpha: 0.9),
                     clipBorderRadius: BorderRadius.circular(12.r),
                     border: Theme.of(context).defaultBorderSide,
                   ),
@@ -205,11 +207,11 @@ class _BookingPagePageState extends State<BookingPagePage>
                     ),
                   ).asGlass(
                     frosted: true,
-                    blurX: 8,
-                    blurY: 8,
+                    blurX: 18,
+                    blurY: 18,
                     tintColor: Theme.of(
                       context,
-                    ).colorScheme.primaryContainer.withValues(alpha: 0.9),
+                    ).colorScheme.primary.withValues(alpha: 0.9),
                     clipBorderRadius: BorderRadius.circular(12.r),
                     border: Theme.of(context).defaultBorderSide,
                   ),
@@ -224,11 +226,11 @@ class _BookingPagePageState extends State<BookingPagePage>
                     ),
                   ).asGlass(
                     frosted: true,
-                    blurX: 8,
-                    blurY: 8,
+                    blurX: 18,
+                    blurY: 18,
                     tintColor: Theme.of(
                       context,
-                    ).colorScheme.primaryContainer.withValues(alpha: 0.9),
+                    ).colorScheme.primary.withValues(alpha: 0.9),
                     clipBorderRadius: BorderRadius.circular(12.r),
                     border: Theme.of(context).defaultBorderSide,
                   ),
@@ -243,11 +245,11 @@ class _BookingPagePageState extends State<BookingPagePage>
                     ),
                   ).asGlass(
                     frosted: true,
-                    blurX: 8,
-                    blurY: 8,
+                    blurX: 18,
+                    blurY: 18,
                     tintColor: Theme.of(
                       context,
-                    ).colorScheme.primaryContainer.withValues(alpha: 0.9),
+                    ).colorScheme.primary.withValues(alpha: 0.9),
                     clipBorderRadius: BorderRadius.circular(12.r),
                     border: Theme.of(context).defaultBorderSide,
                   ),
@@ -262,11 +264,11 @@ class _BookingPagePageState extends State<BookingPagePage>
                     ),
                   ).asGlass(
                     frosted: true,
-                    blurX: 8,
-                    blurY: 8,
+                    blurX: 18,
+                    blurY: 18,
                     tintColor: Theme.of(
                       context,
-                    ).colorScheme.primaryContainer.withValues(alpha: 0.9),
+                    ).colorScheme.primary.withValues(alpha: 0.9),
                     clipBorderRadius: BorderRadius.circular(12.r),
                     border: Theme.of(context).defaultBorderSide,
                   ),

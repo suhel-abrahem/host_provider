@@ -56,7 +56,9 @@
     "youDeniedLocationPermissionForever": "يبدو أنك رفضت صلاحية الموقع بشكل دائم. يجب أن تذهب إلى إعدادات الجهاز وتوافق عليها!",
     "add": "إضافة",
     "price": "السعر",
-    "noThingToShow": "لا يوجد شيء للعرض"
+    "noThingToShow": "لا يوجد شيء للعرض",
+    "pageNotFound": "الصفحة غير موجودة",
+    "unexpectedErrorOccurred": "حدث خطأ غير متوقع"
   },
   "theme": {
     "choose": "اختر سمة",
@@ -279,5 +281,24 @@
     "new": "جديد",
     "today": "اليوم",
     "earlier": "سابقاً"
+  },
+  "settingsPage": {
+    "title": "صفحة الإعدادات",
+    "label": "الإعدادات",
+    "language": "اللغة",
+    "theme": "السمة",
+    "logout": "تسجيل الخروج",
+    "areYouSureYouWantToLogout": "هل أنت متأكد من أنك تريد تسجيل الخروج؟",
+    "yesLogout": "نعم، تسجيل الخروج",
+    "noCancel": "لا، إلغاء",
+    "selectLanguage": "اختر اللغة",
+    "selectTheme": "اختر السمة",
+    "allowNotifications": "السماح بالإشعارات",
+    "notifications": "الإشعارات",
+    "itsSemsYouHaveProblemsWithNotificationToken": "يبدو أن لديك مشاكل في رمز الإشعارات",
+    "fixIt": "إصلاحها",
+    "allowLocationServices": "السماح بخدمات الموقع",
+    "location": "الموقع",
+    "allowAppAccessYourLocation": "السماح للتطبيق بالوصول إلى موقعك"
   }
 }

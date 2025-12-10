@@ -105,7 +105,9 @@ class Helper {
         return LocaleKeys.bookingPage_inProgress.tr();
       case 'completed':
         return LocaleKeys.bookingPage_completed.tr();
-      case 'canceled':
+      case 'cancelled':
+        return LocaleKeys.bookingPage_canceled.tr();
+      case "rejected":
         return LocaleKeys.bookingPage_canceled.tr();
       default:
         return null;

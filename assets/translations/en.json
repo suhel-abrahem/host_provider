@@ -56,7 +56,9 @@
     "youDeniedLocationPermissionForever": "It seems you denied location permission permanently. You must go to device settings and allow it!",
     "add": "Add",
     "price": "Price",
-    "noThingToShow": "Nothing to show"
+    "noThingToShow": "Nothing to show",
+    "pageNotFound": "Page not found",
+    "unexpectedErrorOccurred": "An unexpected error occurred"
   },
   "theme": {
     "choose": "Choose theme",
@@ -279,5 +281,24 @@
     "new": "New",
     "today": "Today",
     "earlier": "Earlier"
+  },
+  "settingsPage": {
+    "title": "Settings page",
+    "label": "Settings",
+    "language": "Language",
+    "theme": "Theme",
+    "logout": "Logout",
+    "areYouSureYouWantToLogout": "Are you sure you want to logout?",
+    "yesLogout": "Yes, logout",
+    "noCancel": "No, cancel",
+    "selectLanguage": "Select language",
+    "selectTheme": "Select theme",
+    "allowNotifications": "Allow notifications",
+    "notifications": "Notifications",
+    "itsSemsYouHaveProblemsWithNotificationToken": "It seems you have problems with the notification token",
+    "fixIt": "Fix it",
+    "allowLocationServices": "Allow location services",
+    "location": "Location",
+    "allowAppAccessYourLocation": "Allow app to access your location"
   }
 }

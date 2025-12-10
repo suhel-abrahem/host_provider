@@ -13,6 +13,7 @@ import 'package:hosta_provider/features/login_page/domain/entities/login_state_e
 import 'package:hosta_provider/generated/locale_keys.g.dart';
 import '../../../config/app/app_preferences.dart';
 import '../../../config/route/routes_manager.dart';
+import '../../../main.dart';
 import '../../constants/font_constants.dart';
 import '../../data_state/data_state.dart';
 import '../../dependencies_injection.dart';
@@ -170,7 +171,12 @@ class _MainPageState extends State<MainPage> {
                     TextButton(
                       onPressed: () {
                         context.pop();
-                        context.push(RoutesPath.bookingPage);
+                        context.pushNamed(
+                          RoutesName.serviceInfoPage,
+                          pathParameters: {
+                            "serviceId": message.data["booking_id"].toString(),
+                          },
+                        );
                       },
                       child: Text(
                         LocaleKeys.notificationPage_show.tr(),
@@ -190,16 +196,46 @@ class _MainPageState extends State<MainPage> {
           );
         }
       });
+    } catch (e) {
+      if (mounted) {
+        showMessage(
+          message: LocaleKeys.common_someThingWentWrongWhileShowNotification
+              .tr(),
+          context: context,
+        );
+      }
+    }
+    try {
       FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
         if (mounted) {
-          context.pushNamed(RoutesName.bookingPage);
+          context.pushNamed(
+            RoutesName.serviceInfoPage,
+            pathParameters: {
+              "serviceId": message.data["booking_id"].toString(),
+            },
+          );
         }
       });
+    } catch (e) {
+      if (mounted) {
+        showMessage(
+          message: LocaleKeys.common_someThingWentWrongWhileShowNotification
+              .tr(),
+          context: context,
+        );
+      }
+    }
+    try {
       RemoteMessage? initialMessage = await FirebaseMessaging.instance
           .getInitialMessage();
       if (initialMessage != null) {
         if (mounted) {
-          context.pushNamed(RoutesName.bookingPage);
+          context.pushNamed(
+            RoutesName.serviceInfoPage,
+            pathParameters: {
+              "serviceId": initialMessage.data["booking_id"].toString(),
+            },
+          );
         }
       }
     } catch (e) {
@@ -280,6 +316,7 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
+    print("is connected: ${socket?.connected}");
     return Stack(
       children: [
         AnimatedPositioned(

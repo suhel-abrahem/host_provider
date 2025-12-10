@@ -23,6 +23,10 @@ class FirebaseMessagingService {
     }
   }
 
+  Future<void> deleteDeviceToken() async {
+    await _firebaseMessaging.deleteToken();
+  }
+
   Future<DataState<void>?> setDeviceToken() async {
     DataState<void>? result;
     try {
@@ -95,5 +99,24 @@ class FirebaseMessagingService {
     } else if (settings.authorizationStatus ==
         AuthorizationStatus.provisional) {
     } else {}
+  }
+
+  Future<void> RemoveNotificationPermission() async {
+    await _firebaseMessaging.requestPermission(
+      alert: false,
+      announcement: false,
+      badge: false,
+      carPlay: false,
+      criticalAlert: false,
+      provisional: false,
+      sound: false,
+    );
+  }
+
+  Future<bool> hasPermission() async {
+    NotificationSettings settings = await _firebaseMessaging
+        .getNotificationSettings();
+    return settings.authorizationStatus == AuthorizationStatus.authorized ||
+        settings.authorizationStatus == AuthorizationStatus.provisional;
   }
 }

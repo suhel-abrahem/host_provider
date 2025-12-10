@@ -72,7 +72,9 @@ class CodegenLoader extends AssetLoader{
     "youDeniedLocationPermissionForever": "يبدو أنك رفضت صلاحية الموقع بشكل دائم. يجب أن تذهب إلى إعدادات الجهاز وتوافق عليها!",
     "add": "إضافة",
     "price": "السعر",
-    "noThingToShow": "لا يوجد شيء للعرض"
+    "noThingToShow": "لا يوجد شيء للعرض",
+    "pageNotFound": "الصفحة غير موجودة",
+    "unexpectedErrorOccurred": "حدث خطأ غير متوقع"
   },
   "theme": {
     "choose": "اختر سمة",
@@ -295,6 +297,25 @@ class CodegenLoader extends AssetLoader{
     "new": "جديد",
     "today": "اليوم",
     "earlier": "سابقاً"
+  },
+  "settingsPage": {
+    "title": "صفحة الإعدادات",
+    "label": "الإعدادات",
+    "language": "اللغة",
+    "theme": "السمة",
+    "logout": "تسجيل الخروج",
+    "areYouSureYouWantToLogout": "هل أنت متأكد من أنك تريد تسجيل الخروج؟",
+    "yesLogout": "نعم، تسجيل الخروج",
+    "noCancel": "لا، إلغاء",
+    "selectLanguage": "اختر اللغة",
+    "selectTheme": "اختر السمة",
+    "allowNotifications": "السماح بالإشعارات",
+    "notifications": "الإشعارات",
+    "itsSemsYouHaveProblemsWithNotificationToken": "يبدو أن لديك مشاكل في رمز الإشعارات",
+    "fixIt": "إصلاحها",
+    "allowLocationServices": "السماح بخدمات الموقع",
+    "location": "الموقع",
+    "allowAppAccessYourLocation": "السماح للتطبيق بالوصول إلى موقعك"
   }
 };
 static const Map<String,dynamic> _en = {
@@ -355,7 +376,9 @@ static const Map<String,dynamic> _en = {
     "youDeniedLocationPermissionForever": "It seems you denied location permission permanently. You must go to device settings and allow it!",
     "add": "Add",
     "price": "Price",
-    "noThingToShow": "Nothing to show"
+    "noThingToShow": "Nothing to show",
+    "pageNotFound": "Page not found",
+    "unexpectedErrorOccurred": "An unexpected error occurred"
   },
   "theme": {
     "choose": "Choose theme",
@@ -578,6 +601,25 @@ static const Map<String,dynamic> _en = {
     "new": "New",
     "today": "Today",
     "earlier": "Earlier"
+  },
+  "settingsPage": {
+    "title": "Settings page",
+    "label": "Settings",
+    "language": "Language",
+    "theme": "Theme",
+    "logout": "Logout",
+    "areYouSureYouWantToLogout": "Are you sure you want to logout?",
+    "yesLogout": "Yes, logout",
+    "noCancel": "No, cancel",
+    "selectLanguage": "Select language",
+    "selectTheme": "Select theme",
+    "allowNotifications": "Allow notifications",
+    "notifications": "Notifications",
+    "itsSemsYouHaveProblemsWithNotificationToken": "It seems you have problems with the notification token",
+    "fixIt": "Fix it",
+    "allowLocationServices": "Allow location services",
+    "location": "Location",
+    "allowAppAccessYourLocation": "Allow app to access your location"
   }
 };
 static const Map<String,dynamic> _fa = {
@@ -638,7 +680,9 @@ static const Map<String,dynamic> _fa = {
     "youDeniedLocationPermissionForever": "بەهەمان شێوە، پەیوەندیدانی مافەکانی شوێنەکان بەرز ناکەیت! پێویستە بڕۆیت بۆ ڕووکاری ئەندازە و پەسند بکەیت!",
     "add": "زیادکردن",
     "price": "قیمت",
-    "noThingToShow": "هیچ شتێک بۆ نیشاندانی نیە"
+    "noThingToShow": "هیچ شتێک بۆ نیشاندانی نیە",
+    "pageNotFound": "پەیجەکە نەدۆزرایەوە",
+    "unexpectedErrorOccurred": "هەڵەیەکی نەهەڵبژاردوو ڕوودەدات"
   },
   "theme": {
     "choose": "مۆدێلێک هەڵبژێرە",
@@ -861,6 +905,25 @@ static const Map<String,dynamic> _fa = {
     "new": "نوێ",
     "today": "ئەمڕۆ",
     "earlier": "پێشتر"
+  },
+  "settingsPage": {
+    "title": "شاشەی ڕێکخستنەکان",
+    "label": "ڕێکخستنەکان",
+    "language": "زمان",
+    "theme": "ڕووکەش",
+    "logout": "چوونە دەرەوە",
+    "areYouSureYouWantToLogout": "دڵنیایت کە دەتەوێت چوونە دەرەوە؟",
+    "yesLogout": "بەڵێ، چوونە دەرەوە",
+    "noCancel": "نەخێر، هەڵوەشاندنەوە",
+    "selectLanguage": "زمان هەڵبژێرە",
+    "selectTheme": "ڕووکەش هەڵبژێرە",
+    "allowNotifications": "ڕێگە بدە بۆ ئاگاداریەکان",
+    "notifications": "ئاگاداریەکان",
+    "itsSemsYouHaveProblemsWithNotificationToken": "وەکەی ئاگاداری هەڵەیە",
+    "fixIt": "چاککردنەوە",
+    "allowLocationServices": "ڕێگە بدە بۆ خزمەتگوزارییەکانی شوێن",
+    "location": "شوێن",
+    "allowAppAccessYourLocation": "ڕێگە بدە بۆ ئەپلیکەیشن بۆ گەیشتن بە شوێنەکەت"
   }
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": _ar, "en": _en, "fa": _fa};

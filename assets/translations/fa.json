@@ -56,7 +56,9 @@
     "youDeniedLocationPermissionForever": "بەهەمان شێوە، پەیوەندیدانی مافەکانی شوێنەکان بەرز ناکەیت! پێویستە بڕۆیت بۆ ڕووکاری ئەندازە و پەسند بکەیت!",
     "add": "زیادکردن",
     "price": "قیمت",
-    "noThingToShow": "هیچ شتێک بۆ نیشاندانی نیە"
+    "noThingToShow": "هیچ شتێک بۆ نیشاندانی نیە",
+    "pageNotFound": "پەیجەکە نەدۆزرایەوە",
+    "unexpectedErrorOccurred": "هەڵەیەکی نەهەڵبژاردوو ڕوودەدات"
   },
   "theme": {
     "choose": "مۆدێلێک هەڵبژێرە",
@@ -279,5 +281,24 @@
     "new": "نوێ",
     "today": "ئەمڕۆ",
     "earlier": "پێشتر"
+  },
+  "settingsPage": {
+    "title": "شاشەی ڕێکخستنەکان",
+    "label": "ڕێکخستنەکان",
+    "language": "زمان",
+    "theme": "ڕووکەش",
+    "logout": "چوونە دەرەوە",
+    "areYouSureYouWantToLogout": "دڵنیایت کە دەتەوێت چوونە دەرەوە؟",
+    "yesLogout": "بەڵێ، چوونە دەرەوە",
+    "noCancel": "نەخێر، هەڵوەشاندنەوە",
+    "selectLanguage": "زمان هەڵبژێرە",
+    "selectTheme": "ڕووکەش هەڵبژێرە",
+    "allowNotifications": "ڕێگە بدە بۆ ئاگاداریەکان",
+    "notifications": "ئاگاداریەکان",
+    "itsSemsYouHaveProblemsWithNotificationToken": "وەکەی ئاگاداری هەڵەیە",
+    "fixIt": "چاککردنەوە",
+    "allowLocationServices": "ڕێگە بدە بۆ خزمەتگوزارییەکانی شوێن",
+    "location": "شوێن",
+    "allowAppAccessYourLocation": "ڕێگە بدە بۆ ئەپلیکەیشن بۆ گەیشتن بە شوێنەکەت"
   }
 }

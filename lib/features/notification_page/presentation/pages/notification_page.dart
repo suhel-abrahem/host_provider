@@ -191,7 +191,16 @@ class _NotificationPageState extends State<NotificationPage> {
                                             ),
                                           ),
                                         );
-                                        context.push(RoutesPath.bookingPage);
+                                        context.pushNamed(
+                                          RoutesName.serviceInfoPage,
+                                          pathParameters: {
+                                            "serviceId":
+                                                newNotifs[index]
+                                                    ?.data?["booking_id"]
+                                                    .toString() ??
+                                                "",
+                                          },
+                                        );
                                       },
                                     ),
                               ),
@@ -244,7 +253,16 @@ class _NotificationPageState extends State<NotificationPage> {
                                             ),
                                           ),
                                         );
-                                        context.push(RoutesPath.bookingPage);
+                                        context.pushNamed(
+                                          RoutesName.serviceInfoPage,
+                                          pathParameters: {
+                                            "serviceId":
+                                                todayNotifs[index]
+                                                    ?.data?["booking_id"]
+                                                    .toString() ??
+                                                "",
+                                          },
+                                        );
                                       },
                                     ),
                               ),
@@ -298,7 +316,14 @@ class _NotificationPageState extends State<NotificationPage> {
                                           ),
                                         );
                                         context.pushNamed(
-                                          RoutesPath.bookingPage,
+                                          RoutesName.serviceInfoPage,
+                                          pathParameters: {
+                                            "serviceId":
+                                                earlierNotifs[index]
+                                                    ?.data?["booking_id"]
+                                                    .toString() ??
+                                                "",
+                                          },
                                         );
                                       },
                                     ),

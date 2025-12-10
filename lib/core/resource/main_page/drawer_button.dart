@@ -32,7 +32,11 @@ class DrawerButtonWidget extends StatelessWidget {
             onPressed: onPressed,
             style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
               elevation: WidgetStateProperty.fromMap({WidgetState.pressed: 10}),
-              shadowColor: WidgetStatePropertyAll(Colors.transparent),
+              shadowColor: WidgetStatePropertyAll(
+                (selected ?? false)
+                    ? Theme.of(context).focusColor.withValues(alpha: 1)
+                    : Colors.transparent,
+              ),
               backgroundColor: WidgetStatePropertyAll(Colors.transparent),
               foregroundColor: WidgetStatePropertyAll(
                 Theme.of(context).textTheme.labelLarge?.color,
@@ -50,13 +54,7 @@ class DrawerButtonWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Icon(
-                    icon,
-                    color: (selected ?? false)
-                        ? Theme.of(context).focusColor
-                        : ColorManager.backgroundColor,
-                    size: 24.sp,
-                  ),
+                  Icon(icon, color: ColorManager.backgroundColor, size: 24.sp),
                   Padding(
                     padding: EdgeInsetsDirectional.only(start: 24.sp),
                     child: Text(
@@ -64,9 +62,7 @@ class DrawerButtonWidget extends StatelessWidget {
                       style: Theme.of(context).textTheme.labelLarge?.copyWith(
                         fontFamily: FontConstants.fontFamily(context.locale),
                         fontWeight: FontWeight.w500,
-                        color: (selected ?? false)
-                            ? Theme.of(context).focusColor
-                            : ColorManager.backgroundColor,
+                        color: ColorManager.backgroundColor,
                       ),
                     ),
                   ),

@@ -5,6 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:glass/glass.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hosta_provider/core/resource/firebase_common_services/firebase_messageing_service.dart';
+import 'package:permission_handler/permission_handler.dart' as AppSettings;
 import '../../../../core/resource/color_manager.dart';
 import '../../../../core/resource/main_page/main_page.dart';
 import '../bloc/get_profile_bloc.dart';
@@ -33,10 +35,21 @@ class SettingPagePage extends StatefulWidget {
 class _SettingPagePageState extends State<SettingPagePage> {
   String? selectedLanguage;
   bool? isDarkTheme = false;
+  bool? isNotificationEnabled = false;
+  Future<void> checkNotificationPermission() async {
+    bool hasPermission = await getItInstance<FirebaseMessagingService>()
+        .hasPermission();
+    setState(() {
+      isNotificationEnabled = hasPermission;
+    });
+  }
+
   @override
   void initState() {
     isDarkTheme = getItInstance<AppPreferences>().getAppTheme();
+
     super.initState();
+    checkNotificationPermission();
   }
 
   @override
@@ -78,7 +91,7 @@ class _SettingPagePageState extends State<SettingPagePage> {
                           ),
                       labelPadding: EdgeInsetsDirectional.only(end: 12.w),
                       labelPosition: Position.beside,
-                      backgroundColor: Theme.of(context).colorScheme.surface,
+                      backgroundColor: Theme.of(context).primaryColor,
                       items: LanguageConstant.supportedLanguagesNames,
                       onChange: (newLanguage) {
                         if (newLanguage != null) {
@@ -175,6 +188,69 @@ class _SettingPagePageState extends State<SettingPagePage> {
                                 );
                               },
                             );
+                          },
+                        ),
+                      ),
+                    ],
+                  ),
+                ).asGlass(
+                  frosted: true,
+                  blurX: 38,
+                  blurY: 38,
+                  tintColor: Theme.of(
+                    context,
+                  ).colorScheme.primary.withValues(alpha: 0.9),
+                  clipBorderRadius: BorderRadius.circular(12.r),
+                  border: Theme.of(context).defaultBorderSide,
+                ),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
+            child:
+                Container(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: 20.w,
+                    vertical: 20.h,
+                  ),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Text(
+                        LocaleKeys.settingsPage_allowNotifications.tr(),
+                        style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                          fontFamily: FontConstants.fontFamily(context.locale),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 12.w),
+                        child: Switch.adaptive(
+                          value: isNotificationEnabled ?? false,
+                          inactiveTrackColor: ColorManager.backgroundColor,
+                          activeTrackColor: Theme.of(context).primaryColor,
+                          activeThumbColor: Theme.of(
+                            context,
+                          ).scaffoldBackgroundColor,
+                          thumbIcon: WidgetStateProperty.resolveWith((states) {
+                            if (states.contains(WidgetState.selected)) {
+                              return Icon(
+                                Icons.notifications_active,
+                                size: 16.sp,
+                                color: Theme.of(
+                                  context,
+                                ).textTheme.labelLarge?.color,
+                              );
+                            } else {
+                              return Icon(
+                                Icons.notifications_off,
+                                size: 16.sp,
+                                color: ColorManager.darkBackground,
+                              );
+                            }
+                          }),
+                          onChanged: (bool value) async {
+                            await AppSettings.openAppSettings();
+                            checkNotificationPermission();
                           },
                         ),
                       ),

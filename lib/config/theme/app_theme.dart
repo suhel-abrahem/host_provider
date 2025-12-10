@@ -512,6 +512,7 @@ ThemeData darkTheme() {
 
 ThemeData lightTheme() {
   return ThemeData(
+    disabledColor: ColorManager.disabledColor,
     colorScheme: const ColorScheme(
       primaryContainer: ColorManager.primaryContainerColor,
       brightness: Brightness.light,
@@ -524,6 +525,7 @@ ThemeData lightTheme() {
       shadow: ColorManager.lightShadowColor,
       surface: ColorManager.backgroundColor,
       onSurface: ColorManager.primaryContainerColor,
+
       // surface: ColorManager.surfaceColor,
       // onSurface: ColorManager.disabledColor
     ),
