@@ -129,6 +129,7 @@
     "acceptBooking": "پەسەندکردنی ئاراستەکردن",
     "rejectBooking": "رەتکردنەوەی ئاراستەکردن",
     "startService": "دەست پێکردنی خزمەت",
+    "cancelBooking": "هەڵوەشاندنەوەی ئاراستەکردن",
     "areYouSureYouWantToRejectThisBooking": "دڵنیای کە دەتەوێت ئەم ئاراستەکردنە رەت بکەیتەوە؟",
     "yesReject": "بەڵێ، رەت بکە",
     "noCancel": "نەخێر، هەڵبوەشێنەوە",

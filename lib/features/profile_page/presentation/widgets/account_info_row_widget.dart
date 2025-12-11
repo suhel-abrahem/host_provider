@@ -83,6 +83,14 @@ class _AccountInfoRowWidgetState extends State<AccountInfoRowWidget> {
               backgroundColor: WidgetStatePropertyAll(Colors.transparent),
               shadowColor: WidgetStatePropertyAll(Colors.transparent),
               padding: WidgetStatePropertyAll(EdgeInsets.zero),
+              shape: WidgetStatePropertyAll(
+                RoundedRectangleBorder(
+                  side: Theme.of(context).defaultBorderSide.copyWith(
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
+                  borderRadius: BorderRadius.circular(12.r),
+                ),
+              ),
             ),
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 4.h),
@@ -91,7 +99,7 @@ class _AccountInfoRowWidgetState extends State<AccountInfoRowWidget> {
                 child: Icon(
                   Icons.edit_outlined,
                   size: 20.sp,
-                  color: Theme.of(context).colorScheme.onPrimaryContainer,
+                  color: Theme.of(context).textTheme.labelLarge?.color,
                 ),
               ),
             ),

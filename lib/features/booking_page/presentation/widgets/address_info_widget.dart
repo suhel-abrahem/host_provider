@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:glass/glass.dart';
 import '../../../../config/theme/app_theme.dart';
 import '../../../../core/constants/font_constants.dart';
+import '../../../../core/resource/color_manager.dart';
 import '../../../../core/resource/common_entity/addresses_entity.dart';
 import '../../../../generated/locale_keys.g.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -90,6 +91,7 @@ class AddressInfoWidget extends StatelessWidget {
                     LocaleKeys.serviceDetailsPage_showOnMap.tr(),
                     style: Theme.of(context).textTheme.labelLarge?.copyWith(
                       fontFamily: FontConstants.fontFamily(context.locale),
+                      color: ColorManager.backgroundColor,
                     ),
                   ),
                 ),

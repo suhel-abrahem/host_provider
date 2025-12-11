@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:glass/glass.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hosta_provider/core/resource/color_manager.dart';
 import '../../../../config/theme/app_theme.dart';
 import '../../../../core/constants/font_constants.dart';
 import '../../../../core/dependencies_injection.dart';
@@ -82,6 +83,7 @@ class _BookingServiceWidgetState extends State<BookingServiceWidget> {
                               fontFamily: FontConstants.fontFamily(
                                 context.locale,
                               ),
+                              color: ColorManager.backgroundColor,
                             ),
                       ),
                     ),
@@ -287,20 +289,27 @@ class _BookingServiceWidgetState extends State<BookingServiceWidget> {
                                                   vertical: 12.h,
                                                 );
                                               }
-                                              return EdgeInsets.zero;
+                                              return EdgeInsets.symmetric(
+                                                horizontal: 16.w,
+                                              );
                                             }),
                                       ),
-                                  child: Text(
-                                    LocaleKeys.bookingPage_acceptBooking.tr(),
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .labelLarge
-                                        ?.copyWith(
-                                          fontFamily: FontConstants.fontFamily(
-                                            context.locale,
+                                  child: FittedBox(
+                                    fit: BoxFit.scaleDown,
+                                    child: Text(
+                                      LocaleKeys.bookingPage_acceptBooking.tr(),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .labelLarge
+                                          ?.copyWith(
+                                            fontFamily:
+                                                FontConstants.fontFamily(
+                                                  context.locale,
+                                                ),
+                                            color: ColorManager.backgroundColor,
+                                            fontSize: 16.sp,
                                           ),
-                                          fontSize: 16.sp,
-                                        ),
+                                    ),
                                   ),
                                 ),
                               ),
@@ -340,20 +349,27 @@ class _BookingServiceWidgetState extends State<BookingServiceWidget> {
                                                   vertical: 12.h,
                                                 );
                                               }
-                                              return EdgeInsets.zero;
+                                              return EdgeInsets.symmetric(
+                                                horizontal: 16.w,
+                                              );
                                             }),
                                       ),
-                                  child: Text(
-                                    LocaleKeys.bookingPage_rejectBooking.tr(),
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .labelLarge
-                                        ?.copyWith(
-                                          fontFamily: FontConstants.fontFamily(
-                                            context.locale,
+                                  child: FittedBox(
+                                    fit: BoxFit.scaleDown,
+                                    child: Text(
+                                      LocaleKeys.bookingPage_rejectBooking.tr(),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .labelLarge
+                                          ?.copyWith(
+                                            fontFamily:
+                                                FontConstants.fontFamily(
+                                                  context.locale,
+                                                ),
+                                            color: ColorManager.backgroundColor,
+                                            fontSize: 16.sp,
                                           ),
-                                          fontSize: 16.sp,
-                                        ),
+                                    ),
                                   ),
                                 ),
                               ),
@@ -394,7 +410,9 @@ class _BookingServiceWidgetState extends State<BookingServiceWidget> {
                                                   vertical: 12.h,
                                                 );
                                               }
-                                              return EdgeInsets.zero;
+                                              return EdgeInsets.symmetric(
+                                                horizontal: 16.w,
+                                              );
                                             }),
                                         backgroundColor: WidgetStatePropertyAll(
                                           Helper.getColorByStatus(
@@ -404,18 +422,24 @@ class _BookingServiceWidgetState extends State<BookingServiceWidget> {
                                         ),
                                       ),
                                   child: Center(
-                                    child: Text(
-                                      LocaleKeys.bookingPage_startService.tr(),
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .labelLarge
-                                          ?.copyWith(
-                                            fontFamily:
-                                                FontConstants.fontFamily(
-                                                  context.locale,
-                                                ),
-                                            fontSize: 16.sp,
-                                          ),
+                                    child: FittedBox(
+                                      fit: BoxFit.scaleDown,
+                                      child: Text(
+                                        LocaleKeys.bookingPage_startService
+                                            .tr(),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .labelLarge
+                                            ?.copyWith(
+                                              fontFamily:
+                                                  FontConstants.fontFamily(
+                                                    context.locale,
+                                                  ),
+                                              color:
+                                                  ColorManager.backgroundColor,
+                                              fontSize: 16.sp,
+                                            ),
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -436,7 +460,7 @@ class _BookingServiceWidgetState extends State<BookingServiceWidget> {
                                                   return AlertDialog(
                                                     title: Text(
                                                       LocaleKeys
-                                                          .bookingPage_rejectBooking
+                                                          .bookingPage_cancelBooking
                                                           .tr(),
                                                       style: Theme.of(context)
                                                           .textTheme
@@ -469,6 +493,8 @@ class _BookingServiceWidgetState extends State<BookingServiceWidget> {
                                                                         context
                                                                             .locale,
                                                                       ),
+                                                                  color: ColorManager
+                                                                      .backgroundColor,
                                                                 ),
                                                           ),
                                                           SizedBox(
@@ -579,7 +605,9 @@ class _BookingServiceWidgetState extends State<BookingServiceWidget> {
                                                       vertical: 12.h,
                                                     );
                                                   }
-                                                  return EdgeInsets.zero;
+                                                  return EdgeInsets.symmetric(
+                                                    horizontal: 16.w,
+                                                  );
                                                 }),
                                             backgroundColor:
                                                 WidgetStatePropertyAll(
@@ -590,19 +618,24 @@ class _BookingServiceWidgetState extends State<BookingServiceWidget> {
                                                 ),
                                           ),
                                       child: Center(
-                                        child: Text(
-                                          LocaleKeys.bookingPage_rejectBooking
-                                              .tr(),
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .labelLarge
-                                              ?.copyWith(
-                                                fontFamily:
-                                                    FontConstants.fontFamily(
-                                                      context.locale,
-                                                    ),
-                                                fontSize: 16.sp,
-                                              ),
+                                        child: FittedBox(
+                                          fit: BoxFit.scaleDown,
+                                          child: Text(
+                                            LocaleKeys.bookingPage_cancelBooking
+                                                .tr(),
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .labelLarge
+                                                ?.copyWith(
+                                                  fontFamily:
+                                                      FontConstants.fontFamily(
+                                                        context.locale,
+                                                      ),
+                                                  color: ColorManager
+                                                      .backgroundColor,
+                                                  fontSize: 16.sp,
+                                                ),
+                                          ),
                                         ),
                                       ),
                                     );
@@ -645,18 +678,26 @@ class _BookingServiceWidgetState extends State<BookingServiceWidget> {
                                           vertical: 12.h,
                                         );
                                       }
-                                      return EdgeInsets.zero;
+                                      return EdgeInsets.symmetric(
+                                        horizontal: 16.w,
+                                      );
                                     }),
                                   ),
                               child: Center(
-                                child: Text(
-                                  LocaleKeys.bookingPage_finishService.tr(),
-                                  style: Theme.of(context).textTheme.labelLarge
-                                      ?.copyWith(
-                                        fontFamily: FontConstants.fontFamily(
-                                          context.locale,
+                                child: FittedBox(
+                                  fit: BoxFit.scaleDown,
+                                  child: Text(
+                                    LocaleKeys.bookingPage_finishService.tr(),
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .labelLarge
+                                        ?.copyWith(
+                                          fontFamily: FontConstants.fontFamily(
+                                            context.locale,
+                                          ),
+                                          color: ColorManager.backgroundColor,
                                         ),
-                                      ),
+                                  ),
                                 ),
                               ),
                             ),
@@ -677,7 +718,7 @@ class _BookingServiceWidgetState extends State<BookingServiceWidget> {
             blurY: 38,
             tintColor: Theme.of(
               context,
-            ).colorScheme.primaryContainer.withValues(alpha: 0.9),
+            ).colorScheme.primary.withValues(alpha: 0.9),
             clipBorderRadius: BorderRadius.circular(12.r),
             border: Theme.of(context).defaultBorderSide,
           ),

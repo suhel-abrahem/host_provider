@@ -316,7 +316,6 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    print("is connected: ${socket?.connected}");
     return Stack(
       children: [
         AnimatedPositioned(

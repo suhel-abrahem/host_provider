@@ -129,6 +129,7 @@
     "acceptBooking": "قبول الحجز",
     "rejectBooking": "رفض الحجز",
     "startService": "بدء الخدمة",
+    "cancelBooking": "إلغاء الحجز",
     "areYouSureYouWantToRejectThisBooking": "هل أنت متأكد من أنك تريد رفض هذا الحجز؟",
     "yesReject": "نعم، رفض",
     "noCancel": "لا، إلغاء",

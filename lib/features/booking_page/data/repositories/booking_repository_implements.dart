@@ -26,7 +26,7 @@ class BookingRepositoryImpl implements BookingRepository {
     }
     CommonService commonService = CommonService(
       headers: {
-        "Accept-Language": getBookingModel?.acceptLanguage,
+        "Accept-Language": getBookingModel?.acceptLanguage ?? "ar",
         "Authorization": "Bearer ${getBookingModel?.auth}",
         "accept": "application/json",
       },

@@ -7,6 +7,7 @@ import 'package:go_router/go_router.dart';
 import 'package:hosta_provider/core/resource/common_state_widget/page_not_found_state_widget.dart';
 import '../../../../config/theme/app_theme.dart';
 import '../../../../core/dependencies_injection.dart';
+import '../../../../core/resource/color_manager.dart';
 import '../../../../core/resource/common_entity/customer_entity.dart';
 import '../../../../core/resource/common_state_widget/error_state_widget.dart';
 import '../../../../core/resource/common_state_widget/no_data_state_widget.dart';
@@ -42,6 +43,14 @@ class _ServiceInfoPageState extends State<ServiceInfoPage> {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   bool isLoading = false;
   @override
+  void didUpdateWidget(covariant ServiceInfoPage oldWidget) {
+    getBookingModel = getBookingModel?.copyWith(
+      acceptLanguage: Helper.getCountryCode(context),
+    );
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => getItInstance<GetBookingBloc>()
@@ -52,6 +61,9 @@ class _ServiceInfoPageState extends State<ServiceInfoPage> {
         ),
       child: Builder(
         builder: (context) {
+          getBookingModel = getBookingModel?.copyWith(
+            acceptLanguage: Helper.getCountryCode(context),
+          );
           return BlocBuilder<GetBookingBloc, GetBookingState>(
             builder: (context, state) {
               String? title = "Service Info";
@@ -556,24 +568,31 @@ class _ServiceInfoPageState extends State<ServiceInfoPage> {
                                                               vertical: 12.h,
                                                             );
                                                           }
-                                                          return EdgeInsets
-                                                              .zero;
+                                                          return EdgeInsets.symmetric(
+                                                            horizontal: 16.w,
+                                                          );
                                                         }),
                                                       ),
-                                                  child: Text(
-                                                    LocaleKeys
-                                                        .bookingPage_acceptBooking
-                                                        .tr(),
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .labelLarge
-                                                        ?.copyWith(
-                                                          fontFamily:
-                                                              FontConstants.fontFamily(
-                                                                context.locale,
-                                                              ),
-                                                          fontSize: 16.sp,
-                                                        ),
+                                                  child: FittedBox(
+                                                    fit: BoxFit.scaleDown,
+                                                    child: Text(
+                                                      LocaleKeys
+                                                          .bookingPage_acceptBooking
+                                                          .tr(),
+                                                      style: Theme.of(context)
+                                                          .textTheme
+                                                          .labelLarge
+                                                          ?.copyWith(
+                                                            fontFamily:
+                                                                FontConstants.fontFamily(
+                                                                  context
+                                                                      .locale,
+                                                                ),
+                                                            color: ColorManager
+                                                                .backgroundColor,
+                                                            fontSize: 16.sp,
+                                                          ),
+                                                    ),
                                                   ),
                                                 ),
                                               ),
@@ -619,24 +638,31 @@ class _ServiceInfoPageState extends State<ServiceInfoPage> {
                                                               vertical: 12.h,
                                                             );
                                                           }
-                                                          return EdgeInsets
-                                                              .zero;
+                                                          return EdgeInsets.symmetric(
+                                                            horizontal: 16.w,
+                                                          );
                                                         }),
                                                       ),
-                                                  child: Text(
-                                                    LocaleKeys
-                                                        .bookingPage_rejectBooking
-                                                        .tr(),
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .labelLarge
-                                                        ?.copyWith(
-                                                          fontFamily:
-                                                              FontConstants.fontFamily(
-                                                                context.locale,
-                                                              ),
-                                                          fontSize: 16.sp,
-                                                        ),
+                                                  child: FittedBox(
+                                                    fit: BoxFit.scaleDown,
+                                                    child: Text(
+                                                      LocaleKeys
+                                                          .bookingPage_rejectBooking
+                                                          .tr(),
+                                                      style: Theme.of(context)
+                                                          .textTheme
+                                                          .labelLarge
+                                                          ?.copyWith(
+                                                            fontFamily:
+                                                                FontConstants.fontFamily(
+                                                                  context
+                                                                      .locale,
+                                                                ),
+                                                            color: ColorManager
+                                                                .backgroundColor,
+                                                            fontSize: 16.sp,
+                                                          ),
+                                                    ),
                                                   ),
                                                 ),
                                               ),
@@ -681,8 +707,9 @@ class _ServiceInfoPageState extends State<ServiceInfoPage> {
                                                               vertical: 12.h,
                                                             );
                                                           }
-                                                          return EdgeInsets
-                                                              .zero;
+                                                          return EdgeInsets.symmetric(
+                                                            horizontal: 16.w,
+                                                          );
                                                         }),
                                                         backgroundColor:
                                                             WidgetStatePropertyAll(
@@ -693,20 +720,25 @@ class _ServiceInfoPageState extends State<ServiceInfoPage> {
                                                             ),
                                                       ),
                                                   child: Center(
-                                                    child: Text(
-                                                      LocaleKeys
-                                                          .bookingPage_startService
-                                                          .tr(),
-                                                      style: Theme.of(context)
-                                                          .textTheme
-                                                          .labelLarge
-                                                          ?.copyWith(
-                                                            fontFamily:
-                                                                FontConstants.fontFamily(
-                                                                  context
-                                                                      .locale,
-                                                                ),
-                                                          ),
+                                                    child: FittedBox(
+                                                      fit: BoxFit.scaleDown,
+                                                      child: Text(
+                                                        LocaleKeys
+                                                            .bookingPage_startService
+                                                            .tr(),
+                                                        style: Theme.of(context)
+                                                            .textTheme
+                                                            .labelLarge
+                                                            ?.copyWith(
+                                                              fontFamily:
+                                                                  FontConstants.fontFamily(
+                                                                    context
+                                                                        .locale,
+                                                                  ),
+                                                              color: ColorManager
+                                                                  .backgroundColor,
+                                                            ),
+                                                      ),
                                                     ),
                                                   ),
                                                 ),
@@ -728,7 +760,7 @@ class _ServiceInfoPageState extends State<ServiceInfoPage> {
                                                                   return AlertDialog(
                                                                     title: Text(
                                                                       LocaleKeys
-                                                                          .bookingPage_rejectBooking
+                                                                          .bookingPage_cancelBooking
                                                                           .tr(),
                                                                       style: Theme.of(context)
                                                                           .textTheme
@@ -861,8 +893,10 @@ class _ServiceInfoPageState extends State<ServiceInfoPage> {
                                                                       12.h,
                                                                 );
                                                               }
-                                                              return EdgeInsets
-                                                                  .zero;
+                                                              return EdgeInsets.symmetric(
+                                                                horizontal:
+                                                                    16.w,
+                                                              );
                                                             }),
                                                             backgroundColor:
                                                                 WidgetStatePropertyAll(
@@ -873,21 +907,27 @@ class _ServiceInfoPageState extends State<ServiceInfoPage> {
                                                                 ),
                                                           ),
                                                       child: Center(
-                                                        child: Text(
-                                                          LocaleKeys
-                                                              .bookingPage_rejectBooking
-                                                              .tr(),
-                                                          style: Theme.of(context)
-                                                              .textTheme
-                                                              .labelLarge
-                                                              ?.copyWith(
-                                                                fontFamily:
-                                                                    FontConstants.fontFamily(
-                                                                      context
-                                                                          .locale,
-                                                                    ),
-                                                                fontSize: 16.sp,
-                                                              ),
+                                                        child: FittedBox(
+                                                          fit: BoxFit.scaleDown,
+                                                          child: Text(
+                                                            LocaleKeys
+                                                                .bookingPage_cancelBooking
+                                                                .tr(),
+                                                            style: Theme.of(context)
+                                                                .textTheme
+                                                                .labelLarge
+                                                                ?.copyWith(
+                                                                  fontFamily:
+                                                                      FontConstants.fontFamily(
+                                                                        context
+                                                                            .locale,
+                                                                      ),
+                                                                  color: ColorManager
+                                                                      .backgroundColor,
+                                                                  fontSize:
+                                                                      16.sp,
+                                                                ),
+                                                          ),
                                                         ),
                                                       ),
                                                     );
@@ -931,37 +971,41 @@ class _ServiceInfoPageState extends State<ServiceInfoPage> {
                                                               context,
                                                             )!,
                                                           ),
-                                                      padding:
-                                                          WidgetStateProperty.resolveWith((
-                                                            callback,
-                                                          ) {
-                                                            if (callback
-                                                                .contains(
-                                                                  WidgetState
-                                                                      .pressed,
-                                                                )) {
-                                                              return EdgeInsets.symmetric(
-                                                                vertical: 12.h,
-                                                              );
-                                                            }
-                                                            return EdgeInsets
-                                                                .zero;
-                                                          }),
+                                                      padding: WidgetStateProperty.resolveWith((
+                                                        callback,
+                                                      ) {
+                                                        if (callback.contains(
+                                                          WidgetState.pressed,
+                                                        )) {
+                                                          return EdgeInsets.symmetric(
+                                                            vertical: 12.h,
+                                                          );
+                                                        }
+                                                        return EdgeInsets.symmetric(
+                                                          horizontal: 16.w,
+                                                        );
+                                                      }),
                                                     ),
                                                 child: Center(
-                                                  child: Text(
-                                                    LocaleKeys
-                                                        .bookingPage_finishService
-                                                        .tr(),
-                                                    style: Theme.of(context)
-                                                        .textTheme
-                                                        .labelLarge
-                                                        ?.copyWith(
-                                                          fontFamily:
-                                                              FontConstants.fontFamily(
-                                                                context.locale,
-                                                              ),
-                                                        ),
+                                                  child: FittedBox(
+                                                    fit: BoxFit.scaleDown,
+                                                    child: Text(
+                                                      LocaleKeys
+                                                          .bookingPage_finishService
+                                                          .tr(),
+                                                      style: Theme.of(context)
+                                                          .textTheme
+                                                          .labelLarge
+                                                          ?.copyWith(
+                                                            fontFamily:
+                                                                FontConstants.fontFamily(
+                                                                  context
+                                                                      .locale,
+                                                                ),
+                                                            color: ColorManager
+                                                                .backgroundColor,
+                                                          ),
+                                                    ),
                                                   ),
                                                 ),
                                               ),

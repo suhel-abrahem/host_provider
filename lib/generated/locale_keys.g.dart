@@ -126,6 +126,7 @@ abstract class  LocaleKeys {
   static const bookingPage_acceptBooking = 'bookingPage.acceptBooking';
   static const bookingPage_rejectBooking = 'bookingPage.rejectBooking';
   static const bookingPage_startService = 'bookingPage.startService';
+  static const bookingPage_cancelBooking = 'bookingPage.cancelBooking';
   static const bookingPage_areYouSureYouWantToRejectThisBooking = 'bookingPage.areYouSureYouWantToRejectThisBooking';
   static const bookingPage_yesReject = 'bookingPage.yesReject';
   static const bookingPage_noCancel = 'bookingPage.noCancel';

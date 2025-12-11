@@ -129,6 +129,7 @@
     "acceptBooking": "Accept booking",
     "rejectBooking": "Reject booking",
     "startService": "Start service",
+    "cancelBooking": "Cancel booking",
     "areYouSureYouWantToRejectThisBooking": "Are you sure you want to reject this booking?",
     "yesReject": "Yes, reject",
     "noCancel": "No, cancel",

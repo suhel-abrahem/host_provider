@@ -473,6 +473,7 @@ class _AccountPagePageState extends State<AccountPagePage> {
                                     Padding(
                                       padding: EdgeInsets.only(top: 12.h),
                                       child: AccountInfoRowWidget(
+                                        key: ValueKey(isNameChanged),
                                         onEdit: () {
                                           setState(() {
                                             isNameChanged = true;
@@ -509,6 +510,7 @@ class _AccountPagePageState extends State<AccountPagePage> {
                                     //dob
                                     Padding(
                                       padding: EdgeInsets.only(top: 12.h),
+                                      key: ValueKey(isDobChanged),
                                       child: AccountInfoRowWidget(
                                         key: ValueKey(birthDate),
                                         onChanged: (value) {
@@ -581,6 +583,7 @@ class _AccountPagePageState extends State<AccountPagePage> {
                                     Padding(
                                       padding: EdgeInsets.only(top: 12.h),
                                       child: AccountInfoRowWidget(
+                                        key: ValueKey(isEmailChanged),
                                         onEdit: () {
                                           setState(() {
                                             isEmailChanged = true;
@@ -650,6 +653,7 @@ class _AccountPagePageState extends State<AccountPagePage> {
                                         vertical: 12.h,
                                       ),
                                       child: Row(
+                                        key: ValueKey(isCityChanged),
                                         mainAxisAlignment:
                                             MainAxisAlignment.start,
                                         children: [
@@ -975,6 +979,24 @@ class _AccountPagePageState extends State<AccountPagePage> {
                                                         WidgetStatePropertyAll(
                                                           EdgeInsets.zero,
                                                         ),
+                                                    shape: WidgetStatePropertyAll(
+                                                      RoundedRectangleBorder(
+                                                        side: Theme.of(context)
+                                                            .defaultBorderSide
+                                                            .copyWith(
+                                                              color:
+                                                                  Theme.of(
+                                                                        context,
+                                                                      )
+                                                                      .colorScheme
+                                                                      .primary,
+                                                            ),
+                                                        borderRadius:
+                                                            BorderRadius.circular(
+                                                              12.r,
+                                                            ),
+                                                      ),
+                                                    ),
                                                   ),
                                               child: Container(
                                                 padding: EdgeInsets.symmetric(
@@ -987,8 +1009,9 @@ class _AccountPagePageState extends State<AccountPagePage> {
                                                     Icons.edit_outlined,
                                                     size: 20.sp,
                                                     color: Theme.of(context)
-                                                        .colorScheme
-                                                        .onPrimaryContainer,
+                                                        .textTheme
+                                                        .labelLarge
+                                                        ?.color,
                                                   ),
                                                 ),
                                               ),
@@ -998,31 +1021,36 @@ class _AccountPagePageState extends State<AccountPagePage> {
                                       ),
                                     ),
                                     //address
-                                    AccountInfoRowWidget(
-                                      onEdit: () {
-                                        setState(() {
-                                          isAddressChanged = true;
-                                        });
-                                      },
-                                      onChanged: (value) {
-                                        setProfileModel = setProfileModel
-                                            .copyWith(address: value);
-                                        profileModel = profileModel.copyWith(
-                                          profile: setProfileModel,
-                                        );
-                                      },
-                                      validator: (value) => null,
-                                      profileEntity:
-                                          (profileModel.profile?.address
-                                                  ?.toString()
-                                                  .trim()
-                                                  .isNotEmpty ??
-                                              false)
-                                          ? profileModel.profile?.address
-                                          : data?.addresses?.first?["address"],
-                                      iconData: Icons.home_outlined,
-                                      label: LocaleKeys.profilePage_address
-                                          .tr(),
+                                    SizedBox(
+                                      child: AccountInfoRowWidget(
+                                        key: ValueKey(setProfileModel.address),
+                                        onEdit: () {
+                                          setState(() {
+                                            isAddressChanged = true;
+                                          });
+                                        },
+                                        onChanged: (value) {
+                                          setProfileModel = setProfileModel
+                                              .copyWith(address: value);
+                                          profileModel = profileModel.copyWith(
+                                            profile: setProfileModel,
+                                          );
+                                        },
+                                        validator: (value) => null,
+                                        profileEntity:
+                                            (profileModel.profile?.address
+                                                    ?.toString()
+                                                    .trim()
+                                                    .isNotEmpty ??
+                                                false)
+                                            ? profileModel.profile?.address
+                                            : data
+                                                  ?.addresses
+                                                  ?.first?["address"],
+                                        iconData: Icons.home_outlined,
+                                        label: LocaleKeys.profilePage_address
+                                            .tr(),
+                                      ),
                                     ),
                                     if (isAddressChanged ||
                                         isCityChanged ||
@@ -1259,7 +1287,7 @@ class _AccountPagePageState extends State<AccountPagePage> {
                       blurY: 38,
                       tintColor: Theme.of(
                         context,
-                      ).colorScheme.primaryContainer.withValues(alpha: 0.9),
+                      ).colorScheme.primary.withValues(alpha: 0.9),
                       clipBorderRadius: BorderRadius.circular(12.r),
                       border: Theme.of(context).defaultBorderSide,
                     ),
@@ -1396,6 +1424,19 @@ class _AccountPagePageState extends State<AccountPagePage> {
                                             padding: WidgetStatePropertyAll(
                                               EdgeInsets.zero,
                                             ),
+                                            shape: WidgetStatePropertyAll(
+                                              RoundedRectangleBorder(
+                                                side: Theme.of(context)
+                                                    .defaultBorderSide
+                                                    .copyWith(
+                                                      color: Theme.of(
+                                                        context,
+                                                      ).colorScheme.primary,
+                                                    ),
+                                                borderRadius:
+                                                    BorderRadius.circular(12.r),
+                                              ),
+                                            ),
                                           ),
                                       child: Container(
                                         padding: EdgeInsets.symmetric(
@@ -1409,7 +1450,7 @@ class _AccountPagePageState extends State<AccountPagePage> {
                                             size: 20.sp,
                                             color: Theme.of(
                                               context,
-                                            ).colorScheme.onPrimaryContainer,
+                                            ).textTheme.labelLarge?.color,
                                           ),
                                         ),
                                       ),
@@ -1798,6 +1839,19 @@ class _AccountPagePageState extends State<AccountPagePage> {
                                           padding: WidgetStatePropertyAll(
                                             EdgeInsets.zero,
                                           ),
+                                          shape: WidgetStatePropertyAll(
+                                            RoundedRectangleBorder(
+                                              side: Theme.of(context)
+                                                  .defaultBorderSide
+                                                  .copyWith(
+                                                    color: Theme.of(
+                                                      context,
+                                                    ).colorScheme.primary,
+                                                  ),
+                                              borderRadius:
+                                                  BorderRadius.circular(12.r),
+                                            ),
+                                          ),
                                         ),
                                     child: Container(
                                       padding: EdgeInsets.symmetric(
@@ -1811,7 +1865,7 @@ class _AccountPagePageState extends State<AccountPagePage> {
                                           size: 20.sp,
                                           color: Theme.of(
                                             context,
-                                          ).colorScheme.onPrimaryContainer,
+                                          ).textTheme.labelLarge?.color,
                                         ),
                                       ),
                                     ),

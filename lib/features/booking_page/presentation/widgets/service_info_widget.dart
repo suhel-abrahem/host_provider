@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:glass/glass.dart';
 import '../../../../config/theme/app_theme.dart';
+import '../../../../core/resource/color_manager.dart';
 import '../../domain/entities/booking_entity.dart';
 
 import '../../../../core/constants/font_constants.dart';
@@ -43,6 +44,7 @@ class ServiceInfoWidget extends StatelessWidget {
                   Helper.getStatusName(bookingEntity?.status ?? "") ?? "",
                   style: Theme.of(context).textTheme.labelMedium?.copyWith(
                     fontFamily: FontConstants.fontFamily(context.locale),
+                    color: ColorManager.backgroundColor,
                   ),
                 ),
               ),
