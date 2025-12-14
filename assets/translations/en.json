@@ -58,7 +58,10 @@
     "price": "Price",
     "noThingToShow": "Nothing to show",
     "pageNotFound": "Page not found",
-    "unexpectedErrorOccurred": "An unexpected error occurred"
+    "unexpectedErrorOccurred": "An unexpected error occurred",
+    "yourSessionHasExpiredPleaseLoginAgain": "Your session has expired. Please login again.",
+    "ok": "OK",
+    "tryAgain": "Try again"
   },
   "theme": {
     "choose": "Choose theme",

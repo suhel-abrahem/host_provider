@@ -20,6 +20,7 @@ class LottiesName {
   static const String noInternet = "no_Internet.json";
   static const String error = "error.json";
   static const String noData = "no_data.json";
+  static const String unAuthorized = "no_connection.json";
 }
 
 class ImagesName {

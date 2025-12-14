@@ -61,6 +61,9 @@ abstract class  LocaleKeys {
   static const common_noThingToShow = 'common.noThingToShow';
   static const common_pageNotFound = 'common.pageNotFound';
   static const common_unexpectedErrorOccurred = 'common.unexpectedErrorOccurred';
+  static const common_yourSessionHasExpiredPleaseLoginAgain = 'common.yourSessionHasExpiredPleaseLoginAgain';
+  static const common_ok = 'common.ok';
+  static const common_tryAgain = 'common.tryAgain';
   static const common = 'common';
   static const theme_choose = 'theme.choose';
   static const theme_system = 'theme.system';

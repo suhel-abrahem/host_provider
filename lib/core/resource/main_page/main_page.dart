@@ -9,6 +9,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hosta_provider/core/enums/login_state_enum.dart';
 import 'package:hosta_provider/core/resource/color_manager.dart';
+import 'package:hosta_provider/core/resource/main_page/set_fcm_token_for_current_user.dart';
 import 'package:hosta_provider/features/login_page/domain/entities/login_state_entity.dart';
 import 'package:hosta_provider/generated/locale_keys.g.dart';
 import '../../../config/app/app_preferences.dart';
@@ -59,6 +60,16 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   double yOffset = 0;
   bool animationDone = false;
+  void checkSessionValidity() {
+    final loginState = getItInstance<AppPreferences>().getUserInfo();
+    if (loginState == null ||
+        loginState.loginStateEnum != LoginStateEnum.logined) {
+      if (mounted) {
+        context.go(RoutesPath.loginPage);
+      }
+    }
+  }
+
   Future<void> getMessage() async {
     try {
       FirebaseMessaging.onMessage.listen((RemoteMessage message) {
@@ -249,44 +260,30 @@ class _MainPageState extends State<MainPage> {
     }
   }
 
-  Future<void> setFcmTokenForCurrentUser() async {
-    final LoginStateEntity? loginState = getItInstance<AppPreferences>()
-        .getUserInfo();
-
-    if (loginState != null && !(loginState.isFcmTokenSet ?? false)) {
-      await getItInstance<FirebaseMessagingService>().setDeviceToken().then((
-        value,
-      ) async {
-        if (value is DataSuccess) {
-          await getItInstance<AppPreferences>().setUserInfo(
-            loginStateEntity: loginState.copyWith(isFcmTokenSet: true),
-          );
-        } else {
-          await getItInstance<AppPreferences>().setUserInfo(
-            loginStateEntity: loginState.copyWith(isFcmTokenSet: false),
-          );
-          if (mounted) {
-            showMessage(
-              message: LocaleKeys
-                  .common_notificationTokenErrorPleaseFixItOnSettings
-                  .tr(),
-              context: context,
-              haveButton: true,
-              buttonTitle: LocaleKeys.profilePage_settings.tr(),
-              onPressed: () {
-                context.pushNamed(RoutesName.settingsPage);
-              },
-            );
-          }
+  Future<void> onTokenRefresh() async {
+    FirebaseMessaging.instance.onTokenRefresh.listen((newToken) async {
+      final LoginStateEntity? loginState = getItInstance<AppPreferences>()
+          .getUserInfo();
+      if (newToken != loginState?.fcmToken) {
+        await getItInstance<AppPreferences>().setUserInfo(
+          loginStateEntity: loginState?.copyWith(
+            fcmToken: newToken,
+            isFcmTokenSet: false,
+          ),
+        );
+        if (mounted) {
+          await setFcmTokenForCurrentUser(context: context);
         }
-      });
-    }
+      }
+    });
   }
 
   @override
   void initState() {
+    checkSessionValidity();
     super.initState();
-    setFcmTokenForCurrentUser();
+    setFcmTokenForCurrentUser(context: context);
+    onTokenRefresh();
     getMessage();
   }
 
@@ -382,6 +379,7 @@ class _MainPageState extends State<MainPage> {
                       ),
                       child: Center(
                         child: AppBar(
+                          shadowColor: Theme.of(context).shadowColor,
                           backgroundColor: Theme.of(context).primaryColor,
                           centerTitle: true,
                           title: Text(

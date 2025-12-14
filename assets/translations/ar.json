@@ -58,7 +58,10 @@
     "price": "السعر",
     "noThingToShow": "لا يوجد شيء للعرض",
     "pageNotFound": "الصفحة غير موجودة",
-    "unexpectedErrorOccurred": "حدث خطأ غير متوقع"
+    "unexpectedErrorOccurred": "حدث خطأ غير متوقع",
+    "yourSessionHasExpiredPleaseLoginAgain": "انتهت صلاحية جلستك. يرجى تسجيل الدخول مرة أخرى.",
+    "ok": "موافق",
+    "tryAgain": "حاول مرة أخرى"
   },
   "theme": {
     "choose": "اختر سمة",

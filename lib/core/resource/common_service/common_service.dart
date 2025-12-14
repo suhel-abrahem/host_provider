@@ -35,6 +35,8 @@ class CommonService {
       );
       if (response.statusCode == 204) {
         return DataSuccess(data: null);
+      } else if ((response.statusCode ?? 0) == 401) {
+        return UnauthenticatedDataState(error: response.data?["message"]);
       }
 
       return DataSuccess(data: response);

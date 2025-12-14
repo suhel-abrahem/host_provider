@@ -27,8 +27,8 @@ class FirebaseMessagingService {
     await _firebaseMessaging.deleteToken();
   }
 
-  Future<DataState<void>?> setDeviceToken() async {
-    DataState<void>? result;
+  Future<DataState<String?>?> setDeviceToken() async {
+    DataState<String?>? result;
     try {
       final LoginStateEntity? loginState = getItInstance<AppPreferences>()
           .getUserInfo();
@@ -65,7 +65,7 @@ class FirebaseMessagingService {
               )
               .then((onValue) {
                 if (onValue is DataSuccess) {
-                  result = DataSuccess(data: null);
+                  result = DataSuccess(data: value.data);
                   return result;
                 } else {
                   result = DataFailed(error: onValue.error);

@@ -74,7 +74,10 @@ class CodegenLoader extends AssetLoader{
     "price": "السعر",
     "noThingToShow": "لا يوجد شيء للعرض",
     "pageNotFound": "الصفحة غير موجودة",
-    "unexpectedErrorOccurred": "حدث خطأ غير متوقع"
+    "unexpectedErrorOccurred": "حدث خطأ غير متوقع",
+    "yourSessionHasExpiredPleaseLoginAgain": "انتهت صلاحية جلستك. يرجى تسجيل الدخول مرة أخرى.",
+    "ok": "موافق",
+    "tryAgain": "حاول مرة أخرى"
   },
   "theme": {
     "choose": "اختر سمة",
@@ -379,7 +382,10 @@ static const Map<String,dynamic> _en = {
     "price": "Price",
     "noThingToShow": "Nothing to show",
     "pageNotFound": "Page not found",
-    "unexpectedErrorOccurred": "An unexpected error occurred"
+    "unexpectedErrorOccurred": "An unexpected error occurred",
+    "yourSessionHasExpiredPleaseLoginAgain": "Your session has expired. Please login again.",
+    "ok": "OK",
+    "tryAgain": "Try again"
   },
   "theme": {
     "choose": "Choose theme",
@@ -684,7 +690,10 @@ static const Map<String,dynamic> _fa = {
     "price": "قیمت",
     "noThingToShow": "هیچ شتێک بۆ نیشاندانی نیە",
     "pageNotFound": "پەیجەکە نەدۆزرایەوە",
-    "unexpectedErrorOccurred": "هەڵەیەکی نەهەڵبژاردوو ڕوودەدات"
+    "unexpectedErrorOccurred": "هەڵەیەکی نەهەڵبژاردوو ڕوودەدات",
+    "yourSessionHasExpiredPleaseLoginAgain": "کاتی نیشتەجێبوونت کۆتایی هات. تکایە دووبارە بچۆ ژوورەوە.",
+    "ok": "باشە",
+    "tryAgain": "دووبارە هەوڵبدەرەوە"
   },
   "theme": {
     "choose": "مۆدێلێک هەڵبژێرە",

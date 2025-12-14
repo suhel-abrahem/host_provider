@@ -54,7 +54,7 @@ class _BookingPageTapPageState extends State<BookingPageTapPage> {
           getItInstance<GetBookingBloc>()
             ..add(GetBookingEvent.getBookings(getBookingModel: widget.model)),
       child: BlocListener<GetBookingBloc, GetBookingState>(
-        listener: (context, state) {
+        listener: (context, state) async {
           if (state is GetBookingStateError) {
             showMessage(
               context: context,
@@ -65,7 +65,7 @@ class _BookingPageTapPageState extends State<BookingPageTapPage> {
               GetBookingEventGetBookings(getBookingModel: widget.model),
             );
           } else if (state is GetBookingStateUnauthenticated) {
-            getItInstance<AppPreferences>().setUserInfo(
+            await getItInstance<AppPreferences>().setUserInfo(
               loginStateEntity: LoginStateEntity(),
             );
           }

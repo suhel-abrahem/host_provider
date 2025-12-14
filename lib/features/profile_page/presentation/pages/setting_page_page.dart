@@ -1,6 +1,7 @@
 import 'package:animated_theme_switcher/animated_theme_switcher.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:glass/glass.dart';
@@ -9,6 +10,7 @@ import 'package:hosta_provider/core/resource/firebase_common_services/firebase_m
 import 'package:permission_handler/permission_handler.dart' as AppSettings;
 import '../../../../core/resource/color_manager.dart';
 import '../../../../core/resource/main_page/main_page.dart';
+import '../../../../core/resource/main_page/set_fcm_token_for_current_user.dart';
 import '../bloc/get_profile_bloc.dart';
 import '../../../../generated/locale_keys.g.dart';
 
@@ -36,6 +38,7 @@ class _SettingPagePageState extends State<SettingPagePage> {
   String? selectedLanguage;
   bool? isDarkTheme = false;
   bool? isNotificationEnabled = false;
+  LoginStateEntity? loginState;
   Future<void> checkNotificationPermission() async {
     bool hasPermission = await getItInstance<FirebaseMessagingService>()
         .hasPermission();
@@ -47,7 +50,7 @@ class _SettingPagePageState extends State<SettingPagePage> {
   @override
   void initState() {
     isDarkTheme = getItInstance<AppPreferences>().getAppTheme();
-
+    loginState = getItInstance<AppPreferences>().getUserInfo();
     super.initState();
     checkNotificationPermission();
   }
@@ -266,6 +269,71 @@ class _SettingPagePageState extends State<SettingPagePage> {
                   clipBorderRadius: BorderRadius.circular(12.r),
                   border: Theme.of(context).defaultBorderSide,
                 ),
+          ),
+          AnimatedOpacity(
+            opacity: (loginState?.isFcmTokenSet ?? false) ? 0 : 1,
+            duration: 300.ms,
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              child:
+                  Container(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 16.w,
+                      vertical: 16.h,
+                    ),
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        SizedBox(
+                          width: 240.w,
+                          child: FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: Text(
+                              LocaleKeys
+                                  .settingsPage_itsSemsYouHaveProblemsWithNotificationToken
+                                  .tr(),
+                              style: Theme.of(context).textTheme.labelMedium
+                                  ?.copyWith(
+                                    fontFamily: FontConstants.fontFamily(
+                                      context.locale,
+                                    ),
+                                  ),
+                            ),
+                          ),
+                        ),
+                        Spacer(),
+                        TextButton(
+                          onPressed: () async {
+                            await setFcmTokenForCurrentUser(
+                              context: context,
+                              showSuccessMessage: true,
+                            );
+                          },
+                          child: Text(
+                            LocaleKeys.settingsPage_fixIt.tr(),
+                            style: Theme.of(context).textTheme.labelMedium
+                                ?.copyWith(
+                                  fontFamily: FontConstants.fontFamily(
+                                    context.locale,
+                                  ),
+                                  color: Theme.of(context).primaryColor,
+                                ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ).asGlass(
+                    frosted: true,
+                    blurX: 38,
+                    blurY: 38,
+                    tintColor: Theme.of(
+                      context,
+                    ).colorScheme.primary.withValues(alpha: 0.9),
+                    clipBorderRadius: BorderRadius.circular(12.r),
+                    border: Theme.of(context).defaultBorderSide,
+                  ),
+            ),
           ),
           Spacer(),
           Padding(

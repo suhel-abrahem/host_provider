@@ -15,6 +15,7 @@ abstract class LoginStateEntity with _$LoginStateEntity {
     @Default("") String? created_at,
     @Default(LoginStateEnum.unlogined) LoginStateEnum? loginStateEnum,
     @Default(false) bool? isFcmTokenSet,
+    @Default("") String? fcmToken,
   }) = _LoginStateEntity;
 
   factory LoginStateEntity.fromJson(Map<String, dynamic> json) =>

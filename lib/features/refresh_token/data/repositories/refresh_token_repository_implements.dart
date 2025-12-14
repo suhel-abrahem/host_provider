@@ -64,6 +64,7 @@ class RefreshTokenRepositoryImplements implements RefreshTokenRepository {
             )
             .then((onValue) {
               if (onValue is DataSuccess) {
+                print('Refresh token successful: ${onValue.data?.data}');
                 response = DataSuccess(
                   data: TokenEntity.fromJson(onValue.data?.data),
                 );
@@ -79,8 +80,13 @@ class RefreshTokenRepositoryImplements implements RefreshTokenRepository {
                   loginStateEntity: userInfo,
                 );
                 return response;
+              } else if (onValue is UnauthenticatedDataState) {
+                response = UnauthenticatedDataState(error: onValue.error);
+
+                return response;
               } else {
-                return onValue;
+                response = DataFailed(error: (onValue as DataFailed).error);
+                return response;
               }
             });
         return response;

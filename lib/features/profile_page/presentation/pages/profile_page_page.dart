@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:glass/glass.dart';
 import 'package:go_router/go_router.dart';
 import 'package:hosta_provider/core/resource/color_manager.dart';
+import 'package:hosta_provider/core/resource/common_state_widget/unAuth_state_widget.dart';
 import '../../../../config/theme/app_theme.dart';
 import '../../../../core/resource/common_entity/addresses_entity.dart';
 import '../../../../core/resource/common_state_widget/no_data_state_widget.dart';
@@ -81,7 +82,12 @@ class _ProfilePagePageState extends State<ProfilePagePage> {
                   error: (error) => Center(child: ErrorStateWidget()),
                   noInternet: () => Center(child: NoInternetStateWidget()),
                   noData: () => Center(child: NodataStateWidget()),
-                  unauthorized: () => Center(child: ErrorStateWidget()),
+                  unauthorized: () => Center(
+                    child: UnauthStateWidget(
+                      lottieHeight: 150.h,
+                      lottieWidth: 150.w,
+                    ),
+                  ),
                   loggedOut: () => SizedBox(),
                   logoutError: (String? message) => SizedBox(),
                   updated: (ProfileEntity? profileEntity) => ErrorStateWidget(),

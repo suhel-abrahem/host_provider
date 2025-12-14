@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:glass/glass.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hosta_provider/core/resource/common_state_widget/unAuth_state_widget.dart';
 import '../../../../config/app/app_preferences.dart';
 import '../../../../config/route/routes_manager.dart';
 import '../../../../config/theme/app_theme.dart';
@@ -141,7 +142,7 @@ class _MyServicesPagePageState extends State<MyServicesPagePage> {
                       ),
                     ),
                   ),
-                  unAuthorized: () => SizedBox(),
+                  unAuthorized: () => UnauthStateWidget(),
                   noData: () => Expanded(
                     child: Center(
                       child: NodataStateWidget(

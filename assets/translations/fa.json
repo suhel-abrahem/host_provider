@@ -58,7 +58,10 @@
     "price": "قیمت",
     "noThingToShow": "هیچ شتێک بۆ نیشاندانی نیە",
     "pageNotFound": "پەیجەکە نەدۆزرایەوە",
-    "unexpectedErrorOccurred": "هەڵەیەکی نەهەڵبژاردوو ڕوودەدات"
+    "unexpectedErrorOccurred": "هەڵەیەکی نەهەڵبژاردوو ڕوودەدات",
+    "yourSessionHasExpiredPleaseLoginAgain": "کاتی نیشتەجێبوونت کۆتایی هات. تکایە دووبارە بچۆ ژوورەوە.",
+    "ok": "باشە",
+    "tryAgain": "دووبارە هەوڵبدەرەوە"
   },
   "theme": {
     "choose": "مۆدێلێک هەڵبژێرە",

@@ -8,6 +8,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:glass/glass.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hosta_provider/core/resource/common_state_widget/unAuth_state_widget.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 import '../../../../config/route/routes_manager.dart';
 import '../../../../config/theme/app_theme.dart';
@@ -213,6 +214,7 @@ class _HomePagePageState extends State<HomePagePage> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(60.h),
         child: AppBar(
+          shadowColor: Theme.of(context).shadowColor,
           bottom: null,
           backgroundColor: Theme.of(context).primaryColor,
           actions: [
@@ -297,7 +299,7 @@ class _HomePagePageState extends State<HomePagePage> {
                 create: (context) => getItInstance<GetProfileBloc>()
                   ..add(GetProfileEvent.getProfile(profileModel: profileModel)),
                 child: BlocListener<GetProfileBloc, GetProfileState>(
-                  listener: (context, state) {
+                  listener: (context, state) async {
                     if (state is GetProfileStateLoading) {
                       setState(() {
                         isProfileDataLoading = true;
@@ -319,13 +321,12 @@ class _HomePagePageState extends State<HomePagePage> {
                         isProfileDataLoading = false;
                       });
                     } else if (state is GetProfileStateUnauthorized) {
-                      getItInstance<AppPreferences>().setUserInfo(
+                      await getItInstance<AppPreferences>().setUserInfo(
                         loginStateEntity: LoginStateEntity(),
                       );
                       setState(() {
                         isProfileDataLoading = false;
                       });
-                      context.pushNamed(RoutesName.loginPage);
                     } else if (state is GetProfileStateLoaded) {
                       setState(() {
                         profileEntity = state.profileEntity;
@@ -757,6 +758,7 @@ class _HomePagePageState extends State<HomePagePage> {
                               ),
                               BlocBuilder<HomePageBloc, HomePageState>(
                                 builder: (context, state) {
+                                  print("Rebuilding Chart Widget: $state");
                                   return state.when(
                                     initial: () => ErrorStateWidget(),
                                     loading: () => Center(
@@ -765,13 +767,12 @@ class _HomePagePageState extends State<HomePagePage> {
                                     loaded: (data) {
                                       totalBookingsSpots = [];
                                       totalRevenueSpots = [];
-                                      homePageEntity?.yearly_stats?.forEach((
-                                        action,
-                                      ) {
+                                      print("HomePageEntity: $data");
+                                      data?.yearly_stats?.forEach((action) {
                                         totalBookingsSpots.add(
                                           FlSpot(
                                             (Helper.monthNumberFromName(
-                                                  action["month_name"],
+                                                  action["month"].toString(),
                                                 )) ??
                                                 0,
                                             action["total_bookings"]
@@ -782,7 +783,7 @@ class _HomePagePageState extends State<HomePagePage> {
                                         totalRevenueSpots.add(
                                           FlSpot(
                                             (Helper.monthNumberFromName(
-                                                  action["month_name"],
+                                                  action["month"].toString(),
                                                 )) ??
                                                 0,
                                             action["total_revenue"]
@@ -791,6 +792,7 @@ class _HomePagePageState extends State<HomePagePage> {
                                           ),
                                         );
                                       });
+
                                       return AnimatedSwitcher(
                                         duration: const Duration(
                                           milliseconds: 300,
@@ -832,7 +834,12 @@ class _HomePagePageState extends State<HomePagePage> {
                                     error: (error) => ErrorStateWidget(),
                                     noData: () => NodataStateWidget(),
                                     noInternet: () => NoInternetStateWidget(),
-                                    unauthenticated: () => ErrorStateWidget(),
+                                    unauthenticated: () => Center(
+                                      child: UnauthStateWidget(
+                                        lottieHeight: 100.h,
+                                        lottieWidth: 100.w,
+                                      ),
+                                    ),
                                   );
                                 },
                               ),
