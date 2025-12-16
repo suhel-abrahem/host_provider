@@ -21,3 +21,33 @@ This project focuses on **scalable architecture**, **real-time communication**, 
 ## 🧠 Architecture
 The application follows **Clean Architecture** principles with a clear separation of concerns:
 
+## 📸 Screenshots
+
+### First Use & Authentication
+| First Use | Login |
+|---------|-------|
+| ![](screenshots/first_use_page.jpg) | ![](screenshots/login_page.jpg) |
+
+### Home & Navigation
+| Home | Drawer |
+|------|--------|
+| ![](screenshots/home_page.jpg) | ![](screenshots/drawer.jpg) |
+
+### Booking Flow
+| Booking | Booking Info |
+|---------|--------------|
+| ![](screenshots/booking_page.jpg) | ![](screenshots/booking_info_page.jpg) |
+
+### Services & Notifications
+| Service | Notifications |
+|---------|---------------|
+| ![](screenshots/service_page.jpg) | ![](screenshots/notification_page.jpg) |
+
+### Account & Profile
+| Account | Profile |
+|---------|---------|
+| ![](screenshots/account_page_1.jpg) | ![](screenshots/profile_page.jpg) |
+
+| Account (More) |
+|---------------|
+| ![](screenshots/account_page_2.jpg) |
