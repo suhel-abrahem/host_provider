@@ -1,16 +1,23 @@
-# hosta_provider
+# 🏠 Hosta Provider App
 
-A new Flutter project.
+**Hosta Provider** is a Flutter-based mobile application designed for service providers to manage bookings, availability, notifications, and customer interactions in real time.
 
-## Getting Started
+This project focuses on **scalable architecture**, **real-time communication**, and **production-ready Flutter practices**.
 
-This project is a starting point for a Flutter application.
+---
 
-A few resources to get you started if this is your first Flutter project:
+## 🚀 Features
+- Provider authentication & onboarding
+- OTP verification flow
+- Booking management system
+- Real-time notifications
+- Availability & working hours management
+- Profile & service management
+- Light & Dark mode support
+- Multi-language support
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+---
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 🧠 Architecture
+The application follows **Clean Architecture** principles with a clear separation of concerns:
+
