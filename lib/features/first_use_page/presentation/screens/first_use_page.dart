@@ -26,6 +26,7 @@ class FirstUsePage extends StatefulWidget {
 class _FirstUsePageState extends State<FirstUsePage> {
   Locale? selectedLocale;
   bool isDarkTheme = true;
+  String? languageName;
   @override
   void didUpdateWidget(covariant FirstUsePage oldWidget) {
     isDarkTheme = Theme.of(context).brightness == Brightness.dark
@@ -91,6 +92,7 @@ class _FirstUsePageState extends State<FirstUsePage> {
                       onPressed: () {
                         setState(() {
                           selectedLocale = LanguageConstant.enLoacle;
+                          languageName = LanguageConstant.enName;
                         });
                       },
                       child: Text(
@@ -115,6 +117,7 @@ class _FirstUsePageState extends State<FirstUsePage> {
                       onPressed: () {
                         setState(() {
                           selectedLocale = LanguageConstant.arLoacle;
+                          languageName = LanguageConstant.arName;
                         });
                       },
                       child: Text(
@@ -139,6 +142,7 @@ class _FirstUsePageState extends State<FirstUsePage> {
                       onPressed: () {
                         setState(() {
                           selectedLocale = LanguageConstant.faLocale;
+                          languageName = LanguageConstant.faName;
                         });
                       },
                       child: Text(
@@ -203,7 +207,7 @@ class _FirstUsePageState extends State<FirstUsePage> {
                       ? () {
                           context.setLocale(selectedLocale!);
                           getItInstance<AppPreferences>().setLanguage(
-                            languageCode: selectedLocale?.languageCode,
+                            languageCode: languageName,
                           );
                           getItInstance<AppPreferences>().setFirstUse(
                             isFirstUse: true,

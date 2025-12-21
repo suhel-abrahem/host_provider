@@ -6,11 +6,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:glass/glass.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hosta_provider/core/resource/firebase_common_services/firebase_messageing_service.dart';
+
 import 'package:permission_handler/permission_handler.dart' as AppSettings;
+import '../../../../core/data_state/data_state.dart';
 import '../../../../core/resource/color_manager.dart';
+import '../../../../core/resource/firebase_common_services/firebase_messageing_service.dart';
 import '../../../../core/resource/main_page/main_page.dart';
-import '../../../../core/resource/main_page/set_fcm_token_for_current_user.dart';
+
 import '../bloc/get_profile_bloc.dart';
 import '../../../../generated/locale_keys.g.dart';
 
@@ -105,10 +107,52 @@ class _SettingPagePageState extends State<SettingPagePage> {
                             Helper.getLocaleByName(newLanguage),
                           );
                           getItInstance<AppPreferences>().setLanguage(
-                            languageCode: Helper.getLocaleByName(
-                              newLanguage,
-                            ).languageCode,
+                            languageCode: newLanguage,
                           );
+                          getItInstance<FirebaseMessagingService>()
+                              .updateDeviceLanguage()
+                              .then((value) async {
+                                if (value is DataSuccess) {
+                                  await getItInstance<AppPreferences>()
+                                      .setUserInfo(
+                                        loginStateEntity: loginState?.copyWith(
+                                          isFcmTokenSet: true,
+                                          fcmToken: value?.data,
+                                        ),
+                                      );
+                                  if (context.mounted) {
+                                    showMessage(
+                                      message: LocaleKeys.common_success.tr(),
+                                      context: context,
+                                    );
+                                  }
+                                } else {
+                                  await getItInstance<AppPreferences>()
+                                      .setUserInfo(
+                                        loginStateEntity: loginState?.copyWith(
+                                          isFcmTokenSet: false,
+                                        ),
+                                      );
+                                  if (context.mounted) {
+                                    showMessage(
+                                      message: LocaleKeys
+                                          .common_notificationTokenErrorPleaseFixItOnSettings
+                                          .tr(),
+                                      context: context,
+                                      haveButton: true,
+                                      buttonWidget: Icon(
+                                        Icons.settings,
+                                        size: 16.w,
+                                        color: Colors.white,
+                                      ),
+                                      onPressed: () {
+                                        context.push(RoutesPath.settingPage);
+                                      },
+                                    );
+                                  }
+                                }
+                              });
+                          ;
                           context.go(RoutesPath.homePage);
                         }
                       },
@@ -287,28 +331,71 @@ class _SettingPagePageState extends State<SettingPagePage> {
                       children: [
                         SizedBox(
                           width: 240.w,
-                          child: FittedBox(
-                            fit: BoxFit.scaleDown,
-                            child: Text(
-                              LocaleKeys
-                                  .settingsPage_itsSemsYouHaveProblemsWithNotificationToken
-                                  .tr(),
-                              style: Theme.of(context).textTheme.labelMedium
-                                  ?.copyWith(
-                                    fontFamily: FontConstants.fontFamily(
-                                      context.locale,
-                                    ),
+                          child: Text(
+                            LocaleKeys
+                                .settingsPage_itsSemsYouHaveProblemsWithNotificationToken
+                                .tr(),
+                            style: Theme.of(context).textTheme.labelMedium
+                                ?.copyWith(
+                                  fontFamily: FontConstants.fontFamily(
+                                    context.locale,
                                   ),
-                            ),
+                                ),
                           ),
                         ),
                         Spacer(),
                         TextButton(
                           onPressed: () async {
-                            await setFcmTokenForCurrentUser(
-                              context: context,
-                              showSuccessMessage: true,
-                            );
+                            final LoginStateEntity? loginState =
+                                getItInstance<AppPreferences>().getUserInfo();
+
+                            if (loginState != null &&
+                                !(loginState.isFcmTokenSet ?? false)) {
+                              await getItInstance<FirebaseMessagingService>()
+                                  .setDeviceToken()
+                                  .then((value) async {
+                                    if (value is DataSuccess) {
+                                      await getItInstance<AppPreferences>()
+                                          .setUserInfo(
+                                            loginStateEntity: loginState
+                                                .copyWith(
+                                                  isFcmTokenSet: true,
+                                                  fcmToken: value?.data,
+                                                ),
+                                          );
+
+                                      showMessage(
+                                        message: LocaleKeys.common_success.tr(),
+                                        context: context,
+                                      );
+                                    } else {
+                                      await getItInstance<AppPreferences>()
+                                          .setUserInfo(
+                                            loginStateEntity: loginState
+                                                .copyWith(isFcmTokenSet: false),
+                                          );
+                                      if (context.mounted) {
+                                        showMessage(
+                                          message: LocaleKeys
+                                              .common_notificationTokenErrorPleaseFixItOnSettings
+                                              .tr(),
+                                          context: context,
+                                          haveButton: false,
+                                          buttonWidget: Icon(
+                                            Icons.settings,
+                                            size: 16.w,
+                                            color: Colors.white,
+                                          ),
+                                          onPressed: () {
+                                            context.push(
+                                              RoutesPath.settingPage,
+                                            );
+                                          },
+                                        );
+                                      }
+                                    }
+                                  });
+                            }
                           },
                           child: Text(
                             LocaleKeys.settingsPage_fixIt.tr(),

@@ -35,8 +35,6 @@ class CommonService {
       );
       if (response.statusCode == 204) {
         return DataSuccess(data: null);
-      } else if ((response.statusCode ?? 0) == 401) {
-        return UnauthenticatedDataState(error: response.data?["message"]);
       }
 
       return DataSuccess(data: response);
@@ -57,6 +55,35 @@ class CommonService {
     final url = ApiConstant.baseUrl + endpoint;
     try {
       final response = await _dio.post(url, data: data, options: options);
+      if ((response.statusCode ?? 0) >= 200 ||
+          (response.statusCode ?? 0) <= 204) {
+        return DataSuccess(data: response);
+      } else {
+        return DataFailed(error: response.statusMessage);
+      }
+    } on DioException catch (e) {
+      if ((e.response?.statusCode ?? 0) == 401) {
+        return UnauthenticatedDataState(error: e.response?.data?["message"]);
+      } else if ((e.response?.statusCode ?? 0) == 422) {
+        return DataError(data: e.response, error: e.response?.statusMessage);
+      } else if ((e.response?.statusCode ?? 0) == 403) {
+        return DataError(data: e.response, error: e.response?.statusMessage);
+      } else if ((e.response?.statusCode ?? 0) == 404) {
+        return NotFoundDataState(error: e.response?.statusMessage);
+      }
+      return DataFailed(error: e.toString());
+    }
+  }
+
+  /// PATCH request
+  Future<DataState<Response?>> patch(
+    String endpoint, {
+    Object? data,
+    Options? options,
+  }) async {
+    final url = ApiConstant.baseUrl + endpoint;
+    try {
+      final response = await _dio.patch(url, data: data, options: options);
       if ((response.statusCode ?? 0) >= 200 ||
           (response.statusCode ?? 0) <= 204) {
         return DataSuccess(data: response);

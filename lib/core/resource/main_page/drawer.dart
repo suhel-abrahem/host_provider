@@ -9,8 +9,10 @@ import 'package:hosta_provider/core/resource/main_page/glew_effect.dart'
     show GlowOverlay;
 import '../../../config/app/app_preferences.dart';
 
+import '../../data_state/data_state.dart';
 import '../../dependencies_injection.dart';
 import '../color_manager.dart';
+import '../firebase_common_services/firebase_messageing_service.dart';
 import '../image_widget.dart';
 import 'drawer_button.dart';
 import '../../../features/profile_page/domain/entities/profile_entity.dart';
@@ -261,10 +263,55 @@ class _CustomDrawerState extends State<CustomDrawer> {
                         });
                         context.setLocale(Helper.getLocaleByName(newLanguage));
                         getItInstance<AppPreferences>().setLanguage(
-                          languageCode: Helper.getLocaleByName(
-                            newLanguage,
-                          ).languageCode,
+                          languageCode: newLanguage,
                         );
+                        final LoginStateEntity? loginState =
+                            getItInstance<AppPreferences>().getUserInfo();
+
+                        getItInstance<FirebaseMessagingService>()
+                            .updateDeviceLanguage()
+                            .then((value) async {
+                              if (value is DataSuccess) {
+                                await getItInstance<AppPreferences>()
+                                    .setUserInfo(
+                                      loginStateEntity: loginState?.copyWith(
+                                        isFcmTokenSet: true,
+                                        fcmToken: value?.data,
+                                      ),
+                                    );
+                                if (context.mounted) {
+                                  showMessage(
+                                    message: LocaleKeys.common_success.tr(),
+                                    context: context,
+                                  );
+                                }
+                              } else {
+                                await getItInstance<AppPreferences>()
+                                    .setUserInfo(
+                                      loginStateEntity: loginState?.copyWith(
+                                        isFcmTokenSet: false,
+                                      ),
+                                    );
+                                if (context.mounted) {
+                                  showMessage(
+                                    message: LocaleKeys
+                                        .common_notificationTokenErrorPleaseFixItOnSettings
+                                        .tr(),
+                                    context: context,
+                                    haveButton: true,
+                                    buttonWidget: Icon(
+                                      Icons.settings,
+                                      size: 16.w,
+                                      color: Colors.white,
+                                    ),
+                                    onPressed: () {
+                                      context.push(RoutesPath.settingPage);
+                                    },
+                                  );
+                                }
+                              }
+                            });
+
                         context.go(RoutesPath.homePage);
                       }
                     },

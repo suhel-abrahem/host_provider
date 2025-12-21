@@ -46,7 +46,11 @@ Future<void> setFcmTokenForCurrentUser({
                 .tr(),
             context: context,
             haveButton: true,
-            buttonTitle: LocaleKeys.profilePage_settings.tr(),
+            buttonWidget: Icon(
+              Icons.settings,
+              size: 20,
+              color: Theme.of(context).colorScheme.onPrimary,
+            ),
             onPressed: () {
               context.pushNamed(RoutesName.settingsPage);
             },

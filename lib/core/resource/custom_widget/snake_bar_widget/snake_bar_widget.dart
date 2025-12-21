@@ -5,7 +5,7 @@ void showMessage({
   required String message,
   required BuildContext context,
   bool haveButton = false,
-  String? buttonTitle,
+  Widget? buttonWidget,
   VoidCallback? onPressed,
   int duration = 3000,
 }) {
@@ -13,22 +13,19 @@ void showMessage({
     behavior: SnackBarBehavior.floating,
     // margin: EdgeInsets.only(bottom: 3.h, left: 3.w, right: 3.w),
     backgroundColor: Theme.of(context).colorScheme.onSurface,
-    padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 5.h),
+    padding: EdgeInsets.symmetric(horizontal: 10.w, vertical: 10.h),
     content: SizedBox(
-      height: 50.h,
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Expanded(
-            child: FittedBox(
-              fit: BoxFit.scaleDown,
-              child: Text(
-                message,
-                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                  color: Theme.of(context).colorScheme.error,
-                ),
-                textAlign: TextAlign.center,
+          SizedBox(
+            width: haveButton ? 250.w : 300.w,
+            child: Text(
+              message,
+              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                color: Theme.of(context).colorScheme.error,
               ),
+              textAlign: TextAlign.center,
             ),
           ),
           if (haveButton)
@@ -36,8 +33,12 @@ void showMessage({
               width: 50.w,
               height: 30.h,
               child: ElevatedButton(
+                style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
+                  padding: WidgetStatePropertyAll(EdgeInsets.zero),
+                  shape: WidgetStatePropertyAll(CircleBorder()),
+                ),
                 onPressed: onPressed,
-                child: Text(buttonTitle ?? ''),
+                child: buttonWidget ?? const SizedBox.shrink(),
               ),
             ),
         ],

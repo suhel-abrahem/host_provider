@@ -17,4 +17,9 @@ class LanguageConstant {
   static const String defaultLanguage = en;
   static const String defaultLanguageName = enName;
   static List<String> supportedLanguagesNames = [arName, enName, faName];
+  static const Map<String, String> languageCodeMap = {
+    arName: ar,
+    enName: en,
+    faName: "ku",
+  };
 }
