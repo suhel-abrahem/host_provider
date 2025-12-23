@@ -128,6 +128,7 @@ class NotificationPageBloc
                     ),
                   )
                   .then((onValue) {
+                    print("Set Notification As Read Value: $onValue");
                     if (onValue is DataSuccess) {
                       emit(NotificationPageState.readNotificationSuccess());
                     } else if (onValue is UnauthenticatedDataState) {

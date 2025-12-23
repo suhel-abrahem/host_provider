@@ -42,6 +42,7 @@ class GetBookingBloc extends Bloc<GetBookingEvent, GetBookingState> {
                   auth: onValue?.data?.access_token,
                 ),
               ).then((getValue) {
+                print("Get Booking Value: $getValue");
                 if (getValue is DataSuccess<List<BookingEntity?>?>) {
                   final bookings = getValue.data;
                   if (bookings != null && bookings.isNotEmpty) {

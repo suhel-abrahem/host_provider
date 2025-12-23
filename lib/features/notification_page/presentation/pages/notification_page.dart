@@ -3,20 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
-import 'package:hosta_provider/config/route/routes_manager.dart';
-import 'package:hosta_provider/core/constants/font_constants.dart';
-import 'package:hosta_provider/core/data_state/data_state.dart';
-import 'package:hosta_provider/core/dependencies_injection.dart';
-import 'package:hosta_provider/core/resource/common_state_widget/error_state_widget.dart';
-import 'package:hosta_provider/core/resource/common_state_widget/no_data_state_widget.dart';
-import 'package:hosta_provider/core/resource/common_state_widget/no_internet_state_widget.dart';
-import 'package:hosta_provider/core/resource/custom_widget/snake_bar_widget/snake_bar_widget.dart';
-import 'package:hosta_provider/core/resource/main_page/main_page.dart';
-import 'package:hosta_provider/core/util/helper/helper.dart';
-import 'package:hosta_provider/features/login_page/domain/entities/login_state_entity.dart';
-import 'package:hosta_provider/features/notification_page/presentation/bloc/notification_page_bloc.dart';
-import 'package:hosta_provider/features/notification_page/presentation/widgets/notification_widget.dart';
-import 'package:hosta_provider/generated/locale_keys.g.dart';
+import '/config/route/routes_manager.dart';
+import '/core/constants/font_constants.dart';
+
+import '/core/dependencies_injection.dart';
+import '/core/resource/common_state_widget/error_state_widget.dart';
+import '/core/resource/common_state_widget/no_data_state_widget.dart';
+import '/core/resource/common_state_widget/no_internet_state_widget.dart';
+import '/core/resource/custom_widget/snake_bar_widget/snake_bar_widget.dart';
+import '/core/resource/main_page/main_page.dart';
+import '/core/util/helper/helper.dart';
+import '/features/login_page/domain/entities/login_state_entity.dart';
+import '/features/notification_page/presentation/bloc/notification_page_bloc.dart';
+import '/features/notification_page/presentation/widgets/notification_widget.dart';
+import '/generated/locale_keys.g.dart';
 
 import '../../../../config/app/app_preferences.dart';
 import '../../../../core/enums/login_state_enum.dart';
@@ -54,6 +54,9 @@ class _NotificationPageState extends State<NotificationPage> {
       title: LocaleKeys.notificationPage_title.tr(),
       body: Builder(
         builder: (context) {
+          notificationModel = notificationModel.copyWith(
+            acceptLanguage: Helper.getCountryCode(context),
+          );
           return BlocProvider<NotificationPageBloc>(
             create: (context) => getItInstance<NotificationPageBloc>()
               ..add(
@@ -179,30 +182,30 @@ class _NotificationPageState extends State<NotificationPage> {
                                 itemCount: newNotifs.length,
                                 shrinkWrap: true,
                                 physics: const NeverScrollableScrollPhysics(),
-                                itemBuilder: (context, index) =>
-                                    NotificationWidget(
-                                      notification: newNotifs[index],
-                                      onTap: () {
-                                        context.read<NotificationPageBloc>().add(
-                                          NotificationPageEvent.readNotification(
-                                            model: notificationModel.copyWith(
-                                              id: newNotifs[index]?.id
-                                                  .toString(),
-                                            ),
+                                itemBuilder: (context, index) => NotificationWidget(
+                                  notification: newNotifs[index],
+                                  onTap: () {
+                                    if (newNotifs[index]?.is_read == false) {
+                                      context.read<NotificationPageBloc>().add(
+                                        NotificationPageEvent.readNotification(
+                                          model: notificationModel.copyWith(
+                                            id: newNotifs[index]?.id.toString(),
                                           ),
-                                        );
-                                        context.pushNamed(
-                                          RoutesName.serviceInfoPage,
-                                          pathParameters: {
-                                            "serviceId":
-                                                newNotifs[index]
-                                                    ?.data?["booking_id"]
-                                                    .toString() ??
-                                                "",
-                                          },
-                                        );
+                                        ),
+                                      );
+                                    }
+                                    context.pushNamed(
+                                      RoutesName.serviceInfoPage,
+                                      pathParameters: {
+                                        "serviceId":
+                                            newNotifs[index]
+                                                ?.data?["booking_id"]
+                                                .toString() ??
+                                            "",
                                       },
-                                    ),
+                                    );
+                                  },
+                                ),
                               ),
                             )
                           else
@@ -241,30 +244,31 @@ class _NotificationPageState extends State<NotificationPage> {
                                 itemCount: todayNotifs.length,
                                 shrinkWrap: true,
                                 physics: const NeverScrollableScrollPhysics(),
-                                itemBuilder: (context, index) =>
-                                    NotificationWidget(
-                                      notification: todayNotifs[index],
-                                      onTap: () {
-                                        context.read<NotificationPageBloc>().add(
-                                          NotificationPageEvent.readNotification(
-                                            model: notificationModel.copyWith(
-                                              id: todayNotifs[index]?.id
-                                                  .toString(),
-                                            ),
+                                itemBuilder: (context, index) => NotificationWidget(
+                                  notification: todayNotifs[index],
+                                  onTap: () {
+                                    if (todayNotifs[index]?.is_read == false) {
+                                      context.read<NotificationPageBloc>().add(
+                                        NotificationPageEvent.readNotification(
+                                          model: notificationModel.copyWith(
+                                            id: todayNotifs[index]?.id
+                                                .toString(),
                                           ),
-                                        );
-                                        context.pushNamed(
-                                          RoutesName.serviceInfoPage,
-                                          pathParameters: {
-                                            "serviceId":
-                                                todayNotifs[index]
-                                                    ?.data?["booking_id"]
-                                                    .toString() ??
-                                                "",
-                                          },
-                                        );
+                                        ),
+                                      );
+                                    }
+                                    context.pushNamed(
+                                      RoutesName.serviceInfoPage,
+                                      pathParameters: {
+                                        "serviceId":
+                                            todayNotifs[index]
+                                                ?.data?["booking_id"]
+                                                .toString() ??
+                                            "",
                                       },
-                                    ),
+                                    );
+                                  },
+                                ),
                               ),
                             )
                           else
@@ -303,30 +307,32 @@ class _NotificationPageState extends State<NotificationPage> {
                                 itemCount: earlierNotifs.length,
                                 shrinkWrap: true,
                                 physics: const NeverScrollableScrollPhysics(),
-                                itemBuilder: (context, index) =>
-                                    NotificationWidget(
-                                      notification: earlierNotifs[index],
-                                      onTap: () {
-                                        context.read<NotificationPageBloc>().add(
-                                          NotificationPageEvent.readNotification(
-                                            model: notificationModel.copyWith(
-                                              id: earlierNotifs[index]?.id
-                                                  .toString(),
-                                            ),
+                                itemBuilder: (context, index) => NotificationWidget(
+                                  notification: earlierNotifs[index],
+                                  onTap: () {
+                                    if (earlierNotifs[index]?.is_read ==
+                                        false) {
+                                      context.read<NotificationPageBloc>().add(
+                                        NotificationPageEvent.readNotification(
+                                          model: notificationModel.copyWith(
+                                            id: earlierNotifs[index]?.id
+                                                .toString(),
                                           ),
-                                        );
-                                        context.pushNamed(
-                                          RoutesName.serviceInfoPage,
-                                          pathParameters: {
-                                            "serviceId":
-                                                earlierNotifs[index]
-                                                    ?.data?["booking_id"]
-                                                    .toString() ??
-                                                "",
-                                          },
-                                        );
+                                        ),
+                                      );
+                                    }
+                                    context.pushNamed(
+                                      RoutesName.serviceInfoPage,
+                                      pathParameters: {
+                                        "serviceId":
+                                            earlierNotifs[index]
+                                                ?.data?["booking_id"]
+                                                .toString() ??
+                                            "",
                                       },
-                                    ),
+                                    );
+                                  },
+                                ),
                               ),
                             )
                           else
