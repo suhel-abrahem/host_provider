@@ -32,7 +32,8 @@ import '../bloc/set_booking_bloc.dart';
 
 class ServiceInfoPage extends StatefulWidget {
   final String? serviceId;
-  const ServiceInfoPage({super.key, required this.serviceId});
+  final ValueChanged<void>? onChanged;
+  const ServiceInfoPage({super.key, required this.serviceId, this.onChanged});
 
   @override
   State<ServiceInfoPage> createState() => _ServiceInfoPageState();
@@ -172,134 +173,49 @@ class _ServiceInfoPageState extends State<ServiceInfoPage> {
                                                             ? 0.w
                                                             : 60.w,
                                                       ),
-                                                      child: ElevatedButton(
-                                                        style: Theme.of(context)
-                                                            .elevatedButtonTheme
-                                                            .style
-                                                            ?.copyWith(
-                                                              padding:
-                                                                  WidgetStatePropertyAll(
-                                                                    EdgeInsets
-                                                                        .zero,
-                                                                  ),
-                                                              backgroundColor:
-                                                                  WidgetStatePropertyAll(
-                                                                    Colors
-                                                                        .transparent,
-                                                                  ),
-                                                              shadowColor:
-                                                                  WidgetStatePropertyAll(
-                                                                    Colors
-                                                                        .transparent,
-                                                                  ),
-                                                              shape: WidgetStatePropertyAll(
-                                                                RoundedRectangleBorder(
-                                                                  borderRadius:
-                                                                      BorderRadius.circular(
-                                                                        20.r,
-                                                                      ),
-                                                                ),
-                                                              ),
-                                                            ),
-                                                        onPressed: () {
-                                                          showDialog(
-                                                            context: context,
-                                                            builder: (context) => Dialog(
-                                                              insetAnimationDuration:
-                                                                  const Duration(
-                                                                    milliseconds:
-                                                                        300,
-                                                                  ),
-                                                              insetAnimationCurve:
-                                                                  Curves
-                                                                      .easeInOut,
-                                                              clipBehavior: Clip
-                                                                  .antiAlias,
-                                                              child: ClipRRect(
-                                                                borderRadius:
-                                                                    BorderRadius.circular(
-                                                                      12.r,
-                                                                    ),
-                                                                child: ImageWidget(
-                                                                  errorWidget: SizedBox(
-                                                                    width:
-                                                                        100.w,
-                                                                    height:
-                                                                        100.h,
-                                                                    child: Center(
-                                                                      child: Icon(
-                                                                        Icons
-                                                                            .broken_image_outlined,
-                                                                        size: 50
-                                                                            .r,
-                                                                        color: Theme.of(
-                                                                          context,
-                                                                        ).primaryColor,
-                                                                      ),
-                                                                    ),
-                                                                  ),
-                                                                  imageUrl:
-                                                                      data
-                                                                          ?.last
-                                                                          ?.images?[index]["image_url"] ??
-                                                                      "",
-                                                                ),
-                                                              ),
-                                                            ),
-                                                          );
-                                                        },
-                                                        child: ClipRRect(
-                                                          borderRadius:
-                                                              BorderRadius.circular(
-                                                                20.r,
-                                                              ),
-                                                          clipBehavior:
-                                                              Clip.antiAlias,
-                                                          child: Container(
-                                                            decoration: BoxDecoration(
-                                                              boxShadow: [
-                                                                BoxShadow(
-                                                                  color:
-                                                                      Theme.of(
+                                                      child: Container(
+                                                        clipBehavior:
+                                                            Clip.antiAlias,
+                                                        decoration: BoxDecoration(
+                                                          boxShadow: [
+                                                            BoxShadow(
+                                                              color:
+                                                                  Theme.of(
                                                                         context,
-                                                                      ).colorScheme.shadow.withValues(
+                                                                      )
+                                                                      .colorScheme
+                                                                      .shadow
+                                                                      .withValues(
                                                                         alpha:
                                                                             0.2,
                                                                       ),
-                                                                  blurRadius:
-                                                                      8.r,
-                                                                  offset:
-                                                                      Offset(
-                                                                        0,
-                                                                        4.h,
-                                                                      ),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                            height: 200.h,
-                                                            width: 200.w,
-                                                            child: ImageWidget(
-                                                              boxFit:
-                                                                  BoxFit.cover,
-                                                              errorWidget: Center(
-                                                                child: Icon(
-                                                                  Icons
-                                                                      .broken_image_outlined,
-                                                                  size: 50.r,
-                                                                  color: Theme.of(
-                                                                    context,
-                                                                  ).colorScheme.onErrorContainer,
-                                                                ),
+                                                              blurRadius: 8.r,
+                                                              offset: Offset(
+                                                                0,
+                                                                4.h,
                                                               ),
-                                                              imageUrl:
-                                                                  data
-                                                                      ?.last
-                                                                      ?.images?[index]["image_url"] ??
-                                                                  "",
-                                                              height: 200.h,
-                                                              width: 200.w,
+                                                            ),
+                                                          ],
+                                                        ),
+
+                                                        width: 200.w,
+                                                        child: ImageWidget(
+                                                          boxFit: BoxFit.cover,
+                                                          errorWidget: Center(
+                                                            child: Icon(
+                                                              Icons
+                                                                  .broken_image_outlined,
+                                                              size: 50.r,
+                                                              color: Theme.of(context)
+                                                                  .colorScheme
+                                                                  .onErrorContainer,
                                                             ),
                                                           ),
+                                                          imageUrl:
+                                                              data
+                                                                  ?.last
+                                                                  ?.images?[index]["image_url"] ??
+                                                              "",
                                                         ),
                                                       ),
                                                     ),
@@ -483,13 +399,16 @@ class _ServiceInfoPageState extends State<ServiceInfoPage> {
                                                 .tr(),
                                             context: context,
                                           );
-                                          context.pop();
-                                          context.pushNamed(
-                                            RoutesName.serviceInfoPage,
-                                            pathParameters: {
-                                              "serviceId":
-                                                  widget.serviceId ?? "",
-                                            },
+                                          if (widget.onChanged != null) {
+                                            widget.onChanged!(null);
+                                          }
+                                          context.read<GetBookingBloc>().add(
+                                            GetBookingEvent.getBookings(
+                                              getBookingModel: getBookingModel
+                                                  ?.copyWith(
+                                                    id: widget.serviceId,
+                                                  ),
+                                            ),
                                           );
                                         },
                                         error: () {

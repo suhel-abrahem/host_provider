@@ -84,7 +84,16 @@ class _BookingPageTapPageState extends State<BookingPageTapPage> {
                       vertical: 8.0.h,
                       horizontal: 20.w,
                     ),
-                    child: BookingServiceWidget(bookingEntity: booking),
+                    child: BookingServiceWidget(
+                      bookingEntity: booking,
+                      onChanged: (_) {
+                        context.read<GetBookingBloc>().add(
+                          GetBookingEvent.getBookings(
+                            getBookingModel: widget.model,
+                          ),
+                        );
+                      },
+                    ),
                   );
                 },
               ),

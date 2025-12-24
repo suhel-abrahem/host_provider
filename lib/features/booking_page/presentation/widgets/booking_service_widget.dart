@@ -20,7 +20,8 @@ import '../bloc/set_booking_bloc.dart';
 
 class BookingServiceWidget extends StatefulWidget {
   final BookingEntity? bookingEntity;
-  const BookingServiceWidget({super.key, this.bookingEntity});
+  final ValueChanged<void>? onChanged;
+  const BookingServiceWidget({super.key, this.bookingEntity, this.onChanged});
 
   @override
   State<BookingServiceWidget> createState() => _BookingServiceWidgetState();
@@ -207,10 +208,9 @@ class _BookingServiceWidgetState extends State<BookingServiceWidget> {
                             message: LocaleKeys.common_success.tr(),
                             context: context,
                           );
-                          context.pushNamed(
-                            RoutesName.bookingPage,
-                            pathParameters: {"pageIndex": "0"},
-                          );
+                          if (widget.onChanged != null) {
+                            widget.onChanged!(null);
+                          }
                         },
                         error: () {
                           setState(() {

@@ -120,7 +120,13 @@ class _HomePagePageState extends State<HomePagePage> {
             socket?.onAny((event, data) {
               print('📡 onAny → event: $event | data: $data');
             });
+            socket?.on('notification:unread_count', (data) async {
+              print("🔔 New Notification: $data");
 
+              // int count = await getUnreadCount();
+
+              streamSocket.addResponse(data["unread_count"].toString());
+            });
             // Your specific event listener
             socket?.on('notification:new', (data) async {
               print("🔔 New Notification: $data");

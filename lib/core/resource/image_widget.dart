@@ -26,25 +26,70 @@ class ImageWidget extends StatelessWidget {
       return SizedBox(
         width: width,
         height: height,
-        child: SvgPicture.network(
-          imageUrl,
-          width: width,
-          height: height,
-          fit: boxFit ?? BoxFit.contain,
-          errorBuilder: (context, error, stackTrace) =>
-              errorWidget ??
-              Icon(
-                Icons.error,
-                color: Theme.of(context).colorScheme.error,
-                size: errorIconSize,
-              ),
-          placeholderBuilder: (context) => SizedBox(
+        child: GestureDetector(
+          onTap: () async {
+            await showDialog(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                  content: ClipRRect(
+                    borderRadius: BorderRadius.circular(12.r),
+                    child: SvgPicture.network(
+                      imageUrl,
+
+                      fit: boxFit ?? BoxFit.contain,
+                      errorBuilder: (context, error, stackTrace) => FittedBox(
+                        fit: boxFit ?? BoxFit.contain,
+                        child:
+                            errorWidget ??
+                            Icon(
+                              Icons.error,
+
+                              color: Theme.of(context).colorScheme.error,
+                              size: errorIconSize,
+                            ),
+                      ),
+                      placeholderBuilder: (context) => SizedBox(
+                        width: width,
+                        height: height,
+                        child: SizedBox(
+                          width: 50.w,
+                          height: 50.h,
+                          child: Center(child: CircularProgressIndicator()),
+                        ),
+                      ),
+                    ),
+                  ),
+                  backgroundColor: Colors.transparent,
+                  contentPadding: EdgeInsets.zero,
+                );
+              },
+            );
+          },
+          child: SvgPicture.network(
+            imageUrl,
             width: width,
             height: height,
-            child: SizedBox(
-              width: 50.w,
-              height: 50.h,
-              child: CircularProgressIndicator(),
+            fit: boxFit ?? BoxFit.contain,
+            errorBuilder: (context, error, stackTrace) => FittedBox(
+              fit: boxFit ?? BoxFit.contain,
+              child:
+                  errorWidget ??
+                  Icon(
+                    Icons.error,
+
+                    color: Theme.of(context).colorScheme.error,
+                    size: errorIconSize,
+                  ),
+            ),
+            placeholderBuilder: (context) => SizedBox(
+              width: width,
+              height: height,
+              child: SizedBox(
+                width: 50.w,
+                height: 50.h,
+                child: Center(child: CircularProgressIndicator()),
+              ),
             ),
           ),
         ),
@@ -53,21 +98,55 @@ class ImageWidget extends StatelessWidget {
       return SizedBox(
         width: width,
         height: height,
-        child: CachedNetworkImage(
-          fit: boxFit ?? BoxFit.contain,
-          width: width,
-          height: height,
-          imageUrl: imageUrl,
+        child: GestureDetector(
+          onTap: () async {
+            await showDialog(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                  content: ClipRRect(
+                    borderRadius: BorderRadius.circular(12.r),
+                    child: CachedNetworkImage(
+                      fit: boxFit ?? BoxFit.contain,
+                      imageUrl: imageUrl,
+                      progressIndicatorBuilder: (context, url, progress) =>
+                          Center(
+                            child: CircularProgressIndicator(
+                              value: progress.progress,
+                            ),
+                          ),
+                      errorWidget: (_, __, ___) =>
+                          errorWidget ??
+                          Icon(
+                            Icons.error,
+                            color: Theme.of(context).colorScheme.error,
+                            size: errorIconSize,
+                          ),
+                    ),
+                  ),
+                  backgroundColor: Colors.transparent,
+                  contentPadding: EdgeInsets.zero,
+                );
+              },
+            );
+          },
+          child: CachedNetworkImage(
+            fit: boxFit ?? BoxFit.contain,
+            width: width,
+            height: height,
+            imageUrl: imageUrl,
 
-          progressIndicatorBuilder: (context, url, progress) =>
-              CircularProgressIndicator(value: progress.progress),
-          errorWidget: (_, __, ___) =>
-              errorWidget ??
-              Icon(
-                Icons.error,
-                color: Theme.of(context).colorScheme.error,
-                size: errorIconSize,
-              ),
+            progressIndicatorBuilder: (context, url, progress) => Center(
+              child: CircularProgressIndicator(value: progress.progress),
+            ),
+            errorWidget: (_, __, ___) =>
+                errorWidget ??
+                Icon(
+                  Icons.error,
+                  color: Theme.of(context).colorScheme.error,
+                  size: errorIconSize,
+                ),
+          ),
         ),
       );
     }

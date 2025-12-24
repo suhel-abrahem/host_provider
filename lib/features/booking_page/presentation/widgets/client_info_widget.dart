@@ -34,17 +34,25 @@ class ClientInfoWidget extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              ClipOval(
-                child: CircleAvatar(
-                  radius: 30.r,
-                  child: ImageWidget(
-                    errorWidget: Icon(
-                      Icons.design_services,
-                      size: 30.sp,
-                      color: Theme.of(context).colorScheme.onPrimaryContainer,
-                    ),
-                    imageUrl: customerEntity?.avatar ?? "",
+              Container(
+                width: 60.w,
+                height: 60.h,
+                clipBehavior: Clip.antiAlias,
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  border: Border.all(
+                    color: Theme.of(context).colorScheme.onPrimaryContainer,
+                    width: 2.w,
                   ),
+                ),
+                child: ImageWidget(
+                  boxFit: BoxFit.cover,
+                  errorWidget: Icon(
+                    Icons.design_services,
+                    size: 30.sp,
+                    color: Theme.of(context).colorScheme.onPrimaryContainer,
+                  ),
+                  imageUrl: customerEntity?.avatar ?? "",
                 ),
               ),
               Column(
