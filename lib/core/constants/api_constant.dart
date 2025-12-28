@@ -25,4 +25,6 @@ class ApiConstant {
   static const String getNotificationsEndpoint = "/notifications";
   static const String updateDeviceLanguageEndpoint =
       "/notifications/device-locale";
+  static const String chatEndpoint = "/chat/conversations";
+  static const String sendMessageEndpoint = "/chat/messages";
 }

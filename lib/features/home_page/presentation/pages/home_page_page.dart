@@ -213,6 +213,37 @@ class _HomePagePageState extends State<HomePagePage> {
                 ),
               ),
             ),
+            IconButton(
+              onPressed: () {
+                context.pushNamed(RoutesName.chatsPage);
+              },
+              icon: SizedBox(
+                width: 36.w,
+                height: 36.h,
+                child: Stack(
+                  children: [
+                    PositionedDirectional(
+                      bottom: 0,
+                      top: 0,
+                      start: 0,
+                      child: Icon(
+                        Icons.chat_bubble_rounded,
+                        size: 28.sp,
+                        color: ColorManager.darkTextColor,
+                      ),
+                    ),
+                    AnimatedPositionedDirectional(
+                      duration: Duration(milliseconds: 300),
+                      top: 0.h,
+                      end: 4.w,
+                      child: BuildWithSocketStream(
+                        onValueChanged: (value) => notificationCount = value,
+                      ).animate().flipV(duration: Duration(milliseconds: 300)),
+                    ),
+                  ],
+                ),
+              ),
+            ),
             Padding(
               padding: EdgeInsetsDirectional.only(end: 8.w),
               child: SizedBox(

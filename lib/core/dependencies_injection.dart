@@ -1,6 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:hosta_provider/features/notification_page/domain/entities/notification_entity.dart';
+import '../features/chat/data/models/chat_model.dart';
+import '../features/chat/data/repositories/chat_repository_implements.dart';
+import '../features/chat/domain/entities/chat/chat_entity.dart';
+import '../features/chat/domain/entities/chats/chats_entity.dart';
+import '../features/chat/domain/entities/conversation/conversation_entity.dart';
+import '../features/chat/domain/entities/message/message_entity.dart';
+import '../features/chat/domain/repositories/chat_repository.dart';
+import '../features/chat/domain/usecases/get_chat_details_usecase.dart';
+import '../features/chat/domain/usecases/get_chats_usecase.dart';
+import '../features/chat/domain/usecases/send_chat_usecase.dart';
+import '../features/chat/presentation/bloc/get_chat_bloc.dart';
+import '../features/chat/presentation/bloc/send_chat_bloc.dart';
 import '../features/notification_page/data/models/notification_model.dart';
 import '../features/notification_page/data/repositories/notification_repository_implements.dart';
 import '../features/notification_page/domain/repositories/notification_repository.dart';
@@ -428,4 +440,34 @@ Future<void> initDependencies() async {
       getItInstance(),
     ),
   );
+  // end of notification page
+  //chat
+  //entities and models
+  getItInstance.registerSingleton<ConversationEntity>(ConversationEntity());
+  getItInstance.registerSingleton<ChatEntity>(ChatEntity());
+  getItInstance.registerSingleton<ChatsEntity>(ChatsEntity());
+  getItInstance.registerSingleton<MessageEntity>(MessageEntity());
+  getItInstance.registerSingleton<ChatModel>(ChatModel());
+  //repository
+  getItInstance.registerSingleton<ChatRepository>(
+    ChatRepositoryImplements(getItInstance()),
+  );
+  //usecase
+  getItInstance.registerSingleton<GetChatsUsecase>(
+    GetChatsUsecase(getItInstance()),
+  );
+  getItInstance.registerSingleton<GetChatDetailsUsecase>(
+    GetChatDetailsUsecase(getItInstance()),
+  );
+  getItInstance.registerSingleton<SendChatUsecase>(
+    SendChatUsecase(getItInstance()),
+  );
+  //bloc
+  getItInstance.registerFactory<GetChatBloc>(
+    () => GetChatBloc(getItInstance(), getItInstance(), getItInstance()),
+  );
+  getItInstance.registerFactory<SendChatBloc>(
+    () => SendChatBloc(getItInstance(), getItInstance()),
+  );
+  //end of chat
 }

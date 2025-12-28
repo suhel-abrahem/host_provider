@@ -4,6 +4,8 @@ import 'package:animated_theme_switcher/animated_theme_switcher.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:go_router/go_router.dart';
+import '../../features/chat/presentation/pages/chat_page.dart';
+import '../../features/chat/presentation/pages/chats_page.dart';
 import '../../features/notification_page/presentation/pages/notification_page.dart';
 import '../app/app_preferences.dart';
 import 'route_tracker.dart';
@@ -50,6 +52,8 @@ class RoutesName {
   static String settingsPage = "settingsPage";
   static String helpPage = "helpPage";
   static String notificationPage = "notificationPage";
+  static String chatsPage = "chatsPage";
+  static String chatPage = "chatPage";
 }
 
 class RoutesPath {
@@ -70,6 +74,8 @@ class RoutesPath {
   static String settingsPage = "/settingsPage";
   static String helpPage = "/helpPage";
   static String notificationPage = "/notificationPage";
+  static String chatsPage = "/chatsPage";
+  static String chatPage = "/chatPage/:bookingNumber/:chatId";
 }
 
 GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -271,6 +277,26 @@ GoRouter goRouter = GoRouter(
               pageBuilder: (context, state) {
                 return _customTransitionPage(
                   child: NotificationPage(),
+                  state: state,
+                );
+              },
+            ),
+            GoRoute(
+              path: RoutesPath.chatsPage,
+              name: RoutesName.chatsPage,
+              pageBuilder: (context, state) {
+                return _customTransitionPage(child: ChatsPage(), state: state);
+              },
+            ),
+            GoRoute(
+              path: RoutesPath.chatPage,
+              name: RoutesName.chatPage,
+              pageBuilder: (context, state) {
+                return _customTransitionPage(
+                  child: ChatPage(
+                    bookingNumber: state.pathParameters["bookingNumber"],
+                    chatId: int.tryParse(state.pathParameters["chatId"] ?? ""),
+                  ),
                   state: state,
                 );
               },

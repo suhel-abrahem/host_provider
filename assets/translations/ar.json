@@ -304,5 +304,17 @@
     "allowLocationServices": "السماح بخدمات الموقع",
     "location": "الموقع",
     "allowAppAccessYourLocation": "السماح للتطبيق بالوصول إلى موقعك"
+  },
+  "chatsPage": {
+    "title": "صفحة الدردشات",
+    "label": "الدردشات",
+    "noChatsAvailable": "لا توجد دردشات متاحة",
+    "noMesagesYet": "لا توجد رسائل بعد",
+    "typeYourMessageHere": "اكتب رسالتك هنا...",
+    "send": "إرسال",
+    "sentAImage": "أرسل صورة",
+    "you": "أنت",
+    "maximumOf5ImagesAllowed": "مسموح بحد أقصى 5 صور",
+    "youCanSelectUpTo5Images": "يمكنك اختيار ما يصل إلى 5 صور"
   }
 }

@@ -320,6 +320,18 @@ class CodegenLoader extends AssetLoader{
     "allowLocationServices": "السماح بخدمات الموقع",
     "location": "الموقع",
     "allowAppAccessYourLocation": "السماح للتطبيق بالوصول إلى موقعك"
+  },
+  "chatsPage": {
+    "title": "صفحة الدردشات",
+    "label": "الدردشات",
+    "noChatsAvailable": "لا توجد دردشات متاحة",
+    "noMesagesYet": "لا توجد رسائل بعد",
+    "typeYourMessageHere": "اكتب رسالتك هنا...",
+    "send": "إرسال",
+    "sentAImage": "أرسل صورة",
+    "you": "أنت",
+    "maximumOf5ImagesAllowed": "مسموح بحد أقصى 5 صور",
+    "youCanSelectUpTo5Images": "يمكنك اختيار ما يصل إلى 5 صور"
   }
 };
 static const Map<String,dynamic> _en = {
@@ -628,6 +640,18 @@ static const Map<String,dynamic> _en = {
     "allowLocationServices": "Allow location services",
     "location": "Location",
     "allowAppAccessYourLocation": "Allow app to access your location"
+  },
+  "chatsPage": {
+    "title": "Chats page",
+    "label": "Chats",
+    "noChatsAvailable": "No chats available",
+    "noMesagesYet": "No messages yet",
+    "typeYourMessageHere": "Type your message here...",
+    "send": "Send",
+    "sentAImage": "Sent an image",
+    "you": "You",
+    "maximumOf5ImagesAllowed": "Maximum of 5 images allowed",
+    "youCanSelectUpTo5Images": "You can select up to 5 images"
   }
 };
 static const Map<String,dynamic> _fa = {
@@ -936,6 +960,18 @@ static const Map<String,dynamic> _fa = {
     "allowLocationServices": "ڕێگە بدە بۆ خزمەتگوزارییەکانی شوێن",
     "location": "شوێن",
     "allowAppAccessYourLocation": "ڕێگە بدە بۆ ئەپلیکەیشن بۆ گەیشتن بە شوێنەکەت"
+  },
+  "chatsPage": {
+    "title": "شاشەی چات",
+    "label": "چاتەکان",
+    "noChatsAvailable": "هیچ چاتێک بوونی نییە",
+    "noMesagesYet": "هیچ نامەیەک بوونی نییە",
+    "typeYourMessageHere": "نامەکەت لێرە بنوسە...",
+    "send": "ناردن",
+    "sentAImage": "وێنەیەک نارد",
+    "you": "تۆ",
+    "maximumOf5ImagesAllowed": "زۆربەی 5 وێنە ڕێگەپێدراوە",
+    "youCanSelectUpTo5Images": "دەتوانیت تا 5 وێنە هەڵبژێریت"
   }
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": _ar, "en": _en, "fa": _fa};

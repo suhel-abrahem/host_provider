@@ -294,5 +294,16 @@ abstract class  LocaleKeys {
   static const settingsPage_location = 'settingsPage.location';
   static const settingsPage_allowAppAccessYourLocation = 'settingsPage.allowAppAccessYourLocation';
   static const settingsPage = 'settingsPage';
+  static const chatsPage_title = 'chatsPage.title';
+  static const chatsPage_label = 'chatsPage.label';
+  static const chatsPage_noChatsAvailable = 'chatsPage.noChatsAvailable';
+  static const chatsPage_noMesagesYet = 'chatsPage.noMesagesYet';
+  static const chatsPage_typeYourMessageHere = 'chatsPage.typeYourMessageHere';
+  static const chatsPage_send = 'chatsPage.send';
+  static const chatsPage_sentAImage = 'chatsPage.sentAImage';
+  static const chatsPage_you = 'chatsPage.you';
+  static const chatsPage_maximumOf5ImagesAllowed = 'chatsPage.maximumOf5ImagesAllowed';
+  static const chatsPage_youCanSelectUpTo5Images = 'chatsPage.youCanSelectUpTo5Images';
+  static const chatsPage = 'chatsPage';
 
 }

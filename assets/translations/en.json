@@ -304,5 +304,17 @@
     "allowLocationServices": "Allow location services",
     "location": "Location",
     "allowAppAccessYourLocation": "Allow app to access your location"
+  },
+  "chatsPage": {
+    "title": "Chats page",
+    "label": "Chats",
+    "noChatsAvailable": "No chats available",
+    "noMesagesYet": "No messages yet",
+    "typeYourMessageHere": "Type your message here...",
+    "send": "Send",
+    "sentAImage": "Sent an image",
+    "you": "You",
+    "maximumOf5ImagesAllowed": "Maximum of 5 images allowed",
+    "youCanSelectUpTo5Images": "You can select up to 5 images"
   }
 }

@@ -40,6 +40,7 @@ class CustomInputField extends StatelessWidget {
   final BorderRadius? borderRadius;
   final bool? readOnly;
   final bool? enabled;
+  final int? minLines;
   final Function(String?)? onSaved;
   const CustomInputField({
     super.key,
@@ -76,6 +77,7 @@ class CustomInputField extends StatelessWidget {
     this.readOnly,
     this.onSaved,
     this.enabled,
+    this.minLines,
   });
 
   @override
@@ -93,6 +95,7 @@ class CustomInputField extends StatelessWidget {
             ),
         enabled: enabled,
         maxLines: maxLines ?? 1,
+        minLines: minLines,
         maxLength: maxLength,
         controller: controller,
         initialValue: initialValue,

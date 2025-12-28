@@ -304,5 +304,17 @@
     "allowLocationServices": "ڕێگە بدە بۆ خزمەتگوزارییەکانی شوێن",
     "location": "شوێن",
     "allowAppAccessYourLocation": "ڕێگە بدە بۆ ئەپلیکەیشن بۆ گەیشتن بە شوێنەکەت"
+  },
+  "chatsPage": {
+    "title": "شاشەی چات",
+    "label": "چاتەکان",
+    "noChatsAvailable": "هیچ چاتێک بوونی نییە",
+    "noMesagesYet": "هیچ نامەیەک بوونی نییە",
+    "typeYourMessageHere": "نامەکەت لێرە بنوسە...",
+    "send": "ناردن",
+    "sentAImage": "وێنەیەک نارد",
+    "you": "تۆ",
+    "maximumOf5ImagesAllowed": "زۆربەی 5 وێنە ڕێگەپێدراوە",
+    "youCanSelectUpTo5Images": "دەتوانیت تا 5 وێنە هەڵبژێریت"
   }
 }
