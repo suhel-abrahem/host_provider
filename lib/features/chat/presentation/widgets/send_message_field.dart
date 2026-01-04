@@ -36,14 +36,16 @@ class _SendMessageFieldState extends State<SendMessageField> {
     if ((images?.length ?? 0) <= 4) {
       final imagePicker = ImagePicker();
 
-      await imagePicker.pickImage(source: ImageSource.camera).then((onValue) {
-        setState(() {
-          if (onValue != null) {
-            images?.add(File(onValue.path));
-          }
-        });
-        print("Images Length: $images");
-      });
+      await imagePicker
+          .pickImage(source: ImageSource.camera, imageQuality: 60)
+          .then((onValue) {
+            setState(() {
+              if (onValue != null) {
+                images?.add(File(onValue.path));
+              }
+            });
+            print("Images Length: $images");
+          });
     } else {
       showMessage(
         message: LocaleKeys.chatsPage_maximumOf5ImagesAllowed.tr(),
@@ -57,16 +59,16 @@ class _SendMessageFieldState extends State<SendMessageField> {
     if ((images?.length ?? 0) <= 4) {
       final imagePicker = ImagePicker();
 
-      await imagePicker.pickMultiImage(limit: 6 - (images?.length ?? 0)).then((
-        onValue,
-      ) {
-        setState(() {
-          for (var element in onValue) {
-            if ((images?.length ?? 0) < 5) images?.add(File(element.path));
-          }
-        });
-        print("Images Length: $images");
-      });
+      await imagePicker
+          .pickMultiImage(limit: 6 - (images?.length ?? 0), imageQuality: 60)
+          .then((onValue) {
+            setState(() {
+              for (var element in onValue) {
+                if ((images?.length ?? 0) < 5) images?.add(File(element.path));
+              }
+            });
+            print("Images Length: $images");
+          });
     } else {
       showMessage(
         message: LocaleKeys.chatsPage_maximumOf5ImagesAllowed.tr(),
@@ -220,6 +222,7 @@ class _SendMessageFieldState extends State<SendMessageField> {
                       if (widget.onSend != null) {
                         widget.onSend?.call(
                           MessageEntity(
+                            me: true,
                             uploadingState: UploadingStateEnum.uploading,
                             message_type: images?.isNotEmpty == true
                                 ? "image"

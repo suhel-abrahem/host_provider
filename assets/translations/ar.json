@@ -284,7 +284,8 @@
     "notificatios": "الإشعارات",
     "new": "جديد",
     "today": "اليوم",
-    "earlier": "سابقاً"
+    "earlier": "سابقاً",
+    "youHaveMoreThen10Notifications": "لديك أكثر من 10 إشعارات"
   },
   "settingsPage": {
     "title": "صفحة الإعدادات",

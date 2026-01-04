@@ -18,7 +18,13 @@ import '../../../../core/enums/uploading_state_enum.dart';
 class MessageContainer extends StatefulWidget {
   final MessageEntity? messageEntity;
   final int? chatId;
-  const MessageContainer({super.key, this.messageEntity, this.chatId});
+  final ValueChanged<MessageEntity?>? onMessageSent;
+  const MessageContainer({
+    super.key,
+    this.messageEntity,
+    this.chatId,
+    this.onMessageSent,
+  });
 
   @override
   State<MessageContainer> createState() => _MessageContainerState();
@@ -67,7 +73,9 @@ class _MessageContainerState extends State<MessageContainer> {
               );
               messageEntity = state.messageEntity?.copyWith(
                 uploadingState: UploadingStateEnum.uploaded,
+                me: true,
               );
+              widget.onMessageSent?.call(messageEntity);
             });
           } else if (state is SendChatStateError) {
             setState(() {
@@ -78,9 +86,9 @@ class _MessageContainerState extends State<MessageContainer> {
           }
         },
         child: Align(
-          alignment: widget.messageEntity?.me == true
-              ? Alignment.centerRight
-              : Alignment.centerLeft,
+          alignment: messageEntity?.me == true
+              ? AlignmentDirectional.centerStart
+              : AlignmentDirectional.centerEnd,
           child: Padding(
             padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 12.w),
             child: Stack(
@@ -114,7 +122,7 @@ class _MessageContainerState extends State<MessageContainer> {
                       Theme.of(context).defaultBorderSide,
                     ),
                     borderRadius: BorderRadius.circular(12.r),
-                    color: widget.messageEntity?.me == true
+                    color: messageEntity?.me == true
                         ? Theme.of(context).colorScheme.primary
                         : Theme.of(context).colorScheme.primaryContainer,
                   ),

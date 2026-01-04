@@ -32,7 +32,7 @@ import '../../features/profile_page/presentation/pages/help_page_page.dart';
 import '../../features/profile_page/presentation/pages/setting_page_page.dart';
 
 String? currentPath = RoutesPath.homePage;
-IO.Socket? socket;
+String? lastNotificationCount = "0";
 
 class RoutesName {
   static String homePage = "homePage";
@@ -91,10 +91,7 @@ GoRouter goRouter = GoRouter(
             state.uri.toString().endsWith(RoutesPath.otpPage))) {
       return RoutesPath.loginPage;
     }
-    if (currentPath?.endsWith(RoutesPath.homePage) == false) {
-      socket?.disconnect();
-      socket?.dispose();
-    }
+
     return null;
   },
   initialLocation: RoutesPath.homePage,

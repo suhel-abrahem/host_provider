@@ -284,7 +284,8 @@
     "notificatios": "Notifications",
     "new": "New",
     "today": "Today",
-    "earlier": "Earlier"
+    "earlier": "Earlier",
+    "youHaveMoreThen10Notifications": "You have more than 10 notifications"
   },
   "settingsPage": {
     "title": "Settings page",

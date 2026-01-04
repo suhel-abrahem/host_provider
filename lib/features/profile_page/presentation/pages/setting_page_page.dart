@@ -13,6 +13,7 @@ import '../../../../core/resource/color_manager.dart';
 import '../../../../core/resource/firebase_common_services/firebase_messageing_service.dart';
 import '../../../../core/resource/main_page/main_page.dart';
 
+import '../../../../main.dart';
 import '../bloc/get_profile_bloc.dart';
 import '../../../../generated/locale_keys.g.dart';
 
@@ -435,6 +436,7 @@ class _SettingPagePageState extends State<SettingPagePage> {
                     getItInstance<AppPreferences>().setUserInfo(
                       loginStateEntity: LoginStateEntity(),
                     );
+                    socketService.disconnect();
                     // Navigate to login page or perform other actions
                     context.goNamed(RoutesName.loginPage);
                   } else if (state is GetProfileStateLogoutError) {

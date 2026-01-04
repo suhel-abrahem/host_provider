@@ -59,97 +59,10 @@ class _HomePagePageState extends State<HomePagePage> {
   ProfileModel profileModel = ProfileModel();
   ProfileEntity? profileEntity = ProfileEntity();
   bool isProfileDataLoading = true;
-  int notificationCount = 0;
-  Future<void> connectAndListen() async {
-    LoginStateEntity? loginState = getItInstance<AppPreferences>()
-        .getUserInfo();
-    await getItInstance<RefreshTokenUsecase>()
-        .call(
-          params: RefreshTokenModel(
-            token: loginState?.access_token ?? "",
-            refresh_token: loginState?.refresh_token ?? "",
-          ),
-        )
-        .then((onValue) {
-          print("Refreshed token result socket: $onValue");
-          if (onValue is DataSuccess) {
-            socket = IO.io(
-              'https://hosta-api.lenda-agency.com',
-              IO.OptionBuilder()
-                  .setPath('/socket.io/')
-                  .setTransports(['websocket'])
-                  .enableForceNew()
-                  .enableReconnection()
-                  .setExtraHeaders({
-                    'Connection': 'upgrade',
-                    'Upgrade': 'websocket',
-                  })
-                  .enableAutoConnect()
-                  .build(),
-            );
-
-            socket?.connect();
-
-            // Connection status
-            socket?.onConnect((_) {
-              print('✅ Connected to Socket.IO');
-
-              socket?.emit('authenticate', {
-                'userId': loginState?.user['id'],
-                'token': onValue?.data?.access_token,
-              });
-              // socket?.emit('notification:new', {"unread_count": "0"});
-            });
-
-            socket?.onConnectError((error) {
-              streamSocket.addResponse("0");
-              print('⛔ connect_error: $error');
-            });
-
-            socket?.onError((error) {
-              streamSocket.addResponse("0");
-              print('⛔ error: $error');
-            });
-
-            socket?.onDisconnect((_) {
-              streamSocket.addResponse("0");
-              print('❌ disconnected from socket');
-            });
-
-            // 🔍 Log EVERY event received from the server
-            socket?.onAny((event, data) {
-              print('📡 onAny → event: $event | data: $data');
-            });
-            socket?.on('notification:unread_count', (data) async {
-              print("🔔 New Notification: $data");
-
-              // int count = await getUnreadCount();
-
-              streamSocket.addResponse(data["unread_count"].toString());
-            });
-            // Your specific event listener
-            socket?.on('notification:new', (data) async {
-              print("🔔 New Notification: $data");
-
-              // int count = await getUnreadCount();
-
-              streamSocket.addResponse(data["unread_count"].toString());
-            });
-          }
-        });
-  }
-
-  @override
-  void dispose() {
-    socket?.close();
-    socket?.dispose();
-    super.dispose();
-  }
 
   @override
   void initState() {
     super.initState();
-    connectAndListen();
   }
 
   @override
@@ -206,7 +119,7 @@ class _HomePagePageState extends State<HomePagePage> {
                       top: 0.h,
                       end: 4.w,
                       child: BuildWithSocketStream(
-                        onValueChanged: (value) => notificationCount = value,
+                        stream: notificationStreamSocket.stream,
                       ).animate().flipV(duration: Duration(milliseconds: 300)),
                     ),
                   ],
@@ -237,7 +150,7 @@ class _HomePagePageState extends State<HomePagePage> {
                       top: 0.h,
                       end: 4.w,
                       child: BuildWithSocketStream(
-                        onValueChanged: (value) => notificationCount = value,
+                        stream: chatUnReadCountStreamSocket.stream,
                       ).animate().flipV(duration: Duration(milliseconds: 300)),
                     ),
                   ],
@@ -245,7 +158,7 @@ class _HomePagePageState extends State<HomePagePage> {
               ),
             ),
             Padding(
-              padding: EdgeInsetsDirectional.only(end: 8.w),
+              padding: EdgeInsetsDirectional.zero,
               child: SizedBox(
                 width: 36.w,
                 height: 36.h,
@@ -274,7 +187,7 @@ class _HomePagePageState extends State<HomePagePage> {
                         child: Icon(
                           Icons.menu,
                           size: 28.sp,
-                          color: ColorManager.backgroundColor,
+                          color: ColorManager.darkTextColor,
                         ),
                       );
                     },

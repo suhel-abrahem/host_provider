@@ -275,6 +275,7 @@ abstract class  LocaleKeys {
   static const notificationPage_new = 'notificationPage.new';
   static const notificationPage_today = 'notificationPage.today';
   static const notificationPage_earlier = 'notificationPage.earlier';
+  static const notificationPage_youHaveMoreThen10Notifications = 'notificationPage.youHaveMoreThen10Notifications';
   static const notificationPage = 'notificationPage';
   static const settingsPage_title = 'settingsPage.title';
   static const settingsPage_label = 'settingsPage.label';

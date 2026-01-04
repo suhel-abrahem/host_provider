@@ -9,6 +9,7 @@ import 'package:hosta_provider/core/resource/main_page/glew_effect.dart'
     show GlowOverlay;
 import '../../../config/app/app_preferences.dart';
 
+import '../../../main.dart';
 import '../../data_state/data_state.dart';
 import '../../dependencies_injection.dart';
 import '../color_manager.dart';
@@ -423,6 +424,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                     getItInstance<AppPreferences>().setUserInfo(
                       loginStateEntity: LoginStateEntity(),
                     );
+                    socketService.disconnect();
                     // Navigate to login page or perform other actions
                     context.goNamed(RoutesName.loginPage);
                   } else if (state is GetProfileStateLogoutError) {

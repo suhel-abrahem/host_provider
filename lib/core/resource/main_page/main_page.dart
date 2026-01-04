@@ -7,11 +7,14 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:go_router/go_router.dart';
-import 'package:hosta_provider/core/enums/login_state_enum.dart';
-import 'package:hosta_provider/core/resource/color_manager.dart';
-import 'package:hosta_provider/core/resource/main_page/set_fcm_token_for_current_user.dart';
-import 'package:hosta_provider/features/login_page/domain/entities/login_state_entity.dart';
-import 'package:hosta_provider/generated/locale_keys.g.dart';
+import '/core/resource/main_page/booking_notification_widget.dart';
+import '/core/resource/main_page/message_notification_widget.dart';
+
+import '/core/enums/login_state_enum.dart';
+import '/core/resource/color_manager.dart';
+import '/core/resource/main_page/set_fcm_token_for_current_user.dart';
+import '/features/login_page/domain/entities/login_state_entity.dart';
+import '/generated/locale_keys.g.dart';
 import '../../../config/app/app_preferences.dart';
 import '../../../config/route/routes_manager.dart';
 
@@ -59,6 +62,8 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   double yOffset = 0;
   bool animationDone = false;
+  List<RemoteMessage?>? notifications = [];
+  double startPosition = 0;
   void checkSessionValidity() {
     final loginState = getItInstance<AppPreferences>().getUserInfo();
     if (loginState == null ||
@@ -72,138 +77,38 @@ class _MainPageState extends State<MainPage> {
   Future<void> getMessage() async {
     try {
       FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+        print('Got a message whilst in the foreground!: ${message.data}');
         if (mounted) {
-          showDialog(
-            context: context,
-            builder: (context) {
-              return Center(
-                child: AlertDialog(
-                  constraints: BoxConstraints(
-                    minWidth: 300.w,
-                    minHeight: 320.h,
-                    maxWidth: 300.w,
-                    maxHeight: 320.h,
+          message.data["type"].toString().contains("booking")
+              ? showDialog(
+                  context: context,
+                  builder: (context) => StatefulBuilder(
+                    builder: (context, setState) {
+                      return BookingNotificationWidget(message: message);
+                    },
                   ),
-                  backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-                  title: Center(
-                    child: Text(
-                      message.notification?.title ??
-                          LocaleKeys.notificationPage_noTitle.tr(),
-                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                        fontFamily: FontConstants.fontFamily(context.locale),
-                      ),
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                  icon: Icon(
-                    Icons.notifications_active,
-                    color: Theme.of(context).colorScheme.primary,
-                    shadows: [
-                      BoxShadow(
-                        color: Theme.of(context).shadowColor,
-                        blurRadius: 8.r,
-                        offset: Offset(0, 4.h),
-                      ),
-                    ],
-                    size: 28.sp,
-                  ).animate().shake(duration: 1600.ms),
-                  content: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 8.w),
-                        child: Text(
-                          "${LocaleKeys.notificationPage_body.tr()}:",
-                          style: Theme.of(context).textTheme.labelMedium
-                              ?.copyWith(
-                                fontFamily: FontConstants.fontFamily(
-                                  context.locale,
-                                ),
-                              ),
-                          overflow: TextOverflow.ellipsis,
+                )
+              : setState(() {
+                  if (!(notifications?.contains(message) ?? true) &&
+                      ((notifications?.length ?? 0) <= 10)) {
+                    notifications?.add(message);
+                  } else if ((notifications?.length ?? 0) >= 10) {
+                    notifications = [
+                      RemoteMessage(
+                        messageId: "more_than_10_notifications",
+                        notification: RemoteNotification(
+                          title: LocaleKeys
+                              .notificationPage_youHaveMoreThen10Notifications
+                              .tr(),
+                          body: LocaleKeys
+                              .notificationPage_youHaveMoreThen10Notifications
+                              .tr(),
                         ),
+                        data: {"sender_image": ""},
                       ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 8.w,
-                          vertical: 8.h,
-                        ),
-                        child: Container(
-                          height: 90.h,
-                          width: 284.w,
-                          padding: EdgeInsets.symmetric(
-                            vertical: 16.h,
-                            horizontal: 16.w,
-                          ),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8.r),
-                            color: Theme.of(
-                              context,
-                            ).colorScheme.primaryContainer,
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                message.notification?.body ??
-                                    LocaleKeys.notificationPage_noBody.tr(),
-                                style: Theme.of(context).textTheme.labelMedium
-                                    ?.copyWith(
-                                      fontFamily: FontConstants.fontFamily(
-                                        context.locale,
-                                      ),
-                                    ),
-                                textAlign: TextAlign.start,
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                  actions: [
-                    TextButton(
-                      onPressed: () {
-                        context.pop();
-                      },
-                      child: Text(
-                        LocaleKeys.notificationPage_ok.tr(),
-                        style: Theme.of(context).textTheme.labelMedium
-                            ?.copyWith(
-                              fontFamily: FontConstants.fontFamily(
-                                context.locale,
-                              ),
-                              color: Theme.of(context).primaryColor,
-                            ),
-                      ),
-                    ),
-                    TextButton(
-                      onPressed: () {
-                        context.pop();
-                        context.pushNamed(
-                          RoutesName.serviceInfoPage,
-                          pathParameters: {
-                            "serviceId": message.data["booking_id"].toString(),
-                          },
-                        );
-                      },
-                      child: Text(
-                        LocaleKeys.notificationPage_show.tr(),
-                        style: Theme.of(context).textTheme.labelMedium
-                            ?.copyWith(
-                              fontFamily: FontConstants.fontFamily(
-                                context.locale,
-                              ),
-                              color: Theme.of(context).primaryColor,
-                            ),
-                      ),
-                    ),
-                  ],
-                ),
-              );
-            },
-          );
+                    ];
+                  }
+                });
         }
       });
     } catch (e) {
@@ -512,6 +417,36 @@ class _MainPageState extends State<MainPage> {
             ),
           ),
         ),
+        if (notifications != null && notifications?.isNotEmpty == true)
+          Positioned(
+            top: 10.h,
+            left: 0,
+            right: 0,
+            child: SizedBox(
+              height: 100.h + ((notifications?.length ?? 0)) * 5.h,
+              width: 360.w,
+              child: Stack(
+                key: ValueKey(notifications?.length ?? UniqueKey()),
+                children: [
+                  ...List.generate(notifications?.length ?? 0, (index) {
+                    return Positioned(
+                      top: index * 5.h,
+                      left: 0,
+                      right: 0,
+                      child: MessageNotificationWidget(
+                        message: notifications?[index],
+                        onRemove: (val) {
+                          setState(() {
+                            notifications?.removeAt(index);
+                          });
+                        },
+                      ),
+                    );
+                  }),
+                ],
+              ),
+            ),
+          ).animate().slideY(duration: 500.ms, begin: -1.0),
       ],
     );
   }

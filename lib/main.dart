@@ -4,20 +4,20 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:hosta_provider/core/data_state/data_state.dart';
-import 'package:hosta_provider/core/resource/common_service/common_service.dart';
+
 import 'package:hosta_provider/core/resource/firebase_common_services/firebase_messageing_service.dart';
-import 'package:hosta_provider/features/login_page/domain/entities/login_state_entity.dart';
-import 'package:hosta_provider/features/refresh_token/data/models/refresh_token_model.dart';
-import 'package:hosta_provider/features/refresh_token/domain/usecases/refresh_token_usecase.dart';
+import 'package:hosta_provider/core/resource/socketio_service.dart/socketio_service.dart';
+
 import 'config/app/app.dart';
 import 'config/app/app_preferences.dart';
 import 'core/constants/language_constant.dart';
 import 'core/dependencies_injection.dart';
-import 'core/resource/rst_stream/rst_stream.dart';
-import 'core/util/helper/helper.dart';
-import 'package:socket_io_client/socket_io_client.dart' as IO;
 
+import 'core/enums/login_state_enum.dart';
+import 'core/resource/socketio_service.dart/home_socket_initializer.dart';
+import 'core/util/helper/helper.dart';
+
+final socketService = getItInstance<SocketService>();
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   // If you're going to use other Firebase services in the background, such as Firestore,
   // make sure you call `initializeApp` before using other Firebase services.
@@ -54,7 +54,11 @@ void main() async {
   getItInstance<FirebaseMessagingService>().notificationPermission();
 
   getItInstance<FirebaseMessagingService>().getDeviceToken();
-
+  if (getItInstance<AppPreferences>().getUserInfo()?.loginStateEnum ==
+      LoginStateEnum.logined) {
+    socketService.connect();
+    initHomeAndChatSocketListeners();
+  }
   runApp(
     EasyLocalization(
       supportedLocales: LanguageConstant.supportedLocales,

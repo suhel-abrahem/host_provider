@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
+import 'package:hosta_provider/core/resource/socketio_service.dart/socketio_service.dart';
 import 'package:hosta_provider/features/notification_page/domain/entities/notification_entity.dart';
 import '../features/chat/data/models/chat_model.dart';
 import '../features/chat/data/repositories/chat_repository_implements.dart';
@@ -135,6 +136,7 @@ Future<void> initDependencies() async {
   getItInstance.registerSingleton<FirebaseMessagingService>(
     FirebaseMessagingService(),
   );
+  getItInstance.registerLazySingleton<SocketService>(() => SocketService());
   //login feature dependencies
   getItInstance.registerSingleton<LoginStateEntity>(LoginStateEntity());
   getItInstance.registerSingleton<LoginModel>(LoginModel());

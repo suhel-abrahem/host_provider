@@ -10,6 +10,8 @@ import '../../../../core/enums/login_state_enum.dart';
 import '../../../../core/resource/custom_widget/snake_bar_widget/snake_bar_widget.dart';
 
 import '../../../../core/resource/firebase_common_services/firebase_messageing_service.dart';
+import '../../../../core/resource/socketio_service.dart/home_socket_initializer.dart';
+import '../../../../main.dart';
 import '../../../login_page/domain/entities/login_state_entity.dart';
 import '../../data/models/otp_model.dart';
 import '../bloc/otp_page_bloc.dart';
@@ -63,16 +65,22 @@ class _OtpPagePageState extends State<OtpPagePage> {
               );
             },
             loading: () {},
-            verified: (data) {
+            verified: (data) async {
               LoginStateEntity? loginStateEntity = data;
               loginStateEntity = loginStateEntity?.copyWith(
                 loginStateEnum: LoginStateEnum.logined,
                 created_at: DateTime.now().toString(),
               );
-              getItInstance<AppPreferences>().setUserInfo(
+              await getItInstance<AppPreferences>().setUserInfo(
                 loginStateEntity: loginStateEntity,
               );
-
+              if (getItInstance<AppPreferences>()
+                      .getUserInfo()
+                      ?.loginStateEnum ==
+                  LoginStateEnum.logined) {
+                socketService.connect();
+                initHomeAndChatSocketListeners();
+              }
               context.goNamed(RoutesName.homePage);
             },
             resent: (LoginStateEntity? loginStateEntity) {

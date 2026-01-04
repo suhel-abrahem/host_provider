@@ -284,7 +284,8 @@
     "notificatios": "ئاگاداریەکان",
     "new": "نوێ",
     "today": "ئەمڕۆ",
-    "earlier": "پێشتر"
+    "earlier": "پێشتر",
+    "youHaveMoreThen10Notifications": "تۆ زیاتر لە 10 ئاگاداری هەیە"
   },
   "settingsPage": {
     "title": "شاشەی ڕێکخستنەکان",

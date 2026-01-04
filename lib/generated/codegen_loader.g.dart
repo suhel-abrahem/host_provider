@@ -300,7 +300,8 @@ class CodegenLoader extends AssetLoader{
     "notificatios": "الإشعارات",
     "new": "جديد",
     "today": "اليوم",
-    "earlier": "سابقاً"
+    "earlier": "سابقاً",
+    "youHaveMoreThen10Notifications": "لديك أكثر من 10 إشعارات"
   },
   "settingsPage": {
     "title": "صفحة الإعدادات",
@@ -620,7 +621,8 @@ static const Map<String,dynamic> _en = {
     "notificatios": "Notifications",
     "new": "New",
     "today": "Today",
-    "earlier": "Earlier"
+    "earlier": "Earlier",
+    "youHaveMoreThen10Notifications": "You have more than 10 notifications"
   },
   "settingsPage": {
     "title": "Settings page",
@@ -940,7 +942,8 @@ static const Map<String,dynamic> _fa = {
     "notificatios": "ئاگاداریەکان",
     "new": "نوێ",
     "today": "ئەمڕۆ",
-    "earlier": "پێشتر"
+    "earlier": "پێشتر",
+    "youHaveMoreThen10Notifications": "تۆ زیاتر لە 10 ئاگاداری هەیە"
   },
   "settingsPage": {
     "title": "شاشەی ڕێکخستنەکان",
