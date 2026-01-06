@@ -79,6 +79,7 @@ class ConversionWidget extends StatelessWidget {
                   style: Theme.of(context).textTheme.labelLarge?.copyWith(
                     fontFamily: FontConstants.fontFamily(context.locale),
                   ),
+                  overflow: TextOverflow.ellipsis,
                 ),
                 Row(
                   children: [
@@ -90,6 +91,7 @@ class ConversionWidget extends StatelessWidget {
                         fontFamily: FontConstants.fontFamily(context.locale),
                         fontWeight: FontWeight.bold,
                       ),
+                      overflow: TextOverflow.ellipsis,
                     ),
                     if (messageEntity?.message_type == "image")
                       Text(

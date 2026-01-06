@@ -59,7 +59,7 @@ class _LoginPageState extends State<LoginPage> {
               context: context,
             );
           } else if (state is LoginStateLoaded) {
-            getItInstance<AppPreferences>().setUserInfo(
+            await getItInstance<AppPreferences>().setUserInfo(
               loginStateEntity: state.loginStateEntity?.copyWith(
                 loginStateEnum: LoginStateEnum.logined,
                 created_at: DateTime.now().toString(),

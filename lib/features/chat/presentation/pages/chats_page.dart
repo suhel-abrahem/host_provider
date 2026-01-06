@@ -71,17 +71,20 @@ class _ChatsPageState extends State<ChatsPage> {
                       itemCount: data?.length ?? 0,
                       itemBuilder: (context, index) => Padding(
                         padding: EdgeInsets.zero,
-                        child: ConversionWidget(
-                          chatId: data?[index]?.id,
-                          messageEntity: MessageEntity.fromJson(
-                            data?[index]?.last_message ?? {},
+                        child: SizedBox(
+                          width: 1.sw,
+                          child: ConversionWidget(
+                            chatId: data?[index]?.id,
+                            messageEntity: MessageEntity.fromJson(
+                              data?[index]?.last_message ?? {},
+                            ),
+                            bookingNumber: data?[index]?.booking_number,
+                            unreadCount: data?[index]?.unread_count,
+                            otherParticipantEntity:
+                                OtherParticipantEntity.fromJson(
+                                  data?[index]?.other_participant ?? {},
+                                ),
                           ),
-                          bookingNumber: data?[index]?.booking_number,
-                          unreadCount: data?[index]?.unread_count,
-                          otherParticipantEntity:
-                              OtherParticipantEntity.fromJson(
-                                data?[index]?.other_participant ?? {},
-                              ),
                         ),
                       ),
                     ),

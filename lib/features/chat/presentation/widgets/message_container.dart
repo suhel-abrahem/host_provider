@@ -4,6 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '/config/theme/app_theme.dart';
 import '/core/constants/font_constants.dart';
 import '/core/dependencies_injection.dart';
@@ -33,10 +34,22 @@ class MessageContainer extends StatefulWidget {
 class _MessageContainerState extends State<MessageContainer> {
   MessageEntity? messageEntity;
   ChatModel chatModel = ChatModel();
+  bool isGif = false;
   @override
   void initState() {
-    final String? messageType = widget.messageEntity?.message_type;
-    messageEntity = widget.messageEntity;
+    String? messageType = widget.messageEntity?.message_type;
+    String lower =
+        widget.messageEntity?.content?.last.toString().toLowerCase() ?? '';
+    if (lower.startsWith('http') &&
+        (lower.endsWith('.gif') ||
+            lower.contains('tenor.com') ||
+            lower.contains('giphy.com'))) {
+      print("Detected GIF URL: $lower");
+
+      isGif = true;
+    }
+
+    messageEntity = widget.messageEntity?.copyWith(message_type: messageType);
     chatModel = ChatModel(
       id: widget.chatId,
       content: messageType == "text"
@@ -44,12 +57,13 @@ class _MessageContainerState extends State<MessageContainer> {
           : null,
       attachments: widget.messageEntity?.files,
     );
-    print("MessageEntity in initState: ${widget.messageEntity?.content?.last}");
+
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
+    print("Building MessageContainer for message: $isGif}");
     return BlocProvider<SendChatBloc>(
       create: (context) => getItInstance<SendChatBloc>()
         ..add(
@@ -59,7 +73,6 @@ class _MessageContainerState extends State<MessageContainer> {
         ),
       child: BlocListener<SendChatBloc, SendChatState>(
         listener: (context, state) {
-          print("SendChatState: $state");
           if (state is SendChatStateLoading) {
             setState(() {
               messageEntity = messageEntity?.copyWith(
@@ -68,9 +81,6 @@ class _MessageContainerState extends State<MessageContainer> {
             });
           } else if (state is SendChatStateSent) {
             setState(() {
-              print(
-                "Message sent successfully: ${state.messageEntity?.content}",
-              );
               messageEntity = state.messageEntity?.copyWith(
                 uploadingState: UploadingStateEnum.uploaded,
                 me: true,
@@ -94,7 +104,8 @@ class _MessageContainerState extends State<MessageContainer> {
             child: Stack(
               children: [
                 Container(
-                  padding: widget.messageEntity?.message_type == "image"
+                  padding:
+                      (widget.messageEntity?.message_type == "image" || isGif)
                       ? EdgeInsets.zero
                       : EdgeInsets.symmetric(vertical: 8, horizontal: 16),
                   margin: EdgeInsetsDirectional.only(
@@ -126,7 +137,7 @@ class _MessageContainerState extends State<MessageContainer> {
                         ? Theme.of(context).colorScheme.primary
                         : Theme.of(context).colorScheme.primaryContainer,
                   ),
-                  child: widget.messageEntity?.message_type == "image"
+                  child: (messageEntity?.message_type == "image" || isGif)
                       ? ClipRRect(
                           borderRadius: BorderRadiusGeometry.circular(12.r),
                           child: GridView.builder(
@@ -162,14 +173,28 @@ class _MessageContainerState extends State<MessageContainer> {
                                                 borderRadius:
                                                     BorderRadius.circular(12.r),
                                               ),
-                                              child: FittedBox(
-                                                fit: BoxFit.fill,
-                                                child: Image.file(
-                                                  messageEntity
-                                                          ?.files?[index] ??
-                                                      File(""),
-                                                ),
-                                              ),
+                                              child: isGif
+                                                  ? ImageWidget(
+                                                      boxFit: BoxFit.cover,
+                                                      imageUrl:
+                                                          messageEntity
+                                                              ?.content
+                                                              ?.last ??
+                                                          "",
+
+                                                      errorWidget: Icon(
+                                                        Icons
+                                                            .broken_image_outlined,
+                                                      ),
+                                                    )
+                                                  : FittedBox(
+                                                      fit: BoxFit.fill,
+                                                      child: Image.file(
+                                                        messageEntity
+                                                                ?.files?[index] ??
+                                                            File(""),
+                                                      ),
+                                                    ),
                                             ),
                                           );
                                         },
@@ -189,13 +214,26 @@ class _MessageContainerState extends State<MessageContainer> {
                                           Theme.of(context).defaultBorderSide,
                                         ),
                                       ),
-                                      child: FittedBox(
-                                        fit: BoxFit.cover,
-                                        child: Image.file(
-                                          messageEntity?.files?[index] ??
-                                              File(""),
-                                        ),
-                                      ),
+                                      child: isGif
+                                          ? ImageWidget(
+                                              boxFit: BoxFit.cover,
+                                              imageUrl:
+                                                  messageEntity
+                                                      ?.content
+                                                      ?.last ??
+                                                  "",
+
+                                              errorWidget: Icon(
+                                                Icons.broken_image_outlined,
+                                              ),
+                                            )
+                                          : FittedBox(
+                                              fit: BoxFit.cover,
+                                              child: Image.file(
+                                                messageEntity?.files?[index] ??
+                                                    File(""),
+                                              ),
+                                            ),
                                     ),
                                   )
                                 : Container(
@@ -205,20 +243,33 @@ class _MessageContainerState extends State<MessageContainer> {
                                         Theme.of(context).defaultBorderSide,
                                       ),
                                     ),
-                                    child: ImageWidget(
-                                      boxFit: BoxFit.cover,
+                                    child: isGif
+                                        ? ImageWidget(
+                                            boxFit: BoxFit.cover,
+                                            imageUrl:
+                                                messageEntity?.content?.last ??
+                                                "",
 
-                                      imageUrl:
-                                          messageEntity?.content?[index] ?? '',
-                                      errorIconSize: 50.sp,
-                                      errorWidget: Icon(
-                                        Icons.broken_image_outlined,
-                                        size: 50.sp,
-                                        color: Theme.of(
-                                          context,
-                                        ).colorScheme.onErrorContainer,
-                                      ),
-                                    ),
+                                            errorWidget: Icon(
+                                              Icons.broken_image_outlined,
+                                            ),
+                                          )
+                                        : ImageWidget(
+                                            boxFit: BoxFit.cover,
+
+                                            imageUrl:
+                                                messageEntity
+                                                    ?.content?[index] ??
+                                                '',
+                                            errorIconSize: 50.sp,
+                                            errorWidget: Icon(
+                                              Icons.broken_image_outlined,
+                                              size: 50.sp,
+                                              color: Theme.of(
+                                                context,
+                                              ).colorScheme.onErrorContainer,
+                                            ),
+                                          ),
                                   ),
                           ),
                         )
