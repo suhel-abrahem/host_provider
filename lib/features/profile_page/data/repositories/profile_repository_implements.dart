@@ -442,4 +442,60 @@ class ProfileRepositoryImplements implements ProfileRepository {
     }
     return dataState;
   }
+
+  @override
+  Future<DataState<DataState<void>?>?> deleteAccount(
+    ProfileModel? profileModel,
+  ) async {
+    ConnectivityResult? connectivityResult;
+    await _checkConnectivity.checkConnectivity().then((onValue) {
+      connectivityResult = onValue.last;
+    });
+    if (connectivityResult == ConnectivityResult.none) {
+      return NOInternetDataState();
+    }
+    DataState<DataState<void>?>? dataState;
+    CommonService commonService = CommonService(
+      headers: {
+        'Authorization': 'Bearer ${profileModel?.authToken}',
+        "Content_type": "application/json",
+      },
+    );
+    print('Deleting account for user password: ${profileModel?.password}');
+    try {
+      await commonService
+          .delete(
+            ApiConstant.deleteAccountEndpoint,
+            params: {
+              "confirmation": "DELETE",
+              "password": profileModel?.password,
+            },
+          )
+          .then((response) {
+            print('Delete account response: $response');
+            if (response is DataSuccess) {
+              dataState = DataSuccess<DataState<void>?>(data: null);
+              return dataState;
+            } else if (response is UnauthenticatedDataState) {
+              dataState = UnauthenticatedDataState(
+                error:
+                    response.error ??
+                    'Something went wrong, please try again later.',
+              );
+              return dataState;
+            } else {
+              dataState = DataFailed(
+                error:
+                    response.error ??
+                    'Something went wrong, please try again later.',
+              );
+              return dataState;
+            }
+          });
+    } catch (e) {
+      dataState = DataFailed(error: e.toString());
+      return dataState;
+    }
+    return dataState;
+  }
 }

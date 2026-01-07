@@ -12,6 +12,7 @@ void initHomeAndChatSocketListeners() {
     event: "notification:unread_count",
     callback: (data) {
       notificationStreamSocket.addResponse(data["unread_count"].toString());
+      lastNotificationCount = data["unread_count"].toString();
     },
   );
 
@@ -19,6 +20,7 @@ void initHomeAndChatSocketListeners() {
     event: "notification:new",
     callback: (data) {
       notificationStreamSocket.addResponse(data["unread_count"].toString());
+      lastNotificationCount = data["unread_count"].toString();
     },
   );
 
@@ -26,6 +28,7 @@ void initHomeAndChatSocketListeners() {
     event: "chat:unread_messages",
     callback: (data) {
       chatUnReadCountStreamSocket.addResponse(data["unread_count"]);
+      lastChatUnReadCount = data["unread_count"].toString();
     },
   );
 
@@ -39,6 +42,7 @@ void initHomeAndChatSocketListeners() {
       chatMessageStreamSocket.addResponse(
         MessageEntity.fromJson(data["message"]).copyWith(me: false),
       );
+      lastChatUnReadCount = data["unread_count"].toString();
     },
   );
 

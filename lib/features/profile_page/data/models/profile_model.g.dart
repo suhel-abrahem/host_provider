@@ -11,6 +11,7 @@ _ProfileModel _$ProfileModelFromJson(Map<String, dynamic> json) =>
       acceptLanguage: json['acceptLanguage'] as String? ?? "",
       authToken: json['authToken'] as String? ?? "",
       id: json['id'] as String? ?? "",
+      password: json['password'] as String? ?? "",
       profile: json['profile'] == null
           ? const SetProfileModel()
           : SetProfileModel.fromJson(json['profile'] as Map<String, dynamic>),
@@ -21,5 +22,6 @@ Map<String, dynamic> _$ProfileModelToJson(_ProfileModel instance) =>
       'acceptLanguage': instance.acceptLanguage,
       'authToken': instance.authToken,
       'id': instance.id,
+      'password': instance.password,
       'profile': instance.profile,
     };

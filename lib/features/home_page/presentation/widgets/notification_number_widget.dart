@@ -2,13 +2,21 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '/config/route/routes_manager.dart';
+
+import '/core/resource/rst_stream/rst_stream.dart';
+import '../../../../core/enums/count_type_enum.dart';
 import '/core/constants/font_constants.dart';
 
 class BuildWithSocketStream extends StatefulWidget {
   final ValueChanged<int>? onValueChanged;
   final Stream? stream;
-  const BuildWithSocketStream({super.key, this.onValueChanged, this.stream});
+  final CountTypeEnum? countType;
+  const BuildWithSocketStream({
+    super.key,
+    this.onValueChanged,
+    this.stream,
+    this.countType = CountTypeEnum.notification,
+  });
 
   @override
   State<BuildWithSocketStream> createState() => _BuildWithSocketStreamState();
@@ -25,8 +33,19 @@ class _BuildWithSocketStreamState extends State<BuildWithSocketStream> {
     return StreamBuilder(
       stream: widget.stream,
       builder: (BuildContext context, AsyncSnapshot snapshot) {
-        lastNotificationCount = snapshot.data?.toString() ?? "0";
-        String value = snapshot.data?.toString() ?? "";
+        String? value;
+        if (widget.countType == CountTypeEnum.notification) {
+          if (snapshot.data != null) {
+            lastNotificationCount = snapshot.data?.toString();
+          }
+          value = lastNotificationCount ?? "0";
+        } else {
+          if (snapshot.data != null) {
+            lastChatUnReadCount = snapshot.data?.toString();
+          }
+          value = lastChatUnReadCount ?? "0";
+        }
+
         widget.onValueChanged?.call(int.tryParse(value) ?? 0);
         return AnimatedOpacity(
           opacity: value == "0" ? 0.0 : 1.0,

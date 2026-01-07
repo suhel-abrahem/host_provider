@@ -1,0 +1,1 @@
+enum CountTypeEnum { notification, chatUnRead }

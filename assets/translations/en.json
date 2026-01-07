@@ -199,7 +199,9 @@
     "languagesIspeak": "Languages I speak",
     "message": "Message",
     "profileImage": "Profile image",
-    "dob": "Date of Birth"
+    "dob": "Date of Birth",
+    "deleteAccountWarning": "By deleting your account, you will lose access to all your data and will not be able to recover it.",
+    "areYouSure": "Are you sure?"
   },
   "myServicesPage": {
     "title": "My services page",

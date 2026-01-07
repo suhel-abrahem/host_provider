@@ -32,7 +32,6 @@ import '../../features/profile_page/presentation/pages/help_page_page.dart';
 import '../../features/profile_page/presentation/pages/setting_page_page.dart';
 
 String? currentPath = RoutesPath.homePage;
-String? lastNotificationCount = "0";
 
 class RoutesName {
   static String homePage = "homePage";

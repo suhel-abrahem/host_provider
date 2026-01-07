@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ProfileModel {
 
- String? get acceptLanguage; String? get authToken; String? get id; SetProfileModel? get profile;
+ String? get acceptLanguage; String? get authToken; String? get id; String? get password; SetProfileModel? get profile;
 /// Create a copy of ProfileModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $ProfileModelCopyWith<ProfileModel> get copyWith => _$ProfileModelCopyWithImpl<P
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProfileModel&&(identical(other.acceptLanguage, acceptLanguage) || other.acceptLanguage == acceptLanguage)&&(identical(other.authToken, authToken) || other.authToken == authToken)&&(identical(other.id, id) || other.id == id)&&(identical(other.profile, profile) || other.profile == profile));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ProfileModel&&(identical(other.acceptLanguage, acceptLanguage) || other.acceptLanguage == acceptLanguage)&&(identical(other.authToken, authToken) || other.authToken == authToken)&&(identical(other.id, id) || other.id == id)&&(identical(other.password, password) || other.password == password)&&(identical(other.profile, profile) || other.profile == profile));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,acceptLanguage,authToken,id,profile);
+int get hashCode => Object.hash(runtimeType,acceptLanguage,authToken,id,password,profile);
 
 @override
 String toString() {
-  return 'ProfileModel(acceptLanguage: $acceptLanguage, authToken: $authToken, id: $id, profile: $profile)';
+  return 'ProfileModel(acceptLanguage: $acceptLanguage, authToken: $authToken, id: $id, password: $password, profile: $profile)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $ProfileModelCopyWith<$Res>  {
   factory $ProfileModelCopyWith(ProfileModel value, $Res Function(ProfileModel) _then) = _$ProfileModelCopyWithImpl;
 @useResult
 $Res call({
- String? acceptLanguage, String? authToken, String? id, SetProfileModel? profile
+ String? acceptLanguage, String? authToken, String? id, String? password, SetProfileModel? profile
 });
 
 
@@ -65,11 +65,12 @@ class _$ProfileModelCopyWithImpl<$Res>
 
 /// Create a copy of ProfileModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? acceptLanguage = freezed,Object? authToken = freezed,Object? id = freezed,Object? profile = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? acceptLanguage = freezed,Object? authToken = freezed,Object? id = freezed,Object? password = freezed,Object? profile = freezed,}) {
   return _then(_self.copyWith(
 acceptLanguage: freezed == acceptLanguage ? _self.acceptLanguage : acceptLanguage // ignore: cast_nullable_to_non_nullable
 as String?,authToken: freezed == authToken ? _self.authToken : authToken // ignore: cast_nullable_to_non_nullable
 as String?,id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String?,password: freezed == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
 as String?,profile: freezed == profile ? _self.profile : profile // ignore: cast_nullable_to_non_nullable
 as SetProfileModel?,
   ));
@@ -168,10 +169,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? acceptLanguage,  String? authToken,  String? id,  SetProfileModel? profile)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? acceptLanguage,  String? authToken,  String? id,  String? password,  SetProfileModel? profile)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ProfileModel() when $default != null:
-return $default(_that.acceptLanguage,_that.authToken,_that.id,_that.profile);case _:
+return $default(_that.acceptLanguage,_that.authToken,_that.id,_that.password,_that.profile);case _:
   return orElse();
 
 }
@@ -189,10 +190,10 @@ return $default(_that.acceptLanguage,_that.authToken,_that.id,_that.profile);cas
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? acceptLanguage,  String? authToken,  String? id,  SetProfileModel? profile)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? acceptLanguage,  String? authToken,  String? id,  String? password,  SetProfileModel? profile)  $default,) {final _that = this;
 switch (_that) {
 case _ProfileModel():
-return $default(_that.acceptLanguage,_that.authToken,_that.id,_that.profile);case _:
+return $default(_that.acceptLanguage,_that.authToken,_that.id,_that.password,_that.profile);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -209,10 +210,10 @@ return $default(_that.acceptLanguage,_that.authToken,_that.id,_that.profile);cas
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? acceptLanguage,  String? authToken,  String? id,  SetProfileModel? profile)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? acceptLanguage,  String? authToken,  String? id,  String? password,  SetProfileModel? profile)?  $default,) {final _that = this;
 switch (_that) {
 case _ProfileModel() when $default != null:
-return $default(_that.acceptLanguage,_that.authToken,_that.id,_that.profile);case _:
+return $default(_that.acceptLanguage,_that.authToken,_that.id,_that.password,_that.profile);case _:
   return null;
 
 }
@@ -224,12 +225,13 @@ return $default(_that.acceptLanguage,_that.authToken,_that.id,_that.profile);cas
 @JsonSerializable()
 
 class _ProfileModel implements ProfileModel {
-  const _ProfileModel({this.acceptLanguage = "", this.authToken = "", this.id = "", this.profile = const SetProfileModel()});
+  const _ProfileModel({this.acceptLanguage = "", this.authToken = "", this.id = "", this.password = "", this.profile = const SetProfileModel()});
   factory _ProfileModel.fromJson(Map<String, dynamic> json) => _$ProfileModelFromJson(json);
 
 @override@JsonKey() final  String? acceptLanguage;
 @override@JsonKey() final  String? authToken;
 @override@JsonKey() final  String? id;
+@override@JsonKey() final  String? password;
 @override@JsonKey() final  SetProfileModel? profile;
 
 /// Create a copy of ProfileModel
@@ -245,16 +247,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProfileModel&&(identical(other.acceptLanguage, acceptLanguage) || other.acceptLanguage == acceptLanguage)&&(identical(other.authToken, authToken) || other.authToken == authToken)&&(identical(other.id, id) || other.id == id)&&(identical(other.profile, profile) || other.profile == profile));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ProfileModel&&(identical(other.acceptLanguage, acceptLanguage) || other.acceptLanguage == acceptLanguage)&&(identical(other.authToken, authToken) || other.authToken == authToken)&&(identical(other.id, id) || other.id == id)&&(identical(other.password, password) || other.password == password)&&(identical(other.profile, profile) || other.profile == profile));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,acceptLanguage,authToken,id,profile);
+int get hashCode => Object.hash(runtimeType,acceptLanguage,authToken,id,password,profile);
 
 @override
 String toString() {
-  return 'ProfileModel(acceptLanguage: $acceptLanguage, authToken: $authToken, id: $id, profile: $profile)';
+  return 'ProfileModel(acceptLanguage: $acceptLanguage, authToken: $authToken, id: $id, password: $password, profile: $profile)';
 }
 
 
@@ -265,7 +267,7 @@ abstract mixin class _$ProfileModelCopyWith<$Res> implements $ProfileModelCopyWi
   factory _$ProfileModelCopyWith(_ProfileModel value, $Res Function(_ProfileModel) _then) = __$ProfileModelCopyWithImpl;
 @override @useResult
 $Res call({
- String? acceptLanguage, String? authToken, String? id, SetProfileModel? profile
+ String? acceptLanguage, String? authToken, String? id, String? password, SetProfileModel? profile
 });
 
 
@@ -282,11 +284,12 @@ class __$ProfileModelCopyWithImpl<$Res>
 
 /// Create a copy of ProfileModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? acceptLanguage = freezed,Object? authToken = freezed,Object? id = freezed,Object? profile = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? acceptLanguage = freezed,Object? authToken = freezed,Object? id = freezed,Object? password = freezed,Object? profile = freezed,}) {
   return _then(_ProfileModel(
 acceptLanguage: freezed == acceptLanguage ? _self.acceptLanguage : acceptLanguage // ignore: cast_nullable_to_non_nullable
 as String?,authToken: freezed == authToken ? _self.authToken : authToken // ignore: cast_nullable_to_non_nullable
 as String?,id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String?,password: freezed == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
 as String?,profile: freezed == profile ? _self.profile : profile // ignore: cast_nullable_to_non_nullable
 as SetProfileModel?,
   ));

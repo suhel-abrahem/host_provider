@@ -17,6 +17,7 @@ import '../../../../core/dependencies_injection.dart';
 import '../../../../core/resource/common_state_widget/error_state_widget.dart';
 import '../../../../core/resource/common_state_widget/no_data_state_widget.dart';
 import '../../../../core/resource/common_state_widget/no_internet_state_widget.dart';
+import '../../../../core/resource/common_state_widget/unAuth_state_widget.dart';
 import '../../../../core/resource/custom_widget/custom_input_field/custom_input_field.dart';
 import '../../../../core/resource/custom_widget/snake_bar_widget/snake_bar_widget.dart';
 import '../../../../core/resource/image_widget.dart';
@@ -32,6 +33,7 @@ import '../../data/models/working_time_model.dart';
 import '../../domain/entities/language_entity.dart';
 import '../../domain/entities/profile_entity.dart';
 import '../../domain/entities/working_hours_entity.dart';
+import '../bloc/delete_account_bloc.dart';
 import '../bloc/get_profile_bloc.dart';
 import '../bloc/get_working_time_bloc.dart';
 import '../bloc/languges_bloc.dart';
@@ -43,6 +45,7 @@ import '../../../signup_page/data/models/city_model.dart';
 import '../../../signup_page/domain/entities/city_entity.dart';
 import '../../../signup_page/presentation/bloc/get_cities_bloc.dart';
 import '../widgets/day_container_widget.dart';
+import '../widgets/delete_account_widget.dart';
 
 class AccountPagePage extends StatefulWidget {
   const AccountPagePage({super.key});
@@ -81,6 +84,8 @@ class _AccountPagePageState extends State<AccountPagePage> {
   List<WorkingTimeModel?>? scheduleList = [];
   bool isLanguageISpeakError = false;
   List<LanguageEntity?>? preferredLanguages = [];
+  String? password;
+  GlobalKey<FormState> deleteAccountFormKey = GlobalKey<FormState>();
   @override
   void initState() {
     scheduleList = [
@@ -1984,6 +1989,548 @@ class _AccountPagePageState extends State<AccountPagePage> {
                       border: Theme.of(context).defaultBorderSide,
                     ),
               ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
+              child:
+                  Container(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 16.w,
+                      vertical: 16.h,
+                    ),
+                    child: BlocProvider(
+                      create: (context) =>
+                          getItInstance<DeleteAccountBloc>()
+                            ..add(DeleteAccountEvent.started()),
+                      child: BlocListener<DeleteAccountBloc, DeleteAccountState>(
+                        listener: (context, state) async {
+                          if (state is DeleteAccountStateSuccess) {
+                            showMessage(
+                              message: LocaleKeys.common_success.tr(),
+                              context: context,
+                            );
+                            setState(() {
+                              password = null;
+                            });
+                            context.pop();
+                          } else if (state is DeleteAccountStateFailure) {
+                            showMessage(
+                              message: LocaleKeys.common_error.tr(),
+                              context: context,
+                            );
+                            setState(() {
+                              password = null;
+                            });
+                          } else if (state
+                              is DeleteAccountStateUnauthenticated) {
+                            await getItInstance<AppPreferences>().setUserInfo(
+                              loginStateEntity: LoginStateEntity(),
+                            );
+                            setState(() {
+                              password = null;
+                            });
+                          }
+                        },
+                        child: BlocBuilder<DeleteAccountBloc, DeleteAccountState>(
+                          buildWhen: (previous, current) => animationDone,
+                          builder: (bContext, state) => state.when(
+                            initial: () => Builder(
+                              builder: (context) {
+                                return DeleteAccountWidget(
+                                  onPressed: () async {
+                                    await showDialog(
+                                      context: bContext,
+
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          backgroundColor: Theme.of(context)
+                                              .scaffoldBackgroundColor
+                                              .withValues(alpha: 0.7),
+                                          title: Text(
+                                            LocaleKeys.profilePage_areYouSure
+                                                .tr(),
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .labelLarge
+                                                ?.copyWith(
+                                                  fontFamily:
+                                                      FontConstants.fontFamily(
+                                                        context.locale,
+                                                      ),
+                                                ),
+                                          ),
+                                          content: SizedBox(
+                                            height: 200.h,
+                                            child: Form(
+                                              key: deleteAccountFormKey,
+                                              autovalidateMode: AutovalidateMode
+                                                  .onUserInteraction,
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text(
+                                                    LocaleKeys
+                                                        .profilePage_deleteAccountWarning
+                                                        .tr(),
+
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .labelLarge
+                                                        ?.copyWith(
+                                                          fontFamily:
+                                                              FontConstants.fontFamily(
+                                                                context.locale,
+                                                              ),
+                                                        ),
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                          vertical: 12.h,
+                                                        ),
+                                                    child: CustomInputField(
+                                                      label: LocaleKeys
+                                                          .loginPage_password
+                                                          .tr(),
+                                                      obscureText: true,
+                                                      onChanged: (value) {
+                                                        password = value
+                                                            .toString();
+                                                      },
+                                                      validator: (value) {
+                                                        if (value == null ||
+                                                            value
+                                                                .toString()
+                                                                .trim()
+                                                                .isEmpty) {
+                                                          return LocaleKeys
+                                                              .loginPage_passwordIsRequired
+                                                              .tr();
+                                                        }
+                                                        return null;
+                                                      },
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          actions: <Widget>[
+                                            TextButton(
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                              child: Text(
+                                                LocaleKeys.common_cancel.tr(),
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .labelLarge
+                                                    ?.copyWith(
+                                                      fontFamily:
+                                                          FontConstants.fontFamily(
+                                                            context.locale,
+                                                          ),
+                                                    ),
+                                              ),
+                                            ),
+                                            TextButton(
+                                              onPressed:
+                                                  deleteAccountFormKey
+                                                          .currentState
+                                                          ?.validate() ??
+                                                      false
+                                                  ? () {
+                                                      print(
+                                                        "pressed ok:$password",
+                                                      );
+                                                      bContext
+                                                          .read<
+                                                            DeleteAccountBloc
+                                                          >()
+                                                          .add(
+                                                            DeleteAccountEvent.deleteAccount(
+                                                              profileModel:
+                                                                  ProfileModel(
+                                                                    password:
+                                                                        password,
+                                                                  ),
+                                                            ),
+                                                          );
+                                                      Navigator.of(
+                                                        context,
+                                                      ).pop();
+                                                    }
+                                                  : () {
+                                                      showMessage(
+                                                        message: LocaleKeys
+                                                            .loginPage_passwordIsRequired
+                                                            .tr(),
+                                                        context: context,
+                                                      );
+                                                    },
+                                              child: Text(
+                                                LocaleKeys.common_ok.tr(),
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .labelLarge
+                                                    ?.copyWith(
+                                                      fontFamily:
+                                                          FontConstants.fontFamily(
+                                                            context.locale,
+                                                          ),
+                                                    ),
+                                              ),
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    );
+                                  },
+                                );
+                              },
+                            ),
+                            loading: () => ElevatedButton(
+                              onPressed: () {},
+                              child: SizedBox(
+                                width: 20.w,
+                                height: 20.h,
+                                child: CircularProgressIndicator(
+                                  color: Theme.of(
+                                    context,
+                                  ).colorScheme.onPrimary,
+                                ),
+                              ),
+                            ),
+                            success: () => Builder(
+                              builder: (context) {
+                                return DeleteAccountWidget(
+                                  onPressed: () async {
+                                    await showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          backgroundColor: Theme.of(context)
+                                              .scaffoldBackgroundColor
+                                              .withValues(alpha: 0.7),
+                                          title: Text(
+                                            LocaleKeys.profilePage_areYouSure
+                                                .tr(),
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .labelLarge
+                                                ?.copyWith(
+                                                  fontFamily:
+                                                      FontConstants.fontFamily(
+                                                        context.locale,
+                                                      ),
+                                                ),
+                                          ),
+                                          content: SizedBox(
+                                            height: 200.h,
+                                            child: Form(
+                                              key: deleteAccountFormKey,
+                                              autovalidateMode: AutovalidateMode
+                                                  .onUserInteraction,
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text(
+                                                    LocaleKeys
+                                                        .profilePage_deleteAccountWarning
+                                                        .tr(),
+
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .labelLarge
+                                                        ?.copyWith(
+                                                          fontFamily:
+                                                              FontConstants.fontFamily(
+                                                                context.locale,
+                                                              ),
+                                                        ),
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                          vertical: 12.h,
+                                                        ),
+                                                    child: CustomInputField(
+                                                      label: LocaleKeys
+                                                          .loginPage_password
+                                                          .tr(),
+                                                      obscureText: true,
+                                                      onChanged: (value) {
+                                                        password = value
+                                                            .toString();
+                                                      },
+                                                      validator: (value) {
+                                                        if (value == null ||
+                                                            value
+                                                                .toString()
+                                                                .trim()
+                                                                .isEmpty) {
+                                                          return LocaleKeys
+                                                              .loginPage_passwordIsRequired
+                                                              .tr();
+                                                        }
+                                                        return null;
+                                                      },
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          actions: <Widget>[
+                                            TextButton(
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                              child: Text(
+                                                LocaleKeys.common_cancel.tr(),
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .labelLarge
+                                                    ?.copyWith(
+                                                      fontFamily:
+                                                          FontConstants.fontFamily(
+                                                            context.locale,
+                                                          ),
+                                                    ),
+                                              ),
+                                            ),
+                                            TextButton(
+                                              onPressed:
+                                                  deleteAccountFormKey
+                                                          .currentState
+                                                          ?.validate() ??
+                                                      false
+                                                  ? () {
+                                                      print(
+                                                        "pressed ok:$password",
+                                                      );
+                                                      bContext
+                                                          .read<
+                                                            DeleteAccountBloc
+                                                          >()
+                                                          .add(
+                                                            DeleteAccountEvent.deleteAccount(
+                                                              profileModel:
+                                                                  ProfileModel(
+                                                                    password:
+                                                                        password,
+                                                                  ),
+                                                            ),
+                                                          );
+                                                      Navigator.of(
+                                                        context,
+                                                      ).pop();
+                                                    }
+                                                  : () {
+                                                      showMessage(
+                                                        message: LocaleKeys
+                                                            .loginPage_passwordIsRequired
+                                                            .tr(),
+                                                        context: context,
+                                                      );
+                                                    },
+                                              child: Text(
+                                                LocaleKeys.common_ok.tr(),
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .labelLarge
+                                                    ?.copyWith(
+                                                      fontFamily:
+                                                          FontConstants.fontFamily(
+                                                            context.locale,
+                                                          ),
+                                                    ),
+                                              ),
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    );
+                                  },
+                                );
+                              },
+                            ),
+                            failure: (e) => Builder(
+                              builder: (context) {
+                                return DeleteAccountWidget(
+                                  onPressed: () async {
+                                    await showDialog(
+                                      context: context,
+                                      builder: (BuildContext context) {
+                                        return AlertDialog(
+                                          backgroundColor: Theme.of(context)
+                                              .scaffoldBackgroundColor
+                                              .withValues(alpha: 0.7),
+                                          title: Text(
+                                            LocaleKeys.profilePage_areYouSure
+                                                .tr(),
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .labelLarge
+                                                ?.copyWith(
+                                                  fontFamily:
+                                                      FontConstants.fontFamily(
+                                                        context.locale,
+                                                      ),
+                                                ),
+                                          ),
+                                          content: SizedBox(
+                                            height: 200.h,
+                                            child: Form(
+                                              key: deleteAccountFormKey,
+                                              autovalidateMode: AutovalidateMode
+                                                  .onUserInteraction,
+                                              child: Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Text(
+                                                    LocaleKeys
+                                                        .profilePage_deleteAccountWarning
+                                                        .tr(),
+
+                                                    style: Theme.of(context)
+                                                        .textTheme
+                                                        .labelLarge
+                                                        ?.copyWith(
+                                                          fontFamily:
+                                                              FontConstants.fontFamily(
+                                                                context.locale,
+                                                              ),
+                                                        ),
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        EdgeInsets.symmetric(
+                                                          vertical: 12.h,
+                                                        ),
+                                                    child: CustomInputField(
+                                                      label: LocaleKeys
+                                                          .loginPage_password
+                                                          .tr(),
+                                                      obscureText: true,
+                                                      onChanged: (value) {
+                                                        password = value
+                                                            .toString();
+                                                      },
+                                                      validator: (value) {
+                                                        if (value == null ||
+                                                            value
+                                                                .toString()
+                                                                .trim()
+                                                                .isEmpty) {
+                                                          return LocaleKeys
+                                                              .loginPage_passwordIsRequired
+                                                              .tr();
+                                                        }
+                                                        return null;
+                                                      },
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ),
+                                          actions: <Widget>[
+                                            TextButton(
+                                              onPressed: () {
+                                                Navigator.of(context).pop();
+                                              },
+                                              child: Text(
+                                                LocaleKeys.common_cancel.tr(),
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .labelLarge
+                                                    ?.copyWith(
+                                                      fontFamily:
+                                                          FontConstants.fontFamily(
+                                                            context.locale,
+                                                          ),
+                                                    ),
+                                              ),
+                                            ),
+                                            TextButton(
+                                              onPressed:
+                                                  deleteAccountFormKey
+                                                          .currentState
+                                                          ?.validate() ??
+                                                      false
+                                                  ? () {
+                                                      print(
+                                                        "pressed ok:$password",
+                                                      );
+                                                      bContext
+                                                          .read<
+                                                            DeleteAccountBloc
+                                                          >()
+                                                          .add(
+                                                            DeleteAccountEvent.deleteAccount(
+                                                              profileModel:
+                                                                  ProfileModel(
+                                                                    password:
+                                                                        password,
+                                                                  ),
+                                                            ),
+                                                          );
+                                                      Navigator.of(
+                                                        context,
+                                                      ).pop();
+                                                    }
+                                                  : () {
+                                                      showMessage(
+                                                        message: LocaleKeys
+                                                            .loginPage_passwordIsRequired
+                                                            .tr(),
+                                                        context: context,
+                                                      );
+                                                    },
+                                              child: Text(
+                                                LocaleKeys.common_ok.tr(),
+                                                style: Theme.of(context)
+                                                    .textTheme
+                                                    .labelLarge
+                                                    ?.copyWith(
+                                                      fontFamily:
+                                                          FontConstants.fontFamily(
+                                                            context.locale,
+                                                          ),
+                                                    ),
+                                              ),
+                                            ),
+                                          ],
+                                        );
+                                      },
+                                    );
+                                  },
+                                );
+                              },
+                            ),
+                            unauthenticated: (e) => UnauthStateWidget(),
+                            noInternet: () => NoInternetStateWidget(),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ).asGlass(
+                    frosted: true,
+                    blurX: 38,
+                    blurY: 38,
+                    tintColor: Theme.of(
+                      context,
+                    ).colorScheme.primary.withValues(alpha: 0.9),
+                    clipBorderRadius: BorderRadius.circular(12.r),
+                    border: Theme.of(context).defaultBorderSide,
+                  ),
             ),
           ],
         ),

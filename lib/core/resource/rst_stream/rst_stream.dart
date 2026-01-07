@@ -3,8 +3,6 @@ import 'dart:async';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import '/features/chat/domain/entities/message/message_entity.dart';
 
-import '../../../features/chat/domain/entities/message/message_entity.dart';
-
 class StreamSocket<T> {
   final _controller = StreamController<T>.broadcast();
 
@@ -26,3 +24,5 @@ final notificationStreamSocket = StreamSocket<dynamic>();
 final chatUnReadCountStreamSocket = StreamSocket<int>();
 final chatMessageStreamSocket = StreamSocket<MessageEntity?>();
 final fcmNotificationStreamSocket = StreamSocket<RemoteMessage?>();
+String? lastNotificationCount;
+String? lastChatUnReadCount;

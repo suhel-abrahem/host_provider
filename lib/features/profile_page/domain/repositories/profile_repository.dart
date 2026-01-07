@@ -32,4 +32,7 @@ abstract class ProfileRepository {
   Future<DataState<List<LanguageEntity?>?>?> updateLanguage(
     LanguageModel? languageModel,
   );
+  Future<DataState<DataState<void>?>?> deleteAccount(
+    ProfileModel? profileModel,
+  );
 }

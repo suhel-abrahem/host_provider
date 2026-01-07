@@ -196,6 +196,8 @@ abstract class  LocaleKeys {
   static const profilePage_message = 'profilePage.message';
   static const profilePage_profileImage = 'profilePage.profileImage';
   static const profilePage_dob = 'profilePage.dob';
+  static const profilePage_deleteAccountWarning = 'profilePage.deleteAccountWarning';
+  static const profilePage_areYouSure = 'profilePage.areYouSure';
   static const profilePage = 'profilePage';
   static const myServicesPage_title = 'myServicesPage.title';
   static const myServicesPage_label = 'myServicesPage.label';

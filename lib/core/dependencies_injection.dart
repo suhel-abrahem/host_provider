@@ -21,6 +21,8 @@ import '../features/notification_page/domain/usecases/get_notification_usecase.d
 import '../features/notification_page/domain/usecases/set_all_notification_as_read_usecase.dart';
 import '../features/notification_page/domain/usecases/set_notification_as_read_usecase.dart';
 import '../features/notification_page/presentation/bloc/notification_page_bloc.dart';
+import '../features/profile_page/domain/usecases/delete_account_usecase.dart';
+import '../features/profile_page/presentation/bloc/delete_account_bloc.dart';
 import 'resource/common_service/common_service.dart';
 import 'resource/connectivity/check_connectivity.dart';
 import '../features/booking_page/data/repositories/booking_repository_implements.dart';
@@ -374,6 +376,9 @@ Future<void> initDependencies() async {
   getItInstance.registerSingleton<UpdateProfileUsecase>(
     UpdateProfileUsecase(getItInstance()),
   );
+  getItInstance.registerSingleton<DeleteAccountUsecase>(
+    DeleteAccountUsecase(getItInstance()),
+  );
   //bloc
   getItInstance.registerFactory<GetProfileBloc>(
     () => GetProfileBloc(
@@ -393,6 +398,9 @@ Future<void> initDependencies() async {
   );
   getItInstance.registerFactory<LangugesBloc>(
     () => LangugesBloc(getItInstance(), getItInstance(), getItInstance()),
+  );
+  getItInstance.registerFactory<DeleteAccountBloc>(
+    () => DeleteAccountBloc(getItInstance(), getItInstance()),
   );
   // end of profile page
   // home page

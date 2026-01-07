@@ -27,4 +27,5 @@ class ApiConstant {
       "/notifications/device-locale";
   static const String chatEndpoint = "/chat/conversations";
   static const String sendMessageEndpoint = "/chat/messages";
+  static const String deleteAccountEndpoint = "/profile/account";
 }

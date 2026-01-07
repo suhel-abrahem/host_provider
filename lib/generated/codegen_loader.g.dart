@@ -215,7 +215,9 @@ class CodegenLoader extends AssetLoader{
     "languagesIspeak": "اللغات التي أتحدثها",
     "message": "الرسالة",
     "profileImage": "صورة الملف الشخصي",
-    "dob": "تاريخ الميلاد"
+    "dob": "تاريخ الميلاد",
+    "deleteAccountWarning": "بحذفك لحسابك، ستفقد الوصول إلى جميع بياناتك ولن تتمكن من استعادتها.",
+    "areYouSure": "هل أنت متأكد؟"
   },
   "myServicesPage": {
     "title": "صفحة خدماتي",
@@ -536,7 +538,9 @@ static const Map<String,dynamic> _en = {
     "languagesIspeak": "Languages I speak",
     "message": "Message",
     "profileImage": "Profile image",
-    "dob": "Date of Birth"
+    "dob": "Date of Birth",
+    "deleteAccountWarning": "By deleting your account, you will lose access to all your data and will not be able to recover it.",
+    "areYouSure": "Are you sure?"
   },
   "myServicesPage": {
     "title": "My services page",
@@ -857,7 +861,9 @@ static const Map<String,dynamic> _fa = {
     "languagesIspeak": "زمانەکانم",
     "message": "پەیام",
     "profileImage": "وێنەی پڕۆفایل",
-    "dob": "ڕۆژی لەدایکبوون"
+    "dob": "ڕۆژی لەدایکبوون",
+    "deleteAccountWarning": "بە سڕینەوەی ئەژمارەکەت، دەستگەیشتنت بە هەموو داتاکانت دەکەوێت و ناتوانیت وەرگرنەوە.",
+    "areYouSure": "دڵنیایت؟"
   },
   "myServicesPage": {
     "title": "شاشەی خزمەتگوزاریەکانم",

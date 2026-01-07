@@ -9,6 +9,7 @@ abstract class ProfileModel with _$ProfileModel {
     @Default("") String? acceptLanguage,
     @Default("") String? authToken,
     @Default("") String? id,
+    @Default("") String? password,
     @Default(SetProfileModel()) SetProfileModel? profile,
   }) = _ProfileModel;
   factory ProfileModel.fromJson(Map<String, dynamic> json) =>
