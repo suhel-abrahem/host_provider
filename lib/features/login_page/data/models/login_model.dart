@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-part 'login_model.g.dart';
+
 part 'login_model.freezed.dart';
+part 'login_model.g.dart';
 
 @freezed
 abstract class LoginModel with _$LoginModel {

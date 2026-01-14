@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$LoginStateModel {
 
- String? get password; String? get email; String? get phone; String? get token; String? get otp;
+ String? get password; String? get login; String? get token; String? get otp;
 /// Create a copy of LoginStateModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $LoginStateModelCopyWith<LoginStateModel> get copyWith => _$LoginStateModelCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is LoginStateModel&&(identical(other.password, password) || other.password == password)&&(identical(other.email, email) || other.email == email)&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.token, token) || other.token == token)&&(identical(other.otp, otp) || other.otp == otp));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LoginStateModel&&(identical(other.password, password) || other.password == password)&&(identical(other.login, login) || other.login == login)&&(identical(other.token, token) || other.token == token)&&(identical(other.otp, otp) || other.otp == otp));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,password,email,phone,token,otp);
+int get hashCode => Object.hash(runtimeType,password,login,token,otp);
 
 @override
 String toString() {
-  return 'LoginStateModel(password: $password, email: $email, phone: $phone, token: $token, otp: $otp)';
+  return 'LoginStateModel(password: $password, login: $login, token: $token, otp: $otp)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $LoginStateModelCopyWith<$Res>  {
   factory $LoginStateModelCopyWith(LoginStateModel value, $Res Function(LoginStateModel) _then) = _$LoginStateModelCopyWithImpl;
 @useResult
 $Res call({
- String? password, String? email, String? phone, String? token, String? otp
+ String? password, String? login, String? token, String? otp
 });
 
 
@@ -65,11 +65,10 @@ class _$LoginStateModelCopyWithImpl<$Res>
 
 /// Create a copy of LoginStateModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? password = freezed,Object? email = freezed,Object? phone = freezed,Object? token = freezed,Object? otp = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? password = freezed,Object? login = freezed,Object? token = freezed,Object? otp = freezed,}) {
   return _then(_self.copyWith(
 password: freezed == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
-as String?,email: freezed == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
-as String?,phone: freezed == phone ? _self.phone : phone // ignore: cast_nullable_to_non_nullable
+as String?,login: freezed == login ? _self.login : login // ignore: cast_nullable_to_non_nullable
 as String?,token: freezed == token ? _self.token : token // ignore: cast_nullable_to_non_nullable
 as String?,otp: freezed == otp ? _self.otp : otp // ignore: cast_nullable_to_non_nullable
 as String?,
@@ -157,10 +156,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? password,  String? email,  String? phone,  String? token,  String? otp)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? password,  String? login,  String? token,  String? otp)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _LoginStateModel() when $default != null:
-return $default(_that.password,_that.email,_that.phone,_that.token,_that.otp);case _:
+return $default(_that.password,_that.login,_that.token,_that.otp);case _:
   return orElse();
 
 }
@@ -178,10 +177,10 @@ return $default(_that.password,_that.email,_that.phone,_that.token,_that.otp);ca
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? password,  String? email,  String? phone,  String? token,  String? otp)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? password,  String? login,  String? token,  String? otp)  $default,) {final _that = this;
 switch (_that) {
 case _LoginStateModel():
-return $default(_that.password,_that.email,_that.phone,_that.token,_that.otp);case _:
+return $default(_that.password,_that.login,_that.token,_that.otp);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -198,10 +197,10 @@ return $default(_that.password,_that.email,_that.phone,_that.token,_that.otp);ca
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? password,  String? email,  String? phone,  String? token,  String? otp)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? password,  String? login,  String? token,  String? otp)?  $default,) {final _that = this;
 switch (_that) {
 case _LoginStateModel() when $default != null:
-return $default(_that.password,_that.email,_that.phone,_that.token,_that.otp);case _:
+return $default(_that.password,_that.login,_that.token,_that.otp);case _:
   return null;
 
 }
@@ -213,12 +212,11 @@ return $default(_that.password,_that.email,_that.phone,_that.token,_that.otp);ca
 @JsonSerializable()
 
 class _LoginStateModel implements LoginStateModel {
-  const _LoginStateModel({this.password = "", this.email = "", this.phone = "", this.token = "", this.otp = ""});
+  const _LoginStateModel({this.password = "", this.login = "", this.token = "", this.otp = ""});
   factory _LoginStateModel.fromJson(Map<String, dynamic> json) => _$LoginStateModelFromJson(json);
 
 @override@JsonKey() final  String? password;
-@override@JsonKey() final  String? email;
-@override@JsonKey() final  String? phone;
+@override@JsonKey() final  String? login;
 @override@JsonKey() final  String? token;
 @override@JsonKey() final  String? otp;
 
@@ -235,16 +233,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LoginStateModel&&(identical(other.password, password) || other.password == password)&&(identical(other.email, email) || other.email == email)&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.token, token) || other.token == token)&&(identical(other.otp, otp) || other.otp == otp));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _LoginStateModel&&(identical(other.password, password) || other.password == password)&&(identical(other.login, login) || other.login == login)&&(identical(other.token, token) || other.token == token)&&(identical(other.otp, otp) || other.otp == otp));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,password,email,phone,token,otp);
+int get hashCode => Object.hash(runtimeType,password,login,token,otp);
 
 @override
 String toString() {
-  return 'LoginStateModel(password: $password, email: $email, phone: $phone, token: $token, otp: $otp)';
+  return 'LoginStateModel(password: $password, login: $login, token: $token, otp: $otp)';
 }
 
 
@@ -255,7 +253,7 @@ abstract mixin class _$LoginStateModelCopyWith<$Res> implements $LoginStateModel
   factory _$LoginStateModelCopyWith(_LoginStateModel value, $Res Function(_LoginStateModel) _then) = __$LoginStateModelCopyWithImpl;
 @override @useResult
 $Res call({
- String? password, String? email, String? phone, String? token, String? otp
+ String? password, String? login, String? token, String? otp
 });
 
 
@@ -272,11 +270,10 @@ class __$LoginStateModelCopyWithImpl<$Res>
 
 /// Create a copy of LoginStateModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? password = freezed,Object? email = freezed,Object? phone = freezed,Object? token = freezed,Object? otp = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? password = freezed,Object? login = freezed,Object? token = freezed,Object? otp = freezed,}) {
   return _then(_LoginStateModel(
 password: freezed == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
-as String?,email: freezed == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
-as String?,phone: freezed == phone ? _self.phone : phone // ignore: cast_nullable_to_non_nullable
+as String?,login: freezed == login ? _self.login : login // ignore: cast_nullable_to_non_nullable
 as String?,token: freezed == token ? _self.token : token // ignore: cast_nullable_to_non_nullable
 as String?,otp: freezed == otp ? _self.otp : otp // ignore: cast_nullable_to_non_nullable
 as String?,

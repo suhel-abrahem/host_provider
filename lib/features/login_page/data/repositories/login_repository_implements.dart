@@ -31,9 +31,7 @@ class LoginRepositoryImplements implements LoginRepository {
           .post(
             ApiConstant.loginEndpoint,
             data: LoginModel(
-              login: (loginStateModel?.phone?.trim().isEmpty ?? false)
-                  ? loginStateModel?.email?.trim()
-                  : loginStateModel?.phone?.trim(),
+              login: loginStateModel?.login,
               password: loginStateModel?.password,
             ).toJson(),
           )
