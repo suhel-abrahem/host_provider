@@ -21,8 +21,30 @@ import '../features/notification_page/domain/usecases/get_notification_usecase.d
 import '../features/notification_page/domain/usecases/set_all_notification_as_read_usecase.dart';
 import '../features/notification_page/domain/usecases/set_notification_as_read_usecase.dart';
 import '../features/notification_page/presentation/bloc/notification_page_bloc.dart';
+import '../features/profile_page/data/models/help/create_ticket_model.dart';
+import '../features/profile_page/data/models/help/get_tickets_model.dart';
+import '../features/profile_page/data/models/reset_password/request_reset_password_model.dart';
+import '../features/profile_page/data/models/reset_password/reset_password_model.dart';
+import '../features/profile_page/data/models/reset_password/verify_otp_model.dart';
+import '../features/profile_page/data/repositories/help/ticket_repository_implements.dart';
+import '../features/profile_page/data/repositories/reset_password/reset_password_repository_implements.dart';
+import '../features/profile_page/domain/entities/help/tickets_entity.dart';
+import '../features/profile_page/domain/entities/reset_password/request_reset_password_entity.dart';
+import '../features/profile_page/domain/entities/reset_password/verify_otp_entity.dart';
+import '../features/profile_page/domain/repositories/help/tickets_repository.dart';
+import '../features/profile_page/domain/repositories/reset_password/reset_password_repository.dart';
 import '../features/profile_page/domain/usecases/delete_account_usecase.dart';
+import '../features/profile_page/domain/usecases/help/create_ticket_usecase.dart';
+import '../features/profile_page/domain/usecases/help/get_ticket_details_usecase.dart';
+import '../features/profile_page/domain/usecases/help/get_tickets_usecase.dart';
+import '../features/profile_page/domain/usecases/help/send_ticket_message_usecase.dart';
+import '../features/profile_page/domain/usecases/reset_password/request_reset_password_usecase.dart';
+import '../features/profile_page/domain/usecases/reset_password/resent_reset_password_otp_usecase.dart';
+import '../features/profile_page/domain/usecases/reset_password/reset_password_usecase.dart';
+import '../features/profile_page/domain/usecases/reset_password/verify_otp_usecase.dart';
 import '../features/profile_page/presentation/bloc/delete_account_bloc.dart';
+import '../features/profile_page/presentation/bloc/reset_password_bloc.dart';
+import '../features/profile_page/presentation/bloc/tickets_bloc_bloc.dart';
 import 'resource/common_service/common_service.dart';
 import 'resource/connectivity/check_connectivity.dart';
 import '../features/booking_page/data/repositories/booking_repository_implements.dart';
@@ -480,4 +502,75 @@ Future<void> initDependencies() async {
     () => SendChatBloc(getItInstance(), getItInstance()),
   );
   //end of chat
+  // help
+  // entities and models
+  getItInstance.registerSingleton<TicketsEntity>(TicketsEntity());
+  getItInstance.registerSingleton<CreateTicketModel>(CreateTicketModel());
+  getItInstance.registerSingleton<GetTicketsModel>(GetTicketsModel());
+  // repository
+  getItInstance.registerSingleton<TicketsRepository>(
+    TicketRepositoryImplements(getItInstance()),
+  );
+  // usecase
+  getItInstance.registerSingleton<GetTicketsUsecase>(
+    GetTicketsUsecase(getItInstance()),
+  );
+  getItInstance.registerSingleton<CreateTicketUsecase>(
+    CreateTicketUsecase(getItInstance()),
+  );
+  getItInstance.registerSingleton<GetTicketDetailsUsecase>(
+    GetTicketDetailsUsecase(getItInstance()),
+  );
+  getItInstance.registerSingleton<SendTicketMessageUsecase>(
+    SendTicketMessageUsecase(getItInstance()),
+  );
+  // bloc
+  getItInstance.registerFactory<TicketsBlocBloc>(
+    () => TicketsBlocBloc(
+      getItInstance(),
+      getItInstance(),
+      getItInstance(),
+      getItInstance(),
+      getItInstance(),
+    ),
+  );
+  // end of help
+  // reset password
+  // entities and models
+  getItInstance.registerSingleton<RequestResetPasswordEntity>(
+    RequestResetPasswordEntity(),
+  );
+  getItInstance.registerSingleton<VerifyOtpEntity>(VerifyOtpEntity());
+  getItInstance.registerSingleton<ResetPasswordModel>(ResetPasswordModel());
+  getItInstance.registerSingleton<VerifyOtpModel>(VerifyOtpModel());
+  getItInstance.registerSingleton<RequestResetPasswordModel>(
+    RequestResetPasswordModel(),
+  );
+
+  // repository
+  getItInstance.registerSingleton<ResetPasswordRepository>(
+    ResetPasswordRepositoryImplements(getItInstance()),
+  );
+  // usecase
+  getItInstance.registerSingleton<RequestResetPasswordUsecase>(
+    RequestResetPasswordUsecase(resetPasswordRepository: getItInstance()),
+  );
+  getItInstance.registerSingleton<VerifyOtpUsecase>(
+    VerifyOtpUsecase(getItInstance()),
+  );
+  getItInstance.registerSingleton<ResetPasswordUsecase>(
+    ResetPasswordUsecase(getItInstance()),
+  );
+  getItInstance.registerSingleton<ResentResetPasswordOtpUsecase>(
+    ResentResetPasswordOtpUsecase(getItInstance()),
+  );
+  // bloc
+  getItInstance.registerFactory<ResetPasswordBloc>(
+    () => ResetPasswordBloc(
+      getItInstance(),
+      getItInstance(),
+      getItInstance(),
+      getItInstance(),
+    ),
+  );
 }

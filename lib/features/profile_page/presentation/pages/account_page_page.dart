@@ -2532,6 +2532,36 @@ class _AccountPagePageState extends State<AccountPagePage> {
                     border: Theme.of(context).defaultBorderSide,
                   ),
             ),
+            Padding(
+              padding: EdgeInsets.only(bottom: 16.h, right: 20.w, left: 20.w),
+              child:
+                  Container(
+                    padding: EdgeInsets.symmetric(
+                      vertical: 16.h,
+                      horizontal: 16.w,
+                    ),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        context.push(RoutesPath.resetPasswordPage);
+                      },
+                      child: Text(
+                        LocaleKeys.profilePage_resetPassword.tr(),
+                        style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                          fontFamily: FontConstants.fontFamily(context.locale),
+                        ),
+                      ),
+                    ),
+                  ).asGlass(
+                    frosted: true,
+                    blurX: 38,
+                    blurY: 38,
+                    tintColor: Theme.of(
+                      context,
+                    ).colorScheme.primary.withValues(alpha: 0.9),
+                    clipBorderRadius: BorderRadius.circular(12.r),
+                    border: Theme.of(context).defaultBorderSide,
+                  ),
+            ),
           ],
         ),
       ),

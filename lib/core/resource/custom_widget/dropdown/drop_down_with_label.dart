@@ -3,8 +3,10 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hosta_provider/config/theme/app_theme.dart';
-import 'package:hosta_provider/core/constants/font_constants.dart';
 
+import '/config/theme/app_theme.dart';
+
+import '../../../constants/font_constants.dart';
 import '../../../enums/psition_enum.dart';
 import '../../../util/validator/validator.dart';
 
@@ -204,30 +206,25 @@ class _DropDownWithLabelState<T> extends State<DropDownWithLabel<T>> {
                           minWidth: widget.dropDownMinWidth ?? 40,
                         ),
                         width: widget.dropDownWidth,
-                        child: Row(
-                          key: ValueKey(widget.isLoading),
-                          children: [
-                            AnimatedSwitcher(
-                              duration: const Duration(milliseconds: 300),
-                              child: widget.isLoading
-                                  ? SizedBox(
-                                      width: widget.dropDownWidth,
-                                      child: LinearProgressIndicator(
-                                        valueColor: widget.loadingValueColor,
-                                        backgroundColor:
-                                            widget.loadingBackgroundColor,
-                                        borderRadius: BorderRadius.all(
-                                          Radius.circular(5.r),
-                                        ),
-                                        minHeight: 5.h,
-                                        color: Theme.of(
-                                          context,
-                                        ).colorScheme.primary,
-                                      ),
-                                    )
-                                  : _customDropDown(state: state),
-                            ),
-                          ],
+                        child: AnimatedSwitcher(
+                          duration: const Duration(milliseconds: 300),
+                          child: widget.isLoading
+                              ? SizedBox(
+                                  width: widget.dropDownWidth,
+                                  child: LinearProgressIndicator(
+                                    valueColor: widget.loadingValueColor,
+                                    backgroundColor:
+                                        widget.loadingBackgroundColor,
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(5.r),
+                                    ),
+                                    minHeight: 5.h,
+                                    color: Theme.of(
+                                      context,
+                                    ).colorScheme.primary,
+                                  ),
+                                )
+                              : _customDropDown(state: state),
                         ),
                       ),
                     ),
@@ -246,7 +243,7 @@ class _DropDownWithLabelState<T> extends State<DropDownWithLabel<T>> {
         underline: const SizedBox(),
         customButton: Container(
           constraints: BoxConstraints(
-            minWidth: ((widget.dropDownMinWidth ?? 40) * 0.95),
+            minWidth: ((widget.dropDownMinWidth ?? 40)),
           ),
           width: widget.dropDownWidth,
           height: widget.dropDownHeight,
@@ -258,7 +255,6 @@ class _DropDownWithLabelState<T> extends State<DropDownWithLabel<T>> {
               children: [
                 if (selectedValue != null || widget.hint != null)
                   Expanded(
-                    flex: 6,
                     child: Tooltip(
                       message: widget.stringConverter.call(
                         selectedValue ?? widget.hint as T,
@@ -297,25 +293,27 @@ class _DropDownWithLabelState<T> extends State<DropDownWithLabel<T>> {
 
                 if (!widget.readOnly)
                   Expanded(
-                    flex: 2,
-                    child: ValueListenableBuilder<bool>(
-                      key: ValueKey(isShow),
-                      valueListenable: isShow,
-                      builder: (context, value, _) {
-                        return AnimatedRotation(
-                          duration: const Duration(milliseconds: 300),
-                          turns: value ? 0.5 : 0,
-                          child: FittedBox(
-                            fit: BoxFit.contain,
-                            child: Icon(
-                              Icons.keyboard_arrow_down_rounded,
-                              color: Theme.of(context).textTheme.labelLarge
-                                  ?.copyWith(color: widget.valueColor)
-                                  .color,
+                    child: Align(
+                      alignment: AlignmentDirectional.centerEnd,
+                      child: ValueListenableBuilder<bool>(
+                        key: ValueKey(isShow),
+                        valueListenable: isShow,
+                        builder: (context, value, _) {
+                          return AnimatedRotation(
+                            duration: const Duration(milliseconds: 300),
+                            turns: value ? 0.5 : 0,
+                            child: FittedBox(
+                              fit: BoxFit.contain,
+                              child: Icon(
+                                Icons.keyboard_arrow_down_rounded,
+                                color: Theme.of(context).textTheme.labelLarge
+                                    ?.copyWith(color: widget.valueColor)
+                                    .color,
+                              ),
                             ),
-                          ),
-                        );
-                      },
+                          );
+                        },
+                      ),
                     ),
                   ),
               ],

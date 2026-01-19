@@ -18,7 +18,8 @@ class ConversionWidget extends StatelessWidget {
   final OtherParticipantEntity? otherParticipantEntity;
   final int? chatId;
   final int? unreadCount;
-
+  final String? ticketImage;
+  final bool? isTicket;
   const ConversionWidget({
     super.key,
     this.messageEntity,
@@ -26,19 +27,29 @@ class ConversionWidget extends StatelessWidget {
     this.otherParticipantEntity,
     this.unreadCount,
     this.chatId,
+    this.ticketImage,
+    this.isTicket,
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => {
-        context.pushNamed(
-          RoutesName.chatPage,
-          pathParameters: {
-            'bookingNumber': bookingNumber.toString(),
-            'chatId': chatId.toString(),
-          },
-        ),
+        if (isTicket == true)
+          {
+            context.pushNamed(
+              RoutesName.ticketPage,
+              pathParameters: {'ticketId': chatId.toString()},
+            ),
+          }
+        else
+          context.pushNamed(
+            RoutesName.chatPage,
+            pathParameters: {
+              'bookingNumber': bookingNumber.toString(),
+              'chatId': chatId.toString(),
+            },
+          ),
       },
       child: Container(
         decoration: BoxDecoration(
@@ -64,7 +75,10 @@ class ConversionWidget extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(20.r),
                   child: ImageWidget(
-                    imageUrl: otherParticipantEntity?.profile_image ?? "",
+                    imageUrl:
+                        ticketImage ??
+                        otherParticipantEntity?.profile_image ??
+                        "",
                     boxFit: BoxFit.cover,
                   ),
                 ),

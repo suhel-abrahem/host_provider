@@ -17,7 +17,12 @@ class ColorManager {
       });
 
   // Primary Colors
-  static const Color primaryColor = Color.fromARGB(255, 95, 96, 185);
+  static const Color primaryColor = Color.fromARGB(
+    255,
+    243,
+    94,
+    114,
+  ); // Vibrant Red
   static Color primaryColorLight = primaryColor.withValues(alpha: 0.25);
 
   // Accent Colors

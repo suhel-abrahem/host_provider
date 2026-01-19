@@ -128,9 +128,7 @@ class _MyServiceWidgetState extends State<MyServiceWidget> {
                       height: 70.h,
                       child: ImageWidget(
                         boxFit: BoxFit.scaleDown,
-                        imageUrl:
-                            ApiConstant.imageBaseUrl +
-                            (widget.serviceEntity?.image ?? ""),
+                        imageUrl: (widget.serviceEntity?.image ?? ""),
                         width: 70.w,
                         height: 70.h,
                         errorIconSize: 32.sp,

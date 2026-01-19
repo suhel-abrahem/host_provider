@@ -52,7 +52,7 @@ Future<void> setFcmTokenForCurrentUser({
               color: Theme.of(context).colorScheme.onPrimary,
             ),
             onPressed: () {
-              context.pushNamed(RoutesName.settingsPage);
+              context.pushNamed(RoutesName.settingPage);
             },
           );
         }

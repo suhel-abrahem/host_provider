@@ -1,12 +1,19 @@
 import 'dart:convert';
-import 'package:socket_io_client/socket_io_client.dart' as IO;
+
 import 'package:animated_theme_switcher/animated_theme_switcher.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:go_router/go_router.dart';
+
+import '../../core/resource/common_entity/service_entity.dart';
 import '../../features/chat/presentation/pages/chat_page.dart';
 import '../../features/chat/presentation/pages/chats_page.dart';
 import '../../features/notification_page/presentation/pages/notification_page.dart';
+import '../../features/profile_page/presentation/pages/create_ticket_page_page.dart';
+import '../../features/profile_page/presentation/pages/resert_password/reset_password_page.dart';
+import '../../features/profile_page/presentation/pages/ticket_chat.dart';
+import '../../features/profile_page/presentation/pages/tickets_page.dart';
+
 import '../app/app_preferences.dart';
 import 'route_tracker.dart';
 import '../../core/dependencies_injection.dart';
@@ -28,7 +35,7 @@ import '../../core/resource/main_page/main_bottom_bar.dart';
 import '../../features/booking_page/presentation/pages/booking_page_page.dart';
 
 import '../../features/profile_page/presentation/pages/account_page_page.dart';
-import '../../features/profile_page/presentation/pages/help_page_page.dart';
+
 import '../../features/profile_page/presentation/pages/setting_page_page.dart';
 
 String? currentPath = RoutesPath.homePage;
@@ -37,7 +44,7 @@ class RoutesName {
   static String homePage = "homePage";
   static String categoriesPage = "categoriesPage";
   static String settingPage = "settingPage";
-  static String categoryPage = "categoryPage";
+
   static String loginPage = "loginPage";
   static String firstUsePage = "firstUsePage";
   static String signupPage = "signupPage";
@@ -48,18 +55,23 @@ class RoutesName {
   static String otpPage = "otpPage";
   static String categoryServicesPage = "categoryServicesPage";
   static String accountPage = "accountPage";
-  static String settingsPage = "settingsPage";
-  static String helpPage = "helpPage";
+
+  static String createTicketPage = "createTicketPage";
+  static String ticketsPage = "ticketsPage";
+  static String serviceDetailsPage = "serviceDetailsPage";
+  static String providerPage = "providerPage";
   static String notificationPage = "notificationPage";
   static String chatsPage = "chatsPage";
   static String chatPage = "chatPage";
+  static String resetPasswordPage = "resetPasswordPage";
+  static String ticketPage = "ticketPage";
 }
 
 class RoutesPath {
   static String homePage = '/';
   static String categoriesPage = '/categories';
   static String settingPage = '/setting';
-  static String categoryPage = '/category';
+
   static String loginPage = '/login';
   static String firstUsePage = '/firstUse';
   static String signupPage = '/signup';
@@ -70,47 +82,69 @@ class RoutesPath {
   static String categoryServicesPage = "/categoryServicesPage/:categoryEntity";
   static String serviceInfoPage = "/serviceInfoPage/:serviceId";
   static String accountPage = "/accountPage";
-  static String settingsPage = "/settingsPage";
-  static String helpPage = "/helpPage";
+
+  static String createTicketPage = "/createTicketPage";
+  static String ticketsPage = "/ticketsPage";
+  static String serviceDetailsPage = "/serviceDetailsPage/:serviceEntity";
+  static String providerPage = "/providerPage";
   static String notificationPage = "/notificationPage";
   static String chatsPage = "/chatsPage";
   static String chatPage = "/chatPage/:bookingNumber/:chatId";
+  static String resetPasswordPage = "/resetPasswordPage";
+  static String ticketPage = "/ticketPage/:ticketId";
 }
 
 GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+String? lastPath;
 GoRouter goRouter = GoRouter(
   observers: [RouteTracker()],
   redirect: (context, state) {
     currentPath = state.uri.toString();
+    // if (currentPath?.endsWith(lastPath ?? "") == false) {
+    //   return lastPath;
+    // }
     if (getItInstance<AppPreferences>().isFirstUse() == false) {
       return RoutesPath.firstUsePage;
     } else if (getItInstance<AppPreferences>().getUserInfo()?.loginStateEnum ==
             LoginStateEnum.unlogined &&
         !(state.uri.toString().endsWith(RoutesPath.signupPage) ||
-            state.uri.toString().endsWith(RoutesPath.otpPage))) {
+            state.uri.toString().endsWith(RoutesPath.otpPage) ||
+            state.uri.toString().endsWith(RoutesPath.resetPasswordPage))) {
       return RoutesPath.loginPage;
     }
-
-    return null;
   },
   initialLocation: RoutesPath.homePage,
   navigatorKey: navigatorKey,
   routes: [
     StatefulShellRoute.indexedStack(
       builder: (context, state, navigationShell) => ThemeSwitchingArea(
-        child: Scaffold(
-          backgroundColor: Colors.transparent,
-          body: navigationShell,
-          bottomNavigationBar:
-              !(state.uri.toString().endsWith(RoutesPath.loginPage) ||
-                  state.uri.toString().endsWith(RoutesPath.firstUsePage) ||
-                  state.uri.toString().endsWith(RoutesPath.signupPage) ||
-                  state.uri.toString().endsWith(RoutesPath.otpPage))
-              ? MainBottomBar(
-                  key: ValueKey(currentPath),
-                  currentIndex: _routerToIndex(currentPath ?? ""),
-                ).animate().scaleY(duration: 500.ms)
-              : null,
+        child: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: [
+                const Color.fromARGB(255, 35, 89, 116).withValues(alpha: 0.9),
+                Color.fromARGB(255, 11, 56, 102).withValues(alpha: 0.8),
+                Color.fromARGB(255, 4, 38, 75),
+              ],
+              stops: const [0.0, 0.5, 1.0],
+            ),
+          ),
+          child: Scaffold(
+            backgroundColor: Colors.transparent,
+            body: navigationShell,
+            bottomNavigationBar:
+                !(state.uri.toString().endsWith(RoutesPath.loginPage) ||
+                    state.uri.toString().endsWith(RoutesPath.firstUsePage) ||
+                    state.uri.toString().endsWith(RoutesPath.signupPage) ||
+                    state.uri.toString().endsWith(RoutesPath.otpPage))
+                ? MainBottomBar(
+                    key: ValueKey(currentPath),
+                    currentIndex: _routerToIndex(currentPath ?? ""),
+                  ).animate().scaleY(duration: 500.ms)
+                : null,
+          ),
         ),
       ),
       branches: [
@@ -258,15 +292,26 @@ GoRouter goRouter = GoRouter(
               },
             ),
             GoRoute(
-              path: RoutesPath.helpPage,
-              name: RoutesName.helpPage,
+              path: RoutesPath.createTicketPage,
+              name: RoutesName.createTicketPage,
               pageBuilder: (context, state) {
                 return _customTransitionPage(
-                  child: HelpPagePage(),
+                  child: TicketCreationPage(),
                   state: state,
                 );
               },
             ),
+            GoRoute(
+              path: RoutesPath.ticketsPage,
+              name: RoutesName.ticketsPage,
+              pageBuilder: (context, state) {
+                return _customTransitionPage(
+                  child: TicketsPage(),
+                  state: state,
+                );
+              },
+            ),
+
             GoRoute(
               path: RoutesPath.notificationPage,
               name: RoutesName.notificationPage,
@@ -293,6 +338,30 @@ GoRouter goRouter = GoRouter(
                     bookingNumber: state.pathParameters["bookingNumber"],
                     chatId: int.tryParse(state.pathParameters["chatId"] ?? ""),
                   ),
+                  state: state,
+                );
+              },
+            ),
+            GoRoute(
+              path: RoutesPath.ticketPage,
+              name: RoutesName.ticketPage,
+              pageBuilder: (context, state) {
+                return _customTransitionPage(
+                  child: TicketChatPage(
+                    chatId: int.tryParse(
+                      state.pathParameters["ticketId"] ?? "",
+                    ),
+                  ),
+                  state: state,
+                );
+              },
+            ),
+            GoRoute(
+              path: RoutesPath.resetPasswordPage,
+              name: RoutesName.resetPasswordPage,
+              pageBuilder: (context, state) {
+                return _customTransitionPage(
+                  child: ResetPasswordPage(),
                   state: state,
                 );
               },

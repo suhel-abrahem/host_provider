@@ -182,7 +182,9 @@ class _LoginPageState extends State<LoginPage> {
                       child: Align(
                         alignment: AlignmentDirectional.centerStart,
                         child: TextButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            context.pushNamed(RoutesName.resetPasswordPage);
+                          },
                           child: Text(
                             LocaleKeys.loginPage_forgotPassword.tr(),
                             style: Theme.of(context).textTheme.labelSmall
