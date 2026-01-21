@@ -294,7 +294,7 @@ class _BookingPagePageState extends State<BookingPagePage>
 
               //accepted
               BookingPageTapPage(
-                model: getBookingModel?.copyWith(status: "accepted"),
+                model: getBookingModel?.copyWith(status: "confirmed"),
               ),
               //in progress
               BookingPageTapPage(
