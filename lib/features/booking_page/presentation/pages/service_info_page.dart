@@ -698,7 +698,7 @@ class _ServiceInfoPageState extends State<ServiceInfoPage> {
                                                                             MainAxisAlignment.spaceEvenly,
                                                                         children: [
                                                                           Text(
-                                                                            LocaleKeys.bookingPage_areYouSureYouWantToRejectThisBooking.tr(),
+                                                                            LocaleKeys.bookingPage_areYouSureYouWantToCancelThisBooking.tr(),
                                                                             style:
                                                                                 Theme.of(
                                                                                   context,
@@ -715,7 +715,7 @@ class _ServiceInfoPageState extends State<ServiceInfoPage> {
                                                                               key: formKey,
                                                                               autovalidateMode: AutovalidateMode.onUserInteraction,
                                                                               child: CustomInputField(
-                                                                                label: LocaleKeys.bookingPage_rejectReason.tr(),
+                                                                                label: LocaleKeys.bookingPage_cancelReason.tr(),
                                                                                 height: 150.h,
                                                                                 maxLines: 5,
                                                                                 onChanged:
@@ -729,7 +729,7 @@ class _ServiceInfoPageState extends State<ServiceInfoPage> {
                                                                                       if (value ==
                                                                                               null ||
                                                                                           value.isEmpty) {
-                                                                                        return LocaleKeys.bookingPage_pleaseProvideAReasonForRejection.tr();
+                                                                                        return LocaleKeys.bookingPage_pleaseProvideAReasonForCancellation.tr();
                                                                                       }
                                                                                       return null;
                                                                                     },

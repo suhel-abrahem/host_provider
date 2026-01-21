@@ -88,7 +88,8 @@ class Helper {
       case 'completed':
         return Colors.green;
 
-      case 'canceled':
+      case 'cancelled':
+      case 'rejected':
         return Theme.of(context).colorScheme.error;
       default:
         return Theme.of(context).colorScheme.error;
@@ -108,7 +109,7 @@ class Helper {
       case 'cancelled':
         return LocaleKeys.bookingPage_canceled.tr();
       case "rejected":
-        return LocaleKeys.bookingPage_canceled.tr();
+        return LocaleKeys.bookingPage_rejected.tr();
       default:
         return null;
     }

@@ -83,7 +83,7 @@ class _BookingPagePageState extends State<BookingPagePage>
     initialIndex = widget.initialIndex ?? 0;
 
     tabController = TabController(
-      length: 6,
+      length: 7,
       vsync: this,
       initialIndex: initialIndex,
       animationDuration: Duration(milliseconds: 300),
@@ -262,6 +262,25 @@ class _BookingPagePageState extends State<BookingPagePage>
                     padding: EdgeInsets.symmetric(horizontal: 12.w),
 
                     child: Center(
+                      child: Text(LocaleKeys.bookingPage_rejected.tr()),
+                    ),
+                  ),
+                ).asGlass(
+                  frosted: true,
+                  blurX: 18,
+                  blurY: 18,
+                  tintColor: Theme.of(
+                    context,
+                  ).colorScheme.primary.withValues(alpha: 0.9),
+                  clipBorderRadius: BorderRadius.circular(12.r),
+                  border: Theme.of(context).defaultBorderSide,
+                ),
+                Tab(
+                  child: Container(
+                    height: 60.h,
+                    padding: EdgeInsets.symmetric(horizontal: 12.w),
+
+                    child: Center(
                       child: Text(LocaleKeys.bookingPage_canceled.tr()),
                     ),
                   ),
@@ -307,6 +326,10 @@ class _BookingPagePageState extends State<BookingPagePage>
               //pending
               BookingPageTapPage(
                 model: getBookingModel?.copyWith(status: "pending"),
+              ),
+              //rejected
+              BookingPageTapPage(
+                model: getBookingModel?.copyWith(status: "rejected"),
               ),
               //canceled
               BookingPageTapPage(

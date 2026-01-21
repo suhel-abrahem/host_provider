@@ -482,7 +482,7 @@ class _BookingServiceWidgetState extends State<BookingServiceWidget> {
                                                         children: [
                                                           Text(
                                                             LocaleKeys
-                                                                .bookingPage_areYouSureYouWantToRejectThisBooking
+                                                                .bookingPage_areYouSureYouWantToCancelThisBooking
                                                                 .tr(),
                                                             style: Theme.of(context)
                                                                 .textTheme
@@ -506,7 +506,7 @@ class _BookingServiceWidgetState extends State<BookingServiceWidget> {
                                                                       .onUserInteraction,
                                                               child: CustomInputField(
                                                                 label: LocaleKeys
-                                                                    .bookingPage_rejectReason
+                                                                    .bookingPage_cancelReason
                                                                     .tr(),
                                                                 height: 150.h,
                                                                 maxLines: 5,
@@ -521,7 +521,7 @@ class _BookingServiceWidgetState extends State<BookingServiceWidget> {
                                                                       value
                                                                           .isEmpty) {
                                                                     return LocaleKeys
-                                                                        .bookingPage_pleaseProvideAReasonForRejection
+                                                                        .bookingPage_pleaseProvideAReasonForCancellation
                                                                         .tr();
                                                                   }
                                                                   return null;
