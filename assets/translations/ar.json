@@ -143,7 +143,9 @@
     "serviceImages": "صور الخدمة",
     "cancelReason": "سبب الإلغاء",
     "pleaseProvideAReasonForCancellation": "يرجى تقديم سبب الإلغاء",
-    "providerDetails": "تفاصيل المزود"
+    "providerDetails": "تفاصيل المزود",
+    "additionalCost": "تكلفة إضافية",
+    "additionalCostNotes": "ملاحظات التكلفة الإضافية"
   },
   "profilePage": {
     "title": "صفحة الملف الشخصي",

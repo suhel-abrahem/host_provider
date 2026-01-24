@@ -13,6 +13,8 @@ _GetBookingModel _$GetBookingModelFromJson(Map<String, dynamic> json) =>
       acceptLanguage: json['acceptLanguage'] as String? ?? "",
       status: json['status'] as String? ?? "",
       id: json['id'] as String? ?? "",
+      additional_cost: (json['additional_cost'] as num?)?.toDouble() ?? 0.0,
+      additional_cost_notes: json['additional_cost_notes'] as String? ?? "",
     );
 
 Map<String, dynamic> _$GetBookingModelToJson(_GetBookingModel instance) =>
@@ -22,4 +24,6 @@ Map<String, dynamic> _$GetBookingModelToJson(_GetBookingModel instance) =>
       'acceptLanguage': instance.acceptLanguage,
       'status': instance.status,
       'id': instance.id,
+      'additional_cost': instance.additional_cost,
+      'additional_cost_notes': instance.additional_cost_notes,
     };

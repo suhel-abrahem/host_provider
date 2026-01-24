@@ -159,7 +159,9 @@ class CodegenLoader extends AssetLoader{
     "serviceImages": "صور الخدمة",
     "cancelReason": "سبب الإلغاء",
     "pleaseProvideAReasonForCancellation": "يرجى تقديم سبب الإلغاء",
-    "providerDetails": "تفاصيل المزود"
+    "providerDetails": "تفاصيل المزود",
+    "additionalCost": "تكلفة إضافية",
+    "additionalCostNotes": "ملاحظات التكلفة الإضافية"
   },
   "profilePage": {
     "title": "صفحة الملف الشخصي",
@@ -523,7 +525,9 @@ static const Map<String,dynamic> _en = {
     "serviceImages": "Service images",
     "cancelReason": "Cancel reason",
     "pleaseProvideAReasonForCancellation": "Please provide a reason for cancellation",
-    "providerDetails": "Provider details"
+    "providerDetails": "Provider details",
+    "additionalCost": "Additional cost",
+    "additionalCostNotes": "Additional cost notes"
   },
   "profilePage": {
     "title": "Profile page",
@@ -887,7 +891,9 @@ static const Map<String,dynamic> _fa = {
     "serviceImages": "وێنەکانی خزمەتگوزاری",
     "cancelReason": "هۆکاری هەڵوەشاندنەوە",
     "pleaseProvideAReasonForCancellation": "تکایە هۆکاری هەڵوەشاندنەوەکە دابنێ",
-    "providerDetails": "زانیاری دابینکەر"
+    "providerDetails": "زانیاری دابینکەر",
+    "additionalCost": "تکایە نرخی زیادە بنووسە",
+    "additionalCostNotes": "تکایە تێبینییەکانی نرخی زیادە بنووسە"
   },
   "profilePage": {
     "title": "پەیجی پڕۆفایل",

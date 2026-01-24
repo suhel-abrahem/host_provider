@@ -143,7 +143,9 @@
     "serviceImages": "وێنەکانی خزمەتگوزاری",
     "cancelReason": "هۆکاری هەڵوەشاندنەوە",
     "pleaseProvideAReasonForCancellation": "تکایە هۆکاری هەڵوەشاندنەوەکە دابنێ",
-    "providerDetails": "زانیاری دابینکەر"
+    "providerDetails": "زانیاری دابینکەر",
+    "additionalCost": "تکایە نرخی زیادە بنووسە",
+    "additionalCostNotes": "تکایە تێبینییەکانی نرخی زیادە بنووسە"
   },
   "profilePage": {
     "title": "پەیجی پڕۆفایل",

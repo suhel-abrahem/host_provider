@@ -11,6 +11,8 @@ abstract class GetBookingModel with _$GetBookingModel {
     @Default("") String? acceptLanguage,
     @Default("") String? status,
     @Default("") String? id,
+    @Default(0.0) double? additional_cost,
+    @Default("") String? additional_cost_notes,
   }) = _GetBookingModel;
   factory GetBookingModel.fromJson(Map<String, dynamic> json) =>
       _$GetBookingModelFromJson(json);

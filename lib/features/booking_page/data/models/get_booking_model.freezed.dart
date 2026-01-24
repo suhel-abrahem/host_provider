@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$GetBookingModel {
 
- String? get auth; String? get reason; String? get acceptLanguage; String? get status; String? get id;
+ String? get auth; String? get reason; String? get acceptLanguage; String? get status; String? get id; double? get additional_cost; String? get additional_cost_notes;
 /// Create a copy of GetBookingModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $GetBookingModelCopyWith<GetBookingModel> get copyWith => _$GetBookingModelCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is GetBookingModel&&(identical(other.auth, auth) || other.auth == auth)&&(identical(other.reason, reason) || other.reason == reason)&&(identical(other.acceptLanguage, acceptLanguage) || other.acceptLanguage == acceptLanguage)&&(identical(other.status, status) || other.status == status)&&(identical(other.id, id) || other.id == id));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is GetBookingModel&&(identical(other.auth, auth) || other.auth == auth)&&(identical(other.reason, reason) || other.reason == reason)&&(identical(other.acceptLanguage, acceptLanguage) || other.acceptLanguage == acceptLanguage)&&(identical(other.status, status) || other.status == status)&&(identical(other.id, id) || other.id == id)&&(identical(other.additional_cost, additional_cost) || other.additional_cost == additional_cost)&&(identical(other.additional_cost_notes, additional_cost_notes) || other.additional_cost_notes == additional_cost_notes));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,auth,reason,acceptLanguage,status,id);
+int get hashCode => Object.hash(runtimeType,auth,reason,acceptLanguage,status,id,additional_cost,additional_cost_notes);
 
 @override
 String toString() {
-  return 'GetBookingModel(auth: $auth, reason: $reason, acceptLanguage: $acceptLanguage, status: $status, id: $id)';
+  return 'GetBookingModel(auth: $auth, reason: $reason, acceptLanguage: $acceptLanguage, status: $status, id: $id, additional_cost: $additional_cost, additional_cost_notes: $additional_cost_notes)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $GetBookingModelCopyWith<$Res>  {
   factory $GetBookingModelCopyWith(GetBookingModel value, $Res Function(GetBookingModel) _then) = _$GetBookingModelCopyWithImpl;
 @useResult
 $Res call({
- String? auth, String? reason, String? acceptLanguage, String? status, String? id
+ String? auth, String? reason, String? acceptLanguage, String? status, String? id, double? additional_cost, String? additional_cost_notes
 });
 
 
@@ -65,13 +65,15 @@ class _$GetBookingModelCopyWithImpl<$Res>
 
 /// Create a copy of GetBookingModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? auth = freezed,Object? reason = freezed,Object? acceptLanguage = freezed,Object? status = freezed,Object? id = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? auth = freezed,Object? reason = freezed,Object? acceptLanguage = freezed,Object? status = freezed,Object? id = freezed,Object? additional_cost = freezed,Object? additional_cost_notes = freezed,}) {
   return _then(_self.copyWith(
 auth: freezed == auth ? _self.auth : auth // ignore: cast_nullable_to_non_nullable
 as String?,reason: freezed == reason ? _self.reason : reason // ignore: cast_nullable_to_non_nullable
 as String?,acceptLanguage: freezed == acceptLanguage ? _self.acceptLanguage : acceptLanguage // ignore: cast_nullable_to_non_nullable
 as String?,status: freezed == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as String?,id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String?,additional_cost: freezed == additional_cost ? _self.additional_cost : additional_cost // ignore: cast_nullable_to_non_nullable
+as double?,additional_cost_notes: freezed == additional_cost_notes ? _self.additional_cost_notes : additional_cost_notes // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }
@@ -157,10 +159,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? auth,  String? reason,  String? acceptLanguage,  String? status,  String? id)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? auth,  String? reason,  String? acceptLanguage,  String? status,  String? id,  double? additional_cost,  String? additional_cost_notes)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _GetBookingModel() when $default != null:
-return $default(_that.auth,_that.reason,_that.acceptLanguage,_that.status,_that.id);case _:
+return $default(_that.auth,_that.reason,_that.acceptLanguage,_that.status,_that.id,_that.additional_cost,_that.additional_cost_notes);case _:
   return orElse();
 
 }
@@ -178,10 +180,10 @@ return $default(_that.auth,_that.reason,_that.acceptLanguage,_that.status,_that.
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? auth,  String? reason,  String? acceptLanguage,  String? status,  String? id)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? auth,  String? reason,  String? acceptLanguage,  String? status,  String? id,  double? additional_cost,  String? additional_cost_notes)  $default,) {final _that = this;
 switch (_that) {
 case _GetBookingModel():
-return $default(_that.auth,_that.reason,_that.acceptLanguage,_that.status,_that.id);case _:
+return $default(_that.auth,_that.reason,_that.acceptLanguage,_that.status,_that.id,_that.additional_cost,_that.additional_cost_notes);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -198,10 +200,10 @@ return $default(_that.auth,_that.reason,_that.acceptLanguage,_that.status,_that.
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? auth,  String? reason,  String? acceptLanguage,  String? status,  String? id)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? auth,  String? reason,  String? acceptLanguage,  String? status,  String? id,  double? additional_cost,  String? additional_cost_notes)?  $default,) {final _that = this;
 switch (_that) {
 case _GetBookingModel() when $default != null:
-return $default(_that.auth,_that.reason,_that.acceptLanguage,_that.status,_that.id);case _:
+return $default(_that.auth,_that.reason,_that.acceptLanguage,_that.status,_that.id,_that.additional_cost,_that.additional_cost_notes);case _:
   return null;
 
 }
@@ -213,7 +215,7 @@ return $default(_that.auth,_that.reason,_that.acceptLanguage,_that.status,_that.
 @JsonSerializable()
 
 class _GetBookingModel implements GetBookingModel {
-  const _GetBookingModel({this.auth = "", this.reason = "", this.acceptLanguage = "", this.status = "", this.id = ""});
+  const _GetBookingModel({this.auth = "", this.reason = "", this.acceptLanguage = "", this.status = "", this.id = "", this.additional_cost = 0.0, this.additional_cost_notes = ""});
   factory _GetBookingModel.fromJson(Map<String, dynamic> json) => _$GetBookingModelFromJson(json);
 
 @override@JsonKey() final  String? auth;
@@ -221,6 +223,8 @@ class _GetBookingModel implements GetBookingModel {
 @override@JsonKey() final  String? acceptLanguage;
 @override@JsonKey() final  String? status;
 @override@JsonKey() final  String? id;
+@override@JsonKey() final  double? additional_cost;
+@override@JsonKey() final  String? additional_cost_notes;
 
 /// Create a copy of GetBookingModel
 /// with the given fields replaced by the non-null parameter values.
@@ -235,16 +239,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _GetBookingModel&&(identical(other.auth, auth) || other.auth == auth)&&(identical(other.reason, reason) || other.reason == reason)&&(identical(other.acceptLanguage, acceptLanguage) || other.acceptLanguage == acceptLanguage)&&(identical(other.status, status) || other.status == status)&&(identical(other.id, id) || other.id == id));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _GetBookingModel&&(identical(other.auth, auth) || other.auth == auth)&&(identical(other.reason, reason) || other.reason == reason)&&(identical(other.acceptLanguage, acceptLanguage) || other.acceptLanguage == acceptLanguage)&&(identical(other.status, status) || other.status == status)&&(identical(other.id, id) || other.id == id)&&(identical(other.additional_cost, additional_cost) || other.additional_cost == additional_cost)&&(identical(other.additional_cost_notes, additional_cost_notes) || other.additional_cost_notes == additional_cost_notes));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,auth,reason,acceptLanguage,status,id);
+int get hashCode => Object.hash(runtimeType,auth,reason,acceptLanguage,status,id,additional_cost,additional_cost_notes);
 
 @override
 String toString() {
-  return 'GetBookingModel(auth: $auth, reason: $reason, acceptLanguage: $acceptLanguage, status: $status, id: $id)';
+  return 'GetBookingModel(auth: $auth, reason: $reason, acceptLanguage: $acceptLanguage, status: $status, id: $id, additional_cost: $additional_cost, additional_cost_notes: $additional_cost_notes)';
 }
 
 
@@ -255,7 +259,7 @@ abstract mixin class _$GetBookingModelCopyWith<$Res> implements $GetBookingModel
   factory _$GetBookingModelCopyWith(_GetBookingModel value, $Res Function(_GetBookingModel) _then) = __$GetBookingModelCopyWithImpl;
 @override @useResult
 $Res call({
- String? auth, String? reason, String? acceptLanguage, String? status, String? id
+ String? auth, String? reason, String? acceptLanguage, String? status, String? id, double? additional_cost, String? additional_cost_notes
 });
 
 
@@ -272,13 +276,15 @@ class __$GetBookingModelCopyWithImpl<$Res>
 
 /// Create a copy of GetBookingModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? auth = freezed,Object? reason = freezed,Object? acceptLanguage = freezed,Object? status = freezed,Object? id = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? auth = freezed,Object? reason = freezed,Object? acceptLanguage = freezed,Object? status = freezed,Object? id = freezed,Object? additional_cost = freezed,Object? additional_cost_notes = freezed,}) {
   return _then(_GetBookingModel(
 auth: freezed == auth ? _self.auth : auth // ignore: cast_nullable_to_non_nullable
 as String?,reason: freezed == reason ? _self.reason : reason // ignore: cast_nullable_to_non_nullable
 as String?,acceptLanguage: freezed == acceptLanguage ? _self.acceptLanguage : acceptLanguage // ignore: cast_nullable_to_non_nullable
 as String?,status: freezed == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
 as String?,id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
+as String?,additional_cost: freezed == additional_cost ? _self.additional_cost : additional_cost // ignore: cast_nullable_to_non_nullable
+as double?,additional_cost_notes: freezed == additional_cost_notes ? _self.additional_cost_notes : additional_cost_notes // ignore: cast_nullable_to_non_nullable
 as String?,
   ));
 }

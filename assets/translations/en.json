@@ -143,7 +143,9 @@
     "serviceImages": "Service images",
     "cancelReason": "Cancel reason",
     "pleaseProvideAReasonForCancellation": "Please provide a reason for cancellation",
-    "providerDetails": "Provider details"
+    "providerDetails": "Provider details",
+    "additionalCost": "Additional cost",
+    "additionalCostNotes": "Additional cost notes"
   },
   "profilePage": {
     "title": "Profile page",

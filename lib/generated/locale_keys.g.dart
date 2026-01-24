@@ -141,6 +141,8 @@ abstract class  LocaleKeys {
   static const bookingPage_cancelReason = 'bookingPage.cancelReason';
   static const bookingPage_pleaseProvideAReasonForCancellation = 'bookingPage.pleaseProvideAReasonForCancellation';
   static const bookingPage_providerDetails = 'bookingPage.providerDetails';
+  static const bookingPage_additionalCost = 'bookingPage.additionalCost';
+  static const bookingPage_additionalCostNotes = 'bookingPage.additionalCostNotes';
   static const bookingPage = 'bookingPage';
   static const profilePage_title = 'profilePage.title';
   static const profilePage_label = 'profilePage.label';
