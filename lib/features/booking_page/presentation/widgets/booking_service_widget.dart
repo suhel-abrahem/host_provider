@@ -8,6 +8,7 @@ import 'package:hosta_provider/core/resource/color_manager.dart';
 import '../../../../config/theme/app_theme.dart';
 import '../../../../core/constants/font_constants.dart';
 import '../../../../core/dependencies_injection.dart';
+import '../../../../core/enums/psition_enum.dart';
 import '../../../../core/resource/custom_widget/custom_input_field/custom_input_field.dart';
 import '../../../../core/resource/custom_widget/snake_bar_widget/snake_bar_widget.dart';
 import '../../../../core/util/helper/helper.dart';
@@ -29,6 +30,7 @@ class BookingServiceWidget extends StatefulWidget {
 
 class _BookingServiceWidgetState extends State<BookingServiceWidget> {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  GlobalKey<FormState> additionalCostKey = GlobalKey<FormState>();
   bool isLoading = false;
   @override
   Widget build(BuildContext context) {
@@ -646,60 +648,178 @@ class _BookingServiceWidgetState extends State<BookingServiceWidget> {
                           ),
                           "in_progress" => SizedBox(
                             height: 40.h,
-                            child: ElevatedButton(
-                              onPressed: isLoading
-                                  ? null
-                                  : () {
-                                      context.read<SetBookingBloc>().add(
-                                        SetBookingEvent.setBookings(
-                                          getBookingModel: GetBookingModel(
-                                            id: widget.bookingEntity?.id
-                                                .toString(),
-                                            status: "complete",
-                                          ),
+                            child: Builder(
+                              builder: (completeContext) {
+                                return ElevatedButton(
+                                  onPressed: isLoading
+                                      ? null
+                                      : () {
+                                          String? reason;
+                                          double? additionalCost;
+                                          showDialog(
+                                            context: context,
+                                            builder: (context) {
+                                              return AlertDialog(
+                                                title: Text(
+                                                  LocaleKeys
+                                                      .bookingPage_finishService
+                                                      .tr(),
+                                                  style: Theme.of(context)
+                                                      .textTheme
+                                                      .labelLarge
+                                                      ?.copyWith(
+                                                        fontFamily:
+                                                            FontConstants.fontFamily(
+                                                              context.locale,
+                                                            ),
+                                                      ),
+                                                ),
+                                                content: SizedBox(
+                                                  height: 250.h,
+                                                  child: Form(
+                                                    key: additionalCostKey,
+                                                    autovalidateMode:
+                                                        AutovalidateMode
+                                                            .onUserInteraction,
+                                                    child: Column(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceEvenly,
+                                                      children: [
+                                                        CustomInputField(
+                                                          outerLabel: LocaleKeys
+                                                              .bookingPage_additionalCost
+                                                              .tr(),
+                                                          haveOuterLabel: true,
+                                                          outerLabelPosition:
+                                                              Position.upper,
+                                                          height: 50.h,
+                                                          maxLines: 1,
+                                                          onChanged: (value) =>
+                                                              additionalCost =
+                                                                  double.tryParse(
+                                                                    value ?? '',
+                                                                  ),
+                                                          validator: (value) {},
+                                                        ),
+                                                        CustomInputField(
+                                                          outerLabel: LocaleKeys
+                                                              .bookingPage_additionalCostNotes
+                                                              .tr(),
+                                                          haveOuterLabel: true,
+                                                          outerLabelPosition:
+                                                              Position.upper,
+                                                          height: 50.h,
+                                                          maxLines: 1,
+                                                          onChanged: (value) =>
+                                                              reason = value,
+                                                          validator: (value) {},
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
+                                                actions: [
+                                                  TextButton(
+                                                    onPressed: () {
+                                                      Navigator.of(
+                                                        context,
+                                                      ).pop();
+                                                    },
+                                                    child: Text(
+                                                      LocaleKeys.common_cancel
+                                                          .tr(),
+                                                    ),
+                                                  ),
+                                                  TextButton(
+                                                    onPressed: isLoading
+                                                        ? null
+                                                        : () {
+                                                            {
+                                                              completeContext.read<SetBookingBloc>().add(
+                                                                SetBookingEvent.setBookings(
+                                                                  getBookingModel: GetBookingModel(
+                                                                    additional_cost_notes:
+                                                                        reason,
+                                                                    additional_cost:
+                                                                        additionalCost,
+                                                                    id: widget
+                                                                        .bookingEntity
+                                                                        ?.id
+                                                                        .toString(),
+                                                                    status:
+                                                                        "complete",
+                                                                  ),
+                                                                ),
+                                                              );
+                                                              Navigator.of(
+                                                                context,
+                                                              ).pop();
+                                                            }
+                                                          },
+                                                    child: Text(
+                                                      LocaleKeys.common_save
+                                                          .tr(),
+                                                    ),
+                                                  ),
+                                                ],
+                                                backgroundColor:
+                                                    Theme.of(context)
+                                                        .colorScheme
+                                                        .primaryContainer
+                                                        .withValues(alpha: 0.8),
+                                              );
+                                            },
+                                          );
+                                        },
+                                  style: Theme.of(context)
+                                      .elevatedButtonTheme
+                                      .style
+                                      ?.copyWith(
+                                        backgroundColor: WidgetStatePropertyAll(
+                                          Helper.getColorByStatus(
+                                            "in_progress",
+                                            context,
+                                          )!,
                                         ),
-                                      );
-                                    },
-                              style: Theme.of(context).elevatedButtonTheme.style
-                                  ?.copyWith(
-                                    backgroundColor: WidgetStatePropertyAll(
-                                      Helper.getColorByStatus(
-                                        "in_progress",
-                                        context,
-                                      )!,
+                                        padding:
+                                            WidgetStateProperty.resolveWith((
+                                              callback,
+                                            ) {
+                                              if (callback.contains(
+                                                WidgetState.pressed,
+                                              )) {
+                                                return EdgeInsets.symmetric(
+                                                  vertical: 12.h,
+                                                );
+                                              }
+                                              return EdgeInsets.symmetric(
+                                                horizontal: 16.w,
+                                              );
+                                            }),
+                                      ),
+                                  child: Center(
+                                    child: FittedBox(
+                                      fit: BoxFit.scaleDown,
+                                      child: Text(
+                                        LocaleKeys.bookingPage_finishService
+                                            .tr(),
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .labelLarge
+                                            ?.copyWith(
+                                              fontFamily:
+                                                  FontConstants.fontFamily(
+                                                    context.locale,
+                                                  ),
+                                              color:
+                                                  ColorManager.backgroundColor,
+                                            ),
+                                      ),
                                     ),
-                                    padding: WidgetStateProperty.resolveWith((
-                                      callback,
-                                    ) {
-                                      if (callback.contains(
-                                        WidgetState.pressed,
-                                      )) {
-                                        return EdgeInsets.symmetric(
-                                          vertical: 12.h,
-                                        );
-                                      }
-                                      return EdgeInsets.symmetric(
-                                        horizontal: 16.w,
-                                      );
-                                    }),
                                   ),
-                              child: Center(
-                                child: FittedBox(
-                                  fit: BoxFit.scaleDown,
-                                  child: Text(
-                                    LocaleKeys.bookingPage_finishService.tr(),
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .labelLarge
-                                        ?.copyWith(
-                                          fontFamily: FontConstants.fontFamily(
-                                            context.locale,
-                                          ),
-                                          color: ColorManager.backgroundColor,
-                                        ),
-                                  ),
-                                ),
-                              ),
+                                );
+                              },
                             ),
                           ),
                           "completed" => SizedBox(),

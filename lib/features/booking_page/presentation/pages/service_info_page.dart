@@ -917,8 +917,7 @@ class _ServiceInfoPageState extends State<ServiceInfoPage> {
                                                                                 (
                                                                                   value,
                                                                                 ) => additionalCost = double.tryParse(
-                                                                                  value ??
-                                                                                      '',
+                                                                                  value.toString(),
                                                                                 ),
                                                                             validator:
                                                                                 (
@@ -939,7 +938,7 @@ class _ServiceInfoPageState extends State<ServiceInfoPage> {
                                                                             onChanged:
                                                                                 (
                                                                                   value,
-                                                                                ) => reason = value,
+                                                                                ) => reason = value.toString(),
                                                                             validator:
                                                                                 (
                                                                                   value,

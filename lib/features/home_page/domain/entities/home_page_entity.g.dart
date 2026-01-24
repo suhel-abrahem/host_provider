@@ -9,6 +9,7 @@ part of 'home_page_entity.dart';
 _HomePageEntity _$HomePageEntityFromJson(
   Map<String, dynamic> json,
 ) => _HomePageEntity(
+  rating: (json['rating'] as num?)?.toDouble() ?? 0.0,
   today_bookings: (json['today_bookings'] as num?)?.toInt() ?? 0,
   completed_revenue: (json['completed_revenue'] as num?)?.toInt() ?? 0,
   current_month_bookings:
@@ -21,6 +22,7 @@ _HomePageEntity _$HomePageEntityFromJson(
 
 Map<String, dynamic> _$HomePageEntityToJson(_HomePageEntity instance) =>
     <String, dynamic>{
+      'rating': instance.rating,
       'today_bookings': instance.today_bookings,
       'completed_revenue': instance.completed_revenue,
       'current_month_bookings': instance.current_month_bookings,

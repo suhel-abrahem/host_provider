@@ -45,14 +45,16 @@ class ClientInfoWidget extends StatelessWidget {
                     width: 2.w,
                   ),
                 ),
-                child: ImageWidget(
-                  boxFit: BoxFit.cover,
-                  errorWidget: Icon(
-                    Icons.design_services,
-                    size: 30.sp,
-                    color: Theme.of(context).colorScheme.onPrimaryContainer,
+                child: ClipOval(
+                  child: ImageWidget(
+                    boxFit: BoxFit.cover,
+                    errorWidget: Icon(
+                      Icons.broken_image,
+                      size: 30.sp,
+                      color: Theme.of(context).colorScheme.onPrimaryContainer,
+                    ),
+                    imageUrl: customerEntity?.avatar ?? "",
                   ),
-                  imageUrl: customerEntity?.avatar ?? "",
                 ),
               ),
               Column(

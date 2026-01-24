@@ -93,9 +93,14 @@ class BookingRepositoryImpl implements BookingRepository {
               if (getBookingModel?.reason != null ||
                   getBookingModel?.reason != "")
                 "notes": getBookingModel?.reason,
+              if (getBookingModel?.additional_cost != null)
+                "additional_cost": getBookingModel?.additional_cost,
+              if (getBookingModel?.additional_cost_notes != null)
+                "additional_cost_notes": getBookingModel?.additional_cost_notes,
             },
           )
           .then((onValue) {
+            print("set booking response: ${onValue}");
             if (onValue is DataSuccess) {
               response = DataSuccess(
                 data: BookingEntity.fromJson(onValue.data?.data["data"]),

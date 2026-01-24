@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$HomePageEntity {
 
- int? get today_bookings; int? get completed_revenue; int? get current_month_bookings; int? get current_month_revenue; int? get in_progress_bookings; int? get pending_bookings; List<dynamic>? get yearly_stats;
+ double? get rating; int? get today_bookings; int? get completed_revenue; int? get current_month_bookings; int? get current_month_revenue; int? get in_progress_bookings; int? get pending_bookings; List<dynamic>? get yearly_stats;
 /// Create a copy of HomePageEntity
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $HomePageEntityCopyWith<HomePageEntity> get copyWith => _$HomePageEntityCopyWith
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is HomePageEntity&&(identical(other.today_bookings, today_bookings) || other.today_bookings == today_bookings)&&(identical(other.completed_revenue, completed_revenue) || other.completed_revenue == completed_revenue)&&(identical(other.current_month_bookings, current_month_bookings) || other.current_month_bookings == current_month_bookings)&&(identical(other.current_month_revenue, current_month_revenue) || other.current_month_revenue == current_month_revenue)&&(identical(other.in_progress_bookings, in_progress_bookings) || other.in_progress_bookings == in_progress_bookings)&&(identical(other.pending_bookings, pending_bookings) || other.pending_bookings == pending_bookings)&&const DeepCollectionEquality().equals(other.yearly_stats, yearly_stats));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is HomePageEntity&&(identical(other.rating, rating) || other.rating == rating)&&(identical(other.today_bookings, today_bookings) || other.today_bookings == today_bookings)&&(identical(other.completed_revenue, completed_revenue) || other.completed_revenue == completed_revenue)&&(identical(other.current_month_bookings, current_month_bookings) || other.current_month_bookings == current_month_bookings)&&(identical(other.current_month_revenue, current_month_revenue) || other.current_month_revenue == current_month_revenue)&&(identical(other.in_progress_bookings, in_progress_bookings) || other.in_progress_bookings == in_progress_bookings)&&(identical(other.pending_bookings, pending_bookings) || other.pending_bookings == pending_bookings)&&const DeepCollectionEquality().equals(other.yearly_stats, yearly_stats));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,today_bookings,completed_revenue,current_month_bookings,current_month_revenue,in_progress_bookings,pending_bookings,const DeepCollectionEquality().hash(yearly_stats));
+int get hashCode => Object.hash(runtimeType,rating,today_bookings,completed_revenue,current_month_bookings,current_month_revenue,in_progress_bookings,pending_bookings,const DeepCollectionEquality().hash(yearly_stats));
 
 @override
 String toString() {
-  return 'HomePageEntity(today_bookings: $today_bookings, completed_revenue: $completed_revenue, current_month_bookings: $current_month_bookings, current_month_revenue: $current_month_revenue, in_progress_bookings: $in_progress_bookings, pending_bookings: $pending_bookings, yearly_stats: $yearly_stats)';
+  return 'HomePageEntity(rating: $rating, today_bookings: $today_bookings, completed_revenue: $completed_revenue, current_month_bookings: $current_month_bookings, current_month_revenue: $current_month_revenue, in_progress_bookings: $in_progress_bookings, pending_bookings: $pending_bookings, yearly_stats: $yearly_stats)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $HomePageEntityCopyWith<$Res>  {
   factory $HomePageEntityCopyWith(HomePageEntity value, $Res Function(HomePageEntity) _then) = _$HomePageEntityCopyWithImpl;
 @useResult
 $Res call({
- int? today_bookings, int? completed_revenue, int? current_month_bookings, int? current_month_revenue, int? in_progress_bookings, int? pending_bookings, List<dynamic>? yearly_stats
+ double? rating, int? today_bookings, int? completed_revenue, int? current_month_bookings, int? current_month_revenue, int? in_progress_bookings, int? pending_bookings, List<dynamic>? yearly_stats
 });
 
 
@@ -65,9 +65,10 @@ class _$HomePageEntityCopyWithImpl<$Res>
 
 /// Create a copy of HomePageEntity
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? today_bookings = freezed,Object? completed_revenue = freezed,Object? current_month_bookings = freezed,Object? current_month_revenue = freezed,Object? in_progress_bookings = freezed,Object? pending_bookings = freezed,Object? yearly_stats = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? rating = freezed,Object? today_bookings = freezed,Object? completed_revenue = freezed,Object? current_month_bookings = freezed,Object? current_month_revenue = freezed,Object? in_progress_bookings = freezed,Object? pending_bookings = freezed,Object? yearly_stats = freezed,}) {
   return _then(_self.copyWith(
-today_bookings: freezed == today_bookings ? _self.today_bookings : today_bookings // ignore: cast_nullable_to_non_nullable
+rating: freezed == rating ? _self.rating : rating // ignore: cast_nullable_to_non_nullable
+as double?,today_bookings: freezed == today_bookings ? _self.today_bookings : today_bookings // ignore: cast_nullable_to_non_nullable
 as int?,completed_revenue: freezed == completed_revenue ? _self.completed_revenue : completed_revenue // ignore: cast_nullable_to_non_nullable
 as int?,current_month_bookings: freezed == current_month_bookings ? _self.current_month_bookings : current_month_bookings // ignore: cast_nullable_to_non_nullable
 as int?,current_month_revenue: freezed == current_month_revenue ? _self.current_month_revenue : current_month_revenue // ignore: cast_nullable_to_non_nullable
@@ -159,10 +160,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int? today_bookings,  int? completed_revenue,  int? current_month_bookings,  int? current_month_revenue,  int? in_progress_bookings,  int? pending_bookings,  List<dynamic>? yearly_stats)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( double? rating,  int? today_bookings,  int? completed_revenue,  int? current_month_bookings,  int? current_month_revenue,  int? in_progress_bookings,  int? pending_bookings,  List<dynamic>? yearly_stats)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _HomePageEntity() when $default != null:
-return $default(_that.today_bookings,_that.completed_revenue,_that.current_month_bookings,_that.current_month_revenue,_that.in_progress_bookings,_that.pending_bookings,_that.yearly_stats);case _:
+return $default(_that.rating,_that.today_bookings,_that.completed_revenue,_that.current_month_bookings,_that.current_month_revenue,_that.in_progress_bookings,_that.pending_bookings,_that.yearly_stats);case _:
   return orElse();
 
 }
@@ -180,10 +181,10 @@ return $default(_that.today_bookings,_that.completed_revenue,_that.current_month
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int? today_bookings,  int? completed_revenue,  int? current_month_bookings,  int? current_month_revenue,  int? in_progress_bookings,  int? pending_bookings,  List<dynamic>? yearly_stats)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( double? rating,  int? today_bookings,  int? completed_revenue,  int? current_month_bookings,  int? current_month_revenue,  int? in_progress_bookings,  int? pending_bookings,  List<dynamic>? yearly_stats)  $default,) {final _that = this;
 switch (_that) {
 case _HomePageEntity():
-return $default(_that.today_bookings,_that.completed_revenue,_that.current_month_bookings,_that.current_month_revenue,_that.in_progress_bookings,_that.pending_bookings,_that.yearly_stats);case _:
+return $default(_that.rating,_that.today_bookings,_that.completed_revenue,_that.current_month_bookings,_that.current_month_revenue,_that.in_progress_bookings,_that.pending_bookings,_that.yearly_stats);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -200,10 +201,10 @@ return $default(_that.today_bookings,_that.completed_revenue,_that.current_month
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int? today_bookings,  int? completed_revenue,  int? current_month_bookings,  int? current_month_revenue,  int? in_progress_bookings,  int? pending_bookings,  List<dynamic>? yearly_stats)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( double? rating,  int? today_bookings,  int? completed_revenue,  int? current_month_bookings,  int? current_month_revenue,  int? in_progress_bookings,  int? pending_bookings,  List<dynamic>? yearly_stats)?  $default,) {final _that = this;
 switch (_that) {
 case _HomePageEntity() when $default != null:
-return $default(_that.today_bookings,_that.completed_revenue,_that.current_month_bookings,_that.current_month_revenue,_that.in_progress_bookings,_that.pending_bookings,_that.yearly_stats);case _:
+return $default(_that.rating,_that.today_bookings,_that.completed_revenue,_that.current_month_bookings,_that.current_month_revenue,_that.in_progress_bookings,_that.pending_bookings,_that.yearly_stats);case _:
   return null;
 
 }
@@ -215,9 +216,10 @@ return $default(_that.today_bookings,_that.completed_revenue,_that.current_month
 @JsonSerializable()
 
 class _HomePageEntity implements HomePageEntity {
-  const _HomePageEntity({this.today_bookings = 0, this.completed_revenue = 0, this.current_month_bookings = 0, this.current_month_revenue = 0, this.in_progress_bookings = 0, this.pending_bookings = 0, final  List<dynamic>? yearly_stats = const []}): _yearly_stats = yearly_stats;
+  const _HomePageEntity({this.rating = 0.0, this.today_bookings = 0, this.completed_revenue = 0, this.current_month_bookings = 0, this.current_month_revenue = 0, this.in_progress_bookings = 0, this.pending_bookings = 0, final  List<dynamic>? yearly_stats = const []}): _yearly_stats = yearly_stats;
   factory _HomePageEntity.fromJson(Map<String, dynamic> json) => _$HomePageEntityFromJson(json);
 
+@override@JsonKey() final  double? rating;
 @override@JsonKey() final  int? today_bookings;
 @override@JsonKey() final  int? completed_revenue;
 @override@JsonKey() final  int? current_month_bookings;
@@ -247,16 +249,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _HomePageEntity&&(identical(other.today_bookings, today_bookings) || other.today_bookings == today_bookings)&&(identical(other.completed_revenue, completed_revenue) || other.completed_revenue == completed_revenue)&&(identical(other.current_month_bookings, current_month_bookings) || other.current_month_bookings == current_month_bookings)&&(identical(other.current_month_revenue, current_month_revenue) || other.current_month_revenue == current_month_revenue)&&(identical(other.in_progress_bookings, in_progress_bookings) || other.in_progress_bookings == in_progress_bookings)&&(identical(other.pending_bookings, pending_bookings) || other.pending_bookings == pending_bookings)&&const DeepCollectionEquality().equals(other._yearly_stats, _yearly_stats));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _HomePageEntity&&(identical(other.rating, rating) || other.rating == rating)&&(identical(other.today_bookings, today_bookings) || other.today_bookings == today_bookings)&&(identical(other.completed_revenue, completed_revenue) || other.completed_revenue == completed_revenue)&&(identical(other.current_month_bookings, current_month_bookings) || other.current_month_bookings == current_month_bookings)&&(identical(other.current_month_revenue, current_month_revenue) || other.current_month_revenue == current_month_revenue)&&(identical(other.in_progress_bookings, in_progress_bookings) || other.in_progress_bookings == in_progress_bookings)&&(identical(other.pending_bookings, pending_bookings) || other.pending_bookings == pending_bookings)&&const DeepCollectionEquality().equals(other._yearly_stats, _yearly_stats));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,today_bookings,completed_revenue,current_month_bookings,current_month_revenue,in_progress_bookings,pending_bookings,const DeepCollectionEquality().hash(_yearly_stats));
+int get hashCode => Object.hash(runtimeType,rating,today_bookings,completed_revenue,current_month_bookings,current_month_revenue,in_progress_bookings,pending_bookings,const DeepCollectionEquality().hash(_yearly_stats));
 
 @override
 String toString() {
-  return 'HomePageEntity(today_bookings: $today_bookings, completed_revenue: $completed_revenue, current_month_bookings: $current_month_bookings, current_month_revenue: $current_month_revenue, in_progress_bookings: $in_progress_bookings, pending_bookings: $pending_bookings, yearly_stats: $yearly_stats)';
+  return 'HomePageEntity(rating: $rating, today_bookings: $today_bookings, completed_revenue: $completed_revenue, current_month_bookings: $current_month_bookings, current_month_revenue: $current_month_revenue, in_progress_bookings: $in_progress_bookings, pending_bookings: $pending_bookings, yearly_stats: $yearly_stats)';
 }
 
 
@@ -267,7 +269,7 @@ abstract mixin class _$HomePageEntityCopyWith<$Res> implements $HomePageEntityCo
   factory _$HomePageEntityCopyWith(_HomePageEntity value, $Res Function(_HomePageEntity) _then) = __$HomePageEntityCopyWithImpl;
 @override @useResult
 $Res call({
- int? today_bookings, int? completed_revenue, int? current_month_bookings, int? current_month_revenue, int? in_progress_bookings, int? pending_bookings, List<dynamic>? yearly_stats
+ double? rating, int? today_bookings, int? completed_revenue, int? current_month_bookings, int? current_month_revenue, int? in_progress_bookings, int? pending_bookings, List<dynamic>? yearly_stats
 });
 
 
@@ -284,9 +286,10 @@ class __$HomePageEntityCopyWithImpl<$Res>
 
 /// Create a copy of HomePageEntity
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? today_bookings = freezed,Object? completed_revenue = freezed,Object? current_month_bookings = freezed,Object? current_month_revenue = freezed,Object? in_progress_bookings = freezed,Object? pending_bookings = freezed,Object? yearly_stats = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? rating = freezed,Object? today_bookings = freezed,Object? completed_revenue = freezed,Object? current_month_bookings = freezed,Object? current_month_revenue = freezed,Object? in_progress_bookings = freezed,Object? pending_bookings = freezed,Object? yearly_stats = freezed,}) {
   return _then(_HomePageEntity(
-today_bookings: freezed == today_bookings ? _self.today_bookings : today_bookings // ignore: cast_nullable_to_non_nullable
+rating: freezed == rating ? _self.rating : rating // ignore: cast_nullable_to_non_nullable
+as double?,today_bookings: freezed == today_bookings ? _self.today_bookings : today_bookings // ignore: cast_nullable_to_non_nullable
 as int?,completed_revenue: freezed == completed_revenue ? _self.completed_revenue : completed_revenue // ignore: cast_nullable_to_non_nullable
 as int?,current_month_bookings: freezed == current_month_bookings ? _self.current_month_bookings : current_month_bookings // ignore: cast_nullable_to_non_nullable
 as int?,current_month_revenue: freezed == current_month_revenue ? _self.current_month_revenue : current_month_revenue // ignore: cast_nullable_to_non_nullable

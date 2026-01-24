@@ -5,6 +5,7 @@ part 'home_page_entity.g.dart';
 @freezed
 abstract class HomePageEntity with _$HomePageEntity {
   const factory HomePageEntity({
+    @Default(0.0) double? rating,
     @Default(0) int? today_bookings,
     @Default(0) int? completed_revenue,
     @Default(0) int? current_month_bookings,
