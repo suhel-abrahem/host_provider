@@ -33,13 +33,19 @@ class DrawerButtonWidget extends StatelessWidget {
             style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
               elevation: WidgetStateProperty.fromMap({WidgetState.pressed: 10}),
               shadowColor: WidgetStatePropertyAll(
-                (selected ?? false)
-                    ? Theme.of(context).focusColor.withValues(alpha: 1)
+                selected ?? false
+                    ? Theme.of(context).colorScheme.shadow
                     : Colors.transparent,
               ),
-              backgroundColor: WidgetStatePropertyAll(Colors.transparent),
+              backgroundColor: WidgetStatePropertyAll(
+                (selected ?? false)
+                    ? const Color.fromARGB(255, 225, 238, 231)
+                    : ColorManager.primaryColor,
+              ),
               foregroundColor: WidgetStatePropertyAll(
-                Theme.of(context).textTheme.labelLarge?.color,
+                selected ?? false
+                    ? ColorManager.primaryColor
+                    : ColorManager.darkTextColor,
               ),
               side: WidgetStatePropertyAll(BorderSide.none),
 
@@ -54,7 +60,13 @@ class DrawerButtonWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Icon(icon, color: ColorManager.backgroundColor, size: 24.sp),
+                  Icon(
+                    icon,
+                    color: selected ?? false
+                        ? ColorManager.primaryColor
+                        : ColorManager.darkTextColor,
+                    size: 24.sp,
+                  ),
                   Padding(
                     padding: EdgeInsetsDirectional.only(start: 24.sp),
                     child: Text(
@@ -62,7 +74,9 @@ class DrawerButtonWidget extends StatelessWidget {
                       style: Theme.of(context).textTheme.labelLarge?.copyWith(
                         fontFamily: FontConstants.fontFamily(context.locale),
                         fontWeight: FontWeight.w500,
-                        color: ColorManager.backgroundColor,
+                        color: selected ?? false
+                            ? ColorManager.primaryColor
+                            : ColorManager.darkTextColor,
                       ),
                     ),
                   ),

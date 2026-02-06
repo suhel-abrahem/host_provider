@@ -19,7 +19,7 @@ class GetCitiesRepositoryImplements implements GetCitiesRepository {
   Future<DataState<List<CityEntity?>?>?> getCities({
     required CityModel? cityModel,
   }) async {
-    ConnectivityResult connectivityResult = ConnectivityResult.none;
+    ConnectivityResult? connectivityResult;
     await _checkConnectivity.checkConnectivity().then(
       (action) => connectivityResult = action.last,
     );

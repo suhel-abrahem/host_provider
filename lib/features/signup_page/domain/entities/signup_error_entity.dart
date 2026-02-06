@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-part 'signup_error_entity.g.dart';
+
 part 'signup_error_entity.freezed.dart';
+part 'signup_error_entity.g.dart';
 
 @freezed
 abstract class SignupErrorEntity with _$SignupErrorEntity {

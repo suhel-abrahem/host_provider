@@ -12,9 +12,12 @@ _SetProfileModel _$SetProfileModelFromJson(Map<String, dynamic> json) =>
       email: json['email'] as String? ?? "",
       phone: json['phone'] as String? ?? "",
       dob: json['dob'] as String? ?? "",
-      avatar: const FilePathConverter().fromJson(json['avatar'] as String?),
+      avatar: const FileJsonConverter().fromJson(json['avatar'] as String?),
       address: json['address'] as String? ?? "",
-      city_id: (json['city_id'] as num?)?.toInt() ?? null,
+      city_id: (json['city_id'] as num?)?.toInt() ?? 1,
+      country_id: (json['country_id'] as num?)?.toInt() ?? 1,
+      lat: json['lat'] as String? ?? "",
+      lng: json['lng'] as String? ?? "",
     );
 
 Map<String, dynamic> _$SetProfileModelToJson(_SetProfileModel instance) =>
@@ -23,7 +26,10 @@ Map<String, dynamic> _$SetProfileModelToJson(_SetProfileModel instance) =>
       'email': instance.email,
       'phone': instance.phone,
       'dob': instance.dob,
-      'avatar': const FilePathConverter().toJson(instance.avatar),
+      'avatar': const FileJsonConverter().toJson(instance.avatar),
       'address': instance.address,
       'city_id': instance.city_id,
+      'country_id': instance.country_id,
+      'lat': instance.lat,
+      'lng': instance.lng,
     };

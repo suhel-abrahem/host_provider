@@ -19,7 +19,7 @@ class GetCountryRepositoryImplement implements GetCountryRepository {
   Future<DataState<List<CountryEntity?>?>?> getCountry({
     required CountryModel? countryModel,
   }) async {
-    ConnectivityResult connectivityResult = ConnectivityResult.none;
+    ConnectivityResult? connectivityResult;
     await _checkConnectivity.checkConnectivity().then(
       (action) => connectivityResult = action.last,
     );

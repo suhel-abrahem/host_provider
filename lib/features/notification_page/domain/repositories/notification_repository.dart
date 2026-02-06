@@ -1,5 +1,5 @@
-import 'package:hosta_provider/core/data_state/data_state.dart';
-import 'package:hosta_provider/features/notification_page/data/models/notification_model.dart';
+import '/core/data_state/data_state.dart';
+import '/features/notification_page/data/models/notification_model.dart';
 
 import '../entities/notification_entity.dart';
 

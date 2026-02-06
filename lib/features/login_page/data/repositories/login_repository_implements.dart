@@ -26,8 +26,17 @@ class LoginRepositoryImplements implements LoginRepository {
     }
     LoginStateEntity? loginStateEntity;
     DataState<LoginStateEntity>? dataState;
+    CommonService commonService = CommonService(
+      headers: {
+        'Content-Type': 'application/json',
+        "accept": "application/json",
+      },
+    );
+    print(
+      "login model/login: ${loginStateModel?.login}, password: ${loginStateModel?.password}",
+    );
     try {
-      await _commonService
+      await commonService
           .post(
             ApiConstant.loginEndpoint,
             data: LoginModel(
@@ -36,7 +45,10 @@ class LoginRepositoryImplements implements LoginRepository {
             ).toJson(),
           )
           .then((response) {
-            if (response is DataSuccess<Response?>) {
+            print(
+              "Login response: ${response.data?.statusCode}, logindata: ${response.data?.data}",
+            );
+            if (response is DataSuccess) {
               if (response.data?.statusCode == 200) {
                 loginStateEntity = LoginStateEntity.fromJson(
                   response.data?.data,
@@ -44,11 +56,29 @@ class LoginRepositoryImplements implements LoginRepository {
                 dataState = DataSuccess(data: loginStateEntity);
                 return dataState;
               } else {
-                dataState = OtpRequestedDataState();
+                dataState = OtpRequestedDataState(
+                  data: LoginStateEntity(
+                    user: {"id": response.data?.data["user_id"]},
+                  ),
+                );
                 return dataState;
               }
             } else if (response is DataFailed) {
               dataState = DataFailed(error: response.error);
+              return dataState;
+            } else if (response is UnauthenticatedDataState) {
+              dataState = UnauthenticatedDataState(error: response.error);
+              return dataState;
+            } else if (response is TooManyRequestsDataState) {
+              dataState = TooManyRequestsDataState(
+                error: response.error,
+                data: LoginStateEntity(
+                  retry_after_seconds: response
+                      .data
+                      ?.data["retry_after_seconds"]
+                      .toString(),
+                ),
+              );
               return dataState;
             }
           });

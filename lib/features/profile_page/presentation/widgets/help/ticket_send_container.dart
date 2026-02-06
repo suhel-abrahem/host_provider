@@ -11,9 +11,9 @@ import '/config/theme/app_theme.dart';
 import '/core/constants/font_constants.dart';
 import '/core/dependencies_injection.dart';
 import '/core/resource/image_widget.dart';
-import '/features/chat/data/models/chat_model.dart';
+
 import '/features/chat/domain/entities/message/message_entity.dart';
-import '/features/chat/presentation/bloc/send_chat_bloc.dart';
+
 import '/generated/locale_keys.g.dart';
 
 import '/core/enums/uploading_state_enum.dart';
@@ -121,7 +121,6 @@ class _TicketMessageContainerState extends State<TicketMessageContainer> {
                     maxWidth: 260.w,
                     minWidth: 20.w,
                     minHeight: 25.h,
-                    maxHeight: 250.h,
                   ),
                   decoration: BoxDecoration(
                     boxShadow: [

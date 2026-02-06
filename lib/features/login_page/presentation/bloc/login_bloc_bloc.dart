@@ -22,7 +22,7 @@ class LoginBlocBloc extends Bloc<LoginBlocEvent, LoginBlocState> {
       emit(LoginBlocState.loginStateLoading());
       await _loginUsecase?.call(params: event.loginStateModel).then((
         dataState,
-      ) {
+      ) async {
         if (dataState is DataSuccess) {
           emit(
             LoginBlocState.loginStateLoaded(loginStateEntity: dataState?.data),
@@ -30,7 +30,11 @@ class LoginBlocBloc extends Bloc<LoginBlocEvent, LoginBlocState> {
         } else if (dataState is NOInternetDataState<LoginStateModel?>) {
           emit(LoginBlocState.loginStateNoInternet());
         } else if (dataState is OtpRequestedDataState) {
-          emit(LoginBlocState.unAuthorized());
+          emit(LoginBlocState.otpRequested(loginStateEntity: dataState?.data));
+        } else if (dataState is TooManyRequestsDataState) {
+          emit(
+            LoginBlocState.tooManyRequests(loginStateEntity: dataState?.data),
+          );
         } else {
           emit(LoginBlocState.loginStateError(message: "An error occurred"));
         }

@@ -1,7 +1,11 @@
 // ignore_for_file: non_constant_identifier_names
 
+import 'dart:io';
+
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hosta_provider/features/signup_page/data/models/uint8list_json_converter.dart';
+
+import '../../../../core/resource/json_converter/file_json_converter.dart';
+
 part 'signup_model.freezed.dart';
 part 'signup_model.g.dart';
 
@@ -17,7 +21,7 @@ abstract class SignupModel with _$SignupModel {
     @Default("") String? address,
     @Default("") String? role,
     @Default("") String? dob,
-    @FileJsonConverter() @Default("") String? avatar,
+    @FileJsonConverter() File? avatar,
     @Default("") String? password,
     @Default("") String? password_confirmation,
     @Default("") String? email,

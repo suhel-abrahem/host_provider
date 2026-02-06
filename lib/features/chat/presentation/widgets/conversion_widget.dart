@@ -20,6 +20,7 @@ class ConversionWidget extends StatelessWidget {
   final int? unreadCount;
   final String? ticketImage;
   final bool? isTicket;
+  final bool? canSend;
   const ConversionWidget({
     super.key,
     this.messageEntity,
@@ -29,6 +30,7 @@ class ConversionWidget extends StatelessWidget {
     this.chatId,
     this.ticketImage,
     this.isTicket,
+    this.canSend,
   });
 
   @override
@@ -39,7 +41,11 @@ class ConversionWidget extends StatelessWidget {
           {
             context.pushNamed(
               RoutesName.ticketPage,
-              pathParameters: {'ticketId': chatId.toString()},
+              pathParameters: {
+                'ticketId': chatId.toString(),
+                "bookingNumber": bookingNumber.toString(),
+                "canSend": (canSend == true) ? "true" : "false",
+              },
             ),
           }
         else
@@ -85,54 +91,97 @@ class ConversionWidget extends StatelessWidget {
               ),
             ),
 
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  bookingNumber ?? "",
-                  style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                    fontFamily: FontConstants.fontFamily(context.locale),
-                  ),
-                  overflow: TextOverflow.ellipsis,
-                ),
-                Row(
-                  children: [
-                    Text(
-                      (messageEntity?.me ?? false)
-                          ? "${LocaleKeys.chatsPage_you.tr()}: "
-                          : "${otherParticipantEntity?.name ?? ""}: ",
-                      style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                        fontFamily: FontConstants.fontFamily(context.locale),
-                        fontWeight: FontWeight.bold,
-                      ),
-                      overflow: TextOverflow.ellipsis,
+            SizedBox(
+              width: 270.w,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    bookingNumber ?? "",
+                    style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                      fontFamily: FontConstants.fontFamily(context.locale),
                     ),
-                    if (messageEntity?.message_type == "image")
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  Row(
+                    children: [
                       Text(
-                        "${LocaleKeys.chatsPage_sentAImage.tr()}. 📷",
+                        (messageEntity?.me ?? false)
+                            ? "${LocaleKeys.chatsPage_you.tr()}: "
+                            : "${otherParticipantEntity?.name ?? ""}: ",
                         style: Theme.of(context).textTheme.labelSmall?.copyWith(
                           fontFamily: FontConstants.fontFamily(context.locale),
-                        ),
-                        overflow: TextOverflow.ellipsis,
-                      )
-                    else
-                      Text(
-                        messageEntity?.content != null &&
-                                messageEntity!.content!.isNotEmpty
-                            ? messageEntity?.content?.last ??
-                                  LocaleKeys.chatsPage_noMesagesYet.tr()
-                            : LocaleKeys.chatsPage_noMesagesYet.tr(),
-                        style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                          fontFamily: FontConstants.fontFamily(context.locale),
-                          fontWeight: messageEntity?.is_read == false
-                              ? FontWeight.bold
-                              : FontWeight.normal,
+                          fontWeight: FontWeight.bold,
                         ),
                         overflow: TextOverflow.ellipsis,
                       ),
-                  ],
+                      if (messageEntity?.message_type == "image")
+                        Text(
+                          "${LocaleKeys.chatsPage_sentAImage.tr()}. 📷",
+                          style: Theme.of(context).textTheme.labelSmall
+                              ?.copyWith(
+                                fontFamily: FontConstants.fontFamily(
+                                  context.locale,
+                                ),
+                              ),
+                          overflow: TextOverflow.ellipsis,
+                        )
+                      else
+                        SizedBox(
+                          width: 200.w,
+                          child: Text(
+                            messageEntity?.content != null &&
+                                    messageEntity!.content!.isNotEmpty
+                                ? messageEntity?.content?.last ??
+                                      LocaleKeys.chatsPage_noMesagesYet.tr()
+                                : LocaleKeys.chatsPage_noMesagesYet.tr(),
+                            style: Theme.of(context).textTheme.labelSmall
+                                ?.copyWith(
+                                  fontFamily: FontConstants.fontFamily(
+                                    context.locale,
+                                  ),
+                                  fontWeight: messageEntity?.is_read == false
+                                      ? FontWeight.bold
+                                      : FontWeight.normal,
+                                ),
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            Visibility(
+              visible: unreadCount != null && unreadCount! > 0,
+              child: Container(
+                constraints: BoxConstraints(
+                  minWidth: 24.w,
+                  minHeight: 24.h,
+                  maxHeight: 30.h,
+                  maxWidth: 30.w,
                 ),
-              ],
+                padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 4.h),
+                decoration: BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Theme.of(context).colorScheme.primary,
+                ),
+
+                child: Center(
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Text(
+                      unreadCount != null && unreadCount! > 0
+                          ? unreadCount.toString()
+                          : "0",
+                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                        fontFamily: FontConstants.fontFamily(context.locale),
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
             ),
           ],
         ),

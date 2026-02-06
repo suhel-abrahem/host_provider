@@ -51,20 +51,17 @@ class _AccountInfoRowWidgetState extends State<AccountInfoRowWidget> {
           border: Theme.of(context).defaultBorderSide,
         ),
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: 12.w),
-          child: Padding(
-            padding: EdgeInsets.symmetric(vertical: 8.h),
-            child: CustomInputField(
-              onChanged: (value) => widget.onChanged(value),
-              validator: widget.validator,
-              width: 200.w,
-              enabled: enabled,
-              fillColor: Theme.of(
-                context,
-              ).colorScheme.primaryContainer.withValues(alpha: 0.3),
-              initialValue: widget.profileEntity ?? "",
-              label: widget.label ?? "",
-            ),
+          padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 8.h),
+          child: CustomInputField(
+            onChanged: (value) => widget.onChanged(value),
+            validator: widget.validator,
+            width: 200.w,
+            enabled: enabled,
+            fillColor: Theme.of(
+              context,
+            ).colorScheme.primaryContainer.withValues(alpha: 0.3),
+            initialValue: widget.profileEntity ?? "",
+            label: widget.label ?? "",
           ),
         ),
         SizedBox(
@@ -92,17 +89,31 @@ class _AccountInfoRowWidgetState extends State<AccountInfoRowWidget> {
                 ),
               ),
             ),
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 4.h),
-              child: FittedBox(
-                fit: BoxFit.scaleDown,
-                child: Icon(
-                  Icons.edit_outlined,
-                  size: 20.sp,
-                  color: Theme.of(context).textTheme.labelLarge?.color,
+            child:
+                Container(
+                  width: 40.w,
+                  height: 40.h,
+                  padding: EdgeInsets.symmetric(horizontal: 4.w, vertical: 4.h),
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Icon(
+                      Icons.edit_outlined,
+                      size: 20.sp,
+                      color: Theme.of(context).textTheme.labelLarge?.color,
+                    ),
+                  ),
+                ).asGlass(
+                  frosted: true,
+                  blurX: 18,
+                  blurY: 18,
+                  tintColor: Theme.of(
+                    context,
+                  ).colorScheme.primary.withValues(alpha: 0.9),
+                  clipBorderRadius: BorderRadius.circular(12.r),
+                  border: Theme.of(context).defaultBorderSide.copyWith(
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
                 ),
-              ),
-            ),
           ),
         ),
       ],

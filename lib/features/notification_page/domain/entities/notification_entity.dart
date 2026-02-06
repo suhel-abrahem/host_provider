@@ -10,7 +10,7 @@ abstract class NotificationEntity with _$NotificationEntity {
     @Default('') String? type,
     @Default("") String? title,
     @Default('') String? body,
-    @Default({}) Map<String, dynamic>? data,
+    @Default({}) Map<String, dynamic> data,
     @Default(false) bool? is_read,
     @Default("") String? created_at,
     @Default("") String? updated_at,

@@ -25,7 +25,7 @@ class NOInternetDataState<T> extends DataState<T> {
 }
 
 class OtpRequestedDataState<T> extends DataState<T> {
-  const OtpRequestedDataState();
+  const OtpRequestedDataState({super.data});
 }
 
 class LocationDisabledDataState<T> extends DataState<T> {
@@ -46,4 +46,8 @@ class UnauthenticatedDataState<T> extends DataState<T> {
 
 class NotFoundDataState<T> extends DataState<T> {
   const NotFoundDataState({required super.error});
+}
+
+class TooManyRequestsDataState<T> extends DataState<T> {
+  const TooManyRequestsDataState({required super.error, super.data});
 }

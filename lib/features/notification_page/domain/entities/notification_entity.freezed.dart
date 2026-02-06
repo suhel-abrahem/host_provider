@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$NotificationEntity {
 
- int? get id; int? get user_id; String? get type; String? get title; String? get body; Map<String, dynamic>? get data; bool? get is_read; String? get created_at; String? get updated_at; String? get read_at;
+ int? get id; int? get user_id; String? get type; String? get title; String? get body; Map<String, dynamic> get data; bool? get is_read; String? get created_at; String? get updated_at; String? get read_at;
 /// Create a copy of NotificationEntity
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $NotificationEntityCopyWith<$Res>  {
   factory $NotificationEntityCopyWith(NotificationEntity value, $Res Function(NotificationEntity) _then) = _$NotificationEntityCopyWithImpl;
 @useResult
 $Res call({
- int? id, int? user_id, String? type, String? title, String? body, Map<String, dynamic>? data, bool? is_read, String? created_at, String? updated_at, String? read_at
+ int? id, int? user_id, String? type, String? title, String? body, Map<String, dynamic> data, bool? is_read, String? created_at, String? updated_at, String? read_at
 });
 
 
@@ -65,15 +65,15 @@ class _$NotificationEntityCopyWithImpl<$Res>
 
 /// Create a copy of NotificationEntity
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? user_id = freezed,Object? type = freezed,Object? title = freezed,Object? body = freezed,Object? data = freezed,Object? is_read = freezed,Object? created_at = freezed,Object? updated_at = freezed,Object? read_at = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? user_id = freezed,Object? type = freezed,Object? title = freezed,Object? body = freezed,Object? data = null,Object? is_read = freezed,Object? created_at = freezed,Object? updated_at = freezed,Object? read_at = freezed,}) {
   return _then(_self.copyWith(
 id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int?,user_id: freezed == user_id ? _self.user_id : user_id // ignore: cast_nullable_to_non_nullable
 as int?,type: freezed == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
 as String?,title: freezed == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
 as String?,body: freezed == body ? _self.body : body // ignore: cast_nullable_to_non_nullable
-as String?,data: freezed == data ? _self.data : data // ignore: cast_nullable_to_non_nullable
-as Map<String, dynamic>?,is_read: freezed == is_read ? _self.is_read : is_read // ignore: cast_nullable_to_non_nullable
+as String?,data: null == data ? _self.data : data // ignore: cast_nullable_to_non_nullable
+as Map<String, dynamic>,is_read: freezed == is_read ? _self.is_read : is_read // ignore: cast_nullable_to_non_nullable
 as bool?,created_at: freezed == created_at ? _self.created_at : created_at // ignore: cast_nullable_to_non_nullable
 as String?,updated_at: freezed == updated_at ? _self.updated_at : updated_at // ignore: cast_nullable_to_non_nullable
 as String?,read_at: freezed == read_at ? _self.read_at : read_at // ignore: cast_nullable_to_non_nullable
@@ -162,7 +162,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int? id,  int? user_id,  String? type,  String? title,  String? body,  Map<String, dynamic>? data,  bool? is_read,  String? created_at,  String? updated_at,  String? read_at)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int? id,  int? user_id,  String? type,  String? title,  String? body,  Map<String, dynamic> data,  bool? is_read,  String? created_at,  String? updated_at,  String? read_at)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _NotificationEntity() when $default != null:
 return $default(_that.id,_that.user_id,_that.type,_that.title,_that.body,_that.data,_that.is_read,_that.created_at,_that.updated_at,_that.read_at);case _:
@@ -183,7 +183,7 @@ return $default(_that.id,_that.user_id,_that.type,_that.title,_that.body,_that.d
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int? id,  int? user_id,  String? type,  String? title,  String? body,  Map<String, dynamic>? data,  bool? is_read,  String? created_at,  String? updated_at,  String? read_at)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int? id,  int? user_id,  String? type,  String? title,  String? body,  Map<String, dynamic> data,  bool? is_read,  String? created_at,  String? updated_at,  String? read_at)  $default,) {final _that = this;
 switch (_that) {
 case _NotificationEntity():
 return $default(_that.id,_that.user_id,_that.type,_that.title,_that.body,_that.data,_that.is_read,_that.created_at,_that.updated_at,_that.read_at);case _:
@@ -203,7 +203,7 @@ return $default(_that.id,_that.user_id,_that.type,_that.title,_that.body,_that.d
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int? id,  int? user_id,  String? type,  String? title,  String? body,  Map<String, dynamic>? data,  bool? is_read,  String? created_at,  String? updated_at,  String? read_at)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int? id,  int? user_id,  String? type,  String? title,  String? body,  Map<String, dynamic> data,  bool? is_read,  String? created_at,  String? updated_at,  String? read_at)?  $default,) {final _that = this;
 switch (_that) {
 case _NotificationEntity() when $default != null:
 return $default(_that.id,_that.user_id,_that.type,_that.title,_that.body,_that.data,_that.is_read,_that.created_at,_that.updated_at,_that.read_at);case _:
@@ -218,7 +218,7 @@ return $default(_that.id,_that.user_id,_that.type,_that.title,_that.body,_that.d
 @JsonSerializable()
 
 class _NotificationEntity implements NotificationEntity {
-  const _NotificationEntity({this.id = 0, this.user_id = 0, this.type = '', this.title = "", this.body = '', final  Map<String, dynamic>? data = const {}, this.is_read = false, this.created_at = "", this.updated_at = "", this.read_at = ""}): _data = data;
+  const _NotificationEntity({this.id = 0, this.user_id = 0, this.type = '', this.title = "", this.body = '', final  Map<String, dynamic> data = const {}, this.is_read = false, this.created_at = "", this.updated_at = "", this.read_at = ""}): _data = data;
   factory _NotificationEntity.fromJson(Map<String, dynamic> json) => _$NotificationEntityFromJson(json);
 
 @override@JsonKey() final  int? id;
@@ -226,13 +226,11 @@ class _NotificationEntity implements NotificationEntity {
 @override@JsonKey() final  String? type;
 @override@JsonKey() final  String? title;
 @override@JsonKey() final  String? body;
- final  Map<String, dynamic>? _data;
-@override@JsonKey() Map<String, dynamic>? get data {
-  final value = _data;
-  if (value == null) return null;
+ final  Map<String, dynamic> _data;
+@override@JsonKey() Map<String, dynamic> get data {
   if (_data is EqualUnmodifiableMapView) return _data;
   // ignore: implicit_dynamic_type
-  return EqualUnmodifiableMapView(value);
+  return EqualUnmodifiableMapView(_data);
 }
 
 @override@JsonKey() final  bool? is_read;
@@ -273,7 +271,7 @@ abstract mixin class _$NotificationEntityCopyWith<$Res> implements $Notification
   factory _$NotificationEntityCopyWith(_NotificationEntity value, $Res Function(_NotificationEntity) _then) = __$NotificationEntityCopyWithImpl;
 @override @useResult
 $Res call({
- int? id, int? user_id, String? type, String? title, String? body, Map<String, dynamic>? data, bool? is_read, String? created_at, String? updated_at, String? read_at
+ int? id, int? user_id, String? type, String? title, String? body, Map<String, dynamic> data, bool? is_read, String? created_at, String? updated_at, String? read_at
 });
 
 
@@ -290,15 +288,15 @@ class __$NotificationEntityCopyWithImpl<$Res>
 
 /// Create a copy of NotificationEntity
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? user_id = freezed,Object? type = freezed,Object? title = freezed,Object? body = freezed,Object? data = freezed,Object? is_read = freezed,Object? created_at = freezed,Object? updated_at = freezed,Object? read_at = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? user_id = freezed,Object? type = freezed,Object? title = freezed,Object? body = freezed,Object? data = null,Object? is_read = freezed,Object? created_at = freezed,Object? updated_at = freezed,Object? read_at = freezed,}) {
   return _then(_NotificationEntity(
 id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int?,user_id: freezed == user_id ? _self.user_id : user_id // ignore: cast_nullable_to_non_nullable
 as int?,type: freezed == type ? _self.type : type // ignore: cast_nullable_to_non_nullable
 as String?,title: freezed == title ? _self.title : title // ignore: cast_nullable_to_non_nullable
 as String?,body: freezed == body ? _self.body : body // ignore: cast_nullable_to_non_nullable
-as String?,data: freezed == data ? _self._data : data // ignore: cast_nullable_to_non_nullable
-as Map<String, dynamic>?,is_read: freezed == is_read ? _self.is_read : is_read // ignore: cast_nullable_to_non_nullable
+as String?,data: null == data ? _self._data : data // ignore: cast_nullable_to_non_nullable
+as Map<String, dynamic>,is_read: freezed == is_read ? _self.is_read : is_read // ignore: cast_nullable_to_non_nullable
 as bool?,created_at: freezed == created_at ? _self.created_at : created_at // ignore: cast_nullable_to_non_nullable
 as String?,updated_at: freezed == updated_at ? _self.updated_at : updated_at // ignore: cast_nullable_to_non_nullable
 as String?,read_at: freezed == read_at ? _self.read_at : read_at // ignore: cast_nullable_to_non_nullable

@@ -74,6 +74,9 @@ class _ChatsPageState extends State<ChatsPage> {
                         child: SizedBox(
                           width: 1.sw,
                           child: ConversionWidget(
+                            canSend: data?[index]?.status == "closed"
+                                ? false
+                                : true,
                             chatId: data?[index]?.id,
                             messageEntity: MessageEntity.fromJson(
                               data?[index]?.last_message ?? {},

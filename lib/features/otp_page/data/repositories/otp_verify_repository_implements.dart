@@ -21,7 +21,7 @@ class OtpVerifyRepositoryImplements implements OtpVerifyRepository {
        _checkConnectivity = checkConnectivity;
   @override
   Future<DataState<LoginStateEntity?>?> verify({OtpModel? otpModel}) async {
-    ConnectivityResult connectivityResult = ConnectivityResult.none;
+    ConnectivityResult? connectivityResult;
     await _checkConnectivity.checkConnectivity().then(
       (action) => connectivityResult = action.last,
     );
@@ -34,14 +34,32 @@ class OtpVerifyRepositoryImplements implements OtpVerifyRepository {
         "{user}",
         "${otpModel?.userId}",
       );
-      await _commonService
+      CommonService commonService = CommonService(
+        headers: {
+          'Content-Type': 'application/json',
+          "accept": "application/json",
+        },
+      );
+      await commonService
           .post(endpoint, data: {"otp": otpModel?.otp.toString()})
           .then((onValue) {
+            print("OTP verify response: ${onValue.data}");
             if (onValue is DataSuccess) {
               response = DataSuccess(
                 data: LoginStateEntity.fromJson(onValue.data?.data),
               );
 
+              return response;
+            } else if (onValue is TooManyRequestsDataState) {
+              response = TooManyRequestsDataState(
+                error: onValue.error,
+                data: LoginStateEntity(
+                  retry_after_seconds: onValue
+                      .data
+                      ?.data?["retry_after_seconds"]
+                      .toString(),
+                ),
+              );
               return response;
             } else {
               response = DataError(error: onValue.error);
@@ -69,7 +87,13 @@ class OtpVerifyRepositoryImplements implements OtpVerifyRepository {
         "{user}",
         "${otpModel?.userId}",
       );
-      await _commonService
+      CommonService commonService = CommonService(
+        headers: {
+          'Content-Type': 'application/json',
+          "accept": "application/json",
+        },
+      );
+      await commonService
           .post(endpoint, data: {"verify_method": otpModel?.verifyMethod})
           .then((onValue) {
             if (onValue is DataSuccess) {
@@ -77,6 +101,17 @@ class OtpVerifyRepositoryImplements implements OtpVerifyRepository {
                 data: LoginStateEntity.fromJson(onValue.data?.data),
               );
 
+              return response;
+            } else if (onValue is TooManyRequestsDataState) {
+              response = TooManyRequestsDataState(
+                error: onValue.error,
+                data: LoginStateEntity(
+                  retry_after_seconds: onValue
+                      .data
+                      ?.data?["retry_after_seconds"]
+                      .toString(),
+                ),
+              );
               return response;
             } else {
               response = DataError(error: onValue.error);

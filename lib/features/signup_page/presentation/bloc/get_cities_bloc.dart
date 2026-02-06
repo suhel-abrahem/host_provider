@@ -1,14 +1,15 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
 import '../../../../core/data_state/data_state.dart';
 import '../../data/models/city_model.dart';
 import '../../domain/entities/city_entity.dart';
 import '../../domain/usecases/get_cities_usecase.dart';
 
+part 'get_cities_bloc.freezed.dart';
 part 'get_cities_event.dart';
 part 'get_cities_state.dart';
-part 'get_cities_bloc.freezed.dart';
 
 class GetCitiesBloc extends Bloc<GetCitiesEvent, GetCitiesState> {
   final GetCitiesUsecase _getCitiesUsecase;

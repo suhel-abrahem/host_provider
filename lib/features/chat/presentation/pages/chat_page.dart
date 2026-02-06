@@ -1,9 +1,12 @@
+import 'package:animated_emoji/animated_emoji.dart';
+import 'package:animated_emoji/emoji.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hosta_provider/features/chat/domain/entities/chat/chat_entity.dart';
-import 'package:hosta_provider/features/login_page/domain/entities/login_state_entity.dart';
+import '/core/resource/custom_widget/snake_bar_widget/snake_bar_widget.dart';
+
+import '/features/login_page/domain/entities/login_state_entity.dart';
 import '../../../../config/app/app_preferences.dart';
 
 import '../../../../core/constants/font_constants.dart';
@@ -96,18 +99,9 @@ class _ChatPageState extends State<ChatPage> {
                       _scrollToBottom();
                     }
                   } else if (state is GetChatStateError) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(
-                          LocaleKeys.common_error.tr(),
-                          style: Theme.of(context).textTheme.labelLarge
-                              ?.copyWith(
-                                fontFamily: FontConstants.fontFamily(
-                                  context.locale,
-                                ),
-                              ),
-                        ),
-                      ),
+                    showMessage(
+                      message: LocaleKeys.common_error.tr(),
+                      context: context,
                     );
                   } else if (state is GetChatStateUnAuthenticated) {
                     await await getItInstance<AppPreferences>().setUserInfo(
@@ -116,7 +110,27 @@ class _ChatPageState extends State<ChatPage> {
                   }
                 },
                 child: currentState.when(
-                  initial: () => Center(child: CircularProgressIndicator()),
+                  initial: () => Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        SizedBox(
+                          width: 200.w,
+                          height: 200.h,
+                          child: AnimatedEmoji(AnimatedEmojis.bird),
+                        ),
+                        Text(
+                          LocaleKeys.chatsPage_noChatsAvailable.tr(),
+                          style: Theme.of(context).textTheme.labelLarge
+                              ?.copyWith(
+                                fontFamily: FontConstants.fontFamily(
+                                  context.locale,
+                                ),
+                              ),
+                        ),
+                      ],
+                    ),
+                  ),
                   loading: () => Center(child: CircularProgressIndicator()),
                   getChatStateLoaded: (data) => Center(
                     child: ErrorStateWidget(
@@ -129,13 +143,18 @@ class _ChatPageState extends State<ChatPage> {
                       stream: chatMessageStreamSocket.stream,
                       builder: (context, asyncSnapshot) {
                         if (asyncSnapshot.data != null) {
-                          final msg = asyncSnapshot.data as MessageEntity;
+                          if (asyncSnapshot.data?.booking_number ==
+                              widget.bookingNumber) {
+                            final MessageEntity? msg =
+                                asyncSnapshot.data?.message;
 
-                          final exists =
-                              chatMesages?.any((m) => m?.id == msg.id) ?? false;
-                          if (!exists) {
-                            chatMesages?.add(msg);
-                            _scrollToBottom(animated: true);
+                            final exists =
+                                chatMesages?.any((m) => m?.id == msg?.id) ??
+                                false;
+                            if (!exists) {
+                              chatMesages?.add(msg);
+                              _scrollToBottom(animated: true);
+                            }
                           }
                         }
 
@@ -177,11 +196,24 @@ class _ChatPageState extends State<ChatPage> {
                     ),
                   ),
                   noChats: () => Center(
-                    child: Text(
-                      LocaleKeys.chatsPage_noChatsAvailable.tr(),
-                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                        fontFamily: FontConstants.fontFamily(context.locale),
-                      ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        SizedBox(
+                          width: 200.w,
+                          height: 200.h,
+                          child: AnimatedEmoji(AnimatedEmojis.bird),
+                        ),
+                        Text(
+                          LocaleKeys.chatsPage_noChatsAvailable.tr(),
+                          style: Theme.of(context).textTheme.labelLarge
+                              ?.copyWith(
+                                fontFamily: FontConstants.fontFamily(
+                                  context.locale,
+                                ),
+                              ),
+                        ),
+                      ],
                     ),
                   ),
                 ),

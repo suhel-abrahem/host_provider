@@ -331,16 +331,18 @@ extension LoginBlocStatePatterns on LoginBlocState {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( LoginStateInitial value)?  loginStateInitial,TResult Function( LoginStateLoading value)?  loginStateLoading,TResult Function( LoginStateUnAuthorized value)?  unAuthorized,TResult Function( LoginStateLoaded value)?  loginStateLoaded,TResult Function( LoginStateError value)?  loginStateError,TResult Function( LoginStateNoInternet value)?  loginStateNoInternet,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( LoginStateInitial value)?  loginStateInitial,TResult Function( LoginStateLoading value)?  loginStateLoading,TResult Function( LoginStateUnAuthorized value)?  unAuthorized,TResult Function( LoginStateTooManyRequests value)?  tooManyRequests,TResult Function( LoginStateLoaded value)?  loginStateLoaded,TResult Function( LoginStateError value)?  loginStateError,TResult Function( LoginStateNoInternet value)?  loginStateNoInternet,TResult Function( LoginStateOtpRequested value)?  otpRequested,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case LoginStateInitial() when loginStateInitial != null:
 return loginStateInitial(_that);case LoginStateLoading() when loginStateLoading != null:
 return loginStateLoading(_that);case LoginStateUnAuthorized() when unAuthorized != null:
-return unAuthorized(_that);case LoginStateLoaded() when loginStateLoaded != null:
+return unAuthorized(_that);case LoginStateTooManyRequests() when tooManyRequests != null:
+return tooManyRequests(_that);case LoginStateLoaded() when loginStateLoaded != null:
 return loginStateLoaded(_that);case LoginStateError() when loginStateError != null:
 return loginStateError(_that);case LoginStateNoInternet() when loginStateNoInternet != null:
-return loginStateNoInternet(_that);case _:
+return loginStateNoInternet(_that);case LoginStateOtpRequested() when otpRequested != null:
+return otpRequested(_that);case _:
   return orElse();
 
 }
@@ -358,16 +360,18 @@ return loginStateNoInternet(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( LoginStateInitial value)  loginStateInitial,required TResult Function( LoginStateLoading value)  loginStateLoading,required TResult Function( LoginStateUnAuthorized value)  unAuthorized,required TResult Function( LoginStateLoaded value)  loginStateLoaded,required TResult Function( LoginStateError value)  loginStateError,required TResult Function( LoginStateNoInternet value)  loginStateNoInternet,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( LoginStateInitial value)  loginStateInitial,required TResult Function( LoginStateLoading value)  loginStateLoading,required TResult Function( LoginStateUnAuthorized value)  unAuthorized,required TResult Function( LoginStateTooManyRequests value)  tooManyRequests,required TResult Function( LoginStateLoaded value)  loginStateLoaded,required TResult Function( LoginStateError value)  loginStateError,required TResult Function( LoginStateNoInternet value)  loginStateNoInternet,required TResult Function( LoginStateOtpRequested value)  otpRequested,}){
 final _that = this;
 switch (_that) {
 case LoginStateInitial():
 return loginStateInitial(_that);case LoginStateLoading():
 return loginStateLoading(_that);case LoginStateUnAuthorized():
-return unAuthorized(_that);case LoginStateLoaded():
+return unAuthorized(_that);case LoginStateTooManyRequests():
+return tooManyRequests(_that);case LoginStateLoaded():
 return loginStateLoaded(_that);case LoginStateError():
 return loginStateError(_that);case LoginStateNoInternet():
-return loginStateNoInternet(_that);case _:
+return loginStateNoInternet(_that);case LoginStateOtpRequested():
+return otpRequested(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -384,16 +388,18 @@ return loginStateNoInternet(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( LoginStateInitial value)?  loginStateInitial,TResult? Function( LoginStateLoading value)?  loginStateLoading,TResult? Function( LoginStateUnAuthorized value)?  unAuthorized,TResult? Function( LoginStateLoaded value)?  loginStateLoaded,TResult? Function( LoginStateError value)?  loginStateError,TResult? Function( LoginStateNoInternet value)?  loginStateNoInternet,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( LoginStateInitial value)?  loginStateInitial,TResult? Function( LoginStateLoading value)?  loginStateLoading,TResult? Function( LoginStateUnAuthorized value)?  unAuthorized,TResult? Function( LoginStateTooManyRequests value)?  tooManyRequests,TResult? Function( LoginStateLoaded value)?  loginStateLoaded,TResult? Function( LoginStateError value)?  loginStateError,TResult? Function( LoginStateNoInternet value)?  loginStateNoInternet,TResult? Function( LoginStateOtpRequested value)?  otpRequested,}){
 final _that = this;
 switch (_that) {
 case LoginStateInitial() when loginStateInitial != null:
 return loginStateInitial(_that);case LoginStateLoading() when loginStateLoading != null:
 return loginStateLoading(_that);case LoginStateUnAuthorized() when unAuthorized != null:
-return unAuthorized(_that);case LoginStateLoaded() when loginStateLoaded != null:
+return unAuthorized(_that);case LoginStateTooManyRequests() when tooManyRequests != null:
+return tooManyRequests(_that);case LoginStateLoaded() when loginStateLoaded != null:
 return loginStateLoaded(_that);case LoginStateError() when loginStateError != null:
 return loginStateError(_that);case LoginStateNoInternet() when loginStateNoInternet != null:
-return loginStateNoInternet(_that);case _:
+return loginStateNoInternet(_that);case LoginStateOtpRequested() when otpRequested != null:
+return otpRequested(_that);case _:
   return null;
 
 }
@@ -410,15 +416,17 @@ return loginStateNoInternet(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  loginStateInitial,TResult Function()?  loginStateLoading,TResult Function()?  unAuthorized,TResult Function( LoginStateEntity? loginStateEntity)?  loginStateLoaded,TResult Function( String? message)?  loginStateError,TResult Function()?  loginStateNoInternet,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  loginStateInitial,TResult Function()?  loginStateLoading,TResult Function()?  unAuthorized,TResult Function( LoginStateEntity? loginStateEntity)?  tooManyRequests,TResult Function( LoginStateEntity? loginStateEntity)?  loginStateLoaded,TResult Function( String? message)?  loginStateError,TResult Function()?  loginStateNoInternet,TResult Function( LoginStateEntity? loginStateEntity)?  otpRequested,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case LoginStateInitial() when loginStateInitial != null:
 return loginStateInitial();case LoginStateLoading() when loginStateLoading != null:
 return loginStateLoading();case LoginStateUnAuthorized() when unAuthorized != null:
-return unAuthorized();case LoginStateLoaded() when loginStateLoaded != null:
+return unAuthorized();case LoginStateTooManyRequests() when tooManyRequests != null:
+return tooManyRequests(_that.loginStateEntity);case LoginStateLoaded() when loginStateLoaded != null:
 return loginStateLoaded(_that.loginStateEntity);case LoginStateError() when loginStateError != null:
 return loginStateError(_that.message);case LoginStateNoInternet() when loginStateNoInternet != null:
-return loginStateNoInternet();case _:
+return loginStateNoInternet();case LoginStateOtpRequested() when otpRequested != null:
+return otpRequested(_that.loginStateEntity);case _:
   return orElse();
 
 }
@@ -436,15 +444,17 @@ return loginStateNoInternet();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  loginStateInitial,required TResult Function()  loginStateLoading,required TResult Function()  unAuthorized,required TResult Function( LoginStateEntity? loginStateEntity)  loginStateLoaded,required TResult Function( String? message)  loginStateError,required TResult Function()  loginStateNoInternet,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  loginStateInitial,required TResult Function()  loginStateLoading,required TResult Function()  unAuthorized,required TResult Function( LoginStateEntity? loginStateEntity)  tooManyRequests,required TResult Function( LoginStateEntity? loginStateEntity)  loginStateLoaded,required TResult Function( String? message)  loginStateError,required TResult Function()  loginStateNoInternet,required TResult Function( LoginStateEntity? loginStateEntity)  otpRequested,}) {final _that = this;
 switch (_that) {
 case LoginStateInitial():
 return loginStateInitial();case LoginStateLoading():
 return loginStateLoading();case LoginStateUnAuthorized():
-return unAuthorized();case LoginStateLoaded():
+return unAuthorized();case LoginStateTooManyRequests():
+return tooManyRequests(_that.loginStateEntity);case LoginStateLoaded():
 return loginStateLoaded(_that.loginStateEntity);case LoginStateError():
 return loginStateError(_that.message);case LoginStateNoInternet():
-return loginStateNoInternet();case _:
+return loginStateNoInternet();case LoginStateOtpRequested():
+return otpRequested(_that.loginStateEntity);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -461,15 +471,17 @@ return loginStateNoInternet();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  loginStateInitial,TResult? Function()?  loginStateLoading,TResult? Function()?  unAuthorized,TResult? Function( LoginStateEntity? loginStateEntity)?  loginStateLoaded,TResult? Function( String? message)?  loginStateError,TResult? Function()?  loginStateNoInternet,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  loginStateInitial,TResult? Function()?  loginStateLoading,TResult? Function()?  unAuthorized,TResult? Function( LoginStateEntity? loginStateEntity)?  tooManyRequests,TResult? Function( LoginStateEntity? loginStateEntity)?  loginStateLoaded,TResult? Function( String? message)?  loginStateError,TResult? Function()?  loginStateNoInternet,TResult? Function( LoginStateEntity? loginStateEntity)?  otpRequested,}) {final _that = this;
 switch (_that) {
 case LoginStateInitial() when loginStateInitial != null:
 return loginStateInitial();case LoginStateLoading() when loginStateLoading != null:
 return loginStateLoading();case LoginStateUnAuthorized() when unAuthorized != null:
-return unAuthorized();case LoginStateLoaded() when loginStateLoaded != null:
+return unAuthorized();case LoginStateTooManyRequests() when tooManyRequests != null:
+return tooManyRequests(_that.loginStateEntity);case LoginStateLoaded() when loginStateLoaded != null:
 return loginStateLoaded(_that.loginStateEntity);case LoginStateError() when loginStateError != null:
 return loginStateError(_that.message);case LoginStateNoInternet() when loginStateNoInternet != null:
-return loginStateNoInternet();case _:
+return loginStateNoInternet();case LoginStateOtpRequested() when otpRequested != null:
+return otpRequested(_that.loginStateEntity);case _:
   return null;
 
 }
@@ -572,6 +584,84 @@ String toString() {
 
 
 
+
+/// @nodoc
+
+
+class LoginStateTooManyRequests implements LoginBlocState {
+  const LoginStateTooManyRequests({required this.loginStateEntity});
+  
+
+ final  LoginStateEntity? loginStateEntity;
+
+/// Create a copy of LoginBlocState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$LoginStateTooManyRequestsCopyWith<LoginStateTooManyRequests> get copyWith => _$LoginStateTooManyRequestsCopyWithImpl<LoginStateTooManyRequests>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LoginStateTooManyRequests&&(identical(other.loginStateEntity, loginStateEntity) || other.loginStateEntity == loginStateEntity));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,loginStateEntity);
+
+@override
+String toString() {
+  return 'LoginBlocState.tooManyRequests(loginStateEntity: $loginStateEntity)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $LoginStateTooManyRequestsCopyWith<$Res> implements $LoginBlocStateCopyWith<$Res> {
+  factory $LoginStateTooManyRequestsCopyWith(LoginStateTooManyRequests value, $Res Function(LoginStateTooManyRequests) _then) = _$LoginStateTooManyRequestsCopyWithImpl;
+@useResult
+$Res call({
+ LoginStateEntity? loginStateEntity
+});
+
+
+$LoginStateEntityCopyWith<$Res>? get loginStateEntity;
+
+}
+/// @nodoc
+class _$LoginStateTooManyRequestsCopyWithImpl<$Res>
+    implements $LoginStateTooManyRequestsCopyWith<$Res> {
+  _$LoginStateTooManyRequestsCopyWithImpl(this._self, this._then);
+
+  final LoginStateTooManyRequests _self;
+  final $Res Function(LoginStateTooManyRequests) _then;
+
+/// Create a copy of LoginBlocState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? loginStateEntity = freezed,}) {
+  return _then(LoginStateTooManyRequests(
+loginStateEntity: freezed == loginStateEntity ? _self.loginStateEntity : loginStateEntity // ignore: cast_nullable_to_non_nullable
+as LoginStateEntity?,
+  ));
+}
+
+/// Create a copy of LoginBlocState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$LoginStateEntityCopyWith<$Res>? get loginStateEntity {
+    if (_self.loginStateEntity == null) {
+    return null;
+  }
+
+  return $LoginStateEntityCopyWith<$Res>(_self.loginStateEntity!, (value) {
+    return _then(_self.copyWith(loginStateEntity: value));
+  });
+}
+}
 
 /// @nodoc
 
@@ -748,5 +838,83 @@ String toString() {
 
 
 
+
+/// @nodoc
+
+
+class LoginStateOtpRequested implements LoginBlocState {
+  const LoginStateOtpRequested({required this.loginStateEntity});
+  
+
+ final  LoginStateEntity? loginStateEntity;
+
+/// Create a copy of LoginBlocState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$LoginStateOtpRequestedCopyWith<LoginStateOtpRequested> get copyWith => _$LoginStateOtpRequestedCopyWithImpl<LoginStateOtpRequested>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is LoginStateOtpRequested&&(identical(other.loginStateEntity, loginStateEntity) || other.loginStateEntity == loginStateEntity));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,loginStateEntity);
+
+@override
+String toString() {
+  return 'LoginBlocState.otpRequested(loginStateEntity: $loginStateEntity)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $LoginStateOtpRequestedCopyWith<$Res> implements $LoginBlocStateCopyWith<$Res> {
+  factory $LoginStateOtpRequestedCopyWith(LoginStateOtpRequested value, $Res Function(LoginStateOtpRequested) _then) = _$LoginStateOtpRequestedCopyWithImpl;
+@useResult
+$Res call({
+ LoginStateEntity? loginStateEntity
+});
+
+
+$LoginStateEntityCopyWith<$Res>? get loginStateEntity;
+
+}
+/// @nodoc
+class _$LoginStateOtpRequestedCopyWithImpl<$Res>
+    implements $LoginStateOtpRequestedCopyWith<$Res> {
+  _$LoginStateOtpRequestedCopyWithImpl(this._self, this._then);
+
+  final LoginStateOtpRequested _self;
+  final $Res Function(LoginStateOtpRequested) _then;
+
+/// Create a copy of LoginBlocState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? loginStateEntity = freezed,}) {
+  return _then(LoginStateOtpRequested(
+loginStateEntity: freezed == loginStateEntity ? _self.loginStateEntity : loginStateEntity // ignore: cast_nullable_to_non_nullable
+as LoginStateEntity?,
+  ));
+}
+
+/// Create a copy of LoginBlocState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$LoginStateEntityCopyWith<$Res>? get loginStateEntity {
+    if (_self.loginStateEntity == null) {
+    return null;
+  }
+
+  return $LoginStateEntityCopyWith<$Res>(_self.loginStateEntity!, (value) {
+    return _then(_self.copyWith(loginStateEntity: value));
+  });
+}
+}
 
 // dart format on

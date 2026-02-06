@@ -1,15 +1,17 @@
 import 'package:animated_theme_switcher/animated_theme_switcher.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:go_router/go_router.dart';
-import 'package:hosta_provider/core/resource/main_page/glew_effect.dart'
-    show GlowOverlay;
+import '/core/resource/main_page/glew_effect.dart';
+import '/main.dart';
+import 'package:restart/restart.dart';
+
 import '../../../config/app/app_preferences.dart';
 
-import '../../../main.dart';
 import '../../data_state/data_state.dart';
 import '../../dependencies_injection.dart';
 import '../color_manager.dart';
@@ -142,20 +144,24 @@ class _CustomDrawerState extends State<CustomDrawer> {
                             borderRadius: BorderRadiusDirectional.only(
                               topEnd: Radius.circular(50.r),
                             ),
-                            child: GlowOverlay(
-                              glowColor: ColorManager.primaryColor,
-                              child: ImageWidget(
-                                width: 250.w,
-                                height: 200.h,
-                                boxFit: BoxFit.cover,
-                                errorWidget: Icon(
-                                  Icons.account_circle,
-                                  size: 60.sp,
-                                  color: Theme.of(
-                                    context,
-                                  ).textTheme.labelLarge?.color,
+                            child: SizedBox(
+                              width: 250.w,
+                              height: 200.h,
+                              child: GlowOverlay(
+                                glowColor: ColorManager.primaryColor,
+                                child: ImageWidget(
+                                  width: 250.w,
+                                  height: 200.h,
+                                  boxFit: BoxFit.cover,
+                                  errorWidget: Icon(
+                                    Icons.account_circle,
+                                    size: 60.sp,
+                                    color: Theme.of(
+                                      context,
+                                    ).textTheme.labelLarge?.color,
+                                  ),
+                                  imageUrl: userInfo?.avatar ?? "",
                                 ),
-                                imageUrl: userInfo?.avatar ?? "",
                               ),
                             ),
                           ),
@@ -179,16 +185,14 @@ class _CustomDrawerState extends State<CustomDrawer> {
               },
             ),
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 8.h),
-            child: DrawerButtonWidget(
-              selected: currentPath?.endsWith(RoutesPath.categoriesPage),
-              title: LocaleKeys.categoriesPage_title.tr(),
-              icon: Icons.miscellaneous_services,
-              onPressed: () {
-                context.push(RoutesPath.categoriesPage);
-              },
-            ),
+
+          DrawerButtonWidget(
+            selected: currentPath?.endsWith(RoutesPath.categoriesPage),
+            title: LocaleKeys.categoriesPage_title.tr(),
+            icon: Icons.category,
+            onPressed: () {
+              context.push(RoutesPath.categoriesPage);
+            },
           ),
           DrawerButtonWidget(
             selected: currentPath?.endsWith(RoutesPath.bookingPage),
@@ -198,20 +202,24 @@ class _CustomDrawerState extends State<CustomDrawer> {
               context.push(RoutesPath.bookingPage);
             },
           ),
-
-          Padding(
-            padding: EdgeInsets.symmetric(vertical: 8.h),
-            child: DrawerButtonWidget(
-              selected: currentPath?.endsWith(RoutesPath.profilePage),
-              title: LocaleKeys.profilePage_title.tr(),
-              icon: Icons.account_circle,
-              onPressed: () {
-                context.push(RoutesPath.profilePage);
-              },
-            ),
+          DrawerButtonWidget(
+            selected: currentPath?.endsWith(RoutesPath.profilePage),
+            title: LocaleKeys.profilePage_title.tr(),
+            icon: Icons.account_circle,
+            onPressed: () {
+              context.push(RoutesPath.profilePage);
+            },
+          ),
+          DrawerButtonWidget(
+            selected: currentPath?.endsWith(RoutesPath.profilePage),
+            title: LocaleKeys.profilePage_title.tr(),
+            icon: Icons.favorite,
+            onPressed: () {
+              context.push(RoutesPath.profilePage);
+            },
           ),
           Padding(
-            padding: EdgeInsets.only(top: 8.h),
+            padding: EdgeInsets.only(bottom: 8.h),
             child: Divider(
               color: ColorManager.backgroundColor.withValues(alpha: 0.5),
               thickness: 2.h,
@@ -230,7 +238,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                     padding: EdgeInsetsDirectional.only(end: 8.w),
                     child: Icon(
                       Icons.language,
-                      color: ColorManager.backgroundColor,
+                      color: ColorManager.darkTextColor,
                       size: 24.sp,
                     ),
                   ),
@@ -245,26 +253,26 @@ class _CustomDrawerState extends State<CustomDrawer> {
 
                       offset: Offset(0, 1.h),
                     ),
-                    valueColor: ColorManager.backgroundColor,
+                    valueColor: ColorManager.darkTextColor,
                     borderRadius: BorderRadius.circular(30.r),
                     label: LocaleKeys.language_choose.tr(),
                     labelStyle: Theme.of(context).textTheme.labelLarge
                         ?.copyWith(
                           fontFamily: FontConstants.fontFamily(context.locale),
-                          color: ColorManager.backgroundColor,
+                          color: ColorManager.darkTextColor,
                         ),
                     labelPadding: EdgeInsets.only(bottom: 4.h),
                     labelPosition: Position.upper,
                     backgroundColor: Theme.of(context).primaryColor,
                     items: LanguageConstant.supportedLanguagesNames,
-                    onChange: (newLanguage) {
+                    onChange: (newLanguage) async {
                       if (newLanguage != null) {
                         setState(() {
                           selectedLanguage = newLanguage;
                         });
                         context.setLocale(Helper.getLocaleByName(newLanguage));
-                        getItInstance<AppPreferences>().setLanguage(
-                          languageCode: newLanguage,
+                        await getItInstance<AppPreferences>().setLanguage(
+                          languageName: newLanguage,
                         );
                         final LoginStateEntity? loginState =
                             getItInstance<AppPreferences>().getUserInfo();
@@ -313,7 +321,9 @@ class _CustomDrawerState extends State<CustomDrawer> {
                               }
                             });
 
-                        context.go(RoutesPath.homePage);
+                        setState(() {
+                          lastPath = newLanguage;
+                        });
                       }
                     },
                     stringConverter: (string) {
@@ -347,7 +357,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                   children: [
                     Icon(
                       Icons.brightness_6,
-                      color: ColorManager.backgroundColor,
+                      color: ColorManager.darkTextColor,
                       size: 24.sp,
                     ),
                     Padding(
@@ -356,7 +366,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                         LocaleKeys.theme_choose.tr(),
                         style: Theme.of(context).textTheme.labelLarge?.copyWith(
                           fontFamily: FontConstants.fontFamily(context.locale),
-                          color: ColorManager.backgroundColor,
+                          color: ColorManager.darkTextColor,
                         ),
                       ),
                     ),
@@ -419,14 +429,17 @@ class _CustomDrawerState extends State<CustomDrawer> {
                   getItInstance<GetProfileBloc>()
                     ..add(GetProfileEvent.started()),
               child: BlocListener<GetProfileBloc, GetProfileState>(
-                listener: (context, state) {
+                listener: (context, state) async {
                   if (state is GetProfileStateLoggedOut) {
-                    getItInstance<AppPreferences>().setUserInfo(
+                    await getItInstance<AppPreferences>().setUserInfo(
                       loginStateEntity: LoginStateEntity(),
                     );
                     socketService.disconnect();
                     // Navigate to login page or perform other actions
-                    context.goNamed(RoutesName.loginPage);
+                    if (context.mounted) {
+                      restart();
+                      context.goNamed(RoutesName.loginPage);
+                    }
                   } else if (state is GetProfileStateLogoutError) {
                     // Show error message
                     showMessage(
@@ -440,16 +453,18 @@ class _CustomDrawerState extends State<CustomDrawer> {
                     return DrawerButtonWidget(
                       title: LocaleKeys.profilePage_logout.tr(),
                       icon: Icons.logout_outlined,
-                      onPressed: () {
-                        context.read<GetProfileBloc>().add(
-                          GetProfileEvent.logout(
-                            profileModel: ProfileModel(
-                              authToken: getItInstance<AppPreferences>()
-                                  .getUserInfo()
-                                  ?.access_token,
+                      onPressed: () async {
+                        if (context.mounted) {
+                          context.read<GetProfileBloc>().add(
+                            GetProfileEvent.logout(
+                              profileModel: ProfileModel(
+                                authToken: getItInstance<AppPreferences>()
+                                    .getUserInfo()
+                                    ?.access_token,
+                              ),
                             ),
-                          ),
-                        );
+                          );
+                        }
                       },
                     );
                   },

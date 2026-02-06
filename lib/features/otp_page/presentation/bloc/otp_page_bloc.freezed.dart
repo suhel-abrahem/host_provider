@@ -415,7 +415,7 @@ extension OtpPageStatePatterns on OtpPageState {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( OtpPageStateInitial value)?  initial,TResult Function( OtpPageStateError value)?  error,TResult Function( OtpPageStateLoading value)?  loading,TResult Function( OtpPageStateVerified value)?  verified,TResult Function( OtpPageStateResent value)?  resent,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( OtpPageStateInitial value)?  initial,TResult Function( OtpPageStateError value)?  error,TResult Function( OtpPageStateLoading value)?  loading,TResult Function( OtpPageStateVerified value)?  verified,TResult Function( OtpPageStateResent value)?  resent,TResult Function( OtpPageStateTooManyRequests value)?  tooManyRequests,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case OtpPageStateInitial() when initial != null:
@@ -423,7 +423,8 @@ return initial(_that);case OtpPageStateError() when error != null:
 return error(_that);case OtpPageStateLoading() when loading != null:
 return loading(_that);case OtpPageStateVerified() when verified != null:
 return verified(_that);case OtpPageStateResent() when resent != null:
-return resent(_that);case _:
+return resent(_that);case OtpPageStateTooManyRequests() when tooManyRequests != null:
+return tooManyRequests(_that);case _:
   return orElse();
 
 }
@@ -441,7 +442,7 @@ return resent(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( OtpPageStateInitial value)  initial,required TResult Function( OtpPageStateError value)  error,required TResult Function( OtpPageStateLoading value)  loading,required TResult Function( OtpPageStateVerified value)  verified,required TResult Function( OtpPageStateResent value)  resent,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( OtpPageStateInitial value)  initial,required TResult Function( OtpPageStateError value)  error,required TResult Function( OtpPageStateLoading value)  loading,required TResult Function( OtpPageStateVerified value)  verified,required TResult Function( OtpPageStateResent value)  resent,required TResult Function( OtpPageStateTooManyRequests value)  tooManyRequests,}){
 final _that = this;
 switch (_that) {
 case OtpPageStateInitial():
@@ -449,7 +450,8 @@ return initial(_that);case OtpPageStateError():
 return error(_that);case OtpPageStateLoading():
 return loading(_that);case OtpPageStateVerified():
 return verified(_that);case OtpPageStateResent():
-return resent(_that);case _:
+return resent(_that);case OtpPageStateTooManyRequests():
+return tooManyRequests(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -466,7 +468,7 @@ return resent(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( OtpPageStateInitial value)?  initial,TResult? Function( OtpPageStateError value)?  error,TResult? Function( OtpPageStateLoading value)?  loading,TResult? Function( OtpPageStateVerified value)?  verified,TResult? Function( OtpPageStateResent value)?  resent,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( OtpPageStateInitial value)?  initial,TResult? Function( OtpPageStateError value)?  error,TResult? Function( OtpPageStateLoading value)?  loading,TResult? Function( OtpPageStateVerified value)?  verified,TResult? Function( OtpPageStateResent value)?  resent,TResult? Function( OtpPageStateTooManyRequests value)?  tooManyRequests,}){
 final _that = this;
 switch (_that) {
 case OtpPageStateInitial() when initial != null:
@@ -474,7 +476,8 @@ return initial(_that);case OtpPageStateError() when error != null:
 return error(_that);case OtpPageStateLoading() when loading != null:
 return loading(_that);case OtpPageStateVerified() when verified != null:
 return verified(_that);case OtpPageStateResent() when resent != null:
-return resent(_that);case _:
+return resent(_that);case OtpPageStateTooManyRequests() when tooManyRequests != null:
+return tooManyRequests(_that);case _:
   return null;
 
 }
@@ -491,14 +494,15 @@ return resent(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  error,TResult Function()?  loading,TResult Function( LoginStateEntity? loginStateEntity)?  verified,TResult Function( LoginStateEntity? loginStateEntity)?  resent,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  error,TResult Function()?  loading,TResult Function( LoginStateEntity? loginStateEntity)?  verified,TResult Function( LoginStateEntity? loginStateEntity)?  resent,TResult Function( LoginStateEntity? loginStateEntity)?  tooManyRequests,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case OtpPageStateInitial() when initial != null:
 return initial();case OtpPageStateError() when error != null:
 return error();case OtpPageStateLoading() when loading != null:
 return loading();case OtpPageStateVerified() when verified != null:
 return verified(_that.loginStateEntity);case OtpPageStateResent() when resent != null:
-return resent(_that.loginStateEntity);case _:
+return resent(_that.loginStateEntity);case OtpPageStateTooManyRequests() when tooManyRequests != null:
+return tooManyRequests(_that.loginStateEntity);case _:
   return orElse();
 
 }
@@ -516,14 +520,15 @@ return resent(_that.loginStateEntity);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  error,required TResult Function()  loading,required TResult Function( LoginStateEntity? loginStateEntity)  verified,required TResult Function( LoginStateEntity? loginStateEntity)  resent,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  error,required TResult Function()  loading,required TResult Function( LoginStateEntity? loginStateEntity)  verified,required TResult Function( LoginStateEntity? loginStateEntity)  resent,required TResult Function( LoginStateEntity? loginStateEntity)  tooManyRequests,}) {final _that = this;
 switch (_that) {
 case OtpPageStateInitial():
 return initial();case OtpPageStateError():
 return error();case OtpPageStateLoading():
 return loading();case OtpPageStateVerified():
 return verified(_that.loginStateEntity);case OtpPageStateResent():
-return resent(_that.loginStateEntity);case _:
+return resent(_that.loginStateEntity);case OtpPageStateTooManyRequests():
+return tooManyRequests(_that.loginStateEntity);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -540,14 +545,15 @@ return resent(_that.loginStateEntity);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  error,TResult? Function()?  loading,TResult? Function( LoginStateEntity? loginStateEntity)?  verified,TResult? Function( LoginStateEntity? loginStateEntity)?  resent,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  error,TResult? Function()?  loading,TResult? Function( LoginStateEntity? loginStateEntity)?  verified,TResult? Function( LoginStateEntity? loginStateEntity)?  resent,TResult? Function( LoginStateEntity? loginStateEntity)?  tooManyRequests,}) {final _that = this;
 switch (_that) {
 case OtpPageStateInitial() when initial != null:
 return initial();case OtpPageStateError() when error != null:
 return error();case OtpPageStateLoading() when loading != null:
 return loading();case OtpPageStateVerified() when verified != null:
 return verified(_that.loginStateEntity);case OtpPageStateResent() when resent != null:
-return resent(_that.loginStateEntity);case _:
+return resent(_that.loginStateEntity);case OtpPageStateTooManyRequests() when tooManyRequests != null:
+return tooManyRequests(_that.loginStateEntity);case _:
   return null;
 
 }
@@ -788,6 +794,84 @@ class _$OtpPageStateResentCopyWithImpl<$Res>
 @pragma('vm:prefer-inline') $Res call({Object? loginStateEntity = freezed,}) {
   return _then(OtpPageStateResent(
 freezed == loginStateEntity ? _self.loginStateEntity : loginStateEntity // ignore: cast_nullable_to_non_nullable
+as LoginStateEntity?,
+  ));
+}
+
+/// Create a copy of OtpPageState
+/// with the given fields replaced by the non-null parameter values.
+@override
+@pragma('vm:prefer-inline')
+$LoginStateEntityCopyWith<$Res>? get loginStateEntity {
+    if (_self.loginStateEntity == null) {
+    return null;
+  }
+
+  return $LoginStateEntityCopyWith<$Res>(_self.loginStateEntity!, (value) {
+    return _then(_self.copyWith(loginStateEntity: value));
+  });
+}
+}
+
+/// @nodoc
+
+
+class OtpPageStateTooManyRequests implements OtpPageState {
+  const OtpPageStateTooManyRequests({required this.loginStateEntity});
+  
+
+ final  LoginStateEntity? loginStateEntity;
+
+/// Create a copy of OtpPageState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+$OtpPageStateTooManyRequestsCopyWith<OtpPageStateTooManyRequests> get copyWith => _$OtpPageStateTooManyRequestsCopyWithImpl<OtpPageStateTooManyRequests>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is OtpPageStateTooManyRequests&&(identical(other.loginStateEntity, loginStateEntity) || other.loginStateEntity == loginStateEntity));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,loginStateEntity);
+
+@override
+String toString() {
+  return 'OtpPageState.tooManyRequests(loginStateEntity: $loginStateEntity)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class $OtpPageStateTooManyRequestsCopyWith<$Res> implements $OtpPageStateCopyWith<$Res> {
+  factory $OtpPageStateTooManyRequestsCopyWith(OtpPageStateTooManyRequests value, $Res Function(OtpPageStateTooManyRequests) _then) = _$OtpPageStateTooManyRequestsCopyWithImpl;
+@useResult
+$Res call({
+ LoginStateEntity? loginStateEntity
+});
+
+
+$LoginStateEntityCopyWith<$Res>? get loginStateEntity;
+
+}
+/// @nodoc
+class _$OtpPageStateTooManyRequestsCopyWithImpl<$Res>
+    implements $OtpPageStateTooManyRequestsCopyWith<$Res> {
+  _$OtpPageStateTooManyRequestsCopyWithImpl(this._self, this._then);
+
+  final OtpPageStateTooManyRequests _self;
+  final $Res Function(OtpPageStateTooManyRequests) _then;
+
+/// Create a copy of OtpPageState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? loginStateEntity = freezed,}) {
+  return _then(OtpPageStateTooManyRequests(
+loginStateEntity: freezed == loginStateEntity ? _self.loginStateEntity : loginStateEntity // ignore: cast_nullable_to_non_nullable
 as LoginStateEntity?,
   ));
 }

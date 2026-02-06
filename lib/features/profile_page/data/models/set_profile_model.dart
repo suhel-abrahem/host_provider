@@ -1,8 +1,11 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'dart:io';
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hosta_provider/features/profile_page/data/models/file_json_converter.dart'
-    show FilePathConverter;
+
+import '../../../../core/resource/json_converter/file_json_converter.dart';
+
 part 'set_profile_model.freezed.dart';
 part 'set_profile_model.g.dart';
 
@@ -13,9 +16,12 @@ abstract class SetProfileModel with _$SetProfileModel {
     @Default("") String? email,
     @Default("") String? phone,
     @Default("") String? dob,
-    @FilePathConverter() File? avatar,
+    @FileJsonConverter() File? avatar,
     @Default("") String? address,
-    @Default(null) int? city_id,
+    @Default(1) int? city_id,
+    @Default(1) int? country_id,
+    @Default("") String? lat,
+    @Default("") String? lng,
   }) = _SetProfileModel;
   factory SetProfileModel.fromJson(Map<String, dynamic> json) =>
       _$SetProfileModelFromJson(json);

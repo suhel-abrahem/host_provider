@@ -119,7 +119,6 @@ class _MessageContainerState extends State<MessageContainer> {
                     maxWidth: 260.w,
                     minWidth: 20.w,
                     minHeight: 25.h,
-                    maxHeight: 200.h,
                   ),
                   decoration: BoxDecoration(
                     boxShadow: [

@@ -4,14 +4,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import '../../../../config/app/app_preferences.dart';
-import '../../../../core/data_state/data_state.dart';
 import '../../../../core/dependencies_injection.dart';
 import '../../../../core/enums/login_state_enum.dart';
 import '../../../../core/resource/custom_widget/snake_bar_widget/snake_bar_widget.dart';
 
-import '../../../../core/resource/firebase_common_services/firebase_messageing_service.dart';
-import '../../../../core/resource/socketio_service.dart/home_socket_initializer.dart';
-import '../../../../main.dart';
 import '../../../login_page/domain/entities/login_state_entity.dart';
 import '../../data/models/otp_model.dart';
 import '../bloc/otp_page_bloc.dart';
@@ -25,7 +21,8 @@ import '../../../login_page/presentation/bloc/login_bloc_bloc.dart';
 import 'package:flutter_timer_countdown/flutter_timer_countdown.dart';
 
 class OtpPagePage extends StatefulWidget {
-  const OtpPagePage({super.key});
+  final String? userId;
+  const OtpPagePage({super.key, this.userId});
 
   @override
   State<OtpPagePage> createState() => _OtpPagePageState();
@@ -37,14 +34,15 @@ class _OtpPagePageState extends State<OtpPagePage> {
   OtpModel otpModel = const OtpModel();
   Duration duration = const Duration(seconds: 60);
   bool isTimerCompleted = false;
+  int? userId;
   @override
   void initState() {
     signupInfoEntity = getItInstance<AppPreferences>().getSignupInfo();
-
+    if (widget.userId != null) {
+      userId = int.tryParse(widget.userId!);
+    }
     otpModel = otpModel.copyWith(
-      userId: signupInfoEntity?.signupEntity?.user_id,
-
-      verifyMethod: "whatsapp",
+      userId: userId ?? signupInfoEntity?.signupEntity?.user_id,
     );
     super.initState();
   }
@@ -65,22 +63,15 @@ class _OtpPagePageState extends State<OtpPagePage> {
               );
             },
             loading: () {},
-            verified: (data) async {
+            verified: (data) {
               LoginStateEntity? loginStateEntity = data;
               loginStateEntity = loginStateEntity?.copyWith(
                 loginStateEnum: LoginStateEnum.logined,
                 created_at: DateTime.now().toString(),
               );
-              await getItInstance<AppPreferences>().setUserInfo(
+              getItInstance<AppPreferences>().setUserInfo(
                 loginStateEntity: loginStateEntity,
               );
-              if (getItInstance<AppPreferences>()
-                      .getUserInfo()
-                      ?.loginStateEnum ==
-                  LoginStateEnum.logined) {
-                socketService.connect();
-                initHomeAndChatSocketListeners();
-              }
               context.goNamed(RoutesName.homePage);
             },
             resent: (LoginStateEntity? loginStateEntity) {
@@ -88,6 +79,35 @@ class _OtpPagePageState extends State<OtpPagePage> {
                 message: LocaleKeys.common_success.tr(),
                 context: context,
               );
+            },
+            tooManyRequests: (LoginStateEntity? loginStateEntity) {
+              showMessage(
+                message:
+                    "${LocaleKeys.common_tooManysRequestsPleaseTryAgainLater.tr()} ${loginStateEntity?.retry_after_seconds}s",
+                context: context,
+              );
+              if (loginStateEntity != null) {
+                if (loginStateEntity.retry_after_seconds != null &&
+                    loginStateEntity.retry_after_seconds != "1") {
+                  duration = Duration(
+                    seconds:
+                        int.tryParse(
+                          loginStateEntity.retry_after_seconds ?? "60",
+                        ) ??
+                        60,
+                  );
+                }
+                setState(() {
+                  duration = Duration(
+                    seconds:
+                        int.tryParse(
+                          loginStateEntity.retry_after_seconds ?? "60",
+                        ) ??
+                        60,
+                  );
+                  isTimerCompleted = false;
+                });
+              }
             },
           );
         },
@@ -260,23 +280,26 @@ class _OtpPagePageState extends State<OtpPagePage> {
                                     ),
                               ),
                             ),
-                            TimerCountdown(
-                              enableDescriptions: false,
-                              format: CountDownTimerFormat.secondsOnly,
-                              endTime: DateTime.now().add(duration),
-                              onEnd: () {
-                                setState(() {
-                                  isTimerCompleted = true;
-                                });
-                              },
-                              timeTextStyle: Theme.of(context)
-                                  .textTheme
-                                  .labelSmall
-                                  ?.copyWith(
-                                    fontFamily: FontConstants.fontFamily(
-                                      context.locale,
+                            SizedBox(
+                              key: ValueKey(duration),
+                              child: TimerCountdown(
+                                enableDescriptions: false,
+                                format: CountDownTimerFormat.secondsOnly,
+                                endTime: DateTime.now().add(duration),
+                                onEnd: () {
+                                  setState(() {
+                                    isTimerCompleted = true;
+                                  });
+                                },
+                                timeTextStyle: Theme.of(context)
+                                    .textTheme
+                                    .labelSmall
+                                    ?.copyWith(
+                                      fontFamily: FontConstants.fontFamily(
+                                        context.locale,
+                                      ),
                                     ),
-                                  ),
+                              ),
                             ),
                           ],
                         )

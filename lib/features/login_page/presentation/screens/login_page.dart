@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:restart/restart.dart';
 import '../../../../config/app/app_preferences.dart';
 import '../../../../core/constants/font_constants.dart';
 import '../../../../core/dependencies_injection.dart';
@@ -57,12 +58,18 @@ class _LoginPageState extends State<LoginPage> {
               context: context,
             );
           } else if (state is LoginStateLoaded) {
+            print("login state loaded: ${state.loginStateEntity}");
             await getItInstance<AppPreferences>().setUserInfo(
               loginStateEntity: state.loginStateEntity?.copyWith(
                 loginStateEnum: LoginStateEnum.logined,
+
                 created_at: DateTime.now().toString(),
               ),
             );
+            print(
+              "login state zapna: ${getItInstance<AppPreferences>().getUserInfo()}",
+            );
+
             if (getItInstance<AppPreferences>().getUserInfo()?.loginStateEnum ==
                 LoginStateEnum.logined) {
               socketService.connect();
@@ -71,12 +78,32 @@ class _LoginPageState extends State<LoginPage> {
             setState(() {
               currentPath = RoutesPath.homePage;
             });
-            if (context.canPop()) {
-              context.pop();
+            if (context.mounted) {
+              if (context.canPop()) {
+                context.pop();
+              }
+              context.go(RoutesPath.homePage);
+              restart();
+              print(
+                "login state zapna 2: ${getItInstance<AppPreferences>().getUserInfo()}",
+              );
             }
-            context.go(RoutesPath.homePage);
-          } else if (state is LoginStateUnAuthorized) {
-            context.pushNamed(RoutesName.otpPage);
+          } else if (state is LoginStateOtpRequested) {
+            print("unauthorized login state");
+            if (context.mounted) {
+              context.pushNamed(
+                RoutesName.otpPage,
+                pathParameters: {"userId": state.loginStateEntity?.user["id"]},
+              );
+            }
+          } else if (state is LoginStateTooManyRequests) {
+            if (context.mounted) {
+              showMessage(
+                message:
+                    "${LocaleKeys.common_tooManysRequestsPleaseTryAgainLater.tr()} ${state.loginStateEntity?.retry_after_seconds}s",
+                context: context,
+              );
+            }
           }
         },
         child: Scaffold(

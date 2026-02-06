@@ -4,19 +4,20 @@ class GlowOverlay extends StatelessWidget {
   final Widget child;
 
   final Color glowColor;
-
+  final double? glowHeight;
   const GlowOverlay({
     super.key,
     required this.child,
 
     this.glowColor = const Color(0xff0084ff),
+    this.glowHeight = 0.65,
   });
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        child,
+        Positioned.fill(child: child),
 
         Positioned.fill(
           child: IgnorePointer(
@@ -30,7 +31,7 @@ class GlowOverlay extends StatelessWidget {
                     glowColor.withValues(alpha: 0.2),
                     Colors.transparent,
                   ],
-                  stops: const [0.0, 0.65, 1],
+                  stops: [0.0, glowHeight ?? 0.65, 1],
                 ),
               ),
             ),

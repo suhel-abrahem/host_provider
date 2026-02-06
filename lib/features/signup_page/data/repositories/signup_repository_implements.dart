@@ -23,7 +23,7 @@ class SignupRepositoryImplements implements SignupRepository {
   }) : _commonService = commonService,
        _checkConnectivity = checkConnectivity;
 
-  ConnectivityResult connectivityResult = ConnectivityResult.none;
+  ConnectivityResult? connectivityResult ;
 
   @override
   Future<DataState<SignupInfoEntity?>?> signup({

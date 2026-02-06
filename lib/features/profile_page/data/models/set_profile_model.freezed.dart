@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$SetProfileModel {
 
- String? get name; String? get email; String? get phone; String? get dob;@FilePathConverter() File? get avatar; String? get address; int? get city_id;
+ String? get name; String? get email; String? get phone; String? get dob;@FileJsonConverter() File? get avatar; String? get address; int? get city_id; int? get country_id; String? get lat; String? get lng;
 /// Create a copy of SetProfileModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $SetProfileModelCopyWith<SetProfileModel> get copyWith => _$SetProfileModelCopyW
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is SetProfileModel&&(identical(other.name, name) || other.name == name)&&(identical(other.email, email) || other.email == email)&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.dob, dob) || other.dob == dob)&&(identical(other.avatar, avatar) || other.avatar == avatar)&&(identical(other.address, address) || other.address == address)&&(identical(other.city_id, city_id) || other.city_id == city_id));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is SetProfileModel&&(identical(other.name, name) || other.name == name)&&(identical(other.email, email) || other.email == email)&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.dob, dob) || other.dob == dob)&&(identical(other.avatar, avatar) || other.avatar == avatar)&&(identical(other.address, address) || other.address == address)&&(identical(other.city_id, city_id) || other.city_id == city_id)&&(identical(other.country_id, country_id) || other.country_id == country_id)&&(identical(other.lat, lat) || other.lat == lat)&&(identical(other.lng, lng) || other.lng == lng));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,name,email,phone,dob,avatar,address,city_id);
+int get hashCode => Object.hash(runtimeType,name,email,phone,dob,avatar,address,city_id,country_id,lat,lng);
 
 @override
 String toString() {
-  return 'SetProfileModel(name: $name, email: $email, phone: $phone, dob: $dob, avatar: $avatar, address: $address, city_id: $city_id)';
+  return 'SetProfileModel(name: $name, email: $email, phone: $phone, dob: $dob, avatar: $avatar, address: $address, city_id: $city_id, country_id: $country_id, lat: $lat, lng: $lng)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $SetProfileModelCopyWith<$Res>  {
   factory $SetProfileModelCopyWith(SetProfileModel value, $Res Function(SetProfileModel) _then) = _$SetProfileModelCopyWithImpl;
 @useResult
 $Res call({
- String? name, String? email, String? phone, String? dob,@FilePathConverter() File? avatar, String? address, int? city_id
+ String? name, String? email, String? phone, String? dob,@FileJsonConverter() File? avatar, String? address, int? city_id, int? country_id, String? lat, String? lng
 });
 
 
@@ -65,7 +65,7 @@ class _$SetProfileModelCopyWithImpl<$Res>
 
 /// Create a copy of SetProfileModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? name = freezed,Object? email = freezed,Object? phone = freezed,Object? dob = freezed,Object? avatar = freezed,Object? address = freezed,Object? city_id = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? name = freezed,Object? email = freezed,Object? phone = freezed,Object? dob = freezed,Object? avatar = freezed,Object? address = freezed,Object? city_id = freezed,Object? country_id = freezed,Object? lat = freezed,Object? lng = freezed,}) {
   return _then(_self.copyWith(
 name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String?,email: freezed == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
@@ -74,7 +74,10 @@ as String?,dob: freezed == dob ? _self.dob : dob // ignore: cast_nullable_to_non
 as String?,avatar: freezed == avatar ? _self.avatar : avatar // ignore: cast_nullable_to_non_nullable
 as File?,address: freezed == address ? _self.address : address // ignore: cast_nullable_to_non_nullable
 as String?,city_id: freezed == city_id ? _self.city_id : city_id // ignore: cast_nullable_to_non_nullable
-as int?,
+as int?,country_id: freezed == country_id ? _self.country_id : country_id // ignore: cast_nullable_to_non_nullable
+as int?,lat: freezed == lat ? _self.lat : lat // ignore: cast_nullable_to_non_nullable
+as String?,lng: freezed == lng ? _self.lng : lng // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 
@@ -159,10 +162,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? name,  String? email,  String? phone,  String? dob, @FilePathConverter()  File? avatar,  String? address,  int? city_id)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String? name,  String? email,  String? phone,  String? dob, @FileJsonConverter()  File? avatar,  String? address,  int? city_id,  int? country_id,  String? lat,  String? lng)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _SetProfileModel() when $default != null:
-return $default(_that.name,_that.email,_that.phone,_that.dob,_that.avatar,_that.address,_that.city_id);case _:
+return $default(_that.name,_that.email,_that.phone,_that.dob,_that.avatar,_that.address,_that.city_id,_that.country_id,_that.lat,_that.lng);case _:
   return orElse();
 
 }
@@ -180,10 +183,10 @@ return $default(_that.name,_that.email,_that.phone,_that.dob,_that.avatar,_that.
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? name,  String? email,  String? phone,  String? dob, @FilePathConverter()  File? avatar,  String? address,  int? city_id)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String? name,  String? email,  String? phone,  String? dob, @FileJsonConverter()  File? avatar,  String? address,  int? city_id,  int? country_id,  String? lat,  String? lng)  $default,) {final _that = this;
 switch (_that) {
 case _SetProfileModel():
-return $default(_that.name,_that.email,_that.phone,_that.dob,_that.avatar,_that.address,_that.city_id);case _:
+return $default(_that.name,_that.email,_that.phone,_that.dob,_that.avatar,_that.address,_that.city_id,_that.country_id,_that.lat,_that.lng);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -200,10 +203,10 @@ return $default(_that.name,_that.email,_that.phone,_that.dob,_that.avatar,_that.
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? name,  String? email,  String? phone,  String? dob, @FilePathConverter()  File? avatar,  String? address,  int? city_id)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String? name,  String? email,  String? phone,  String? dob, @FileJsonConverter()  File? avatar,  String? address,  int? city_id,  int? country_id,  String? lat,  String? lng)?  $default,) {final _that = this;
 switch (_that) {
 case _SetProfileModel() when $default != null:
-return $default(_that.name,_that.email,_that.phone,_that.dob,_that.avatar,_that.address,_that.city_id);case _:
+return $default(_that.name,_that.email,_that.phone,_that.dob,_that.avatar,_that.address,_that.city_id,_that.country_id,_that.lat,_that.lng);case _:
   return null;
 
 }
@@ -215,16 +218,19 @@ return $default(_that.name,_that.email,_that.phone,_that.dob,_that.avatar,_that.
 @JsonSerializable()
 
 class _SetProfileModel implements SetProfileModel {
-  const _SetProfileModel({this.name = "", this.email = "", this.phone = "", this.dob = "", @FilePathConverter() this.avatar, this.address = "", this.city_id = null});
+  const _SetProfileModel({this.name = "", this.email = "", this.phone = "", this.dob = "", @FileJsonConverter() this.avatar, this.address = "", this.city_id = 1, this.country_id = 1, this.lat = "", this.lng = ""});
   factory _SetProfileModel.fromJson(Map<String, dynamic> json) => _$SetProfileModelFromJson(json);
 
 @override@JsonKey() final  String? name;
 @override@JsonKey() final  String? email;
 @override@JsonKey() final  String? phone;
 @override@JsonKey() final  String? dob;
-@override@FilePathConverter() final  File? avatar;
+@override@FileJsonConverter() final  File? avatar;
 @override@JsonKey() final  String? address;
 @override@JsonKey() final  int? city_id;
+@override@JsonKey() final  int? country_id;
+@override@JsonKey() final  String? lat;
+@override@JsonKey() final  String? lng;
 
 /// Create a copy of SetProfileModel
 /// with the given fields replaced by the non-null parameter values.
@@ -239,16 +245,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SetProfileModel&&(identical(other.name, name) || other.name == name)&&(identical(other.email, email) || other.email == email)&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.dob, dob) || other.dob == dob)&&(identical(other.avatar, avatar) || other.avatar == avatar)&&(identical(other.address, address) || other.address == address)&&(identical(other.city_id, city_id) || other.city_id == city_id));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _SetProfileModel&&(identical(other.name, name) || other.name == name)&&(identical(other.email, email) || other.email == email)&&(identical(other.phone, phone) || other.phone == phone)&&(identical(other.dob, dob) || other.dob == dob)&&(identical(other.avatar, avatar) || other.avatar == avatar)&&(identical(other.address, address) || other.address == address)&&(identical(other.city_id, city_id) || other.city_id == city_id)&&(identical(other.country_id, country_id) || other.country_id == country_id)&&(identical(other.lat, lat) || other.lat == lat)&&(identical(other.lng, lng) || other.lng == lng));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,name,email,phone,dob,avatar,address,city_id);
+int get hashCode => Object.hash(runtimeType,name,email,phone,dob,avatar,address,city_id,country_id,lat,lng);
 
 @override
 String toString() {
-  return 'SetProfileModel(name: $name, email: $email, phone: $phone, dob: $dob, avatar: $avatar, address: $address, city_id: $city_id)';
+  return 'SetProfileModel(name: $name, email: $email, phone: $phone, dob: $dob, avatar: $avatar, address: $address, city_id: $city_id, country_id: $country_id, lat: $lat, lng: $lng)';
 }
 
 
@@ -259,7 +265,7 @@ abstract mixin class _$SetProfileModelCopyWith<$Res> implements $SetProfileModel
   factory _$SetProfileModelCopyWith(_SetProfileModel value, $Res Function(_SetProfileModel) _then) = __$SetProfileModelCopyWithImpl;
 @override @useResult
 $Res call({
- String? name, String? email, String? phone, String? dob,@FilePathConverter() File? avatar, String? address, int? city_id
+ String? name, String? email, String? phone, String? dob,@FileJsonConverter() File? avatar, String? address, int? city_id, int? country_id, String? lat, String? lng
 });
 
 
@@ -276,7 +282,7 @@ class __$SetProfileModelCopyWithImpl<$Res>
 
 /// Create a copy of SetProfileModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? name = freezed,Object? email = freezed,Object? phone = freezed,Object? dob = freezed,Object? avatar = freezed,Object? address = freezed,Object? city_id = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? name = freezed,Object? email = freezed,Object? phone = freezed,Object? dob = freezed,Object? avatar = freezed,Object? address = freezed,Object? city_id = freezed,Object? country_id = freezed,Object? lat = freezed,Object? lng = freezed,}) {
   return _then(_SetProfileModel(
 name: freezed == name ? _self.name : name // ignore: cast_nullable_to_non_nullable
 as String?,email: freezed == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
@@ -285,7 +291,10 @@ as String?,dob: freezed == dob ? _self.dob : dob // ignore: cast_nullable_to_non
 as String?,avatar: freezed == avatar ? _self.avatar : avatar // ignore: cast_nullable_to_non_nullable
 as File?,address: freezed == address ? _self.address : address // ignore: cast_nullable_to_non_nullable
 as String?,city_id: freezed == city_id ? _self.city_id : city_id // ignore: cast_nullable_to_non_nullable
-as int?,
+as int?,country_id: freezed == country_id ? _self.country_id : country_id // ignore: cast_nullable_to_non_nullable
+as int?,lat: freezed == lat ? _self.lat : lat // ignore: cast_nullable_to_non_nullable
+as String?,lng: freezed == lng ? _self.lng : lng // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 

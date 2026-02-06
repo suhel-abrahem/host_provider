@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$SignupModel {
 
- int? get country_id; num? get lng; String? get verify_via; String? get name; String? get phone; int? get city_id; String? get address; String? get role; String? get dob;@FileJsonConverter() String? get avatar; String? get password; String? get password_confirmation; String? get email; num? get lat;
+ int? get country_id; num? get lng; String? get verify_via; String? get name; String? get phone; int? get city_id; String? get address; String? get role; String? get dob;@FileJsonConverter() File? get avatar; String? get password; String? get password_confirmation; String? get email; num? get lat;
 /// Create a copy of SignupModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $SignupModelCopyWith<$Res>  {
   factory $SignupModelCopyWith(SignupModel value, $Res Function(SignupModel) _then) = _$SignupModelCopyWithImpl;
 @useResult
 $Res call({
- int? country_id, num? lng, String? verify_via, String? name, String? phone, int? city_id, String? address, String? role, String? dob,@FileJsonConverter() String? avatar, String? password, String? password_confirmation, String? email, num? lat
+ int? country_id, num? lng, String? verify_via, String? name, String? phone, int? city_id, String? address, String? role, String? dob,@FileJsonConverter() File? avatar, String? password, String? password_confirmation, String? email, num? lat
 });
 
 
@@ -77,7 +77,7 @@ as int?,address: freezed == address ? _self.address : address // ignore: cast_nu
 as String?,role: freezed == role ? _self.role : role // ignore: cast_nullable_to_non_nullable
 as String?,dob: freezed == dob ? _self.dob : dob // ignore: cast_nullable_to_non_nullable
 as String?,avatar: freezed == avatar ? _self.avatar : avatar // ignore: cast_nullable_to_non_nullable
-as String?,password: freezed == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
+as File?,password: freezed == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
 as String?,password_confirmation: freezed == password_confirmation ? _self.password_confirmation : password_confirmation // ignore: cast_nullable_to_non_nullable
 as String?,email: freezed == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as String?,lat: freezed == lat ? _self.lat : lat // ignore: cast_nullable_to_non_nullable
@@ -166,7 +166,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int? country_id,  num? lng,  String? verify_via,  String? name,  String? phone,  int? city_id,  String? address,  String? role,  String? dob, @FileJsonConverter()  String? avatar,  String? password,  String? password_confirmation,  String? email,  num? lat)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int? country_id,  num? lng,  String? verify_via,  String? name,  String? phone,  int? city_id,  String? address,  String? role,  String? dob, @FileJsonConverter()  File? avatar,  String? password,  String? password_confirmation,  String? email,  num? lat)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _SignupModel() when $default != null:
 return $default(_that.country_id,_that.lng,_that.verify_via,_that.name,_that.phone,_that.city_id,_that.address,_that.role,_that.dob,_that.avatar,_that.password,_that.password_confirmation,_that.email,_that.lat);case _:
@@ -187,7 +187,7 @@ return $default(_that.country_id,_that.lng,_that.verify_via,_that.name,_that.pho
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int? country_id,  num? lng,  String? verify_via,  String? name,  String? phone,  int? city_id,  String? address,  String? role,  String? dob, @FileJsonConverter()  String? avatar,  String? password,  String? password_confirmation,  String? email,  num? lat)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int? country_id,  num? lng,  String? verify_via,  String? name,  String? phone,  int? city_id,  String? address,  String? role,  String? dob, @FileJsonConverter()  File? avatar,  String? password,  String? password_confirmation,  String? email,  num? lat)  $default,) {final _that = this;
 switch (_that) {
 case _SignupModel():
 return $default(_that.country_id,_that.lng,_that.verify_via,_that.name,_that.phone,_that.city_id,_that.address,_that.role,_that.dob,_that.avatar,_that.password,_that.password_confirmation,_that.email,_that.lat);case _:
@@ -207,7 +207,7 @@ return $default(_that.country_id,_that.lng,_that.verify_via,_that.name,_that.pho
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int? country_id,  num? lng,  String? verify_via,  String? name,  String? phone,  int? city_id,  String? address,  String? role,  String? dob, @FileJsonConverter()  String? avatar,  String? password,  String? password_confirmation,  String? email,  num? lat)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int? country_id,  num? lng,  String? verify_via,  String? name,  String? phone,  int? city_id,  String? address,  String? role,  String? dob, @FileJsonConverter()  File? avatar,  String? password,  String? password_confirmation,  String? email,  num? lat)?  $default,) {final _that = this;
 switch (_that) {
 case _SignupModel() when $default != null:
 return $default(_that.country_id,_that.lng,_that.verify_via,_that.name,_that.phone,_that.city_id,_that.address,_that.role,_that.dob,_that.avatar,_that.password,_that.password_confirmation,_that.email,_that.lat);case _:
@@ -222,7 +222,7 @@ return $default(_that.country_id,_that.lng,_that.verify_via,_that.name,_that.pho
 @JsonSerializable()
 
 class _SignupModel implements SignupModel {
-   _SignupModel({this.country_id = 0, this.lng = 0.000, this.verify_via = "", this.name = "", this.phone = "", this.city_id = 0, this.address = "", this.role = "", this.dob = "", @FileJsonConverter() this.avatar = "", this.password = "", this.password_confirmation = "", this.email = "", this.lat = 0.000});
+   _SignupModel({this.country_id = 0, this.lng = 0.000, this.verify_via = "", this.name = "", this.phone = "", this.city_id = 0, this.address = "", this.role = "", this.dob = "", @FileJsonConverter() this.avatar, this.password = "", this.password_confirmation = "", this.email = "", this.lat = 0.000});
   factory _SignupModel.fromJson(Map<String, dynamic> json) => _$SignupModelFromJson(json);
 
 @override@JsonKey() final  int? country_id;
@@ -234,7 +234,7 @@ class _SignupModel implements SignupModel {
 @override@JsonKey() final  String? address;
 @override@JsonKey() final  String? role;
 @override@JsonKey() final  String? dob;
-@override@JsonKey()@FileJsonConverter() final  String? avatar;
+@override@FileJsonConverter() final  File? avatar;
 @override@JsonKey() final  String? password;
 @override@JsonKey() final  String? password_confirmation;
 @override@JsonKey() final  String? email;
@@ -273,7 +273,7 @@ abstract mixin class _$SignupModelCopyWith<$Res> implements $SignupModelCopyWith
   factory _$SignupModelCopyWith(_SignupModel value, $Res Function(_SignupModel) _then) = __$SignupModelCopyWithImpl;
 @override @useResult
 $Res call({
- int? country_id, num? lng, String? verify_via, String? name, String? phone, int? city_id, String? address, String? role, String? dob,@FileJsonConverter() String? avatar, String? password, String? password_confirmation, String? email, num? lat
+ int? country_id, num? lng, String? verify_via, String? name, String? phone, int? city_id, String? address, String? role, String? dob,@FileJsonConverter() File? avatar, String? password, String? password_confirmation, String? email, num? lat
 });
 
 
@@ -302,7 +302,7 @@ as int?,address: freezed == address ? _self.address : address // ignore: cast_nu
 as String?,role: freezed == role ? _self.role : role // ignore: cast_nullable_to_non_nullable
 as String?,dob: freezed == dob ? _self.dob : dob // ignore: cast_nullable_to_non_nullable
 as String?,avatar: freezed == avatar ? _self.avatar : avatar // ignore: cast_nullable_to_non_nullable
-as String?,password: freezed == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
+as File?,password: freezed == password ? _self.password : password // ignore: cast_nullable_to_non_nullable
 as String?,password_confirmation: freezed == password_confirmation ? _self.password_confirmation : password_confirmation // ignore: cast_nullable_to_non_nullable
 as String?,email: freezed == email ? _self.email : email // ignore: cast_nullable_to_non_nullable
 as String?,lat: freezed == lat ? _self.lat : lat // ignore: cast_nullable_to_non_nullable

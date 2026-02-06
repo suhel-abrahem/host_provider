@@ -15,7 +15,7 @@ class GetPositionRepositoryImplements implements GetPositionRepository {
   Future<DataState<PositionEntity?>?> getPosition() async {
     bool? serviceEnabled;
     LocationPermission permission;
-    ConnectivityResult? connectivityResult = ConnectivityResult.none;
+    ConnectivityResult? connectivityResult;
     await _checkConnectivity.checkConnectivity().then(
       (onValue) => connectivityResult = onValue.last,
     );

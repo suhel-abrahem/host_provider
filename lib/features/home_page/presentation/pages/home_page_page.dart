@@ -29,6 +29,7 @@ import '../../../refresh_token/data/models/refresh_token_model.dart';
 import '../../../refresh_token/domain/usecases/refresh_token_usecase.dart';
 import '../../domain/entities/home_page_entity.dart';
 import '../bloc/home_page_bloc.dart';
+import '../bloc/unread_count_bloc.dart';
 import '../widgets/notification_number_widget.dart';
 import '../widgets/squer_container_with_presse_widget.dart';
 import '../../../login_page/domain/entities/login_state_entity.dart';
@@ -59,7 +60,7 @@ class _HomePagePageState extends State<HomePagePage> {
   ProfileModel profileModel = ProfileModel();
   ProfileEntity? profileEntity = ProfileEntity();
   bool isProfileDataLoading = true;
-
+  int notificationCount = 0;
   @override
   void initState() {
     super.initState();
@@ -118,8 +119,87 @@ class _HomePagePageState extends State<HomePagePage> {
                       duration: Duration(milliseconds: 300),
                       top: 0.h,
                       end: 4.w,
-                      child: BuildWithSocketStream(
-                        stream: notificationStreamSocket.stream,
+                      child: BlocProvider(
+                        create: (context) => getItInstance<UnreadCountBloc>()
+                          ..add(UnreadCountEvent.getNotificationUnreadCount()),
+                        child: BlocListener<UnreadCountBloc, UnreadCountState>(
+                          listener: (context, state) {
+                            if (state
+                                is UnreadCountStateNotificationUnreadCountLoaded) {
+                              unreadedNotificationStreamSocket.addResponse(
+                                state.count,
+                              );
+                            }
+                          },
+                          child: BlocBuilder<UnreadCountBloc, UnreadCountState>(
+                            builder: (context, state) {
+                              return state.when(
+                                initial: () => BuildWithSocketStream(
+                                  lastNotificationCount: "0",
+                                  stream:
+                                      unreadedNotificationStreamSocket.stream,
+                                  onValueChanged: (value) =>
+                                      notificationCount = value,
+                                ),
+                                loading: () => BuildWithSocketStream(
+                                  isLoading: true,
+                                  stream:
+                                      unreadedNotificationStreamSocket.stream,
+                                  onValueChanged: (value) =>
+                                      notificationCount = value,
+                                ),
+                                notificationUnreadCountLoaded: (count) {
+                                  return BuildWithSocketStream(
+                                    lastNotificationCount: count?.toString(),
+                                    stream:
+                                        unreadedNotificationStreamSocket.stream,
+                                    onValueChanged: (value) =>
+                                        notificationCount = value,
+                                  );
+                                },
+                                unauthenticated: (error) =>
+                                    BuildWithSocketStream(
+                                      lastNotificationCount: "0",
+                                      stream: unreadedNotificationStreamSocket
+                                          .stream,
+                                      onValueChanged: (value) =>
+                                          notificationCount = value,
+                                    ),
+                                noInternet: () => BuildWithSocketStream(
+                                  lastNotificationCount: "0",
+                                  stream:
+                                      unreadedNotificationStreamSocket.stream,
+                                  onValueChanged: (value) =>
+                                      notificationCount = value,
+                                ),
+                                error: (error) => BuildWithSocketStream(
+                                  lastNotificationCount: "0",
+                                  stream:
+                                      unreadedNotificationStreamSocket.stream,
+                                  onValueChanged: (value) =>
+                                      notificationCount = value,
+                                ),
+                                messageUnreadCountLoaded: (int? count) {
+                                  return BuildWithSocketStream(
+                                    stream:
+                                        unreadedNotificationStreamSocket.stream,
+                                    onValueChanged: (value) =>
+                                        notificationCount = value,
+                                  );
+                                },
+                                ticketUnreadCountLoaded: (int? count) {
+                                  return BuildWithSocketStream(
+                                    lastNotificationCount: count?.toString(),
+                                    stream:
+                                        unreadedNotificationStreamSocket.stream,
+                                    onValueChanged: (value) =>
+                                        notificationCount = value,
+                                  );
+                                },
+                              );
+                            },
+                          ),
+                        ),
                       ).animate().flipV(duration: Duration(milliseconds: 300)),
                     ),
                   ],
@@ -149,8 +229,83 @@ class _HomePagePageState extends State<HomePagePage> {
                       duration: Duration(milliseconds: 300),
                       top: 0.h,
                       end: 4.w,
-                      child: BuildWithSocketStream(
-                        stream: chatUnReadCountStreamSocket.stream,
+                      child: BlocProvider(
+                        create: (context) =>
+                            getItInstance<UnreadCountBloc>()
+                              ..add(UnreadCountEvent.getMessageUnreadCount()),
+                        child: BlocListener<UnreadCountBloc, UnreadCountState>(
+                          listener: (context, state) {
+                            if (state
+                                is UnreadCountStateMessageUnreadCountLoaded) {
+                              chatUnReadCountStreamSocket.addResponse(
+                                state.count ?? 0,
+                              );
+                            }
+                          },
+                          child: BlocBuilder<UnreadCountBloc, UnreadCountState>(
+                            builder: (context, state) {
+                              return state.when(
+                                initial: () => BuildWithSocketStream(
+                                  lastNotificationCount: "0",
+                                  stream: chatUnReadCountStreamSocket.stream,
+                                  onValueChanged: (value) =>
+                                      notificationCount = value,
+                                ),
+                                loading: () => BuildWithSocketStream(
+                                  lastNotificationCount: "0",
+                                  isLoading: true,
+                                  stream: chatUnReadCountStreamSocket.stream,
+                                  onValueChanged: (value) =>
+                                      notificationCount = value,
+                                ),
+                                notificationUnreadCountLoaded: (count) {
+                                  return BuildWithSocketStream(
+                                    lastNotificationCount: "0",
+                                    stream: chatUnReadCountStreamSocket.stream,
+                                    onValueChanged: (value) =>
+                                        notificationCount = value,
+                                  );
+                                },
+                                unauthenticated: (error) =>
+                                    BuildWithSocketStream(
+                                      lastNotificationCount: "0",
+                                      stream:
+                                          chatUnReadCountStreamSocket.stream,
+                                      onValueChanged: (value) =>
+                                          notificationCount = value,
+                                    ),
+                                noInternet: () => BuildWithSocketStream(
+                                  lastNotificationCount: "0",
+                                  stream: chatUnReadCountStreamSocket.stream,
+                                  onValueChanged: (value) =>
+                                      notificationCount = value,
+                                ),
+                                error: (error) => BuildWithSocketStream(
+                                  lastNotificationCount: "0",
+                                  stream: chatUnReadCountStreamSocket.stream,
+                                  onValueChanged: (value) =>
+                                      notificationCount = value,
+                                ),
+                                messageUnreadCountLoaded: (int? count) {
+                                  return BuildWithSocketStream(
+                                    lastNotificationCount: count?.toString(),
+                                    stream: chatUnReadCountStreamSocket.stream,
+                                    onValueChanged: (value) =>
+                                        notificationCount = value,
+                                  );
+                                },
+                                ticketUnreadCountLoaded: (int? count) {
+                                  return BuildWithSocketStream(
+                                    lastNotificationCount: "0",
+                                    stream: chatUnReadCountStreamSocket.stream,
+                                    onValueChanged: (value) =>
+                                        notificationCount = value,
+                                  );
+                                },
+                              );
+                            },
+                          ),
+                        ),
                       ).animate().flipV(duration: Duration(milliseconds: 300)),
                     ),
                   ],

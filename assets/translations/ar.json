@@ -38,6 +38,7 @@
     "viaWhatsapp": "عبر الواتساب"
   },
   "common": {
+    "tooManysRequestsPleaseTryAgainLater": "طلبات كثيرة جداً. يرجى المحاولة مرة أخرى لاحقاً.",
     "loading": "جاري التحميل...",
     "error": "خطأ",
     "notificationTokenErrorPleaseFixItOnSettings": "خطأ في رمز الاشعارات. يرجى إصلاحه في الإعدادات!",
@@ -61,7 +62,8 @@
     "unexpectedErrorOccurred": "حدث خطأ غير متوقع",
     "yourSessionHasExpiredPleaseLoginAgain": "انتهت صلاحية جلستك. يرجى تسجيل الدخول مرة أخرى.",
     "ok": "موافق",
-    "tryAgain": "حاول مرة أخرى"
+    "tryAgain": "حاول مرة أخرى",
+    "clear": "مسح"
   },
   "theme": {
     "choose": "اختر سمة",
@@ -244,7 +246,8 @@
     "passwordResetSuccessful": "تم إعادة تعيين كلمة المرور بنجاح",
     "theNewPasswordAndConfirmNewPasswordFieldsDoNotMatch": "حقلي كلمة المرور الجديدة وتأكيد كلمة المرور الجديدة غير متطابقين",
     "identifierIsRequired": "المعرف مطلوب",
-    "enterTheOtpSentToYourEmail": "أدخل رمز التحقق المرسل إلى بريدك الإلكتروني "
+    "enterTheOtpSentToYourEmail": "أدخل رمز التحقق المرسل إلى بريدك الإلكتروني ",
+    "setYourLocation": "حدد موقعك"
   },
   "myServicesPage": {
     "title": "صفحة خدماتي",
@@ -305,7 +308,48 @@
     "noAddress": "لا يوجد عنوان",
     "showOnMap": "عرض على الخريطة",
     "callClient": "الاتصال بالعميل",
-    "cantShowMap": "لا يمكن عرض الخريطة"
+    "cantShowMap": "لا يمكن عرض الخريطة",
+    "availableProviders": "المزودون المتاحون",
+    "providersAvailable": "مزودون متاحون",
+    "sortProvidersBy": "فرز المزودين حسب",
+    "distanceNearestToFarthest": "المسافة من الأقرب إلى الأبعد",
+    "ratingHighToLow": "التقييم من الأعلى إلى الأدنى",
+    "priceLowToHigh": "السعر من الأقل إلى الأعلى",
+    "bookNow": "احجز الآن",
+    "describeYourIssue": "صف مشكلتك",
+    "pleaseDescribeYourIssueInDetail": "يرجى وصف مشكلتك بالتفصيل",
+    "addAttachments": "إضافة مرفقات",
+    "next": "التالي",
+    "schedule": "الجدول الزمني",
+    "availableTimes": "الأوقات المتاحة",
+    "ConfirmBooking": "تأكيد الحجز",
+    "bookingConfirmed": "تم تأكيد الحجز",
+    "addMore": "إضافة المزيد",
+    "removeAll": "إزالة الكل",
+    "chooseFromGallery": "اختر من المعرض",
+    "takePhoto": "التقاط صورة",
+    "chooseDay": "اختر اليوم",
+    "maximumOf5ImagesAllowed": "مسموح بحد أقصى 5 صور",
+    "youCanSelectUpTo5Images": "يمكنك اختيار ما يصل إلى 5 صور",
+    "uploading": "جارٍ التحميل...",
+    "oneImageOrMoreHasBeenDownGraded": "تم تقليل جودة صورة واحدة أو أكثر",
+    "sort": {
+      "sortBy": "فرز حسب",
+      "distance": "المسافة",
+      "rating": "التقييم",
+      "price": "السعر",
+      "language": "اللغة",
+      "city": "المدينة",
+      "none": "لا شيء",
+      "max": "الأقصى",
+      "min": "الأدنى",
+      "ar": "العربية",
+      "en": "الإنجليزية",
+      "ku": "الكردية",
+      "lat": "خط العرض",
+      "lng": "خط الطول",
+      "setYourLocation": "حدد موقعك"
+    }
   },
   "notificationPage": {
     "title": "صفحة الإشعارات",
@@ -360,7 +404,7 @@
     "send": "إرسال",
     "sentAImage": "أرسل صورة",
     "you": "أنت",
-    "maximumOf5ImagesAllowed": "مسموح بحد أقصى 5 صور",
-    "youCanSelectUpTo5Images": "يمكنك اختيار ما يصل إلى 5 صور"
+    "adminReply": "رد الإدارة",
+    "ticketClosed": "التذكرة مغلقة"
   }
 }

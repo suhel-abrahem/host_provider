@@ -54,6 +54,7 @@ class CodegenLoader extends AssetLoader{
     "viaWhatsapp": "عبر الواتساب"
   },
   "common": {
+    "tooManysRequestsPleaseTryAgainLater": "طلبات كثيرة جداً. يرجى المحاولة مرة أخرى لاحقاً.",
     "loading": "جاري التحميل...",
     "error": "خطأ",
     "notificationTokenErrorPleaseFixItOnSettings": "خطأ في رمز الاشعارات. يرجى إصلاحه في الإعدادات!",
@@ -77,7 +78,8 @@ class CodegenLoader extends AssetLoader{
     "unexpectedErrorOccurred": "حدث خطأ غير متوقع",
     "yourSessionHasExpiredPleaseLoginAgain": "انتهت صلاحية جلستك. يرجى تسجيل الدخول مرة أخرى.",
     "ok": "موافق",
-    "tryAgain": "حاول مرة أخرى"
+    "tryAgain": "حاول مرة أخرى",
+    "clear": "مسح"
   },
   "theme": {
     "choose": "اختر سمة",
@@ -260,7 +262,8 @@ class CodegenLoader extends AssetLoader{
     "passwordResetSuccessful": "تم إعادة تعيين كلمة المرور بنجاح",
     "theNewPasswordAndConfirmNewPasswordFieldsDoNotMatch": "حقلي كلمة المرور الجديدة وتأكيد كلمة المرور الجديدة غير متطابقين",
     "identifierIsRequired": "المعرف مطلوب",
-    "enterTheOtpSentToYourEmail": "أدخل رمز التحقق المرسل إلى بريدك الإلكتروني "
+    "enterTheOtpSentToYourEmail": "أدخل رمز التحقق المرسل إلى بريدك الإلكتروني ",
+    "setYourLocation": "حدد موقعك"
   },
   "myServicesPage": {
     "title": "صفحة خدماتي",
@@ -321,7 +324,48 @@ class CodegenLoader extends AssetLoader{
     "noAddress": "لا يوجد عنوان",
     "showOnMap": "عرض على الخريطة",
     "callClient": "الاتصال بالعميل",
-    "cantShowMap": "لا يمكن عرض الخريطة"
+    "cantShowMap": "لا يمكن عرض الخريطة",
+    "availableProviders": "المزودون المتاحون",
+    "providersAvailable": "مزودون متاحون",
+    "sortProvidersBy": "فرز المزودين حسب",
+    "distanceNearestToFarthest": "المسافة من الأقرب إلى الأبعد",
+    "ratingHighToLow": "التقييم من الأعلى إلى الأدنى",
+    "priceLowToHigh": "السعر من الأقل إلى الأعلى",
+    "bookNow": "احجز الآن",
+    "describeYourIssue": "صف مشكلتك",
+    "pleaseDescribeYourIssueInDetail": "يرجى وصف مشكلتك بالتفصيل",
+    "addAttachments": "إضافة مرفقات",
+    "next": "التالي",
+    "schedule": "الجدول الزمني",
+    "availableTimes": "الأوقات المتاحة",
+    "ConfirmBooking": "تأكيد الحجز",
+    "bookingConfirmed": "تم تأكيد الحجز",
+    "addMore": "إضافة المزيد",
+    "removeAll": "إزالة الكل",
+    "chooseFromGallery": "اختر من المعرض",
+    "takePhoto": "التقاط صورة",
+    "chooseDay": "اختر اليوم",
+    "maximumOf5ImagesAllowed": "مسموح بحد أقصى 5 صور",
+    "youCanSelectUpTo5Images": "يمكنك اختيار ما يصل إلى 5 صور",
+    "uploading": "جارٍ التحميل...",
+    "oneImageOrMoreHasBeenDownGraded": "تم تقليل جودة صورة واحدة أو أكثر",
+    "sort": {
+      "sortBy": "فرز حسب",
+      "distance": "المسافة",
+      "rating": "التقييم",
+      "price": "السعر",
+      "language": "اللغة",
+      "city": "المدينة",
+      "none": "لا شيء",
+      "max": "الأقصى",
+      "min": "الأدنى",
+      "ar": "العربية",
+      "en": "الإنجليزية",
+      "ku": "الكردية",
+      "lat": "خط العرض",
+      "lng": "خط الطول",
+      "setYourLocation": "حدد موقعك"
+    }
   },
   "notificationPage": {
     "title": "صفحة الإشعارات",
@@ -376,8 +420,8 @@ class CodegenLoader extends AssetLoader{
     "send": "إرسال",
     "sentAImage": "أرسل صورة",
     "you": "أنت",
-    "maximumOf5ImagesAllowed": "مسموح بحد أقصى 5 صور",
-    "youCanSelectUpTo5Images": "يمكنك اختيار ما يصل إلى 5 صور"
+    "adminReply": "رد الإدارة",
+    "ticketClosed": "التذكرة مغلقة"
   }
 };
 static const Map<String,dynamic> _en = {
@@ -420,6 +464,7 @@ static const Map<String,dynamic> _en = {
     "viaWhatsapp": "Via Whatsapp"
   },
   "common": {
+    "tooManysRequestsPleaseTryAgainLater": "Too many requests. Please try again later.",
     "loading": "Loading...",
     "error": "Error",
     "notificationTokenErrorPleaseFixItOnSettings": "Notification token error. Please fix it in settings!",
@@ -443,7 +488,8 @@ static const Map<String,dynamic> _en = {
     "unexpectedErrorOccurred": "An unexpected error occurred",
     "yourSessionHasExpiredPleaseLoginAgain": "Your session has expired. Please login again.",
     "ok": "OK",
-    "tryAgain": "Try again"
+    "tryAgain": "Try again",
+    "clear": "Clear"
   },
   "theme": {
     "choose": "Choose theme",
@@ -626,7 +672,8 @@ static const Map<String,dynamic> _en = {
     "passwordResetSuccessful": "Password reset successful",
     "theNewPasswordAndConfirmNewPasswordFieldsDoNotMatch": "The new password and confirm new password fields do not match",
     "identifierIsRequired": "Identifier is required",
-    "enterTheOtpSentToYourEmail": "Enter the OTP sent to your email"
+    "enterTheOtpSentToYourEmail": "Enter the OTP sent to your email",
+    "setYourLocation": "Set your location"
   },
   "myServicesPage": {
     "title": "My services page",
@@ -687,7 +734,48 @@ static const Map<String,dynamic> _en = {
     "noAddress": "No address",
     "showOnMap": "Show on map",
     "callClient": "Call client",
-    "cantShowMap": "Can't show map"
+    "cantShowMap": "Can't show map",
+    "availableProviders": "Available providers",
+    "providersAvailable": "Providers available",
+    "sortProvidersBy": "Sort providers by",
+    "distanceNearestToFarthest": "Distance: Nearest to Farthest",
+    "ratingHighToLow": "Rating: High to Low",
+    "priceLowToHigh": "Price: Low to High",
+    "bookNow": "Book Now",
+    "describeYourIssue": "Describe your issue",
+    "pleaseDescribeYourIssueInDetail": "Please describe your issue in detail",
+    "addAttachments": "Add attachments",
+    "next": "Next",
+    "schedule": "Schedule",
+    "availableTimes": "Available times",
+    "ConfirmBooking": "Confirm booking",
+    "bookingConfirmed": "Booking confirmed",
+    "addMore": "Add more",
+    "removeAll": "Remove all",
+    "chooseFromGallery": "Choose from gallery",
+    "takePhoto": "Take photo",
+    "chooseDay": "Choose day",
+    "maximumOf5ImagesAllowed": "Maximum of 5 images allowed",
+    "youCanSelectUpTo5Images": "You can select up to 5 images",
+    "uploading": "Uploading...",
+    "oneImageOrMoreHasBeenDownGraded": "One or more images have been downgraded",
+    "sort": {
+      "sortBy": "Sort by",
+      "distance": "Distance",
+      "rating": "Rating",
+      "price": "Price",
+      "language": "Language",
+      "city": "City",
+      "none": "None",
+      "max": "Maximum",
+      "min": "Minimum",
+      "ar": "Arabic",
+      "en": "English",
+      "ku": "Kurdish",
+      "lat": "Latitude",
+      "lng": "Longitude",
+      "setYourLocation": "Set your location"
+    }
   },
   "notificationPage": {
     "title": "Notification page",
@@ -742,8 +830,8 @@ static const Map<String,dynamic> _en = {
     "send": "Send",
     "sentAImage": "Sent an image",
     "you": "You",
-    "maximumOf5ImagesAllowed": "Maximum of 5 images allowed",
-    "youCanSelectUpTo5Images": "You can select up to 5 images"
+    "adminReply": "Admin reply",
+    "ticketClosed": "Ticket closed"
   }
 };
 static const Map<String,dynamic> _fa = {
@@ -786,6 +874,7 @@ static const Map<String,dynamic> _fa = {
     "viaWhatsapp": "بەڕێی واتسئاپ"
   },
   "common": {
+    "tooManysRequestsPleaseTryAgainLater": "زیاتر لە داواکاریەکان. تکایە دووبارە هەوڵبدەرەوە دواتر.",
     "loading": "چاوەڕێ بکە...",
     "error": "هەڵە",
     "notificationTokenErrorPleaseFixItOnSettings": "هەڵەی توکینی ئاگاداری. تکایە لە ڕێکخستنەکاندا چارەسەر بکە!",
@@ -809,7 +898,8 @@ static const Map<String,dynamic> _fa = {
     "unexpectedErrorOccurred": "هەڵەیەکی نەهەڵبژاردوو ڕوودەدات",
     "yourSessionHasExpiredPleaseLoginAgain": "کاتی نیشتەجێبوونت کۆتایی هات. تکایە دووبارە بچۆ ژوورەوە.",
     "ok": "باشە",
-    "tryAgain": "دووبارە هەوڵبدەرەوە"
+    "tryAgain": "دووبارە هەوڵبدەرەوە",
+    "clear": "سڕینەوە"
   },
   "theme": {
     "choose": "مۆدێلێک هەڵبژێرە",
@@ -992,7 +1082,8 @@ static const Map<String,dynamic> _fa = {
     "passwordResetSuccessful": "وشەی نهێنی بە سەرکەوتوویی گۆڕدرا",
     "theNewPasswordAndConfirmNewPasswordFieldsDoNotMatch": "وشەی نهێنی نوێ و دووبارەی وشەی نهێنی نوێ یەک ناگرن",
     "identifierIsRequired": "ناسەر پێویستە",
-    "enterTheOtpSentToYourEmail": "کۆدی پشکنین بنووسە کە بۆ ئیمەیڵەکەت نێردرا"
+    "enterTheOtpSentToYourEmail": "کۆدی پشکنین بنووسە کە بۆ ئیمەیڵەکەت نێردرا",
+    "setYourLocation": "شوێنەکەت دیاری بکە"
   },
   "myServicesPage": {
     "title": "شاشەی خزمەتگوزاریەکانم",
@@ -1053,7 +1144,48 @@ static const Map<String,dynamic> _fa = {
     "noAddress": "هیچ ناونیشانێک نیە",
     "showOnMap": "نیشانبدە لەسەر نەخشە",
     "callClient": "پەیوەندی بکە بە موشتەری",
-    "cantShowMap": "ناتوانرێت نەخشە نیشانبدرێت"
+    "cantShowMap": "ناتوانرێت نەخشە نیشانبدرێت",
+    "availableProviders": "دابینکەرە بەردەستەکان",
+    "providersAvailable": "دابینکەرە بەردەستەکان",
+    "sortProvidersBy": "ڕیزکردنەوەی دابینکەرەکان بە",
+    "distanceNearestToFarthest": "دووری: نزیکترین بۆ دووریترین",
+    "ratingHighToLow": "هەڵسەنگاندن: بەرزترین بۆ نزمترین",
+    "priceLowToHigh": "قیمت: نزمترین بۆ بەرزترین",
+    "bookNow": "ئێستا بکڕە",
+    "describeYourIssue": "مشکلەکەت وەسف بکە",
+    "pleaseDescribeYourIssueInDetail": "تکایە مشکلت بە وردی وەسف بکە",
+    "addAttachments": "زیادکردنی پەیوەندەکان",
+    "next": "دواتر",
+    "schedule": "خشتە",
+    "availableTimes": "کاتە بەردەستەکان",
+    "ConfirmBooking": "پشتڕاستکردنەوەی داواکردن",
+    "bookingConfirmed": "داواکردن پشتڕاست کرا",
+    "addMore": "زیادکردنی زیاتر",
+    "removeAll": "سڕینەوەی هەموو",
+    "chooseFromGallery": "هەڵبژاردنی وێنە لە گەلەری",
+    "takePhoto": "وێنە گرتن",
+    "chooseDay": "ڕۆژ هەڵبژێرە",
+    "maximumOf5ImagesAllowed": "زۆربەی 5 وێنە ڕێگەپێدراوە",
+    "youCanSelectUpTo5Images": "دەتوانیت تا 5 وێنە هەڵبژێریت",
+    "uploading": "لە بارکردندا...",
+    "oneImageOrMoreHasBeenDownGraded": "یەک یان زیاتر لە وێنەکان کەمکراونەوەی کەیفیەت",
+    "sort": {
+      "sortBy": "ڕیزکردنەوە بە",
+      "distance": "دووری",
+      "rating": "هەڵسەنگاندن",
+      "price": "نرخ",
+      "language": "زمان",
+      "city": "شار",
+      "none": "هیچ",
+      "max": "زیاترین",
+      "min": "کەمترین",
+      "ar": "عربی",
+      "en": "انگلیسی",
+      "ku": "کردی",
+      "lat": " عرض جغرافیایی",
+      "lng": "طول جغرافیایی",
+      "setYourLocation": "شوێنەکەت دیاری بکە"
+    }
   },
   "notificationPage": {
     "title": "شاشەی ئاگاداری",
@@ -1108,8 +1240,8 @@ static const Map<String,dynamic> _fa = {
     "send": "ناردن",
     "sentAImage": "وێنەیەک نارد",
     "you": "تۆ",
-    "maximumOf5ImagesAllowed": "زۆربەی 5 وێنە ڕێگەپێدراوە",
-    "youCanSelectUpTo5Images": "دەتوانیت تا 5 وێنە هەڵبژێریت"
+    "adminReply": " وەڵامی بەڕێوەبەر",
+    "ticketClosed": "تیکەت داخرا"
   }
 };
 static const Map<String, Map<String,dynamic>> mapLocales = {"ar": _ar, "en": _en, "fa": _fa};

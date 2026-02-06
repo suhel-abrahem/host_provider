@@ -14,6 +14,12 @@ import '../features/chat/domain/usecases/get_chats_usecase.dart';
 import '../features/chat/domain/usecases/send_chat_usecase.dart';
 import '../features/chat/presentation/bloc/get_chat_bloc.dart';
 import '../features/chat/presentation/bloc/send_chat_bloc.dart';
+import '../features/home_page/data/repositories/unread_notification_and_message/unread_notification_and_message_repository_implements.dart';
+import '../features/home_page/domain/repositories/unread_notification_and_message_repository/unread_notification_and_message_repository.dart';
+import '../features/home_page/domain/usecases/unread_notification_and_message/get_unread_tickets_usecase.dart';
+import '../features/home_page/domain/usecases/unread_notification_and_message/get_unreade_notificatin_usecase.dart';
+import '../features/home_page/domain/usecases/unread_notification_and_message/unread_message_usecase.dart';
+import '../features/home_page/presentation/bloc/unread_count_bloc.dart';
 import '../features/notification_page/data/models/notification_model.dart';
 import '../features/notification_page/data/repositories/notification_repository_implements.dart';
 import '../features/notification_page/domain/repositories/notification_repository.dart';
@@ -567,6 +573,33 @@ Future<void> initDependencies() async {
   // bloc
   getItInstance.registerFactory<ResetPasswordBloc>(
     () => ResetPasswordBloc(
+      getItInstance(),
+      getItInstance(),
+      getItInstance(),
+      getItInstance(),
+    ),
+  ); //unread count
+  //repository
+  getItInstance.registerSingleton<UnreadNotificationAndMessageRepository>(
+    UnreadNotificationAndMessageRepositoryImplements(
+      checkConnectivity: getItInstance(),
+    ),
+  );
+  //usecase
+  getItInstance.registerSingleton<GetUnreadeNotificatinUsecase>(
+    GetUnreadeNotificatinUsecase(repository: getItInstance()),
+  );
+  getItInstance.registerSingleton<UnreadMessageUsecase>(
+    UnreadMessageUsecase(repository: getItInstance()),
+  );
+  getItInstance.registerSingleton<GetUnreadTicketsUsecase>(
+    GetUnreadTicketsUsecase(
+      unreadNotificationAndMessageRepository: getItInstance(),
+    ),
+  );
+  //bloc
+  getItInstance.registerFactory<UnreadCountBloc>(
+    () => UnreadCountBloc(
       getItInstance(),
       getItInstance(),
       getItInstance(),

@@ -69,12 +69,15 @@ class ColorManager {
   static const Color logout = Color(0xFFB71C1C); // Deep Red
   static const Color disabledColor = Color.fromARGB(
     255,
-    102,
-    102,
-    102,
+    192,
+    188,
+    188,
   ); // Gray Disabled
-  static const Color disabledTextColor = Color(
-    0xFF9E9E9E,
+  static const Color disabledTextColor = Color.fromARGB(
+    255,
+    214,
+    208,
+    208,
   ); // Soft Disabled Text
 
   // Dark Mode Colors

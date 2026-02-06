@@ -9,4 +9,7 @@ class OtpPageState with _$OtpPageState {
       OtpPageStateVerified;
   const factory OtpPageState.resent(LoginStateEntity? loginStateEntity) =
       OtpPageStateResent;
+  const factory OtpPageState.tooManyRequests({
+    required LoginStateEntity? loginStateEntity,
+  }) = OtpPageStateTooManyRequests;
 }

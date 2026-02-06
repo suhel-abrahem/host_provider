@@ -207,7 +207,7 @@ class _FirstUsePageState extends State<FirstUsePage> {
                       ? () {
                           context.setLocale(selectedLocale!);
                           getItInstance<AppPreferences>().setLanguage(
-                            languageCode: languageName,
+                            languageName: languageName,
                           );
                           getItInstance<AppPreferences>().setFirstUse(
                             isFirstUse: true,

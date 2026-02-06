@@ -48,7 +48,7 @@ class _SendMessageFieldState extends State<SendMessageField> {
           });
     } else {
       showMessage(
-        message: LocaleKeys.chatsPage_maximumOf5ImagesAllowed.tr(),
+        message: LocaleKeys.serviceDetailsPage_maximumOf5ImagesAllowed.tr(),
         context: context,
       );
     }
@@ -71,7 +71,7 @@ class _SendMessageFieldState extends State<SendMessageField> {
           });
     } else {
       showMessage(
-        message: LocaleKeys.chatsPage_maximumOf5ImagesAllowed.tr(),
+        message: LocaleKeys.serviceDetailsPage_maximumOf5ImagesAllowed.tr(),
         context: context,
       );
     }
@@ -174,76 +174,88 @@ class _SendMessageFieldState extends State<SendMessageField> {
                             },
                           ).animate().fadeIn(duration: 600.ms),
                         )
-                      : CustomInputField(
-                          minLines: 1,
-                          maxLines: 5,
-                          contentPadding: EdgeInsets.symmetric(
-                            horizontal: 8.w,
-                            vertical: 2.h,
-                          ),
-                          onChanged: (value) {
-                            messageText = value.toString().trim();
-                          },
-                          validator: (value) {
-                            if (value?.trim().isEmpty ?? true) {
-                              return "";
-                            }
-                            return null;
-                          },
-                        ).animate().fadeIn(duration: 600.ms);
+                      : Padding(
+                          padding: EdgeInsetsDirectional.only(end: 8.w),
+                          child: CustomInputField(
+                            minLines: 1,
+                            maxLines: 5,
+                            contentPadding: EdgeInsets.symmetric(
+                              horizontal: 8.w,
+                              vertical: 2.h,
+                            ),
+                            onChanged: (value) {
+                              messageText = value.toString().trim();
+                            },
+                            validator: (value) {
+                              if (value?.trim().isEmpty ?? true) {
+                                return "";
+                              }
+                              return null;
+                            },
+                          ).animate().fadeIn(duration: 600.ms),
+                        );
                 },
               ),
             ),
-            IconButton(
-              onPressed: () async {
-                await openCamera();
-              },
-              icon: Icon(
-                Icons.camera_alt,
-                color: Theme.of(context).textTheme.labelLarge?.color,
+            SizedBox(
+              width: 24.w,
+              child: IconButton(
+                onPressed: () async {
+                  await openCamera();
+                },
+                icon: Icon(
+                  Icons.camera_alt,
+                  color: Theme.of(context).textTheme.labelLarge?.color,
+                ),
               ),
             ),
-            IconButton(
-              onPressed: () async {
-                await openGallery();
-              },
-              icon: Icon(
-                Icons.attach_file,
-                color: Theme.of(context).textTheme.labelLarge?.color,
+            SizedBox(
+              width: 24.w,
+              child: IconButton(
+                onPressed: () async {
+                  await openGallery();
+                },
+                icon: Icon(
+                  Icons.attach_file,
+                  color: Theme.of(context).textTheme.labelLarge?.color,
+                ),
               ),
             ),
             Builder(
               builder: (context) {
-                return IconButton(
-                  onPressed: () {
-                    print("Send Message Clicked:${widget.chatId}");
-                    if ((formKey.currentState?.validate() ?? false) ||
-                        (images?.isNotEmpty ?? false)) {
-                      if (widget.onSend != null) {
-                        widget.onSend?.call(
-                          MessageEntity(
-                            me: true,
-                            uploadingState: UploadingStateEnum.uploading,
-                            message_type: images?.isNotEmpty == true
-                                ? "image"
-                                : "text",
-                            content: images?.isNotEmpty == true
-                                ? images?.map((e) => e?.path).toList()
-                                : [messageText ?? ""],
-                            files: images?.isNotEmpty == true ? images : null,
-                          ),
-                        );
+                return SizedBox(
+                  width: 24.w,
+                  child: IconButton(
+                    onPressed: () {
+                      print("Send Message Clicked:${widget.chatId}");
+                      if ((formKey.currentState?.validate() ?? false) ||
+                          (images?.isNotEmpty ?? false)) {
+                        if (widget.onSend != null) {
+                          widget.onSend?.call(
+                            MessageEntity(
+                              me: true,
+                              uploadingState: UploadingStateEnum.uploading,
+                              message_type: images?.isNotEmpty == true
+                                  ? "image"
+                                  : "text",
+                              content: images?.isNotEmpty == true
+                                  ? images?.map((e) => e?.path).toList()
+                                  : [messageText ?? ""],
+                              files: images?.isNotEmpty == true ? images : null,
+                            ),
+                          );
+                        }
+                        formKey.currentState?.reset();
+                        setState(() {
+                          images = [];
+                          messageText = null;
+                        });
                       }
-                      formKey.currentState?.reset();
-                      setState(() {
-                        images = [];
-                        messageText = null;
-                      });
-                    }
-                  },
-                  icon: Icon(
-                    Icons.send,
-                    color: Theme.of(context).textTheme.labelLarge?.color,
+                    },
+                    icon: Icon(
+                      Icons.send,
+                      color: Theme.of(context).textTheme.labelLarge?.color,
+                    ),
                   ),
                 );
               },

@@ -1,8 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hosta_provider/core/constants/font_constants.dart';
-import 'package:hosta_provider/features/notification_page/domain/entities/notification_entity.dart';
+import '/core/constants/font_constants.dart';
+import '/features/notification_page/domain/entities/notification_entity.dart';
 
 class NotificationWidget extends StatelessWidget {
   final NotificationEntity? notification;
@@ -28,30 +28,43 @@ class NotificationWidget extends StatelessWidget {
             size: 32.sp,
           ),
           Padding(
-            padding: EdgeInsetsDirectional.only(start: 16.w),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  notification?.title ?? "",
-                  style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                    fontFamily: FontConstants.fontFamily(context.locale),
-                  ),
-                  overflow: TextOverflow.ellipsis,
-                ),
+            padding: EdgeInsetsDirectional.only(start: 16.w, end: 1.w),
+            child: SizedBox(
+              width: 300.w,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisSize: MainAxisSize.min,
 
-                Padding(
-                  padding: EdgeInsets.only(top: 8.h),
-                  child: Text(
-                    notification?.body ?? "",
-                    style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                      fontFamily: FontConstants.fontFamily(context.locale),
+                children: [
+                  Center(
+                    child: Text(
+                      notification?.title ?? "",
+                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                        fontFamily: FontConstants.fontFamily(context.locale),
+                      ),
+                      overflow: TextOverflow.ellipsis,
                     ),
-                    overflow: TextOverflow.ellipsis,
                   ),
-                ),
-              ],
+
+                  Padding(
+                    padding: EdgeInsets.only(top: 8.h),
+                    child: SizedBox(
+                      width: 300.w,
+                      child: Text(
+                        notification?.body ?? "",
+                        style: Theme.of(context).textTheme.labelMedium
+                            ?.copyWith(
+                              fontFamily: FontConstants.fontFamily(
+                                context.locale,
+                              ),
+                            ),
+                        textAlign: TextAlign.start,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ],

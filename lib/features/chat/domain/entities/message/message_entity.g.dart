@@ -11,12 +11,9 @@ _MessageEntity _$MessageEntityFromJson(Map<String, dynamic> json) =>
       id: (json['id'] as num?)?.toInt() ?? 0,
       sender_id: (json['sender_id'] as num?)?.toInt() ?? 0,
       sender_name: json['sender_name'] as String? ?? "",
+      sender_avatar: json['sender_avatar'] as String? ?? "",
       message_type: json['message_type'] as String? ?? "",
-      content:
-          (json['content'] as List<dynamic>?)
-              ?.map((e) => e as String?)
-              .toList() ??
-          const [],
+      content: json['content'] as List<dynamic>? ?? const [],
       me: json['me'] as bool? ?? false,
       is_read: json['is_read'] as bool? ?? false,
       read_at: json['read_at'] as String? ?? "",
@@ -37,6 +34,7 @@ Map<String, dynamic> _$MessageEntityToJson(_MessageEntity instance) =>
       'id': instance.id,
       'sender_id': instance.sender_id,
       'sender_name': instance.sender_name,
+      'sender_avatar': instance.sender_avatar,
       'message_type': instance.message_type,
       'content': instance.content,
       'me': instance.me,

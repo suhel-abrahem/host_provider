@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$ChatsEntity {
 
- int? get id; int? get booking_id; String? get booking_number; String? get booking_status; String? get service_name; Map<String, dynamic>? get other_participant; Map<String, dynamic>? get last_message; String? get last_message_at; int? get unread_count;
+ int? get id; int? get booking_id; String? get booking_number; String? get booking_status; String? get service_name; Map<String, dynamic>? get other_participant; Map<String, dynamic>? get last_message; String? get last_message_at; int? get unread_count; String? get status;
 /// Create a copy of ChatsEntity
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -28,16 +28,16 @@ $ChatsEntityCopyWith<ChatsEntity> get copyWith => _$ChatsEntityCopyWithImpl<Chat
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is ChatsEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.booking_id, booking_id) || other.booking_id == booking_id)&&(identical(other.booking_number, booking_number) || other.booking_number == booking_number)&&(identical(other.booking_status, booking_status) || other.booking_status == booking_status)&&(identical(other.service_name, service_name) || other.service_name == service_name)&&const DeepCollectionEquality().equals(other.other_participant, other_participant)&&const DeepCollectionEquality().equals(other.last_message, last_message)&&(identical(other.last_message_at, last_message_at) || other.last_message_at == last_message_at)&&(identical(other.unread_count, unread_count) || other.unread_count == unread_count));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is ChatsEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.booking_id, booking_id) || other.booking_id == booking_id)&&(identical(other.booking_number, booking_number) || other.booking_number == booking_number)&&(identical(other.booking_status, booking_status) || other.booking_status == booking_status)&&(identical(other.service_name, service_name) || other.service_name == service_name)&&const DeepCollectionEquality().equals(other.other_participant, other_participant)&&const DeepCollectionEquality().equals(other.last_message, last_message)&&(identical(other.last_message_at, last_message_at) || other.last_message_at == last_message_at)&&(identical(other.unread_count, unread_count) || other.unread_count == unread_count)&&(identical(other.status, status) || other.status == status));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,booking_id,booking_number,booking_status,service_name,const DeepCollectionEquality().hash(other_participant),const DeepCollectionEquality().hash(last_message),last_message_at,unread_count);
+int get hashCode => Object.hash(runtimeType,id,booking_id,booking_number,booking_status,service_name,const DeepCollectionEquality().hash(other_participant),const DeepCollectionEquality().hash(last_message),last_message_at,unread_count,status);
 
 @override
 String toString() {
-  return 'ChatsEntity(id: $id, booking_id: $booking_id, booking_number: $booking_number, booking_status: $booking_status, service_name: $service_name, other_participant: $other_participant, last_message: $last_message, last_message_at: $last_message_at, unread_count: $unread_count)';
+  return 'ChatsEntity(id: $id, booking_id: $booking_id, booking_number: $booking_number, booking_status: $booking_status, service_name: $service_name, other_participant: $other_participant, last_message: $last_message, last_message_at: $last_message_at, unread_count: $unread_count, status: $status)';
 }
 
 
@@ -48,7 +48,7 @@ abstract mixin class $ChatsEntityCopyWith<$Res>  {
   factory $ChatsEntityCopyWith(ChatsEntity value, $Res Function(ChatsEntity) _then) = _$ChatsEntityCopyWithImpl;
 @useResult
 $Res call({
- int? id, int? booking_id, String? booking_number, String? booking_status, String? service_name, Map<String, dynamic>? other_participant, Map<String, dynamic>? last_message, String? last_message_at, int? unread_count
+ int? id, int? booking_id, String? booking_number, String? booking_status, String? service_name, Map<String, dynamic>? other_participant, Map<String, dynamic>? last_message, String? last_message_at, int? unread_count, String? status
 });
 
 
@@ -65,7 +65,7 @@ class _$ChatsEntityCopyWithImpl<$Res>
 
 /// Create a copy of ChatsEntity
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? booking_id = freezed,Object? booking_number = freezed,Object? booking_status = freezed,Object? service_name = freezed,Object? other_participant = freezed,Object? last_message = freezed,Object? last_message_at = freezed,Object? unread_count = freezed,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? id = freezed,Object? booking_id = freezed,Object? booking_number = freezed,Object? booking_status = freezed,Object? service_name = freezed,Object? other_participant = freezed,Object? last_message = freezed,Object? last_message_at = freezed,Object? unread_count = freezed,Object? status = freezed,}) {
   return _then(_self.copyWith(
 id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int?,booking_id: freezed == booking_id ? _self.booking_id : booking_id // ignore: cast_nullable_to_non_nullable
@@ -76,7 +76,8 @@ as String?,other_participant: freezed == other_participant ? _self.other_partici
 as Map<String, dynamic>?,last_message: freezed == last_message ? _self.last_message : last_message // ignore: cast_nullable_to_non_nullable
 as Map<String, dynamic>?,last_message_at: freezed == last_message_at ? _self.last_message_at : last_message_at // ignore: cast_nullable_to_non_nullable
 as String?,unread_count: freezed == unread_count ? _self.unread_count : unread_count // ignore: cast_nullable_to_non_nullable
-as int?,
+as int?,status: freezed == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 
@@ -161,10 +162,10 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int? id,  int? booking_id,  String? booking_number,  String? booking_status,  String? service_name,  Map<String, dynamic>? other_participant,  Map<String, dynamic>? last_message,  String? last_message_at,  int? unread_count)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( int? id,  int? booking_id,  String? booking_number,  String? booking_status,  String? service_name,  Map<String, dynamic>? other_participant,  Map<String, dynamic>? last_message,  String? last_message_at,  int? unread_count,  String? status)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _ChatsEntity() when $default != null:
-return $default(_that.id,_that.booking_id,_that.booking_number,_that.booking_status,_that.service_name,_that.other_participant,_that.last_message,_that.last_message_at,_that.unread_count);case _:
+return $default(_that.id,_that.booking_id,_that.booking_number,_that.booking_status,_that.service_name,_that.other_participant,_that.last_message,_that.last_message_at,_that.unread_count,_that.status);case _:
   return orElse();
 
 }
@@ -182,10 +183,10 @@ return $default(_that.id,_that.booking_id,_that.booking_number,_that.booking_sta
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int? id,  int? booking_id,  String? booking_number,  String? booking_status,  String? service_name,  Map<String, dynamic>? other_participant,  Map<String, dynamic>? last_message,  String? last_message_at,  int? unread_count)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( int? id,  int? booking_id,  String? booking_number,  String? booking_status,  String? service_name,  Map<String, dynamic>? other_participant,  Map<String, dynamic>? last_message,  String? last_message_at,  int? unread_count,  String? status)  $default,) {final _that = this;
 switch (_that) {
 case _ChatsEntity():
-return $default(_that.id,_that.booking_id,_that.booking_number,_that.booking_status,_that.service_name,_that.other_participant,_that.last_message,_that.last_message_at,_that.unread_count);case _:
+return $default(_that.id,_that.booking_id,_that.booking_number,_that.booking_status,_that.service_name,_that.other_participant,_that.last_message,_that.last_message_at,_that.unread_count,_that.status);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -202,10 +203,10 @@ return $default(_that.id,_that.booking_id,_that.booking_number,_that.booking_sta
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int? id,  int? booking_id,  String? booking_number,  String? booking_status,  String? service_name,  Map<String, dynamic>? other_participant,  Map<String, dynamic>? last_message,  String? last_message_at,  int? unread_count)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( int? id,  int? booking_id,  String? booking_number,  String? booking_status,  String? service_name,  Map<String, dynamic>? other_participant,  Map<String, dynamic>? last_message,  String? last_message_at,  int? unread_count,  String? status)?  $default,) {final _that = this;
 switch (_that) {
 case _ChatsEntity() when $default != null:
-return $default(_that.id,_that.booking_id,_that.booking_number,_that.booking_status,_that.service_name,_that.other_participant,_that.last_message,_that.last_message_at,_that.unread_count);case _:
+return $default(_that.id,_that.booking_id,_that.booking_number,_that.booking_status,_that.service_name,_that.other_participant,_that.last_message,_that.last_message_at,_that.unread_count,_that.status);case _:
   return null;
 
 }
@@ -217,7 +218,7 @@ return $default(_that.id,_that.booking_id,_that.booking_number,_that.booking_sta
 @JsonSerializable()
 
 class _ChatsEntity implements ChatsEntity {
-  const _ChatsEntity({this.id = 0, this.booking_id = 0, this.booking_number = "", this.booking_status = "", this.service_name = "", final  Map<String, dynamic>? other_participant = const {}, final  Map<String, dynamic>? last_message = const {}, this.last_message_at = "", this.unread_count = 0}): _other_participant = other_participant,_last_message = last_message;
+  const _ChatsEntity({this.id = 0, this.booking_id = 0, this.booking_number = "", this.booking_status = "", this.service_name = "", final  Map<String, dynamic>? other_participant = const {}, final  Map<String, dynamic>? last_message = const {}, this.last_message_at = "", this.unread_count = 0, this.status = ""}): _other_participant = other_participant,_last_message = last_message;
   factory _ChatsEntity.fromJson(Map<String, dynamic> json) => _$ChatsEntityFromJson(json);
 
 @override@JsonKey() final  int? id;
@@ -245,6 +246,7 @@ class _ChatsEntity implements ChatsEntity {
 
 @override@JsonKey() final  String? last_message_at;
 @override@JsonKey() final  int? unread_count;
+@override@JsonKey() final  String? status;
 
 /// Create a copy of ChatsEntity
 /// with the given fields replaced by the non-null parameter values.
@@ -259,16 +261,16 @@ Map<String, dynamic> toJson() {
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ChatsEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.booking_id, booking_id) || other.booking_id == booking_id)&&(identical(other.booking_number, booking_number) || other.booking_number == booking_number)&&(identical(other.booking_status, booking_status) || other.booking_status == booking_status)&&(identical(other.service_name, service_name) || other.service_name == service_name)&&const DeepCollectionEquality().equals(other._other_participant, _other_participant)&&const DeepCollectionEquality().equals(other._last_message, _last_message)&&(identical(other.last_message_at, last_message_at) || other.last_message_at == last_message_at)&&(identical(other.unread_count, unread_count) || other.unread_count == unread_count));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _ChatsEntity&&(identical(other.id, id) || other.id == id)&&(identical(other.booking_id, booking_id) || other.booking_id == booking_id)&&(identical(other.booking_number, booking_number) || other.booking_number == booking_number)&&(identical(other.booking_status, booking_status) || other.booking_status == booking_status)&&(identical(other.service_name, service_name) || other.service_name == service_name)&&const DeepCollectionEquality().equals(other._other_participant, _other_participant)&&const DeepCollectionEquality().equals(other._last_message, _last_message)&&(identical(other.last_message_at, last_message_at) || other.last_message_at == last_message_at)&&(identical(other.unread_count, unread_count) || other.unread_count == unread_count)&&(identical(other.status, status) || other.status == status));
 }
 
 @JsonKey(includeFromJson: false, includeToJson: false)
 @override
-int get hashCode => Object.hash(runtimeType,id,booking_id,booking_number,booking_status,service_name,const DeepCollectionEquality().hash(_other_participant),const DeepCollectionEquality().hash(_last_message),last_message_at,unread_count);
+int get hashCode => Object.hash(runtimeType,id,booking_id,booking_number,booking_status,service_name,const DeepCollectionEquality().hash(_other_participant),const DeepCollectionEquality().hash(_last_message),last_message_at,unread_count,status);
 
 @override
 String toString() {
-  return 'ChatsEntity(id: $id, booking_id: $booking_id, booking_number: $booking_number, booking_status: $booking_status, service_name: $service_name, other_participant: $other_participant, last_message: $last_message, last_message_at: $last_message_at, unread_count: $unread_count)';
+  return 'ChatsEntity(id: $id, booking_id: $booking_id, booking_number: $booking_number, booking_status: $booking_status, service_name: $service_name, other_participant: $other_participant, last_message: $last_message, last_message_at: $last_message_at, unread_count: $unread_count, status: $status)';
 }
 
 
@@ -279,7 +281,7 @@ abstract mixin class _$ChatsEntityCopyWith<$Res> implements $ChatsEntityCopyWith
   factory _$ChatsEntityCopyWith(_ChatsEntity value, $Res Function(_ChatsEntity) _then) = __$ChatsEntityCopyWithImpl;
 @override @useResult
 $Res call({
- int? id, int? booking_id, String? booking_number, String? booking_status, String? service_name, Map<String, dynamic>? other_participant, Map<String, dynamic>? last_message, String? last_message_at, int? unread_count
+ int? id, int? booking_id, String? booking_number, String? booking_status, String? service_name, Map<String, dynamic>? other_participant, Map<String, dynamic>? last_message, String? last_message_at, int? unread_count, String? status
 });
 
 
@@ -296,7 +298,7 @@ class __$ChatsEntityCopyWithImpl<$Res>
 
 /// Create a copy of ChatsEntity
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? booking_id = freezed,Object? booking_number = freezed,Object? booking_status = freezed,Object? service_name = freezed,Object? other_participant = freezed,Object? last_message = freezed,Object? last_message_at = freezed,Object? unread_count = freezed,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? id = freezed,Object? booking_id = freezed,Object? booking_number = freezed,Object? booking_status = freezed,Object? service_name = freezed,Object? other_participant = freezed,Object? last_message = freezed,Object? last_message_at = freezed,Object? unread_count = freezed,Object? status = freezed,}) {
   return _then(_ChatsEntity(
 id: freezed == id ? _self.id : id // ignore: cast_nullable_to_non_nullable
 as int?,booking_id: freezed == booking_id ? _self.booking_id : booking_id // ignore: cast_nullable_to_non_nullable
@@ -307,7 +309,8 @@ as String?,other_participant: freezed == other_participant ? _self._other_partic
 as Map<String, dynamic>?,last_message: freezed == last_message ? _self._last_message : last_message // ignore: cast_nullable_to_non_nullable
 as Map<String, dynamic>?,last_message_at: freezed == last_message_at ? _self.last_message_at : last_message_at // ignore: cast_nullable_to_non_nullable
 as String?,unread_count: freezed == unread_count ? _self.unread_count : unread_count // ignore: cast_nullable_to_non_nullable
-as int?,
+as int?,status: freezed == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
+as String?,
   ));
 }
 

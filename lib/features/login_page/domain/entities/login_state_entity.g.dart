@@ -22,6 +22,7 @@ _LoginStateEntity _$LoginStateEntityFromJson(Map<String, dynamic> json) =>
           LoginStateEnum.unlogined,
       isFcmTokenSet: json['isFcmTokenSet'] as bool? ?? false,
       fcmToken: json['fcmToken'] as String? ?? "",
+      retry_after_seconds: json['retry_after_seconds'] as String? ?? "1",
     );
 
 Map<String, dynamic> _$LoginStateEntityToJson(_LoginStateEntity instance) =>
@@ -35,6 +36,7 @@ Map<String, dynamic> _$LoginStateEntityToJson(_LoginStateEntity instance) =>
       'loginStateEnum': _$LoginStateEnumEnumMap[instance.loginStateEnum],
       'isFcmTokenSet': instance.isFcmTokenSet,
       'fcmToken': instance.fcmToken,
+      'retry_after_seconds': instance.retry_after_seconds,
     };
 
 const _$LoginStateEnumEnumMap = {

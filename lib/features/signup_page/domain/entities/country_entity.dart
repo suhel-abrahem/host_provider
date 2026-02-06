@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-part 'country_entity.g.dart';
+
 part 'country_entity.freezed.dart';
+part 'country_entity.g.dart';
 
 @freezed
 abstract class CountryEntity with _$CountryEntity {

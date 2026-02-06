@@ -1,14 +1,15 @@
 import 'package:bloc/bloc.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+
 import '../../../../core/data_state/data_state.dart';
 import '../../data/models/country_model.dart';
 import '../../domain/entities/country_entity.dart';
 import '../../domain/usecases/get_country_usecase.dart';
 
+part 'get_countries_bloc.freezed.dart';
 part 'get_countries_event.dart';
 part 'get_countries_state.dart';
-part 'get_countries_bloc.freezed.dart';
 
 class GetCountriesBloc extends Bloc<GetCountriesEvent, GetCountriesState> {
   final GetCountryUsecase _getCountryUsecase;

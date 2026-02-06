@@ -17,6 +17,7 @@ _ChatsEntity _$ChatsEntityFromJson(Map<String, dynamic> json) => _ChatsEntity(
   last_message: json['last_message'] as Map<String, dynamic>? ?? const {},
   last_message_at: json['last_message_at'] as String? ?? "",
   unread_count: (json['unread_count'] as num?)?.toInt() ?? 0,
+  status: json['status'] as String? ?? "",
 );
 
 Map<String, dynamic> _$ChatsEntityToJson(_ChatsEntity instance) =>
@@ -30,4 +31,5 @@ Map<String, dynamic> _$ChatsEntityToJson(_ChatsEntity instance) =>
       'last_message': instance.last_message,
       'last_message_at': instance.last_message_at,
       'unread_count': instance.unread_count,
+      'status': instance.status,
     };

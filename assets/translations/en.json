@@ -38,6 +38,7 @@
     "viaWhatsapp": "Via Whatsapp"
   },
   "common": {
+    "tooManysRequestsPleaseTryAgainLater": "Too many requests. Please try again later.",
     "loading": "Loading...",
     "error": "Error",
     "notificationTokenErrorPleaseFixItOnSettings": "Notification token error. Please fix it in settings!",
@@ -61,7 +62,8 @@
     "unexpectedErrorOccurred": "An unexpected error occurred",
     "yourSessionHasExpiredPleaseLoginAgain": "Your session has expired. Please login again.",
     "ok": "OK",
-    "tryAgain": "Try again"
+    "tryAgain": "Try again",
+    "clear": "Clear"
   },
   "theme": {
     "choose": "Choose theme",
@@ -244,7 +246,8 @@
     "passwordResetSuccessful": "Password reset successful",
     "theNewPasswordAndConfirmNewPasswordFieldsDoNotMatch": "The new password and confirm new password fields do not match",
     "identifierIsRequired": "Identifier is required",
-    "enterTheOtpSentToYourEmail": "Enter the OTP sent to your email"
+    "enterTheOtpSentToYourEmail": "Enter the OTP sent to your email",
+    "setYourLocation": "Set your location"
   },
   "myServicesPage": {
     "title": "My services page",
@@ -305,7 +308,48 @@
     "noAddress": "No address",
     "showOnMap": "Show on map",
     "callClient": "Call client",
-    "cantShowMap": "Can't show map"
+    "cantShowMap": "Can't show map",
+    "availableProviders": "Available providers",
+    "providersAvailable": "Providers available",
+    "sortProvidersBy": "Sort providers by",
+    "distanceNearestToFarthest": "Distance: Nearest to Farthest",
+    "ratingHighToLow": "Rating: High to Low",
+    "priceLowToHigh": "Price: Low to High",
+    "bookNow": "Book Now",
+    "describeYourIssue": "Describe your issue",
+    "pleaseDescribeYourIssueInDetail": "Please describe your issue in detail",
+    "addAttachments": "Add attachments",
+    "next": "Next",
+    "schedule": "Schedule",
+    "availableTimes": "Available times",
+    "ConfirmBooking": "Confirm booking",
+    "bookingConfirmed": "Booking confirmed",
+    "addMore": "Add more",
+    "removeAll": "Remove all",
+    "chooseFromGallery": "Choose from gallery",
+    "takePhoto": "Take photo",
+    "chooseDay": "Choose day",
+    "maximumOf5ImagesAllowed": "Maximum of 5 images allowed",
+    "youCanSelectUpTo5Images": "You can select up to 5 images",
+    "uploading": "Uploading...",
+    "oneImageOrMoreHasBeenDownGraded": "One or more images have been downgraded",
+    "sort": {
+      "sortBy": "Sort by",
+      "distance": "Distance",
+      "rating": "Rating",
+      "price": "Price",
+      "language": "Language",
+      "city": "City",
+      "none": "None",
+      "max": "Maximum",
+      "min": "Minimum",
+      "ar": "Arabic",
+      "en": "English",
+      "ku": "Kurdish",
+      "lat": "Latitude",
+      "lng": "Longitude",
+      "setYourLocation": "Set your location"
+    }
   },
   "notificationPage": {
     "title": "Notification page",
@@ -360,7 +404,7 @@
     "send": "Send",
     "sentAImage": "Sent an image",
     "you": "You",
-    "maximumOf5ImagesAllowed": "Maximum of 5 images allowed",
-    "youCanSelectUpTo5Images": "You can select up to 5 images"
+    "adminReply": "Admin reply",
+    "ticketClosed": "Ticket closed"
   }
 }

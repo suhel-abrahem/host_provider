@@ -1,7 +1,11 @@
 import 'dart:async';
 
 import 'package:firebase_messaging/firebase_messaging.dart';
+import '/core/resource/main_page/notificaion_entity/message_from_websocet_entity.dart';
 import '/features/chat/domain/entities/message/message_entity.dart';
+import '/features/notification_page/domain/entities/notification_entity.dart';
+
+import '../main_page/notificaion_entity/message_notification_entity.dart';
 
 class StreamSocket<T> {
   final _controller = StreamController<T>.broadcast();
@@ -20,9 +24,9 @@ class StreamSocket<T> {
 }
 
 // Create a global instance
-final notificationStreamSocket = StreamSocket<dynamic>();
+final unreadedNotificationStreamSocket = StreamSocket<dynamic>();
 final chatUnReadCountStreamSocket = StreamSocket<int>();
-final chatMessageStreamSocket = StreamSocket<MessageEntity?>();
-final fcmNotificationStreamSocket = StreamSocket<RemoteMessage?>();
-String? lastNotificationCount;
-String? lastChatUnReadCount;
+final chatMessageStreamSocket = StreamSocket<MessageFromWebSocketEntity?>();
+final ticketMessageStreamSocket = StreamSocket<MessageFromWebSocketEntity?>();
+final notificationStreamSocket = StreamSocket<NotificationEntity?>();
+final messageNotificationSocket = StreamSocket<MessageNotificationEntity?>();

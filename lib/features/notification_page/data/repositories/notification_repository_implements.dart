@@ -1,11 +1,11 @@
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:hosta_provider/core/data_state/data_state.dart';
-import 'package:hosta_provider/core/resource/common_service/common_service.dart';
-import 'package:hosta_provider/core/resource/connectivity/check_connectivity.dart';
+import '../../../../core/data_state/data_state.dart';
+import '../../../../core/resource/common_service/common_service.dart';
+import '../../../../core/resource/connectivity/check_connectivity.dart';
 
-import 'package:hosta_provider/features/notification_page/data/models/notification_model.dart';
+import '../../../../features/notification_page/data/models/notification_model.dart';
 
-import 'package:hosta_provider/features/notification_page/domain/entities/notification_entity.dart';
+import '../../../../features/notification_page/domain/entities/notification_entity.dart';
 
 import '../../../../core/constants/api_constant.dart';
 import '../../domain/repositories/notification_repository.dart';

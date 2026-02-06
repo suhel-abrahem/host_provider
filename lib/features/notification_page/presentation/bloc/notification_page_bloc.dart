@@ -1,10 +1,10 @@
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:hosta_provider/config/app/app_preferences.dart';
-import 'package:hosta_provider/features/login_page/domain/entities/login_state_entity.dart';
-import 'package:hosta_provider/features/notification_page/domain/usecases/get_notification_usecase.dart';
-import 'package:hosta_provider/features/refresh_token/data/models/refresh_token_model.dart';
-import 'package:hosta_provider/features/refresh_token/domain/usecases/refresh_token_usecase.dart';
+import '/config/app/app_preferences.dart';
+import '/features/login_page/domain/entities/login_state_entity.dart';
+import '/features/notification_page/domain/usecases/get_notification_usecase.dart';
+import '/features/refresh_token/data/models/refresh_token_model.dart';
+import '/features/refresh_token/domain/usecases/refresh_token_usecase.dart';
 
 import '../../../../core/data_state/data_state.dart';
 import '../../../../core/dependencies_injection.dart';
@@ -128,7 +128,7 @@ class NotificationPageBloc
                     ),
                   )
                   .then((onValue) {
-                    print("Set Notification As Read Value: $onValue");
+                    print("Set Notification as Read Result: $onValue");
                     if (onValue is DataSuccess) {
                       emit(NotificationPageState.readNotificationSuccess());
                     } else if (onValue is UnauthenticatedDataState) {

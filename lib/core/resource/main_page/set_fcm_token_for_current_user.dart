@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../config/app/app_preferences.dart';
@@ -46,13 +47,9 @@ Future<void> setFcmTokenForCurrentUser({
                 .tr(),
             context: context,
             haveButton: true,
-            buttonWidget: Icon(
-              Icons.settings,
-              size: 20,
-              color: Theme.of(context).colorScheme.onPrimary,
-            ),
+            buttonWidget: Icon(Icons.settings, size: 16.w, color: Colors.white),
             onPressed: () {
-              context.pushNamed(RoutesName.settingPage);
+              context.push(RoutesPath.settingPage);
             },
           );
         }

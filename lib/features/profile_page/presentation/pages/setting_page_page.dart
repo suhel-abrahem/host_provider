@@ -108,7 +108,7 @@ class _SettingPagePageState extends State<SettingPagePage> {
                             Helper.getLocaleByName(newLanguage),
                           );
                           getItInstance<AppPreferences>().setLanguage(
-                            languageCode: newLanguage,
+                            languageName: newLanguage,
                           );
                           getItInstance<FirebaseMessagingService>()
                               .updateDeviceLanguage()

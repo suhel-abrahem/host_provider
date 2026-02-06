@@ -1,10 +1,8 @@
 import '../../../../core/data_state/data_state.dart';
 import '../../../../core/usecase/usecase.dart';
 import '../../data/models/signup_model.dart';
-
-import '../repositories/signup_repository.dart';
-
 import '../entities/signup_info_entity.dart';
+import '../repositories/signup_repository.dart';
 
 class SignupUsecase
     implements UseCase<DataState<SignupInfoEntity?>?, SignupModel?> {

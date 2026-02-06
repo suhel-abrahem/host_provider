@@ -38,6 +38,7 @@
     "viaWhatsapp": "بەڕێی واتسئاپ"
   },
   "common": {
+    "tooManysRequestsPleaseTryAgainLater": "زیاتر لە داواکاریەکان. تکایە دووبارە هەوڵبدەرەوە دواتر.",
     "loading": "چاوەڕێ بکە...",
     "error": "هەڵە",
     "notificationTokenErrorPleaseFixItOnSettings": "هەڵەی توکینی ئاگاداری. تکایە لە ڕێکخستنەکاندا چارەسەر بکە!",
@@ -61,7 +62,8 @@
     "unexpectedErrorOccurred": "هەڵەیەکی نەهەڵبژاردوو ڕوودەدات",
     "yourSessionHasExpiredPleaseLoginAgain": "کاتی نیشتەجێبوونت کۆتایی هات. تکایە دووبارە بچۆ ژوورەوە.",
     "ok": "باشە",
-    "tryAgain": "دووبارە هەوڵبدەرەوە"
+    "tryAgain": "دووبارە هەوڵبدەرەوە",
+    "clear": "سڕینەوە"
   },
   "theme": {
     "choose": "مۆدێلێک هەڵبژێرە",
@@ -244,7 +246,8 @@
     "passwordResetSuccessful": "وشەی نهێنی بە سەرکەوتوویی گۆڕدرا",
     "theNewPasswordAndConfirmNewPasswordFieldsDoNotMatch": "وشەی نهێنی نوێ و دووبارەی وشەی نهێنی نوێ یەک ناگرن",
     "identifierIsRequired": "ناسەر پێویستە",
-    "enterTheOtpSentToYourEmail": "کۆدی پشکنین بنووسە کە بۆ ئیمەیڵەکەت نێردرا"
+    "enterTheOtpSentToYourEmail": "کۆدی پشکنین بنووسە کە بۆ ئیمەیڵەکەت نێردرا",
+    "setYourLocation": "شوێنەکەت دیاری بکە"
   },
   "myServicesPage": {
     "title": "شاشەی خزمەتگوزاریەکانم",
@@ -305,7 +308,48 @@
     "noAddress": "هیچ ناونیشانێک نیە",
     "showOnMap": "نیشانبدە لەسەر نەخشە",
     "callClient": "پەیوەندی بکە بە موشتەری",
-    "cantShowMap": "ناتوانرێت نەخشە نیشانبدرێت"
+    "cantShowMap": "ناتوانرێت نەخشە نیشانبدرێت",
+    "availableProviders": "دابینکەرە بەردەستەکان",
+    "providersAvailable": "دابینکەرە بەردەستەکان",
+    "sortProvidersBy": "ڕیزکردنەوەی دابینکەرەکان بە",
+    "distanceNearestToFarthest": "دووری: نزیکترین بۆ دووریترین",
+    "ratingHighToLow": "هەڵسەنگاندن: بەرزترین بۆ نزمترین",
+    "priceLowToHigh": "قیمت: نزمترین بۆ بەرزترین",
+    "bookNow": "ئێستا بکڕە",
+    "describeYourIssue": "مشکلەکەت وەسف بکە",
+    "pleaseDescribeYourIssueInDetail": "تکایە مشکلت بە وردی وەسف بکە",
+    "addAttachments": "زیادکردنی پەیوەندەکان",
+    "next": "دواتر",
+    "schedule": "خشتە",
+    "availableTimes": "کاتە بەردەستەکان",
+    "ConfirmBooking": "پشتڕاستکردنەوەی داواکردن",
+    "bookingConfirmed": "داواکردن پشتڕاست کرا",
+    "addMore": "زیادکردنی زیاتر",
+    "removeAll": "سڕینەوەی هەموو",
+    "chooseFromGallery": "هەڵبژاردنی وێنە لە گەلەری",
+    "takePhoto": "وێنە گرتن",
+    "chooseDay": "ڕۆژ هەڵبژێرە",
+    "maximumOf5ImagesAllowed": "زۆربەی 5 وێنە ڕێگەپێدراوە",
+    "youCanSelectUpTo5Images": "دەتوانیت تا 5 وێنە هەڵبژێریت",
+    "uploading": "لە بارکردندا...",
+    "oneImageOrMoreHasBeenDownGraded": "یەک یان زیاتر لە وێنەکان کەمکراونەوەی کەیفیەت",
+    "sort": {
+      "sortBy": "ڕیزکردنەوە بە",
+      "distance": "دووری",
+      "rating": "هەڵسەنگاندن",
+      "price": "نرخ",
+      "language": "زمان",
+      "city": "شار",
+      "none": "هیچ",
+      "max": "زیاترین",
+      "min": "کەمترین",
+      "ar": "عربی",
+      "en": "انگلیسی",
+      "ku": "کردی",
+      "lat": " عرض جغرافیایی",
+      "lng": "طول جغرافیایی",
+      "setYourLocation": "شوێنەکەت دیاری بکە"
+    }
   },
   "notificationPage": {
     "title": "شاشەی ئاگاداری",
@@ -360,7 +404,7 @@
     "send": "ناردن",
     "sentAImage": "وێنەیەک نارد",
     "you": "تۆ",
-    "maximumOf5ImagesAllowed": "زۆربەی 5 وێنە ڕێگەپێدراوە",
-    "youCanSelectUpTo5Images": "دەتوانیت تا 5 وێنە هەڵبژێریت"
+    "adminReply": " وەڵامی بەڕێوەبەر",
+    "ticketClosed": "تیکەت داخرا"
   }
 }

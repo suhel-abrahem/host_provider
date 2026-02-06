@@ -33,4 +33,8 @@ class ApiConstant {
   static const String resetPasswordEndpoint = "/password/reset";
   static const String verifyOtpResetPasswordEndpoint = "/password/verify-otp";
   static const String resendResetPasswordOtpEndpoint = "/password/resend-otp";
+  static const String getUnreadNotificationCountEndpoint =
+      "/notifications/unread-count";
+  static const String getUnreadMessageCountEndpoint = "/chat/unread-count";
+  static const String getUnreadTicketCountEndpoint = "/support/unread-count";
 }

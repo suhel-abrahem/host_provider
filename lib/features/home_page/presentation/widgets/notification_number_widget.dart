@@ -3,19 +3,22 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import '/core/resource/rst_stream/rst_stream.dart';
 import '../../../../core/enums/count_type_enum.dart';
 import '/core/constants/font_constants.dart';
 
 class BuildWithSocketStream extends StatefulWidget {
   final ValueChanged<int>? onValueChanged;
   final Stream? stream;
+  final String? lastNotificationCount;
   final CountTypeEnum? countType;
+  final bool? isLoading;
   const BuildWithSocketStream({
     super.key,
     this.onValueChanged,
     this.stream,
     this.countType = CountTypeEnum.notification,
+    this.isLoading = false,
+    this.lastNotificationCount,
   });
 
   @override
@@ -23,8 +26,10 @@ class BuildWithSocketStream extends StatefulWidget {
 }
 
 class _BuildWithSocketStreamState extends State<BuildWithSocketStream> {
+  String? lastNotificationCount;
   @override
   void initState() {
+    lastNotificationCount = widget.lastNotificationCount;
     super.initState();
   }
 
@@ -41,9 +46,9 @@ class _BuildWithSocketStreamState extends State<BuildWithSocketStream> {
           value = lastNotificationCount ?? "0";
         } else {
           if (snapshot.data != null) {
-            lastChatUnReadCount = snapshot.data?.toString();
+            lastNotificationCount = snapshot.data?.toString();
           }
-          value = lastChatUnReadCount ?? "0";
+          value = lastNotificationCount ?? "0";
         }
 
         widget.onValueChanged?.call(int.tryParse(value) ?? 0);
@@ -62,7 +67,7 @@ class _BuildWithSocketStreamState extends State<BuildWithSocketStream> {
                   : Colors.red,
               borderRadius: BorderRadius.circular(30.r),
             ),
-            child: snapshot.connectionState == ConnectionState.waiting
+            child: widget.isLoading == true
                 ? CircularProgressIndicator(color: Colors.white)
                 : Center(
                     child: FittedBox(

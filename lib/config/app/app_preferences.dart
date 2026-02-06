@@ -11,10 +11,10 @@ class AppPreferences {
   late final SharedPreferences _sharedPreferences;
   AppPreferences(SharedPreferences sharedPreferences)
     : _sharedPreferences = sharedPreferences;
-  setLanguage({String? languageCode}) {
+  setLanguage({String? languageName}) {
     _sharedPreferences.setString(
       SharedPreferencesKeys.appLanguageKey,
-      languageCode ?? LanguageConstant.en,
+      languageName ?? LanguageConstant.en,
     );
   }
 

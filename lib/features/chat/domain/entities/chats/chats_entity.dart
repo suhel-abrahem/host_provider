@@ -17,6 +17,7 @@ abstract class ChatsEntity with _$ChatsEntity {
     @Default({}) Map<String, dynamic>? last_message,
     @Default("") String? last_message_at,
     @Default(0) int? unread_count,
+    @Default("") String? status,
   }) = _ChatsEntity;
 
   factory ChatsEntity.fromJson(Map<String, dynamic> json) =>
