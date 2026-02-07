@@ -103,95 +103,6 @@ class _MainPageState extends State<MainPage> {
     }
   }
 
-  Future<void> getMessage() async {
-    try {
-      FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-        if (mounted) {
-          message.data["type"].toString().contains("booking")
-              ? context.pushNamed(
-                  RoutesName.serviceInfoPage,
-                  pathParameters: {
-                    "serviceId": message.data["booking_id"].toString(),
-                    "isComplete":
-                        message.data["type"].toString() == "booking_completed"
-                        ? "true"
-                        : "false",
-                  },
-                )
-              : message.data["type"].toString().contains("support_admin_reply")
-              ? context.pushNamed(
-                  RoutesName.ticketPage,
-                  pathParameters: {
-                    "ticketId": message.data["ticket_id"] ?? "",
-                    "canSend": "true",
-                  },
-                )
-              : context.pushNamed(
-                  RoutesName.chatPage,
-                  pathParameters: {
-                    "bookingNumber": message.data["booking_number"] ?? "",
-                    "chatId": message.data["conversationId"] ?? "",
-                  },
-                );
-        }
-      });
-    } catch (e) {
-      if (mounted) {
-        showMessage(
-          message: LocaleKeys.common_someThingWentWrongWhileShowNotification
-              .tr(),
-          context: context,
-        );
-      }
-    }
-    try {
-      RemoteMessage? initialMessage = await FirebaseMessaging.instance
-          .getInitialMessage();
-      if (initialMessage != null) {
-        if (mounted) {
-          initialMessage.data["type"].toString().contains("booking")
-              ? context.pushNamed(
-                  RoutesName.serviceInfoPage,
-                  pathParameters: {
-                    "serviceId": initialMessage.data["booking_id"].toString(),
-                    "isComplete":
-                        initialMessage.data["type"].toString() ==
-                            "booking_completed"
-                        ? "true"
-                        : "false",
-                  },
-                )
-              : initialMessage.data["type"].toString().contains(
-                  "support_admin_reply",
-                )
-              ? context.pushNamed(
-                  RoutesName.ticketPage,
-                  pathParameters: {
-                    "ticketId": initialMessage.data["ticket_id"] ?? "",
-                    "canSend": "true",
-                  },
-                )
-              : context.pushNamed(
-                  RoutesName.chatPage,
-                  pathParameters: {
-                    "bookingNumber":
-                        initialMessage.data["booking_number"] ?? "",
-                    "chatId": initialMessage.data["conversationId"] ?? "",
-                  },
-                );
-        }
-      }
-    } catch (e) {
-      if (mounted) {
-        showMessage(
-          message: LocaleKeys.common_someThingWentWrongWhileShowNotification
-              .tr(),
-          context: context,
-        );
-      }
-    }
-  }
-
   Future<void> onTokenRefresh() async {
     FirebaseMessaging.instance.onTokenRefresh.listen((newToken) async {
       final LoginStateEntity? loginState = getItInstance<AppPreferences>()
@@ -241,7 +152,6 @@ class _MainPageState extends State<MainPage> {
 
     setFcmTokenForCurrentUser(context: context);
     onTokenRefresh();
-    getMessage();
   }
 
   @override

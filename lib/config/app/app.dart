@@ -3,16 +3,14 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../core/resource/main_page/fcm_notification.dart';
 import '/core/util/helper/helper.dart';
 
 import '../../core/constants/language_constant.dart';
 import '../../core/dependencies_injection.dart';
-import '../../core/resource/main_page/booking_notification_widget.dart';
-import '../../core/resource/main_page/main_page.dart';
-import '../../core/resource/rst_stream/add_notification_function.dart';
-import '../../core/resource/rst_stream/message_notification_service.dart';
+
 import '../../core/resource/rst_stream/notification_service.dart';
-import '../../core/resource/rst_stream/rst_stream.dart';
+
 import '../../generated/locale_keys.g.dart';
 import '../route/routes_manager.dart';
 import '../theme/app_theme.dart';
@@ -31,6 +29,7 @@ class _HostaProviderState extends State<HostaProvider> {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) {
       NotificationService().init();
+      FcmNotification().initialize();
       // MessageNotificationService().init(
       //   onMessage: (data) {
       //     if (!mounted) return;
