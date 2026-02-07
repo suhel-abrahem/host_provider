@@ -10,8 +10,8 @@ import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'package:go_router/go_router.dart';
+import '/core/resource/rst_stream/rst_stream.dart';
 
-import '../rst_stream/rst_stream.dart';
 import '/core/resource/main_page/booking_notification_widget.dart';
 import '/core/resource/main_page/message_notification_widget.dart';
 
@@ -118,6 +118,14 @@ class _MainPageState extends State<MainPage> {
                         : "false",
                   },
                 )
+              : message.data["type"].toString().contains("support_admin_reply")
+              ? context.pushNamed(
+                  RoutesName.ticketPage,
+                  pathParameters: {
+                    "ticketId": message.data["ticket_id"] ?? "",
+                    "canSend": "true",
+                  },
+                )
               : context.pushNamed(
                   RoutesName.chatPage,
                   pathParameters: {
@@ -151,6 +159,16 @@ class _MainPageState extends State<MainPage> {
                             "booking_completed"
                         ? "true"
                         : "false",
+                  },
+                )
+              : initialMessage.data["type"].toString().contains(
+                  "support_admin_reply",
+                )
+              ? context.pushNamed(
+                  RoutesName.ticketPage,
+                  pathParameters: {
+                    "ticketId": initialMessage.data["ticket_id"] ?? "",
+                    "canSend": "true",
                   },
                 )
               : context.pushNamed(

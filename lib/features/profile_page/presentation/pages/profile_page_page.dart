@@ -14,6 +14,7 @@ import '../../../../core/resource/common_state_widget/unAuth_state_widget.dart';
 import '../../../../core/resource/custom_widget/snake_bar_widget/snake_bar_widget.dart';
 import '../../../../core/resource/main_page/main_page.dart';
 import '../../../../core/util/helper/helper.dart';
+import '../../../home_page/presentation/bloc/unread_count_bloc.dart';
 import '../../../login_page/domain/entities/login_state_entity.dart';
 import '../widgets/user_info_container_widget.dart';
 
@@ -287,158 +288,268 @@ class _ProfilePagePageState extends State<ProfilePagePage> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.w),
-              child: ElevatedButton(
-                onPressed: () async {
-                  await showDialog(
-                    context: context,
-                    builder: (context) => Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Container(
-                        height: 150.h,
-                        width: double.infinity,
-                        padding: EdgeInsets.symmetric(
-                          horizontal: 16.w,
-                          vertical: 16.h,
-                        ),
-                        decoration: BoxDecoration(
-                          color: Theme.of(context).scaffoldBackgroundColor,
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(16.r),
-                            topRight: Radius.circular(16.r),
+              padding: EdgeInsetsDirectional.only(end: 20.w, start: 10.w),
+              child: SizedBox(
+                height: 100.h,
+                width: 300.w,
+                child: Stack(
+                  children: [
+                    PositionedDirectional(
+                      top: 15.h,
+                      start: 10.w,
+                      end: 0,
+                      bottom: 0,
+                      child: SizedBox(
+                        child: Center(
+                          child: ElevatedButton(
+                            onPressed: () async {
+                              await showDialog(
+                                context: context,
+                                builder: (context) => Align(
+                                  alignment: Alignment.bottomCenter,
+                                  child: Container(
+                                    height: 150.h,
+                                    width: double.infinity,
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: 16.w,
+                                      vertical: 16.h,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: Theme.of(
+                                        context,
+                                      ).scaffoldBackgroundColor,
+                                      borderRadius: BorderRadius.only(
+                                        topLeft: Radius.circular(16.r),
+                                        topRight: Radius.circular(16.r),
+                                      ),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Theme.of(context).shadowColor,
+                                          blurRadius: 2.r,
+                                          offset: Offset(-1, -2.h),
+                                        ),
+                                      ],
+                                    ),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceAround,
+                                      children: [
+                                        TextButton(
+                                          onPressed: () {
+                                            context.pop();
+                                            context.pushNamed(
+                                              RoutesName.ticketsPage,
+                                            );
+                                          },
+
+                                          child: Text(
+                                            LocaleKeys.profilePage_viewMyTickets
+                                                .tr(),
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .labelLarge
+                                                ?.copyWith(
+                                                  fontFamily:
+                                                      FontConstants.fontFamily(
+                                                        context.locale,
+                                                      ),
+                                                ),
+                                          ),
+                                        ),
+
+                                        TextButton(
+                                          onPressed: () {
+                                            context.pop();
+                                            context.pushNamed(
+                                              RoutesName.createTicketPage,
+                                            );
+                                          },
+                                          child: Text(
+                                            LocaleKeys
+                                                .profilePage_contactAsForAssistance
+                                                .tr(),
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .labelLarge
+                                                ?.copyWith(
+                                                  fontFamily:
+                                                      FontConstants.fontFamily(
+                                                        context.locale,
+                                                      ),
+                                                ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                            style: Theme.of(context).elevatedButtonTheme.style
+                                ?.copyWith(
+                                  backgroundColor: WidgetStatePropertyAll(
+                                    Colors.transparent,
+                                  ),
+                                  shadowColor: WidgetStatePropertyAll(
+                                    Colors.transparent,
+                                  ),
+                                  padding: WidgetStatePropertyAll(
+                                    EdgeInsets.zero,
+                                  ),
+                                ),
+                            child:
+                                Container(
+                                  padding: EdgeInsets.symmetric(
+                                    vertical: 16.h,
+                                    horizontal: 16.w,
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Container(
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: 4.w,
+                                          vertical: 4.h,
+                                        ),
+                                        child: Icon(
+                                          Icons.help_outline,
+                                          color: Theme.of(
+                                            context,
+                                          ).textTheme.labelLarge?.color,
+                                          size: 24.r,
+                                        ),
+                                      ).asGlass(
+                                        frosted: true,
+                                        blurX: 28,
+                                        blurY: 28,
+                                        tintColor: Theme.of(context)
+                                            .colorScheme
+                                            .primary
+                                            .withValues(alpha: 1.0),
+                                        clipBorderRadius: BorderRadius.circular(
+                                          12.r,
+                                        ),
+                                        border: Theme.of(
+                                          context,
+                                        ).defaultBorderSide,
+                                      ),
+                                      SizedBox(
+                                        width: 220.w,
+                                        child: Column(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                              LocaleKeys
+                                                  .profilePage_helpAndSupport
+                                                  .tr(),
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .labelLarge
+                                                  ?.copyWith(
+                                                    fontFamily:
+                                                        FontConstants.fontFamily(
+                                                          context.locale,
+                                                        ),
+                                                  ),
+                                            ),
+                                            Text(
+                                              LocaleKeys
+                                                  .profilePage_contactAsForAssistance
+                                                  .tr(),
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .labelSmall
+                                                  ?.copyWith(
+                                                    fontFamily:
+                                                        FontConstants.fontFamily(
+                                                          context.locale,
+                                                        ),
+                                                  ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                      Icon(
+                                        Icons.arrow_forward_ios,
+                                        color: Theme.of(
+                                          context,
+                                        ).iconTheme.color,
+                                        size: 16.r,
+                                      ),
+                                    ],
+                                  ),
+                                ).asGlass(
+                                  frosted: true,
+                                  blurX: 8,
+                                  blurY: 8,
+                                  tintColor: Theme.of(
+                                    context,
+                                  ).colorScheme.primary.withValues(alpha: 1.0),
+                                  clipBorderRadius: BorderRadius.circular(12.r),
+                                  border: Theme.of(context).defaultBorderSide,
+                                ),
                           ),
-                          boxShadow: [
-                            BoxShadow(
-                              color: Theme.of(context).shadowColor,
-                              blurRadius: 2.r,
-                              offset: Offset(-1, -2.h),
-                            ),
-                          ],
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            TextButton(
-                              onPressed: () {
-                                context.pop();
-                                context.pushNamed(RoutesName.ticketsPage);
-                              },
-
-                              child: Text(
-                                LocaleKeys.profilePage_viewMyTickets.tr(),
-                                style: Theme.of(context).textTheme.labelLarge
-                                    ?.copyWith(
-                                      fontFamily: FontConstants.fontFamily(
-                                        context.locale,
-                                      ),
-                                    ),
-                              ),
-                            ),
-
-                            TextButton(
-                              onPressed: () {
-                                context.pop();
-                                context.pushNamed(RoutesName.createTicketPage);
-                              },
-                              child: Text(
-                                LocaleKeys.profilePage_contactAsForAssistance
-                                    .tr(),
-                                style: Theme.of(context).textTheme.labelLarge
-                                    ?.copyWith(
-                                      fontFamily: FontConstants.fontFamily(
-                                        context.locale,
-                                      ),
-                                    ),
-                              ),
-                            ),
-                          ],
                         ),
                       ),
                     ),
-                  );
-                },
-                style: Theme.of(context).elevatedButtonTheme.style?.copyWith(
-                  backgroundColor: WidgetStatePropertyAll(Colors.transparent),
-                  shadowColor: WidgetStatePropertyAll(Colors.transparent),
-                  padding: WidgetStatePropertyAll(EdgeInsets.zero),
+                    PositionedDirectional(
+                      top: 0.h,
+                      start: 0.w,
+
+                      child: BlocProvider(
+                        create: (context) =>
+                            getItInstance<UnreadCountBloc>()
+                              ..add(UnreadCountEvent.getTicketUnreadCount()),
+                        child: BlocBuilder<UnreadCountBloc, UnreadCountState>(
+                          builder: (context, state) {
+                            if (state
+                                is UnreadCountStateTicketUnreadCountLoaded) {
+                              if ((state.count ?? 0) > 0) {
+                                return Container(
+                                  constraints: BoxConstraints(
+                                    minWidth: 12.w,
+                                    minHeight: 12.h,
+                                    maxHeight: 30.h,
+                                    maxWidth: 30.w,
+                                  ),
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: 2.w,
+                                    vertical: 2.h,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: Colors.red,
+                                    shape: BoxShape.circle,
+                                  ),
+                                  child: Center(
+                                    child: Text(
+                                      state.count.toString(),
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .labelLarge
+                                          ?.copyWith(
+                                            color: Colors.white,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                    ),
+                                  ),
+                                );
+                              } else {
+                                return SizedBox.shrink();
+                              }
+                            }
+                            return SizedBox.shrink();
+                          },
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-                child:
-                    Container(
-                      padding: EdgeInsets.symmetric(
-                        vertical: 16.h,
-                        horizontal: 16.w,
-                      ),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 4.w,
-                              vertical: 4.h,
-                            ),
-                            child: Icon(
-                              Icons.help_outline,
-                              color: Theme.of(
-                                context,
-                              ).textTheme.labelLarge?.color,
-                              size: 24.r,
-                            ),
-                          ).asGlass(
-                            frosted: true,
-                            blurX: 28,
-                            blurY: 28,
-                            tintColor: Theme.of(
-                              context,
-                            ).colorScheme.primary.withValues(alpha: 1.0),
-                            clipBorderRadius: BorderRadius.circular(12.r),
-                            border: Theme.of(context).defaultBorderSide,
-                          ),
-                          SizedBox(
-                            width: 220.w,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  LocaleKeys.profilePage_helpAndSupport.tr(),
-                                  style: Theme.of(context).textTheme.labelLarge
-                                      ?.copyWith(
-                                        fontFamily: FontConstants.fontFamily(
-                                          context.locale,
-                                        ),
-                                      ),
-                                ),
-                                Text(
-                                  LocaleKeys.profilePage_contactAsForAssistance
-                                      .tr(),
-                                  style: Theme.of(context).textTheme.labelSmall
-                                      ?.copyWith(
-                                        fontFamily: FontConstants.fontFamily(
-                                          context.locale,
-                                        ),
-                                      ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Icon(
-                            Icons.arrow_forward_ios,
-                            color: Theme.of(context).iconTheme.color,
-                            size: 16.r,
-                          ),
-                        ],
-                      ),
-                    ).asGlass(
-                      frosted: true,
-                      blurX: 8,
-                      blurY: 8,
-                      tintColor: Theme.of(
-                        context,
-                      ).colorScheme.primary.withValues(alpha: 1.0),
-                      clipBorderRadius: BorderRadius.circular(12.r),
-                      border: Theme.of(context).defaultBorderSide,
-                    ),
               ),
             ),
             Padding(

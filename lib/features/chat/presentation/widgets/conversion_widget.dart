@@ -63,7 +63,7 @@ class ConversionWidget extends StatelessWidget {
               ? Theme.of(context).primaryColor.withValues(alpha: 0.3)
               : Theme.of(context).scaffoldBackgroundColor,
         ),
-        padding: EdgeInsets.symmetric(vertical: 8.h, horizontal: 8.w),
+        padding: EdgeInsets.symmetric(vertical: 12.h, horizontal: 12.w),
         child: Row(
           children: [
             Padding(
@@ -91,65 +91,75 @@ class ConversionWidget extends StatelessWidget {
               ),
             ),
 
-            SizedBox(
-              width: 270.w,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    bookingNumber ?? "",
-                    style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                      fontFamily: FontConstants.fontFamily(context.locale),
-                    ),
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  Row(
-                    children: [
-                      Text(
-                        (messageEntity?.me ?? false)
-                            ? "${LocaleKeys.chatsPage_you.tr()}: "
-                            : "${otherParticipantEntity?.name ?? ""}: ",
-                        style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                          fontFamily: FontConstants.fontFamily(context.locale),
-                          fontWeight: FontWeight.bold,
-                        ),
-                        overflow: TextOverflow.ellipsis,
+            Expanded(
+              child: Padding(
+                padding: EdgeInsetsDirectional.only(end: 12.w),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      bookingNumber ?? "",
+                      style: Theme.of(context).textTheme.labelLarge?.copyWith(
+                        fontFamily: FontConstants.fontFamily(context.locale),
                       ),
-                      if (messageEntity?.message_type == "image")
-                        Text(
-                          "${LocaleKeys.chatsPage_sentAImage.tr()}. 📷",
-                          style: Theme.of(context).textTheme.labelSmall
-                              ?.copyWith(
-                                fontFamily: FontConstants.fontFamily(
-                                  context.locale,
-                                ),
-                              ),
-                          overflow: TextOverflow.ellipsis,
-                        )
-                      else
-                        SizedBox(
-                          width: 200.w,
-                          child: Text(
-                            messageEntity?.content != null &&
-                                    messageEntity!.content!.isNotEmpty
-                                ? messageEntity?.content?.last ??
-                                      LocaleKeys.chatsPage_noMesagesYet.tr()
-                                : LocaleKeys.chatsPage_noMesagesYet.tr(),
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Flexible(
+                          child: FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: Text(
+                              (messageEntity?.me ?? false)
+                                  ? "${LocaleKeys.chatsPage_you.tr()}: "
+                                  : "${otherParticipantEntity?.name ?? ""}: ",
+                              style: Theme.of(context).textTheme.labelLarge
+                                  ?.copyWith(
+                                    fontFamily: FontConstants.fontFamily(
+                                      context.locale,
+                                    ),
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                            ),
+                          ),
+                        ),
+                        if (messageEntity?.message_type == "image")
+                          Text(
+                            "${LocaleKeys.chatsPage_sentAImage.tr()}. 📷",
                             style: Theme.of(context).textTheme.labelSmall
                                 ?.copyWith(
                                   fontFamily: FontConstants.fontFamily(
                                     context.locale,
                                   ),
-                                  fontWeight: messageEntity?.is_read == false
-                                      ? FontWeight.bold
-                                      : FontWeight.normal,
                                 ),
                             overflow: TextOverflow.ellipsis,
+                          )
+                        else
+                          Flexible(
+                            child: Text(
+                              messageEntity?.content != null &&
+                                      messageEntity!.content!.isNotEmpty
+                                  ? messageEntity?.content?.last ??
+                                        LocaleKeys.chatsPage_noMesagesYet.tr()
+                                  : LocaleKeys.chatsPage_noMesagesYet.tr(),
+                              style: Theme.of(context).textTheme.labelSmall
+                                  ?.copyWith(
+                                    fontFamily: FontConstants.fontFamily(
+                                      context.locale,
+                                    ),
+
+                                    fontWeight: messageEntity?.is_read == false
+                                        ? FontWeight.bold
+                                        : FontWeight.normal,
+                                  ),
+                              overflow: TextOverflow.ellipsis,
+                            ),
                           ),
-                        ),
-                    ],
-                  ),
-                ],
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
             Visibility(

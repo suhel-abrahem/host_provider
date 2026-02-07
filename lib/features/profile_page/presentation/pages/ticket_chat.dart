@@ -10,9 +10,9 @@ import '/features/profile_page/presentation/widgets/help/ticket_send_container.d
 import '../../../../core/resource/custom_widget/snake_bar_widget/snake_bar_widget.dart';
 import '../../../../core/util/helper/helper.dart';
 import '../../../chat/domain/entities/message/message_entity.dart';
-
+import '../../../chat/presentation/widgets/message_container.dart';
 import '../../data/models/help/get_tickets_model.dart';
-
+import '../../domain/entities/help/ticket_entity.dart';
 import '../../domain/entities/help/tickets_entity.dart';
 import '/features/login_page/domain/entities/login_state_entity.dart';
 import '../../../../config/app/app_preferences.dart';
@@ -26,6 +26,7 @@ import '/core/dependencies_injection.dart';
 
 import '/core/resource/main_page/main_page.dart';
 
+import '/features/chat/presentation/bloc/get_chat_bloc.dart';
 import '/features/chat/presentation/widgets/send_message_field.dart';
 
 import '../../../../core/resource/rst_stream/rst_stream.dart';
@@ -38,7 +39,7 @@ class TicketChatPage extends StatefulWidget {
     super.key,
     this.bookingNumber,
     this.chatId,
-    this.canSend,
+    this.canSend = true,
   });
 
   @override
@@ -77,7 +78,7 @@ class _TicketChatPageState extends State<TicketChatPage> {
   Widget build(BuildContext context) {
     model = model?.copyWith(accepted_language: Helper.getCountryCode(context));
     return MainPage(
-      title: widget.bookingNumber,
+      title: widget.chatId?.toString() ?? widget.bookingNumber,
       body: Column(
         children: [
           Expanded(

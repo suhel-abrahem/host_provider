@@ -51,32 +51,52 @@ class ServiceInfoWidget extends StatelessWidget {
             ],
           ),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "${LocaleKeys.serviceDetailsPage_service.tr()}:",
-                    style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                      fontFamily: FontConstants.fontFamily(context.locale),
-                    ),
+              Expanded(
+                child: Padding(
+                  padding: EdgeInsetsDirectional.only(end: 16.w),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: Text(
+                          "${LocaleKeys.serviceDetailsPage_service.tr()}:",
+                          style: Theme.of(context).textTheme.labelMedium
+                              ?.copyWith(
+                                fontFamily: FontConstants.fontFamily(
+                                  context.locale,
+                                ),
+                              ),
+                        ),
+                      ),
+                      FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child: Text(
+                          bookingEntity?.service?["name"] ?? "",
+                          style: Theme.of(context).textTheme.labelMedium
+                              ?.copyWith(
+                                fontFamily: FontConstants.fontFamily(
+                                  context.locale,
+                                ),
+                              ),
+                        ),
+                      ),
+                    ],
                   ),
-                  Text(
-                    bookingEntity?.service?["name"] ?? "",
-                    style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                      fontFamily: FontConstants.fontFamily(context.locale),
-                    ),
-                  ),
-                ],
+                ),
               ),
-              FittedBox(
-                fit: BoxFit.scaleDown,
-                child: Text(
-                  "${bookingEntity?.total_price ?? 0} ${LocaleKeys.myServicesPage_iqd.tr()}",
-                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                    fontFamily: FontConstants.fontFamily(context.locale),
+              SizedBox(
+                width: 80.w,
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: Text(
+                    "${bookingEntity?.total_price ?? 0} ${LocaleKeys.myServicesPage_iqd.tr()}",
+                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                      fontFamily: FontConstants.fontFamily(context.locale),
+                    ),
                   ),
                 ),
               ),
