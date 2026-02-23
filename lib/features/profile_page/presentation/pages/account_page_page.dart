@@ -1503,8 +1503,8 @@ class _AccountPagePageState extends State<AccountPagePage> {
               padding: EdgeInsets.only(
                 top: 0.h,
                 bottom: 20.h,
-                left: 20.w,
-                right: 20.w,
+                left: 12.w,
+                right: 12.w,
               ),
               child: BlocProvider<GetWorkingTimeBloc>(
                 create: (context) => getItInstance<GetWorkingTimeBloc>()
@@ -1516,6 +1516,7 @@ class _AccountPagePageState extends State<AccountPagePage> {
                 child:
                     BlocListener<GetWorkingTimeBloc, GetWorkingTimeState>(
                       listener: (context, state) {
+                        print("GetWorkingTimeState: $state");
                         state.when(
                           initial: () {},
                           loading: () {},
@@ -1570,8 +1571,8 @@ class _AccountPagePageState extends State<AccountPagePage> {
                       },
                       child: Container(
                         padding: EdgeInsetsGeometry.symmetric(
-                          horizontal: 16.w,
-                          vertical: 16.h,
+                          horizontal: 8.w,
+                          vertical: 8.h,
                         ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -1641,7 +1642,7 @@ class _AccountPagePageState extends State<AccountPagePage> {
                                         fit: BoxFit.scaleDown,
                                         child: Icon(
                                           Icons.edit_outlined,
-                                          size: 20.sp,
+                                          size: 25.sp,
                                           color: Theme.of(
                                             context,
                                           ).textTheme.labelLarge?.color,

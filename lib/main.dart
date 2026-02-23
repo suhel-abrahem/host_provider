@@ -64,8 +64,9 @@ void main() async {
       supportedLocales: LanguageConstant.supportedLocales,
       path: LanguageConstant.path,
       saveLocale: true,
-      startLocale: Helper.getLocaleByCode(
-        getItInstance<AppPreferences>().getLanguage() ?? LanguageConstant.en,
+      startLocale: Helper.getLocaleByName(
+        getItInstance<AppPreferences>().getLanguage() ??
+            LanguageConstant.arName,
       ),
       fallbackLocale: LanguageConstant.arLoacle,
       child: HostaProvider(),

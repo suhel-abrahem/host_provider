@@ -2,14 +2,15 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:glass/glass.dart';
+
 import '../../../../config/theme/app_theme.dart';
 import '../../../../core/constants/font_constants.dart';
 import '../../../../core/resource/custom_widget/custom_input_field/custom_input_field.dart';
+import '../../../../core/resource/validator.dart';
 import '../../../../core/util/helper/helper.dart';
+import '../../../../generated/locale_keys.g.dart';
 import '../../data/models/working_time_model.dart';
 import '../../domain/entities/working_hours_entity.dart';
-
-import '../../../../generated/locale_keys.g.dart';
 
 class DayContainerWidget extends StatefulWidget {
   final WorkingHoursEntity? workingHoursEntity;
@@ -29,7 +30,7 @@ class DayContainerWidget extends StatefulWidget {
 
 class _DayContainerWidgetState extends State<DayContainerWidget> {
   late WorkingTimeModel workingHoursModel;
-
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   @override
   void initState() {
     super.initState();
@@ -55,12 +56,13 @@ class _DayContainerWidgetState extends State<DayContainerWidget> {
           Helper.getDayById(widget.workingHoursEntity?.day_of_week)?.tr() ?? '',
           style: theme.textTheme.labelSmall?.copyWith(
             fontFamily: FontConstants.fontFamily(locale),
+            fontSize: 12.sp,
           ),
         ),
         AnimatedContainer(
           duration: const Duration(milliseconds: 300),
-          height: canEdit ? 100.h : 58.h,
-          padding: EdgeInsets.symmetric(horizontal: 16.w),
+          height: canEdit ? 150.h : 90.h,
+          padding: EdgeInsets.symmetric(horizontal: 8.w),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
@@ -82,7 +84,7 @@ class _DayContainerWidgetState extends State<DayContainerWidget> {
                             is_available: !value,
                           );
                           if (widget.onChanged != null) {
-                            widget.onChanged!(workingHoursModel);
+                            widget.onChanged?.call(workingHoursModel);
                           }
                         }),
                       ),
@@ -92,38 +94,49 @@ class _DayContainerWidgetState extends State<DayContainerWidget> {
               AnimatedSwitcher(
                 duration: const Duration(milliseconds: 400),
                 child: (workingHoursModel.is_available ?? false)
-                    ? Row(
-                        key: ValueKey(
-                          'available_${workingHoursModel.day_of_week}',
-                        ),
-                        children: [
-                          _buildTimeField(
-                            context,
-                            workingHoursModel.start_time,
-                            locale,
-                            (value) {
-                              if (widget.onChanged != null) {
-                                widget.onChanged!(workingHoursModel);
-                              }
-                            },
+                    ? Form(
+                        key: formKey,
+                        autovalidateMode: AutovalidateMode.onUserInteraction,
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          key: ValueKey(
+                            'available_${workingHoursModel.day_of_week}',
                           ),
-                          Text(
-                            ' - ',
-                            style: theme.textTheme.labelLarge?.copyWith(
-                              fontFamily: FontConstants.fontFamily(locale),
+                          children: [
+                            _buildTimeField(
+                              context,
+                              workingHoursModel.start_time,
+                              locale,
+                              (value) {
+                                workingHoursModel = workingHoursModel.copyWith(
+                                  start_time: value,
+                                );
+                                if (widget.onChanged != null) {
+                                  widget.onChanged!(workingHoursModel);
+                                }
+                              },
                             ),
-                          ),
-                          _buildTimeField(
-                            context,
-                            workingHoursModel.end_time,
-                            locale,
-                            (value) {
-                              if (widget.onChanged != null) {
-                                widget.onChanged!(workingHoursModel);
-                              }
-                            },
-                          ),
-                        ],
+                            Text(
+                              ' - ',
+                              style: theme.textTheme.labelLarge?.copyWith(
+                                fontFamily: FontConstants.fontFamily(locale),
+                              ),
+                            ),
+                            _buildTimeField(
+                              context,
+                              workingHoursModel.end_time,
+                              locale,
+                              (value) {
+                                workingHoursModel = workingHoursModel.copyWith(
+                                  end_time: value,
+                                );
+                                if (widget.onChanged != null) {
+                                  widget.onChanged!(workingHoursModel);
+                                }
+                              },
+                            ),
+                          ],
+                        ),
                       )
                     : Center(
                         key: ValueKey(
@@ -170,13 +183,23 @@ class _DayContainerWidgetState extends State<DayContainerWidget> {
     }
 
     return CustomInputField(
-      width: 62.w,
-      height: 25.h,
+      hintText: "hh:mm",
+      width: 100.w,
+      height: 50.h,
       style: theme.textTheme.labelSmall?.copyWith(
         fontFamily: FontConstants.fontFamily(locale),
+        fontSize: 12.sp,
       ),
-      contentPadding: EdgeInsets.symmetric(horizontal: 4.w),
+      contentPadding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 0.h),
       initialValue: formattedTime,
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return '*';
+        } else if (!RegExp(Validator.timeRegex).hasMatch(value)) {
+          return 'Invalid time';
+        }
+        return null;
+      },
       onChanged: onChanged,
     );
   }

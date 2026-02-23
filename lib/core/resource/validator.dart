@@ -8,4 +8,5 @@ class Validator {
       r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[.,!@#])[a-zA-Z0-9.,!@#]{4,}$';
   static const String numberRegex = r'^[0-9]';
   static const String stringRegex = r'^[a-zA-z]';
+  static const String timeRegex = r'^([01]\d|2[0-3]):([0-5]\d)$';
 }

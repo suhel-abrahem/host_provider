@@ -149,8 +149,9 @@ class _MainPageState extends State<MainPage> {
         addNotification(data);
       }
     });
+    // ToDO: remove the comment and test the setFcmTokenForCurrentUser function after implementing it
+    // setFcmTokenForCurrentUser(context: context);
 
-    setFcmTokenForCurrentUser(context: context);
     onTokenRefresh();
   }
 

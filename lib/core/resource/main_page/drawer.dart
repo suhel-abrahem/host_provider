@@ -187,11 +187,11 @@ class _CustomDrawerState extends State<CustomDrawer> {
           ),
 
           DrawerButtonWidget(
-            selected: currentPath?.endsWith(RoutesPath.categoriesPage),
-            title: LocaleKeys.categoriesPage_title.tr(),
+            selected: currentPath?.endsWith(RoutesPath.myServicesPage),
+            title: LocaleKeys.myServicesPage_title.tr(),
             icon: Icons.category,
             onPressed: () {
-              context.push(RoutesPath.categoriesPage);
+              context.push(RoutesPath.myServicesPage);
             },
           ),
           DrawerButtonWidget(
@@ -210,14 +210,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
               context.push(RoutesPath.profilePage);
             },
           ),
-          DrawerButtonWidget(
-            selected: currentPath?.endsWith(RoutesPath.profilePage),
-            title: LocaleKeys.profilePage_title.tr(),
-            icon: Icons.favorite,
-            onPressed: () {
-              context.push(RoutesPath.profilePage);
-            },
-          ),
+
           Padding(
             padding: EdgeInsets.only(bottom: 8.h),
             child: Divider(

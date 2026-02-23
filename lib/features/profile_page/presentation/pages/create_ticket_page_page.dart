@@ -108,6 +108,9 @@ class _TicketCreationPageState extends State<TicketCreationPage> {
                                 ),
                               );
                             });
+                            if (context.mounted && context.canPop()) {
+                              context.pop();
+                            }
                           },
                           sessionExpired: () async {
                             showMessage(

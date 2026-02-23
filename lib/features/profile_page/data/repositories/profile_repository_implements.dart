@@ -201,12 +201,20 @@ class ProfileRepositoryImplements implements ProfileRepository {
           workingTimeData.add({
             "day_of_week": workingTime.day_of_week,
             "is_available": workingTime.is_available,
-            "start_time": DateFormat(
-              'HH:mm',
-            ).format(DateFormat('HH:mm').parse(workingTime.start_time ?? "")),
-            "end_time": DateFormat(
-              'HH:mm',
-            ).format(DateFormat('HH:mm').parse(workingTime.end_time ?? "")),
+            "start_time": workingTime.is_available == false
+                ? "08:00"
+                : DateFormat('HH:mm')
+                      .format(
+                        DateFormat('HH:mm').parse(workingTime.start_time ?? ""),
+                      )
+                      .toString(),
+            "end_time": workingTime.is_available == false
+                ? "17:00"
+                : DateFormat('HH:mm')
+                      .format(
+                        DateFormat('HH:mm').parse(workingTime.end_time ?? ""),
+                      )
+                      .toString(),
           });
         }
       }
