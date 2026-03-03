@@ -3,8 +3,11 @@ import 'dart:io';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_image_compress/flutter_image_compress.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import 'package:path_provider/path_provider.dart';
 
 import '/core/resource/custom_widget/custom_input_field/custom_input_field.dart';
 import '/core/resource/custom_widget/snake_bar_widget/snake_bar_widget.dart';
@@ -36,16 +39,21 @@ class _SendMessageFieldState extends State<SendMessageField> {
     if ((images?.length ?? 0) <= 4) {
       final imagePicker = ImagePicker();
 
-      await imagePicker
-          .pickImage(source: ImageSource.camera, imageQuality: 60)
-          .then((onValue) {
-            setState(() {
-              if (onValue != null) {
-                images?.add(File(onValue.path));
-              }
-            });
-            print("Images Length: $images");
-          });
+      await imagePicker.pickImage(source: ImageSource.camera).then((
+        onValue,
+      ) async {
+        if (onValue != null) {
+          // Compress the image before adding it to the list
+          final compressedXFile = await FlutterImageCompress.compressAndGetFile(
+            onValue.path,
+            '${(await getTemporaryDirectory()).path}/${DateTime.now().millisecondsSinceEpoch}.jpg',
+            quality: 60,
+          );
+          final compressedFile = File(compressedXFile?.path ?? onValue.path);
+          images?.add(compressedFile);
+        }
+        setState(() {});
+      });
     } else {
       showMessage(
         message: LocaleKeys.serviceDetailsPage_maximumOf5ImagesAllowed.tr(),
