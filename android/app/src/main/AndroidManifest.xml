@@ -13,8 +13,10 @@
 
     <application
         android:name="${applicationName}"
-        android:label="hosta_provider"
-        android:icon="@mipmap/ic_launcher">
+        android:label="Salihly"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        >
 
         <activity
             android:name=".MainActivity"

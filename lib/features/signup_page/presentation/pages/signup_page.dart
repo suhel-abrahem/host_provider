@@ -8,6 +8,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:geolocator/geolocator.dart';
 
 import 'package:go_router/go_router.dart';
+import 'package:hosta_provider/core/extensions/theme_data_extensions.dart';
 
 import '../../../../config/app/app_preferences.dart';
 import '../../../../config/route/routes_manager.dart';
@@ -226,12 +227,17 @@ class _SignupPageState extends State<SignupPage> {
                 body: ListView(
                   children: [
                     Padding(
-                      padding: EdgeInsetsGeometry.symmetric(vertical: 50.h),
+                      padding: EdgeInsetsGeometry.only(top: 30.h),
                       child: SvgPicture.asset(
                         getAssetsPath(
-                          assetsName: ImagesName.loginImage,
-                          assetsType: AssetsType.image,
+                          assetsName: Theme.of(context).isDark
+                              ? IconsName.darkLogo
+                              : IconsName.logo,
+                          assetsType: AssetsType.icon,
                         ),
+                        width: 100.w,
+                        height: 200.h,
+                        fit: BoxFit.cover,
                       ),
                     ),
                     Form(
@@ -1261,20 +1267,25 @@ class _SignupPageState extends State<SignupPage> {
                                       ),
                                     ),
                               ),
-                              TextButton(
-                                onPressed: () {
-                                  context.goNamed(RoutesName.loginPage);
-                                },
-                                child: Text(
-                                  LocaleKeys.loginPage_login.tr(),
-                                  style: Theme.of(context).textTheme.labelMedium
-                                      ?.copyWith(
-                                        fontWeight: FontWeight.w600,
-                                        fontFamily: FontConstants.fontFamily(
-                                          context.locale,
+                              Padding(
+                                padding: EdgeInsets.only(bottom: 12.0.h),
+                                child: TextButton(
+                                  onPressed: () {
+                                    context.goNamed(RoutesName.loginPage);
+                                  },
+                                  child: Text(
+                                    LocaleKeys.loginPage_login.tr(),
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .labelMedium
+                                        ?.copyWith(
+                                          fontWeight: FontWeight.w600,
+                                          fontFamily: FontConstants.fontFamily(
+                                            context.locale,
+                                          ),
+                                          decoration: TextDecoration.underline,
                                         ),
-                                        decoration: TextDecoration.underline,
-                                      ),
+                                  ),
                                 ),
                               ),
                             ],

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hosta_provider/core/extensions/theme_data_extensions.dart';
 import '../../../../config/app/app_preferences.dart';
 import '../../../../config/route/routes_manager.dart';
 import '../../../../config/theme/app_theme.dart';
@@ -52,12 +53,17 @@ class _FirstUsePageState extends State<FirstUsePage> {
       child: ListView(
         children: [
           Padding(
-            padding: EdgeInsetsGeometry.symmetric(vertical: 50.h),
+            padding: EdgeInsetsGeometry.only(top: 30.h),
             child: SvgPicture.asset(
               getAssetsPath(
-                assetsName: ImagesName.loginImage,
-                assetsType: AssetsType.image,
+                assetsName: Theme.of(context).isDark
+                    ? IconsName.darkLogo
+                    : IconsName.logo,
+                assetsType: AssetsType.icon,
               ),
+              width: 100.w,
+              height: 200.h,
+              fit: BoxFit.cover,
             ),
           ),
           Padding(
