@@ -25,9 +25,8 @@ class RefreshTokenRepositoryImplements implements RefreshTokenRepository {
     RefreshTokenModel? refreshTokenModel,
   }) async {
     ConnectivityResult? connectivityResult;
-    _checkConnectivity.checkConnectivity().then(
-      (onValue) => connectivityResult = onValue.last,
-    );
+    final connectivityResponse = await _checkConnectivity.checkConnectivity();
+    connectivityResult = connectivityResponse.last;
     if (connectivityResult == ConnectivityResult.none) {
       return NOInternetDataState();
     }

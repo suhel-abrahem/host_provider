@@ -117,33 +117,19 @@ GoRouter goRouter = GoRouter(
   routes: [
     StatefulShellRoute.indexedStack(
       builder: (context, state, navigationShell) => ThemeSwitchingArea(
-        child: Container(
-          decoration: BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [
-                const Color.fromARGB(255, 35, 89, 116).withValues(alpha: 0.9),
-                Color.fromARGB(255, 11, 56, 102).withValues(alpha: 0.8),
-                Color.fromARGB(255, 4, 38, 75),
-              ],
-              stops: const [0.0, 0.5, 1.0],
-            ),
-          ),
-          child: Scaffold(
-            backgroundColor: Colors.transparent,
-            body: navigationShell,
-            bottomNavigationBar:
-                !(state.uri.toString().endsWith(RoutesPath.loginPage) ||
-                    state.uri.toString().endsWith(RoutesPath.firstUsePage) ||
-                    state.uri.toString().endsWith(RoutesPath.signupPage) ||
-                    state.uri.toString().endsWith(RoutesPath.otpPage))
-                ? MainBottomBar(
-                    key: ValueKey(currentPath),
-                    navigationShell: navigationShell,
-                  ).animate().scaleY(duration: 500.ms)
-                : null,
-          ),
+        child: Scaffold(
+          backgroundColor: Colors.transparent,
+          body: navigationShell,
+          bottomNavigationBar:
+              !(state.uri.toString().endsWith(RoutesPath.loginPage) ||
+                  state.uri.toString().endsWith(RoutesPath.firstUsePage) ||
+                  state.uri.toString().endsWith(RoutesPath.signupPage) ||
+                  state.uri.toString().endsWith(RoutesPath.otpPage))
+              ? MainBottomBar(
+                  key: ValueKey(currentPath),
+                  navigationShell: navigationShell,
+                ).animate().scaleY(duration: 500.ms)
+              : null,
         ),
       ),
       branches: [

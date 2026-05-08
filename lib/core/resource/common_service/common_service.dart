@@ -13,6 +13,7 @@ class CommonService {
     Map<String, dynamic>? headers,
   }) : _dio = Dio(
          BaseOptions(
+          baseUrl: ApiConstant.baseUrl,
            connectTimeout: connectTimeout ?? const Duration(seconds: 200),
            receiveTimeout: receiveTimeout ?? const Duration(seconds: 200),
            queryParameters: queryParameters,
@@ -55,7 +56,7 @@ class CommonService {
     final url = ApiConstant.baseUrl + endpoint;
     try {
       final response = await _dio.post(url, data: data, options: options);
-      if ((response.statusCode ?? 0) >= 200 ||
+      if ((response.statusCode ?? 0) >= 200 &&
           (response.statusCode ?? 0) <= 204) {
         return DataSuccess(data: response);
       } else {
@@ -84,7 +85,7 @@ class CommonService {
     final url = ApiConstant.baseUrl + endpoint;
     try {
       final response = await _dio.patch(url, data: data, options: options);
-      if ((response.statusCode ?? 0) >= 200 ||
+      if ((response.statusCode ?? 0) >= 200 &&
           (response.statusCode ?? 0) <= 204) {
         return DataSuccess(data: response);
       } else {
@@ -113,7 +114,7 @@ class CommonService {
     final url = ApiConstant.baseUrl + endpoint;
     try {
       final response = await _dio.put(url, data: data, options: options);
-      if ((response.statusCode ?? 0) >= 200 ||
+      if ((response.statusCode ?? 0) >= 200 &&
           (response.statusCode ?? 0) <= 204) {
         return DataSuccess(data: response);
       } else {
@@ -142,7 +143,7 @@ class CommonService {
     final url = ApiConstant.baseUrl + endpoint;
     try {
       final response = await _dio.delete(url, data: params, options: options);
-      if ((response.statusCode ?? 0) >= 200 ||
+      if ((response.statusCode ?? 0) >= 200 &&
           (response.statusCode ?? 0) <= 204) {
         return DataSuccess(data: response);
       } else {
