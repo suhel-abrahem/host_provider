@@ -124,7 +124,8 @@ GoRouter goRouter = GoRouter(
               !(state.uri.toString().endsWith(RoutesPath.loginPage) ||
                   state.uri.toString().endsWith(RoutesPath.firstUsePage) ||
                   state.uri.toString().endsWith(RoutesPath.signupPage) ||
-                  state.uri.toString().endsWith(RoutesPath.otpPage))
+                  state.uri.toString().endsWith(RoutesPath.otpPage) ||
+                  state.uri.toString().endsWith(RoutesPath.resetPasswordPage))
               ? MainBottomBar(
                   key: ValueKey(currentPath),
                   navigationShell: navigationShell,
