@@ -85,8 +85,17 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
         },
       ),
     ];
-    return MainPage(
-      title: pageTitle,
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(pageTitle ?? ""),
+        centerTitle: true,
+        leading: BackButton(
+          color: Theme.of(context).textTheme.labelLarge?.color,
+          onPressed: () {
+            if (context.canPop()) context.pop();
+          },
+        ),
+      ),
       body: AnimatedSwitcher(
         duration: 600.ms,
         transitionBuilder: (child, animation) {
